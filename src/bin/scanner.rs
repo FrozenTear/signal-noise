@@ -2,6 +2,11 @@ use anyhow::Result;
 use reqwest::Client;
 use serde_json::json;
 use std::env;
+use std::collections::HashMap;
+
+/// Type: (issue_title, source_urls)
+/// Used to check for duplicate story candidates
+type ExistingIssue = (String, Vec<String>);
 
 #[tokio::main]
 async fn main() -> Result<()> {
