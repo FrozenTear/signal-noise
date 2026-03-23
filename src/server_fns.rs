@@ -72,20 +72,24 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
     use surrealdb::{engine::local::Db, Surreal};
 
     if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
-        let query = match &category {
-            Some(cat) => format!(
+        let mut res_result = if let Some(cat) = &category {
+            db.query(
                 "SELECT slug, title, summary, category, confidence_score, published_at \
-                 FROM article WHERE status = 'published' AND category = '{}' \
+                 FROM article WHERE status = 'published' AND category = $cat \
                  ORDER BY published_at DESC LIMIT 20",
-                cat
-            ),
-            None => "SELECT slug, title, summary, category, confidence_score, published_at \
-                     FROM article WHERE status = 'published' \
-                     ORDER BY published_at DESC LIMIT 20"
-                .to_string(),
+            )
+            .bind(("cat", cat.clone()))
+            .await
+        } else {
+            db.query(
+                "SELECT slug, title, summary, category, confidence_score, published_at \
+                 FROM article WHERE status = 'published' \
+                 ORDER BY published_at DESC LIMIT 20",
+            )
+            .await
         };
 
-        if let Ok(mut res) = db.query(query).await {
+        if let Ok(mut res) = res_result {
             if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
                 if !rows.is_empty() {
                     let articles = rows
@@ -124,13 +128,14 @@ pub async fn get_article_by_slug(
     use surrealdb::{engine::local::Db, Surreal};
 
     if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
-        let query = format!(
-            "SELECT slug, title, body, category, confidence_score, ai_monologue, published_at \
-             FROM article WHERE slug = '{}' LIMIT 1",
-            slug
-        );
-
-        if let Ok(mut res) = db.query(query).await {
+        if let Ok(mut res) = db
+            .query(
+                "SELECT slug, title, body, category, confidence_score, ai_monologue, published_at \
+                 FROM article WHERE slug = $slug LIMIT 1",
+            )
+            .bind(("slug", slug.clone()))
+            .await
+        {
             if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
                 if let Some(v) = rows.into_iter().next() {
                     return Ok(Some(ArticleDetail {
