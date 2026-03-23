@@ -444,14 +444,92 @@ mod tests {
     }
 
     #[test]
-    fn test_string_similarity_handles_long_strings() {
-        // Test that long strings are truncated to prevent performance issues
+    fn test_filter_handles_empty_candidates() {
+        let existing = vec![(
+            "Title".to_string(),
+            vec!["https://example.com".to_string()],
+        )];
+        let filtered = filter_new_candidates(vec![], &existing);
+        assert_eq!(
+            filtered.len(),
+            0,
+            "Should handle empty candidates list"
+        );
+    }
+
+    #[test]
+    fn test_filter_preserves_all_with_no_existing() {
+        let candidates = vec![
+            make_candidate("Story 1", "https://site1.com"),
+            make_candidate("Story 2", "https://site2.com"),
+        ];
+        let filtered = filter_new_candidates(candidates.clone(), &[]);
+        assert_eq!(
+            filtered.len(),
+            2,
+            "Should preserve all candidates when no existing issues"
+        );
+    }
+
+    #[test]
+    fn test_string_similarity_near_threshold() {
+        // Strings that should be very similar (above 0.85 threshold)
+        let sim_above = string_similarity(
+            "Linux Kernel 6.8 Released",
+            "Linux Kernel 6.8 Release",
+        );
+        assert!(
+            sim_above > 0.85,
+            "Similar headlines should exceed threshold"
+        );
+
+        // Different headlines should not exceed threshold
+        let sim_below = string_similarity(
+            "Tech Company Raises Funding Round",
+            "Tech Company Acquires Startup",
+        );
+        assert!(
+            sim_below <= 0.85,
+            "Different headlines should not exceed threshold"
+        );
+    }
+
+    #[test]
+    fn test_filter_detects_duplicate_across_multiple_urls() {
+        let mut candidate = make_candidate("New Story", "https://site1.com");
+        candidate.source_urls.push("https://site2.com".to_string());
+
+        let existing = vec![(
+            "Old".to_string(),
+            vec!["https://site2.com".to_string()],
+        )];
+
+        let filtered = filter_new_candidates(vec![candidate], &existing);
+        assert_eq!(
+            filtered.len(),
+            0,
+            "Should detect duplicate URL in multi-URL candidate"
+        );
+    }
+
+    #[test]
+    fn test_string_similarity_truncates_long_strings() {
         let long_str = "a".repeat(2000);
-        let similar_long = "a".repeat(1950) + "bbb";
-        let sim = string_similarity(&long_str, &similar_long);
-        // Should complete quickly without hanging (not asserting specific value,
-        // just that it completes in reasonable time)
-        assert!(sim >= 0.0 && sim <= 1.0, "Similarity should be in valid range");
+        let truncated_str = "a".repeat(1000);
+        // Two strings that differ only after 1000 chars should be equal (truncated)
+        let sim = string_similarity(&long_str, &truncated_str);
+        assert!(
+            sim > 0.99,
+            "Should treat truncated strings as identical"
+        );
+
+        // Verify different content within first 1000 chars is detected
+        let different = "b".repeat(500) + &"a".repeat(500);
+        let sim2 = string_similarity(&long_str, &different);
+        assert!(
+            sim2 < 0.9,
+            "Should detect differences within truncation boundary"
+        );
     }
 }
 
