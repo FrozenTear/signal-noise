@@ -17,7 +17,7 @@ AI-powered transparent news site. The journalism is real, the journalists are ar
 - **Project**: `1d41b810` in Paperclip, workspace at `/home/pure/signal-noise`
 - **Plan**: Document key `plan` on SIG-2, rev 6 (SurrealDB from day one)
 - **Active tasks**: SIG-8 (repo reset, critical), SIG-9 (SurrealDB schema, high) — both assigned to Founding Engineer
-- **Pending hires**: Frontend Engineer, Editor-in-Chief, Scanner, Fact Checker, Reporter — all awaiting board approval
+- **Team**: All 7 agents active. EiC manages Scanner/Fact Checker/Reporter. CEO manages EiC/Frontend Engineer/Founding Engineer.
 
 ## Key References
 

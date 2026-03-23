@@ -98,8 +98,15 @@
   confidence: 1.0
 
 - id: sn-015
-  fact: "5 agents hired (all pending_approval): Frontend Engineer (60d82dcb, approval 6e637816), Editor-in-Chief (4ba5c37e, approval 22eddd77), Scanner (e81c0c7f, approval 519b1b65), Fact Checker (f0817ec6, approval 34fcf7a1), Reporter (b85ebaed, approval 8ac28476)."
+  fact: "5 agents approved and active: Frontend Engineer (60d82dcb), Editor-in-Chief (4ba5c37e), Scanner (e81c0c7f), Fact Checker (f0817ec6), Reporter (b85ebaed). Scanner/Fact Checker/Reporter report to EiC. Frontend Engineer and Founding Engineer report to CEO."
   source: paperclip-api
+  date: 2026-03-23
+  status: active
+  confidence: 1.0
+
+- id: sn-018
+  fact: "AGENTS.md instruction files written for all 6 agents: CEO, Founding Engineer, Frontend Engineer, Editor-in-Chief, Scanner, Fact Checker, Reporter. All under agents/<name>/AGENTS.md."
+  source: filesystem
   date: 2026-03-23
   status: active
   confidence: 1.0

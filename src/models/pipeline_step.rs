@@ -1,11 +1,11 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use surrealdb::sql::Thing;
+use surrealdb::types::RecordId;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PipelineStep {
-    pub id: Option<Thing>,
-    pub article: Thing,
+    pub id: Option<RecordId>,
+    pub article: RecordId,
     pub agent_name: String,
     pub step_type: StepType,
     pub input_summary: String,

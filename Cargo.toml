@@ -7,14 +7,18 @@ edition = "2021"
 name = "signal-noise"
 path = "src/main.rs"
 
+[[bin]]
+name = "scanner"
+path = "src/bin/scanner.rs"
+
 [dependencies]
 # Dioxus fullstack (Axum backend + WASM frontend)
-dioxus = { version = "0.6", features = ["fullstack", "router"] }
-dioxus-fullstack = "0.6"
-axum = "0.7"
+dioxus = { version = "0.7.3", features = ["fullstack", "router"] }
+dioxus-fullstack = "0.7.3"
+axum = "0.8"
 
 # SurrealDB embedded (Rust SDK, no server process)
-surrealdb = { version = "2", features = ["kv-surrealkv"] }
+surrealdb = { version = "3", features = ["kv-surrealkv"] }
 
 # Async runtime
 tokio = { version = "1", features = ["full"] }
@@ -37,6 +41,11 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # Utilities
 chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1", features = ["v4", "serde"] }
+
+# RSS/Feed parsing
+feed-rs = "2"
+reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
+strsim = "0.11"
 
 [features]
 default = []

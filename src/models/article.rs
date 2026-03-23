@@ -1,16 +1,16 @@
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
-use surrealdb::sql::Thing;
+use surrealdb::types::RecordId;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Article {
-    pub id: Option<Thing>,
+    pub id: Option<RecordId>,
     pub slug: String,
     pub title: String,
     pub summary: String,
     pub body: String,
     pub category: String,
-    pub persona: Option<Thing>,
+    pub persona: Option<RecordId>,
     pub confidence_score: f64,
     pub ai_monologue: Option<String>,
     pub pipeline_metadata: serde_json::Value,
