@@ -44,27 +44,16 @@ async fn main() -> Result<()> {
 
     tracing::info!("No assignments in inbox. Starting RSS feed polling...");
 
-    // Load feed configuration
+    // Poll all feeds for story candidates
     let config_path = "config/feeds.toml";
-    let config = signal_noise::scanner::load_feed_config(config_path)?;
-
-    // Poll all feeds
-    eprintln!("About to poll feeds from {}", config_path);
     let candidates = signal_noise::scanner::poll_feeds(config_path).await?;
-    eprintln!("Poll feeds completed with {} candidates", candidates.len());
-    eprintln!("About to log story candidates");
     tracing::info!("Found {} story candidates to process", candidates.len());
-    eprintln!("Logged story candidates, about to create issues");
 
     // Create Paperclip issues for each story candidate
     let mut created_count = 0;
-    eprintln!("Starting issue creation loop with {} candidates", candidates.len());
-    tracing::info!("Starting issue creation loop with {} candidates", candidates.len());
     for candidate in candidates {
-        eprintln!("Processing candidate: {}", candidate.headline);
         tracing::info!("Creating issue for: {}", candidate.headline);
 
-        eprintln!("Creating issue_body");
         let mut issue_body = serde_json::Map::new();
         issue_body.insert(
             "title".to_string(),
@@ -100,7 +89,6 @@ async fn main() -> Result<()> {
         );
 
         // Create the issue
-        eprintln!("About to make HTTP request to create issue");
         let issue_response = client
             .post(format!("{}/api/companies/{}/issues", api_url, company_id))
             .header("Authorization", &auth_header)
@@ -109,7 +97,6 @@ async fn main() -> Result<()> {
             .json(&serde_json::Value::Object(issue_body))
             .send()
             .await;
-        eprintln!("HTTP request completed");
 
         match issue_response {
             Ok(resp) => {
