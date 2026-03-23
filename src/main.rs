@@ -8,6 +8,10 @@ mod models;
 mod pages;
 mod server_fns;
 
+// Register the stylesheet as a compile-time asset so dx copies it to public/assets/
+// and returns the correct URL at runtime (with optional content hash).
+const MAIN_CSS: Asset = asset!("/assets/tailwind.css");
+
 fn main() {
     #[cfg(feature = "server")]
     {
@@ -44,6 +48,7 @@ fn App() -> Element {
     rsx! {
         document::Link { rel: "preconnect", href: "https://fonts.googleapis.com" }
         document::Link { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }
+        document::Link { rel: "stylesheet", href: MAIN_CSS }
         Router::<pages::Route> {}
     }
 }
