@@ -1,4 +1,5 @@
 use anyhow::Result;
+use chrono::Utc;
 use reqwest::Client;
 use serde_json::json;
 use std::env;
@@ -7,6 +8,83 @@ use std::collections::HashMap;
 /// Type: (issue_title, source_urls)
 /// Used to check for duplicate story candidates
 type ExistingIssue = (String, Vec<String>);
+
+/// Query Paperclip API for existing story candidate issues (last 7 days)
+/// Returns: Vec<(issue_title, source_urls)>
+async fn query_existing_candidates(
+    client: &reqwest::Client,
+    api_url: &str,
+    company_id: &str,
+    auth_header: &str,
+) -> Result<Vec<ExistingIssue>, Box<dyn std::error::Error>> {
+    let seven_days_ago = Utc::now() - chrono::Duration::days(7);
+
+    tracing::info!("Querying existing story candidates from last 7 days...");
+
+    // Query issues created after 7 days ago
+    let url = format!(
+        "{}/api/companies/{}/issues?status=todo,in_progress,in_review",
+        api_url,
+        company_id,
+    );
+
+    let response = client
+        .get(&url)
+        .header("Authorization", auth_header)
+        .timeout(std::time::Duration::from_secs(30))
+        .send()
+        .await;
+
+    match response {
+        Ok(resp) => {
+            match resp.json::<Vec<serde_json::Value>>().await {
+                Ok(issues) => {
+                    let mut existing = Vec::new();
+
+                    for issue in issues {
+                        if let Some(created_at_str) = issue.get("createdAt").and_then(|t| t.as_str()) {
+                            if let Ok(created_at) = chrono::DateTime::parse_from_rfc3339(created_at_str) {
+                                if created_at.with_timezone(&Utc) < seven_days_ago {
+                                    continue; // Skip old issues
+                                }
+                            }
+                        }
+
+                        let title = issue
+                            .get("title")
+                            .and_then(|t| t.as_str())
+                            .unwrap_or("")
+                            .to_string();
+
+                        // Extract URLs from description if present
+                        let urls = if let Some(desc) = issue.get("description").and_then(|d| d.as_str()) {
+                            // Simple extraction: look for https:// patterns
+                            desc.split_whitespace()
+                                .filter(|s| s.starts_with("https://") || s.starts_with("http://"))
+                                .map(|s| s.to_string())
+                                .collect()
+                        } else {
+                            Vec::new()
+                        };
+
+                        existing.push((title, urls));
+                    }
+
+                    tracing::info!("Found {} existing story candidate issues", existing.len());
+                    Ok(existing)
+                }
+                Err(e) => {
+                    tracing::warn!("Failed to parse Paperclip response: {}", e);
+                    Ok(Vec::new()) // Graceful degradation
+                }
+            }
+        }
+        Err(e) => {
+            tracing::warn!("Failed to query existing candidates: {}", e);
+            Ok(Vec::new()) // Graceful degradation on API failure
+        }
+    }
+}
 
 #[tokio::main]
 async fn main() -> Result<()> {
