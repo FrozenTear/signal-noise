@@ -28,8 +28,8 @@ priority = "medium"
 # ─── Technology ──────────────────────────────────────────────────────────────
 
 [[feed]]
-url = "https://feeds.arstechnica.com/arstechnica/technology-lab"
-name = "Ars Technica — Technology Lab"
+url = "https://feeds.arstechnica.com/arstechnica/gadgets"
+name = "Ars Technica — Tech"
 beat = "tech"
 type = "wire"
 priority = "high"
@@ -44,6 +44,20 @@ priority = "medium"
 [[feed]]
 url = "https://techcrunch.com/feed/"
 name = "TechCrunch"
+beat = "tech"
+type = "wire"
+priority = "medium"
+
+[[feed]]
+url = "https://hnrss.org/frontpage?points=100"
+name = "Hacker News (100+)"
+beat = "tech"
+type = "aggregator"
+priority = "high"
+
+[[feed]]
+url = "https://www.theverge.com/rss/index.xml"
+name = "The Verge"
 beat = "tech"
 type = "wire"
 priority = "medium"
