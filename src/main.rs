@@ -24,7 +24,28 @@ fn main() {
 
                 let state = api::AppState { db };
 
-                dioxus_axum::launch_with_context(App, state, "0.0.0.0:8080").await;
+                use dioxus_fullstack::prelude::{DioxusRouterExt, ServeConfigBuilder};
+                use std::sync::Arc;
+
+                let state_for_ssr = state.clone();
+                let context_providers = Arc::new(vec![
+                    Box::new(move || -> Box<dyn std::any::Any> { Box::new(state_for_ssr.clone()) })
+                        as Box<dyn Fn() -> Box<dyn std::any::Any> + Send + Sync + 'static>,
+                ]);
+
+                let cfg = ServeConfigBuilder::default().context_providers(context_providers);
+
+                let router = axum::Router::new()
+                    .nest("/api", api::routes::router(state))
+                    .serve_dioxus_application(cfg, App);
+
+                let listener = tokio::net::TcpListener::bind("0.0.0.0:8080")
+                    .await
+                    .expect("Failed to bind port 8080");
+                tracing::info!("Listening on 0.0.0.0:8080");
+                axum::serve(listener, router.into_make_service())
+                    .await
+                    .expect("Server error");
             });
     }
 

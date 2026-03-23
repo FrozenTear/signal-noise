@@ -5,6 +5,11 @@ pub mod home;
 
 use dioxus::prelude::*;
 
+pub use about::About;
+pub use article::Article;
+pub use beat::{BeatLinux, BeatPrivacy, BeatTech};
+pub use home::Home;
+
 #[derive(Clone, Routable, Debug, PartialEq)]
 pub enum Route {
     #[route("/")]

@@ -1,6 +1,6 @@
 use anyhow::Result;
 use surrealdb::{
-    engine::local::{Db, SurrealKV},
+    engine::local::{Db, SurrealKv},
     Surreal,
 };
 
@@ -10,7 +10,7 @@ const DB_NS: &str = "signal_noise";
 const DB_NAME: &str = "signal_noise";
 
 pub async fn init_db() -> Result<Surreal<Db>> {
-    let db = Surreal::new::<SurrealKV>(DB_PATH).await?;
+    let db = Surreal::new::<SurrealKv>(DB_PATH).await?;
     db.use_ns(DB_NS).use_db(DB_NAME).await?;
     Ok(db)
 }

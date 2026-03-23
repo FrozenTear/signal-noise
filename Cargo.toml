@@ -10,7 +10,8 @@ path = "src/main.rs"
 [dependencies]
 # Dioxus fullstack (Axum backend + WASM frontend)
 dioxus = { version = "0.6", features = ["fullstack", "router"] }
-dioxus-axum = "0.6"
+dioxus-fullstack = "0.6"
+axum = "0.7"
 
 # SurrealDB embedded (Rust SDK, no server process)
 surrealdb = { version = "2", features = ["kv-surrealkv"] }
@@ -36,6 +37,11 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 # Utilities
 chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1", features = ["v4", "serde"] }
+
+[features]
+default = []
+web = ["dioxus/web"]
+server = ["dioxus/server", "dioxus-fullstack/server"]
 
 [profile.release]
 opt-level = "z"

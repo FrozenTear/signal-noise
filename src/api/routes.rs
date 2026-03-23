@@ -10,11 +10,21 @@ use axum::{
     extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
+    routing::get,
+    Router,
 };
 use serde::Deserialize;
 use serde_json::{json, Value};
 
 use super::AppState;
+
+pub fn router(state: AppState) -> Router {
+    Router::new()
+        .route("/articles", get(list_articles).post(publish_article))
+        .route("/articles/:slug", get(get_article))
+        .route("/agents/status", get(agent_status))
+        .with_state(state)
+}
 
 #[derive(Deserialize)]
 pub struct ArticleQuery {
