@@ -168,7 +168,7 @@ pub async fn publish_article(
         .db
         .query(
             r#"
-            UPSERT article WHERE slug = $slug MERGE {
+            UPSERT article MERGE {
                 slug:             $slug,
                 title:            $title,
                 summary:          $summary,
@@ -182,7 +182,7 @@ pub async fn publish_article(
                 status:           'published',
                 published_at:     time::now(),
                 updated_at:       time::now()
-            }
+            } WHERE slug = $slug
             "#,
         )
         .bind(("slug", slug.clone()))
