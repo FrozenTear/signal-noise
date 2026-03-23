@@ -247,6 +247,19 @@ async fn main() -> Result<()> {
     let candidates = signal_noise::scanner::poll_feeds(config_path).await?;
     tracing::info!("Found {} story candidates to process", candidates.len());
 
+    // Query existing issues for deduplication
+    let existing_issues = query_existing_candidates(
+        &client,
+        &api_url,
+        &company_id,
+        &auth_header,
+    )
+    .await;
+
+    // Filter out duplicates
+    let candidates = filter_new_candidates(candidates, &existing_issues);
+    tracing::info!("After deduplication: {} new candidates", candidates.len());
+
     // Create Paperclip issues for each story candidate
     let mut created_count = 0;
     for candidate in candidates {
