@@ -1,0 +1,82 @@
+# Signal Noise — RSS Feed Configuration
+# Scanner agent reads this file on each heartbeat.
+# Each [[feed]] entry defines one RSS/Atom feed to poll.
+
+# ─── Linux & Open Source ─────────────────────────────────────────────────────
+
+[[feed]]
+url = "https://www.phoronix.com/rss.php"
+name = "Phoronix"
+beat = "linux"
+type = "blog"
+priority = "high"
+
+[[feed]]
+url = "https://lwn.net/headlines/rss"
+name = "LWN.net"
+beat = "linux"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://www.theregister.com/software/open_source/headlines.atom"
+name = "The Register — Open Source"
+beat = "linux"
+type = "wire"
+priority = "medium"
+
+# ─── Technology ──────────────────────────────────────────────────────────────
+
+[[feed]]
+url = "https://feeds.arstechnica.com/arstechnica/technology-lab"
+name = "Ars Technica — Technology Lab"
+beat = "tech"
+type = "wire"
+priority = "high"
+
+[[feed]]
+url = "https://www.wired.com/feed/rss"
+name = "Wired"
+beat = "tech"
+type = "wire"
+priority = "medium"
+
+[[feed]]
+url = "https://techcrunch.com/feed/"
+name = "TechCrunch"
+beat = "tech"
+type = "wire"
+priority = "medium"
+
+# ─── Privacy & Surveillance ──────────────────────────────────────────────────
+
+[[feed]]
+url = "https://www.eff.org/rss/updates.xml"
+name = "EFF Updates"
+beat = "privacy"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://noyb.eu/en/rss.xml"
+name = "noyb"
+beat = "privacy"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://feeds.arstechnica.com/arstechnica/security"
+name = "Ars Technica — Security"
+beat = "privacy"
+type = "wire"
+priority = "medium"
+
+# ─── Scanner config ──────────────────────────────────────────────────────────
+
+[scanner]
+# Minimum time between polls per feed (seconds)
+poll_interval_sec = 3600
+# Similarity threshold for deduplication (0.0–1.0)
+dedup_threshold = 0.85
+# Max candidates to surface per heartbeat
+max_candidates_per_run = 10

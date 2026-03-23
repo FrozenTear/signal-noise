@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Signal Noise global styles */
+
+@layer base {
+    body {
+        @apply bg-white text-gray-900 font-sans;
+    }
+}
+
+@layer components {
+    .prose h2 {
+        @apply text-xl font-semibold mt-6 mb-3;
+    }
+    .prose p {
+        @apply text-gray-700 leading-relaxed mb-4;
+    }
+    .prose ul, .prose ol {
+        @apply ml-6 mb-4 space-y-1;
+    }
+    .prose li {
+        @apply text-gray-700;
+    }
+}

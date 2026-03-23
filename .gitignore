@@ -1,0 +1,27 @@
+# Rust / Cargo
+/target
+Cargo.lock
+
+# SurrealDB data directory
+/data/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Dioxus build output
+/dist/
+/.dioxus/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/settings.json
+.idea/

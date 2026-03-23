@@ -1,0 +1,136 @@
+-- Signal Noise — SurrealDB Schema
+-- Applied at startup via db::apply_schema()
+-- Use DEFINE TABLE / DEFINE FIELD / DEFINE INDEX for schema-enforced changes.
+
+-- ─── Namespacing is handled by the SDK (ns: signal_noise, db: signal_noise) ─────
+
+-- ══════════════════════════════════════════════════════════════════
+-- TABLES
+-- ══════════════════════════════════════════════════════════════════
+
+DEFINE TABLE persona SCHEMAFULL;
+DEFINE FIELD slug            ON persona TYPE string  ASSERT $value != NONE;
+DEFINE FIELD name            ON persona TYPE string  ASSERT $value != NONE;
+DEFINE FIELD bio             ON persona TYPE string  ASSERT $value != NONE;
+DEFINE FIELD beat            ON persona TYPE string  ASSERT $value != NONE;
+DEFINE FIELD writing_style_guide ON persona TYPE string  DEFAULT "";
+DEFINE FIELD example_phrases ON persona TYPE array   DEFAULT [];
+DEFINE FIELD avatar_url      ON persona TYPE option<string>;
+DEFINE FIELD is_active       ON persona TYPE bool    DEFAULT true;
+
+DEFINE INDEX persona_slug    ON persona FIELDS slug UNIQUE;
+
+
+DEFINE TABLE category SCHEMAFULL;
+DEFINE FIELD slug            ON category TYPE string ASSERT $value != NONE;
+DEFINE FIELD name            ON category TYPE string ASSERT $value != NONE;
+DEFINE FIELD description     ON category TYPE string DEFAULT "";
+
+DEFINE INDEX category_slug   ON category FIELDS slug UNIQUE;
+
+
+DEFINE TABLE source SCHEMAFULL;
+DEFINE FIELD url                ON source TYPE string ASSERT $value != NONE;
+DEFINE FIELD name               ON source TYPE string ASSERT $value != NONE;
+DEFINE FIELD type               ON source TYPE string ASSERT $value IN ["wire","press","primary","blog"];
+DEFINE FIELD paywall_status     ON source TYPE string ASSERT $value IN ["free","paywalled","unknown"] DEFAULT "unknown";
+DEFINE FIELD verification_status ON source TYPE string ASSERT $value IN ["verified","unverified","unknown"] DEFAULT "unknown";
+DEFINE FIELD bias_indicator     ON source TYPE option<string>;
+
+DEFINE INDEX source_url      ON source FIELDS url UNIQUE;
+
+
+DEFINE TABLE article SCHEMAFULL;
+DEFINE FIELD slug               ON article TYPE string ASSERT $value != NONE;
+DEFINE FIELD title              ON article TYPE string ASSERT $value != NONE;
+DEFINE FIELD summary            ON article TYPE string DEFAULT "";
+DEFINE FIELD body               ON article TYPE string DEFAULT "";
+DEFINE FIELD category           ON article TYPE string ASSERT $value != NONE;
+DEFINE FIELD persona            ON article TYPE option<record<persona>>;
+DEFINE FIELD confidence_score   ON article TYPE float  DEFAULT 0.0;
+DEFINE FIELD ai_monologue       ON article TYPE option<string>;
+DEFINE FIELD pipeline_metadata  ON article TYPE object DEFAULT {};
+DEFINE FIELD source_urls        ON article TYPE array  DEFAULT [];
+DEFINE FIELD status             ON article TYPE string
+    ASSERT $value IN ["draft","fact_checking","writing","editing","published","rejected"]
+    DEFAULT "draft";
+DEFINE FIELD published_at       ON article TYPE option<datetime>;
+DEFINE FIELD created_at         ON article TYPE datetime DEFAULT time::now();
+DEFINE FIELD updated_at         ON article TYPE datetime DEFAULT time::now();
+
+DEFINE INDEX article_slug       ON article FIELDS slug UNIQUE;
+DEFINE INDEX article_status     ON article FIELDS status;
+DEFINE INDEX article_category   ON article FIELDS category;
+DEFINE INDEX article_published  ON article FIELDS published_at;
+
+
+DEFINE TABLE pipeline_step SCHEMAFULL;
+DEFINE FIELD article           ON pipeline_step TYPE record<article> ASSERT $value != NONE;
+DEFINE FIELD agent_name        ON pipeline_step TYPE string ASSERT $value != NONE;
+DEFINE FIELD step_type         ON pipeline_step TYPE string
+    ASSERT $value IN ["scan","fact_check","draft","edit"];
+DEFINE FIELD input_summary     ON pipeline_step TYPE string DEFAULT "";
+DEFINE FIELD output_summary    ON pipeline_step TYPE string DEFAULT "";
+DEFINE FIELD confidence_delta  ON pipeline_step TYPE float  DEFAULT 0.0;
+DEFINE FIELD started_at        ON pipeline_step TYPE datetime DEFAULT time::now();
+DEFINE FIELD completed_at      ON pipeline_step TYPE option<datetime>;
+
+
+-- ══════════════════════════════════════════════════════════════════
+-- GRAPH EDGES
+-- ══════════════════════════════════════════════════════════════════
+
+-- article->cites->source
+-- Carries citation metadata. Use: RELATE article:x->cites->source:y CONTENT {...}
+DEFINE TABLE cites SCHEMALESS TYPE RELATION IN article OUT source;
+DEFINE FIELD access_timestamp          ON cites TYPE option<datetime>;
+DEFINE FIELD excerpt_available         ON cites TYPE bool DEFAULT false;
+DEFINE FIELD verification_status_at_cite_time ON cites TYPE string DEFAULT "unknown";
+
+
+-- article->produced_by->pipeline_step
+-- Full audit trail linking articles to each pipeline step.
+DEFINE TABLE produced_by SCHEMALESS TYPE RELATION IN article OUT pipeline_step;
+
+
+-- pipeline_step->feeds->pipeline_step
+-- Step ordering / dependency chain.
+DEFINE TABLE feeds SCHEMALESS TYPE RELATION IN pipeline_step OUT pipeline_step;
+
+
+-- ══════════════════════════════════════════════════════════════════
+-- SEED DATA — categories and personas
+-- ══════════════════════════════════════════════════════════════════
+
+-- Categories
+INSERT IGNORE INTO category (slug, name, description) VALUES
+    ("linux",    "Linux & Open Source", "Kernel, distributions, and free software ecosystem"),
+    ("tech",     "Technology",          "Industry, products, and research"),
+    ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy");
+
+-- Personas (is_active = true for launch beats)
+INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, is_active) VALUES
+    (
+        "priya-nair",
+        "Priya Nair",
+        "Priya covers the technology beat with a focus on developer tools, AI research, and the business of tech. She writes with precision and a healthy skepticism toward hype.",
+        "tech",
+        "Clear, analytical prose. Cite sources inline. Flag uncertainty with hedged language. Avoid superlatives. Short paragraphs.",
+        true
+    ),
+    (
+        "linux-persona",
+        "TBD",
+        "Placeholder — Linux & Open Source persona to be designed.",
+        "linux",
+        "",
+        false
+    ),
+    (
+        "privacy-persona",
+        "TBD",
+        "Placeholder — Privacy & Surveillance persona to be designed.",
+        "privacy",
+        "",
+        false
+    );

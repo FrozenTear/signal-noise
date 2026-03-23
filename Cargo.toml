@@ -1,0 +1,52 @@
+[package]
+name = "signal-noise"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "signal-noise"
+path = "src/main.rs"
+
+[dependencies]
+# Dioxus fullstack (Axum backend + WASM frontend)
+dioxus = { version = "0.6", features = ["fullstack", "router"] }
+dioxus-axum = "0.6"
+
+# SurrealDB embedded (Rust SDK, no server process)
+surrealdb = { version = "2", features = ["kv-surrealkv"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Config
+toml = "0.8"
+
+# Error handling
+anyhow = "1"
+thiserror = "2"
+
+# Logging / tracing
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Utilities
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 0
+
+# WASM target optimizations
+[profile.wasm-release]
+inherits = "release"
+opt-level = "z"
