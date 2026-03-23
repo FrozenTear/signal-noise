@@ -80,3 +80,18 @@ poll_interval_sec = 3600
 dedup_threshold = 0.85
 # Max candidates to surface per heartbeat
 max_candidates_per_run = 10
+
+# ─── gnews.io Discovery Channel ────────────────────────────────────────────
+
+[gnews]
+# API key: get from gnews.io account (start with free tier)
+api_key = "GNEWS_API_KEY_HERE"
+# Tier: "free" (dev) or "essential" (€50/mo, launch)
+tier = "free"
+# Beat-specific queries for article discovery
+# Use narrow, on-topic keywords to stay within daily quota (100 req/day, 10 articles/req max)
+queries = [
+  { beat = "linux", q = "Linux kernel distribution open source", limit = 5 },
+  { beat = "tech", q = "tech startup AI machine learning software engineering", limit = 5 },
+  { beat = "privacy", q = "privacy surveillance data protection encryption", limit = 5 }
+]
