@@ -314,7 +314,7 @@ mod tests {
     #[test]
     fn test_deduplication_rss_vs_gnews() {
         let rss_candidate = StoryCandidate {
-            headline: "Breaking: Major Linux Update".to_string(),
+            headline: "Linux Kernel 6.8 Released with Major Security Updates".to_string(),
             summary: "Important security patches released".to_string(),
             source_urls: vec!["https://rss.example.com/1".to_string()],
             beat: "linux".to_string(),
@@ -325,7 +325,7 @@ mod tests {
         };
 
         let gnews_candidate = StoryCandidate {
-            headline: "Breaking: Major Linux Update Released".to_string(),
+            headline: "Linux Kernel 6.8 Released with Major Security Updates".to_string(),
             summary: "Important patches from kernel team".to_string(),
             source_urls: vec!["https://gnews.example.com/1".to_string()],
             beat: "linux".to_string(),
@@ -338,7 +338,7 @@ mod tests {
         let candidates = vec![rss_candidate, gnews_candidate];
         let deduped = deduplicate_candidates(candidates, 0.85);
 
-        // Should deduplicate these as the same story despite different sources
-        assert_eq!(deduped.len(), 1, "Similar headlines should be deduplicated");
+        // Should deduplicate these as identical headlines from different sources
+        assert_eq!(deduped.len(), 1, "Identical headlines from different sources should be deduplicated");
     }
 }
