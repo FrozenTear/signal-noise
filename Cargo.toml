@@ -10,39 +10,39 @@ path = "src/main.rs"
 [[bin]]
 name = "scanner"
 path = "src/bin/scanner.rs"
+required-features = ["server"]
 
 [dependencies]
 # Dioxus fullstack (Axum backend + WASM frontend)
 dioxus = { version = "0.7.3", features = ["fullstack", "router"] }
 dioxus-fullstack = "0.7.3"
-axum = "0.8"
 
-# SurrealDB embedded (Rust SDK, no server process)
-surrealdb = { version = "3", features = ["kv-surrealkv"] }
-
-# Async runtime
-tokio = { version = "1", features = ["full"] }
-
-# Serialization
+# Serialization — needed on both WASM and server
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 
-# Config
-toml = "0.8"
-
-# Error handling
+# Error handling — needed on both WASM and server
 anyhow = "1"
 thiserror = "2"
 
-# Logging / tracing
+# Logging — tracing facade is WASM-safe; subscriber (formatter) is server-only
 tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
-# Utilities
+# Utilities — both WASM and server
 chrono = { version = "0.4", features = ["serde"] }
-uuid = { version = "1", features = ["v4", "serde"] }
 
-# RSS/Feed parsing
+# uuid: v4 needs a WASM-specific entropy source
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+uuid = { version = "1", features = ["v4", "serde", "js"] }
+
+# ── Server-only dependencies (not compiled for wasm32-unknown-unknown) ────────
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+uuid = { version = "1", features = ["v4", "serde"] }
+axum = "0.8"
+surrealdb = { version = "3", features = ["kv-surrealkv"] }
+tokio = { version = "1", features = ["full"] }
+toml = "0.8"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 feed-rs = "2"
 reqwest = { version = "0.12", features = ["json", "rustls-tls"], default-features = false }
 strsim = "0.11"

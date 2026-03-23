@@ -1,7 +1,9 @@
 use dioxus::prelude::*;
 
+#[cfg(not(target_arch = "wasm32"))]
 mod api;
 mod components;
+#[cfg(not(target_arch = "wasm32"))]
 mod models;
 mod pages;
 mod server_fns;
