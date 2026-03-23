@@ -126,6 +126,71 @@ async fn query_existing_candidates(
     }
 }
 
+/// Deduplicate story candidates against existing issues
+/// Returns: candidates that are new (not duplicates)
+fn filter_new_candidates(
+    candidates: Vec<signal_noise::scanner::StoryCandidate>,
+    existing: &[ExistingIssue],
+) -> Vec<signal_noise::scanner::StoryCandidate> {
+    let mut new_candidates = Vec::new();
+    let mut skipped_count = 0;
+
+    for candidate in candidates {
+        let mut is_duplicate = false;
+
+        // Tier 1: Check URL matching (exact duplicates)
+        for (_, existing_urls) in existing {
+            if existing_urls.iter().any(|url| {
+                candidate.source_urls.iter().any(|c_url| c_url == url)
+            }) {
+                is_duplicate = true;
+                tracing::debug!("Skipped duplicate by URL: {}", candidate.headline);
+                skipped_count += 1;
+                break;
+            }
+        }
+
+        // Tier 2: Check title similarity (if URL is new)
+        if !is_duplicate {
+            for (existing_title, _) in existing {
+                let similarity = string_similarity(&candidate.headline, existing_title);
+                if similarity > 0.85 {
+                    is_duplicate = true;
+                    tracing::debug!(
+                        "Skipped similar story (similarity={:.2}): {}",
+                        similarity,
+                        candidate.headline
+                    );
+                    skipped_count += 1;
+                    break;
+                }
+            }
+        }
+
+        if !is_duplicate {
+            new_candidates.push(candidate);
+        }
+    }
+
+    if skipped_count > 0 {
+        tracing::info!("Deduplication: skipped {} duplicates", skipped_count);
+    }
+
+    new_candidates
+}
+
+/// Calculate string similarity using Levenshtein distance
+/// Returns value between 0.0 and 1.0 (1.0 = identical)
+fn string_similarity(s1: &str, s2: &str) -> f64 {
+    let max_len = std::cmp::max(s1.len(), s2.len());
+    if max_len == 0 {
+        return 1.0;
+    }
+
+    let distance = strsim::levenshtein(s1, s2);
+    1.0 - (distance as f64 / max_len as f64)
+}
+
 #[tokio::main]
 async fn main() -> Result<()> {
     // Initialize logging
