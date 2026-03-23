@@ -8,24 +8,24 @@ pub struct ConfidenceMeterProps {
 #[component]
 pub fn ConfidenceMeter(props: ConfidenceMeterProps) -> Element {
     let pct = (props.score * 100.0) as u32;
-    let color = if props.score >= 0.8 {
-        "bg-green-500"
+    let fill_color = if props.score >= 0.8 {
+        "var(--sn-accent)"
     } else if props.score >= 0.5 {
-        "bg-yellow-500"
+        "var(--sn-amber)"
     } else {
-        "bg-red-500"
+        "var(--sn-red)"
     };
 
     rsx! {
-        div { class: "flex items-center gap-2 my-2",
-            span { class: "text-xs text-gray-500 w-24", "Confidence" }
-            div { class: "flex-1 h-2 bg-gray-200 rounded-full overflow-hidden",
+        div { class: "sn-conf-row", style: "margin-bottom:12px;",
+            span { class: "sn-conf-label", "CONFIDENCE" }
+            div { class: "sn-conf-track",
                 div {
-                    class: "h-full {color} rounded-full",
-                    style: "width: {pct}%"
+                    class: "sn-conf-fill",
+                    style: "width:{pct}%; background:{fill_color};"
                 }
             }
-            span { class: "text-xs font-mono w-8 text-right", "{pct}%" }
+            span { class: "sn-conf-val", "{pct}%" }
         }
     }
 }

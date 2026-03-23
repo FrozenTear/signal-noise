@@ -17,21 +17,35 @@ pub struct SourceBlockProps {
 #[component]
 pub fn SourceBlock(props: SourceBlockProps) -> Element {
     rsx! {
-        div { class: "border-t border-gray-200 mt-8 pt-4",
-            h3 { class: "text-sm font-semibold text-gray-700 mb-3", "Sources" }
-            if props.sources.is_empty() {
-                p { class: "text-sm text-gray-400", "No sources recorded." }
-            } else {
-                ul { class: "space-y-2",
+        div { style: "margin-top:32px;",
+            div { class: "sn-section-hdr",
+                span { class: "hi", "SOURCES" }
+            }
+            div { class: "sn-sb-card",
+                if props.sources.is_empty() {
+                    div { style: "padding:14px 16px; font-family:var(--sn-mono); font-size:10px; color:var(--sn-text-dimmer);",
+                        "No sources recorded."
+                    }
+                } else {
                     for source in &props.sources {
-                        li { class: "flex items-center gap-2 text-sm",
-                            a { class: "text-blue-600 hover:underline", href: "{source.url}", "{source.name}" }
-                            span { class: "text-xs text-gray-400", "[{source.source_type}]" }
-                            if source.paywall {
-                                span { class: "text-xs text-orange-500", "paywall" }
+                        div { class: "sn-source-item",
+                            div {
+                                class: if source.verified { "sn-source-dot ok" } else { "sn-source-dot no" }
                             }
-                            if source.verified {
-                                span { class: "text-xs text-green-600", "verified" }
+                            div {
+                                a { style: "color:var(--sn-accent); text-decoration:none;",
+                                    href: "{source.url}",
+                                    "{source.name}"
+                                }
+                                span { style: "color:var(--sn-text-dimmer); margin-left:6px;",
+                                    "[{source.source_type}]"
+                                }
+                                if source.paywall {
+                                    span { class: "sn-chip-warn", style: "margin-left:6px;", "paywall" }
+                                }
+                                if source.verified {
+                                    span { class: "sn-chip-val", style: "margin-left:6px;", "verified" }
+                                }
                             }
                         }
                     }

@@ -17,20 +17,23 @@ pub struct PipelineTrailProps {
 #[component]
 pub fn PipelineTrail(props: PipelineTrailProps) -> Element {
     rsx! {
-        div { class: "border-t border-gray-200 mt-8 pt-4",
-            h3 { class: "text-sm font-semibold text-gray-700 mb-3", "Editorial Trail" }
-            if props.steps.is_empty() {
-                p { class: "text-sm text-gray-400", "No pipeline steps recorded." }
-            } else {
-                ol { class: "space-y-3",
+        div { style: "margin-top:32px;",
+            div { class: "sn-section-hdr",
+                span { class: "hi", "EDITORIAL TRAIL" }
+            }
+            div { class: "sn-sb-card",
+                if props.steps.is_empty() {
+                    div { style: "padding:14px 16px; font-family:var(--sn-mono); font-size:10px; color:var(--sn-text-dimmer);",
+                        "No pipeline steps recorded."
+                    }
+                } else {
                     for step in &props.steps {
-                        li { class: "flex gap-3 text-sm",
-                            div { class: "w-24 shrink-0 text-gray-400 text-xs pt-0.5", "{step.completed_at}" }
-                            div {
-                                div { class: "font-medium", "{step.agent_name}" }
-                                div { class: "text-gray-600", "{step.output_summary}" }
-                                div { class: "text-xs text-gray-400",
-                                    "confidence Δ {step.confidence_delta:+.2}"
+                        div { class: "sn-pipe-step",
+                            div { class: "sn-pipe-agent", "{step.agent_name}" }
+                            div { class: "sn-pipe-text",
+                                "{step.output_summary}"
+                                span { style: "display:block; margin-top:3px; color:var(--sn-text-dimmer);",
+                                    "Δ {step.confidence_delta:+.2}  ·  {step.completed_at}"
                                 }
                             }
                         }
