@@ -278,3 +278,67 @@ pub async fn poll_feeds(
 
     Ok(top)
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_gnews_article_to_candidate() {
+        let article = crate::gnews::GnewsArticle {
+            title: "Linux Kernel 6.8 Released".to_string(),
+            description: Some("New features and improvements".to_string()),
+            content: None,
+            image: None,
+            url: "https://example.com/article".to_string(),
+            source: crate::gnews::GnewsSource {
+                name: "TechNews".to_string(),
+                url: "https://example.com".to_string(),
+            },
+            published_at: "2026-03-23T08:00:00Z".to_string(),
+        };
+
+        let candidate = gnews_article_to_candidate(
+            article,
+            "linux".to_string(),
+            "medium".to_string(),
+        );
+
+        assert_eq!(candidate.headline, "Linux Kernel 6.8 Released");
+        assert_eq!(candidate.beat, "linux");
+        assert_eq!(candidate.priority, "medium");
+        assert!(candidate.source_feed.contains("gnews.io"));
+        assert_eq!(candidate.source_urls.len(), 1);
+    }
+
+    #[test]
+    fn test_deduplication_rss_vs_gnews() {
+        let rss_candidate = StoryCandidate {
+            headline: "Breaking: Major Linux Update".to_string(),
+            summary: "Important security patches released".to_string(),
+            source_urls: vec!["https://rss.example.com/1".to_string()],
+            beat: "linux".to_string(),
+            priority: "high".to_string(),
+            published_at: None,
+            source_feed: "Phoronix".to_string(),
+            relevance_score: 0.0,
+        };
+
+        let gnews_candidate = StoryCandidate {
+            headline: "Breaking: Major Linux Update Released".to_string(),
+            summary: "Important patches from kernel team".to_string(),
+            source_urls: vec!["https://gnews.example.com/1".to_string()],
+            beat: "linux".to_string(),
+            priority: "medium".to_string(),
+            published_at: None,
+            source_feed: "gnews.io (TechNews)".to_string(),
+            relevance_score: 0.0,
+        };
+
+        let candidates = vec![rss_candidate, gnews_candidate];
+        let deduped = deduplicate_candidates(candidates, 0.85);
+
+        // Should deduplicate these as the same story despite different sources
+        assert_eq!(deduped.len(), 1, "Similar headlines should be deduplicated");
+    }
+}
