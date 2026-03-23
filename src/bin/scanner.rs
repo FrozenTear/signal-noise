@@ -330,3 +330,128 @@ async fn main() -> Result<()> {
     );
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn make_candidate(headline: &str, url: &str) -> signal_noise::scanner::StoryCandidate {
+        signal_noise::scanner::StoryCandidate {
+            headline: headline.to_string(),
+            summary: "Test summary".to_string(),
+            source_urls: vec![url.to_string()],
+            beat: "tech".to_string(),
+            priority: "high".to_string(),
+            published_at: None,
+            source_feed: "test".to_string(),
+            relevance_score: 0.8,
+        }
+    }
+
+    #[test]
+    fn test_filter_removes_exact_url_duplicates() {
+        let candidate = make_candidate(
+            "New Feature Announced",
+            "https://example.com/article/123"
+        );
+
+        let existing = vec![
+            (
+                "Old Title".to_string(),
+                vec!["https://example.com/article/123".to_string()],
+            )
+        ];
+
+        let filtered = filter_new_candidates(vec![candidate], &existing);
+        assert_eq!(filtered.len(), 0, "Should remove exact URL duplicates");
+    }
+
+    #[test]
+    fn test_filter_preserves_new_urls() {
+        let candidate = make_candidate(
+            "Breaking News",
+            "https://newsite.com/story/456"
+        );
+
+        let existing = vec![
+            (
+                "Old Article".to_string(),
+                vec!["https://oldsite.com/story/123".to_string()],
+            )
+        ];
+
+        let filtered = filter_new_candidates(vec![candidate.clone()], &existing);
+        assert_eq!(filtered.len(), 1, "Should preserve new URLs");
+        assert_eq!(filtered[0].headline, candidate.headline);
+    }
+
+    #[test]
+    fn test_filter_removes_similar_titles() {
+        let candidate = make_candidate(
+            "Linux Kernel 6.8 Released with Major Security Updates",
+            "https://site1.com/article/456"
+        );
+
+        let existing = vec![
+            (
+                "Linux Kernel 6.8 Released with Major Security Updates".to_string(),
+                vec!["https://site2.com/article/789".to_string()],
+            )
+        ];
+
+        let filtered = filter_new_candidates(vec![candidate], &existing);
+        assert_eq!(filtered.len(), 0, "Should remove similar headlines (>0.85 similarity)");
+    }
+
+    #[test]
+    fn test_filter_preserves_different_stories() {
+        let candidate1 = make_candidate(
+            "Tech Company Raises Funding",
+            "https://site1.com/article/111"
+        );
+        let candidate2 = make_candidate(
+            "Different Story Entirely",
+            "https://site2.com/article/222"
+        );
+
+        let existing = vec![
+            (
+                "Old Story Not Related".to_string(),
+                vec!["https://oldsite.com/article/999".to_string()],
+            )
+        ];
+
+        let filtered = filter_new_candidates(
+            vec![candidate1.clone(), candidate2.clone()],
+            &existing
+        );
+        assert_eq!(filtered.len(), 2, "Should preserve unrelated stories");
+    }
+
+    #[test]
+    fn test_string_similarity_exact_match() {
+        let sim = string_similarity("Test Title", "Test Title");
+        assert!(sim > 0.99, "Exact match should have very high similarity");
+    }
+
+    #[test]
+    fn test_string_similarity_different_stories() {
+        let sim = string_similarity(
+            "Apple Releases iPhone",
+            "Microsoft Windows Update"
+        );
+        assert!(sim < 0.50, "Very different strings should have low similarity");
+    }
+
+    #[test]
+    fn test_string_similarity_handles_long_strings() {
+        // Test that long strings are truncated to prevent performance issues
+        let long_str = "a".repeat(2000);
+        let similar_long = "a".repeat(1950) + "bbb";
+        let sim = string_similarity(&long_str, &similar_long);
+        // Should complete quickly without hanging (not asserting specific value,
+        // just that it completes in reasonable time)
+        assert!(sim >= 0.0 && sim <= 1.0, "Similarity should be in valid range");
+    }
+}
+
