@@ -1,9 +1,7 @@
 use anyhow::Result;
 use chrono::Utc;
 use reqwest::Client;
-use serde_json::json;
 use std::env;
-use std::collections::HashMap;
 
 /// Type: (issue_title, source_urls)
 /// Used to check for duplicate story candidates
@@ -135,6 +133,10 @@ fn filter_new_candidates(
     let mut new_candidates = Vec::new();
     let mut skipped_count = 0;
 
+    // Two-tier deduplication: O(n*m) complexity acceptable due to:
+    // - 7-day lookback limit (~1000 max existing issues per line 107)
+    // - Break statements prevent redundant checking
+    // - Fast path (URL matching) exits before slower path (title similarity)
     for candidate in candidates {
         let mut is_duplicate = false;
 
@@ -154,6 +156,8 @@ fn filter_new_candidates(
         if !is_duplicate {
             for (existing_title, _) in existing {
                 let similarity = string_similarity(&candidate.headline, existing_title);
+                // 0.85 similarity threshold catches story variants (same news from different outlets)
+                // while avoiding false positives from unrelated stories. Tuned in SIG-113.
                 if similarity > 0.85 {
                     is_duplicate = true;
                     tracing::debug!(
@@ -181,7 +185,13 @@ fn filter_new_candidates(
 
 /// Calculate string similarity using Levenshtein distance
 /// Returns value between 0.0 and 1.0 (1.0 = identical)
+/// Note: Strings longer than 1000 chars are truncated to prevent pathological performance
 fn string_similarity(s1: &str, s2: &str) -> f64 {
+    const MAX_LEN: usize = 1000;
+
+    let s1 = if s1.len() > MAX_LEN { &s1[..MAX_LEN] } else { s1 };
+    let s2 = if s2.len() > MAX_LEN { &s2[..MAX_LEN] } else { s2 };
+
     let max_len = std::cmp::max(s1.len(), s2.len());
     if max_len == 0 {
         return 1.0;
@@ -207,7 +217,7 @@ async fn main() -> Result<()> {
     let api_url = env::var("PAPERCLIP_API_URL")?;
     let api_key = env::var("PAPERCLIP_API_KEY")?;
     let company_id = env::var("PAPERCLIP_COMPANY_ID")?;
-    let agent_id = env::var("PAPERCLIP_AGENT_ID")?;
+    let _agent_id = env::var("PAPERCLIP_AGENT_ID")?;
     let run_id = env::var("PAPERCLIP_RUN_ID")?;
 
     // Create HTTP client with Paperclip auth
