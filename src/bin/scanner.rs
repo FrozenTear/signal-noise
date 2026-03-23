@@ -16,7 +16,7 @@ async fn query_existing_candidates(
     api_url: &str,
     company_id: &str,
     auth_header: &str,
-) -> Result<Vec<ExistingIssue>, Box<dyn std::error::Error>> {
+) -> Vec<ExistingIssue> {
     let seven_days_ago = Utc::now() - chrono::Duration::days(7);
 
     tracing::info!("Querying existing story candidates from last 7 days...");
@@ -42,27 +42,60 @@ async fn query_existing_candidates(
                     let mut existing = Vec::new();
 
                     for issue in issues {
-                        if let Some(created_at_str) = issue.get("createdAt").and_then(|t| t.as_str()) {
-                            if let Ok(created_at) = chrono::DateTime::parse_from_rfc3339(created_at_str) {
-                                if created_at.with_timezone(&Utc) < seven_days_ago {
-                                    continue; // Skip old issues
+                        // Check if issue is recent (Issue 4: Add logging for date parsing failures)
+                        let is_recent = if let Some(created_at_str) = issue.get("createdAt").and_then(|t| t.as_str()) {
+                            match chrono::DateTime::parse_from_rfc3339(created_at_str) {
+                                Ok(created_at) => created_at.with_timezone(&Utc) >= seven_days_ago,
+                                Err(e) => {
+                                    tracing::debug!("Failed to parse createdAt: {} (value: {})", e, created_at_str);
+                                    true // Include in results if parse fails (be inclusive)
                                 }
                             }
+                        } else {
+                            tracing::debug!("Missing createdAt field");
+                            true // Include issues without date (be inclusive)
+                        };
+
+                        if !is_recent {
+                            continue;
                         }
 
-                        let title = issue
-                            .get("title")
-                            .and_then(|t| t.as_str())
-                            .unwrap_or("")
-                            .to_string();
+                        // Issue 3: Skip issues with missing/empty titles
+                        let title = match issue.get("title").and_then(|t| t.as_str()) {
+                            Some(t) if !t.trim().is_empty() => t.to_string(),
+                            _ => {
+                                tracing::debug!("Skipping issue without title");
+                                continue;
+                            }
+                        };
 
-                        // Extract URLs from description if present
+                        // Extract URLs from description if present (Issue 2: More robust URL extraction)
                         let urls = if let Some(desc) = issue.get("description").and_then(|d| d.as_str()) {
-                            // Simple extraction: look for https:// patterns
-                            desc.split_whitespace()
-                                .filter(|s| s.starts_with("https://") || s.starts_with("http://"))
-                                .map(|s| s.to_string())
-                                .collect()
+                            // Extract URLs more robustly: find http(s):// and collect until whitespace/punctuation
+                            let mut extracted_urls = Vec::new();
+                            let mut remaining = desc;
+
+                            while let Some(start_idx) = remaining.find("http://").or_else(|| remaining.find("https://")) {
+                                // Find the protocol start
+                                let protocol_start = if remaining[start_idx..].starts_with("https://") { start_idx } else { start_idx };
+                                let url_start = protocol_start;
+
+                                // Find the end of the URL (whitespace, quotes, brackets, or punctuation)
+                                let url_end = remaining[url_start..]
+                                    .find(|c: char| c.is_whitespace() || c == ')' || c == ',' || c == '"' || c == '>' || c == ']')
+                                    .map(|i| url_start + i)
+                                    .unwrap_or(remaining.len());
+
+                                let url = &remaining[url_start..url_end];
+                                if !url.is_empty() {
+                                    extracted_urls.push(url.to_string());
+                                }
+
+                                // Move past this URL for next iteration
+                                remaining = &remaining[url_end..];
+                            }
+
+                            extracted_urls
                         } else {
                             Vec::new()
                         };
@@ -70,18 +103,25 @@ async fn query_existing_candidates(
                         existing.push((title, urls));
                     }
 
+                    // Issue 5: Add response size limit
+                    const MAX_ISSUES: usize = 1000;
+                    if existing.len() > MAX_ISSUES {
+                        tracing::warn!("Received {} issues, truncating to {}", existing.len(), MAX_ISSUES);
+                    }
+                    let existing = &existing[..std::cmp::min(existing.len(), MAX_ISSUES)];
+
                     tracing::info!("Found {} existing story candidate issues", existing.len());
-                    Ok(existing)
+                    existing.to_vec()
                 }
                 Err(e) => {
                     tracing::warn!("Failed to parse Paperclip response: {}", e);
-                    Ok(Vec::new()) // Graceful degradation
+                    Vec::new() // Graceful degradation
                 }
             }
         }
         Err(e) => {
             tracing::warn!("Failed to query existing candidates: {}", e);
-            Ok(Vec::new()) // Graceful degradation on API failure
+            Vec::new() // Graceful degradation on API failure
         }
     }
 }
