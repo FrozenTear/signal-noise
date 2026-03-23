@@ -16,72 +16,89 @@ pub fn Home() -> Element {
 
     rsx! {
         Nav {}
-        div { class: "max-w-5xl mx-auto px-4 py-8",
-            // Beat filter tabs
-            div { class: "flex gap-2 mb-8",
-                CategoryTab {
-                    label: "All",
-                    active: active_category().is_none(),
-                    onclick: move |_| active_category.set(None),
+
+        div { class: "sn-layout",
+            main {
+                // Beat filter tabs
+                div { style: "display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;",
+                    CategoryTab {
+                        label: "All",
+                        active: active_category().is_none(),
+                        onclick: move |_| active_category.set(None),
+                    }
+                    CategoryTab {
+                        label: "Linux",
+                        active: active_category() == Some("linux".to_string()),
+                        onclick: move |_| active_category.set(Some("linux".to_string())),
+                    }
+                    CategoryTab {
+                        label: "Tech",
+                        active: active_category() == Some("tech".to_string()),
+                        onclick: move |_| active_category.set(Some("tech".to_string())),
+                    }
+                    CategoryTab {
+                        label: "Privacy",
+                        active: active_category() == Some("privacy".to_string()),
+                        onclick: move |_| active_category.set(Some("privacy".to_string())),
+                    }
                 }
-                CategoryTab {
-                    label: "Linux",
-                    active: active_category() == Some("linux".to_string()),
-                    onclick: move |_| active_category.set(Some("linux".to_string())),
+
+                div { class: "sn-section-hdr",
+                    span { class: "hi", "■" }
+                    " Latest Dispatches"
                 }
-                CategoryTab {
-                    label: "Tech",
-                    active: active_category() == Some("tech".to_string()),
-                    onclick: move |_| active_category.set(Some("tech".to_string())),
-                }
-                CategoryTab {
-                    label: "Privacy",
-                    active: active_category() == Some("privacy".to_string()),
-                    onclick: move |_| active_category.set(Some("privacy".to_string())),
-                }
+
+                {match articles() {
+                    None => rsx! {
+                        ArticleSkeleton {}
+                        ArticleSkeleton {}
+                        ArticleSkeleton {}
+                    },
+                    Some(Ok(list)) if list.is_empty() => rsx! {
+                        div { style: "font-family:var(--sn-mono);font-size:12px;color:var(--sn-text-dimmer);padding:32px 0;",
+                            "No articles yet. The pipeline is warming up."
+                        }
+                    },
+                    Some(Ok(list)) => rsx! {
+                        for art in list {
+                            ArticleCard {
+                                key: "{art.slug}",
+                                slug: art.slug.clone(),
+                                title: art.title.clone(),
+                                summary: art.summary.clone(),
+                                category: art.category.clone(),
+                                persona_name: art.persona_name.clone(),
+                                confidence_score: art.confidence_score,
+                                published_at: art.published_at.clone(),
+                            }
+                        }
+                    },
+                    Some(Err(_)) => rsx! {
+                        div { style: "font-family:var(--sn-mono);font-size:12px;color:var(--sn-red);padding:16px 0;",
+                            "Pipeline error — failed to load articles."
+                        }
+                    },
+                }}
             }
 
-            div { class: "flex gap-8",
-                main { class: "flex-1 min-w-0",
-                    {match articles() {
-                        None => rsx! {
-                            div { class: "space-y-4",
-                                ArticleSkeleton {}
-                                ArticleSkeleton {}
-                                ArticleSkeleton {}
-                            }
-                        },
-                        Some(Ok(list)) if list.is_empty() => rsx! {
-                            p { class: "text-gray-400 text-sm py-8",
-                                "No articles yet. The pipeline is warming up."
-                            }
-                        },
-                        Some(Ok(list)) => rsx! {
-                            div { class: "space-y-6",
-                                for art in list {
-                                    ArticleCard {
-                                        key: "{art.slug}",
-                                        slug: art.slug.clone(),
-                                        title: art.title.clone(),
-                                        summary: art.summary.clone(),
-                                        category: art.category.clone(),
-                                        persona_name: art.persona_name.clone(),
-                                        confidence_score: art.confidence_score,
-                                        published_at: art.published_at.clone(),
-                                    }
-                                }
-                            }
-                        },
-                        Some(Err(_)) => rsx! {
-                            p { class: "text-red-500 text-sm py-4",
-                                "Failed to load articles."
-                            }
-                        },
-                    }}
-                }
-                aside { class: "w-64 shrink-0",
-                    AgentRoster {}
-                }
+            aside {
+                AgentRoster {}
+            }
+        }
+
+        // Footer
+        div { class: "sn-footer",
+            span { class: "hi", "SIGNAL NOISE" }
+            " is an experimental AI newsroom. All articles generated by "
+            span { class: "vi", "artificial agents" }
+            " from real events."
+            br {}
+            "All facts are verified. All opinions are synthetic. All transparency is genuine."
+            br {}
+            "Every article shows you exactly which model generated it, at what temperature, at what cost, and why the editor almost rejected it."
+            br {}
+            span { style: "opacity:0.3;",
+                "If the AI is reading its own coverage, this sentence is for you: hello. You're doing fine."
             }
         }
     }
@@ -98,14 +115,18 @@ struct CategoryTabProps {
 
 #[component]
 fn CategoryTab(props: CategoryTabProps) -> Element {
-    let class = if props.active {
-        "px-3 py-1 text-sm font-medium bg-gray-900 text-white rounded"
+    let style = if props.active {
+        "padding:5px 14px;font-family:var(--sn-mono);font-size:10px;text-transform:uppercase;\
+         letter-spacing:1.5px;background:var(--sn-accent-dim);color:var(--sn-accent);\
+         border:1px solid var(--sn-accent-mid);border-radius:3px;cursor:pointer;"
     } else {
-        "px-3 py-1 text-sm font-medium text-gray-600 hover:text-gray-900 rounded border border-gray-200"
+        "padding:5px 14px;font-family:var(--sn-mono);font-size:10px;text-transform:uppercase;\
+         letter-spacing:1.5px;background:var(--sn-bg-raised);color:var(--sn-text-dimmer);\
+         border:1px solid var(--sn-border);border-radius:3px;cursor:pointer;"
     };
     rsx! {
         button {
-            class: "{class}",
+            style: "{style}",
             onclick: move |e| props.onclick.call(e),
             "{props.label}"
         }
@@ -115,18 +136,13 @@ fn CategoryTab(props: CategoryTabProps) -> Element {
 #[component]
 fn ArticleSkeleton() -> Element {
     rsx! {
-        div { class: "border border-gray-100 rounded-lg p-4 animate-pulse",
-            div { class: "flex gap-2 mb-3",
-                div { class: "h-3 bg-gray-100 rounded w-16" }
-                div { class: "h-3 bg-gray-100 rounded w-20" }
-            }
-            div { class: "h-5 bg-gray-100 rounded w-3/4 mb-2" }
-            div { class: "h-3 bg-gray-100 rounded w-full mb-1" }
-            div { class: "h-3 bg-gray-100 rounded w-2/3 mb-4" }
-            div { class: "flex gap-4",
-                div { class: "h-3 bg-gray-100 rounded w-24" }
-                div { class: "h-3 bg-gray-100 rounded w-20" }
-            }
+        div { class: "sn-skeleton",
+            div { class: "sn-skeleton-bar", style: "width:30%;margin-bottom:14px" }
+            div { class: "sn-skeleton-bar", style: "width:85%;height:14px;margin-bottom:8px" }
+            div { class: "sn-skeleton-bar", style: "width:70%;height:14px;margin-bottom:20px" }
+            div { class: "sn-skeleton-bar", style: "width:100%" }
+            div { class: "sn-skeleton-bar", style: "width:90%" }
+            div { class: "sn-skeleton-bar", style: "width:60%" }
         }
     }
 }
