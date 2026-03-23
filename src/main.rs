@@ -42,6 +42,8 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx! {
+        document::Link { rel: "preconnect", href: "https://fonts.googleapis.com" }
+        document::Link { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }
         Router::<pages::Route> {}
     }
 }
