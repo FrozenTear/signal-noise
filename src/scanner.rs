@@ -3,6 +3,7 @@ use chrono::Utc;
 use feed_rs::parser;
 use serde::{Deserialize, Serialize};
 use std::fs;
+use toml;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FeedConfig {
@@ -159,6 +160,67 @@ pub fn rank_candidates(mut candidates: Vec<StoryCandidate>) -> Vec<StoryCandidat
     candidates
 }
 
+/// Convert a gnews.io article to a StoryCandidate
+pub fn gnews_article_to_candidate(
+    article: crate::gnews::GnewsArticle,
+    beat: String,
+    priority: String,
+) -> StoryCandidate {
+    let published_at = chrono::DateTime::parse_from_rfc3339(&article.published_at)
+        .ok()
+        .map(|dt| dt.with_timezone(&chrono::Utc));
+
+    let summary = article
+        .description
+        .unwrap_or_else(|| article.content.unwrap_or_default());
+
+    StoryCandidate {
+        headline: article.title,
+        summary,
+        source_urls: vec![article.url],
+        beat,
+        priority,
+        published_at,
+        source_feed: format!("gnews.io ({})", article.source.name),
+        relevance_score: 0.0, // Will be set by rank_candidates
+    }
+}
+
+/// Fetch gnews articles and convert to story candidates
+pub async fn fetch_gnews_candidates(config_path: &str) -> Result<Vec<StoryCandidate>> {
+    let _config = load_feed_config(config_path)?;
+
+    // Extract gnews config from the TOML (need to parse manually)
+    let contents = std::fs::read_to_string(config_path)?;
+    let root: toml::Table = toml::from_str(&contents)?;
+
+    let gnews_table = match root.get("gnews") {
+        Some(toml::Value::Table(t)) => t.clone(),
+        _ => {
+            tracing::warn!("No [gnews] config found in {}", config_path);
+            return Ok(Vec::new());
+        }
+    };
+
+    let gnews_config: crate::gnews::GnewsConfig = gnews_table.try_into()?;
+
+    let mut candidates = Vec::new();
+    let gnews_articles = crate::gnews::fetch_all_gnews(&gnews_config).await?;
+
+    for (beat, article) in gnews_articles {
+        let priority = "medium".to_string(); // gnews discovery is secondary tier
+        let candidate = gnews_article_to_candidate(article, beat, priority);
+        candidates.push(candidate);
+    }
+
+    tracing::info!(
+        "Fetched {} story candidates from gnews.io",
+        candidates.len()
+    );
+
+    Ok(candidates)
+}
+
 /// Poll all configured feeds and return top story candidates
 pub async fn poll_feeds(
     config_path: &str,
@@ -167,6 +229,7 @@ pub async fn poll_feeds(
 
     let mut all_candidates = Vec::new();
 
+    // Fetch from RSS feeds
     for feed_entry in config.feed {
         tracing::info!("Fetching feed: {} ({})", feed_entry.name, feed_entry.url);
 
@@ -185,7 +248,20 @@ pub async fn poll_feeds(
         }
     }
 
-    tracing::info!("Fetched {} total articles", all_candidates.len());
+    tracing::info!("Fetched {} total articles from RSS", all_candidates.len());
+
+    // Fetch from gnews.io
+    match fetch_gnews_candidates(config_path).await {
+        Ok(gnews_candidates) => {
+            tracing::info!("Fetched {} articles from gnews.io", gnews_candidates.len());
+            all_candidates.extend(gnews_candidates);
+        }
+        Err(e) => {
+            tracing::warn!("Failed to fetch gnews.io candidates: {}", e);
+        }
+    }
+
+    tracing::info!("Total candidates before dedup: {}", all_candidates.len());
 
     // Deduplicate
     let deduped = deduplicate_candidates(all_candidates, config.scanner.dedup_threshold);
