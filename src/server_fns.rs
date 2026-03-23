@@ -130,7 +130,9 @@ pub async fn get_article_by_slug(
     if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
         if let Ok(mut res) = db
             .query(
-                "SELECT slug, title, body, category, confidence_score, ai_monologue, published_at \
+                "SELECT *, \
+                 ->cites->source.* AS sources, \
+                 ->produced_by->pipeline_step.* AS pipeline \
                  FROM article WHERE slug = $slug LIMIT 1",
             )
             .bind(("slug", slug.clone()))
@@ -138,6 +140,44 @@ pub async fn get_article_by_slug(
         {
             if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
                 if let Some(v) = rows.into_iter().next() {
+                    let sources = v["sources"]
+                        .as_array()
+                        .map(|arr| {
+                            arr.iter()
+                                .filter_map(|s| {
+                                    Some(SourceSummary {
+                                        url: s["url"].as_str()?.to_string(),
+                                        name: s["name"].as_str()?.to_string(),
+                                        source_type: s["type"].as_str().unwrap_or("wire").to_string(),
+                                        paywall: s["paywall_status"].as_str() == Some("paywalled"),
+                                        verified: s["verification_status"].as_str() == Some("verified"),
+                                    })
+                                })
+                                .collect()
+                        })
+                        .unwrap_or_default();
+
+                    let pipeline = v["pipeline"]
+                        .as_array()
+                        .map(|arr| {
+                            arr.iter()
+                                .filter_map(|p| {
+                                    Some(PipelineSummary {
+                                        agent_name: p["agent_name"].as_str()?.to_string(),
+                                        step_type: p["step_type"].as_str()?.to_string(),
+                                        output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
+                                        confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
+                                        completed_at: p["completed_at"]
+                                            .as_str()
+                                            .or_else(|| p["started_at"].as_str())
+                                            .unwrap_or("")
+                                            .to_string(),
+                                    })
+                                })
+                                .collect()
+                        })
+                        .unwrap_or_default();
+
                     return Ok(Some(ArticleDetail {
                         slug: v["slug"].as_str().unwrap_or("").to_string(),
                         title: v["title"].as_str().unwrap_or("").to_string(),
@@ -147,8 +187,8 @@ pub async fn get_article_by_slug(
                         confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
                         ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
                         published_at: v["published_at"].as_str().unwrap_or("").to_string(),
-                        sources: vec![],
-                        pipeline: vec![],
+                        sources,
+                        pipeline,
                     }));
                 }
             }
