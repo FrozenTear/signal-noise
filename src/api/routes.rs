@@ -20,7 +20,7 @@ use super::AppState;
 pub fn router(state: AppState) -> Router {
     Router::new()
         .route("/articles", get(list_articles).post(publish_article))
-        .route("/articles/:slug", get(get_article))
+        .route("/articles/{slug}", get(get_article))
         .route("/agents/status", get(agent_status))
         .with_state(state)
 }
