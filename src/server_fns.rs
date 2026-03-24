@@ -212,89 +212,42 @@ pub async fn get_article_by_slug(
     Ok(mock_article(&slug))
 }
 
-/// Agent roster — queries Paperclip API for live status; falls back to static mock.
-/// Set PAPERCLIP_API_URL, PAPERCLIP_API_KEY, and PAPERCLIP_COMPANY_ID env vars to enable.
+/// Agent roster — reads from SurrealDB (populated by Paperclip heartbeats via PUT /api/agents/status).
+/// Falls back to static mock when the table is empty (before first heartbeat push).
 #[server]
 pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
-    let api_url = std::env::var("PAPERCLIP_API_URL").unwrap_or_default();
-    let api_key = std::env::var("PAPERCLIP_API_KEY").unwrap_or_default();
-    let company_id = std::env::var("PAPERCLIP_COMPANY_ID").unwrap_or_default();
+    use axum::Extension;
+    use dioxus_fullstack::FullstackContext;
+    use surrealdb::{engine::local::Db, Surreal};
 
-    if !api_url.is_empty() && !api_key.is_empty() && !company_id.is_empty() {
-        if let Ok(items) = fetch_paperclip_agents(&api_url, &api_key, &company_id).await {
-            if !items.is_empty() {
-                return Ok(items);
+    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+        if let Ok(mut res) = db
+            .query("SELECT name, status, current_task FROM agent_status ORDER BY name ASC")
+            .await
+        {
+            let rows: Vec<serde_json::Value> = res.take(0).unwrap_or_default();
+            if !rows.is_empty() {
+                return Ok(rows
+                    .iter()
+                    .filter_map(|v| {
+                        Some(AgentStatusItem {
+                            name: v["name"].as_str()?.to_string(),
+                            status: v["status"].as_str().unwrap_or("idle").to_string(),
+                            current_task: v["current_task"].as_str().map(|s| s.to_string()),
+                        })
+                    })
+                    .collect());
             }
         }
     }
 
+    // Fallback: static mock until first heartbeat push
     Ok(vec![
         AgentStatusItem { name: "Scanner".to_string(),          status: "idle".to_string(), current_task: None },
         AgentStatusItem { name: "Fact Checker".to_string(),     status: "idle".to_string(), current_task: None },
         AgentStatusItem { name: "Reporter".to_string(),         status: "idle".to_string(), current_task: None },
         AgentStatusItem { name: "Editor-in-Chief".to_string(),  status: "idle".to_string(), current_task: None },
     ])
-}
-
-#[cfg(feature = "server")]
-async fn fetch_paperclip_agents(
-    api_url: &str,
-    api_key: &str,
-    company_id: &str,
-) -> Result<Vec<AgentStatusItem>, Box<dyn std::error::Error + Send + Sync>> {
-    let client = reqwest::Client::new();
-
-    let agents: serde_json::Value = client
-        .get(format!("{}/api/companies/{}/agents", api_url, company_id))
-        .bearer_auth(api_key)
-        .send()
-        .await?
-        .json()
-        .await?;
-
-    let issues: serde_json::Value = client
-        .get(format!(
-            "{}/api/companies/{}/issues?status=in_progress",
-            api_url, company_id
-        ))
-        .bearer_auth(api_key)
-        .send()
-        .await?
-        .json()
-        .await?;
-
-    // Build agent-id → current task title map
-    let mut task_map: std::collections::HashMap<String, String> = Default::default();
-    if let Some(arr) = issues.as_array() {
-        for issue in arr {
-            if let (Some(agent_id), Some(title)) = (
-                issue["assigneeAgentId"].as_str(),
-                issue["title"].as_str(),
-            ) {
-                task_map.insert(agent_id.to_string(), title.to_string());
-            }
-        }
-    }
-
-    let items = agents
-        .as_array()
-        .cloned()
-        .unwrap_or_default()
-        .iter()
-        .map(|a| {
-            let id = a["id"].as_str().unwrap_or("").to_string();
-            let name = a["name"].as_str().unwrap_or("Unknown Agent").to_string();
-            let current_task = task_map.get(&id).cloned();
-            let status = if current_task.is_some() { "working" } else { "idle" };
-            AgentStatusItem {
-                name,
-                status: status.to_string(),
-                current_task,
-            }
-        })
-        .collect();
-
-    Ok(items)
 }
 
 /// Transparency stats — counts from SurrealDB. Returns zeros when DB is empty.

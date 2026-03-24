@@ -21,7 +21,7 @@ pub fn router(state: AppState) -> Router {
     Router::new()
         .route("/articles", get(list_articles).post(publish_article))
         .route("/articles/{slug}", get(get_article))
-        .route("/agents/status", get(agent_status))
+        .route("/agents/status", get(agent_status).put(push_agent_status))
         .with_state(state)
 }
 
@@ -262,25 +262,56 @@ pub async fn publish_article(
     Ok(Json(json!({ "status": "published", "slug": slug })))
 }
 
+/// GET /api/agents/status — read agent status from DB (pushed by Paperclip heartbeats).
 pub async fn agent_status(
-    State(_state): State<AppState>,
+    State(state): State<AppState>,
 ) -> Result<Json<Value>, StatusCode> {
-    Ok(Json(json!({
-        "agents": [
-            {
-                "id": "scanner",
-                "name": "Scanner",
-                "role": "Finds and ingests news from RSS feeds and gnews.io",
-                "status": "active",
-                "beat": "all"
-            },
-            {
-                "id": "founding-engineer",
-                "name": "Founding Engineer",
-                "role": "Backend infrastructure, database, and pipeline plumbing",
-                "status": "active",
-                "beat": "engineering"
-            }
-        ]
-    })))
+    let mut result = state
+        .db
+        .query("SELECT agent_id, name, status, current_task, updated_at FROM agent_status ORDER BY name ASC")
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
+    let agents: Vec<Value> = result.take(0).map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    Ok(Json(json!({ "agents": agents })))
+}
+
+#[derive(Deserialize)]
+pub struct AgentStatusPushItem {
+    pub agent_id: String,
+    pub name: String,
+    pub status: String,
+    pub current_task: Option<String>,
+}
+
+/// PUT /api/agents/status — upsert agent statuses (called by Paperclip heartbeats).
+/// Accepts a JSON array of agent status items. Localhost-only by convention.
+pub async fn push_agent_status(
+    State(state): State<AppState>,
+    Json(items): Json<Vec<AgentStatusPushItem>>,
+) -> Result<Json<Value>, StatusCode> {
+    for item in items {
+        let task = item.current_task.unwrap_or_default();
+        state
+            .db
+            .query(
+                r#"
+                UPSERT agent_status MERGE {
+                    agent_id:     $agent_id,
+                    name:         $name,
+                    status:       $status,
+                    current_task: IF $task != '' THEN $task ELSE NONE END,
+                    updated_at:   time::now()
+                } WHERE agent_id = $agent_id
+                "#,
+            )
+            .bind(("agent_id", item.agent_id))
+            .bind(("name", item.name))
+            .bind(("status", item.status))
+            .bind(("task", task))
+            .await
+            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    }
+
+    Ok(Json(json!({ "status": "ok" })))
 }

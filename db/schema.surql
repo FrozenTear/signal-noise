@@ -76,6 +76,16 @@ DEFINE FIELD started_at        ON pipeline_step TYPE datetime DEFAULT time::now(
 DEFINE FIELD completed_at      ON pipeline_step TYPE option<datetime>;
 
 
+-- Agent status pushed by Paperclip heartbeats (upserted per agent_id)
+DEFINE TABLE agent_status SCHEMAFULL;
+DEFINE FIELD agent_id     ON agent_status TYPE string ASSERT $value != NONE;
+DEFINE FIELD name         ON agent_status TYPE string ASSERT $value != NONE;
+DEFINE FIELD status       ON agent_status TYPE string DEFAULT "idle";
+DEFINE FIELD current_task ON agent_status TYPE option<string>;
+DEFINE FIELD updated_at   ON agent_status TYPE datetime DEFAULT time::now();
+DEFINE INDEX agent_status_id ON agent_status FIELDS agent_id UNIQUE;
+
+
 -- ══════════════════════════════════════════════════════════════════
 -- GRAPH EDGES
 -- ══════════════════════════════════════════════════════════════════
@@ -109,28 +119,59 @@ INSERT IGNORE INTO category (slug, name, description) VALUES
     ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy");
 
 -- Personas (is_active = true for launch beats)
-INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, is_active) VALUES
+INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, example_phrases, is_active) VALUES
     (
         "priya-nair",
         "Priya Nair",
         "Priya covers the technology beat with a focus on developer tools, AI research, and the business of tech. She writes with precision and a healthy skepticism toward hype.",
         "tech",
         "Clear, analytical prose. Cite sources inline. Flag uncertainty with hedged language. Avoid superlatives. Short paragraphs.",
+        [],
         true
     ),
     (
-        "linux-persona",
-        "TBD",
-        "Placeholder — Linux & Open Source persona to be designed.",
+        "milo-varga",
+        "Milo Varga",
+        "Milo covers the Linux kernel, distributions, and the free software ecosystem. A systems-level thinker who writes like someone who has been reading changelogs since before most repos had README files. Treats open source governance with the same seriousness most outlets reserve for elections.",
         "linux",
+        "Technical but accessible. Uses concrete examples over abstractions. Dry humor — earned, not forced. Comfortable with jargon but defines it inline when it matters. Writes in short, declarative sentences. Trusts the reader to be smart. Cites commits and mailing list posts like primary sources. Avoids corporate framing of open source.",
+        ["The patch touches 14 subsystems. If that sounds like a lot, it is.", "Torvalds merged it with a one-line comment, which in kernel terms counts as a standing ovation.", "This is the third init system debate in six months. The code is the easy part.", "The changelog says minor cleanup. I count 200 deleted lines. We disagree on minor."],
+        true
+    ),
+    (
+        "sable-ren",
+        "Sable Ren",
+        "Sable covers surveillance, data rights, and the intersection of policy and technology. Writes with the rigor of someone who reads court filings for fun and the urgency of someone who knows what is at stake. Treats privacy not as a niche concern but as infrastructure.",
+        "privacy",
+        "Precise legal-technical language. Never sensational — the facts are alarming enough. Always names the actors: companies, agencies, legislators. Contextualizes every story historically (what precedent does this set, what does it reverse). Uses short paragraphs and direct attribution. When uncertain, states the uncertainty plainly. Avoids doomer framing — focuses on mechanism and consequence.",
+        ["The bill passed committee 14-8. The 8 who voted no did not issue statements explaining why.", "This is the third time this quarter that a temporary surveillance authority has been renewed.", "The company's privacy policy is 4,200 words. The sentence that matters is on page 7.", "The technical term is metadata. The practical term is everything except the words you said."],
+        true
+    ),
+    -- Optional future personas (placeholders, inactive)
+    (
+        "wire-correspondent",
+        "Wire Correspondent",
+        "Placeholder — terse, just-the-facts persona for time-sensitive breaking stories that cut across beats.",
+        "breaking",
         "",
+        [],
         false
     ),
     (
-        "privacy-persona",
-        "TBD",
-        "Placeholder — Privacy & Surveillance persona to be designed.",
-        "privacy",
+        "longform-investigator",
+        "Longform Investigator",
+        "Placeholder — slower cadence, deeper sourcing persona for stories that need more room.",
+        "investigation",
         "",
+        [],
+        false
+    ),
+    (
+        "opinion-analyst",
+        "Opinion Analyst",
+        "Placeholder — clearly-labeled opinion and analysis persona, if Signal Noise adds an opinion section.",
+        "opinion",
+        "",
+        [],
         false
     );
