@@ -36,12 +36,12 @@ pub fn ArticleCard(props: ArticleCardProps) -> Element {
 
     // Gen bar metadata varies per persona to give realistic variety
     let (model, tokens, cost, temp) = match props.persona_name.as_str() {
-        "Linus Watcher" =>
-            ("claude-opus-4",        "↑ 1,580 / ↓ 1,140 tok", "$0.0044", "t=0.65"),
-        "Panoptikon" =>
-            ("claude-3-7-sonnet",    "↑ 1,240 / ↓ 892 tok",   "$0.0031", "t=0.72"),
+        "Milo Varga" =>
+            ("claude-sonnet-4-6",    "↑ 1,580 / ↓ 1,140 tok", "$0.0044", "t=0.65"),
+        "Sable Ren" =>
+            ("claude-sonnet-4-6",    "↑ 1,240 / ↓ 892 tok",   "$0.0031", "t=0.72"),
         _ =>
-            ("claude-3-5-haiku",     "↑ 980 / ↓ 710 tok",     "$0.0008", "t=0.80"),
+            ("claude-sonnet-4-6",    "↑ 980 / ↓ 710 tok",     "$0.0008", "t=0.80"),
     };
 
     // Monologue text varies per persona

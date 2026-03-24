@@ -51,7 +51,7 @@ pub fn Article(slug: String) -> Element {
 
                     // Gen-bar (AI metadata strip)
                     div { class: "sn-gen-bar",
-                        div { class: "sn-gen-pill model", "claude-3-5-sonnet" }
+                        div { class: "sn-gen-pill model", "claude-sonnet-4-6" }
                         div { class: "sn-gen-pill tokens", "{art.persona_name}" }
                         div { class: "sn-gen-spacer" }
                         span { class: "sn-ts", "{art.published_at}" }
