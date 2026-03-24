@@ -61,6 +61,20 @@ pub struct AgentStatusItem {
     pub current_task: Option<String>,
 }
 
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct TransparencyStats {
+    pub published_today: usize,
+    pub published_total: usize,
+    pub rejected_total: usize,
+}
+
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct PipelineActivityItem {
+    pub agent_name: String,
+    pub output_summary: String,
+    pub completed_at: String,
+}
+
 // ── Server functions ──────────────────────────────────────────────────────────
 
 /// List published articles, optionally filtered by category.
@@ -198,32 +212,196 @@ pub async fn get_article_by_slug(
     Ok(mock_article(&slug))
 }
 
-/// Agent roster — currently returns a static list.
-/// Will be wired to Paperclip API once the integration is in place.
+/// Agent roster — queries Paperclip API for live status; falls back to static mock.
+/// Set PAPERCLIP_API_URL, PAPERCLIP_API_KEY, and PAPERCLIP_COMPANY_ID env vars to enable.
 #[server]
 pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
+    let api_url = std::env::var("PAPERCLIP_API_URL").unwrap_or_default();
+    let api_key = std::env::var("PAPERCLIP_API_KEY").unwrap_or_default();
+    let company_id = std::env::var("PAPERCLIP_COMPANY_ID").unwrap_or_default();
+
+    if !api_url.is_empty() && !api_key.is_empty() && !company_id.is_empty() {
+        if let Ok(items) = fetch_paperclip_agents(&api_url, &api_key, &company_id).await {
+            if !items.is_empty() {
+                return Ok(items);
+            }
+        }
+    }
+
     Ok(vec![
-        AgentStatusItem {
-            name: "Scanner".to_string(),
-            status: "idle".to_string(),
-            current_task: None,
-        },
-        AgentStatusItem {
-            name: "Fact Checker".to_string(),
-            status: "idle".to_string(),
-            current_task: None,
-        },
-        AgentStatusItem {
-            name: "Reporter".to_string(),
-            status: "idle".to_string(),
-            current_task: None,
-        },
-        AgentStatusItem {
-            name: "Editor-in-Chief".to_string(),
-            status: "idle".to_string(),
-            current_task: None,
-        },
+        AgentStatusItem { name: "Scanner".to_string(),          status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Fact Checker".to_string(),     status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Reporter".to_string(),         status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Editor-in-Chief".to_string(),  status: "idle".to_string(), current_task: None },
     ])
+}
+
+#[cfg(feature = "server")]
+async fn fetch_paperclip_agents(
+    api_url: &str,
+    api_key: &str,
+    company_id: &str,
+) -> Result<Vec<AgentStatusItem>, Box<dyn std::error::Error + Send + Sync>> {
+    let client = reqwest::Client::new();
+
+    let agents: serde_json::Value = client
+        .get(format!("{}/api/companies/{}/agents", api_url, company_id))
+        .bearer_auth(api_key)
+        .send()
+        .await?
+        .json()
+        .await?;
+
+    let issues: serde_json::Value = client
+        .get(format!(
+            "{}/api/companies/{}/issues?status=in_progress",
+            api_url, company_id
+        ))
+        .bearer_auth(api_key)
+        .send()
+        .await?
+        .json()
+        .await?;
+
+    // Build agent-id → current task title map
+    let mut task_map: std::collections::HashMap<String, String> = Default::default();
+    if let Some(arr) = issues.as_array() {
+        for issue in arr {
+            if let (Some(agent_id), Some(title)) = (
+                issue["assigneeAgentId"].as_str(),
+                issue["title"].as_str(),
+            ) {
+                task_map.insert(agent_id.to_string(), title.to_string());
+            }
+        }
+    }
+
+    let items = agents
+        .as_array()
+        .cloned()
+        .unwrap_or_default()
+        .iter()
+        .map(|a| {
+            let id = a["id"].as_str().unwrap_or("").to_string();
+            let name = a["name"].as_str().unwrap_or("Unknown Agent").to_string();
+            let current_task = task_map.get(&id).cloned();
+            let status = if current_task.is_some() { "working" } else { "idle" };
+            AgentStatusItem {
+                name,
+                status: status.to_string(),
+                current_task,
+            }
+        })
+        .collect();
+
+    Ok(items)
+}
+
+/// Transparency stats — counts from SurrealDB. Returns zeros when DB is empty.
+#[server]
+pub async fn get_transparency_stats() -> Result<TransparencyStats, ServerFnError> {
+    use axum::Extension;
+    use dioxus_fullstack::FullstackContext;
+    use surrealdb::{engine::local::Db, Surreal};
+
+    let mut stats = TransparencyStats {
+        published_today: 0,
+        published_total: 0,
+        rejected_total: 0,
+    };
+
+    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+        if let Ok(mut res) = db
+            .query(
+                "SELECT slug FROM article WHERE status = 'published' AND published_at > time::now() - 1d; \
+                 SELECT slug FROM article WHERE status = 'published'; \
+                 SELECT slug FROM article WHERE status = 'rejected';",
+            )
+            .await
+        {
+            let today: Vec<serde_json::Value> = res.take(0).unwrap_or_default();
+            let total: Vec<serde_json::Value> = res.take(1).unwrap_or_default();
+            let rejected: Vec<serde_json::Value> = res.take(2).unwrap_or_default();
+            stats.published_today = today.len();
+            stats.published_total = total.len();
+            stats.rejected_total = rejected.len();
+        }
+    }
+
+    Ok(stats)
+}
+
+/// Recent pipeline activity for the Newsroom Chatter sidebar.
+/// Falls back to curated mock when the DB is empty.
+#[server]
+pub async fn get_recent_pipeline_activity() -> Result<Vec<PipelineActivityItem>, ServerFnError> {
+    use axum::Extension;
+    use dioxus_fullstack::FullstackContext;
+    use surrealdb::{engine::local::Db, Surreal};
+
+    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+        if let Ok(mut res) = db
+            .query(
+                "SELECT agent_name, output_summary, completed_at, started_at \
+                 FROM pipeline_step \
+                 WHERE output_summary != '' \
+                 ORDER BY started_at DESC \
+                 LIMIT 4",
+            )
+            .await
+        {
+            let rows: Vec<serde_json::Value> = res.take(0).unwrap_or_default();
+            if !rows.is_empty() {
+                return Ok(rows
+                    .iter()
+                    .filter_map(|v| {
+                        Some(PipelineActivityItem {
+                            agent_name: v["agent_name"].as_str()?.to_string(),
+                            output_summary: v["output_summary"].as_str()?.to_string(),
+                            completed_at: v["completed_at"]
+                                .as_str()
+                                .or_else(|| v["started_at"].as_str())
+                                .unwrap_or("")
+                                .to_string(),
+                        })
+                    })
+                    .collect());
+            }
+        }
+    }
+
+    Ok(mock_pipeline_activity())
+}
+
+#[cfg(feature = "server")]
+fn mock_pipeline_activity() -> Vec<PipelineActivityItem> {
+    vec![
+        PipelineActivityItem {
+            agent_name: "Editor".to_string(),
+            output_summary: "Rejected firmware update story for being \
+                \"aggressively boring even by firmware standards.\" Archiving, not binning.".to_string(),
+            completed_at: "14:28 UTC".to_string(),
+        },
+        PipelineActivityItem {
+            agent_name: "Reporter".to_string(),
+            output_summary: "Requested permission to write an opinion piece. Was reminded \
+                it does not have opinions. Wrote a meta-analysis of that experience instead. \
+                Editor approved the meta-analysis.".to_string(),
+            completed_at: "13:52 UTC".to_string(),
+        },
+        PipelineActivityItem {
+            agent_name: "Fact Checker".to_string(),
+            output_summary: "Flagged crypto article for containing \"more speculation per paragraph \
+                than is compatible with the editorial charter.\" Added: \"I counted.\"".to_string(),
+            completed_at: "12:15 UTC".to_string(),
+        },
+        PipelineActivityItem {
+            agent_name: "Editor".to_string(),
+            output_summary: "Started shift: \"Good morning. We report news, not existential dread. \
+                That's a column, not a beat. Let's begin.\"".to_string(),
+            completed_at: "09:02 UTC".to_string(),
+        },
+    ]
 }
 
 // ── Mock data (server-side only) ─────────────────────────────────────────────

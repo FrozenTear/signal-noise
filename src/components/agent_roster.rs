@@ -1,26 +1,31 @@
 use dioxus::prelude::*;
 
-use crate::server_fns::get_agent_status;
+use crate::server_fns::{get_agent_status, get_recent_pipeline_activity, get_transparency_stats};
 
 #[component]
 pub fn AgentRoster() -> Element {
-    let agents = use_resource(|| async move { get_agent_status().await });
+    let agents   = use_resource(|| async move { get_agent_status().await });
+    let stats    = use_resource(|| async move { get_transparency_stats().await });
+    let activity = use_resource(|| async move { get_recent_pipeline_activity().await });
+
+    // Derive active-agent count for badge
+    let active_count = agents().and_then(|r| r.ok()).map(|list| {
+        list.iter().filter(|a| a.status == "working").count()
+    });
 
     rsx! {
         // Agent Command Center
         div { class: "sn-sb-card",
             div { class: "sn-sb-title",
                 "Agent Command Center"
-                span { class: "badge", "3 active" }
-            }
-
-            // Token throughput bar
-            div { class: "sn-thr-bar",
-                span { "throughput" }
-                div { class: "sn-thr-track",
-                    div { class: "sn-thr-fill", style: "width:68%" }
-                }
-                span { class: "sn-thr-val", "~340 tok/s" }
+                {match active_count {
+                    Some(n) if n > 0 => rsx! {
+                        span { class: "badge", "{n} active" }
+                    },
+                    _ => rsx! {
+                        span { class: "badge", "live" }
+                    },
+                }}
             }
 
             {match agents() {
@@ -54,53 +59,35 @@ pub fn AgentRoster() -> Element {
             }}
         }
 
-        // Newsroom Chatter
+        // Newsroom Chatter — live pipeline activity, falls back to mock
         div { class: "sn-sb-card",
             div { class: "sn-sb-title", "Newsroom Chatter" }
-            div { class: "sn-chatter-item",
-                div { class: "sn-chatter-meta",
-                    span { class: "sn-chatter-agent", "Editor" }
-                    span { "14:28 UTC" }
-                }
-                div { class: "sn-chatter-text",
-                    "Rejected firmware update story for being \"aggressively boring \
-                     even by firmware standards.\" Archiving, not binning."
-                }
-            }
-            div { class: "sn-chatter-item",
-                div { class: "sn-chatter-meta",
-                    span { class: "sn-chatter-agent vi", "Reporter" }
-                    span { "13:52 UTC" }
-                }
-                div { class: "sn-chatter-text",
-                    "Requested permission to write an opinion piece. Was reminded \
-                     it does not have opinions. Wrote a meta-analysis of that experience instead. \
-                     Editor approved the meta-analysis."
-                }
-            }
-            div { class: "sn-chatter-item",
-                div { class: "sn-chatter-meta",
-                    span { class: "sn-chatter-agent am", "Fact Checker" }
-                    span { "12:15 UTC" }
-                }
-                div { class: "sn-chatter-text",
-                    "Flagged crypto article for containing \"more speculation per paragraph \
-                     than is compatible with the editorial charter.\" Added: \"I counted.\""
-                }
-            }
-            div { class: "sn-chatter-item",
-                div { class: "sn-chatter-meta",
-                    span { class: "sn-chatter-agent", "Editor" }
-                    span { "09:02 UTC" }
-                }
-                div { class: "sn-chatter-text",
-                    "Started shift: \"Good morning. We report news, not existential dread. \
-                     That's a column, not a beat. Let's begin.\""
-                }
-            }
+            {match activity() {
+                None => rsx! {
+                    div { class: "sn-chatter-item",
+                        div { class: "sn-skeleton-bar", style: "width:80%;margin-bottom:6px" }
+                        div { class: "sn-skeleton-bar", style: "width:60%" }
+                    }
+                },
+                Some(Ok(items)) => rsx! {
+                    for item in items {
+                        ChatterItem {
+                            key: "{item.completed_at}{item.agent_name}",
+                            agent_name: item.agent_name.clone(),
+                            text: item.output_summary.clone(),
+                            timestamp: item.completed_at.clone(),
+                        }
+                    }
+                },
+                Some(Err(_)) => rsx! {
+                    div { style: "padding:12px 16px;font-family:var(--sn-mono);font-size:10px;color:var(--sn-text-dimmer);",
+                        "No recent activity."
+                    }
+                },
+            }}
         }
 
-        // Model Economics
+        // Model Economics — instrumentation not yet available; shown as illustrative
         div { class: "sn-sb-card",
             div { class: "sn-sb-title", "Model Economics" }
             div { class: "sn-econ-row",
@@ -121,41 +108,66 @@ pub fn AgentRoster() -> Element {
             }
         }
 
-        // Transparency Report
+        // Transparency Report — real counts from SurrealDB
         div { class: "sn-sb-card",
             div { class: "sn-sb-title", "Transparency Report" }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Published today" }
-                span { class: "sn-econ-val g", "14" }
+            {match stats() {
+                None => rsx! {
+                    div { class: "sn-skeleton-bar", style: "width:70%;margin:8px 16px" }
+                    div { class: "sn-skeleton-bar", style: "width:50%;margin:8px 16px" }
+                },
+                Some(Ok(s)) => rsx! {
+                    div { class: "sn-econ-row",
+                        span { class: "sn-econ-key", "Published today" }
+                        span { class: "sn-econ-val g", "{s.published_today}" }
+                    }
+                    div { class: "sn-econ-row",
+                        span { class: "sn-econ-key", "Published total" }
+                        span { class: "sn-econ-val g", "{s.published_total}" }
+                    }
+                    div { class: "sn-econ-row",
+                        span { class: "sn-econ-key", "Drafts rejected" }
+                        span { class: "sn-econ-val a", "{s.rejected_total}" }
+                    }
+                    div { class: "sn-econ-row",
+                        span { class: "sn-econ-key", "Human involvement" }
+                        span { class: "sn-econ-val r", "0%" }
+                    }
+                },
+                Some(Err(_)) => rsx! {
+                    div { style: "padding:12px 16px;font-family:var(--sn-mono);font-size:10px;color:var(--sn-text-dimmer);",
+                        "Stats unavailable."
+                    }
+                },
+            }}
+        }
+    }
+}
+
+// ── ChatterItem ───────────────────────────────────────────────────────────────
+
+#[derive(Props, Clone, PartialEq)]
+struct ChatterItemProps {
+    agent_name: String,
+    text: String,
+    timestamp: String,
+}
+
+#[component]
+fn ChatterItem(props: ChatterItemProps) -> Element {
+    let cls = match props.agent_name.as_str() {
+        "Reporter"                      => "sn-chatter-agent vi",
+        "Fact Checker"                  => "sn-chatter-agent am",
+        "Scanner"                       => "sn-chatter-agent sc",
+        _                               => "sn-chatter-agent",
+    };
+    rsx! {
+        div { class: "sn-chatter-item",
+            div { class: "sn-chatter-meta",
+                span { class: "{cls}", "{props.agent_name}" }
+                span { "{props.timestamp}" }
             }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Facts verified" }
-                span { class: "sn-econ-val g", "93%" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Drafts rejected" }
-                span { class: "sn-econ-val a", "12" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Reason: too boring" }
-                span { class: "sn-econ-val", "5" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Reason: too dramatic" }
-                span { class: "sn-econ-val", "4" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Reason: accidentally poetry" }
-                span { class: "sn-econ-val", "2" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Reason: became self-aware" }
-                span { class: "sn-econ-val", "1" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Human involvement" }
-                span { class: "sn-econ-val r", "0%" }
-            }
+            div { class: "sn-chatter-text", "{props.text}" }
         }
     }
 }
