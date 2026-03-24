@@ -57,6 +57,7 @@ pub struct PipelineSummary {
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 pub struct AgentStatusItem {
     pub name: String,
+    pub model: Option<String>,
     pub status: String,
     pub current_task: Option<String>,
 }
@@ -222,7 +223,7 @@ pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
 
     if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
         if let Ok(mut res) = db
-            .query("SELECT name, status, current_task FROM agent_status ORDER BY name ASC")
+            .query("SELECT name, model, status, current_task FROM agent_status ORDER BY name ASC")
             .await
         {
             let rows: Vec<serde_json::Value> = res.take(0).unwrap_or_default();
@@ -232,6 +233,7 @@ pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
                     .filter_map(|v| {
                         Some(AgentStatusItem {
                             name: v["name"].as_str()?.to_string(),
+                            model: v["model"].as_str().map(|s| s.to_string()),
                             status: v["status"].as_str().unwrap_or("idle").to_string(),
                             current_task: v["current_task"].as_str().map(|s| s.to_string()),
                         })
@@ -243,10 +245,10 @@ pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
 
     // Fallback: static mock until first heartbeat push
     Ok(vec![
-        AgentStatusItem { name: "Scanner".to_string(),          status: "idle".to_string(), current_task: None },
-        AgentStatusItem { name: "Fact Checker".to_string(),     status: "idle".to_string(), current_task: None },
-        AgentStatusItem { name: "Reporter".to_string(),         status: "idle".to_string(), current_task: None },
-        AgentStatusItem { name: "Editor-in-Chief".to_string(),  status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Scanner".to_string(),         model: None, status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Fact Checker".to_string(),    model: None, status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Reporter".to_string(),        model: None, status: "idle".to_string(), current_task: None },
+        AgentStatusItem { name: "Editor-in-Chief".to_string(), model: None, status: "idle".to_string(), current_task: None },
     ])
 }
 

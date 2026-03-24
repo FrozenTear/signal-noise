@@ -80,6 +80,7 @@ DEFINE FIELD completed_at      ON pipeline_step TYPE option<datetime>;
 DEFINE TABLE agent_status SCHEMAFULL;
 DEFINE FIELD agent_id     ON agent_status TYPE string ASSERT $value != NONE;
 DEFINE FIELD name         ON agent_status TYPE string ASSERT $value != NONE;
+DEFINE FIELD model        ON agent_status TYPE option<string>;
 DEFINE FIELD status       ON agent_status TYPE string DEFAULT "idle";
 DEFINE FIELD current_task ON agent_status TYPE option<string>;
 DEFINE FIELD updated_at   ON agent_status TYPE datetime DEFAULT time::now();

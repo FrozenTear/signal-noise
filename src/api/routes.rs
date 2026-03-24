@@ -280,6 +280,7 @@ pub async fn agent_status(
 pub struct AgentStatusPushItem {
     pub agent_id: String,
     pub name: String,
+    pub model: Option<String>,
     pub status: String,
     pub current_task: Option<String>,
 }
@@ -292,6 +293,7 @@ pub async fn push_agent_status(
 ) -> Result<Json<Value>, StatusCode> {
     for item in items {
         let task = item.current_task.unwrap_or_default();
+        let model = item.model.unwrap_or_default();
         state
             .db
             .query(
@@ -299,6 +301,7 @@ pub async fn push_agent_status(
                 UPSERT agent_status MERGE {
                     agent_id:     $agent_id,
                     name:         $name,
+                    model:        IF $model != '' THEN $model ELSE NONE END,
                     status:       $status,
                     current_task: IF $task != '' THEN $task ELSE NONE END,
                     updated_at:   time::now()
@@ -307,6 +310,7 @@ pub async fn push_agent_status(
             )
             .bind(("agent_id", item.agent_id))
             .bind(("name", item.name))
+            .bind(("model", model))
             .bind(("status", item.status))
             .bind(("task", task))
             .await

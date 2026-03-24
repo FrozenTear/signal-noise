@@ -46,6 +46,7 @@ pub fn AgentRoster() -> Element {
                         AgentCommandRow {
                             key: "{agent.name}",
                             name: agent.name.clone(),
+                            model: agent.model.clone(),
                             status: agent.status.clone(),
                             current_task: agent.current_task.clone(),
                         }
@@ -177,6 +178,7 @@ fn ChatterItem(props: ChatterItemProps) -> Element {
 #[derive(Props, Clone, PartialEq)]
 struct AgentCommandRowProps {
     name: String,
+    model: Option<String>,
     status: String,
     current_task: Option<String>,
 }
@@ -185,16 +187,18 @@ struct AgentCommandRowProps {
 fn AgentCommandRow(props: AgentCommandRowProps) -> Element {
     let is_active = props.status == "working";
 
-    let (icon_cls, initials, model, stats) = match props.name.as_str() {
-        "Editor-in-Chief" | "Editor" =>
-            ("ed", "Ed", "claude-opus-4 · high authority",  ("14 approved", "12 rejected", "2 pending")),
-        "Reporter" =>
-            ("rp", "Rp", "claude-3-7-sonnet · throughput",  ("26 drafted", "892k tokens", "t=0.72")),
-        "Fact Checker" =>
-            ("fc", "Fc", "claude-3-7-sonnet · accuracy",    ("93% accuracy", "47 flags", "t=0.10")),
-        _ =>
-            ("sc", "Sc", "grok-3-fast · low cost",          ("847 ingested", "23 surfaced", "idle")),
+    let (icon_cls, initials) = match props.name.as_str() {
+        "Editor-in-Chief" | "Editor" => ("ed", "Ed"),
+        "Reporter"                   => ("rp", "Rp"),
+        "Fact Checker"               => ("fc", "Fc"),
+        "Scanner"                    => ("sc", "Sc"),
+        "Article Verifier"           => ("av", "Av"),
+        _                            => ("sc", &props.name[..2.min(props.name.len())]),
     };
+
+    let model_label = props.model
+        .as_deref()
+        .unwrap_or("claude-sonnet-4-6");
 
     let active_cls = if is_active { "sn-agent-icon active" } else { "sn-agent-icon" };
     let dot_cls    = if is_active { "sn-task-dot active"   } else { "sn-task-dot idle" };
@@ -208,16 +212,11 @@ fn AgentCommandRow(props: AgentCommandRowProps) -> Element {
             div { class: "{active_cls} {icon_cls}", "{initials}" }
             div {
                 div { class: "sn-agent-name", "{props.name}" }
-                div { class: "sn-agent-role", "{model}" }
+                div { class: "sn-agent-role", "{model_label}" }
                 div { class: "sn-agent-task",
                     span { class: "{dot_cls}" }
                     "{task_text}"
                 }
-            }
-            div { class: "sn-agent-stats",
-                div { span { "{stats.0}" } }
-                div { span { "{stats.1}" } }
-                div { span { "{stats.2}" } }
             }
         }
     }
