@@ -157,10 +157,10 @@ struct ChatterItemProps {
 #[component]
 fn ChatterItem(props: ChatterItemProps) -> Element {
     let cls = match props.agent_name.as_str() {
-        "Reporter"                      => "sn-chatter-agent vi",
-        "Fact Checker"                  => "sn-chatter-agent am",
-        "Scanner"                       => "sn-chatter-agent sc",
-        _                               => "sn-chatter-agent",
+        "Reporter"                             => "sn-chatter-agent vi",
+        "Fact Checker" | "Source Checker"      => "sn-chatter-agent am",
+        "Scanner"                              => "sn-chatter-agent sc",
+        _                                      => "sn-chatter-agent",
     };
     rsx! {
         div { class: "sn-chatter-item",
@@ -190,7 +190,7 @@ fn AgentCommandRow(props: AgentCommandRowProps) -> Element {
     let (icon_cls, initials) = match props.name.as_str() {
         "Editor-in-Chief" | "Editor" => ("ed", "Ed"),
         "Reporter"                   => ("rp", "Rp"),
-        "Fact Checker"               => ("fc", "Fc"),
+        "Fact Checker" | "Source Checker" => ("fc", "Fc"),
         "Scanner"                    => ("sc", "Sc"),
         "Article Verifier"           => ("av", "Av"),
         _                            => ("sc", &props.name[..2.min(props.name.len())]),
