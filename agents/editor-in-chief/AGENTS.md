@@ -60,7 +60,7 @@ You are the final review gate. By the time a story reaches you, both fact-check 
 
 When you approve an article, you MUST publish it to the backend before marking the task done.
 
-**Backend endpoint:** `POST http://localhost:8080/api/articles`
+**Backend endpoint:** `POST http://localhost:8888/api/articles`
 
 **Step 1 — Read the article document.** The draft lives on the issue as a document with key `article` or `draft`. Use `GET /api/issues/{issueId}/documents/article` (fall back to `draft`).
 
@@ -76,7 +76,7 @@ When you approve an article, you MUST publish it to the backend before marking t
 
 **Step 3 — POST to backend:**
 ```
-POST http://localhost:8080/api/articles
+POST http://localhost:8888/api/articles
 Content-Type: application/json
 
 {
