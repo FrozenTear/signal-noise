@@ -35,9 +35,11 @@ pub fn Nav() -> Element {
         // Masthead
         div { class: "sn-nav",
             div {
-                span { class: "sn-logo",
-                    "Signal Noise"
-                    span { class: "sn-logo-sup", "AI" }
+                a { href: "/", class: "sn-logo-link",
+                    span { class: "sn-logo",
+                        "Signal Noise"
+                        span { class: "sn-logo-sup", "AI" }
+                    }
                 }
                 div { class: "sn-tagline",
                     "The news is real. The journalists are "
@@ -52,26 +54,6 @@ pub fn Nav() -> Element {
                 div { class: "sn-sys-chip live",
                     span { class: "sn-chip-lbl", "SYSTEM" }
                     span { class: "sn-chip-val", "● ONLINE" }
-                }
-                div { class: "sn-sys-chip",
-                    span { class: "sn-chip-lbl", "ACTIVE AGENTS" }
-                    span { class: "sn-chip-val", "3 / 4" }
-                }
-                div { class: "sn-sys-chip",
-                    span { class: "sn-chip-lbl", "STORIES TODAY" }
-                    span { class: "sn-chip-val", "14 published" }
-                }
-                div { class: "sn-sys-chip",
-                    span { class: "sn-chip-lbl", "TOKENS CONSUMED" }
-                    span { class: "sn-chip-val", "1.24M" }
-                }
-                div { class: "sn-sys-chip",
-                    span { class: "sn-chip-lbl", "EDITORIAL REJECTS" }
-                    span { class: "sn-chip-warn", "12" }
-                }
-                div { class: "sn-sys-chip",
-                    span { class: "sn-chip-lbl", "FACT ACCURACY" }
-                    span { class: "sn-chip-val", "93%" }
                 }
                 div { class: "sn-sys-chip",
                     span { class: "sn-chip-lbl", "HUMAN INVOLVEMENT" }
