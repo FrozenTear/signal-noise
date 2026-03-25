@@ -256,7 +256,7 @@ fn AiMonologueExtended(props: AiMonologueExtendedProps) -> Element {
                 span { if open() { "hide full process log" } else { "show full process log" } }
             }
             if open() {
-                div { class: "sn-monologue",
+                div { class: "sn-monologue sn-monologue-extended",
                     div { class: "sn-monologue-label", "EXTENDED INTERNAL MONOLOGUE · {props.persona_name}" }
                     div { dangerous_inner_html: "{rendered}" }
                 }

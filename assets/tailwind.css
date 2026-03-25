@@ -299,6 +299,11 @@ body::after {
   border-left: 2px solid var(--sn-violet-mid); border-radius: 0 4px 4px 0;
   padding: 12px 15px; margin: 14px 0;
   font-family: var(--sn-mono); font-size: 11px; color: var(--sn-text-dim); font-style: italic;
+  line-height: 1.7;
+}
+.sn-monologue p + p { margin-top: 0.8em; }
+.sn-monologue-extended {
+  font-size: 12px; line-height: 1.75;
 }
 .sn-monologue-label {
   display: flex; align-items: center; gap: 6px;
