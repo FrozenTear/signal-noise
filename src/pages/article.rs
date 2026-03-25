@@ -42,7 +42,9 @@ pub fn Article(slug: String) -> Element {
                         }
                     }
                 },
-                Some(Ok(Some(art))) => rsx! {
+                Some(Ok(Some(art))) => {
+                    let rendered_body = simple_md_to_html(&art.body);
+                    rsx! {
                     // Back link
                     a { style: "display:inline-flex; align-items:center; gap:6px; font-family:var(--sn-mono); font-size:10px; color:var(--sn-text-dimmer); text-decoration:none; margin-bottom:24px; transition:color 0.2s;",
                         href: "/",
@@ -80,13 +82,18 @@ pub fn Article(slug: String) -> Element {
                             }
 
                             // Article body
-                            div { style: "font-size:16px; line-height:1.8; color:var(--sn-text); margin:28px 0; white-space:pre-wrap;",
-                                "{art.body}"
+                            div { class: "prose", style: "margin:28px 0;",
+                                dangerous_inner_html: "{rendered_body}"
                             }
 
                             // AI monologue (expandable)
                             if let Some(monologue) = &art.ai_monologue {
                                 AiMonologue { text: monologue.clone() }
+                            }
+
+                            // Extended process log (expandable)
+                            if let Some(extended) = &art.ai_monologue_extended {
+                                AiMonologueExtended { text: extended.clone(), persona_name: art.persona_name.clone() }
                             }
 
                             // Sources
@@ -135,7 +142,7 @@ pub fn Article(slug: String) -> Element {
                             }
                         }
                     }
-                },
+                }},
                 Some(Err(_)) => rsx! {
                     p { style: "color:var(--sn-red); font-family:var(--sn-mono); font-size:12px; padding:16px 0;",
                         "ERROR: failed to load article."
@@ -144,6 +151,57 @@ pub fn Article(slug: String) -> Element {
             }}
         }
     }
+}
+
+// ── Lightweight markdown → HTML ──────────────────────────────────────────────
+
+fn simple_md_to_html(md: &str) -> String {
+    let mut html = String::new();
+    let mut in_paragraph = false;
+
+    for line in md.lines() {
+        let trimmed = line.trim();
+
+        if trimmed.is_empty() {
+            if in_paragraph {
+                html.push_str("</p>");
+                in_paragraph = false;
+            }
+            continue;
+        }
+
+        if let Some(heading) = trimmed.strip_prefix("### ") {
+            if in_paragraph { html.push_str("</p>"); in_paragraph = false; }
+            html.push_str(&format!("<h3>{}</h3>", html_escape(heading)));
+        } else if let Some(heading) = trimmed.strip_prefix("## ") {
+            if in_paragraph { html.push_str("</p>"); in_paragraph = false; }
+            html.push_str(&format!("<h2>{}</h2>", html_escape(heading)));
+        } else if let Some(heading) = trimmed.strip_prefix("# ") {
+            if in_paragraph { html.push_str("</p>"); in_paragraph = false; }
+            html.push_str(&format!("<h1>{}</h1>", html_escape(heading)));
+        } else {
+            if !in_paragraph {
+                html.push_str("<p>");
+                in_paragraph = true;
+            } else {
+                html.push(' ');
+            }
+            html.push_str(&html_escape(trimmed));
+        }
+    }
+
+    if in_paragraph {
+        html.push_str("</p>");
+    }
+
+    html
+}
+
+fn html_escape(s: &str) -> String {
+    s.replace('&', "&amp;")
+        .replace('<', "&lt;")
+        .replace('>', "&gt;")
+        .replace('"', "&quot;")
 }
 
 // ── AI monologue collapsible ──────────────────────────────────────────────────
@@ -156,6 +214,7 @@ struct AiMonologueProps {
 #[component]
 fn AiMonologue(props: AiMonologueProps) -> Element {
     let mut open = use_signal(|| false);
+    let rendered = simple_md_to_html(&props.text);
 
     rsx! {
         div { style: "margin:24px 0;",
@@ -168,7 +227,38 @@ fn AiMonologue(props: AiMonologueProps) -> Element {
             if open() {
                 div { class: "sn-monologue",
                     div { class: "sn-monologue-label", "INTERNAL REASONING" }
-                    "{props.text}"
+                    div { dangerous_inner_html: "{rendered}" }
+                }
+            }
+        }
+    }
+}
+
+// ── Extended process log collapsible ─────────────────────────────────────────
+
+#[derive(Props, Clone, PartialEq)]
+struct AiMonologueExtendedProps {
+    text: String,
+    persona_name: String,
+}
+
+#[component]
+fn AiMonologueExtended(props: AiMonologueExtendedProps) -> Element {
+    let mut open = use_signal(|| false);
+    let rendered = simple_md_to_html(&props.text);
+
+    rsx! {
+        div { style: "margin:8px 0 24px;",
+            button {
+                class: "sn-toggle-btn",
+                onclick: move |_| open.toggle(),
+                span { style: "color:var(--sn-violet);", "◈" }
+                span { if open() { "hide full process log" } else { "show full process log" } }
+            }
+            if open() {
+                div { class: "sn-monologue",
+                    div { class: "sn-monologue-label", "EXTENDED INTERNAL MONOLOGUE · {props.persona_name}" }
+                    div { dangerous_inner_html: "{rendered}" }
                 }
             }
         }
