@@ -43,6 +43,7 @@ pub struct ArticlePublishPayload {
     pub persona: Option<String>,
     pub confidence_score: Option<f64>,
     pub ai_monologue: Option<String>,
+    pub ai_monologue_extended: Option<String>,
     pub sources: Option<Vec<SourcePayload>>,
     pub pipeline_steps: Option<Vec<PipelineStepPayload>>,
 }
@@ -158,6 +159,7 @@ pub async fn publish_article(
     let summary = payload.summary.unwrap_or_default();
     let confidence = payload.confidence_score.unwrap_or(0.0);
     let ai_monologue = payload.ai_monologue.unwrap_or_default();
+    let ai_monologue_extended = payload.ai_monologue_extended.unwrap_or_default();
     let persona = payload.persona.unwrap_or_default();
 
     // Upsert article.
@@ -177,10 +179,13 @@ pub async fn publish_article(
                 persona:          IF $persona != '' THEN
                                       (SELECT id FROM persona WHERE slug = $persona LIMIT 1)[0].id
                                   ELSE NONE END,
-                confidence_score: $confidence,
-                ai_monologue:     $monologue,
-                status:           'published',
-                published_at:     time::now(),
+                confidence_score:    $confidence,
+                ai_monologue:        $monologue,
+                ai_monologue_extended: IF $monologue_extended != '' THEN $monologue_extended ELSE NONE END,
+                status:              'published',
+                published_at:     IF (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at != NONE
+                                  THEN (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at
+                                  ELSE time::now() END,
                 updated_at:       time::now()
             } WHERE slug = $slug
             "#,
@@ -193,6 +198,7 @@ pub async fn publish_article(
         .bind(("persona", persona))
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
+        .bind(("monologue_extended", ai_monologue_extended))
         .await
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
