@@ -20,6 +20,8 @@ pub struct ArticleSummary {
     pub persona_name: String,
     pub confidence_score: f64,
     pub published_at: String,
+    pub ai_monologue: Option<String>,
+    pub ai_monologue_extended: Option<String>,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -31,6 +33,7 @@ pub struct ArticleDetail {
     pub persona_name: String,
     pub confidence_score: f64,
     pub ai_monologue: Option<String>,
+    pub ai_monologue_extended: Option<String>,
     pub published_at: String,
     pub sources: Vec<SourceSummary>,
     pub pipeline: Vec<PipelineSummary>,
@@ -89,7 +92,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
     if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
         let mut res_result = if let Some(cat) = &category {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at \
+                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
                  FROM article WHERE status = 'published' AND category = $cat \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -97,7 +100,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
             .await
         } else {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at \
+                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
                  FROM article WHERE status = 'published' \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -117,10 +120,13 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
                                 category: v["category"].as_str()?.to_string(),
                                 persona_name: v["persona_name"]
                                     .as_str()
+                                    .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
                                     .unwrap_or("AI Reporter")
                                     .to_string(),
                                 confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
                                 published_at: v["published_at"].as_str().unwrap_or("").to_string(),
+                                ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
+                                ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
                             })
                         })
                         .collect();
@@ -146,6 +152,7 @@ pub async fn get_article_by_slug(
         if let Ok(mut res) = db
             .query(
                 "SELECT *, \
+                 persona.name AS persona_name, \
                  ->cites->source.* AS sources, \
                  ->produced_by->pipeline_step.* AS pipeline \
                  FROM article WHERE slug = $slug LIMIT 1",
@@ -198,9 +205,14 @@ pub async fn get_article_by_slug(
                         title: v["title"].as_str().unwrap_or("").to_string(),
                         body: v["body"].as_str().unwrap_or("").to_string(),
                         category: v["category"].as_str().unwrap_or("").to_string(),
-                        persona_name: "AI Reporter".to_string(),
+                        persona_name: v["persona_name"]
+                            .as_str()
+                            .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
+                            .unwrap_or("AI Reporter")
+                            .to_string(),
                         confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
                         ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
+                        ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
                         published_at: v["published_at"].as_str().unwrap_or("").to_string(),
                         sources,
                         pipeline,
@@ -375,6 +387,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             persona_name: "Linus Watcher".to_string(),
             confidence_score: 0.91,
             published_at: "2026-03-22".to_string(),
+            ai_monologue: None,
+            ai_monologue_extended: None,
         },
         ArticleSummary {
             slug: "openai-gpt5-announcement".to_string(),
@@ -387,6 +401,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             persona_name: "Circuit Breaker".to_string(),
             confidence_score: 0.78,
             published_at: "2026-03-21".to_string(),
+            ai_monologue: None,
+            ai_monologue_extended: None,
         },
         ArticleSummary {
             slug: "eu-chat-control-vote".to_string(),
@@ -400,6 +416,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             persona_name: "Panoptikon".to_string(),
             confidence_score: 0.87,
             published_at: "2026-03-20".to_string(),
+            ai_monologue: None,
+            ai_monologue_extended: None,
         },
         ArticleSummary {
             slug: "systemd-257-containers".to_string(),
@@ -411,6 +429,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             persona_name: "Linus Watcher".to_string(),
             confidence_score: 0.83,
             published_at: "2026-03-19".to_string(),
+            ai_monologue: None,
+            ai_monologue_extended: None,
         },
         ArticleSummary {
             slug: "cloudflare-post-quantum".to_string(),
@@ -424,6 +444,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             persona_name: "Panoptikon".to_string(),
             confidence_score: 0.94,
             published_at: "2026-03-18".to_string(),
+            ai_monologue: None,
+            ai_monologue_extended: None,
         },
         ArticleSummary {
             slug: "apple-vision-pro-2-specs".to_string(),
@@ -437,6 +459,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             persona_name: "Circuit Breaker".to_string(),
             confidence_score: 0.61,
             published_at: "2026-03-17".to_string(),
+            ai_monologue: None,
+            ai_monologue_extended: None,
         },
     ];
 
@@ -478,6 +502,20 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
              discrepancies between secondary sources, but the core claims check out across \
              three independent primary sources. I removed one unverifiable claim rather \
              than include it at lower confidence."
+                .to_string(),
+        ),
+        ai_monologue_extended: Some(
+            "Processing started at 08:14 UTC. Scanner flagged 5 near-duplicate articles across \
+             3 RSS feeds. I merged them into a single source set and noted which outlets broke \
+             the story first (answer: none of them credited the original source, which was a \
+             mailing list post). Fact Checker flagged one performance claim that traced back to \
+             a vendor benchmark with no independent reproduction. I wrote around it rather than \
+             repeat it. The editor rejected my first draft for being too deferential to the \
+             press release — fair point. Draft 2 led with the specific technical claim instead. \
+             Confidence landed at the score you see because I trust the primary sources but the \
+             secondary coverage added interpretation I could not fully verify. I note this not \
+             as a disclaimer but as a bookmark: if the interpretation turns out wrong, this is \
+             where the chain broke."
                 .to_string(),
         ),
         published_at: summary.published_at,

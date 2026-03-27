@@ -54,6 +54,8 @@ pub struct SourcePayload {
     pub name: String,
     #[serde(rename = "type", default = "default_source_type")]
     pub source_type: String,
+    pub paywall_status: Option<String>,
+    pub verification_status: Option<String>,
 }
 
 fn default_source_type() -> String {
@@ -91,7 +93,7 @@ pub async fn list_articles(
     let mut result = if let Some(cat) = params.category {
         state
             .db
-            .query("SELECT * FROM article WHERE status = 'published' AND category = $cat ORDER BY published_at DESC LIMIT $limit START $offset")
+            .query("SELECT *, persona.name AS persona_name FROM article WHERE status = 'published' AND category = $cat ORDER BY published_at DESC LIMIT $limit START $offset")
             .bind(("cat", cat))
             .bind(("limit", limit))
             .bind(("offset", offset))
@@ -100,7 +102,7 @@ pub async fn list_articles(
     } else {
         state
             .db
-            .query("SELECT * FROM article WHERE status = 'published' ORDER BY published_at DESC LIMIT $limit START $offset")
+            .query("SELECT *, persona.name AS persona_name FROM article WHERE status = 'published' ORDER BY published_at DESC LIMIT $limit START $offset")
             .bind(("limit", limit))
             .bind(("offset", offset))
             .await
@@ -121,6 +123,7 @@ pub async fn get_article(
             r#"
             SELECT
                 *,
+                persona.name AS persona_name,
                 ->cites->source.* AS sources,
                 ->produced_by->pipeline_step.* AS pipeline
             FROM article
@@ -202,10 +205,29 @@ pub async fn publish_article(
         .await
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
+    // On re-publish, clean up old cites edges and pipeline_step records so we don't duplicate.
+    state
+        .db
+        .query(
+            r#"
+            LET $art = (SELECT id FROM article WHERE slug = $slug LIMIT 1)[0].id;
+            DELETE cites WHERE in = $art;
+            LET $old_steps = (SELECT ->produced_by->pipeline_step AS steps FROM $art)[0].steps;
+            DELETE produced_by WHERE in = $art;
+            FOR $s IN $old_steps { DELETE $s; };
+            "#,
+        )
+        .bind(("slug", slug.clone()))
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+
     // Upsert each source and create article->cites->source edges.
     // All ID resolution happens inside SurrealDB — no Value passing across the boundary.
     if let Some(sources) = payload.sources {
         for source in sources {
+            let paywall = source.paywall_status.unwrap_or_else(|| "unknown".to_string());
+            let verification = source.verification_status.unwrap_or_else(|| "unknown".to_string());
+
             state
                 .db
                 .query(
@@ -215,9 +237,13 @@ pub async fn publish_article(
                         url:                 $url,
                         name:                $name,
                         type:                $stype,
-                        paywall_status:      'unknown',
-                        verification_status: 'unknown'
-                    } ON DUPLICATE KEY UPDATE name = $input.name)[0];
+                        paywall_status:      $paywall,
+                        verification_status: $verification
+                    } ON DUPLICATE KEY UPDATE
+                        name = $input.name,
+                        paywall_status = IF $input.paywall_status != 'unknown' THEN $input.paywall_status ELSE paywall_status END,
+                        verification_status = IF $input.verification_status != 'unknown' THEN $input.verification_status ELSE verification_status END
+                    )[0];
                     RELATE $art->cites->$src.id;
                     "#,
                 )
@@ -225,6 +251,8 @@ pub async fn publish_article(
                 .bind(("url", source.url))
                 .bind(("name", source.name))
                 .bind(("stype", source.source_type))
+                .bind(("paywall", paywall))
+                .bind(("verification", verification))
                 .await
                 .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
         }
