@@ -145,13 +145,86 @@ pub async fn get_article(
 pub async fn publish_article(
     State(state): State<AppState>,
     Json(payload): Json<ArticlePublishPayload>,
-) -> Result<Json<Value>, StatusCode> {
-    // Validate required fields
-    if payload.title.trim().is_empty()
-        || payload.body.trim().is_empty()
-        || payload.category.trim().is_empty()
-    {
-        return Err(StatusCode::UNPROCESSABLE_ENTITY);
+) -> Result<Json<Value>, (StatusCode, Json<Value>)> {
+    let bad_req = |msg: &str| -> (StatusCode, Json<Value>) {
+        (StatusCode::BAD_REQUEST, Json(json!({ "error": msg })))
+    };
+    let db_err = || -> (StatusCode, Json<Value>) {
+        (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" })))
+    };
+
+    // Required text fields
+    if payload.title.trim().is_empty() {
+        return Err(bad_req("title is required"));
+    }
+    if payload.body.trim().is_empty() {
+        return Err(bad_req("body is required"));
+    }
+    if payload.category.trim().is_empty() {
+        return Err(bad_req("category is required"));
+    }
+
+    // ai_monologue_extended: must be provided and non-empty
+    let ai_monologue_extended = match &payload.ai_monologue_extended {
+        None => return Err(bad_req("ai_monologue_extended is required")),
+        Some(s) if s.trim().is_empty() => return Err(bad_req("ai_monologue_extended cannot be empty")),
+        Some(s) => s.clone(),
+    };
+
+    // confidence_score: if provided, must be within [0.0, 1.0]
+    if let Some(score) = payload.confidence_score {
+        if !(0.0_f64..=1.0_f64).contains(&score) {
+            return Err(bad_req("confidence_score must be between 0.0 and 1.0"));
+        }
+    }
+    let confidence = payload.confidence_score.unwrap_or(0.0);
+
+    // persona: must be provided and non-empty
+    let persona = match &payload.persona {
+        None => return Err(bad_req("persona is required")),
+        Some(s) if s.trim().is_empty() => return Err(bad_req("persona cannot be empty")),
+        Some(s) => s.clone(),
+    };
+
+    // body: reject if it contains metadata headers (YAML frontmatter or ALL_CAPS: lines)
+    let has_metadata = payload.body.lines().any(|line| {
+        let t = line.trim();
+        if t.starts_with("---") {
+            return true;
+        }
+        if let Some(colon) = t.find(':') {
+            let key = &t[..colon];
+            return key.len() >= 2 && key.chars().all(|c| c.is_ascii_uppercase() || c == '_');
+        }
+        false
+    });
+    if has_metadata {
+        return Err(bad_req("body contains metadata headers; strip frontmatter before publishing"));
+    }
+
+    // Validate persona slug exists in DB
+    let mut persona_res = state
+        .db
+        .query("SELECT id FROM persona WHERE slug = $slug LIMIT 1")
+        .bind(("slug", persona.clone()))
+        .await
+        .map_err(|_| db_err())?;
+    let persona_rows: Vec<Value> = persona_res.take(0).map_err(|_| db_err())?;
+    if persona_rows.is_empty() {
+        return Err(bad_req(&format!("persona '{}' does not exist", persona)));
+    }
+
+    // Validate category slug exists in DB
+    let category = payload.category.trim().to_string();
+    let mut cat_res = state
+        .db
+        .query("SELECT id FROM category WHERE slug = $slug LIMIT 1")
+        .bind(("slug", category.clone()))
+        .await
+        .map_err(|_| db_err())?;
+    let cat_rows: Vec<Value> = cat_res.take(0).map_err(|_| db_err())?;
+    if cat_rows.is_empty() {
+        return Err(bad_req(&format!("category '{}' does not exist", category)));
     }
 
     let slug = payload
@@ -160,10 +233,7 @@ pub async fn publish_article(
         .unwrap_or_else(|| generate_slug(&payload.title));
 
     let summary = payload.summary.unwrap_or_default();
-    let confidence = payload.confidence_score.unwrap_or(0.0);
     let ai_monologue = payload.ai_monologue.unwrap_or_default();
-    let ai_monologue_extended = payload.ai_monologue_extended.unwrap_or_default();
-    let persona = payload.persona.unwrap_or_default();
 
     // Upsert article.
     // persona is resolved to a record<persona> inside SurrealDB via sub-select.
@@ -197,13 +267,13 @@ pub async fn publish_article(
         .bind(("title", payload.title))
         .bind(("summary", summary))
         .bind(("body", payload.body))
-        .bind(("category", payload.category))
+        .bind(("category", category))
         .bind(("persona", persona))
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
         .bind(("monologue_extended", ai_monologue_extended))
         .await
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+        .map_err(|_| db_err())?;
 
     // On re-publish, clean up old cites edges and pipeline_step records so we don't duplicate.
     state
@@ -219,7 +289,7 @@ pub async fn publish_article(
         )
         .bind(("slug", slug.clone()))
         .await
-        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+        .map_err(|_| db_err())?;
 
     // Upsert each source and create article->cites->source edges.
     // All ID resolution happens inside SurrealDB — no Value passing across the boundary.
@@ -254,7 +324,7 @@ pub async fn publish_article(
                 .bind(("paywall", paywall))
                 .bind(("verification", verification))
                 .await
-                .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+                .map_err(|_| db_err())?;
         }
     }
 
@@ -289,7 +359,7 @@ pub async fn publish_article(
                 .bind(("output_summary", output_summary))
                 .bind(("confidence_delta", confidence_delta))
                 .await
-                .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+                .map_err(|_| db_err())?;
         }
     }
 
