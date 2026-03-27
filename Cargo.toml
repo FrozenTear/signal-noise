@@ -12,6 +12,11 @@ name = "scanner"
 path = "src/bin/scanner.rs"
 required-features = ["server"]
 
+[[bin]]
+name = "db_admin"
+path = "src/bin/db_admin.rs"
+required-features = ["server"]
+
 [dependencies]
 # Dioxus fullstack (Axum backend + WASM frontend)
 dioxus = { version = "0.7.3", features = ["fullstack", "router"] }

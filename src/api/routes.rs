@@ -1,15 +1,16 @@
 // Axum API route handlers — wired up by dioxus-axum in main.rs
 //
-// GET  /api/articles          — feed with optional ?category= filter
-// GET  /api/articles/:slug    — single article with sources + pipeline
-// POST /api/articles          — publish an article from the pipeline
-// GET  /api/agents/status     — agent roster for live sidebar
+// GET    /api/articles          — feed with optional ?category= filter
+// GET    /api/articles/:slug    — single article with sources + pipeline
+// POST   /api/articles          — publish an article from the pipeline
+// PATCH  /api/articles/:slug    — update article status
+// GET    /api/agents/status     — agent roster for live sidebar
 
 use axum::{
     extract::{Path, Query, State},
     http::StatusCode,
     response::Json,
-    routing::get,
+    routing::{get, patch},
     Router,
 };
 use serde::Deserialize;
@@ -20,7 +21,7 @@ use super::AppState;
 pub fn router(state: AppState) -> Router {
     Router::new()
         .route("/articles", get(list_articles).post(publish_article))
-        .route("/articles/{slug}", get(get_article))
+        .route("/articles/{slug}", get(get_article).patch(update_article_status))
         .route("/agents/status", get(agent_status).put(push_agent_status))
         .with_state(state)
 }
@@ -186,20 +187,21 @@ pub async fn publish_article(
         Some(s) => s.clone(),
     };
 
-    // body: reject if it contains metadata headers (YAML frontmatter or ALL_CAPS: lines)
+    // body: reject if it still contains the metadata sections that should be
+    // extracted into dedicated API fields (monologue, sources, pipeline, etc.)
+    let metadata_headings = [
+        "## AI Monologue",
+        "## Confidence Score",
+        "## Source Block",
+        "## Pipeline Metadata",
+        "## Extended Process Log",
+    ];
     let has_metadata = payload.body.lines().any(|line| {
         let t = line.trim();
-        if t.starts_with("---") {
-            return true;
-        }
-        if let Some(colon) = t.find(':') {
-            let key = &t[..colon];
-            return key.len() >= 2 && key.chars().all(|c| c.is_ascii_uppercase() || c == '_');
-        }
-        false
+        metadata_headings.iter().any(|h| t == *h)
     });
     if has_metadata {
-        return Err(bad_req("body contains metadata headers; strip frontmatter before publishing"));
+        return Err(bad_req("body contains metadata sections (## AI Monologue, ## Source Block, etc.); extract these into dedicated API fields"));
     }
 
     // Validate persona slug exists in DB
@@ -422,4 +424,53 @@ pub async fn push_agent_status(
     }
 
     Ok(Json(json!({ "status": "ok" })))
+}
+
+const VALID_STATUSES: &[&str] = &[
+    "draft", "fact_checking", "writing", "editing", "published", "rejected",
+];
+
+#[derive(Deserialize)]
+pub struct ArticleStatusPatch {
+    pub status: String,
+}
+
+/// PATCH /api/articles/:slug — update article status.
+/// Accepts { "status": "<valid_status>" }.
+pub async fn update_article_status(
+    State(state): State<AppState>,
+    Path(slug): Path<String>,
+    Json(payload): Json<ArticleStatusPatch>,
+) -> Result<Json<Value>, (StatusCode, Json<Value>)> {
+    let bad_req = |msg: &str| -> (StatusCode, Json<Value>) {
+        (StatusCode::BAD_REQUEST, Json(json!({ "error": msg })))
+    };
+
+    if !VALID_STATUSES.contains(&payload.status.as_str()) {
+        return Err(bad_req(&format!(
+            "invalid status '{}'; must be one of: {}",
+            payload.status,
+            VALID_STATUSES.join(", ")
+        )));
+    }
+
+    let mut res = state
+        .db
+        .query(
+            "UPDATE article SET status = $status, updated_at = time::now() WHERE slug = $slug",
+        )
+        .bind(("status", payload.status.clone()))
+        .bind(("slug", slug.clone()))
+        .await
+        .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+
+    let rows: Vec<Value> = res
+        .take(0)
+        .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+
+    if rows.is_empty() {
+        return Err((StatusCode::NOT_FOUND, Json(json!({ "error": "article not found" }))));
+    }
+
+    Ok(Json(json!({ "status": payload.status, "slug": slug })))
 }
