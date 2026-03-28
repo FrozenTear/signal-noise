@@ -7,6 +7,49 @@ use std::env;
 /// Used to check for duplicate story candidates
 type ExistingIssue = (String, Vec<String>);
 
+/// Query Paperclip API to get Source Checker agent ID
+async fn get_source_checker_id(
+    client: &reqwest::Client,
+    api_url: &str,
+    company_id: &str,
+    auth_header: &str,
+) -> Option<String> {
+    let url = format!("{}/api/companies/{}/agents", api_url, company_id);
+
+    match client
+        .get(&url)
+        .header("Authorization", auth_header)
+        .timeout(std::time::Duration::from_secs(30))
+        .send()
+        .await
+    {
+        Ok(resp) => match resp.json::<Vec<serde_json::Value>>().await {
+            Ok(agents) => {
+                for agent in agents {
+                    if let Some(name) = agent.get("name").and_then(|n| n.as_str()) {
+                        if name == "Source Checker" {
+                            if let Some(id) = agent.get("id").and_then(|i| i.as_str()) {
+                                tracing::info!("Found Source Checker agent ID: {}", id);
+                                return Some(id.to_string());
+                            }
+                        }
+                    }
+                }
+                tracing::warn!("Source Checker agent not found in company agents");
+                None
+            }
+            Err(e) => {
+                tracing::warn!("Failed to parse agents response: {}", e);
+                None
+            }
+        },
+        Err(e) => {
+            tracing::warn!("Failed to query agents: {}", e);
+            None
+        }
+    }
+}
+
 /// Query Paperclip API for existing story candidate issues (last 7 days)
 /// Returns: Vec<(issue_title, source_urls)>
 async fn query_existing_candidates(
@@ -260,6 +303,19 @@ async fn main() -> Result<()> {
     let candidates = filter_new_candidates(candidates, &existing_issues);
     tracing::info!("After deduplication: {} new candidates", candidates.len());
 
+    // Get Source Checker agent ID for assignment
+    let source_checker_id = get_source_checker_id(
+        &client,
+        &api_url,
+        &company_id,
+        &auth_header,
+    )
+    .await;
+
+    if source_checker_id.is_none() {
+        tracing::warn!("Could not find Source Checker agent ID. Candidates will be created unassigned.");
+    }
+
     // Create Paperclip issues for each story candidate
     let mut created_count = 0;
     for candidate in candidates {
@@ -298,6 +354,11 @@ async fn main() -> Result<()> {
             }
             .into(),
         );
+
+        // Assign to Source Checker per editorial pipeline protocol
+        if let Some(ref checker_id) = source_checker_id {
+            issue_body.insert("assigneeAgentId".to_string(), checker_id.clone().into());
+        }
 
         // Create the issue
         let issue_response = client
