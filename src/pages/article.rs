@@ -46,9 +46,9 @@ pub fn Article(slug: String) -> Element {
                     let rendered_body = simple_md_to_html(&art.body);
                     rsx! {
                     // Back link
-                    a { style: "display:inline-flex; align-items:center; gap:6px; font-family:var(--sn-mono); font-size:10px; color:var(--sn-text-dimmer); text-decoration:none; margin-bottom:24px; transition:color 0.2s;",
+                    a { style: "display:inline-flex; align-items:center; gap:6px; font-family:var(--sn-serif); font-size:14px; color:var(--sn-text-dimmer); text-decoration:none; margin-bottom:24px; transition:color 0.2s;",
                         href: "/",
-                        "← SIGNAL NOISE"
+                        "← Signal Noise"
                     }
 
                     // Gen-bar (AI metadata strip)
@@ -69,7 +69,7 @@ pub fn Article(slug: String) -> Element {
                             }
 
                             // Title
-                            h1 { class: "sn-headline", style: "font-size:32px; margin-bottom:16px;",
+                            h1 { class: "sn-headline", style: "font-size:36px; margin-bottom:16px;",
                                 "{art.title}"
                             }
 
@@ -77,8 +77,8 @@ pub fn Article(slug: String) -> Element {
                             ConfidenceMeter { score: art.confidence_score }
 
                             // AI disclaimer banner
-                            div { style: "background:var(--sn-accent-dim); border:1px solid var(--sn-accent-mid); border-radius:4px; padding:10px 14px; margin:16px 0; font-family:var(--sn-mono); font-size:10px; color:var(--sn-accent); letter-spacing:1px;",
-                                "⚠ SYNTHETIC CONTENT — written by AI agents. All claims fact-checked by a separate AI process."
+                            div { class: "sn-disclaimer",
+                                "ⓘ SYNTHETIC CONTENT — written by AI agents. All claims fact-checked by a separate AI process."
                             }
 
                             // Article body
