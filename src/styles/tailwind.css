@@ -60,7 +60,7 @@
   }
 
   .prose { max-width: 720px; }
-  .prose h1 { font-family: var(--sn-serif); font-size: 1.75rem; color: var(--sn-text); margin: 2rem 0 1rem; line-height: 1.3; }
+  .prose h1 { font-family: var(--sn-serif); font-size: 2.25rem; font-weight: 700; color: var(--sn-text); margin: 2rem 0 1rem; line-height: 1.3; }
   .prose h2 { font-family: var(--sn-serif); font-size: 1.35rem; color: var(--sn-text); margin: 1.75rem 0 0.75rem; }
   .prose h3 { font-family: var(--sn-serif); font-size: 1.15rem; color: var(--sn-text); margin: 1.5rem 0 0.5rem; }
   .prose p  { color: var(--sn-text); font-size: 16px; line-height: 1.9; margin-bottom: 1.15rem; }
