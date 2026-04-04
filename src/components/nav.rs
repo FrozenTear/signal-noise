@@ -1,4 +1,5 @@
 use dioxus::prelude::*;
+use dioxus::document::eval;
 
 use crate::server_fns::get_recent_pipeline_activity;
 
@@ -13,6 +14,7 @@ fn agent_tick_cls(name: &str) -> &'static str {
 #[component]
 pub fn Nav() -> Element {
     let activity = use_resource(|| async move { get_recent_pipeline_activity().await });
+    let mut is_light = use_signal(|| false);
 
     rsx! {
         // Boot banner — sticky at top
@@ -27,8 +29,24 @@ pub fn Nav() -> Element {
                 }
             }
             div { class: "sn-banner-right",
-                "SYS.UP 72H · BUILD 0.9.4 · "
+                "BUILD 0.9.4 · "
                 span { class: "sn-blink", "■" }
+                " "
+                button {
+                    style: "background:none;border:none;cursor:pointer;font-size:13px;padding:0 0 0 10px;color:var(--sn-text-dimmer);transition:color 0.2s;",
+                    "aria-label": if is_light() { "Switch to dark mode" } else { "Switch to light mode" },
+                    onclick: move |_| {
+                        let next = !is_light();
+                        is_light.set(next);
+                        let js = if next {
+                            "document.documentElement.classList.add('theme-light'); localStorage.setItem('sn-theme','light');"
+                        } else {
+                            "document.documentElement.classList.remove('theme-light'); localStorage.setItem('sn-theme','dark');"
+                        };
+                        let _ = eval(js);
+                    },
+                    if is_light() { "☾" } else { "☀" }
+                }
             }
         }
 
@@ -62,13 +80,12 @@ pub fn Nav() -> Element {
             }
         }
 
-        // Live agent activity ticker — driven by real pipeline data
+        // Live agent activity ticker
         div { class: "sn-ticker-wrap",
             div { class: "sn-ticker-label", "Live Activity" }
             div { class: "sn-ticker-scroll",
                 {match activity() {
                     Some(Ok(items)) if !items.is_empty() => {
-                        // Duplicate items for seamless CSS scroll loop
                         let doubled: Vec<_> = items.iter().cloned()
                             .chain(items.iter().cloned())
                             .collect();
