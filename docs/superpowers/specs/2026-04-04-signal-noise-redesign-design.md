@@ -71,7 +71,9 @@ A warm cream paper theme. Added via `html.theme-light` CSS class overrides.
 | `--sn-violet-dim` | `rgba(91,79,207,0.08)` | |
 | `--sn-violet-mid` | `rgba(91,79,207,0.25)` | |
 | `--sn-amber` | `#b87a00` | Darker amber |
+| `--sn-amber-dim` | `rgba(184,122,0,0.10)` | |
 | `--sn-red` | `#cc3333` | Darker red |
+| `--sn-red-dim` | `rgba(204,51,51,0.08)` | |
 
 **Overlay changes (light mode):** both `body::before` and `body::after` removed entirely. Clean paper.
 
@@ -81,9 +83,9 @@ A warm cream paper theme. Added via `html.theme-light` CSS class overrides.
 - Toggles `class="theme-light"` on `<html>`
 - Preference persisted to `localStorage` key `sn-theme`
 - Default: dark
-- No flash-of-wrong-theme: initial theme applied via an inline `<script>` in `<head>` before paint
+- No flash-of-wrong-theme: initial theme applied via an inline `<script>` in `<head>` before paint. **Signal Noise always runs with SSR enabled** (see `main.rs` `dioxus::server::serve`), so `document::Script` injects reliably on the server-rendered HTML before the browser paints. In the rare case of a CSR-only dev build, a brief theme flash is acceptable and non-blocking.
 
-Implementation: the toggle is a small icon button in the boot banner (right side, next to the build info). Label: `☀` / `☾`. Accessible with `aria-label="Switch to light mode"`.
+Implementation: the toggle is a small icon button in the boot banner (right side, next to the build info). Label: `☀` / `☾`. The `aria-label` must be **dynamic**: `"Switch to light mode"` when dark is active, `"Switch to dark mode"` when light is active.
 
 ---
 
@@ -125,7 +127,9 @@ Dark mode: replace the `3px` top accent rail with a `3px` left border spanning f
 - `linux`: `--sn-violet`
 - `privacy`: `--sn-amber`
 
-Light mode: replace border approach with a subtle `box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px var(--sn-border)`. Feels like paper cards.
+**Implementation detail:** Remove the `sn-article-rail` `<div>` from `article_card.rs` (currently line 41). Apply `border-left: 3px solid <beat-colour>` directly on `.sn-article` via per-beat modifier classes (`.sn-article.beat-tech`, `.sn-article.beat-linux`, `.sn-article.beat-privacy`). A `border-left` on the element itself is part of its box model and is **not** clipped by `overflow: hidden` — the existing `border-radius: 6px` will naturally round the top-left and bottom-left corners of the left border, which looks correct.
+
+Light mode: remove the left border colour distinction. Use `box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px var(--sn-border)` on `.sn-article` instead. Feels like paper cards.
 
 ### Article Page Layout
 
@@ -133,7 +137,8 @@ Light mode: replace border approach with a subtle `box-shadow: 0 1px 4px rgba(0,
 |---|---|---|
 | `max-width` | `680px` (prose) | `720px` |
 | Right rail width | `300px` | `280px` |
-| Article page padding | `32px 48px` | `40px 48px` |
+| Article page padding (desktop) | `32px 48px` | `40px 48px` |
+| Article page padding (mobile, `≤960px`) | `20px` | `20px 16px` (unchanged horizontal) |
 
 The back link ("← SIGNAL NOISE") is styled with the serif font at `14px`, not monospace at `10px`. More prominent, more editorial.
 
@@ -154,7 +159,9 @@ Monospace font reserved for: timestamps, beat tags, labels, AI metadata panels. 
 
 ### AI Monologue Box
 
-**Dark mode:** Background `#1e1a2e` (warm purple), left border `3px` solid `--sn-violet`, border-radius `4px` on all corners (currently asymmetric). Font size `11px` → `12px`. Pulse dot on label header retained.
+**Important CSS fix:** The current `.sn-monologue` rule uses a hardcoded `background: linear-gradient(135deg, #0d1020, #0f111f)` — raw hex values outside the variable system. This must be replaced with a flat variable background. Add a new variable `--sn-monologue-bg` to the palette (dark: `#1e1a2e`, light: `#f0edf8`) and use it in the `.sn-monologue` rule. This is the only way the light-mode override can work.
+
+**Dark mode:** Background `var(--sn-monologue-bg)` (`#1e1a2e` — warm purple), left border `3px` solid `--sn-violet`, border-radius `4px` on all corners (currently asymmetric 0/4/4/0). Font size `11px` → `12px`. Pulse dot on label header retained.
 
 **Light mode:** Background `#f0edf8` (soft lavender), left border `3px` solid `--sn-violet`, text `#3d3560`. Styled like an editor's annotation in the margin — familiar, not technical.
 
@@ -191,6 +198,8 @@ Monospace font reserved for: timestamps, beat tags, labels, AI metadata panels. 
 
 **Light mode:** Background `#fff8e6`, text `#8a6200`, border `#d4a000`. Reads like a newspaper's standard syndication/disclosure note.
 
+Note: the disclaimer div in `article.rs` currently uses an inline `style` attribute with hardcoded dark-mode colours. The icon change requires editing the Rust source; the light-mode colour overrides require moving the styles to CSS classes (add `.sn-disclaimer` class) so that `html.theme-light .sn-disclaimer` can override them.
+
 ---
 
 ## Implementation Notes
@@ -208,11 +217,17 @@ html.theme-light {
 }
 ```
 
-Components use CSS variables throughout — no hardcoded colours in component files. The theme switch is therefore zero-JS beyond toggling the class.
+Components use CSS variables throughout — no hardcoded colours in component files or stylesheet rules. The theme switch is therefore zero-JS beyond toggling the class.
+
+**Exception to fix:** `.sn-monologue` currently has a hardcoded `linear-gradient` (see Section 3 monologue note). `.sn-rejection` also has a hardcoded `rgba(13,6,8,0.8)` background — this is out of scope for this redesign but should be noted: it will appear as near-invisible on light mode. A follow-up ticket should move it to a variable. For now, add a `html.theme-light .sn-rejection` override using `--sn-red-dim` as background.
 
 ### Section Nav Component
 
-New `SectionNav` Dioxus component replacing the inline `CategoryTab` buttons in `home.rs`. Props: `categories: Vec<(String, String)>` (label, value), `active: Option<String>`, `on_select: EventHandler<Option<String>>`.
+New `SectionNav` Dioxus component in **`src/components/section_nav.rs`** (not `nav.rs`). The category filter is page-local state; placing it in the global `Nav` component would require threading `categories`, `active`, and `on_select` props through global chrome, which is architecturally wrong. `SectionNav` is called directly from `home.rs`.
+
+Props: `categories: Vec<(String, String)>` (label, value), `active: Option<String>`, `on_select: EventHandler<Option<String>>`.
+
+Add `pub mod section_nav;` to `src/components/mod.rs`.
 
 ### Theme Toggle Placement
 
@@ -234,8 +249,11 @@ Inline `<script>` added to the `App` component's `<head>` (via `document::Script
 
 | File | Change |
 |---|---|
-| `src/styles/tailwind.css` | Palette update, overlay removal, new section nav styles, light-mode overrides |
-| `src/components/nav.rs` | Add theme toggle button + `SectionNav` component |
+| `src/styles/tailwind.css` | Palette update, overlay removal, `--sn-monologue-bg` variable, new section nav styles, light-mode `html.theme-light` block |
+| `src/components/nav.rs` | Add theme toggle button (with dynamic `aria-label`) |
+| `src/components/section_nav.rs` | New file — `SectionNav` component |
+| `src/components/mod.rs` | Add `pub mod section_nav;` |
 | `src/pages/home.rs` | Use `SectionNav` instead of inline `CategoryTab` buttons |
-| `src/pages/article.rs` | Updated back link style, wider prose |
-| `src/components/article_card.rs` | Left border instead of top rail, updated paddings |
+| `src/pages/article.rs` | Updated back link style, wider prose, `.sn-disclaimer` class on disclaimer div, `ⓘ` icon |
+| `src/components/article_card.rs` | Remove `sn-article-rail` div; add beat class to `<article>` for left border; updated paddings |
+| `src/main.rs` | Add no-flash `document::Script` to `App` head |
