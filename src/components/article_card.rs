@@ -51,8 +51,7 @@ pub fn ArticleCard(props: ArticleCardProps) -> Element {
     let has_rejection = acc < 0.75;
 
     rsx! {
-        article { class: "sn-article",
-            div { class: "sn-article-rail" }
+        article { class: "sn-article beat-{beat_cls}",
 
             // Generation metadata bar
             div { class: "sn-gen-bar",
