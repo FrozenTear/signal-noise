@@ -46,6 +46,9 @@ fn main() {
 #[component]
 fn App() -> Element {
     rsx! {
+        document::Script {
+            "(function(){{var t=localStorage.getItem('sn-theme');if(t==='light')document.documentElement.classList.add('theme-light');}})()"
+        }
         document::Link { rel: "preconnect", href: "https://fonts.googleapis.com" }
         document::Link { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }
         document::Link { rel: "stylesheet", href: MAIN_CSS }
