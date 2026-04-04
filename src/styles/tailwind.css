@@ -529,4 +529,94 @@
   ::-webkit-scrollbar-track { background: var(--sn-bg-deep); }
   ::-webkit-scrollbar-thumb { background: var(--sn-border); border-radius: 2px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--sn-text-dimmer); }
+
+  /* ── Light Mode: Newsprint ──────────────────────────────────────────── */
+  html.theme-light {
+    --sn-bg:          #f8f5ef;
+    --sn-bg-raised:   #f0ece4;
+    --sn-bg-card:     #ffffff;
+    --sn-bg-deep:     #ede9e0;
+    --sn-text:        #1a1523;
+    --sn-text-dim:    #5c5675;
+    --sn-text-dimmer: #9b95ae;
+    --sn-border:      #e2ddd6;
+    --sn-border-glow: rgba(0,122,85,0.15);
+    --sn-accent:      #007a55;
+    --sn-accent-dim:  rgba(0,122,85,0.08);
+    --sn-accent-mid:  rgba(0,122,85,0.25);
+    --sn-violet:      #5b4fcf;
+    --sn-violet-dim:  rgba(91,79,207,0.08);
+    --sn-violet-mid:  rgba(91,79,207,0.25);
+    --sn-amber:       #b87a00;
+    --sn-amber-dim:   rgba(184,122,0,0.10);
+    --sn-red:         #cc3333;
+    --sn-red-dim:     rgba(204,51,51,0.08);
+    --sn-monologue-bg: #f0edf8;
+  }
+
+  html.theme-light body::before,
+  html.theme-light body::after { display: none; }
+
+  html.theme-light body {
+    background: var(--sn-bg);
+    color: var(--sn-text);
+  }
+
+  html.theme-light .sn-beat-tag.tech {
+    background: rgba(0,122,85,0.10); color: #007a55; border-color: rgba(0,122,85,0.30);
+  }
+  html.theme-light .sn-beat-tag.linux {
+    background: rgba(91,79,207,0.10); color: #5b4fcf; border-color: rgba(91,79,207,0.30);
+  }
+  html.theme-light .sn-beat-tag.privacy {
+    background: rgba(184,122,0,0.10); color: #b87a00; border-color: rgba(184,122,0,0.30);
+  }
+
+  html.theme-light .sn-monologue {
+    color: #3d3560;
+  }
+
+  html.theme-light .sn-article,
+  html.theme-light .sn-article.beat-tech,
+  html.theme-light .sn-article.beat-linux,
+  html.theme-light .sn-article.beat-privacy {
+    border-left: 1px solid var(--sn-border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08), 0 0 0 1px var(--sn-border);
+  }
+  html.theme-light .sn-article:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10), 0 0 0 1px var(--sn-border);
+    border-color: var(--sn-border);
+  }
+
+  html.theme-light .sn-trail-marker {
+    border: 1.5px solid #1a1523;
+    color: var(--sn-accent);
+    background: #ffffff;
+    box-shadow: none;
+  }
+  html.theme-light .sn-trail-line {
+    background: var(--sn-border);
+  }
+
+  html.theme-light .sn-rejection {
+    background: var(--sn-red-dim);
+    border-color: rgba(204,51,51,0.25);
+  }
+
+  .sn-disclaimer {
+    background: var(--sn-accent-dim);
+    border: 1px solid var(--sn-accent-mid);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-family: var(--sn-mono);
+    font-size: 11px;
+    color: var(--sn-accent);
+    letter-spacing: 1px;
+  }
+  html.theme-light .sn-disclaimer {
+    background: #fff8e6;
+    color: #8a6200;
+    border-color: #d4a000;
+  }
 }
