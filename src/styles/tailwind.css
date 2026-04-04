@@ -279,7 +279,10 @@
     font-size: 12px;
     color: var(--sn-text-dim);
     font-style: italic;
+    line-height: 1.7;
   }
+  .sn-monologue p + p { margin-top: 0.8em; }
+  .sn-monologue-extended { font-size: 12px; line-height: 1.75; }
   .sn-monologue-label {
     display: flex; align-items: center; gap: 6px;
     font-size: 8px; text-transform: uppercase; letter-spacing: 2px;
