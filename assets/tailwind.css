@@ -608,9 +608,9 @@ html.theme-light .sn-article:hover {
 }
 
 html.theme-light .sn-trail-marker {
-  border: 1.5px solid #1a1523;
+  border: 1.5px solid var(--sn-text);
   color: var(--sn-accent);
-  background: #ffffff;
+  background: var(--sn-bg-card);
   box-shadow: none;
 }
 html.theme-light .sn-trail-line {
