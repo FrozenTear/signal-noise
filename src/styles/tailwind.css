@@ -6,25 +6,26 @@
 
 @layer base {
   :root {
-    --sn-bg:          #070810;
-    --sn-bg-raised:   #0d0f1a;
-    --sn-bg-card:     #10121e;
-    --sn-bg-deep:     #080a14;
+    --sn-bg:          #16141a;
+    --sn-bg-raised:   #1d1b24;
+    --sn-bg-card:     #221f2c;
+    --sn-bg-deep:     #110f17;
     --sn-accent:      #00e5a0;
     --sn-accent-dim:  rgba(0,229,160,0.08);
     --sn-accent-mid:  rgba(0,229,160,0.25);
-    --sn-violet:      #7c6bff;
-    --sn-violet-dim:  rgba(124,107,255,0.10);
-    --sn-violet-mid:  rgba(124,107,255,0.27);
+    --sn-violet:      #9d8fff;
+    --sn-violet-dim:  rgba(157,143,255,0.10);
+    --sn-violet-mid:  rgba(157,143,255,0.27);
     --sn-amber:       #ffb224;
     --sn-amber-dim:   rgba(255,178,36,0.12);
-    --sn-red:         #ff4f4f;
-    --sn-red-dim:     rgba(255,79,79,0.08);
-    --sn-text:        #e4e4f0;
-    --sn-text-dim:    #9a9db4;
-    --sn-text-dimmer: #40435a;
-    --sn-border:      #1c1f32;
+    --sn-red:         #ff5f5f;
+    --sn-red-dim:     rgba(255,95,95,0.08);
+    --sn-text:        #f0eef8;
+    --sn-text-dim:    #a09ab8;
+    --sn-text-dimmer: #6b658a;
+    --sn-border:      #2d2840;
     --sn-border-glow: rgba(0,229,160,0.15);
+    --sn-monologue-bg: #1e1a2e;
     --sn-mono:        'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
     --sn-serif:       'Georgia', 'Times New Roman', serif;
   }
@@ -53,21 +54,9 @@
       linear-gradient(var(--sn-border) 1px, transparent 1px),
       linear-gradient(90deg, var(--sn-border) 1px, transparent 1px);
     background-size: 48px 48px;
-    opacity: 0.3;
+    opacity: 0.10;
     pointer-events: none;
     z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg, transparent, transparent 2px,
-      rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px
-    );
-    pointer-events: none;
-    z-index: 9998;
   }
 
   .prose { max-width: 680px; }
