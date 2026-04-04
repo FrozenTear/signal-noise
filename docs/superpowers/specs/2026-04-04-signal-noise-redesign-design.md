@@ -74,6 +74,7 @@ A warm cream paper theme. Added via `html.theme-light` CSS class overrides.
 | `--sn-amber-dim` | `rgba(184,122,0,0.10)` | |
 | `--sn-red` | `#cc3333` | Darker red |
 | `--sn-red-dim` | `rgba(204,51,51,0.08)` | |
+| `--sn-monologue-bg` | `#f0edf8` | Lavender annotation block |
 
 **Overlay changes (light mode):** both `body::before` and `body::after` removed entirely. Clean paper.
 
@@ -138,7 +139,7 @@ Light mode: remove the left border colour distinction. Use `box-shadow: 0 1px 4p
 | `max-width` | `680px` (prose) | `720px` |
 | Right rail width | `300px` | `280px` |
 | Article page padding (desktop) | `32px 48px` | `40px 48px` |
-| Article page padding (mobile, `≤960px`) | `20px` | `20px 16px` (unchanged horizontal) |
+| Article page padding (mobile, `≤960px`) | `20px` | `20px` (unchanged — `padding: 20px` stays) |
 
 The back link ("← SIGNAL NOISE") is styled with the serif font at `14px`, not monospace at `10px`. More prominent, more editorial.
 
@@ -225,7 +226,16 @@ Components use CSS variables throughout — no hardcoded colours in component fi
 
 New `SectionNav` Dioxus component in **`src/components/section_nav.rs`** (not `nav.rs`). The category filter is page-local state; placing it in the global `Nav` component would require threading `categories`, `active`, and `on_select` props through global chrome, which is architecturally wrong. `SectionNav` is called directly from `home.rs`.
 
-Props: `categories: Vec<(String, String)>` (label, value), `active: Option<String>`, `on_select: EventHandler<Option<String>>`.
+**Categories are hardcoded at the call site in `home.rs`** — the same four beats as today (All, Linux, Tech, Privacy). No new server function is required. When new beats are added in future, they are added to the call site. The component itself is agnostic to the data source.
+
+Props:
+```rust
+categories: &'static [(&'static str, &'static str)]  // (label, value) — static, call-site defined
+active: Option<String>
+on_select: EventHandler<Option<String>>
+```
+
+Using `&'static [(&'static str, &'static str)]` instead of `Vec<(String, String)>` is correct here: the categories are compile-time constants and the static slice avoids per-render allocations.
 
 Add `pub mod section_nav;` to `src/components/mod.rs`.
 
