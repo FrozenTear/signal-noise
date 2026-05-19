@@ -5,6 +5,7 @@ use crate::components::nav::Nav;
 use crate::components::pipeline_trail::{PipelineStepSummary, PipelineTrail};
 use crate::components::source_block::{SourceBlock, SourceItem};
 use crate::server_fns::get_article_by_slug;
+use crate::util::simple_md_to_html;
 
 #[component]
 pub fn Article(slug: String) -> Element {
@@ -115,6 +116,7 @@ pub fn Article(slug: String) -> Element {
                                     output_summary: p.output_summary.clone(),
                                     confidence_delta: p.confidence_delta,
                                     completed_at: p.completed_at.clone(),
+                                    sort_order: p.sort_order,
                                 }).collect()
                             }
                         }
@@ -151,57 +153,6 @@ pub fn Article(slug: String) -> Element {
             }}
         }
     }
-}
-
-// ── Lightweight markdown → HTML ──────────────────────────────────────────────
-
-fn simple_md_to_html(md: &str) -> String {
-    let mut html = String::new();
-    let mut in_paragraph = false;
-
-    for line in md.lines() {
-        let trimmed = line.trim();
-
-        if trimmed.is_empty() {
-            if in_paragraph {
-                html.push_str("</p>");
-                in_paragraph = false;
-            }
-            continue;
-        }
-
-        if let Some(heading) = trimmed.strip_prefix("### ") {
-            if in_paragraph { html.push_str("</p>"); in_paragraph = false; }
-            html.push_str(&format!("<h3>{}</h3>", html_escape(heading)));
-        } else if let Some(heading) = trimmed.strip_prefix("## ") {
-            if in_paragraph { html.push_str("</p>"); in_paragraph = false; }
-            html.push_str(&format!("<h2>{}</h2>", html_escape(heading)));
-        } else if let Some(heading) = trimmed.strip_prefix("# ") {
-            if in_paragraph { html.push_str("</p>"); in_paragraph = false; }
-            html.push_str(&format!("<h1>{}</h1>", html_escape(heading)));
-        } else {
-            if !in_paragraph {
-                html.push_str("<p>");
-                in_paragraph = true;
-            } else {
-                html.push(' ');
-            }
-            html.push_str(&html_escape(trimmed));
-        }
-    }
-
-    if in_paragraph {
-        html.push_str("</p>");
-    }
-
-    html
-}
-
-fn html_escape(s: &str) -> String {
-    s.replace('&', "&amp;")
-        .replace('<', "&lt;")
-        .replace('>', "&gt;")
-        .replace('"', "&quot;")
 }
 
 // ── AI monologue collapsible ──────────────────────────────────────────────────

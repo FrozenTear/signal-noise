@@ -70,6 +70,20 @@ pub struct PipelineStepPayload {
     pub input_summary: Option<String>,
     pub output_summary: Option<String>,
     pub confidence_delta: Option<f64>,
+    pub started_at: Option<String>,
+    pub completed_at: Option<String>,
+}
+
+fn step_sort_order(step_type: &str) -> i32 {
+    match step_type {
+        "scan" => 0,
+        "source_check" => 1,
+        "fact_check" => 2,
+        "draft" => 3,
+        "verify" => 4,
+        "edit" => 5,
+        _ => 99,
+    }
 }
 
 fn generate_slug(title: &str) -> String {
@@ -313,6 +327,7 @@ pub async fn publish_article(
                         verification_status: $verification
                     } ON DUPLICATE KEY UPDATE
                         name = $input.name,
+                        type = IF $input.type != 'wire' THEN $input.type ELSE type END,
                         paywall_status = IF $input.paywall_status != 'unknown' THEN $input.paywall_status ELSE paywall_status END,
                         verification_status = IF $input.verification_status != 'unknown' THEN $input.verification_status ELSE verification_status END
                     )[0];
@@ -336,30 +351,54 @@ pub async fn publish_article(
             let input_summary = step.input_summary.unwrap_or_default();
             let output_summary = step.output_summary.unwrap_or_default();
             let confidence_delta = step.confidence_delta.unwrap_or(0.0);
+            let sort_order = step_sort_order(&step.step_type);
+
+            // Use caller-provided timestamps when available, fall back to time::now()
+            let query = if step.started_at.is_some() || step.completed_at.is_some() {
+                r#"
+                LET $art = (SELECT id FROM article WHERE slug = $slug LIMIT 1)[0].id;
+                LET $step = (CREATE pipeline_step CONTENT {
+                    article:          $art,
+                    agent_name:       $agent_name,
+                    step_type:        $step_type,
+                    input_summary:    $input_summary,
+                    output_summary:   $output_summary,
+                    confidence_delta: $confidence_delta,
+                    sort_order:       $sort_order,
+                    started_at:       IF $started_at != NONE THEN <datetime>$started_at ELSE time::now() END,
+                    completed_at:     IF $completed_at != NONE THEN <datetime>$completed_at ELSE NONE END
+                })[0];
+                RELATE $art->produced_by->$step.id;
+                "#
+            } else {
+                r#"
+                LET $art = (SELECT id FROM article WHERE slug = $slug LIMIT 1)[0].id;
+                LET $step = (CREATE pipeline_step CONTENT {
+                    article:          $art,
+                    agent_name:       $agent_name,
+                    step_type:        $step_type,
+                    input_summary:    $input_summary,
+                    output_summary:   $output_summary,
+                    confidence_delta: $confidence_delta,
+                    sort_order:       $sort_order,
+                    started_at:       time::now()
+                })[0];
+                RELATE $art->produced_by->$step.id;
+                "#
+            };
 
             state
                 .db
-                .query(
-                    r#"
-                    LET $art = (SELECT id FROM article WHERE slug = $slug LIMIT 1)[0].id;
-                    LET $step = (CREATE pipeline_step CONTENT {
-                        article:          $art,
-                        agent_name:       $agent_name,
-                        step_type:        $step_type,
-                        input_summary:    $input_summary,
-                        output_summary:   $output_summary,
-                        confidence_delta: $confidence_delta,
-                        started_at:       time::now()
-                    })[0];
-                    RELATE $art->produced_by->$step.id;
-                    "#,
-                )
+                .query(query)
                 .bind(("slug", slug.clone()))
                 .bind(("agent_name", step.agent_name))
                 .bind(("step_type", step.step_type))
                 .bind(("input_summary", input_summary))
                 .bind(("output_summary", output_summary))
                 .bind(("confidence_delta", confidence_delta))
+                .bind(("sort_order", sort_order))
+                .bind(("started_at", step.started_at))
+                .bind(("completed_at", step.completed_at))
                 .await
                 .map_err(|_| db_err())?;
         }
@@ -433,10 +472,15 @@ const VALID_STATUSES: &[&str] = &[
 #[derive(Deserialize)]
 pub struct ArticleStatusPatch {
     pub status: String,
+    pub body: Option<String>,
+    pub summary: Option<String>,
+    pub confidence_score: Option<f64>,
+    pub ai_monologue: Option<String>,
+    pub ai_monologue_extended: Option<String>,
 }
 
-/// PATCH /api/articles/:slug — update article status.
-/// Accepts { "status": "<valid_status>" }.
+/// PATCH /api/articles/:slug — update article status and optionally content fields.
+/// Required: { "status": "<valid_status>" }. Optional: body, summary, confidence_score, ai_monologue, ai_monologue_extended.
 pub async fn update_article_status(
     State(state): State<AppState>,
     Path(slug): Path<String>,
@@ -454,7 +498,7 @@ pub async fn update_article_status(
         )));
     }
 
-    let mut res = state
+    let mut q = state
         .db
         .query(
             "UPDATE article SET status = $status, updated_at = time::now() WHERE slug = $slug",
@@ -464,12 +508,54 @@ pub async fn update_article_status(
         .await
         .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
 
-    let rows: Vec<Value> = res
+    let rows: Vec<Value> = q
         .take(0)
         .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
 
     if rows.is_empty() {
         return Err((StatusCode::NOT_FOUND, Json(json!({ "error": "article not found" }))));
+    }
+
+    // Apply optional content patches
+    if let Some(body) = payload.body {
+        state.db
+            .query("UPDATE article SET body = $body, updated_at = time::now() WHERE slug = $slug")
+            .bind(("body", body))
+            .bind(("slug", slug.clone()))
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+    }
+    if let Some(summary) = payload.summary {
+        state.db
+            .query("UPDATE article SET summary = $summary, updated_at = time::now() WHERE slug = $slug")
+            .bind(("summary", summary))
+            .bind(("slug", slug.clone()))
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+    }
+    if let Some(score) = payload.confidence_score {
+        state.db
+            .query("UPDATE article SET confidence_score = $score, updated_at = time::now() WHERE slug = $slug")
+            .bind(("score", score))
+            .bind(("slug", slug.clone()))
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+    }
+    if let Some(mono) = payload.ai_monologue {
+        state.db
+            .query("UPDATE article SET ai_monologue = $mono, updated_at = time::now() WHERE slug = $slug")
+            .bind(("mono", mono))
+            .bind(("slug", slug.clone()))
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+    }
+    if let Some(ext) = payload.ai_monologue_extended {
+        state.db
+            .query("UPDATE article SET ai_monologue_extended = $ext, updated_at = time::now() WHERE slug = $slug")
+            .bind(("ext", ext))
+            .bind(("slug", slug.clone()))
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
     }
 
     Ok(Json(json!({ "status": payload.status, "slug": slug })))

@@ -10,7 +10,16 @@ const DB_NS: &str = "signal_noise";
 const DB_NAME: &str = "signal_noise";
 
 pub async fn init_db() -> Result<Surreal<Db>> {
-    let db = Surreal::new::<SurrealKv>(DB_PATH).await?;
+    let db = match Surreal::new::<SurrealKv>(DB_PATH).await {
+        Ok(db) => db,
+        Err(e) if e.to_string().contains("already locked") || e.to_string().contains("LOCK") => {
+            let lock_path = format!("{}/LOCK", DB_PATH);
+            tracing::warn!("Stale SurrealDB lock detected, removing: {}", lock_path);
+            std::fs::remove_file(&lock_path)?;
+            Surreal::new::<SurrealKv>(DB_PATH).await?
+        }
+        Err(e) => return Err(e.into()),
+    };
     db.use_ns(DB_NS).use_db(DB_NAME).await?;
     Ok(db)
 }

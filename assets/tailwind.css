@@ -467,13 +467,44 @@ body::before {
 .sn-source-dot.ok { background: var(--sn-accent); }
 .sn-source-dot.no { background: var(--sn-text-dimmer); }
 
-.sn-pipe-step {
-  padding: 10px 16px; border-bottom: 1px solid var(--sn-border);
-  display: grid; grid-template-columns: 80px 1fr; gap: 10px; font-family: var(--sn-mono); font-size: 10px;
+/* Editorial trail — vertical timeline */
+.sn-trail { padding: 16px 16px 8px; }
+.sn-trail-step {
+  display: grid; grid-template-columns: 28px 1fr; gap: 12px;
+  font-family: var(--sn-mono); font-size: 10px; min-height: 48px;
 }
-.sn-pipe-step:last-child { border-bottom: none; }
-.sn-pipe-agent { font-size: 8px; text-transform: uppercase; letter-spacing: 1px; color: var(--sn-accent); padding-top: 2px; }
-.sn-pipe-text { color: var(--sn-text-dim); line-height: 1.55; }
+.sn-trail-gutter {
+  display: flex; flex-direction: column; align-items: center;
+}
+.sn-trail-marker {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1.5px solid var(--sn-accent); color: var(--sn-accent);
+  font-size: 9px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; background: var(--sn-bg-card);
+}
+.sn-trail-line {
+  width: 1px; flex: 1; min-height: 12px;
+  background: var(--sn-border);
+}
+.sn-trail-content { padding-bottom: 16px; }
+.sn-trail-step.last .sn-trail-content { padding-bottom: 4px; }
+.sn-trail-header {
+  display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px;
+}
+.sn-trail-label {
+  font-size: 9px; font-weight: 600; letter-spacing: 1px;
+  color: var(--sn-accent); text-transform: uppercase;
+}
+.sn-trail-agent { font-size: 9px; color: var(--sn-text-dimmer); letter-spacing: 0.5px; }
+.sn-trail-summary { color: var(--sn-text-dim); line-height: 1.55; }
+.sn-trail-meta {
+  display: flex; gap: 10px; margin-top: 4px; color: var(--sn-text-dimmer); font-size: 9px;
+}
+.sn-trail-delta { color: var(--sn-text-dimmer); }
+.sn-trail-delta.pos { color: var(--sn-accent); }
+.sn-trail-delta.neg { color: var(--sn-red); }
+.sn-trail-ts { color: var(--sn-text-dimmer); }
 
 .sn-trail-marker {
   width: 22px; height: 22px; border-radius: 50%;

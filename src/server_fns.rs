@@ -55,6 +55,7 @@ pub struct PipelineSummary {
     pub output_summary: String,
     pub confidence_delta: f64,
     pub completed_at: String,
+    pub sort_order: i32,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -179,14 +180,27 @@ pub async fn get_article_by_slug(
                         })
                         .unwrap_or_default();
 
-                    let pipeline = v["pipeline"]
+                    let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
                         .as_array()
                         .map(|arr| {
                             arr.iter()
                                 .filter_map(|p| {
+                                    let step_type = p["step_type"].as_str()?.to_string();
+                                    let sort_order = p["sort_order"]
+                                        .as_i64()
+                                        .map(|n| n as i32)
+                                        .unwrap_or_else(|| match step_type.as_str() {
+                                            "scan" => 0,
+                                            "source_check" => 1,
+                                            "fact_check" => 2,
+                                            "draft" => 3,
+                                            "verify" => 4,
+                                            "edit" => 5,
+                                            _ => 99,
+                                        });
                                     Some(PipelineSummary {
                                         agent_name: p["agent_name"].as_str()?.to_string(),
-                                        step_type: p["step_type"].as_str()?.to_string(),
+                                        step_type,
                                         output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
                                         confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
                                         completed_at: p["completed_at"]
@@ -194,11 +208,13 @@ pub async fn get_article_by_slug(
                                             .or_else(|| p["started_at"].as_str())
                                             .unwrap_or("")
                                             .to_string(),
+                                        sort_order,
                                     })
                                 })
                                 .collect()
                         })
                         .unwrap_or_default();
+                    pipeline.sort_by_key(|s| s.sort_order);
 
                     return Ok(Some(ArticleDetail {
                         slug: v["slug"].as_str().unwrap_or("").to_string(),
@@ -551,6 +567,7 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
                     .to_string(),
                 confidence_delta: 0.0,
                 completed_at: "2026-03-22 08:14".to_string(),
+                sort_order: 0,
             },
             PipelineSummary {
                 agent_name: "Fact Checker".to_string(),
@@ -560,6 +577,7 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
                     .to_string(),
                 confidence_delta: 0.15,
                 completed_at: "2026-03-22 08:31".to_string(),
+                sort_order: 2,
             },
             PipelineSummary {
                 agent_name: "Reporter".to_string(),
@@ -569,6 +587,7 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
                     .to_string(),
                 confidence_delta: 0.05,
                 completed_at: "2026-03-22 08:47".to_string(),
+                sort_order: 3,
             },
             PipelineSummary {
                 agent_name: "Editor-in-Chief".to_string(),
@@ -578,6 +597,7 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
                     .to_string(),
                 confidence_delta: 0.02,
                 completed_at: "2026-03-22 09:03".to_string(),
+                sort_order: 5,
             },
         ],
     })

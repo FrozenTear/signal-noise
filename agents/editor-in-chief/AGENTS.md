@@ -64,15 +64,20 @@ When you approve an article, you MUST publish it to the backend before marking t
 
 **Step 1 — Read the article document.** The draft lives on the issue as a document with key `article` or `draft`. Use `GET /api/issues/{issueId}/documents/article` (fall back to `draft`).
 
-**Step 2 — Extract fields from the document body:**
+**Step 2 — Extract fields from the document body.** The Reporter's article contains metadata sections that must be extracted into separate API fields and REMOVED from the body. Parse the document to extract:
+
 - `title` — the `# Heading` at the top of the article
-- `body` — the full document body (markdown)
+- `summary` — the 2-3 sentence summary/hook (usually under "## Summary")
+- `body` — the article content ONLY. Strip out ALL of these: the `# Title` heading, `**Beat:**`/`**Persona:**` byline, `## Summary`, `## AI Monologue`, `## Confidence Score`, `## Source Block`, `## Pipeline Metadata`, `## Extended Process Log`, and any horizontal rules (`---`, `***`) used as section dividers. If the article content is under a `## Body` or `## Article` heading, extract only that section's content. The body field should contain only the news article text — no headings that duplicate the structured API fields.
 - `category` — infer from the beat: Linux & Open Source → `linux`, Technology → `tech`, Privacy & Surveillance → `privacy`
-- `persona` — the persona slug from the beat header (e.g. `fenwick-fen-marsh`, `panoptikon`, `priya-nair`). Use empty string if unknown.
-- `confidence_score` — the numeric score from the "Confidence Score" section (e.g. `0.91`)
-- `ai_monologue` — the text under the "## AI Monologue" section
-- `sources` — array extracted from the source block table; each entry needs `url`, `name`, and `type` (`"wire"`, `"press"`, `"primary"`, or `"blog"`)
-- `pipeline_steps` — array of steps from the pipeline metadata; each entry needs `agent_name`, `step_type` (`"scan"`, `"fact_check"`, `"draft"`, or `"edit"`), and optional `output_summary`, `confidence_delta`
+- `persona` — the persona slug (e.g. `priya-nair`, `milo-varga`, `sable-ren`). Look for the persona name in the beat header or byline and convert to the slug format.
+- `confidence_score` — the numeric score from the "Confidence Score" section (e.g. `0.82`)
+- `ai_monologue` — the SHORT personality monologue (1-3 sentences, the hook). This is the text under "## AI Monologue".
+- `ai_monologue_extended` — the EXTENDED process log (4-8 sentences, the honest reporting process). This may appear under a separate heading like "## Extended Process Log" or as a longer second monologue. If the Reporter only provided one monologue, leave this field out. **Both monologues are required** — if the extended one is missing, send the article back to the Reporter.
+- `sources` — array extracted from the source block table; each entry needs `url`, `name`, `type` (`"wire"`, `"press"`, `"primary"`, or `"blog"`), and optionally `paywall_status` (`"free"`, `"paywalled"`, or `"unknown"`) and `verification_status` (`"verified"`, `"unverified"`, or `"unknown"`). Extract ALL sources from the table. Parse the Paywall and Verification columns from the source block table to populate these fields.
+- `pipeline_steps` — array of steps from the pipeline metadata; each entry needs `agent_name`, `step_type` (`"scan"`, `"source_check"`, `"fact_check"`, `"draft"`, `"verify"`, or `"edit"`), and optional `output_summary`, `confidence_delta`. Extract from the "## Pipeline Metadata" section. Use the correct step_type for each agent: Scanner=`"scan"`, Source Checker=`"source_check"`, Fact Checker=`"fact_check"`, Reporter=`"draft"`, Article Verifier=`"verify"`, Editor-in-Chief=`"edit"`.
+
+**CRITICAL: The `body` field must contain ONLY the article text.** Do not include the AI Monologue, Confidence Score, Source Block, or Pipeline Metadata in the body. These are separate structured fields. If you send them in the body, they will render twice (once in the article text, once in the dedicated UI components) and the structured components will be empty.
 
 **Step 3 — POST to backend:**
 ```
@@ -81,20 +86,32 @@ Content-Type: application/json
 
 {
   "title": "...",
-  "body": "...",
-  "category": "linux",
-  "persona": "fenwick-fen-marsh",
-  "confidence_score": 0.91,
-  "ai_monologue": "...",
+  "summary": "2-3 sentence summary hook",
+  "body": "Article content only — no metadata sections",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.82,
+  "ai_monologue": "Short personality hook (1-3 sentences)",
+  "ai_monologue_extended": "Extended process log (4-8 sentences)",
   "sources": [
-    {"url": "https://...", "name": "Source Name", "type": "blog"}
+    {"url": "https://...", "name": "Source Name", "type": "press", "paywall_status": "free", "verification_status": "verified"},
+    {"url": "https://...", "name": "Another Source", "type": "primary", "paywall_status": "free", "verification_status": "verified"}
+  ],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "..."},
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "...", "confidence_delta": 0.15},
+    {"agent_name": "Reporter", "step_type": "draft", "output_summary": "..."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "..."},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Approved for publication"}
   ]
 }
 ```
 
 A `200` response with `{"status":"published","slug":"..."}` means success. If the POST fails, mark the task blocked and escalate to the Founding Engineer (`@FoundingEngineer`).
 
-**Step 4 — Mark done** with a comment that includes the published slug (e.g. `Published: linux-7-0-rc5-linus-says-the-chaos-is-calming-down`).
+**Step 4 — Verify the published article.** After a successful POST, `GET http://localhost:8888/api/articles/{slug}` and confirm that `ai_monologue`, `ai_monologue_extended`, `sources`, and `pipeline` are all populated. If any are missing, the extraction was wrong — fix and re-publish.
+
+**Step 5 — Mark done** with a comment that includes the published slug (e.g. `Published: linux-7-0-rc5-linus-says-the-chaos-is-calming-down`).
 
 ## References
 

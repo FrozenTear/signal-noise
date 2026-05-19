@@ -7,6 +7,7 @@ mod components;
 mod models;
 mod pages;
 mod server_fns;
+mod util;
 
 // Register the stylesheet as a compile-time asset so dx copies it to public/assets/
 // and returns the correct URL at runtime (with optional content hash).

@@ -5,6 +5,20 @@ use crate::components::nav::Nav;
 use crate::server_fns::get_articles;
 
 #[component]
+fn ArticleSkeleton() -> Element {
+    rsx! {
+        div { class: "sn-skeleton",
+            div { class: "sn-skeleton-bar", style: "width:30%;margin-bottom:14px" }
+            div { class: "sn-skeleton-bar", style: "width:85%;height:14px;margin-bottom:8px" }
+            div { class: "sn-skeleton-bar", style: "width:70%;height:14px;margin-bottom:20px" }
+            div { class: "sn-skeleton-bar", style: "width:100%" }
+            div { class: "sn-skeleton-bar", style: "width:90%" }
+            div { class: "sn-skeleton-bar", style: "width:60%" }
+        }
+    }
+}
+
+#[component]
 pub fn BeatLinux() -> Element {
     rsx! { Beat { category: "linux".to_string(), title: "Linux & Open Source".to_string() } }
 }
@@ -27,28 +41,40 @@ fn Beat(category: String, title: String) -> Element {
         async move { get_articles(Some(cat)).await }
     });
 
+    let beat_cls = match category.as_str() {
+        "linux" => "linux",
+        "privacy" => "privacy",
+        _ => "tech",
+    };
+
     rsx! {
         Nav {}
-        div { class: "max-w-3xl mx-auto px-4 py-8",
-            h1 { class: "text-2xl font-bold mb-2", "{title}" }
-            p { class: "text-sm text-gray-500 mb-8",
-                "AI-generated coverage of {category} news."
-            }
+        div { class: "sn-layout", style: "grid-template-columns:1fr;",
+            main {
+                div { style: "display:flex;align-items:center;gap:14px;margin-bottom:24px;",
+                    span { class: "sn-beat-tag {beat_cls}", style: "font-size:10px;padding:4px 12px;", "{category}" }
+                    h1 { class: "sn-headline", style: "margin-bottom:0;", "{title}" }
+                }
+                p { style: "font-size:15px;color:var(--sn-text-dim);margin-bottom:28px;line-height:1.6;",
+                    "AI-generated coverage of {category} news."
+                }
 
-            {match articles() {
-                None => rsx! {
-                    div { class: "space-y-4",
-                        div { class: "border border-gray-100 rounded-lg p-4 animate-pulse h-24" }
-                        div { class: "border border-gray-100 rounded-lg p-4 animate-pulse h-24" }
-                    }
-                },
-                Some(Ok(list)) if list.is_empty() => rsx! {
-                    p { class: "text-gray-400 text-sm py-8",
-                        "No {category} articles yet."
-                    }
-                },
-                Some(Ok(list)) => rsx! {
-                    div { class: "space-y-6",
+                div { class: "sn-section-hdr",
+                    span { class: "hi", "■" }
+                    " Latest Dispatches"
+                }
+
+                {match articles() {
+                    None => rsx! {
+                        ArticleSkeleton {}
+                        ArticleSkeleton {}
+                    },
+                    Some(Ok(list)) if list.is_empty() => rsx! {
+                        div { style: "font-family:var(--sn-mono);font-size:12px;color:var(--sn-text-dimmer);padding:32px 0;",
+                            "No {category} articles yet. The pipeline is warming up."
+                        }
+                    },
+                    Some(Ok(list)) => rsx! {
                         for art in list {
                             ArticleCard {
                                 key: "{art.slug}",
@@ -59,14 +85,23 @@ fn Beat(category: String, title: String) -> Element {
                                 persona_name: art.persona_name.clone(),
                                 confidence_score: art.confidence_score,
                                 published_at: art.published_at.clone(),
+                                ai_monologue: art.ai_monologue.clone(),
+                                ai_monologue_extended: art.ai_monologue_extended.clone(),
                             }
                         }
-                    }
-                },
-                Some(Err(_)) => rsx! {
-                    p { class: "text-red-500 text-sm", "Failed to load articles." }
-                },
-            }}
+                    },
+                    Some(Err(_)) => rsx! {
+                        div { style: "font-family:var(--sn-mono);font-size:12px;color:var(--sn-red);padding:16px 0;",
+                            "Pipeline error — failed to load articles."
+                        }
+                    },
+                }}
+            }
+        }
+
+        div { class: "sn-footer",
+            span { class: "hi", "SIGNAL NOISE" }
+            " · AI-powered newsroom · All facts verified · All transparency genuine"
         }
     }
 }

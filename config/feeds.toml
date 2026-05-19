@@ -85,6 +85,27 @@ beat = "privacy"
 type = "wire"
 priority = "medium"
 
+[[feed]]
+url = "https://edri.org/feed/"
+name = "EDRi — European Digital Rights"
+beat = "privacy"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://www.patrick-breyer.de/en/feed/"
+name = "Patrick Breyer (MEP)"
+beat = "privacy"
+type = "blog"
+priority = "high"
+
+[[feed]]
+url = "https://euperspectives.eu/feed/"
+name = "EU Perspectives"
+beat = "privacy"
+type = "wire"
+priority = "medium"
+
 # ─── Scanner config ──────────────────────────────────────────────────────────
 
 [scanner]
@@ -92,8 +113,10 @@ priority = "medium"
 poll_interval_sec = 3600
 # Similarity threshold for deduplication (0.0–1.0)
 dedup_threshold = 0.85
-# Max candidates to surface per heartbeat
-max_candidates_per_run = 10
+# Max candidates to surface per heartbeat (total across all beats)
+max_candidates_per_run = 9
+# Max candidates per individual beat per heartbeat (enforces balanced coverage)
+max_candidates_per_beat = 3
 
 # ─── gnews.io Discovery Channel ────────────────────────────────────────────
 
@@ -107,5 +130,6 @@ tier = "free"
 queries = [
   { beat = "linux", q = "Linux kernel distribution open source", limit = 5 },
   { beat = "tech", q = "tech startup AI machine learning software engineering", limit = 5 },
-  { beat = "privacy", q = "privacy surveillance data protection encryption", limit = 5 }
+  { beat = "privacy", q = "privacy surveillance data protection encryption", limit = 5 },
+  { beat = "privacy", q = "EU chat control CSAM scanning encryption regulation", limit = 5 }
 ]

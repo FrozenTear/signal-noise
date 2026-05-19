@@ -49,6 +49,7 @@ DEFINE FIELD category           ON article TYPE string ASSERT $value != NONE;
 DEFINE FIELD persona            ON article TYPE option<record<persona>>;
 DEFINE FIELD confidence_score   ON article TYPE float  DEFAULT 0.0;
 DEFINE FIELD ai_monologue       ON article TYPE option<string>;
+DEFINE FIELD ai_monologue_extended ON article TYPE option<string>;
 DEFINE FIELD pipeline_metadata  ON article TYPE object DEFAULT {};
 DEFINE FIELD source_urls        ON article TYPE array  DEFAULT [];
 DEFINE FIELD status             ON article TYPE string
@@ -65,15 +66,16 @@ DEFINE INDEX article_published  ON article FIELDS published_at;
 
 
 DEFINE TABLE pipeline_step SCHEMAFULL;
-DEFINE FIELD article           ON pipeline_step TYPE record<article> ASSERT $value != NONE;
-DEFINE FIELD agent_name        ON pipeline_step TYPE string ASSERT $value != NONE;
-DEFINE FIELD step_type         ON pipeline_step TYPE string
-    ASSERT $value IN ["scan","fact_check","draft","edit"];
-DEFINE FIELD input_summary     ON pipeline_step TYPE string DEFAULT "";
-DEFINE FIELD output_summary    ON pipeline_step TYPE string DEFAULT "";
-DEFINE FIELD confidence_delta  ON pipeline_step TYPE float  DEFAULT 0.0;
-DEFINE FIELD started_at        ON pipeline_step TYPE datetime DEFAULT time::now();
-DEFINE FIELD completed_at      ON pipeline_step TYPE option<datetime>;
+DEFINE FIELD OVERWRITE article           ON pipeline_step TYPE record<article> ASSERT $value != NONE;
+DEFINE FIELD OVERWRITE agent_name        ON pipeline_step TYPE string ASSERT $value != NONE;
+DEFINE FIELD OVERWRITE step_type         ON pipeline_step TYPE string
+    ASSERT $value IN ["scan","source_check","fact_check","draft","verify","edit"];
+DEFINE FIELD OVERWRITE sort_order        ON pipeline_step TYPE int DEFAULT 99;
+DEFINE FIELD OVERWRITE input_summary     ON pipeline_step TYPE string DEFAULT "";
+DEFINE FIELD OVERWRITE output_summary    ON pipeline_step TYPE string DEFAULT "";
+DEFINE FIELD OVERWRITE confidence_delta  ON pipeline_step TYPE float  DEFAULT 0.0;
+DEFINE FIELD OVERWRITE started_at        ON pipeline_step TYPE datetime DEFAULT time::now();
+DEFINE FIELD OVERWRITE completed_at      ON pipeline_step TYPE option<datetime>;
 
 
 -- Agent status pushed by Paperclip heartbeats (upserted per agent_id)
