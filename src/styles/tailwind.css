@@ -608,6 +608,11 @@
     .sn-hud-modal { border-radius: 10px 10px 0 0; }
   }
 
+  /* On desktop the right rail shows the full trail — hide the redundant expand button */
+  @media (min-width: 961px) {
+    .sn-hud-expand { display: none; }
+  }
+
   @media (min-width: 640px) {
     .sn-hud-modal-overlay { align-items: center; }
     .sn-hud-modal { border-radius: 8px; max-height: 82vh; }
