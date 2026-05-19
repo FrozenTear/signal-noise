@@ -608,10 +608,7 @@
     .sn-hud-modal { border-radius: 10px 10px 0 0; }
   }
 
-  /* On desktop the right rail shows the full trail — hide the redundant expand button */
-  @media (min-width: 961px) {
-    .sn-hud-expand { display: none; }
-  }
+
 
   @media (min-width: 640px) {
     .sn-hud-modal-overlay { align-items: center; }
@@ -757,6 +754,8 @@
   }
   .sn-hud-expand:hover { background: var(--sn-accent-mid); }
   .sn-hud-expand-short { display: none; }
+  /* Right rail shows the full trail on desktop — button is redundant there */
+  @media (min-width: 961px) { .sn-hud-expand { display: none; } }
 
   /* ── HUD Modal ─────────────────────────────────────────────────────── */
   .sn-hud-modal-overlay {
