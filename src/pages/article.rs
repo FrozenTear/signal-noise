@@ -61,7 +61,7 @@ pub fn Article(slug: String) -> Element {
                     }
 
                     div { class: "sn-article-page-grid",
-                        // ── Main column ──────────────────────────────────────
+                        // ── Main column: focused reading ──────────────────────
                         div {
                             // Category + byline
                             div { style: "display:flex; align-items:center; gap:10px; margin-bottom:14px; margin-top:20px;",
@@ -96,33 +96,11 @@ pub fn Article(slug: String) -> Element {
                             if let Some(extended) = &art.ai_monologue_extended {
                                 AiMonologueExtended { text: extended.clone(), persona_name: art.persona_name.clone() }
                             }
-
-                            // Sources
-                            SourceBlock {
-                                sources: art.sources.iter().map(|s| SourceItem {
-                                    url: s.url.clone(),
-                                    name: s.name.clone(),
-                                    source_type: s.source_type.clone(),
-                                    paywall: s.paywall,
-                                    verified: s.verified,
-                                }).collect()
-                            }
-
-                            // Pipeline trail
-                            PipelineTrail {
-                                steps: art.pipeline.iter().map(|p| PipelineStepSummary {
-                                    agent_name: p.agent_name.clone(),
-                                    step_type: p.step_type.clone(),
-                                    output_summary: p.output_summary.clone(),
-                                    confidence_delta: p.confidence_delta,
-                                    completed_at: p.completed_at.clone(),
-                                    sort_order: p.sort_order,
-                                }).collect()
-                            }
                         }
 
-                        // ── Right rail ───────────────────────────────────────
+                        // ── Right rail: live transparency pane ────────────────
                         div {
+                            // AI Provenance
                             div { class: "sn-sb-card",
                                 div { class: "sn-sb-title", "◈ AI PROVENANCE" }
                                 div { style: "padding:14px 16px; font-family:var(--sn-mono); font-size:10px; line-height:2;",
@@ -140,7 +118,42 @@ pub fn Article(slug: String) -> Element {
                                             { format!("{:.0}%", art.confidence_score * 100.0) }
                                         }
                                     }
+                                    div {
+                                        span { class: "sn-chip-lbl", "SOURCES" }
+                                        span { class: "sn-chip-val",
+                                            { format!("{}", art.sources.len()) }
+                                        }
+                                    }
+                                    div {
+                                        span { class: "sn-chip-lbl", "PIPELINE" }
+                                        span { class: "sn-chip-val",
+                                            { format!("{} steps", art.pipeline.len()) }
+                                        }
+                                    }
                                 }
+                            }
+
+                            // Sources — visible by default in right rail
+                            SourceBlock {
+                                sources: art.sources.iter().map(|s| SourceItem {
+                                    url: s.url.clone(),
+                                    name: s.name.clone(),
+                                    source_type: s.source_type.clone(),
+                                    paywall: s.paywall,
+                                    verified: s.verified,
+                                }).collect()
+                            }
+
+                            // Pipeline trail — visible by default in right rail
+                            PipelineTrail {
+                                steps: art.pipeline.iter().map(|p| PipelineStepSummary {
+                                    agent_name: p.agent_name.clone(),
+                                    step_type: p.step_type.clone(),
+                                    output_summary: p.output_summary.clone(),
+                                    confidence_delta: p.confidence_delta,
+                                    completed_at: p.completed_at.clone(),
+                                    sort_order: p.sort_order,
+                                }).collect()
                             }
                         }
                     }

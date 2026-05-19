@@ -22,6 +22,8 @@ pub struct ArticleSummary {
     pub published_at: String,
     pub ai_monologue: Option<String>,
     pub ai_monologue_extended: Option<String>,
+    pub source_count: Option<u32>,
+    pub pipeline_step_count: Option<u32>,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -83,17 +85,14 @@ pub struct PipelineActivityItem {
 // ── Server functions ──────────────────────────────────────────────────────────
 
 /// List published articles, optionally filtered by category.
-/// Falls back to mock data when the DB is empty (pre-SIG-104).
+/// Falls back to mock data when the DB is empty.
 #[server]
 pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary>, ServerFnError> {
-    use axum::Extension;
-    use dioxus_fullstack::FullstackContext;
-    use surrealdb::{engine::local::Db, Surreal};
-
-    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+    if let Some(db) = crate::api::db::get_db() {
         let mut res_result = if let Some(cat) = &category {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
+                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
+                 array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
                  FROM article WHERE status = 'published' AND category = $cat \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -101,7 +100,8 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
             .await
         } else {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
+                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
+                 array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
                  FROM article WHERE status = 'published' \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -128,6 +128,8 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
                                 published_at: v["published_at"].as_str().unwrap_or("").to_string(),
                                 ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
                                 ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
+                                source_count: v["source_count"].as_u64().map(|n| n as u32),
+                                pipeline_step_count: v["pipeline_step_count"].as_u64().map(|n| n as u32),
                             })
                         })
                         .collect();
@@ -145,11 +147,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
 pub async fn get_article_by_slug(
     slug: String,
 ) -> Result<Option<ArticleDetail>, ServerFnError> {
-    use axum::Extension;
-    use dioxus_fullstack::FullstackContext;
-    use surrealdb::{engine::local::Db, Surreal};
-
-    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+    if let Some(db) = crate::api::db::get_db() {
         if let Ok(mut res) = db
             .query(
                 "SELECT *, \
@@ -245,11 +243,7 @@ pub async fn get_article_by_slug(
 /// Falls back to static mock when the table is empty (before first heartbeat push).
 #[server]
 pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
-    use axum::Extension;
-    use dioxus_fullstack::FullstackContext;
-    use surrealdb::{engine::local::Db, Surreal};
-
-    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+    if let Some(db) = crate::api::db::get_db() {
         if let Ok(mut res) = db
             .query("SELECT name, model, status, current_task FROM agent_status ORDER BY name ASC")
             .await
@@ -283,17 +277,13 @@ pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
 /// Transparency stats — counts from SurrealDB. Returns zeros when DB is empty.
 #[server]
 pub async fn get_transparency_stats() -> Result<TransparencyStats, ServerFnError> {
-    use axum::Extension;
-    use dioxus_fullstack::FullstackContext;
-    use surrealdb::{engine::local::Db, Surreal};
-
     let mut stats = TransparencyStats {
         published_today: 0,
         published_total: 0,
         rejected_total: 0,
     };
 
-    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+    if let Some(db) = crate::api::db::get_db() {
         if let Ok(mut res) = db
             .query(
                 "SELECT slug FROM article WHERE status = 'published' AND published_at > time::now() - 1d; \
@@ -318,11 +308,7 @@ pub async fn get_transparency_stats() -> Result<TransparencyStats, ServerFnError
 /// Falls back to curated mock when the DB is empty.
 #[server]
 pub async fn get_recent_pipeline_activity() -> Result<Vec<PipelineActivityItem>, ServerFnError> {
-    use axum::Extension;
-    use dioxus_fullstack::FullstackContext;
-    use surrealdb::{engine::local::Db, Surreal};
-
-    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+    if let Some(db) = crate::api::db::get_db() {
         if let Ok(mut res) = db
             .query(
                 "SELECT agent_name, output_summary, completed_at, started_at \
@@ -405,6 +391,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-22".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_count: Some(5),
+            pipeline_step_count: Some(4),
         },
         ArticleSummary {
             slug: "openai-gpt5-announcement".to_string(),
@@ -419,6 +407,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-21".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_count: Some(3),
+            pipeline_step_count: Some(4),
         },
         ArticleSummary {
             slug: "eu-chat-control-vote".to_string(),
@@ -434,6 +424,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-20".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_count: Some(4),
+            pipeline_step_count: Some(4),
         },
         ArticleSummary {
             slug: "systemd-257-containers".to_string(),
@@ -447,6 +439,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-19".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_count: Some(3),
+            pipeline_step_count: Some(4),
         },
         ArticleSummary {
             slug: "cloudflare-post-quantum".to_string(),
@@ -462,6 +456,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-18".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_count: Some(6),
+            pipeline_step_count: Some(4),
         },
         ArticleSummary {
             slug: "apple-vision-pro-2-specs".to_string(),
@@ -477,6 +473,8 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-17".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_count: Some(2),
+            pipeline_step_count: Some(3),
         },
     ];
 

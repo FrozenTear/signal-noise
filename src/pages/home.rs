@@ -49,19 +49,47 @@ pub fn Home() -> Element {
                             "No articles yet. The pipeline is warming up."
                         }
                     },
-                    Some(Ok(list)) => rsx! {
-                        for art in list {
+                    Some(Ok(list)) => {
+                        let mut it = list.into_iter();
+                        let first = it.next().unwrap();
+                        let rest: Vec<_> = it.collect();
+                        rsx! {
+                            // Hero article — full width, headline at 36px, monologue open
                             ArticleCard {
-                                key: "{art.slug}",
-                                slug: art.slug.clone(),
-                                title: art.title.clone(),
-                                summary: art.summary.clone(),
-                                category: art.category.clone(),
-                                persona_name: art.persona_name.clone(),
-                                confidence_score: art.confidence_score,
-                                published_at: art.published_at.clone(),
-                                ai_monologue: art.ai_monologue.clone(),
-                                ai_monologue_extended: art.ai_monologue_extended.clone(),
+                                key: "{first.slug}",
+                                slug: first.slug.clone(),
+                                title: first.title.clone(),
+                                summary: first.summary.clone(),
+                                category: first.category.clone(),
+                                persona_name: first.persona_name.clone(),
+                                confidence_score: first.confidence_score,
+                                published_at: first.published_at.clone(),
+                                ai_monologue: first.ai_monologue.clone(),
+                                ai_monologue_extended: first.ai_monologue_extended.clone(),
+                                is_featured: true,
+                                source_count: first.source_count,
+                                pipeline_step_count: first.pipeline_step_count,
+                            }
+                            // Remaining articles in 2-column grid
+                            if !rest.is_empty() {
+                                div { class: "sn-feed-grid",
+                                    for art in rest {
+                                        ArticleCard {
+                                            key: "{art.slug}",
+                                            slug: art.slug.clone(),
+                                            title: art.title.clone(),
+                                            summary: art.summary.clone(),
+                                            category: art.category.clone(),
+                                            persona_name: art.persona_name.clone(),
+                                            confidence_score: art.confidence_score,
+                                            published_at: art.published_at.clone(),
+                                            ai_monologue: art.ai_monologue.clone(),
+                                            ai_monologue_extended: art.ai_monologue_extended.clone(),
+                                            source_count: art.source_count,
+                                            pipeline_step_count: art.pipeline_step_count,
+                                        }
+                                    }
+                                }
                             }
                         }
                     },

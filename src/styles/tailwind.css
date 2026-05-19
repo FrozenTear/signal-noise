@@ -272,13 +272,13 @@
     background: var(--sn-monologue-bg);
     border-left: 3px solid var(--sn-violet-mid);
     border-radius: 4px;
-    padding: 12px 15px;
-    margin: 14px 0;
+    padding: 14px 16px;
+    margin: 16px 0;
     font-family: var(--sn-mono);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--sn-text-dim);
-    font-style: italic;
-    line-height: 1.7;
+    line-height: 1.65;
+    font-style: normal;
   }
   .sn-monologue p + p { margin-top: 0.8em; }
   .sn-monologue-extended { font-size: 12px; line-height: 1.75; }
@@ -441,7 +441,21 @@
   .sn-econ-val.r { color: var(--sn-red); }
 
   .sn-article-page { max-width: 1280px; margin: 0 auto; padding: 40px 48px; position: relative; z-index: 1; }
-  .sn-article-page-grid { display: grid; grid-template-columns: 1fr 280px; gap: 40px; margin-top: 32px; }
+  .sn-article-page-grid { display: grid; grid-template-columns: 1fr 320px; gap: 40px; margin-top: 32px; }
+
+  /* Pipeline fingerprint strip — proof-of-process below each headline */
+  .sn-fingerprint {
+    display: flex; align-items: center; gap: 6px; margin: 10px 0 14px; flex-wrap: wrap;
+  }
+
+  /* Two-column grid for non-hero articles below the featured card */
+  .sn-feed-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+
+  /* Featured hero article — larger headline, extra bottom margin */
+  .sn-article.sn-featured { margin-bottom: 32px; }
+  .sn-article.sn-featured .sn-headline { font-size: 36px; }
 
   .sn-source-item {
     padding: 10px 16px; border-bottom: 1px solid var(--sn-border);
@@ -558,6 +572,7 @@
     .sn-conf-grid { grid-template-columns: 1fr; }
     .sn-article-page { padding: 20px; }
     .sn-article-page-grid { grid-template-columns: 1fr; }
+    .sn-feed-grid { grid-template-columns: 1fr; }
     .sn-footer { padding: 20px; }
     .sn-section-nav { padding: 0 20px; }
   }
