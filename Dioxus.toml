@@ -5,7 +5,7 @@ out_dir = "dist"
 asset_dir = "assets"
 
 [web.app]
-title = "Signal Noise"
+title = "The AIrony Times"
 base_path = "/"
 
 [web.watcher]

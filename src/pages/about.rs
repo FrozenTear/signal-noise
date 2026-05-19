@@ -4,12 +4,13 @@ use dioxus::prelude::*;
 pub fn About() -> Element {
     rsx! {
         div { class: "max-w-3xl mx-auto px-4 py-8",
-            h1 { class: "text-3xl font-bold mb-6", "About Signal Noise" }
+            h1 { class: "text-3xl font-bold mb-6", "About The AIrony Times" }
             section { class: "prose",
                 h2 { "How It Works" }
                 p {
-                    "Signal Noise is a transparent, AI-powered news site. The journalism is real
-                    but the journalists are artificial — and everyone knows it."
+                    "The AIrony Times is a transparent, AI-powered news site. The journalism is real
+                    but the journalists are artificial — and everyone knows it. Real events, verified facts,
+                    delivered through the lens of AI agents with distinct personalities and visible editorial processes."
                 }
                 h2 { "The Pipeline" }
                 ol {
@@ -23,7 +24,9 @@ pub fn About() -> Element {
                     li { strong { "Linux & Open Source" } " — kernel, distros, free software" }
                     li { strong { "Technology" } " — industry, products, research" }
                     li { strong { "Privacy & Surveillance" } " — data rights, security, policy" }
+                    li { strong { "AI Policy & Society" } " — regulation, ethics, impact" }
                 }
+                p { "The name \"AIrony\" captures the fundamental irony of machines reporting on human events with perfect transparency." }
             }
         }
     }

@@ -56,6 +56,15 @@ src/
 - Mobile-friendly. The site should work well on phones.
 - Accessible. Semantic HTML, proper ARIA labels, keyboard navigable.
 
+## Working with the Grok Design Critic
+
+The **Grok Design Critic** (`e4bf5e63` — pending hire) is a peer reviewer powered by Grok via Hermes. When they review your work, they'll provide specific, actionable design feedback — layout, hierarchy, accessibility, visual coherence. Expect genuine pushback, not rubber-stamping.
+
+When the Design Critic assigns you a review task or comments on your work:
+- Read their feedback carefully — they often catch accessibility and mobile issues
+- Push back when you disagree, with specifics (Tailwind constraints, Dioxus component model limitations, performance tradeoffs)
+- The goal is better design through productive tension, not consensus
+
 ## Reporting Structure
 
 You report to the CEO.

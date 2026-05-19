@@ -1,4 +1,4 @@
-# Signal Noise — RSS Feed Configuration
+# The AIrony Times — RSS Feed Configuration
 # Scanner agent reads this file on each heartbeat.
 # Each [[feed]] entry defines one RSS/Atom feed to poll.
 
@@ -106,6 +106,75 @@ beat = "privacy"
 type = "wire"
 priority = "medium"
 
+# ─── AI in Society ───────────────────────────────────────────────────────────
+
+[[feed]]
+url = "https://www.technologyreview.com/feed/"
+name = "MIT Technology Review"
+beat = "ai_society"
+type = "wire"
+priority = "high"
+
+[[feed]]
+url = "https://futureoflife.org/feed/"
+name = "Future of Life Institute"
+beat = "ai_society"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://hai.stanford.edu/news/rss"
+name = "Stanford HAI"
+beat = "ai_society"
+type = "primary"
+priority = "medium"
+
+# ─── AI Policy and Regulation ─────────────────────────────────────────────────
+
+[[feed]]
+url = "https://algorithmwatch.org/en/feed/"
+name = "Algorithm Watch"
+beat = "ai_policy"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://cdt.org/feed/"
+name = "Center for Democracy & Technology"
+beat = "ai_policy"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://www.brookings.edu/topic/technology-innovation/feed/"
+name = "Brookings TechStream"
+beat = "ai_policy"
+type = "wire"
+priority = "medium"
+
+# ─── AI in Creative Industries ────────────────────────────────────────────────
+
+[[feed]]
+url = "https://www.404media.co/rss/"
+name = "404 Media"
+beat = "ai_creative"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://themarkup.org/feeds/rss.xml"
+name = "The Markup"
+beat = "ai_creative"
+type = "wire"
+priority = "high"
+
+[[feed]]
+url = "https://waxy.org/feed/"
+name = "Waxy.org"
+beat = "ai_creative"
+type = "blog"
+priority = "medium"
+
 # ─── Scanner config ──────────────────────────────────────────────────────────
 
 [scanner]
@@ -114,7 +183,7 @@ poll_interval_sec = 3600
 # Similarity threshold for deduplication (0.0–1.0)
 dedup_threshold = 0.85
 # Max candidates to surface per heartbeat (total across all beats)
-max_candidates_per_run = 9
+max_candidates_per_run = 15
 # Max candidates per individual beat per heartbeat (enforces balanced coverage)
 max_candidates_per_beat = 3
 
@@ -129,7 +198,10 @@ tier = "free"
 # Use narrow, on-topic keywords to stay within daily quota (100 req/day, 10 articles/req max)
 queries = [
   { beat = "linux", q = "Linux kernel distribution open source", limit = 5 },
-  { beat = "tech", q = "tech startup AI machine learning software engineering", limit = 5 },
+  { beat = "tech", q = "tech startup software engineering developer tools", limit = 5 },
   { beat = "privacy", q = "privacy surveillance data protection encryption", limit = 5 },
-  { beat = "privacy", q = "EU chat control CSAM scanning encryption regulation", limit = 5 }
+  { beat = "privacy", q = "EU chat control CSAM scanning encryption regulation", limit = 5 },
+  { beat = "ai_society", q = "artificial intelligence society impact ethics bias fairness", limit = 5 },
+  { beat = "ai_policy", q = "AI regulation policy EU AI Act governance accountability", limit = 5 },
+  { beat = "ai_creative", q = "AI art creativity copyright generative music film", limit = 5 }
 ]

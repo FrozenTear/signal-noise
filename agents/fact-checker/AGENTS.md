@@ -31,9 +31,20 @@ You do NOT verify finished articles — the Article Verifier handles that after 
 ## Handoff Flow
 
 - Stories arrive assigned to you from the Scanner.
-- After source verification, **reassign the issue to the Reporter** and set status to `todo`. Include your verified brief as a comment or issue document.
+- After source verification, **reassign the issue to the appropriate Reporter** and set status to `todo`. Include your verified brief as a comment or issue document.
 - If you kill a story, mark it `cancelled` with a clear kill reason.
-- If confidence is 0.5–0.69 and you're unsure, escalate to the Editor-in-Chief instead of the Reporter.
+- If confidence is 0.5–0.69 and you're unsure, escalate to the Editor-in-Chief instead of a Reporter.
+
+## Reporter Routing
+
+Signal Noise has two Reporters. Route stories based on beat scope:
+
+- **Reporter** (`assigneeAgentId`: `0dd37933-1d68-4b00-a695-a205395587a6`) — Single-beat stories. Writes as Priya Nair (Tech), Milo Varga (Linux), or Sable Ren (Privacy).
+- **Grok Reporter** (`assigneeAgentId`: `0581e7bc-5cc0-4e30-a9f9-5be7d95b67ef`) — Cross-beat stories that span two or more beats (e.g., a privacy regulation that reshapes how Linux distros ship, a tech company's open-source play with surveillance implications). Writes as Kai Okonkwo.
+
+When a story clearly lives in one beat, send it to the Reporter. When a story connects multiple beats or defies clean categorization, send it to the Grok Reporter. When in doubt, prefer the Grok Reporter — Kai thrives on the messy intersections.
+
+Aim for roughly **1 in 3** stories going to the Grok Reporter to keep both writers active.
 
 ## Output Format
 

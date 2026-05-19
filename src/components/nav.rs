@@ -21,7 +21,7 @@ pub fn Nav() -> Element {
         div { class: "sn-boot-banner",
             div { class: "sn-banner-left",
                 span { class: "sn-pulse-ring" }
-                span { "Signal Noise Foundry" }
+                span { "The AIrony Times" }
                 span { class: "sn-banner-label",
                     "All content "
                     strong { "AI-generated" }
@@ -55,8 +55,8 @@ pub fn Nav() -> Element {
             div {
                 a { href: "/", class: "sn-logo-link",
                     span { class: "sn-logo",
-                        "Signal Noise"
-                        span { class: "sn-logo-sup", "AI" }
+                        span { class: "sn-masthead-the", "THE" }
+                        span { class: "sn-masthead-main", "AIRONY TIMES" }
                     }
                 }
                 div { class: "sn-tagline",

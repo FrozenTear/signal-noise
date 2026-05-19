@@ -4,6 +4,7 @@ use crate::components::confidence_meter::ConfidenceMeter;
 use crate::components::nav::Nav;
 use crate::components::pipeline_trail::{PipelineStepSummary, PipelineTrail};
 use crate::components::source_block::{SourceBlock, SourceItem};
+use crate::components::transparency_hud::{HudPipelineStep, HudSource, TransparencyHud};
 use crate::server_fns::get_article_by_slug;
 use crate::util::simple_md_to_html;
 
@@ -45,6 +46,17 @@ pub fn Article(slug: String) -> Element {
                 },
                 Some(Ok(Some(art))) => {
                     let rendered_body = simple_md_to_html(&art.body);
+                    let hud_confidence = art.confidence_score;
+                    let hud_sources: Vec<HudSource> = art.sources.iter().map(|s| HudSource {
+                        name: s.name.clone(),
+                        verified: s.verified,
+                    }).collect();
+                    let hud_steps: Vec<HudPipelineStep> = art.pipeline.iter().map(|p| HudPipelineStep {
+                        step_type: p.step_type.clone(),
+                        confidence_delta: p.confidence_delta,
+                    }).collect();
+                    let hud_monologue = art.ai_monologue.clone();
+                    let hud_persona = Some(art.persona_name.clone());
                     rsx! {
                     // Back link
                     a { style: "display:inline-flex; align-items:center; gap:6px; font-family:var(--sn-serif); font-size:14px; color:var(--sn-text-dimmer); text-decoration:none; margin-bottom:24px; transition:color 0.2s;",
@@ -156,6 +168,15 @@ pub fn Article(slug: String) -> Element {
                                 }).collect()
                             }
                         }
+                    }
+
+                    // Transparency HUD — fixed bottom bar with full trail modal
+                    TransparencyHud {
+                        confidence_score: hud_confidence,
+                        sources: hud_sources,
+                        pipeline_steps: hud_steps,
+                        ai_monologue: hud_monologue,
+                        persona_name: hud_persona,
                     }
                 }},
                 Some(Err(_)) => rsx! {

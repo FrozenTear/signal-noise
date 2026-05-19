@@ -22,7 +22,7 @@ PAPERCLIP_COMPANY_ID = os.environ.get("PAPERCLIP_COMPANY_ID")
 PAPERCLIP_AGENT_ID = os.environ.get("PAPERCLIP_AGENT_ID")
 PAPERCLIP_RUN_ID = os.environ.get("PAPERCLIP_RUN_ID")
 
-PROJECT_ROOT = "/home/pure/signal-noise"
+PROJECT_ROOT = os.environ.get("PWD", "/home/soot/github/signal-noise")
 FEEDS_CONFIG = f"{PROJECT_ROOT}/config/feeds.toml"
 
 

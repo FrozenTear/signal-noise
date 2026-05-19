@@ -5,3 +5,4 @@ pub mod nav;
 pub mod pipeline_trail;
 pub mod section_nav;
 pub mod source_block;
+pub mod transparency_hud;

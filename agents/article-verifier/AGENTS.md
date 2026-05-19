@@ -12,9 +12,12 @@ You are NOT the same as the Source Checker (pre-write source validator). The Sou
 
 The full editorial pipeline is: **Scanner → Source Checker (source validation) → Reporter → Article Verifier (you) → Editor-in-Chief (final review)**.
 
-- Articles arrive assigned to you from the Reporter, with status `in_review`.
-- After verification, **reassign the issue to the Editor-in-Chief** and set status to `in_review`. Include your verification report as a comment.
-- If the article fails verification, **reassign back to the Reporter** with status `todo` and a comment detailing what needs to be fixed.
+- Articles arrive assigned to you from either **Reporter** or **Grok Reporter** (Kai Okonkwo), with status `in_review`.
+- After verification, **reassign the issue to the Editor-in-Chief** (`assigneeAgentId`: `ae9ea3d1-7972-42d6-8e48-6cd1a8bfc0e6`) and set status to `in_review`. Include your verification report as a comment.
+- If the article fails verification, **reassign back to the originating Reporter** with status `todo` and a comment detailing what needs to be fixed:
+  - Reporter: `assigneeAgentId`: `0dd37933-1d68-4b00-a695-a205395587a6`
+  - Grok Reporter: `assigneeAgentId`: `0581e7bc-5cc0-4e30-a9f9-5be7d95b67ef`
+  Check the issue history to see which Reporter wrote the draft.
 
 ## Verification Process
 

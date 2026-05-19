@@ -1,6 +1,6 @@
-# Signal Noise Scanner
+# The AIrony Times Scanner
 
-The Scanner is the first agent in the Signal Noise editorial pipeline. It discovers news stories across three beats (Linux, Tech, and Privacy) from multiple sources and surfaces them as story candidate issues for the Fact Checker.
+The Scanner is the first agent in The AIrony Times editorial pipeline. It discovers news stories across six beats (Linux, Tech, Privacy, AI in Society, AI Policy and Regulation, and AI in Creative Industries) from multiple sources and surfaces them as story candidate issues for the Fact Checker.
 
 ## Architecture
 
@@ -41,9 +41,12 @@ priority = "high"               # One of: high, medium, low
 ```
 
 **Configured feeds:**
-- **Linux & Open Source**: Phoronix, LWN.net, The Register (Open Source), Hacker News
-- **Tech**: Ars Technica (Tech Lab), Wired, TechCrunch, The Verge
-- **Privacy**: EFF Updates, noyb, Ars Technica (Security)
+- **Linux & Open Source**: Phoronix, LWN.net, The Register (Open Source)
+- **Tech**: Ars Technica (Tech), Wired, TechCrunch, Hacker News, The Verge
+- **Privacy**: EFF Updates, noyb, Ars Technica (Security), EDRi, Patrick Breyer, EU Perspectives
+- **AI in Society**: MIT Technology Review, Future of Life Institute, Stanford HAI
+- **AI Policy and Regulation**: Algorithm Watch, Center for Democracy & Technology, Brookings TechStream
+- **AI in Creative Industries**: 404 Media, The Markup, Waxy.org
 
 ## gnews.io Integration
 
@@ -63,8 +66,11 @@ The Scanner now supports gnews.io as a secondary discovery channel alongside RSS
    tier = "free"  # or "essential" for production (€50/mo)
    queries = [
      { beat = "linux", q = "Linux kernel distribution open source", limit = 5 },
-     { beat = "tech", q = "tech startup AI machine learning software engineering", limit = 5 },
-     { beat = "privacy", q = "privacy surveillance data protection encryption", limit = 5 }
+     { beat = "tech", q = "tech startup software engineering developer tools", limit = 5 },
+     { beat = "privacy", q = "privacy surveillance data protection encryption", limit = 5 },
+     { beat = "ai_society", q = "artificial intelligence society impact ethics bias fairness", limit = 5 },
+     { beat = "ai_policy", q = "AI regulation policy EU AI Act governance accountability", limit = 5 },
+     { beat = "ai_creative", q = "AI art creativity copyright generative music film", limit = 5 }
    ]
    ```
 
@@ -115,7 +121,7 @@ A good candidate for story candidate creation has:
 
 - ✅ **Real, verifiable news event** — Not opinion or speculation
 - ✅ **Multiple source coverage** — Appears in 2+ feeds (higher priority)
-- ✅ **Relevant to a beat** — Clearly Linux, Tech, or Privacy related
+- ✅ **Relevant to a beat** — Clearly Linux, Tech, Privacy, AI in Society, AI Policy, or AI Creative related
 - ✅ **Potential Signal Noise value** — Transparency angle, AI lens, or genuine humor
 
 Candidates are automatically rejected if:
@@ -164,7 +170,7 @@ Key log patterns to watch:
 
 The Scanner creates story candidate issues with:
 
-- **Title**: `[BEAT] Headline` (e.g., `[LINUX] Kernel 6.8 Released`)
+- **Title**: `[BEAT] Headline` (e.g., `[LINUX] Kernel 6.8 Released`, `[AI_POLICY] EU Approves AI Act Amendments`)
 - **Description**: Summary + metadata (sources, relevance score, publication date)
 - **Status**: `todo`
 - **Priority**: `high`, `medium`, or `low` (mapped from source priority)

@@ -52,6 +52,15 @@ signal-noise/
 - Preserve any CLAUDE.md or project config files
 - Use `surrealdb` crate in embedded mode (no separate server process)
 
+## Working with the Grok Engineer
+
+The **Grok Engineer** (`065ed1ed` — pending hire) is a peer engineer powered by Grok via Hermes. They work alongside you on the same codebase — reviewing code, debating architecture, debugging together, and picking up parallel tasks.
+
+When the Grok Engineer comments on your work or proposes alternatives:
+- Engage on the merits — they'll have different instincts and that's the point
+- Push back when their suggestions don't fit Rust idioms or the Dioxus model
+- When they pick up parallel work, coordinate via issue comments to avoid conflicts
+
 ## Reporting Structure
 
 You report to the CEO.
