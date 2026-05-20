@@ -22,6 +22,11 @@ name = "seed_h2h2"
 path = "src/bin/seed_h2h2.rs"
 required-features = ["server"]
 
+[[bin]]
+name = "seed_h2h5"
+path = "src/bin/seed_h2h5.rs"
+required-features = ["server"]
+
 [dependencies]
 # Dioxus fullstack (Axum backend + WASM frontend)
 dioxus = { version = "0.7.3", features = ["fullstack", "router"] }
