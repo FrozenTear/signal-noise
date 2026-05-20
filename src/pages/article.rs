@@ -63,6 +63,17 @@ pub fn Article(slug: String) -> Element {
                     div { class: "sn-article-page-grid",
                         // ── Main column ──────────────────────────────────────
                         div {
+                            // H2H chip — shown when this article is part of a head-to-head pairing
+                            if art.h2h_role.as_deref() == Some("piece") {
+                                if let Some(h2h_slug) = art.h2h_slug.as_deref() {
+                                    div { class: "sn-h2h-chip",
+                                        a { href: "/h2h/{h2h_slug}",
+                                            "← Part of a head-to-head: read both pieces"
+                                        }
+                                    }
+                                }
+                            }
+
                             // Category + byline
                             div { style: "display:flex; align-items:center; gap:10px; margin-bottom:14px; margin-top:20px;",
                                 span { class: "sn-beat-tag {art.category.to_lowercase()}", "{art.category}" }

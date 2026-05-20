@@ -43,6 +43,7 @@ pub struct RejectedArticleSummary {
 pub struct ArticleDetail {
     pub slug: String,
     pub title: String,
+    pub summary: String,
     pub body: String,
     pub category: String,
     pub persona_name: String,
@@ -52,6 +53,21 @@ pub struct ArticleDetail {
     pub published_at: String,
     pub sources: Vec<SourceSummary>,
     pub pipeline: Vec<PipelineSummary>,
+    /// "intro" or "piece" when the article participates in an H2H pairing.
+    pub h2h_role: Option<String>,
+    /// e.g. "h2h-2" — the H2H bundle this article belongs to.
+    pub h2h_slug: Option<String>,
+    /// Byline string used when persona is NULL (e.g. AI-reporter pairings).
+    pub byline: Option<String>,
+    /// Model attribution surfaced on H2H pieces, e.g. "claude-sonnet-4-6".
+    pub model_attribution: Option<String>,
+}
+
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct H2HBundle {
+    pub h2h_slug: String,
+    pub intro: ArticleDetail,
+    pub pieces: Vec<ArticleDetail>,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -276,29 +292,159 @@ pub async fn get_article_by_slug(
                         .unwrap_or_default();
                     pipeline.sort_by_key(|s| s.sort_order);
 
-                    return Ok(Some(ArticleDetail {
-                        slug: v["slug"].as_str().unwrap_or("").to_string(),
-                        title: v["title"].as_str().unwrap_or("").to_string(),
-                        body: v["body"].as_str().unwrap_or("").to_string(),
-                        category: v["category"].as_str().unwrap_or("").to_string(),
-                        persona_name: v["persona_name"]
-                            .as_str()
-                            .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
-                            .unwrap_or("AI Reporter")
-                            .to_string(),
-                        confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
-                        ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
-                        ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
-                        published_at: v["published_at"].as_str().unwrap_or("").to_string(),
-                        sources,
-                        pipeline,
-                    }));
+                    return Ok(Some(article_detail_from_row(&v, sources, pipeline)));
                 }
             }
         }
     }
 
     Ok(mock_article(&slug))
+}
+
+/// Helper: build an ArticleDetail from a SurrealQL row plus pre-extracted sources/pipeline.
+/// Reused by both `get_article_by_slug` and the H2H bundle loader so the field mapping stays in one place.
+#[cfg(feature = "server")]
+fn article_detail_from_row(
+    v: &serde_json::Value,
+    sources: Vec<SourceSummary>,
+    pipeline: Vec<PipelineSummary>,
+) -> ArticleDetail {
+    let pm = &v["pipeline_metadata"];
+    ArticleDetail {
+        slug: v["slug"].as_str().unwrap_or("").to_string(),
+        title: v["title"].as_str().unwrap_or("").to_string(),
+        summary: v["summary"].as_str().unwrap_or("").to_string(),
+        body: v["body"].as_str().unwrap_or("").to_string(),
+        category: v["category"].as_str().unwrap_or("").to_string(),
+        persona_name: v["persona_name"]
+            .as_str()
+            .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
+            .or_else(|| pm["byline"].as_str())
+            .unwrap_or("AI Reporter")
+            .to_string(),
+        confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
+        ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
+        ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
+        published_at: v["published_at"].as_str().unwrap_or("").to_string(),
+        sources,
+        pipeline,
+        h2h_role: pm["h2h_role"].as_str().map(|s| s.to_string()),
+        h2h_slug: pm["h2h_slug"].as_str().map(|s| s.to_string()),
+        byline: pm["byline"].as_str().map(|s| s.to_string()),
+        model_attribution: pm["model_attribution"].as_str().map(|s| s.to_string()),
+    }
+}
+
+/// Load the 3-article bundle (1 intro + 2 pieces) for an H2H pairing keyed by `h2h_slug`.
+/// Returns None when no intro article is found for the slug.
+#[server]
+pub async fn get_h2h_by_slug(
+    h2h_slug: String,
+) -> Result<Option<H2HBundle>, ServerFnError> {
+    use axum::Extension;
+    use dioxus_fullstack::FullstackContext;
+    use surrealdb::{engine::local::Db, Surreal};
+
+    let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await else {
+        return Ok(None);
+    };
+
+    // One query, all three rows. Intro and pieces both filtered by h2h_slug.
+    let Ok(mut res) = db
+        .query(
+            "SELECT *, \
+             persona.name AS persona_name, \
+             ->cites->source.* AS sources, \
+             ->produced_by->pipeline_step.* AS pipeline \
+             FROM article \
+             WHERE pipeline_metadata.h2h_slug = $slug \
+             ORDER BY pipeline_metadata.h2h_role ASC, published_at ASC",
+        )
+        .bind(("slug", h2h_slug.clone()))
+        .await
+    else {
+        return Ok(None);
+    };
+
+    let rows: Vec<serde_json::Value> = res.take(0).unwrap_or_default();
+    if rows.is_empty() {
+        return Ok(None);
+    }
+
+    let mut intro: Option<ArticleDetail> = None;
+    let mut pieces: Vec<ArticleDetail> = Vec::new();
+
+    for v in rows.iter() {
+        let sources = v["sources"]
+            .as_array()
+            .map(|arr| {
+                arr.iter()
+                    .filter_map(|s| {
+                        Some(SourceSummary {
+                            url: s["url"].as_str()?.to_string(),
+                            name: s["name"].as_str()?.to_string(),
+                            source_type: s["type"].as_str().unwrap_or("wire").to_string(),
+                            paywall: s["paywall_status"].as_str() == Some("paywalled"),
+                            verified: s["verification_status"].as_str() == Some("verified"),
+                        })
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+
+        let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
+            .as_array()
+            .map(|arr| {
+                arr.iter()
+                    .filter_map(|p| {
+                        let step_type = p["step_type"].as_str()?.to_string();
+                        let sort_order = p["sort_order"]
+                            .as_i64()
+                            .map(|n| n as i32)
+                            .unwrap_or_else(|| match step_type.as_str() {
+                                "scan" => 0,
+                                "source_check" => 1,
+                                "fact_check" => 2,
+                                "draft" => 3,
+                                "verify" => 4,
+                                "edit" => 5,
+                                _ => 99,
+                            });
+                        Some(PipelineSummary {
+                            agent_name: p["agent_name"].as_str()?.to_string(),
+                            step_type,
+                            output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
+                            confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
+                            completed_at: p["completed_at"]
+                                .as_str()
+                                .or_else(|| p["started_at"].as_str())
+                                .unwrap_or("")
+                                .to_string(),
+                            sort_order,
+                        })
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        pipeline.sort_by_key(|s| s.sort_order);
+
+        let detail = article_detail_from_row(v, sources, pipeline);
+        match detail.h2h_role.as_deref() {
+            Some("intro") => intro = Some(detail),
+            Some("piece") => pieces.push(detail),
+            _ => {}
+        }
+    }
+
+    let Some(intro) = intro else {
+        return Ok(None);
+    };
+
+    Ok(Some(H2HBundle {
+        h2h_slug,
+        intro,
+        pieces,
+    }))
 }
 
 /// Agent roster — reads from SurrealDB (populated by Paperclip heartbeats via PUT /api/agents/status).
@@ -552,6 +698,11 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
 
     Some(ArticleDetail {
         slug: summary.slug,
+        summary: summary.summary.clone(),
+        h2h_role: None,
+        h2h_slug: None,
+        byline: None,
+        model_attribution: None,
         body: format!(
             "# {title}\n\n\
              {summary}\n\n\
