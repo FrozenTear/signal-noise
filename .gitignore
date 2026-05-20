@@ -14,6 +14,9 @@ Cargo.lock
 /dist/
 /.dioxus/
 
+# Next.js build output (stale pre-Dioxus prototype removed in THE-11; Rust + Dioxus only)
+.next/
+
 # Environment
 .env
 .env.local

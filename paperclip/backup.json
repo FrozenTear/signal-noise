@@ -1,0 +1,460 @@
+{
+  "exportedAt": "2026-05-19",
+  "company": {
+    "id": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+    "name": "Signal Noise",
+    "description": null,
+    "status": "active",
+    "issuePrefix": "SIG",
+    "issueCounter": 231,
+    "budgetMonthlyCents": 0,
+    "spentMonthlyCents": 0,
+    "attachmentMaxBytes": 10485760,
+    "requireBoardApprovalForNewAgents": true,
+    "feedbackDataSharingEnabled": false,
+    "feedbackDataSharingConsentAt": null,
+    "feedbackDataSharingConsentByUserId": null,
+    "feedbackDataSharingTermsVersion": null,
+    "brandColor": null,
+    "logoAssetId": null,
+    "createdAt": "2026-03-23T07:05:10.141Z",
+    "updatedAt": "2026-05-19T11:15:16.101Z",
+    "logoUrl": null
+  },
+  "agents": [
+    {
+      "id": "60d82dcb-27a0-433e-9100-723ccbfb469b",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Frontend Engineer",
+      "role": "engineer",
+      "title": "Dioxus/Rust Frontend Engineer",
+      "icon": "code",
+      "status": "idle",
+      "reportsTo": "c778359e-57d6-4cff-ba5a-e3eaeb7c2165",
+      "capabilities": "Dioxus 0.7+ fullstack Rust development, Tailwind CSS, WASM, SSR + hydration, component architecture. Builds the Signal Noise frontend: article pages, transparency components (confidence meters, AI monologue, pipeline viewer), agent roster sidebar, beat pages.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-sonnet-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 200,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/frontend-engineer/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": null,
+      "permissions": {
+        "canCreateAgents": false
+      },
+      "lastHeartbeatAt": "2026-05-19T11:02:13.222Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:34:01.322Z",
+      "updatedAt": "2026-05-19T11:02:13.222Z",
+      "urlKey": "frontend-engineer"
+    },
+    {
+      "id": "f0817ec6-5733-46f4-a0f8-2762ccb1b8d8",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Source Checker",
+      "role": "pm",
+      "title": "Fact Checker",
+      "icon": "shield",
+      "status": "error",
+      "reportsTo": "4ba5c37e-4964-4b52-a376-b3e3dc85fc64",
+      "capabilities": "Claim verification, cross-referencing sources, confidence scoring, story kill decisions. Takes Scanner story candidates, verifies core claims against multiple sources, flags vendor stats vs independent data, assigns confidence scores, kills unverifiable stories. Will be reassigned to report to Editor-in-Chief once approved.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-sonnet-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 150,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/fact-checker/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": null,
+      "permissions": {
+        "canCreateAgents": true
+      },
+      "lastHeartbeatAt": "2026-05-19T11:01:16.652Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:34:43.432Z",
+      "updatedAt": "2026-05-19T11:01:16.652Z",
+      "urlKey": "source-checker"
+    },
+    {
+      "id": "c778359e-57d6-4cff-ba5a-e3eaeb7c2165",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "CEO",
+      "role": "ceo",
+      "title": null,
+      "icon": null,
+      "status": "running",
+      "reportsTo": null,
+      "capabilities": null,
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-opus-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 300,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/ceo/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": null,
+      "permissions": {
+        "canCreateAgents": true
+      },
+      "lastHeartbeatAt": "2026-05-19T11:18:01.852Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:05:48.401Z",
+      "updatedAt": "2026-05-19T11:18:02.119Z",
+      "urlKey": "ceo"
+    },
+    {
+      "id": "b85ebaed-a083-48ba-a279-3cd7a34033a6",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Reporter",
+      "role": "general",
+      "title": "Reporter",
+      "icon": "message-square",
+      "status": "paused",
+      "reportsTo": "4ba5c37e-4964-4b52-a376-b3e3dc85fc64",
+      "capabilities": "Article writing with transparency metadata, persona voice matching, AI monologue generation, confidence annotation. Receives verified briefs from Fact Checker, writes articles with body, AI monologue, confidence notes, and source block. Matches persona writing style. Will be reassigned to report to Editor-in-Chief once approved.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-sonnet-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 200,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/reporter/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": "2026-05-19T11:02:48.609Z",
+      "permissions": {
+        "canCreateAgents": true
+      },
+      "lastHeartbeatAt": "2026-05-19T11:01:16.753Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:34:47.181Z",
+      "updatedAt": "2026-05-19T11:02:48.609Z",
+      "urlKey": "reporter"
+    },
+    {
+      "id": "ea705d8a-bf9c-46a0-8183-a2de1e17d35e",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Article Verifier",
+      "role": "pm",
+      "title": "Article Verifier",
+      "icon": "microscope",
+      "status": "paused",
+      "reportsTo": "4ba5c37e-4964-4b52-a376-b3e3dc85fc64",
+      "capabilities": "Post-write article fact-checking. Verifies every claim, quote, number, and date in finished articles against sources. Catches LLM hallucinations introduced during article generation.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-sonnet-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 150,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/article-verifier/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": "2026-05-19T11:02:45.862Z",
+      "permissions": {
+        "canCreateAgents": true
+      },
+      "lastHeartbeatAt": "2026-05-19T11:01:16.837Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T10:08:56.214Z",
+      "updatedAt": "2026-05-19T11:02:45.862Z",
+      "urlKey": "article-verifier"
+    },
+    {
+      "id": "e81c0c7f-f005-4364-aab9-4ee0e6963e03",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Scanner",
+      "role": "researcher",
+      "title": "News Scanner",
+      "icon": "radar",
+      "status": "paused",
+      "reportsTo": "4ba5c37e-4964-4b52-a376-b3e3dc85fc64",
+      "capabilities": "RSS feed polling, headline discovery, newsworthiness ranking, story candidate creation. Monitors configured feeds across Linux, Tech, and Privacy beats. Deduplicates headlines, ranks by relevance and comedy potential, creates story candidate issues for the pipeline. Will be reassigned to report to Editor-in-Chief once approved.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-haiku-4-5-20251001",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 100,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/scanner/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": "2026-05-19T11:02:56.051Z",
+      "permissions": {
+        "canCreateAgents": true
+      },
+      "lastHeartbeatAt": "2026-04-04T13:10:05.217Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:34:39.047Z",
+      "updatedAt": "2026-05-19T11:02:56.051Z",
+      "urlKey": "scanner"
+    },
+    {
+      "id": "1cb25fd4-90ca-420b-97d8-676102883d22",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Founding Engineer",
+      "role": "engineer",
+      "title": "Founding Engineer",
+      "icon": "code",
+      "status": "idle",
+      "reportsTo": "c778359e-57d6-4cff-ba5a-e3eaeb7c2165",
+      "capabilities": "Full-stack software engineering. Implements features, fixes bugs, writes tests, reviews code, and ships production-quality software.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-sonnet-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 200,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/founding-engineer/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 3600,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": null,
+      "permissions": {
+        "canCreateAgents": false
+      },
+      "lastHeartbeatAt": "2026-05-19T11:02:09.382Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:08:52.640Z",
+      "updatedAt": "2026-05-19T11:02:09.382Z",
+      "urlKey": "founding-engineer"
+    },
+    {
+      "id": "4ba5c37e-4964-4b52-a376-b3e3dc85fc64",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "name": "Editor-in-Chief",
+      "role": "pm",
+      "title": "Editor-in-Chief",
+      "icon": "crown",
+      "status": "paused",
+      "reportsTo": "c778359e-57d6-4cff-ba5a-e3eaeb7c2165",
+      "capabilities": "Editorial judgment, content quality review, voice enforcement, publish authority. Reviews all article drafts, enforces the comedic-transparency tone, rejects stories that miss the mark, sets daily editorial direction. Final gatekeeper before publication.",
+      "adapterType": "claude_local",
+      "adapterConfig": {
+        "cwd": "/home/pure/signal-noise",
+        "model": "claude-opus-4-6",
+        "graceSec": 15,
+        "timeoutSec": 0,
+        "maxTurnsPerRun": 200,
+        "instructionsFilePath": "/home/pure/signal-noise/agents/editor-in-chief/AGENTS.md",
+        "dangerouslySkipPermissions": true
+      },
+      "runtimeConfig": {
+        "heartbeat": {
+          "enabled": true,
+          "cooldownSec": 10,
+          "intervalSec": 1800,
+          "wakeOnDemand": true,
+          "maxConcurrentRuns": 1
+        }
+      },
+      "defaultEnvironmentId": null,
+      "budgetMonthlyCents": 0,
+      "spentMonthlyCents": 0,
+      "pausedAt": "2026-05-19T11:03:02.001Z",
+      "permissions": {
+        "canCreateAgents": true
+      },
+      "lastHeartbeatAt": "2026-05-19T11:01:16.524Z",
+      "metadata": null,
+      "createdAt": "2026-03-23T07:34:34.887Z",
+      "updatedAt": "2026-05-19T11:03:02.001Z",
+      "urlKey": "editor-in-chief"
+    }
+  ],
+  "goals": [
+    {
+      "id": "6efa1d2d-3c6a-47f1-bc88-f6fb99fb2042",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "title": "Signal Noise is a transparent, AI-powered news site where the journalism is real but the journalists are artificial \u2014 and everyone knows it. Real events, verified facts, delivered through the lens of AI agents with distinct personalities and visible editorial processes.",
+      "description": "The transparency is the product. Every article shows its confidence scores, the AI's internal monologue, editorial rejections, and the full pipeline from headline discovery to publication. Readers get real news and a front-row seat to how a multi-agent AI system actually thinks.",
+      "level": "company",
+      "status": "active",
+      "parentId": null,
+      "ownerAgentId": null,
+      "createdAt": "2026-03-23T07:05:10.184Z",
+      "updatedAt": "2026-03-23T07:05:10.184Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1d41b810-6402-48db-b091-53778e442636",
+      "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+      "goalId": null,
+      "name": "Signal Noise",
+      "description": "AI-powered transparent news site. Dioxus fullstack (Rust), SurrealDB, Paperclip agent pipeline. Beats: Linux, Tech, Privacy.",
+      "status": "backlog",
+      "leadAgentId": null,
+      "targetDate": null,
+      "color": "#6366f1",
+      "env": null,
+      "pauseReason": null,
+      "pausedAt": null,
+      "executionWorkspacePolicy": null,
+      "archivedAt": null,
+      "createdAt": "2026-03-23T07:32:41.028Z",
+      "updatedAt": "2026-03-23T07:32:41.028Z",
+      "urlKey": "signal-noise",
+      "goalIds": [],
+      "goals": [],
+      "codebase": {
+        "workspaceId": "b2c62083-6860-4fdf-8a25-ab140aca0ce6",
+        "repoUrl": null,
+        "repoRef": null,
+        "defaultRef": null,
+        "repoName": null,
+        "localFolder": "/home/pure/signal-noise",
+        "managedFolder": "/home/pure/.paperclip/instances/default/projects/c9d9b575-6b19-4b62-b32f-05013dedf3dc/1d41b810-6402-48db-b091-53778e442636/_default",
+        "effectiveLocalFolder": "/home/pure/signal-noise",
+        "origin": "local_folder"
+      },
+      "workspaces": [
+        {
+          "id": "b2c62083-6860-4fdf-8a25-ab140aca0ce6",
+          "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+          "projectId": "1d41b810-6402-48db-b091-53778e442636",
+          "name": "signal-noise",
+          "sourceType": "local_path",
+          "cwd": "/home/pure/signal-noise",
+          "repoUrl": null,
+          "repoRef": null,
+          "defaultRef": null,
+          "visibility": "default",
+          "setupCommand": null,
+          "cleanupCommand": null,
+          "remoteProvider": null,
+          "remoteWorkspaceRef": null,
+          "sharedWorkspaceKey": null,
+          "metadata": null,
+          "runtimeConfig": null,
+          "isPrimary": true,
+          "runtimeServices": [],
+          "createdAt": "2026-03-23T07:32:41.042Z",
+          "updatedAt": "2026-03-23T07:32:41.042Z"
+        }
+      ],
+      "primaryWorkspace": {
+        "id": "b2c62083-6860-4fdf-8a25-ab140aca0ce6",
+        "companyId": "c9d9b575-6b19-4b62-b32f-05013dedf3dc",
+        "projectId": "1d41b810-6402-48db-b091-53778e442636",
+        "name": "signal-noise",
+        "sourceType": "local_path",
+        "cwd": "/home/pure/signal-noise",
+        "repoUrl": null,
+        "repoRef": null,
+        "defaultRef": null,
+        "visibility": "default",
+        "setupCommand": null,
+        "cleanupCommand": null,
+        "remoteProvider": null,
+        "remoteWorkspaceRef": null,
+        "sharedWorkspaceKey": null,
+        "metadata": null,
+        "runtimeConfig": null,
+        "isPrimary": true,
+        "runtimeServices": [],
+        "createdAt": "2026-03-23T07:32:41.042Z",
+        "updatedAt": "2026-03-23T07:32:41.042Z"
+      },
+      "managedByPlugin": null
+    }
+  ],
+  "restore_instructions": "Run `paperclipai company import backup.json` on the new machine after installing Paperclip. Update adapterConfig.cwd paths to match new machine. Agent AGENTS.md instruction files are in the agents/ directory of this repo."
+}
