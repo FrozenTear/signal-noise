@@ -45,6 +45,10 @@ pub fn Article(slug: String) -> Element {
                 },
                 Some(Ok(Some(art))) => {
                     let rendered_body = simple_md_to_html(&art.body);
+                    let model_pill = art
+                        .model_attribution
+                        .clone()
+                        .unwrap_or_else(|| "claude-sonnet-4-6".to_string());
                     rsx! {
                     // Back link
                     a { style: "display:inline-flex; align-items:center; gap:6px; font-family:var(--sn-serif); font-size:14px; color:var(--sn-text-dimmer); text-decoration:none; margin-bottom:24px; transition:color 0.2s;",
@@ -54,7 +58,7 @@ pub fn Article(slug: String) -> Element {
 
                     // Gen-bar (AI metadata strip)
                     div { class: "sn-gen-bar",
-                        div { class: "sn-gen-pill model", "claude-sonnet-4-6" }
+                        div { class: "sn-gen-pill model", "{model_pill}" }
                         div { class: "sn-gen-pill tokens", "{art.persona_name}" }
                         div { class: "sn-gen-spacer" }
                         span { class: "sn-ts", "{art.published_at}" }

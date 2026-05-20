@@ -7,6 +7,22 @@ use crate::components::source_block::{SourceBlock, SourceItem};
 use crate::server_fns::{get_h2h_by_slug, ArticleDetail};
 use crate::util::simple_md_to_html;
 
+/// Best-effort short label for the mobile jump pill, derived from the piece's byline
+/// (e.g. "Bolt / claude-sonnet-4-6" → "Bolt"). Falls back to persona_name, then the slug
+/// so this works for future H2Hs that don't follow the Bolt/Spark naming.
+fn jump_label(piece: &ArticleDetail) -> String {
+    if let Some(byline) = piece.byline.as_deref() {
+        let head = byline.split('/').next().unwrap_or(byline).trim();
+        if !head.is_empty() {
+            return head.to_string();
+        }
+    }
+    if !piece.persona_name.is_empty() && piece.persona_name != "AI Reporter" {
+        return piece.persona_name.clone();
+    }
+    piece.slug.clone()
+}
+
 #[component]
 pub fn Head2Head(slug: String) -> Element {
     let slug_copy = slug.clone();
@@ -67,10 +83,18 @@ pub fn Head2Head(slug: String) -> Element {
 
                     // ── Mobile jump pill (hidden ≥ 1024px via CSS) ──────────
                     if b.pieces.len() >= 2 {
-                        div { class: "sn-h2h-jump-pill",
-                            a { href: "#piece-{b.pieces[0].slug}", "▲ Bolt" }
-                            span { class: "sn-h2h-jump-sep", "·" }
-                            a { href: "#piece-{b.pieces[1].slug}", "▼ Spark" }
+                        {
+                            let p0 = &b.pieces[0];
+                            let p1 = &b.pieces[1];
+                            let l0 = jump_label(p0);
+                            let l1 = jump_label(p1);
+                            rsx! {
+                                div { class: "sn-h2h-jump-pill",
+                                    a { href: "#piece-{p0.slug}", "▲ {l0}" }
+                                    span { class: "sn-h2h-jump-sep", "·" }
+                                    a { href: "#piece-{p1.slug}", "▼ {l1}" }
+                                }
+                            }
                         }
                     }
                 },
