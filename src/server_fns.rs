@@ -22,6 +22,7 @@ pub struct ArticleSummary {
     pub published_at: String,
     pub ai_monologue: Option<String>,
     pub ai_monologue_extended: Option<String>,
+    pub source_substitution: bool,
 }
 
 /// A row on the Rejection Wall ("The Bin").
@@ -61,6 +62,16 @@ pub struct ArticleDetail {
     pub byline: Option<String>,
     /// Model attribution surfaced on H2H pieces, e.g. "claude-sonnet-4-6".
     pub model_attribution: Option<String>,
+    /// True when this article went through the single-pass Source Checker substitution path.
+    pub source_substitution: bool,
+    /// Agent ID of the EIC who authorized the substitution pass.
+    pub source_substitution_approved_by: Option<String>,
+    /// Deep link to the EIC approval comment.
+    pub source_substitution_approval_comment: Option<String>,
+    /// Identifier of the first (original) Source Checker pass.
+    pub source_substitution_original_pass: Option<String>,
+    /// Identifier of the replacement Source Checker pass.
+    pub source_substitution_replacement_pass: Option<String>,
 }
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -132,7 +143,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
             .await
         } else {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
+                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, pipeline_metadata, persona.name AS persona_name \
                  FROM article WHERE status = 'published' \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -159,6 +170,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
                                 published_at: v["published_at"].as_str().unwrap_or("").to_string(),
                                 ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
                                 ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
+                                source_substitution: v["pipeline_metadata"]["source_substitution"].as_bool().unwrap_or(false),
                             })
                         })
                         .collect();
@@ -332,6 +344,11 @@ fn article_detail_from_row(
         h2h_slug: pm["h2h_slug"].as_str().map(|s| s.to_string()),
         byline: pm["byline"].as_str().map(|s| s.to_string()),
         model_attribution: pm["model_attribution"].as_str().map(|s| s.to_string()),
+        source_substitution: pm["source_substitution"].as_bool().unwrap_or(false),
+        source_substitution_approved_by: pm["source_substitution_approved_by"].as_str().map(|s| s.to_string()),
+        source_substitution_approval_comment: pm["source_substitution_approval_comment"].as_str().map(|s| s.to_string()),
+        source_substitution_original_pass: pm["source_substitution_original_pass"].as_str().map(|s| s.to_string()),
+        source_substitution_replacement_pass: pm["source_substitution_replacement_pass"].as_str().map(|s| s.to_string()),
     }
 }
 
@@ -611,6 +628,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-22".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_substitution: false,
         },
         ArticleSummary {
             slug: "openai-gpt5-announcement".to_string(),
@@ -625,6 +643,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-21".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_substitution: false,
         },
         ArticleSummary {
             slug: "eu-chat-control-vote".to_string(),
@@ -640,6 +659,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-20".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_substitution: false,
         },
         ArticleSummary {
             slug: "systemd-257-containers".to_string(),
@@ -653,6 +673,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-19".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_substitution: false,
         },
         ArticleSummary {
             slug: "cloudflare-post-quantum".to_string(),
@@ -668,6 +689,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-18".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_substitution: false,
         },
         ArticleSummary {
             slug: "apple-vision-pro-2-specs".to_string(),
@@ -683,6 +705,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             published_at: "2026-03-17".to_string(),
             ai_monologue: None,
             ai_monologue_extended: None,
+            source_substitution: false,
         },
     ];
 
@@ -703,6 +726,11 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
         h2h_slug: None,
         byline: None,
         model_attribution: None,
+        source_substitution: false,
+        source_substitution_approved_by: None,
+        source_substitution_approval_comment: None,
+        source_substitution_original_pass: None,
+        source_substitution_replacement_pass: None,
         body: format!(
             "# {title}\n\n\
              {summary}\n\n\

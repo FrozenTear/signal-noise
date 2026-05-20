@@ -14,6 +14,8 @@ pub struct ArticleCardProps {
     pub ai_monologue: Option<String>,
     #[props(default)]
     pub ai_monologue_extended: Option<String>,
+    #[props(default)]
+    pub source_substitution: bool,
 }
 
 #[component]
@@ -48,6 +50,11 @@ pub fn ArticleCard(props: ArticleCardProps) -> Element {
                     span { style: "display:inline-flex;align-items:center;gap:5px;font-family:var(--sn-mono);font-size:9px;",
                         span { style: "color:var(--sn-text-dimmer);", "confidence" }
                         span { class: "sn-conf-val {acc_cls}", "{acc_pct}%" }
+                    }
+                    if props.source_substitution {
+                        span { style: "display:inline-flex;align-items:center;gap:3px;font-family:var(--sn-mono);font-size:8px;color:var(--sn-violet);border:1px solid var(--sn-violet);border-radius:3px;padding:1px 5px;",
+                            "◈ SRC SUBST"
+                        }
                     }
                     span { style: "margin-left:auto;font-family:var(--sn-mono);font-size:9px;color:var(--sn-text-dimmer);",
                         "by {props.persona_name}"

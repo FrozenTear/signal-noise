@@ -97,6 +97,13 @@ pub fn Article(slug: String) -> Element {
                                 "ⓘ SYNTHETIC CONTENT — written by AI agents. All claims fact-checked by a separate AI process."
                             }
 
+                            // Source-substitution transparency banner
+                            if art.source_substitution {
+                                div { class: "sn-disclaimer", style: "background:rgba(139,92,246,0.08); border-color:var(--sn-violet); color:var(--sn-violet); margin-top:8px;",
+                                    "◈ SOURCE SUBSTITUTION — an EIC-approved replacement Source Checker pass was applied. See the editorial trail below."
+                                }
+                            }
+
                             // Article body
                             div { class: "prose", style: "margin:28px 0;",
                                 dangerous_inner_html: "{rendered_body}"
@@ -153,6 +160,18 @@ pub fn Article(slug: String) -> Element {
                                         span { class: "sn-chip-lbl", "CONFIDENCE" }
                                         span { class: "sn-chip-val",
                                             { format!("{:.0}%", art.confidence_score * 100.0) }
+                                        }
+                                    }
+                                    if art.source_substitution {
+                                        div {
+                                            span { class: "sn-chip-lbl", "SRC SUBST" }
+                                            span { class: "sn-chip-val", style: "color:var(--sn-violet);", "EIC APPROVED" }
+                                        }
+                                        if let Some(ref approved_by) = art.source_substitution_approved_by {
+                                            div {
+                                                span { class: "sn-chip-lbl", "APPROVED BY" }
+                                                span { class: "sn-chip-val", "{approved_by}" }
+                                            }
                                         }
                                     }
                                 }

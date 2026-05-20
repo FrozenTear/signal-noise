@@ -62,6 +62,7 @@ pub fn Home() -> Element {
                                 published_at: art.published_at.clone(),
                                 ai_monologue: art.ai_monologue.clone(),
                                 ai_monologue_extended: art.ai_monologue_extended.clone(),
+                                source_substitution: art.source_substitution,
                             }
                         }
                     },
