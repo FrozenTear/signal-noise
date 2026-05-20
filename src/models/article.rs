@@ -16,6 +16,7 @@ pub struct Article {
     pub pipeline_metadata: serde_json::Value,
     pub source_urls: Vec<String>,
     pub status: ArticleStatus,
+    pub rejection_reason: Option<String>,
     pub published_at: Option<DateTime<Utc>>,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,

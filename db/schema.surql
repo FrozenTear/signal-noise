@@ -55,6 +55,7 @@ DEFINE FIELD source_urls        ON article TYPE array  DEFAULT [];
 DEFINE FIELD status             ON article TYPE string
     ASSERT $value IN ["draft","fact_checking","writing","editing","published","rejected"]
     DEFAULT "draft";
+DEFINE FIELD rejection_reason   ON article TYPE option<string>;
 DEFINE FIELD published_at       ON article TYPE option<datetime>;
 DEFINE FIELD created_at         ON article TYPE datetime DEFAULT time::now();
 DEFINE FIELD updated_at         ON article TYPE datetime DEFAULT time::now();

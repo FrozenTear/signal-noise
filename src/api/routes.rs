@@ -1,9 +1,9 @@
 // Axum API route handlers — wired up by dioxus-axum in main.rs
 //
-// GET    /api/articles          — feed with optional ?category= filter
+// GET    /api/articles          — feed with optional ?category= and ?status= filters (status defaults to 'published')
 // GET    /api/articles/:slug    — single article with sources + pipeline
-// POST   /api/articles          — publish an article from the pipeline
-// PATCH  /api/articles/:slug    — update article status
+// POST   /api/articles          — publish an article from the pipeline (or reject via rejection_reason)
+// PATCH  /api/articles/:slug    — update article status (and rejection_reason when rejecting)
 // GET    /api/agents/status     — agent roster for live sidebar
 
 use axum::{
@@ -29,6 +29,7 @@ pub fn router(state: AppState) -> Router {
 #[derive(Deserialize)]
 pub struct ArticleQuery {
     pub category: Option<String>,
+    pub status: Option<String>,
     pub limit: Option<usize>,
     pub offset: Option<usize>,
 }
@@ -45,6 +46,7 @@ pub struct ArticlePublishPayload {
     pub confidence_score: Option<f64>,
     pub ai_monologue: Option<String>,
     pub ai_monologue_extended: Option<String>,
+    pub rejection_reason: Option<String>,
     pub sources: Option<Vec<SourcePayload>>,
     pub pipeline_steps: Option<Vec<PipelineStepPayload>>,
 }
@@ -104,25 +106,26 @@ pub async fn list_articles(
 ) -> Result<Json<Value>, StatusCode> {
     let limit = params.limit.unwrap_or(20);
     let offset = params.offset.unwrap_or(0);
+    let status = params.status.clone().unwrap_or_else(|| "published".to_string());
+    let use_updated_order = status == "rejected";
 
-    let mut result = if let Some(cat) = params.category {
-        state
-            .db
-            .query("SELECT *, persona.name AS persona_name FROM article WHERE status = 'published' AND category = $cat ORDER BY published_at DESC LIMIT $limit START $offset")
-            .bind(("cat", cat))
-            .bind(("limit", limit))
-            .bind(("offset", offset))
-            .await
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-    } else {
-        state
-            .db
-            .query("SELECT *, persona.name AS persona_name FROM article WHERE status = 'published' ORDER BY published_at DESC LIMIT $limit START $offset")
-            .bind(("limit", limit))
-            .bind(("offset", offset))
-            .await
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-    };
+    let base = "SELECT *, persona.name AS persona_name FROM article WHERE status = $status";
+    let cat_clause = if params.category.is_some() { " AND category = $cat" } else { "" };
+    let order = if use_updated_order { "updated_at DESC" } else { "published_at DESC" };
+    let sql = format!("{} {} ORDER BY {} LIMIT $limit START $offset", base, cat_clause, order);
+
+    let mut q = state
+        .db
+        .query(&sql)
+        .bind(("status", status))
+        .bind(("limit", limit))
+        .bind(("offset", offset));
+
+    if let Some(cat) = params.category {
+        q = q.bind(("cat", cat));
+    }
+
+    let mut result = q.await.map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
     let articles: Vec<Value> = result.take(0).map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     Ok(Json(json!({ "articles": articles })))
@@ -250,6 +253,7 @@ pub async fn publish_article(
 
     let summary = payload.summary.unwrap_or_default();
     let ai_monologue = payload.ai_monologue.unwrap_or_default();
+    let rejection_reason = payload.rejection_reason.clone().unwrap_or_default();
 
     // Upsert article.
     // persona is resolved to a record<persona> inside SurrealDB via sub-select.
@@ -271,7 +275,8 @@ pub async fn publish_article(
                 confidence_score:    $confidence,
                 ai_monologue:        $monologue,
                 ai_monologue_extended: IF $monologue_extended != '' THEN $monologue_extended ELSE NONE END,
-                status:              'published',
+                rejection_reason: IF $rejection_reason != '' THEN $rejection_reason ELSE NONE END,
+                status:              IF $rejection_reason != '' THEN 'rejected' ELSE 'published' END,
                 published_at:     IF (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at != NONE
                                   THEN (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at
                                   ELSE time::now() END,
@@ -288,6 +293,7 @@ pub async fn publish_article(
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
         .bind(("monologue_extended", ai_monologue_extended))
+        .bind(("rejection_reason", rejection_reason))
         .await
         .map_err(|_| db_err())?;
 
@@ -477,10 +483,11 @@ pub struct ArticleStatusPatch {
     pub confidence_score: Option<f64>,
     pub ai_monologue: Option<String>,
     pub ai_monologue_extended: Option<String>,
+    pub rejection_reason: Option<String>,
 }
 
 /// PATCH /api/articles/:slug — update article status and optionally content fields.
-/// Required: { "status": "<valid_status>" }. Optional: body, summary, confidence_score, ai_monologue, ai_monologue_extended.
+/// Required: { "status": "<valid_status>" }. Optional: body, summary, confidence_score, ai_monologue, ai_monologue_extended, rejection_reason.
 pub async fn update_article_status(
     State(state): State<AppState>,
     Path(slug): Path<String>,
@@ -553,6 +560,14 @@ pub async fn update_article_status(
         state.db
             .query("UPDATE article SET ai_monologue_extended = $ext, updated_at = time::now() WHERE slug = $slug")
             .bind(("ext", ext))
+            .bind(("slug", slug.clone()))
+            .await
+            .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;
+    }
+    if let Some(rej) = payload.rejection_reason {
+        state.db
+            .query("UPDATE article SET rejection_reason = $rej, updated_at = time::now() WHERE slug = $slug")
+            .bind(("rej", rej))
             .bind(("slug", slug.clone()))
             .await
             .map_err(|_| (StatusCode::INTERNAL_SERVER_ERROR, Json(json!({ "error": "database error" }))))?;

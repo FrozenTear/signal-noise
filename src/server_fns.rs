@@ -24,6 +24,21 @@ pub struct ArticleSummary {
     pub ai_monologue_extended: Option<String>,
 }
 
+/// A row on the Rejection Wall ("The Bin").
+/// Mirrors `ArticleSummary` but adds `rejection_reason` and uses `rejected_at` semantics
+/// (the article's `updated_at` at rejection time).
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct RejectedArticleSummary {
+    pub slug: String,
+    pub title: String,
+    pub summary: String,
+    pub category: String,
+    pub persona_name: String,
+    pub confidence_score: f64,
+    pub rejection_reason: Option<String>,
+    pub rejected_at: String,
+}
+
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 pub struct ArticleDetail {
     pub slug: String,
@@ -138,6 +153,51 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
     }
 
     Ok(mock_articles(category))
+}
+
+/// List rejected articles for the Rejection Wall.
+/// Ordered newest-first by `updated_at` (the rejection moment).
+#[server]
+pub async fn get_rejected_articles() -> Result<Vec<RejectedArticleSummary>, ServerFnError> {
+    use axum::Extension;
+    use dioxus_fullstack::FullstackContext;
+    use surrealdb::{engine::local::Db, Surreal};
+
+    if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
+        if let Ok(mut res) = db
+            .query(
+                "SELECT slug, title, summary, category, confidence_score, rejection_reason, \
+                 updated_at AS rejected_at, persona.name AS persona_name \
+                 FROM article WHERE status = 'rejected' \
+                 ORDER BY updated_at DESC LIMIT 50",
+            )
+            .await
+        {
+            if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
+                return Ok(rows
+                    .into_iter()
+                    .filter_map(|v| {
+                        Some(RejectedArticleSummary {
+                            slug: v["slug"].as_str()?.to_string(),
+                            title: v["title"].as_str()?.to_string(),
+                            summary: v["summary"].as_str().unwrap_or("").to_string(),
+                            category: v["category"].as_str().unwrap_or("").to_string(),
+                            persona_name: v["persona_name"]
+                                .as_str()
+                                .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
+                                .unwrap_or("AI Reporter")
+                                .to_string(),
+                            confidence_score: v["confidence_score"].as_f64().unwrap_or(0.0),
+                            rejection_reason: v["rejection_reason"].as_str().map(|s| s.to_string()),
+                            rejected_at: v["rejected_at"].as_str().unwrap_or("").to_string(),
+                        })
+                    })
+                    .collect());
+            }
+        }
+    }
+
+    Ok(Vec::new())
 }
 
 /// Fetch a single article by slug including sources and pipeline trail.

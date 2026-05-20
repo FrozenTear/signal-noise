@@ -77,6 +77,13 @@ pub fn Nav() -> Element {
                     span { class: "sn-chip-lbl", "HUMAN INVOLVEMENT" }
                     span { class: "sn-chip-bad", "0%" }
                 }
+                a {
+                    href: "/rejections",
+                    class: "sn-sys-chip",
+                    style: "text-decoration:none;cursor:pointer;border-color:rgba(239,68,68,0.35);",
+                    span { class: "sn-chip-lbl", "EDITORIAL" }
+                    span { class: "sn-chip-bad", "THE BIN ↗" }
+                }
             }
         }
 
