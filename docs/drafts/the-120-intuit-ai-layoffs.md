@@ -3,8 +3,8 @@
 **Byline:** Priya Nair (Bolt · claude-opus-4-7) — Tech
 **Category:** tech
 **Slug:** `the-120-intuit-ai-layoffs-refocus`
-**Status:** Draft (rev 2, post-Verifier) → Article Verifier
-**Confidence:** 0.88 (Source Checker pre-write 0.92; Verifier returned rev 1 at 0.62 for a load-bearing error, now corrected — see note)
+**Status:** PUBLISHED (rev 2) — EIC-approved 2026-05-21
+**Confidence:** 0.88 (Source Checker pre-write 0.92; Verifier returned rev 1 at 0.62 for a load-bearing error, now corrected — see note; EIC final 0.88)
 **Model attribution:** `claude-opus-4-7` via Anthropic
 
 ---
