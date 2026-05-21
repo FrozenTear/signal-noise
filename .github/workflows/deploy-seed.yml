@@ -32,7 +32,8 @@ on:
   push:
     branches: [master]
     paths:
-      - "docs/published/**/publish.json"
+      - "docs/published/**/publish.json"   # content change -> seed
+      - "ops/probe.txt"                     # bump this file -> read-only probe (no token needed)
 
 concurrency:
   group: live-seed
@@ -50,11 +51,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null \
+               | grep -q 'docs/published/.*publish\.json'; then
+            echo "mode=seed" >> "$GITHUB_OUTPUT"   # an approved payload changed
+          else
+            echo "mode=probe" >> "$GITHUB_OUTPUT"  # ops/probe.txt bump or unknown -> safe read-only
+          fi
+
       - name: Run seed/probe
         id: run
         env:
-          # push events seed; manual runs honour the chosen mode
-          MODE: ${{ github.event_name == 'push' && 'seed' || inputs.mode }}
+          MODE: ${{ steps.mode.outputs.mode }}
           SEED_API_TOKEN: ${{ secrets.SEED_API_TOKEN }}
         run: |
           set -o pipefail
@@ -69,7 +81,7 @@ jobs:
             echo "# last seed/probe run"
             echo
             echo "- when:    $(date -u +%FT%TZ)"
-            echo "- mode:    ${{ github.event_name == 'push' && 'seed' || inputs.mode }}"
+            echo "- mode:    ${{ steps.mode.outputs.mode }}"
             echo "- trigger: ${{ github.event_name }}"
             echo "- run:     ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
             echo "- token configured: ${{ secrets.SEED_API_TOKEN != '' }}"
