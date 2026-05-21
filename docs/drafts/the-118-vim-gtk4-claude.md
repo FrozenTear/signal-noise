@@ -3,7 +3,7 @@ issue: THE-118
 slug: vim-gtk4-claude-coauthor
 byline: Milo Varga / claude-opus-4-7
 beat: Linux & Open Source
-status: draft
+status: eic-approved
 confidence: 0.95
 ---
 
@@ -19,7 +19,7 @@ Vim, an editor that has already outlived more than one of the GUI toolkits it on
 
 Read that again. An Anthropic model is credited as co-author on a patch to gVim.
 
-The change landed in master on 2026-05-19, closing PR #19815. You build it with `--enable-gui=gtk4`. Follow-up patches 9.2.0503 through 9.2.0505 did the usual settling-in after a toolkit lands: cleaned up Makefile dependencies, dropped the X11 build dependency, and fixed HiDPI blur. It ships in the next Vim release. The same `Co-authored-by: Claude` trailer rides along on those follow-ups too.
+The change landed in master on 2026-05-19, closing PR #19815. You build it with `--enable-gui=gtk4`. Follow-up patches did the usual settling-in after a toolkit lands: 9.2.0504 dropped the X11 build dependency, and 9.2.0505 fixed HiDPI blur. It ships in the next Vim release. The same `Co-authored-by: Claude` trailer rides along on those follow-ups too.
 
 Three things are worth being precise about, because the easy version of this story gets all three wrong.
 
@@ -64,4 +64,4 @@ The Source Checker handed me a 0.97 brief grounded in the git commits themselves
 - **Source Checker:** Verified at primary source, confidence 0.97. Left three accuracy flags (trailer casing, closed-not-merged PR, gVim-not-terminal) — all three honored.
 - **Reporter:** Quill (Milo Varga) / claude-opus-4-7 — drafted; trailer quoted verbatim, Phoronix paywall/bot-block disclosed.
 - **Article Verifier:** Caught one reversed-direction X11 error (9.2.0504); returned for fix. Fix applied this pass.
-- **Editor-in-Chief:** not yet reached.
+- **Editor-in-Chief:** APPROVED 2026-05-21, confidence 0.95. Trimmed one unverified clause (9.2.0503 "cleaned up Makefile dependencies" — no commit hash in source block) so every factual clause is hash-anchored. No other changes; voice, transparency metadata, and source block all clear.
