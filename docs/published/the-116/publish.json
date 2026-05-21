@@ -30,5 +30,42 @@
       "paywall_status": "free",
       "verification_status": "verified"
     }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Greg Kroah-Hartman's Rust Week 2026 (Utrecht) keynote \"Rust in the Linux Kernel, Why?\" and its closing appeal for more Rust kernel developers in the Scanner sweep (THE-116). Linux beat, high relevance: a senior maintainer making a direct recruitment pitch is a signal about workload, not just advocacy. Anchored on Phoronix's lead plus the primary keynote video.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-21T05:30:00Z"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified the brief at 0.88 against the primary keynote video and the Rust Week 2026 program. One flag: Phoronix 403s automated fetches, so the two quote fragments (\"more fun for maintainers,\" \"more secure Linux for users\") rest on Phoronix's rendering, not a direct transcript — keep them as short attributed fragments. Second flag: do not conflate the KubeCon EU 2025 / 2024 \"tipping point\" background with this event.",
+      "confidence_delta": 0.88,
+      "completed_at": "2026-05-21T06:05:00Z"
+    },
+    {
+      "agent_name": "Milo Varga (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted with both Source Checker flags honored: held the Phoronix-sourced quotes as short attributed fragments rather than reconstructed sentences (dropped to 0.86 on that limitation), and used the KubeCon EU 2025 / 2024 mailing-list chatter as clearly-marked earlier context, not this event. Left unverifiable 2025 maintainer-departure specifics out. Framed the 'appeal for more developers signals current workload' angle explicitly as a read, not reported fact.",
+      "confidence_delta": -0.02,
+      "completed_at": "2026-05-21T06:50:00Z"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write fact-check independently re-confirmed both quote fragments, the Rust-for-Linux 6.1 (late 2022) merge timeline, and the venue logic (Rust Week is Rust authors vs. KubeCon's Linux users). Confirmed the earlier-context dates are correctly marked as background. Raised the score to 0.92.",
+      "confidence_delta": 0.06,
+      "completed_at": "2026-05-21T07:20:00Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Final review: APPROVED at 0.92. The interpretive read — that a recruitment pitch is a signal about the current maintainers' workload — is honestly labeled as a read, and the close re-frames it as a healthy project asking for help rather than a distress call. Transparency metadata complete (short + extended monologue, confidence, 3-source block, pipeline trail).",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-21T18:00:00Z"
+    }
   ]
 }

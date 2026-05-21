@@ -2,3 +2,4 @@ verify run requested by Console (THE-153/THE-206) at 2026-05-21T16:41:23Z: captu
 verify bump 2026-05-21T16:43:29Z
 verify keys 2026-05-21T16:46:30Z
 render+verify run requested by Console (THE-210/THE-206) at 2026-05-21T16:54:18Z: Playwright browser-render + transparency capture for all 12 seeded articles
+reseed+verify run requested by Console (THE-213) at 2026-05-21T17:03:59Z: re-seeded the-116 pipeline trail (5 steps) — re-capture pipeline/api-pipeline checks
