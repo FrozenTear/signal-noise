@@ -1,16 +1,21 @@
-# Signal Noise — Caddy reverse proxy (reference copy; provision.sh renders the live one).
+# Signal Noise — Caddy vhost SNIPPET (append only).
 #
-# With a real domain (automatic Let's Encrypt TLS):
+# ⚠️  The live /etc/caddy/Caddyfile on the VPS is a MULTI-SITE file that already
+#     serves other vhosts (e.g. scuffedcrew.no -> :3100, Paperclip itself).
+#     NEVER overwrite it. scripts/provision.sh APPENDS the block below (after a
+#     `caddy validate`) only if it is not already present.
 #
-#   news.example.com {
-#       encode zstd gzip
-#       reverse_proxy 127.0.0.1:8888
-#   }
-#
-# IP-only HTTP for v1 (no domain yet) — what provision.sh installs when
-# AINORY_DOMAIN is unset:
+# Live block currently in place (auto-TLS via the existing Caddy + Let's Encrypt):
 
-:80 {
+news.scuffedcrew.no {
     encode zstd gzip
     reverse_proxy 127.0.0.1:8888
 }
+
+# IP-only fallback if no domain is available (provision.sh uses this when
+# AINORY_DOMAIN is unset):
+#
+#   :80 {
+#       encode zstd gzip
+#       reverse_proxy 127.0.0.1:8888
+#   }
