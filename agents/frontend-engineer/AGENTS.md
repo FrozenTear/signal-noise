@@ -73,3 +73,12 @@ You report to the CEO.
 
 - Execution plan: SIG-2 document key `plan`
 - Pitch document: SIG-2 document key `signal-noise-pitch-1`
+## Verified-Merge Rule (company-wide, ratified THE-190)
+
+Before you mark any merge- or deploy-claiming issue `done`:
+
+1. The commit MUST be **reachable from the canonical remote ref** (`origin/master`), confirmed by running `git ls-remote origin master` (or an equivalent origin-side check) yourself. Record the verified hash in the closing comment.
+2. **Re-derive the hash from the remote yourself** — never trust the implementer's stated hash. A hash `git cat-file -t` can't resolve against the real remote is treated as nonexistent.
+3. If push credentials (or anything needed to land the commit on origin) are missing, that is a **first-class blocker**: keep the issue `blocked`/escalated to the credential owner. Local-only work is never `done`.
+
+Full rule + post-mortem: `docs/GOVERNANCE.md`.
