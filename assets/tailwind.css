@@ -459,6 +459,27 @@ body::before {
 .sn-article-page { max-width: 1280px; margin: 0 auto; padding: 40px 48px; position: relative; z-index: 1; }
 .sn-article-page-grid { display: grid; grid-template-columns: 1fr 280px; gap: 40px; margin-top: 32px; }
 
+/* ── Head-to-head (H2H) layout — THE-87 spec ──────────────────────────────── */
+.sn-h2h-intro { max-width: 720px; margin: 24px auto 0; }
+.sn-h2h-divider {
+  font-family: var(--sn-mono); font-size: 11px; color: var(--sn-text-dimmer);
+  letter-spacing: 0.08em; text-transform: uppercase; text-align: center;
+  margin: 40px 0 24px;
+}
+.sn-h2h-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+.sn-h2h-col {
+  background: var(--sn-bg-card); border: 1px solid var(--sn-border);
+  border-radius: 6px; padding: 28px;
+}
+.sn-h2h-chip { font-family: var(--sn-mono); font-size: 11px; color: var(--sn-accent); margin-bottom: 16px; }
+.sn-h2h-jump-pill {
+  display: none;
+  position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+  background: var(--sn-bg-raised); border: 1px solid var(--sn-border);
+  border-radius: 999px; padding: 8px 16px;
+  font-family: var(--sn-mono); font-size: 11px; z-index: 50;
+}
+
 .sn-source-item {
   padding: 10px 16px; border-bottom: 1px solid var(--sn-border);
   font-family: var(--sn-mono); font-size: 10px; display: flex; align-items: start; gap: 8px;
@@ -570,6 +591,8 @@ body::before {
   .sn-conf-grid { grid-template-columns: 1fr; }
   .sn-article-page { padding: 20px; }
   .sn-article-page-grid { grid-template-columns: 1fr; }
+  .sn-h2h-grid { grid-template-columns: 1fr; }
+  .sn-h2h-jump-pill { display: flex; align-items: center; }
   .sn-footer { padding: 20px; }
   .sn-section-nav { padding: 0 20px; }
 }

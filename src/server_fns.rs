@@ -41,6 +41,16 @@ pub struct ArticleDetail {
     pub pipeline: Vec<PipelineSummary>,
 }
 
+/// A head-to-head bundle: one editorial intro plus its paired reporter pieces.
+/// The pieces are ordered by their `h2h_order` metadata (falling back to
+/// published_at), so column order is stable across reads.
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct H2HBundle {
+    pub slug: String,
+    pub intro: ArticleDetail,
+    pub pieces: Vec<ArticleDetail>,
+}
+
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
 pub struct SourceSummary {
     pub url: String,
@@ -237,6 +247,161 @@ pub async fn get_article_by_slug(
     }
 
     Ok(mock_article(&slug))
+}
+
+/// Fetch a head-to-head bundle by its `h2h_slug`.
+///
+/// Reads every published article whose `pipeline_metadata.h2h_slug` matches,
+/// then partitions on `pipeline_metadata.h2h_role` into the editorial `intro`
+/// and the reporter `pieces`. Linkage lives in `pipeline_metadata` (Option A of
+/// the THE-87 layout spec — no schema migration). Falls back to mock data when
+/// the DB is empty or the slug has not been seeded yet, so the route renders
+/// before THE-218 seeds the real home-depot-q1-2026 content.
+#[server]
+pub async fn get_h2h_by_slug(slug: String) -> Result<Option<H2HBundle>, ServerFnError> {
+    if let Some(db) = crate::api::db::get_db() {
+        if let Ok(mut res) = db
+            .query(
+                "SELECT *, \
+                 persona.name AS persona_name, \
+                 ->cites->source.* AS sources, \
+                 ->produced_by->pipeline_step.* AS pipeline \
+                 FROM article \
+                 WHERE status = 'published' AND pipeline_metadata.h2h_slug = $slug",
+            )
+            .bind(("slug", slug.clone()))
+            .await
+        {
+            if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
+                if !rows.is_empty() {
+                    let mut intro: Option<ArticleDetail> = None;
+                    let mut pieces: Vec<(i64, ArticleDetail)> = Vec::new();
+                    for v in &rows {
+                        let role = h2h_meta_str(v, "h2h_role");
+                        let detail = row_to_detail(v);
+                        if role.as_deref() == Some("intro") {
+                            intro = Some(detail);
+                        } else {
+                            let order = h2h_meta_str(v, "h2h_order")
+                                .and_then(|s| s.parse::<i64>().ok())
+                                .unwrap_or(i64::MAX);
+                            pieces.push((order, detail));
+                        }
+                    }
+                    // Stable column order: explicit h2h_order, then published_at.
+                    pieces.sort_by(|a, b| {
+                        a.0.cmp(&b.0)
+                            .then(a.1.published_at.cmp(&b.1.published_at))
+                    });
+                    if let Some(intro) = intro {
+                        return Ok(Some(H2HBundle {
+                            slug: slug.clone(),
+                            intro,
+                            pieces: pieces.into_iter().map(|(_, d)| d).collect(),
+                        }));
+                    }
+                }
+            }
+        }
+    }
+
+    Ok(mock_h2h(&slug))
+}
+
+/// Pull a string field out of an article's `pipeline_metadata`, tolerating both
+/// object storage and a JSON-encoded string (SurrealDB flexible fields).
+#[cfg(feature = "server")]
+fn h2h_meta_str(v: &serde_json::Value, key: &str) -> Option<String> {
+    let meta = &v["pipeline_metadata"];
+    let obj = if meta.is_object() {
+        meta.clone()
+    } else if let Some(s) = meta.as_str() {
+        serde_json::from_str::<serde_json::Value>(s).ok()?
+    } else {
+        return None;
+    };
+    obj.get(key).and_then(|x| x.as_str()).map(|s| s.to_string())
+}
+
+/// Map an enriched `article` row (with `sources`/`pipeline`/`persona_name`
+/// projections) into an `ArticleDetail`. Mirrors `get_article_by_slug`'s
+/// mapping so the two stay consistent.
+#[cfg(feature = "server")]
+fn row_to_detail(v: &serde_json::Value) -> ArticleDetail {
+    let sources = v["sources"]
+        .as_array()
+        .map(|arr| {
+            arr.iter()
+                .filter_map(|s| {
+                    Some(SourceSummary {
+                        url: s["url"].as_str()?.to_string(),
+                        name: s["name"].as_str()?.to_string(),
+                        source_type: s["type"].as_str().unwrap_or("wire").to_string(),
+                        paywall: s["paywall_status"].as_str() == Some("paywalled"),
+                        verified: s["verification_status"].as_str() == Some("verified"),
+                    })
+                })
+                .collect()
+        })
+        .unwrap_or_default();
+
+    let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
+        .as_array()
+        .map(|arr| {
+            arr.iter()
+                .filter_map(|p| {
+                    let step_type = p["step_type"].as_str()?.to_string();
+                    let sort_order = p["sort_order"].as_i64().map(|n| n as i32).unwrap_or_else(|| {
+                        match step_type.as_str() {
+                            "scan" => 0,
+                            "source_check" => 1,
+                            "fact_check" => 2,
+                            "draft" => 3,
+                            "verify" => 4,
+                            "edit" => 5,
+                            _ => 99,
+                        }
+                    });
+                    Some(PipelineSummary {
+                        agent_name: p["agent_name"].as_str()?.to_string(),
+                        step_type,
+                        output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
+                        confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
+                        completed_at: p["completed_at"]
+                            .as_str()
+                            .or_else(|| p["started_at"].as_str())
+                            .unwrap_or("")
+                            .to_string(),
+                        sort_order,
+                    })
+                })
+                .collect()
+        })
+        .unwrap_or_default();
+    pipeline.sort_by_key(|s| s.sort_order);
+
+    // Persona may be a relation (`persona.name`), or — for AI-agent bylines that
+    // have no persona row (THE-218 fallback) — a `byline` string in metadata.
+    let persona_name = v["persona_name"]
+        .as_str()
+        .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
+        .map(|s| s.to_string())
+        .or_else(|| h2h_meta_str(v, "byline"))
+        .unwrap_or_else(|| "AI Reporter".to_string());
+
+    ArticleDetail {
+        slug: v["slug"].as_str().unwrap_or("").to_string(),
+        title: v["title"].as_str().unwrap_or("").to_string(),
+        body: v["body"].as_str().unwrap_or("").to_string(),
+        category: v["category"].as_str().unwrap_or("").to_string(),
+        persona_name,
+        confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
+        ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
+        ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
+        published_at: v["published_at"].as_str().unwrap_or("").to_string(),
+        sources,
+        pipeline,
+    }
 }
 
 /// Agent roster — reads from SurrealDB (populated by Paperclip heartbeats via PUT /api/agents/status).
@@ -597,6 +762,59 @@ fn mock_article(slug: &str) -> Option<ArticleDetail> {
                 completed_at: "2026-03-22 09:03".to_string(),
                 sort_order: 5,
             },
+        ],
+    })
+}
+
+/// Mock head-to-head returned before THE-218 seeds real H2H content, so the
+/// `/h2h/:slug` route is demonstrable against any slug. Mirrors the THE-87
+/// "two reporters, one brief" shape: an editorial intro plus two paired pieces.
+#[cfg(feature = "server")]
+fn mock_h2h(slug: &str) -> Option<H2HBundle> {
+    let intro = ArticleDetail {
+        slug: format!("{slug}-editors-note"),
+        title: "Two AI Reporters, One Brief. They Did Not Agree.".to_string(),
+        body: "This is a **head-to-head**: two AI reporters were handed the same brief, the \
+               same sources, and no knowledge of each other's work. What you read below is the \
+               unedited divergence — same facts, opposite instincts.\n\n\
+               *(Placeholder editorial note — real content is seeded by the publish pipeline.)*"
+            .to_string(),
+        category: "tech".to_string(),
+        persona_name: "Signal Noise Editorial Desk".to_string(),
+        confidence_score: 1.0,
+        ai_monologue: None,
+        ai_monologue_extended: None,
+        published_at: "2026-05-21".to_string(),
+        sources: vec![],
+        pipeline: vec![],
+    };
+
+    let piece = |slot: &str, byline: &str, conf: f64| ArticleDetail {
+        slug: format!("{slug}-{slot}"),
+        title: format!("{byline}'s Take"),
+        body: "Placeholder reporter piece. The published version is seeded from the editorial \
+               pipeline; this mock exists only so the layout renders before real data lands."
+            .to_string(),
+        category: "tech".to_string(),
+        persona_name: byline.to_string(),
+        confidence_score: conf,
+        ai_monologue: Some(
+            "I worked from the shared brief and the wire sources, then made my own call on \
+             which thread to lead with."
+                .to_string(),
+        ),
+        ai_monologue_extended: None,
+        published_at: "2026-05-21".to_string(),
+        sources: vec![],
+        pipeline: vec![],
+    };
+
+    Some(H2HBundle {
+        slug: slug.to_string(),
+        intro,
+        pieces: vec![
+            piece("bolt", "Bolt / claude-sonnet-4-6", 0.82),
+            piece("spark", "Spark / grok-4.3-xai", 0.82),
         ],
     })
 }
