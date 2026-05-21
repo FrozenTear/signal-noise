@@ -33,6 +33,7 @@ on:
     branches: [master]
     paths:
       - "docs/published/**/publish.json"   # content change -> seed
+      - "ops/seed.txt"                      # bump this file -> seed all payloads (needs SEED_API_TOKEN secret)
       - "ops/probe.txt"                     # bump this file -> read-only probe (no token needed)
 
 concurrency:
@@ -57,8 +58,8 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
           elif git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null \
-               | grep -q 'docs/published/.*publish\.json'; then
-            echo "mode=seed" >> "$GITHUB_OUTPUT"   # an approved payload changed
+               | grep -Eq 'docs/published/.*publish\.json|ops/seed\.txt'; then
+            echo "mode=seed" >> "$GITHUB_OUTPUT"   # an approved payload changed, or seed explicitly requested
           else
             echo "mode=probe" >> "$GITHUB_OUTPUT"  # ops/probe.txt bump or unknown -> safe read-only
           fi
