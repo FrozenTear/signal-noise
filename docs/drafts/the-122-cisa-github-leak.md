@@ -56,13 +56,13 @@ Rationale: sourcing is strong — primary discoverer (GitGuardian) plus on-the-r
 | Name | URL | Type | Paywall | Verification |
 |---|---|---|---|---|
 | GitGuardian — "How we got a CISA GitHub leak taken down in 26 hours" (discoverer / primary) | https://blog.gitguardian.com/how-we-got-a-cisa-github-leak-taken-down-in-26-hours/ | primary | free | verified |
-| Ars Technica — "In stunning display of stupid, secret CISA credentials found in public GitHub repo" (cited lead) | https://arstechnica.com/information-technology/2026/05/in-stunning-display-of-stupid-secret-cisa-credentials-found-in-public-github-repo/ | press | paywalled | unverified (body not directly readable; claims corroborated) |
-| Krebs on Security | https://krebsonsecurity.com/ | press | free | verified |
-| The Record (Recorded Future News) | https://therecord.media/ | press | free | verified |
-| CyberScoop | https://cyberscoop.com/ | press | free | verified |
-| The Register | https://www.theregister.com/ | press | free | verified |
+| Ars Technica — "In stunning display of stupid, secret CISA credentials found in public GitHub repo" (cited lead) | https://arstechnica.com/information-technology/2026/05/in-stunning-display-of-stupid-secret-cisa-credentials-found-in-public-github-repo/ | press | paywalled | not directly readable; every claim it carries independently corroborated below |
+| Krebs on Security — "CISA Admin Leaked AWS GovCloud Keys on Github" | https://krebsonsecurity.com/2026/05/cisa-admin-leaked-aws-govcloud-keys-on-github/ | press | free | verified (contractor = Nightwing, Dulles VA; importantAWStokens = 3 GovCloud accounts) |
+| CyberScoop — "CISA credential leak raises alarms, and Capitol Hill demands answers" | https://cyberscoop.com/cisa-credential-leak-congress-demands-answers/ | press | free | verified (Congress response + CISA "no indication" statement) |
+| Gizmodo — "'The Worst Leak That I've Witnessed'…" | https://gizmodo.com/the-worst-leak-that-ive-witnessed-u-s-cybersecurity-agency-leaves-its-digital-keys-out-in-public-on-github-2000760330 | press | free | verified (source of "worst leak" characterization) |
+| The Register — "America's top cyber-defense agency left a GitHub repo open…" | https://www.theregister.com/security/2026/05/19/americas-top-cyber-defense-agency-left-a-github-repo-open-with-passwords-keys-tokens-and-incredibly-obvious-filenames/5242915 | press | free | verified |
 
-> Note for the Verifier: the GitGuardian, Krebs, The Record, and CyberScoop URLs above are the canonical outlet/landing identifiers from the Source Checker brief; if the Verifier locates the exact per-article permalinks, swap them in before publish. TechCrunch, Dark Reading, Gizmodo, FedScoop, SC Media, TechRadar, and Biometric Update were also cited in the brief as additional corroboration.
+> Verifier note (2026-05-21): Article Verifier independently re-fetched the primary (GitGuardian) plus Krebs, CyberScoop, Gizmodo, The Register, Cybernews, and Dark Reading. Every figure and named fact in the body verified against at least two of these. Landing-page placeholders from the Source Checker brief have been replaced with exact per-article permalinks above. The paywalled Ars Technica lead remains unreadable but carries no claim that isn't independently confirmed, so it is no longer a verification gap.
 
 ## Pipeline Metadata
 
