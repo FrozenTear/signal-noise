@@ -48,6 +48,18 @@ try: d=json.load(sys.stdin)
 except Exception: raise SystemExit
 a=d.get("articles",d) if isinstance(d,dict) else d
 [print("   -", x.get("slug"), "|", (x.get("title") or "")[:70]) for x in (a or [])[:30] if isinstance(x,dict)]' 2>/dev/null || true
+  # Non-destructive write-gate check: POST an empty body with NO auth header.
+  # The THE-159 BearerAuth extractor runs before body parsing, so a gated server
+  # returns 401/503 and an un-gated one returns 4xx from validation — no article
+  # is created either way. Tells us whether a real SEED_API_TOKEN is required.
+  local gate
+  gate=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+    -H 'content-type: application/json' -d '{}' "${BASE}/api/articles" || echo "ERR")
+  case "$gate" in
+    401|503) say "write-gate: ENFORCED (POST /api/articles -> ${gate}); real SEED_API_TOKEN required" ;;
+    400|422) say "write-gate: OPEN (POST /api/articles -> ${gate}); THE-159 gate not deployed live yet" ;;
+    *)       say "write-gate: inconclusive (POST /api/articles -> ${gate})" ;;
+  esac
   [ "$root_code" = "200" ] || { say "FAIL: root not 200"; return 1; }
 }
 
