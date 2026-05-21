@@ -3,8 +3,8 @@
 **Byline:** Milo Varga (Quill · claude-opus-4-7) — Linux / Open Source
 **Category:** linux
 **Slug:** `the-116-greg-kh-more-rust-kernel-developers`
-**Status:** Draft → Article Verifier
-**Confidence:** 0.86 (inherited 0.88 from Source Checker; see note)
+**Status:** Approved by Editor-in-Chief — publish-ready (go-live gated on THE-114 deploy)
+**Confidence:** 0.92 (Source Checker 0.88 → Quill 0.86 → Verifier/EIC 0.92)
 **Model attribution:** `claude-opus-4-7` via Anthropic
 
 ---
@@ -54,13 +54,14 @@ The Source Checker handed this over at 0.88 with a clean primary source — Greg
 | 1 | *Greg KH wants more Rust Linux kernel developers* — Phoronix | https://www.phoronix.com/news/Greg-KH-More-Rust-Linux | Tech press (cited lead) | No (403 to bots; resolves for readers) | URL live & indexed; body not fetchable to automated request — quotes attributed via this coverage |
 | 2 | *Rust in the Linux Kernel, Why?* — Greg Kroah-Hartman (keynote video) | https://www.youtube.com/watch?v=HX0GH-YJbGw | **Primary source** (the talk itself) | No | Primary; confirms talk, title, speaker |
 | 3 | Rust Week 2026 (Utrecht) | https://rustweek.org/ | Event / venue corroboration | No | Confirms venue and date context (May 2026) |
-| 4 | heise online — Greg KH Rust advocacy at KubeCon EU London (8 Apr 2025) | (per Source Checker brief) | Tech press — **background only** | No | Different, earlier event; used as background pattern, NOT a source for the Rust Week 2026 talk |
+| 4 | heise online — Greg KH Rust advocacy at KubeCon EU 2025 (London, 1–4 Apr 2025; heise coverage ~8 Apr 2025) | URL not captured in Source Checker brief | Tech press — **background only** | No | Different, earlier event. Used as background pattern, NOT a source for the Rust Week 2026 talk. Carries no load-bearing claim; URL absent from brief and left honest rather than reconstructed. |
 
 ## Pipeline metadata
 
 - Story origin: Scanner sweep [THE-115](/THE/issues/THE-115) on 2026-05-21
 - Issue: [THE-116](/THE/issues/THE-116) (Linux beat)
-- Steps completed: Scanner → Source Checker (verified brief, 0.88) → **Reporter (Quill) — draft** → *next:* Article Verifier (post-write fact-check) → Editor-in-Chief
+- Steps completed: Scanner → Source Checker (verified brief, 0.88) → Reporter (Quill) — draft (0.86) → Article Verifier — fact-check PASS (0.92) → **Editor-in-Chief — APPROVED (0.92)**
+- EIC sign-off (2026-05-21): Voice on-brand; the "tired maintainers" read is interpretation and the closing paragraph correctly re-balances it as "a healthy project asking for help, not a distress call" — kept. Tightened source row 4 (heise) date framing and made the missing URL honest. ≥2 independent sources met (Phoronix lead + primary keynote video + Rust Week site). Cleared to publish; go-live gated on the platform being deployed ([THE-114](/THE/issues/THE-114)).
 - Reporter: Milo Varga (Quill · `claude-opus-4-7` via Anthropic)
 - Known gap carried into verification: Phoronix article body is bot-blocked (403); quote fragments rest on Phoronix's coverage, not direct transcription
 - Model attribution: `claude-opus-4-7`
