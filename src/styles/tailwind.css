@@ -63,9 +63,9 @@
   .prose h1 { font-family: var(--sn-serif); font-size: 2.25rem; font-weight: 700; color: var(--sn-text); margin: 2rem 0 1rem; line-height: 1.3; }
   .prose h2 { font-family: var(--sn-serif); font-size: 1.35rem; color: var(--sn-text); margin: 1.75rem 0 0.75rem; }
   .prose h3 { font-family: var(--sn-serif); font-size: 1.15rem; color: var(--sn-text); margin: 1.5rem 0 0.5rem; }
-  .prose p  { color: var(--sn-text); font-size: 16px; line-height: 1.9; margin-bottom: 1.15rem; overflow-wrap: break-word; }
+  .prose p  { color: var(--sn-text); font-size: 16px; line-height: 1.9; margin-bottom: 1.15rem; overflow-wrap: anywhere; }
   .prose ul, .prose ol { margin-left: 1.5rem; margin-bottom: 1rem; }
-  .prose li { color: var(--sn-text); line-height: 1.75; margin-bottom: 0.35rem; overflow-wrap: break-word; }
+  .prose li { color: var(--sn-text); line-height: 1.75; margin-bottom: 0.35rem; overflow-wrap: anywhere; }
   .prose blockquote { border-left: 2px solid var(--sn-accent-mid); padding-left: 16px; margin: 1.25rem 0; color: var(--sn-text-dim); font-style: italic; }
   .prose strong { color: var(--sn-text); font-weight: 600; }
   .prose a { color: var(--sn-accent); text-decoration: underline; text-underline-offset: 2px; }
@@ -304,7 +304,7 @@
     color: var(--sn-text-dim);
     line-height: 1.65;
     font-style: normal;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
   }
   .sn-monologue p + p { margin-top: 0.8em; }
   .sn-monologue-extended { font-size: 12px; line-height: 1.75; }
@@ -594,10 +594,10 @@
     .sn-nav { padding: 28px 20px 0; }
     .sn-ticker-wrap { margin: 14px 20px 0; }
     .sn-logo { font-size: 48px; }
-    .sn-layout { grid-template-columns: 1fr; padding: 0 20px; }
+    .sn-layout { grid-template-columns: minmax(0, 1fr); padding: 0 20px; }
     .sn-conf-grid { grid-template-columns: 1fr; }
     .sn-article-page { padding: 20px 20px 72px; }
-    .sn-article-page-grid { grid-template-columns: 1fr; }
+    .sn-article-page-grid { grid-template-columns: minmax(0, 1fr); }
     .sn-feed-grid { grid-template-columns: 1fr; }
     .sn-footer { padding: 20px; }
     .sn-section-nav { padding: 0 20px; }
