@@ -19,6 +19,28 @@ tracked on [THE-114](/THE/issues/THE-114).
 - **The `scanner` bin does not touch the DB** — it reads RSS/gnews and posts to
   the Paperclip API, so it can run independently (see "Scanner" below).
 
+### Reusable standalone-article publish path (DB seed)
+
+`seed_article` is the canonical offline path for publishing a single approved
+article (no H2H bundle). It is the mechanism that will publish [THE-119](/THE/issues/THE-119)
+as the first article through the reusable flow.
+
+- Drop a `publish.json` (shape compatible with `POST /api/articles` + optional
+  `published_at`, `issue`, `pipeline_steps` for the full audit trail) into
+  `docs/published/the-XXX/publish.json`.
+- From a stopped service (or any machine with the DB file):
+  `cargo run --bin seed_article --features server -- docs/published/the-XXX/publish.json`
+- Idempotent: re-running the same slug wipes only that article's row + its
+  private `produced_by` / `cites` edges before re-insert. Shared `source` rows
+  are UPSERTed and preserved.
+- Full transparency (sources + pipeline steps) is supported and recommended.
+  The old per-article `seed_the122` / `seed_the124` style is now legacy; new
+  standalones go through `seed_article`.
+
+See `src/bin/seed_article.rs` for the exact JSON expectations and the
+`docs/published/the-116/publish.json` as a minimal real-world example (add
+`pipeline_steps` for complete trail on future seeds).
+
 ## Layout on the VPS
 
 | Path | Purpose |
