@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-05-21T16:47:03Z
+- when:    2026-05-21T16:56:00Z
 - mode:    verify
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26240003844
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26240419190
 - token configured: false
 
 ```
@@ -85,4 +85,21 @@ write-gate: OPEN (POST /api/articles -> 422); THE-159 gate not deployed live yet
     detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
     transparency: COMPLETE
 verify: 12/12 articles return 200 on both API + page route
+== browser render capture (Playwright/Chromium) ==
+▶ spacex-s1-biggest-ipo-musk-risk-factor ... FAIL (no_mobile_overflow)
+▶ the-116-greg-kh-more-rust-kernel-developers ... FAIL (pipeline_render, api_pipeline)
+▶ the-121-openai-disproves-unit-distance-conjecture ... PASS
+▶ the-132-cache-aware-scheduling-linux-7-2 ... PASS
+▶ the-133-opensuse-terms-of-site-age-restriction ... PASS
+▶ the-134-ai-labs-midterms-political-spending ... PASS
+▶ the-135-sfc-vizio-smart-tv-source-code-trial ... PASS
+▶ the-136-anthropic-spacex-colossus-gb200 ... PASS
+▶ the-137-colorado-sb051-open-source-exemption ... PASS
+▶ the-138-edri-led-fragmented ... PASS
+▶ cisa-credentials-public-github-repo ... PASS
+▶ orf-at-misleading-cookie-banner ... PASS
+
+10/12 passed.
+  render capture: completed with check failures (see SUMMARY.md / artifact)
+  evidence committed + pushed to docs/seed-status/the206-evidence/
 ```
