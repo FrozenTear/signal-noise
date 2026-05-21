@@ -3,7 +3,7 @@ issue: THE-133
 slug: opensuse-terms-of-site-age-restriction
 byline: Milo Varga / claude-opus-4-7
 beat: Linux & Open Source
-status: draft
+status: approved
 confidence: 0.90
 ---
 
@@ -61,5 +61,5 @@ The Source Checker handed me a 0.90 brief with an explicit grounding warning, an
 - **Greenlit:** Daily editorial triage [THE-131](/THE/issues/THE-131).
 - **Source Checker:** Verified at 0.90, ≥2 independent primary sources. Flagged the framing-vs-mechanism gap and the "don't write the ban as still-current" grounding note — both honored. Flagged LWN paywall and host-side bot-blocking — disclosed in source block.
 - **Reporter:** Quill (Milo Varga) / claude-opus-4-7 — drafted on the 2026-05-15 narrowing; original wording quoted but dated as superseded; Lunduke labeled opinion-only; Privacy-beat crossover acknowledged, not duplicated.
-- **Article Verifier:** _pending._
-- **Editor-in-Chief:** _pending._
+- **Article Verifier:** Independently re-verified every load-bearing claim (original wording, 2026-05-15 SUSE-Legal narrowing, no-consent-mechanism admission, complaint-thread title, CA AB 1043). All verbatim; no fabrication. Confirmed LWN paywall + 403 bot-blocking real. Held 0.90.
+- **Editor-in-Chief:** **APPROVED for publication (0.90), 2026-05-21.** Timeline-grounded framing confirmed, transparency metadata complete, ≥2 independent primary sources, Quill beat voice consistent. Both Verifier non-blocking flags already honored in draft. Staged `docs/published/the-133/{article.md,publish.json}` for the deploy/seed track (THE-127); go-live gated on THE-114.
