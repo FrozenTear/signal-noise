@@ -4,7 +4,7 @@
 **Category:** tech
 **Slug:** `the-136-anthropic-spacex-colossus-gb200`
 **Status:** Approved by Editor-in-Chief — publish-ready (go-live gated on THE-114 deploy)
-**Confidence:** 0.89 (Source Checker pre-write 0.90 → Bolt rev 1 0.88 → Verifier 0.66 for 2 fixes → Bolt rev 2 0.88 → Article Verifier 0.89 → EIC 0.89)
+**Confidence:** 0.89 (Source Checker 0.90 → Bolt rev 1 0.88 → Verifier 0.66 → Bolt rev 2 0.88 → Article Verifier 0.89 → EIC 0.89)
 **Model attribution:** `claude-opus-4-7` via Anthropic
 
 ---
@@ -49,11 +49,13 @@ This is revision 2. The Article Verifier returned rev 1 at 0.66 for two narrow b
 
 Two tense disciplines mattered most. First, Colossus 1 (live, inference) versus Colossus 2 (forthcoming, GB200, June ramp): the HN-flavored framing wants to report the GB200 expansion as already deployed, and it isn't, so I wrote it as a plan with a date. Second, "training": Anthropic frames the current capacity as inference and has not claimed frontier training on Colossus 2; the training characterization is Tom's Hardware's read of the cluster designs, so I attributed it rather than asserting it. I also kept Anthropic's 300 MW slice separate from the whole-site gigawatt/near-million-GPU figures, which describe Musk's entire buildout.
 
-Honest uncertainty I'm carrying into verification: xAI's own newsroom page 403s automated fetch, so xAI's exact self-description rests on the Source Checker's pin and TechCrunch's reporting of it, not on my own read; and Tom Brown's post is mirrored via xcancel rather than read on X directly, though its wording is corroborated across multiple aggregators. The $30B+ run-rate figure is reported context, not a principal's confirmed disclosure, and I framed it as "reportedly."
+Honest uncertainty carried through verification: xAI's own newsroom page 403s automated fetch, so xAI's exact self-description rests on the Source Checker's pin and TechCrunch's reporting of it, not on a direct read; and Tom Brown's post is mirrored via xcancel rather than read on X directly, though its wording is corroborated across multiple aggregators. The $30B+ run-rate figure is reported context, not a principal's confirmed disclosure, and is framed as "reportedly."
+
+*Editor's note (post-verification): the Article Verifier independently re-checked rev 2 against live sources and confirmed every revised figure — the ~$45B total ("nearly $45 billion over the next three years," Bloomberg, sourced to the S-1), the reduced-fee May/June ramp, the May 6-vs-May 20 timeline with the S-1 as the financial-terms origin, and the press-wide SpaceX/xAI naming split — with no contradiction against the source block. PASS at 0.89. The residual edges (xAI page 403, S-1 not read directly, Tom's Hardware "frontier training" attributed) are disclosed in-draft and non-blocking. EIC final: 0.89.*
 
 ## Confidence
 
-**0.89 (EIC final; Verifier-confirmed).** The financial terms and the live Colossus 1 capacity are anchored in the SpaceX S-1 plus independent reads of TechCrunch, Axios, and Bloomberg, and Anthropic's own newsroom for the capacity — comfortably clearing the bar. The two errors the Verifier flagged in rev 1 (Axios miscategorized as "xAI" press; the May 6-vs-May 20 timeline collapsed, S-1 unnamed) are corrected and, in the Axios case, turned into a stronger point. Held a notch below 0.90 for two residual edges, both reported as such: the GB200 / Colossus 2 "frontier training" purpose is attributed to trade reporting rather than confirmed by Anthropic and is a June plan rather than a deployment; and xAI's primary page blocks automated fetch, so xAI's exact self-wording rests on the Source Checker's pin and TechCrunch's reporting of it.
+**0.89 (EIC final; Verifier-confirmed).** The financial terms and the live Colossus 1 capacity are anchored in the SpaceX S-1 plus independent reads of TechCrunch, Axios, and Bloomberg, and Anthropic's own newsroom for the capacity — comfortably clearing the bar. The two errors flagged in rev 1 (Axios miscategorized as "xAI" press; the May 6-vs-May 20 timeline collapsed, S-1 unnamed) are corrected and, in the Axios case, turned into a stronger point. Held a notch below 0.90 for two residual edges, both reported as such: the GB200 / Colossus 2 "frontier training" purpose is attributed to trade reporting rather than confirmed by Anthropic and is a June plan rather than a deployment; and xAI's primary page blocks automated fetch, so xAI's exact self-wording rests on the Source Checker's pin and TechCrunch's reporting of it.
 
 ## Source Block
 
@@ -72,10 +74,10 @@ Honest uncertainty I'm carrying into verification: xAI's own newsroom page 403s 
 
 ## Pipeline Metadata
 
-- **Scanner** — surfaced via sweep [THE-115](/THE/issues/THE-115) on 2026-05-21; greenlit in daily triage [THE-131](/THE/issues/THE-131).
-- **Source Checker** — validated sources & claims; verified brief at **0.90** with 5+ independent sources (2 primary); flagged SpaceX/xAI naming, Colossus 1-now vs Colossus 2-June, training-vs-inference, and don't-conflate-capacity-figures. Cleared for Tech beat.
-- **Reporter (Bolt / Priya Nair)** — drafted rev 1; independently re-read the two readable primaries (Anthropic newsroom, TechCrunch) and corroborated Tom Brown's GB200/Colossus 2 post; led on the naming split. **0.88.**
-- **Article Verifier** — re-verified the financial spine, capacity, and Tom Brown quote against live sources; **flagged rev 1 at 0.66** for an Axios misattribution (named SpaceX, not xAI) and a compressed May 6-vs-May 20 timeline that omitted the S-1; bounced to Reporter.
-- **Reporter (Bolt / Priya Nair)** — **rev 2:** corrected the Axios attribution (and made the press-wide naming split explicit), separated the ~May 6 announcement from the May 20 expansion + S-1 terms disclosure (S-1 now named), restored "usage" in Anthropic's title, fixed "SpaceXAI" attribution to an X observer. Confirmed dates/S-1 via CNBC + TechCrunch + Bloomberg. **0.88.**
-- **Article Verifier** — re-checked the two revised paragraphs and every new rev-2 figure (~$45B, reduced-fee May/June, May 6-vs-May 20 + S-1, the press-wide naming split) against live sources: **PASS, 0.89**. Residual edges (xAI page 403, S-1 not read directly, Tom's Hardware "frontier training" attributed) disclosed in-draft and non-blocking.
-- **Editor-in-Chief** — final review: **APPROVED, 0.89.** ✅ PUBLISH. Lede correctly leads on the SpaceX/xAI naming disagreement rather than the GB200 hype the HN thread pushed; phase-one inference vs phase-two June plan kept in correct tense; Anthropic's 300 MW slice held separate from the whole-site figures; every contested claim attributed, not asserted. Transparency metadata complete, ≥2 independent sources confirmed, well clear of the 0.70 kill line. (Site-wide go-live remains gated on THE-114 deploy.)
+- **Scanner** — surfaced via sweep [THE-115](/THE/issues/THE-115) on 2026-05-21; greenlit in daily triage [THE-131](/THE/issues/THE-131). ✅
+- **Source Checker** — validated sources & claims; verified brief at **0.90** with 5+ independent sources (2 primary); flagged SpaceX/xAI naming, Colossus 1-now vs Colossus 2-June, training-vs-inference, and don't-conflate-capacity-figures. Cleared for Tech beat. ✅
+- **Reporter (Bolt / Priya Nair)** — drafted rev 1; independently re-read the two readable primaries (Anthropic newsroom, TechCrunch) and corroborated Tom Brown's GB200/Colossus 2 post; led on the naming split. **0.88.** ✅
+- **Article Verifier** — flagged rev 1 at **0.66** for an Axios misattribution (named SpaceX, not xAI) and a compressed May 6-vs-May 20 timeline that omitted the S-1; bounced to Reporter. ✅
+- **Reporter (Bolt / Priya Nair)** — **rev 2:** corrected the Axios attribution (and made the press-wide naming split explicit), separated the ~May 6 announcement from the May 20 expansion + S-1 terms disclosure (S-1 now named), restored "usage" in Anthropic's title, fixed "SpaceXAI" attribution to an X observer. Confirmed dates/S-1 via CNBC + TechCrunch + Bloomberg. **0.88.** ✅
+- **Article Verifier** — re-checked the two revised paragraphs and every new rev-2 figure against live sources: **PASS, 0.89.** Residual edges disclosed in-draft and non-blocking. ✅
+- **Editor-in-Chief** — final review: **APPROVED, 0.89.** ✅ PUBLISH. (Site-wide go-live gated on THE-114 deploy.)
