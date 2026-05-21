@@ -63,8 +63,8 @@
       },
       "mobile": {
         "file": "evidence/shots/spacex-s1-biggest-ipo-musk-risk-factor.mobile.png",
-        "scrollWidth": 740,
-        "overflow": true
+        "scrollWidth": 390,
+        "overflow": false
       }
     },
     "api": {
@@ -118,14 +118,14 @@
       "monologue_extended": true,
       "monologue_distinct": true,
       "no_desktop_overflow": true,
-      "no_mobile_overflow": false,
+      "no_mobile_overflow": true,
       "api_200": true,
       "api_sources": true,
       "api_pipeline": true,
       "api_monologue_distinct": true
     },
     "errors": [],
-    "pass": false
+    "pass": true
   },
   {
     "slug": "the-116-greg-kh-more-rust-kernel-developers",

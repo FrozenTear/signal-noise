@@ -1,10 +1,10 @@
 # THE-206 live evidence — https://news.scuffedcrew.no
 
-Captured: 2026-05-21T22:12:24.862Z
+Captured: 2026-05-21T22:43:49.111Z
 
 | slug | HTTP | renders_200 | headline_ok | byline_ok | confidence_shown | sources_render | pipeline_render | monologue_short | monologue_extended | monologue_distinct | no_desktop_overflow | no_mobile_overflow | api_200 | api_sources | api_pipeline | PASS |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| spacex-s1-biggest-ipo-musk-risk-factor | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ FAIL |
+| spacex-s1-biggest-ipo-musk-risk-factor | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
 | the-116-greg-kh-more-rust-kernel-developers | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
 | the-121-openai-disproves-unit-distance-conjecture | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
 | the-132-cache-aware-scheduling-linux-7-2 | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
@@ -19,7 +19,7 @@ Captured: 2026-05-21T22:12:24.862Z
 
 ## Per-article detail
 
-### spacex-s1-biggest-ipo-musk-risk-factor — FAIL
+### spacex-s1-biggest-ipo-musk-risk-factor — PASS
 - URL: https://news.scuffedcrew.no/article/spacex-s1-biggest-ipo-musk-risk-factor (HTTP 200)
 - Headline: SpaceX's S-1 makes the case for the biggest IPO ever — and lists its own CEO among the risks
 - Byline: by Priya Nair
