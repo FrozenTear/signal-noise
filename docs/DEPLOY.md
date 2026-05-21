@@ -47,7 +47,8 @@ as the first article through the reusable flow.
   `published_at`, `issue`, `pipeline_steps` for the full audit trail) into
   `docs/published/the-XXX/publish.json`.
 - From a stopped service (or any machine with the DB file):
-  `cargo run --bin seed_article --features server -- docs/published/the-XXX/publish.json`
+  `cargo run --bin db_admin --features server -- publish the-XXX`
+  (or the explicit `cargo run --bin seed_article --features server -- docs/published/the-XXX/publish.json`).
 - Idempotent: re-running the same slug wipes only that article's row + its
   private `produced_by` / `cites` edges before re-insert. Shared `source` rows
   are UPSERTed and preserved.
