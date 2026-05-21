@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-05-21T16:56:00Z
+- when:    2026-05-21T17:05:59Z
 - mode:    verify
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26240419190
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26240925749
 - token configured: false
 
 ```
@@ -76,9 +76,9 @@ write-gate: OPEN (POST /api/articles -> 422); THE-159 gate not deployed live yet
     transparency: COMPLETE
 --- the-116-greg-kh-more-rust-kernel-developers
     GET /api/articles/the-116-greg-kh-more-rust-kernel-developers -> 200 ; GET /article/the-116-greg-kh-more-rust-kernel-developers -> 200
-    persona=persona:nxz5jclxvpzuxdbpgu7p confidence=0.92 sources=3 pipeline_steps=0 monologue_short=236c monologue_extended=1569c
+    persona=persona:nxz5jclxvpzuxdbpgu7p confidence=0.92 sources=3 pipeline_steps=5(pipeline) monologue_short=236c monologue_extended=1569c
     detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
-    transparency: INCOMPLETE (pipeline trail not in API detail)
+    transparency: COMPLETE
 --- orf-at-misleading-cookie-banner
     GET /api/articles/orf-at-misleading-cookie-banner -> 200 ; GET /article/orf-at-misleading-cookie-banner -> 200
     persona=persona:6eyium9z2r5zzbmeadwg confidence=0.9 sources=4 pipeline_steps=7(pipeline) monologue_short=159c monologue_extended=1150c
@@ -87,7 +87,7 @@ write-gate: OPEN (POST /api/articles -> 422); THE-159 gate not deployed live yet
 verify: 12/12 articles return 200 on both API + page route
 == browser render capture (Playwright/Chromium) ==
 ▶ spacex-s1-biggest-ipo-musk-risk-factor ... FAIL (no_mobile_overflow)
-▶ the-116-greg-kh-more-rust-kernel-developers ... FAIL (pipeline_render, api_pipeline)
+▶ the-116-greg-kh-more-rust-kernel-developers ... PASS
 ▶ the-121-openai-disproves-unit-distance-conjecture ... PASS
 ▶ the-132-cache-aware-scheduling-linux-7-2 ... PASS
 ▶ the-133-opensuse-terms-of-site-age-restriction ... PASS
@@ -99,7 +99,7 @@ verify: 12/12 articles return 200 on both API + page route
 ▶ cisa-credentials-public-github-repo ... PASS
 ▶ orf-at-misleading-cookie-banner ... PASS
 
-10/12 passed.
+11/12 passed.
   render capture: completed with check failures (see SUMMARY.md / artifact)
   evidence committed + pushed to docs/seed-status/the206-evidence/
 ```
