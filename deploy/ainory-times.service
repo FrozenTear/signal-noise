@@ -1,0 +1,33 @@
+[Unit]
+Description=The Ainory Times (signal-noise) — Dioxus fullstack server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ainory
+Group=ainory
+# Embedded SurrealKV (data/signal-noise.db) is opened relative to the cwd,
+# so the working dir is the persistent data dir — survives every deploy.
+WorkingDirectory=/var/lib/ainory-times
+ExecStart=/opt/ainory-times/current/signal-noise
+# Restart=always (not on-failure): a clean stop/exit — e.g. a stray build
+# stopping the service, or an OOM TERM — should still auto-recover, since
+# the only thing that should keep it down is an explicit `systemctl stop`.
+Restart=always
+RestartSec=3
+Environment=RUST_LOG=signal_noise=info,info
+# Dioxus 0.7 fullstack server reads IP/PORT from the environment.
+Environment=IP=127.0.0.1
+Environment=PORT=8888
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/ainory-times
+LockPersonality=true
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

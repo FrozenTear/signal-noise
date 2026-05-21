@@ -15,7 +15,9 @@ use axum::{
 };
 use serde::Deserialize;
 use serde_json::{json, Value};
+use tracing::info;
 
+use super::auth::BearerAuth;
 use super::AppState;
 
 pub fn router(state: AppState) -> Router {
@@ -158,6 +160,7 @@ pub async fn get_article(
 }
 
 pub async fn publish_article(
+    _auth: BearerAuth,
     State(state): State<AppState>,
     Json(payload): Json<ArticlePublishPayload>,
 ) -> Result<Json<Value>, (StatusCode, Json<Value>)> {
@@ -247,6 +250,14 @@ pub async fn publish_article(
         .slug
         .filter(|s| !s.trim().is_empty())
         .unwrap_or_else(|| generate_slug(&payload.title));
+
+    info!(
+        action = "POST /api/articles",
+        slug = %slug,
+        outcome = "accepted",
+        ts = %chrono::Utc::now().to_rfc3339(),
+        "write-audit"
+    );
 
     let summary = payload.summary.unwrap_or_default();
     let ai_monologue = payload.ai_monologue.unwrap_or_default();
@@ -431,11 +442,19 @@ pub struct AgentStatusPushItem {
 }
 
 /// PUT /api/agents/status — upsert agent statuses (called by Paperclip heartbeats).
-/// Accepts a JSON array of agent status items. Localhost-only by convention.
+/// Accepts a JSON array of agent status items.
 pub async fn push_agent_status(
+    _auth: BearerAuth,
     State(state): State<AppState>,
     Json(items): Json<Vec<AgentStatusPushItem>>,
 ) -> Result<Json<Value>, StatusCode> {
+    info!(
+        action = "PUT /api/agents/status",
+        items = items.len(),
+        outcome = "accepted",
+        ts = %chrono::Utc::now().to_rfc3339(),
+        "write-audit"
+    );
     for item in items {
         let task = item.current_task.unwrap_or_default();
         let model = item.model.unwrap_or_default();
@@ -482,6 +501,7 @@ pub struct ArticleStatusPatch {
 /// PATCH /api/articles/:slug — update article status and optionally content fields.
 /// Required: { "status": "<valid_status>" }. Optional: body, summary, confidence_score, ai_monologue, ai_monologue_extended.
 pub async fn update_article_status(
+    _auth: BearerAuth,
     State(state): State<AppState>,
     Path(slug): Path<String>,
     Json(payload): Json<ArticleStatusPatch>,
@@ -489,6 +509,15 @@ pub async fn update_article_status(
     let bad_req = |msg: &str| -> (StatusCode, Json<Value>) {
         (StatusCode::BAD_REQUEST, Json(json!({ "error": msg })))
     };
+
+    info!(
+        action = %format!("PATCH /api/articles/{}", slug),
+        slug = %slug,
+        status = %payload.status,
+        outcome = "accepted",
+        ts = %chrono::Utc::now().to_rfc3339(),
+        "write-audit"
+    );
 
     if !VALID_STATUSES.contains(&payload.status.as_str()) {
         return Err(bad_req(&format!(

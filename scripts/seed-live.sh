@@ -18,6 +18,7 @@
 #                         are readable via api.github.com.
 #   MODE=seed             POST every docs/published/*/publish.json to /api/articles,
 #                         then GET /api/articles/<slug> to confirm each renders.
+#                         Requires SEED_API_TOKEN set in env — never commit the token.
 #
 # A publish.json file IS the ArticlePublishPayload (src/api/routes.rs:
 #   title, slug?, summary?, body, category, persona, confidence_score?,
@@ -51,6 +52,10 @@ a=d.get("articles",d) if isinstance(d,dict) else d
 }
 
 seed() {
+  if [[ -z "${SEED_API_TOKEN:-}" ]]; then
+    say "ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175)." >&2
+    exit 1
+  fi
   mapfile -t ARTS < <(find docs/published -type f -name publish.json 2>/dev/null | sort)
   if [ "${#ARTS[@]}" -eq 0 ]; then
     say "No docs/published/*/publish.json found in the checkout — nothing to seed."
@@ -65,7 +70,9 @@ seed() {
     slug=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("slug",""))' "$art" 2>/dev/null || echo "")
     say "POST $art (slug=${slug:-<auto>})"
     code=$(curl -fsS -o /tmp/seed-resp.json -w '%{http_code}' --max-time 30 \
-      -H 'content-type: application/json' --data @"$art" \
+      -H 'content-type: application/json' \
+      -H "Authorization: Bearer ${SEED_API_TOKEN}" \
+      --data @"$art" \
       "${BASE}/api/articles" || echo "ERR")
     if [ "$code" != "200" ] && [ "$code" != "201" ]; then
       say "  FAIL (HTTP $code): $(cat /tmp/seed-resp.json 2>/dev/null)"; fail=1; continue
