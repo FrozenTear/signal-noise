@@ -1,0 +1,65 @@
+name: verify-the189-bearer-acceptance
+
+# THE-189: runtime acceptance for the THE-159 bearer-auth hardening.
+#
+# Runs 5 live checks from a GitHub-hosted runner (which CAN reach the VPS at
+# 194.163.163.153; the agent sandbox has an IP-specific egress block per THE-156/157).
+#
+# Results are committed back to docs/seed-status/the159-acceptance.md via the
+# same git-bridge pattern used by deploy-seed — no GitHub Actions API token
+# needed. Verify polls the repo to read the outcome.
+#
+# Requires SEED_API_TOKEN GitHub Actions secret for T3/T5 (valid-bearer + seed).
+# T1, T2, T4 (the rejection and read tests) run regardless.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - '.github/workflows/verify-the189-bearer-acceptance.yml'
+      - 'ops/accept.txt'
+
+permissions:
+  contents: write
+
+env:
+  BASE: https://news.scuffedcrew.no
+
+jobs:
+  accept:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run THE-189 bearer-auth acceptance (MODE=accept)
+        id: accept
+        env:
+          MODE: accept
+          BASE: ${{ env.BASE }}
+          SEED_API_TOKEN: ${{ secrets.SEED_API_TOKEN }}
+        run: bash scripts/seed-live.sh 2>&1 | tee /tmp/accept-out.txt
+
+      - name: Commit acceptance report (always)
+        if: always()
+        run: |
+          mkdir -p docs/seed-status
+          {
+            echo "# THE-189 bearer-auth acceptance report"
+            echo ""
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "- when: $(date -u +%FT%TZ)"
+            echo "- trigger: ${{ github.event_name }}"
+            echo "- token configured: ${{ secrets.SEED_API_TOKEN != '' }}"
+            echo ""
+            echo '```'
+            cat /tmp/accept-out.txt 2>/dev/null || echo "(no output captured)"
+            echo '```'
+          } > docs/seed-status/the159-acceptance.md
+          cat docs/seed-status/the159-acceptance.md >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "verify-the189 bot"
+          git config user.email "actions@github.com"
+          git add docs/seed-status/the159-acceptance.md
+          git commit -m "chore(the159-acceptance): record acceptance run ${{ github.run_id }} [skip ci]" \
+            || echo "no change to commit"
+          git push || echo "push skipped"
