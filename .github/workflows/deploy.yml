@@ -26,11 +26,6 @@ on:
         description: 'type "deploy" to confirm a live redeploy'
         required: true
         default: ''
-  push:
-    branches: [master]
-    paths:
-      - "ops/deploy.txt"   # bump this file -> agent-triggerable live redeploy (no gh/PAT needed; SSH push only)
-
 concurrency:
   group: live-deploy
   cancel-in-progress: false
