@@ -141,15 +141,36 @@
         "href": "https://www.youtube.com/watch?v=HX0GH-YJbGw"
       },
       {
-        "name": "Rust Week 2026 (Utrecht)",
-        "href": "https://rustweek.org/"
-      },
-      {
         "name": "Greg KH wants more Rust Linux kernel developers — Phoronix",
         "href": "https://www.phoronix.com/news/Greg-KH-More-Rust-Linux"
+      },
+      {
+        "name": "Rust Week 2026 (Utrecht)",
+        "href": "https://rustweek.org/"
       }
     ],
-    "pipeline_steps": [],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Milo Varga (Quill)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
     "monologue_short_present": true,
     "monologue_extended_present": true,
     "monologue_distinct": true,
@@ -170,15 +191,41 @@
       "status": 200,
       "file": "evidence/api/the-116-greg-kh-more-rust-kernel-developers.json",
       "has_sources": true,
-      "has_pipeline": false,
+      "has_pipeline": true,
       "has_monologue": true,
       "has_monologue_extended": true,
       "monologue_distinct": true,
       "source_count": 3,
-      "pipeline_count": 0,
+      "pipeline_count": 5,
       "persona_name": "Milo Varga",
       "confidence_score": 0.92,
-      "pipeline": []
+      "pipeline": [
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Milo Varga (Quill)",
+          "model": null
+        }
+      ]
     },
     "checks": {
       "renders_200": true,
@@ -186,7 +233,7 @@
       "byline_ok": true,
       "confidence_shown": true,
       "sources_render": true,
-      "pipeline_render": false,
+      "pipeline_render": true,
       "monologue_short": true,
       "monologue_extended": true,
       "monologue_distinct": true,
@@ -194,11 +241,11 @@
       "no_mobile_overflow": true,
       "api_200": true,
       "api_sources": true,
-      "api_pipeline": false,
+      "api_pipeline": true,
       "api_monologue_distinct": true
     },
     "errors": [],
-    "pass": false
+    "pass": true
   },
   {
     "slug": "the-121-openai-disproves-unit-distance-conjecture",

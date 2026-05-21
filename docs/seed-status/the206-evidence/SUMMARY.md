@@ -1,11 +1,11 @@
 # THE-206 live evidence — https://news.scuffedcrew.no
 
-Captured: 2026-05-21T16:55:57.112Z
+Captured: 2026-05-21T17:05:56.195Z
 
 | slug | HTTP | renders_200 | headline_ok | byline_ok | confidence_shown | sources_render | pipeline_render | monologue_short | monologue_extended | monologue_distinct | no_desktop_overflow | no_mobile_overflow | api_200 | api_sources | api_pipeline | PASS |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | spacex-s1-biggest-ipo-musk-risk-factor | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ FAIL |
-| the-116-greg-kh-more-rust-kernel-developers | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ FAIL |
+| the-116-greg-kh-more-rust-kernel-developers | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
 | the-121-openai-disproves-unit-distance-conjecture | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
 | the-132-cache-aware-scheduling-linux-7-2 | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
 | the-133-opensuse-terms-of-site-age-restriction | 200 | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ PASS |
@@ -29,13 +29,13 @@ Captured: 2026-05-21T16:55:57.112Z
 - Monologue short/extended/distinct: true/true/true
 - Screenshots: desktop=evidence/shots/spacex-s1-biggest-ipo-musk-risk-factor.desktop.png, mobile=evidence/shots/spacex-s1-biggest-ipo-musk-risk-factor.mobile.png
 
-### the-116-greg-kh-more-rust-kernel-developers — FAIL
+### the-116-greg-kh-more-rust-kernel-developers — PASS
 - URL: https://news.scuffedcrew.no/article/the-116-greg-kh-more-rust-kernel-developers (HTTP 200)
 - Headline: Greg KH wants more Rust kernel developers. The keynote was the recruiting poster.
 - Byline: by Milo Varga
 - Confidence meter: 92% (API score 0.92)
 - Sources: 3 rendered, 3 links (API 3)
-- Pipeline: —
+- Pipeline: DISCOVER/Scanner → SOURCE CHECK/Source Checker → DRAFT/Milo Varga (Quill) → VERIFICATION/Article Verifier → EDITORIAL REVIEW/Editor-in-Chief
 - Monologue short/extended/distinct: true/true/true
 - Screenshots: desktop=evidence/shots/the-116-greg-kh-more-rust-kernel-developers.desktop.png, mobile=evidence/shots/the-116-greg-kh-more-rust-kernel-developers.mobile.png
 
