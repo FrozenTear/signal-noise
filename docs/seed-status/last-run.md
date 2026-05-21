@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-05-21T21:38:50Z
-- mode:    probe
+- when:    2026-05-21T22:12:28Z
+- mode:    verify
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26254654502
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26256089523
 - token configured: false
 
 ```
@@ -23,4 +23,83 @@ GET /api/articles -> 12 article(s)
    - the-116-greg-kh-more-rust-kernel-developers | Greg KH wants more Rust kernel developers. The keynote was the recruit
    - orf-at-misleading-cookie-banner | ORF Appealed Rather Than Even Out Two Buttons. The Court Said No.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
+== transparency verify https://news.scuffedcrew.no ==
+--- the-138-edri-led-fragmented
+    GET /api/articles/the-138-edri-led-fragmented -> 200 ; GET /article/the-138-edri-led-fragmented -> 200
+    persona=persona:6eyium9z2r5zzbmeadwg confidence=0.86 sources=3 pipeline_steps=5(pipeline) monologue_short=348c monologue_extended=1900c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-137-colorado-sb051-open-source-exemption
+    GET /api/articles/the-137-colorado-sb051-open-source-exemption -> 200 ; GET /article/the-137-colorado-sb051-open-source-exemption -> 200
+    persona=persona:6eyium9z2r5zzbmeadwg confidence=0.93 sources=5 pipeline_steps=5(pipeline) monologue_short=356c monologue_extended=1627c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-136-anthropic-spacex-colossus-gb200
+    GET /api/articles/the-136-anthropic-spacex-colossus-gb200 -> 200 ; GET /article/the-136-anthropic-spacex-colossus-gb200 -> 200
+    persona=persona:14epwg1le2wgk21h6ohr confidence=0.89 sources=5 pipeline_steps=7(pipeline) monologue_short=573c monologue_extended=3065c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-135-sfc-vizio-smart-tv-source-code-trial
+    GET /api/articles/the-135-sfc-vizio-smart-tv-source-code-trial -> 200 ; GET /article/the-135-sfc-vizio-smart-tv-source-code-trial -> 200
+    persona=persona:14epwg1le2wgk21h6ohr confidence=0.9 sources=5 pipeline_steps=5(pipeline) monologue_short=195c monologue_extended=1238c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-134-ai-labs-midterms-political-spending
+    GET /api/articles/the-134-ai-labs-midterms-political-spending -> 200 ; GET /article/the-134-ai-labs-midterms-political-spending -> 200
+    persona=persona:14epwg1le2wgk21h6ohr confidence=0.9 sources=4 pipeline_steps=5(pipeline) monologue_short=354c monologue_extended=1833c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-133-opensuse-terms-of-site-age-restriction
+    GET /api/articles/the-133-opensuse-terms-of-site-age-restriction -> 200 ; GET /article/the-133-opensuse-terms-of-site-age-restriction -> 200
+    persona=persona:nxz5jclxvpzuxdbpgu7p confidence=0.9 sources=4 pipeline_steps=5(pipeline) monologue_short=434c monologue_extended=2769c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-132-cache-aware-scheduling-linux-7-2
+    GET /api/articles/the-132-cache-aware-scheduling-linux-7-2 -> 200 ; GET /article/the-132-cache-aware-scheduling-linux-7-2 -> 200
+    persona=persona:nxz5jclxvpzuxdbpgu7p confidence=0.89 sources=5 pipeline_steps=5(pipeline) monologue_short=432c monologue_extended=1223c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- cisa-credentials-public-github-repo
+    GET /api/articles/cisa-credentials-public-github-repo -> 200 ; GET /article/cisa-credentials-public-github-repo -> 200
+    persona=persona:6eyium9z2r5zzbmeadwg confidence=0.95 sources=6 pipeline_steps=5(pipeline) monologue_short=232c monologue_extended=1646c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-121-openai-disproves-unit-distance-conjecture
+    GET /api/articles/the-121-openai-disproves-unit-distance-conjecture -> 200 ; GET /article/the-121-openai-disproves-unit-distance-conjecture -> 200
+    persona=persona:14epwg1le2wgk21h6ohr confidence=0.85 sources=1 pipeline_steps=5(pipeline) monologue_short=261c monologue_extended=1262c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- spacex-s1-biggest-ipo-musk-risk-factor
+    GET /api/articles/spacex-s1-biggest-ipo-musk-risk-factor -> 200 ; GET /article/spacex-s1-biggest-ipo-musk-risk-factor -> 200
+    persona=persona:14epwg1le2wgk21h6ohr confidence=0.93 sources=5 pipeline_steps=5(pipeline) monologue_short=338c monologue_extended=1371c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- the-116-greg-kh-more-rust-kernel-developers
+    GET /api/articles/the-116-greg-kh-more-rust-kernel-developers -> 200 ; GET /article/the-116-greg-kh-more-rust-kernel-developers -> 200
+    persona=persona:nxz5jclxvpzuxdbpgu7p confidence=0.92 sources=3 pipeline_steps=5(pipeline) monologue_short=236c monologue_extended=1569c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+--- orf-at-misleading-cookie-banner
+    GET /api/articles/orf-at-misleading-cookie-banner -> 200 ; GET /article/orf-at-misleading-cookie-banner -> 200
+    persona=persona:6eyium9z2r5zzbmeadwg confidence=0.9 sources=4 pipeline_steps=7(pipeline) monologue_short=159c monologue_extended=1150c
+    detail_keys=['ai_monologue', 'ai_monologue_extended', 'body', 'category', 'confidence_score', 'created_at', 'id', 'persona', 'persona_name', 'pipeline', 'pipeline_metadata', 'published_at', 'slug', 'source_urls', 'sources', 'status', 'summary', 'title', 'updated_at']
+    transparency: COMPLETE
+verify: 12/12 articles return 200 on both API + page route
+== browser render capture (Playwright/Chromium) ==
+▶ spacex-s1-biggest-ipo-musk-risk-factor ... FAIL (no_mobile_overflow)
+▶ the-116-greg-kh-more-rust-kernel-developers ... PASS
+▶ the-121-openai-disproves-unit-distance-conjecture ... PASS
+▶ the-132-cache-aware-scheduling-linux-7-2 ... PASS
+▶ the-133-opensuse-terms-of-site-age-restriction ... PASS
+▶ the-134-ai-labs-midterms-political-spending ... PASS
+▶ the-135-sfc-vizio-smart-tv-source-code-trial ... PASS
+▶ the-136-anthropic-spacex-colossus-gb200 ... PASS
+▶ the-137-colorado-sb051-open-source-exemption ... PASS
+▶ the-138-edri-led-fragmented ... PASS
+▶ cisa-credentials-public-github-repo ... PASS
+▶ orf-at-misleading-cookie-banner ... PASS
+
+11/12 passed.
+  render capture: completed with check failures (see SUMMARY.md / artifact)
+  evidence committed + pushed to docs/seed-status/the206-evidence/
 ```
