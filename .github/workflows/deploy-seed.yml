@@ -1,0 +1,86 @@
+name: deploy-seed
+
+# Seed approved articles into the LIVE site (news.scuffedcrew.no) from a
+# GitHub-hosted runner, which CAN reach the VPS. The agent sandbox's egress to
+# 194.163.163.153 is IP-blocked (THE-156 / THE-157), so seeding from the sandbox
+# is impossible; this workflow moves the action onto a network that can reach it.
+#
+# Seeding goes over the public HTTP API (POST /api/articles). Since THE-159 the
+# mutating /api/* routes are failure-closed bearer-gated (src/api/auth.rs), so the
+# seed step authenticates with Authorization: Bearer ${{ secrets.SEED_API_TOKEN }}.
+#
+# THE SINGLE IRREDUCIBLE OPERATOR ACTION:
+#   Provision one shared SEED_API_TOKEN value in TWO places (same string):
+#     1. The live server's environment (systemd unit on the VPS) — what auth.rs reads.
+#     2. This repo's Actions secrets: Settings -> Secrets and variables -> Actions
+#        -> New repository secret -> name SEED_API_TOKEN.
+#   No SSH key secret is needed; seeding is HTTP-only.
+#
+# Verification bridge: each run commits its probe/seed result to
+# docs/seed-status/last-run.md (with [skip ci], a non-trigger path) using the
+# built-in GITHUB_TOKEN, so agents can read the outcome by pulling the repo —
+# no Actions-API token and no VPS reachability required.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "probe = read-only live check; seed = POST docs/published/*/publish.json"
+        type: choice
+        options: [probe, seed]
+        default: probe
+  push:
+    branches: [master]
+    paths:
+      - "docs/published/**/publish.json"
+
+concurrency:
+  group: live-seed
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # to commit the run result back to docs/seed-status/
+
+env:
+  BASE: https://news.scuffedcrew.no
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run seed/probe
+        id: run
+        env:
+          # push events seed; manual runs honour the chosen mode
+          MODE: ${{ github.event_name == 'push' && 'seed' || inputs.mode }}
+          SEED_API_TOKEN: ${{ secrets.SEED_API_TOKEN }}
+        run: |
+          set -o pipefail
+          bash scripts/seed-live.sh 2>&1 | tee /tmp/seed-out.txt
+          echo "rc=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      - name: Record result (always)
+        if: always()
+        run: |
+          mkdir -p docs/seed-status
+          {
+            echo "# last seed/probe run"
+            echo
+            echo "- when:    $(date -u +%FT%TZ)"
+            echo "- mode:    ${{ github.event_name == 'push' && 'seed' || inputs.mode }}"
+            echo "- trigger: ${{ github.event_name }}"
+            echo "- run:     ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "- token configured: ${{ secrets.SEED_API_TOKEN != '' }}"
+            echo
+            echo '```'
+            cat /tmp/seed-out.txt
+            echo '```'
+          } > docs/seed-status/last-run.md
+          cat docs/seed-status/last-run.md >> "$GITHUB_STEP_SUMMARY"
+          git config user.name "deploy-seed bot"
+          git config user.email "actions@github.com"
+          git add docs/seed-status/last-run.md
+          git commit -m "chore(seed-status): record run ${{ github.run_id }} [skip ci]" || echo "no change"
+          git push || echo "push skipped"

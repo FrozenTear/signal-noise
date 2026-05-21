@@ -2,8 +2,8 @@
 
 ## Problem
 The agent sandbox's egress to `194.163.163.153` (news.scuffedcrew.no) is IP-blocked
-(rejected in 0 ms; every other host connects — see THE-156). So the live seed
-(THE-153) and publish-deploy (THE-125) cannot run from the sandbox.
+(rejected in ~5 ms; every other host connects — see THE-156, re-confirmed 2026-05-21).
+So the live seed (THE-153) and publish-deploy (THE-125) cannot run from the sandbox.
 
 ## Solution: seed over the public HTTP API from a GitHub runner
 GitHub-hosted runners are not the agent sandbox and reach the VPS normally.
@@ -11,41 +11,45 @@ GitHub-hosted runners are not the agent sandbox and reach the VPS normally.
 The Dioxus server nests the API at `/api` on the same public bind (`src/main.rs`),
 and `POST /api/articles` is an idempotent **UPSERT-by-slug** that runs inside the
 running server — so the server itself owns the single-writer SurrealKV handle.
-Therefore seeding needs **no SSH, no `systemctl stop/restart`, and no deploy key**.
-We just POST each approved `publish.json` to `https://news.scuffedcrew.no/api/articles`.
+Therefore seeding needs **no SSH and no `systemctl stop/restart`**: we just POST each
+approved `publish.json` to `https://news.scuffedcrew.no/api/articles`.
 
 `.github/workflows/deploy-seed.yml`:
 - `workflow_dispatch` with `mode` = `probe` (read-only live check, default) or `seed`.
 - `push` to `master` touching `docs/published/**/publish.json` → auto `seed`.
-- `scripts/seed-live.sh` does the work; `probe` mode is also a **reachability bridge**
-  — its `curl` output lands in the run log, readable via api.github.com, which the
-  sandbox CAN reach, so live state is observable despite the egress block.
+- `scripts/seed-live.sh` does the work; `probe` mode is also a **reachability bridge**.
+- Each run commits its result to `docs/seed-status/last-run.md` (`[skip ci]`, a
+  non-trigger path) so an agent can verify the outcome by pulling the repo — no
+  Actions-API token and no VPS reachability needed.
+
+## Auth (changed by THE-159 hardening)
+Mutating `/api/*` routes are now **failure-closed bearer-gated** (`src/api/auth.rs`):
+the server reads `SEED_API_TOKEN` from its environment and requires
+`Authorization: Bearer <SEED_API_TOKEN>` on writes (503 if the server's token is
+unset, 401 on mismatch). `seed-live.sh` sends that header from `$SEED_API_TOKEN`.
 
 ## The single irreducible operator action
-**None for seeding.** There is no secret to add — the publish endpoint is
-unauthenticated and reachable over HTTPS. A maintainer (or an agent holding a PAT)
-triggers the workflow via `workflow_dispatch`, or a push under `docs/published/`
-auto-seeds.
+**Provision one shared `SEED_API_TOKEN` value in TWO places (same string):**
+1. **The live server's env** (the `signal-noise`/`ainory-times` systemd unit on the
+   VPS) — this is what `auth.rs` validates against. *(Set as part of the THE-180
+   gated-binary deploy if not already present.)*
+2. **This repo's Actions secrets** — Settings → Secrets and variables → Actions →
+   New repository secret → name `SEED_API_TOKEN`, same value.
 
-> Security note for Warden: the public, unauthenticated `POST /api/articles` is what
-> makes this easy, but it also means anyone on the internet can publish/UPSERT
-> articles. That should be gated (token / network ACL) as a separate hardening item;
-> seeding would then add one Actions secret for the publish token.
+That's the only step no sandbox-bound agent can do: the VPS is unreachable from the
+sandbox, and writing repo Actions secrets needs a token with secrets scope (the
+deploy key cannot). No SSH key secret is required — seeding is HTTP-only.
 
-## ⚠ Blocking prerequisite (not yet satisfied)
-GitHub `master` is a **stale snapshot** (tip = SIG-23 Bill C-22 draft). The approved
-article artifacts and seed tooling from **THE-127 (commit `28f4701`)** —
-`docs/published/*/publish.json`, including THE-119
-(`spacex-s1-biggest-ipo-musk-risk-factor`) — **were never pushed** to this repo.
-A runner that clones `master` therefore has nothing to seed; `seed` mode no-ops with
-a clear message.
-
-**Unblock owner / action:** whoever holds the THE-127 working tree (the SIG/Ainory
-runtime that published THE-119 locally) must `git push` the `docs/published/*`
-payloads to `master`. Once present, `seed` mode publishes them and verifies each
-`GET /api/articles/<slug>` returns 200.
+## Status of prerequisites
+- ✅ Approved payloads on `master`: `docs/published/the-{116,119,121,122,124,132–138}/publish.json`
+  (THE-158, commit `f9716aa`), incl. THE-119 `spacex-s1-biggest-ipo-musk-risk-factor`.
+- ✅ Workflow + script committed (this file, `seed-live.sh`, `deploy-seed.yml`).
+- ⏳ `SEED_API_TOKEN` provisioned on the VPS **and** in Actions secrets — see above.
 
 ## Verify THE-119 renders
-After the payloads are pushed and `seed` runs:
-`curl https://news.scuffedcrew.no/article/spacex-s1-biggest-ipo-musk-risk-factor`
-(or read the workflow's per-slug `GET /api/articles/<slug> -> 200` log lines).
+After the token is provisioned, run the workflow (`workflow_dispatch` mode `seed`, or
+push any `docs/published/**/publish.json`). Then either:
+- read `docs/seed-status/last-run.md` (committed back by the run) for the per-slug
+  `GET /api/articles/<slug> -> 200` lines, or
+- `curl https://news.scuffedcrew.no/article/spacex-s1-biggest-ipo-musk-risk-factor`
+  from any VPS-reachable host.
