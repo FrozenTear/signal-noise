@@ -113,6 +113,43 @@ print("    transparency: " + ("COMPLETE" if ok else "INCOMPLETE (pipeline trail 
     { [ "$dcode" = "200" ] && [ "$pcode" = "200" ]; } && n_ok=$((n_ok+1)) || fail=1
   done <<< "$slugs"
   say "verify: ${n_ok}/${n_total} articles return 200 on both API + page route"
+
+  # ── THE-210: browser-rendered evidence (Playwright) ────────────────────────
+  # The article page is WASM client-rendered, so the curl checks above only see
+  # the API JSON + a 200 on the skeleton route. To prove the transparency
+  # COMPONENTS actually render (and to produce screenshots Proof can eyeball),
+  # run scripts/capture_evidence.mjs in a real Chromium on this host-reaching
+  # runner. Heavy (installs Chromium), so gated on a committed flag file:
+  #   touch ops/render.on  -> browser capture runs; rm it to skip.
+  # deploy-seed.yml has no artifact upload, so the evidence is committed back to
+  # docs/seed-status/the206-evidence/ (the same git bridge last-run.md uses) and
+  # an agent pulls + attaches it to THE-206. Best-effort: never fails the run.
+  if [ -f ops/render.on ] && command -v node >/dev/null 2>&1 && [ -f scripts/capture_evidence.mjs ]; then
+    say "== browser render capture (Playwright/Chromium) =="
+    export SN_BASE_URL="$BASE"
+    npm install --no-save playwright@1.49 >/tmp/pw-npm.log 2>&1 || say "  playwright npm install FAILED (see step log)"
+    npx playwright install --with-deps chromium >/tmp/pw-browser.log 2>&1 || say "  chromium install FAILED (see step log)"
+    if node scripts/capture_evidence.mjs 2>&1 | tee /tmp/render-out.txt; then
+      say "  render capture: all articles PASS"
+    else
+      say "  render capture: completed with check failures (see SUMMARY.md / artifact)"
+    fi
+    if [ -d evidence ]; then
+      rm -rf docs/seed-status/the206-evidence
+      mkdir -p docs/seed-status/the206-evidence
+      cp -r evidence/. docs/seed-status/the206-evidence/ 2>/dev/null || true
+      git add docs/seed-status/the206-evidence >/dev/null 2>&1 || true
+      git -c user.name="deploy-seed bot" -c user.email="actions@github.com" \
+        commit -m "chore(the206): browser-render evidence (THE-210) [skip ci]" >/dev/null 2>&1 \
+        && (git push >/dev/null 2>&1 && say "  evidence committed + pushed to docs/seed-status/the206-evidence/" \
+            || say "  evidence committed; push deferred to Record step") \
+        || say "  no evidence change to commit"
+    else
+      say "  no evidence/ directory produced — capture did not run"
+    fi
+  else
+    say "(browser render skipped: ops/render.on absent or node/script unavailable)"
+  fi
   return $fail
 }
 
