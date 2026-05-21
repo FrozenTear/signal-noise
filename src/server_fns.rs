@@ -18,6 +18,8 @@ pub struct ArticleSummary {
     pub summary: String,
     pub category: String,
     pub persona_name: String,
+    /// Free-form byline used when persona is NULL (e.g. H2H AI-reporter pairings).
+    pub byline: Option<String>,
     pub confidence_score: f64,
     pub published_at: String,
     pub ai_monologue: Option<String>,
@@ -101,7 +103,8 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
     if let Some(db) = crate::api::db::get_db() {
         let mut res_result = if let Some(cat) = &category {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
+                "SELECT slug, title, summary, category, confidence_score, published_at, \
+                 byline, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
                  array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
                  FROM article WHERE status = 'published' AND category = $cat \
                  ORDER BY published_at DESC LIMIT 20",
@@ -110,7 +113,8 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
             .await
         } else {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
+                "SELECT slug, title, summary, category, confidence_score, published_at, \
+                 byline, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
                  array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
                  FROM article WHERE status = 'published' \
                  ORDER BY published_at DESC LIMIT 20",
@@ -132,8 +136,10 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
                                 persona_name: v["persona_name"]
                                     .as_str()
                                     .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
+                                    .or_else(|| v["byline"].as_str())
                                     .unwrap_or("AI Reporter")
                                     .to_string(),
+                                byline: v["byline"].as_str().map(|s| s.to_string()),
                                 confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
                                 published_at: v["published_at"].as_str().unwrap_or("").to_string(),
                                 ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
@@ -380,12 +386,14 @@ fn row_to_detail(v: &serde_json::Value) -> ArticleDetail {
         .unwrap_or_default();
     pipeline.sort_by_key(|s| s.sort_order);
 
-    // Persona may be a relation (`persona.name`), or — for AI-agent bylines that
-    // have no persona row (THE-218 fallback) — a `byline` string in metadata.
+    // Persona may be a relation (`persona.name`), a top-level `byline` column
+    // (THE-224 fallback for H2H articles without a persona row), or the legacy
+    // `pipeline_metadata.byline` string.
     let persona_name = v["persona_name"]
         .as_str()
         .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
         .map(|s| s.to_string())
+        .or_else(|| v["byline"].as_str().map(|s| s.to_string()))
         .or_else(|| h2h_meta_str(v, "byline"))
         .unwrap_or_else(|| "AI Reporter".to_string());
 
@@ -552,6 +560,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "linux".to_string(),
             persona_name: "Linus Watcher".to_string(),
+            byline: None,
             confidence_score: 0.91,
             published_at: "2026-03-22".to_string(),
             ai_monologue: None,
@@ -568,6 +577,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "tech".to_string(),
             persona_name: "Circuit Breaker".to_string(),
+            byline: None,
             confidence_score: 0.78,
             published_at: "2026-03-21".to_string(),
             ai_monologue: None,
@@ -585,6 +595,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "privacy".to_string(),
             persona_name: "Panoptikon".to_string(),
+            byline: None,
             confidence_score: 0.87,
             published_at: "2026-03-20".to_string(),
             ai_monologue: None,
@@ -600,6 +611,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "linux".to_string(),
             persona_name: "Linus Watcher".to_string(),
+            byline: None,
             confidence_score: 0.83,
             published_at: "2026-03-19".to_string(),
             ai_monologue: None,
@@ -617,6 +629,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "privacy".to_string(),
             persona_name: "Panoptikon".to_string(),
+            byline: None,
             confidence_score: 0.94,
             published_at: "2026-03-18".to_string(),
             ai_monologue: None,
@@ -634,6 +647,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "tech".to_string(),
             persona_name: "Circuit Breaker".to_string(),
+            byline: None,
             confidence_score: 0.61,
             published_at: "2026-03-17".to_string(),
             ai_monologue: None,

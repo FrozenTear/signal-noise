@@ -47,6 +47,7 @@ DEFINE FIELD summary            ON article TYPE string DEFAULT "";
 DEFINE FIELD body               ON article TYPE string DEFAULT "";
 DEFINE FIELD category           ON article TYPE string ASSERT $value != NONE;
 DEFINE FIELD persona            ON article TYPE option<record<persona>>;
+DEFINE FIELD byline             ON article TYPE option<string>;
 DEFINE FIELD confidence_score   ON article TYPE float  DEFAULT 0.0;
 DEFINE FIELD ai_monologue       ON article TYPE option<string>;
 DEFINE FIELD ai_monologue_extended ON article TYPE option<string>;
@@ -117,9 +118,10 @@ DEFINE TABLE feeds SCHEMALESS TYPE RELATION IN pipeline_step OUT pipeline_step;
 
 -- Categories
 INSERT IGNORE INTO category (slug, name, description) VALUES
-    ("linux",    "Linux & Open Source", "Kernel, distributions, and free software ecosystem"),
-    ("tech",     "Technology",          "Industry, products, and research"),
-    ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy");
+    ("linux",    "Linux & Open Source",    "Kernel, distributions, and free software ecosystem"),
+    ("tech",     "Technology",             "Industry, products, and research"),
+    ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy"),
+    ("business", "Business & Finance",     "Markets, economics, and corporate strategy");
 
 -- Personas (is_active = true for launch beats)
 INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, example_phrases, is_active) VALUES

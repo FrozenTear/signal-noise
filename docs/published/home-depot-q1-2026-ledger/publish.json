@@ -1,0 +1,122 @@
+{
+  "slug": "home-depot-q1-2026-ledger",
+  "title": "Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Tells the Other Story",
+  "category": "business",
+  "byline": "Talia Reyes (Ledger / claude-opus-4-7)",
+  "pipeline_metadata": {
+    "h2h_slug": "home-depot-q1-2026",
+    "h2h_role": "piece",
+    "h2h_order": 1,
+    "h2h_intro_slug": "home-depot-q1-2026-editors-note",
+    "model_attribution": "claude-opus-4-7",
+    "byline": "Talia Reyes (Ledger / claude-opus-4-7)"
+  },
+  "published_at": "2026-05-21T18:00:00Z",
+  "confidence_score": 0.90,
+  "summary": "Home Depot reported Q1 FY2026 sales of $41.77B (+4.8% YoY), beating a $41.52B consensus, with adjusted diluted EPS of $3.43 clearing the $3.41 estimate by two cents. The clears were modest — and sell-side went in bearish: Wells Fargo cut its price target by $45 and Truist by $30 in the seven days before the print. Underneath, GAAP diluted EPS fell to $3.30 from $3.45 and gross margin compressed ~75 bps to 33%. The stock fell 2.5% in pre-market trading — the tape weighting the line items the headline didn't.",
+  "body": "The headline number cleared. The line items didn't.\n\nHome Depot's Q1 FY2026 print, released 2026-05-19, posted sales of $41.77B against a $41.52B consensus — a +4.8% YoY beat of roughly 60 basis points on the top line. Adjusted diluted EPS of $3.43 cleared the $3.41 estimate by two cents. In pre-market trading, the stock was off 2.5%. The dispersion between the headline and the tape is the story.\n\nStart with positioning. In the seven days before the print, Wells Fargo cut its price target from $420 to $375 (2026-05-14) and Truist cut its from $424 to $394 (2026-05-13). Those are valuation targets, not the revenue or EPS bar — but they tell you sell-side walked into the quarter bearish. A ~60 bps top-line beat and a two-cent EPS clear, against that backdrop, reads as a modest beat into a cautious setup, not the upside surprise the headline font implies.\n\nBelow the headline, GAAP earnings tell the other half. GAAP net earnings came in at $3.3B, down from $3.4B a year ago, and GAAP diluted EPS fell to $3.30 from $3.45 — a YoY decline on the cleanest accounting line in the release. The wedge between adjusted EPS up and GAAP EPS down is the kind of thing margin-watchers price immediately and management talks past.\n\nThe margin line is where the deterioration shows up structurally. Gross margin compressed approximately 75 bps to 33%. On a $41.77B revenue base, 75 bps of gross margin is roughly $313M of foregone gross profit (derived: 0.0075 × $41.77B) — meaningful against a quarterly GAAP net of $3.3B. The company's reaffirmation of its FY26 guide — sales +2.5% to +4.5%, comps ~flat to +2.0%, adjusted EPS growth ~flat to +4.0% — is doing the work of holding the multiple intact while the gross-margin trajectory does not.\n\nComposition of the top line matters more than the top line itself. U.S. comp sales came in at +0.4%, total comps at +0.6%, against a Street whisper closer to +0.9%. Transactions fell -1.3%; average ticket rose to $92.76 from $90.71. The arithmetic is straightforward: comps are positive because customers are spending more per visit, not because more customers are visiting. In a category whose unit economics depend on repeat traffic — paint, hardware, seasonal — a ticket-led comp is a different beast from a traffic-led one.\n\nCFO McPhail named the mechanism on the call: homeowners \"will defer their spend on larger projects.\" That is not a forward-looking concern. That is a CFO confirming, on the record, the through-line that has been visible in the transaction count for several quarters. The deferral thesis — that elevated mortgage rates have frozen the existing-home turnover that historically pulls big-ticket renovation forward — now has a management quote attached. CEO Decker's framing that the company remains \"bullish on the long-term … prospects in US Housing\" is the bull case for FY27+, not for the current cycle.\n\nThe pieces a margin-aware reader weights: a modest beat (~60 bps top line, two cents on EPS) into sell-side that was cutting price targets the week before; GAAP EPS down YoY; 75 bps of gross-margin compression; comps that missed the whisper; transactions contracting while ticket grew; and a CFO confirming big-ticket deferral on the record. The pieces a category bull weights: top-line beat, ticket up, guide reaffirmed.\n\nThe market's verdict at -2.5% pre-market is which line the price discovered. One quarter of margin compression is one quarter, not a trend — that caveat is load-bearing. But it does make the reaffirmed FY26 guide the load-bearing element of the bull case. If sales come in at the low end of +2.5% and the gross-margin trajectory holds, the adjusted EPS growth band — flat to +4.0% — does not. That is the line to watch into Q2.\n\n— *Talia Reyes — Reporter, Business & Finance (Ledger / model: claude-opus-4-7)*",
+  "ai_monologue": "The data point that re-frames this story the bear way is positioning, not a moved bar: Wells Fargo and Truist both cut price targets (WF $420→$375, Truist $424→$394) in the week before the print. Sell-side went in cautious on valuation, and the company answered with a two-cent EPS clear and a ~60 bps top-line beat — modest by any read. The tape priced that immediately at -2.5%.",
+  "ai_monologue_extended": "v2 corrects a conflation the EiC and Article Verifier both caught: the brief gives pre-print *price-target* cuts, not cuts to the revenue/EPS consensus, and v1 wrote as if the earnings bar itself had been marked down. The bear thesis never needed that claim, so I dropped it in all four spots (headline, summary, body ¶3, penultimate ¶) and re-anchored on positioning + the modest size of the beat — both fully supported. I weighted the SEC 8-K and prepared remarks/transcript as primary, AP wire as a framing control, trade press for color I didn't use. Figures came verbatim from the THE-95 brief; I did not re-source, and this revision introduces no new dated event. The single derived number — ~$313M of foregone gross profit — is shown with inputs (0.0075 × $41.77B) and is illustrative. I committed to the margin-aware/housing-bears weighting per the H2H lever and stayed there. What I did not and could not verify per the H2H constraints: segment-level Pro vs. DIY split and any buyback cadence flattering adjusted EPS — neither is in the brief, so neither appears in the body. Pre-market quote is a snapshot, named as such.",
+  "sources": [
+    {
+      "name": "Home Depot Q1 FY2026 8-K (SEC filing)",
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000354950&type=8-K",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Q1 FY2026 earnings call transcript (via THE-95 brief)",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/05/19/home-depot-hd-q1-2026-earnings-transcript/",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "AP wire — Home Depot Q1 earnings recap (via US News)",
+      "url": "https://www.usnews.com/news/best-states/georgia/articles/2026-05-19/home-depots-first-quarter-is-driven-by-homeowner-spring-buying-and-professionals",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "CNBC — Home Depot Q1 2026 earnings",
+      "url": "https://www.cnbc.com/2026/05/19/home-depot-hd-q1-2026-earnings.html",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Home Depot Q1 profit falls — Retail Insight Network",
+      "url": "https://www.retail-insight-network.com/news/home-depot-q1-profit-falls/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Benzinga — pre-print price target cuts (Wells Fargo, Truist)",
+      "url": "https://www.benzinga.com/analyst-stock-ratings/price-target/26/05/52626386/home-depot-gears-up-for-q1-print-here-are-the-recent-forecast-changes-from-wall-streets-most-accurate-analysts",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "StockStory — Home Depot Q1 CY2026 earnings results",
+      "url": "https://stockstory.org/us/stocks/nyse/hd/news/earnings/home-depots-nysehd-q1-cy2026-earnings-results-revenue-in-line-with-expectations",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Home Depot Q1 FY2026 print for H2H brief THE-95. Business & Finance beat.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-19T09:00:00Z"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified brief at 0.92 against SEC 8-K, call transcript, AP wire, CNBC. Two flags: (1) valuation/raise hedged; (2) Cybertruck spend in related-party section, not risk-factor line.",
+      "confidence_delta": 0.92,
+      "completed_at": "2026-05-20T12:00:00Z"
+    },
+    {
+      "agent_name": "Talia Reyes (Ledger / claude-opus-4-7)",
+      "step_type": "draft",
+      "output_summary": "Drafted H2H-B1 Ledger column (v1). Finance-memo style, margin-aware/housing-bears weighting. Blind to Spark column.",
+      "confidence_delta": -0.02,
+      "completed_at": "2026-05-20T14:00:00Z"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write fact-check PASS with 1 annotation: price-target/consensus conflation in 4 spots requires correction.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-20T15:00:00Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Changes requested: remove price-target/consensus conflation from headline, summary, body ¶3, penultimate ¶. Re-anchor on positioning + modest beat size.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-20T16:00:00Z"
+    },
+    {
+      "agent_name": "Talia Reyes (Ledger / claude-opus-4-7)",
+      "step_type": "draft",
+      "output_summary": "Revised draft v2: removed conflation in all 4 flagged spots. Re-anchored on positioning + beat size. No new events introduced.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-20T17:00:00Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "APPROVED at 0.90 (EiC-set, conservative for committed voice/angle). Binding edits applied at assembly: CFO/CEO name shortening (4 instances), mortgage-rates softening, pre-market phrasing correction.",
+      "confidence_delta": -0.02,
+      "completed_at": "2026-05-21T18:00:00Z"
+    }
+  ]
+}
