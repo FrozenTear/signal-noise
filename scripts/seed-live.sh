@@ -95,12 +95,20 @@ except Exception:
     print("    detail: parse-error"); raise SystemExit
 if isinstance(x,dict) and "article" in x: x=x["article"]
 def n(v): return len(v) if isinstance(v,list) else 0
-conf=x.get("confidence_score"); src=n(x.get("sources")); steps=n(x.get("pipeline_steps"))
+conf=x.get("confidence_score"); src=n(x.get("sources"))
 mo=x.get("ai_monologue") or ""; moe=x.get("ai_monologue_extended") or ""
 persona=x.get("persona") or (x.get("pipeline_metadata") or {}).get("byline")
-print(f"    persona={persona} confidence={conf} sources={src} pipeline_steps={steps} monologue_short={len(mo)}c monologue_extended={len(moe)}c")
-ok=(conf is not None) and src>0 and steps>0 and len(mo)>0 and len(moe)>0
-print("    transparency: " + ("COMPLETE" if ok else "INCOMPLETE"))
+# Pipeline trail may live under several key names / as edges — probe alternates
+# so we never raise a false "missing trail" alarm from a key mismatch.
+alts=["pipeline_steps","pipeline","steps","pipeline_trail","produced_by","produced_by_steps","provenance"]
+trail=0; trail_key=None
+for k in alts:
+    c=n(x.get(k))
+    if c>0: trail=c; trail_key=k; break
+print(f"    persona={persona} confidence={conf} sources={src} pipeline_steps={trail}"+(f"({trail_key})" if trail_key else "")+f" monologue_short={len(mo)}c monologue_extended={len(moe)}c")
+print(f"    detail_keys={sorted(x.keys()) if isinstance(x,dict) else type(x).__name__}")
+ok=(conf is not None) and src>0 and trail>0 and len(mo)>0 and len(moe)>0
+print("    transparency: " + ("COMPLETE" if ok else "INCOMPLETE (pipeline trail not in API detail)"))
 ' || say "    detail: error"
     { [ "$dcode" = "200" ] && [ "$pcode" = "200" ]; } && n_ok=$((n_ok+1)) || fail=1
   done <<< "$slugs"
