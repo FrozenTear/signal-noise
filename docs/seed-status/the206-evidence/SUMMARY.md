@@ -1,6 +1,6 @@
 # THE-206 live evidence — https://news.scuffedcrew.no
 
-Captured: 2026-05-21T17:05:56.195Z
+Captured: 2026-05-21T22:12:24.862Z
 
 | slug | HTTP | renders_200 | headline_ok | byline_ok | confidence_shown | sources_render | pipeline_render | monologue_short | monologue_extended | monologue_distinct | no_desktop_overflow | no_mobile_overflow | api_200 | api_sources | api_pipeline | PASS |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
