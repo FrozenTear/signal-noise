@@ -63,6 +63,51 @@ a=d.get("articles",d) if isinstance(d,dict) else d
   [ "$root_code" = "200" ] || { say "FAIL: root not 200"; return 1; }
 }
 
+# Read-only per-article transparency capture (THE-206 sign-off evidence).
+# For every live slug: GET /api/articles/<slug> + the /article/<slug> page, then
+# summarize the transparency payload served from PRODUCTION (confidence, source
+# count, pipeline-step count, short/extended monologue presence, persona/byline).
+# No token needed (reads only). This is the live evidence agent sandboxes cannot
+# capture (egress wall) but a runner can.
+verify() {
+  say "== transparency verify ${BASE} =="
+  local feed slugs
+  feed=$(curl -fsS --max-time 20 "${BASE}/api/articles" || echo '{}')
+  slugs=$(printf '%s' "$feed" | python3 -c 'import json,sys
+try: d=json.load(sys.stdin)
+except Exception: raise SystemExit
+a=d.get("articles",d) if isinstance(d,dict) else d
+[print(x.get("slug")) for x in (a or []) if isinstance(x,dict) and x.get("slug")]' 2>/dev/null || true)
+  local n_ok=0 n_total=0 fail=0
+  while IFS= read -r slug; do
+    [ -z "$slug" ] && continue
+    n_total=$((n_total+1))
+    local detail dcode pcode
+    detail=$(curl -fsS --max-time 20 "${BASE}/api/articles/${slug}" || echo '{}')
+    dcode=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "${BASE}/api/articles/${slug}" || echo ERR)
+    pcode=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "${BASE}/article/${slug}" || echo ERR)
+    say "--- ${slug}"
+    say "    GET /api/articles/${slug} -> ${dcode} ; GET /article/${slug} -> ${pcode}"
+    printf '%s' "$detail" | python3 -c '
+import json,sys
+try: x=json.load(sys.stdin)
+except Exception:
+    print("    detail: parse-error"); raise SystemExit
+if isinstance(x,dict) and "article" in x: x=x["article"]
+def n(v): return len(v) if isinstance(v,list) else 0
+conf=x.get("confidence_score"); src=n(x.get("sources")); steps=n(x.get("pipeline_steps"))
+mo=x.get("ai_monologue") or ""; moe=x.get("ai_monologue_extended") or ""
+persona=x.get("persona") or (x.get("pipeline_metadata") or {}).get("byline")
+print(f"    persona={persona} confidence={conf} sources={src} pipeline_steps={steps} monologue_short={len(mo)}c monologue_extended={len(moe)}c")
+ok=(conf is not None) and src>0 and steps>0 and len(mo)>0 and len(moe)>0
+print("    transparency: " + ("COMPLETE" if ok else "INCOMPLETE"))
+' || say "    detail: error"
+    { [ "$dcode" = "200" ] && [ "$pcode" = "200" ]; } && n_ok=$((n_ok+1)) || fail=1
+  done <<< "$slugs"
+  say "verify: ${n_ok}/${n_total} articles return 200 on both API + page route"
+  return $fail
+}
+
 seed() {
   if [[ -z "${SEED_API_TOKEN:-}" ]]; then
     say "ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175)." >&2
@@ -98,7 +143,8 @@ seed() {
 }
 
 case "$MODE" in
-  probe) probe ;;
-  seed)  probe || true; seed ;;
-  *) say "unknown MODE='$MODE' (use probe|seed)"; exit 2 ;;
+  probe)  probe ;;
+  verify) probe || true; verify ;;
+  seed)   probe || true; seed ;;
+  *) say "unknown MODE='$MODE' (use probe|verify|seed)"; exit 2 ;;
 esac

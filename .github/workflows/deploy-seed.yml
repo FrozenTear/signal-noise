@@ -25,9 +25,9 @@ on:
   workflow_dispatch:
     inputs:
       mode:
-        description: "probe = read-only live check; seed = POST docs/published/*/publish.json"
+        description: "probe = read-only live check; verify = per-article transparency capture; seed = POST docs/published/*/publish.json"
         type: choice
-        options: [probe, seed]
+        options: [probe, verify, seed]
         default: probe
   push:
     branches: [master]
@@ -35,6 +35,7 @@ on:
       - "docs/published/**/publish.json"   # content change -> seed
       - "ops/seed.txt"                      # bump this file -> seed all payloads (needs SEED_API_TOKEN secret)
       - "ops/probe.txt"                     # bump this file -> read-only probe (no token needed)
+      - "ops/verify.txt"                    # bump this file -> read-only per-article transparency capture (no token; THE-206 evidence)
 
 concurrency:
   group: live-seed
@@ -57,6 +58,9 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null \
+               | grep -Eq 'ops/verify\.txt'; then
+            echo "mode=verify" >> "$GITHUB_OUTPUT"  # verify bump -> read-only per-article transparency capture
           elif git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null \
                | grep -Eq 'docs/published/.*publish\.json|ops/seed\.txt'; then
             echo "mode=seed" >> "$GITHUB_OUTPUT"   # an approved payload changed, or seed explicitly requested

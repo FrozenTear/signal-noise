@@ -1,0 +1,1 @@
+verify run requested by Console (THE-153/THE-206) at 2026-05-21T16:41:23Z: capture per-article live transparency evidence for all 12 seeded articles
