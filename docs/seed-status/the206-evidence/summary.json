@@ -1,0 +1,1487 @@
+[
+  {
+    "slug": "spacex-s1-biggest-ipo-musk-risk-factor",
+    "url": "https://news.scuffedcrew.no/article/spacex-s1-biggest-ipo-musk-risk-factor",
+    "http_status": 200,
+    "headline": "SpaceX's S-1 makes the case for the biggest IPO ever — and lists its own CEO among the risks",
+    "byline": "by Priya Nair",
+    "confidence_meter": "93%",
+    "source_count": 5,
+    "source_links": [
+      {
+        "name": "\"The SpaceX IPO plans are now public\" — Engadget",
+        "href": "https://www.engadget.com/2178212/the-spacex-ipo-plans-are-now-public/"
+      },
+      {
+        "name": "\"SpaceX reveals Musk company links, from Cybertrucks and jets to stock investments\" — Reuters (via Investing.com)",
+        "href": "https://www.investing.com/news/stock-market-news/spacex-reveals-musk-company-links-from-cybertrucks-and-jets-to-stock-investments-4702898"
+      },
+      {
+        "name": "\"SpaceX files S-1: IPO could make Elon Musk a trillionaire\" — NBC News",
+        "href": "https://www.nbcnews.com/tech/elon-musk/spacex-files-s-1-ipo-make-elon-musk-trillionaire-rcna346157"
+      },
+      {
+        "name": "\"The SpaceX IPO filing is filled with AI bets, Starship dreams, and Elon Musk at the center\" — TechCrunch",
+        "href": "https://techcrunch.com/2026/05/20/the-spacex-ipo-filing-ai-bets-starship-dreams-elon-musk/"
+      },
+      {
+        "name": "SEC EDGAR S-1 — Space Exploration Technologies Corp (CIK 0001181412)",
+        "href": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026036936/spaceexplorationtechnologi.htm"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Priya Nair (Bolt)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/spacex-s1-biggest-ipo-musk-risk-factor.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/spacex-s1-biggest-ipo-musk-risk-factor.mobile.png",
+        "scrollWidth": 821,
+        "overflow": true
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/spacex-s1-biggest-ipo-musk-risk-factor.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 5,
+      "pipeline_count": 5,
+      "persona_name": "Priya Nair",
+      "confidence_score": 0.93,
+      "pipeline": [
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Priya Nair (Bolt)",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": false,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": false
+  },
+  {
+    "slug": "the-116-greg-kh-more-rust-kernel-developers",
+    "url": "https://news.scuffedcrew.no/article/the-116-greg-kh-more-rust-kernel-developers",
+    "http_status": 200,
+    "headline": "Greg KH wants more Rust kernel developers. The keynote was the recruiting poster.",
+    "byline": "by Milo Varga",
+    "confidence_meter": "92%",
+    "source_count": 3,
+    "source_links": [
+      {
+        "name": "Rust in the Linux Kernel, Why? — Greg Kroah-Hartman (keynote video)",
+        "href": "https://www.youtube.com/watch?v=HX0GH-YJbGw"
+      },
+      {
+        "name": "Rust Week 2026 (Utrecht)",
+        "href": "https://rustweek.org/"
+      },
+      {
+        "name": "Greg KH wants more Rust Linux kernel developers — Phoronix",
+        "href": "https://www.phoronix.com/news/Greg-KH-More-Rust-Linux"
+      }
+    ],
+    "pipeline_steps": [],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-116-greg-kh-more-rust-kernel-developers.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-116-greg-kh-more-rust-kernel-developers.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-116-greg-kh-more-rust-kernel-developers.json",
+      "has_sources": true,
+      "has_pipeline": false,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 3,
+      "pipeline_count": 0,
+      "persona_name": "Milo Varga",
+      "confidence_score": 0.92,
+      "pipeline": []
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": false,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": false,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": false
+  },
+  {
+    "slug": "the-121-openai-disproves-unit-distance-conjecture",
+    "url": "https://news.scuffedcrew.no/article/the-121-openai-disproves-unit-distance-conjecture",
+    "http_status": 200,
+    "headline": "OpenAI says an internal model disproved a discrete-geometry conjecture. A Fields Medalist agrees the math holds.",
+    "byline": "by Priya Nair",
+    "confidence_meter": "85%",
+    "source_count": 1,
+    "source_links": [
+      {
+        "name": "OpenAI announcement — model disproves discrete geometry conjecture",
+        "href": "https://openai.com/index/model-disproves-discrete-geometry-conjecture/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Bolt (Priya Nair)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-121-openai-disproves-unit-distance-conjecture.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-121-openai-disproves-unit-distance-conjecture.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-121-openai-disproves-unit-distance-conjecture.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 1,
+      "pipeline_count": 5,
+      "persona_name": "Priya Nair",
+      "confidence_score": 0.85,
+      "pipeline": [
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Bolt (Priya Nair)",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-132-cache-aware-scheduling-linux-7-2",
+    "url": "https://news.scuffedcrew.no/article/the-132-cache-aware-scheduling-linux-7-2",
+    "http_status": 200,
+    "headline": "The kernel is finally learning where it left its keys",
+    "byline": "by Milo Varga",
+    "confidence_meter": "89%",
+    "source_count": 5,
+    "source_links": [
+      {
+        "name": "Phoronix — \"Looks Like It Will Land For Linux 7.2\" (2026-05-20)",
+        "href": "https://www.phoronix.com/news/Linux-7.2-Likely-CAS"
+      },
+      {
+        "name": "LWN — earlier coverage (mechanism, contributors, regressions)",
+        "href": "https://lwn.net/Articles/1041668/"
+      },
+      {
+        "name": "LWN — Cache aware scheduling (v2/23-patch analysis)",
+        "href": "https://lwn.net/Articles/1049261/"
+      },
+      {
+        "name": "LKML — Tim Chen, Cache Aware Scheduling v3 (2026-02)",
+        "href": "https://lkml.org/lkml/2026/2/10/1370"
+      },
+      {
+        "name": "LKML — original PATCH 00/19 series (2025-10)",
+        "href": "https://lkml.org/lkml/2025/10/11/345"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Milo Varga (Quill)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-132-cache-aware-scheduling-linux-7-2.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-132-cache-aware-scheduling-linux-7-2.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-132-cache-aware-scheduling-linux-7-2.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 5,
+      "pipeline_count": 5,
+      "persona_name": "Milo Varga",
+      "confidence_score": 0.89,
+      "pipeline": [
+        {
+          "step_type": "draft",
+          "agent_name": "Milo Varga (Quill)",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-133-opensuse-terms-of-site-age-restriction",
+    "url": "https://news.scuffedcrew.no/article/the-133-opensuse-terms-of-site-age-restriction",
+    "http_status": 200,
+    "headline": "openSUSE Wrote an Age Limit Into Its Terms. Then It Admitted It Can't Enforce the Fix.",
+    "byline": "by Milo Varga",
+    "confidence_meter": "90%",
+    "source_count": 4,
+    "source_links": [
+      {
+        "name": "Bryan Lunduke (Substack), \"'Open Source Exemption' … Would Not Include GPL\" (assessed against enacted text)",
+        "href": "https://lunduke.substack.com/"
+      },
+      {
+        "name": "openSUSE Project mailing list — \"Terms of Site Update\" (official statement / revision)",
+        "href": "https://lists.opensuse.org/archives/list/project@lists.opensuse.org/message/3FPUFF3UROQLAKSALKPSP2MVB5IFHFQA/"
+      },
+      {
+        "name": "openSUSE Wiki — \"Terms of site\" (current canonical terms)",
+        "href": "https://en.opensuse.org/Terms_of_site"
+      },
+      {
+        "name": "openSUSE Project mailing list — \"Young people explicitly banned from openSUSE — urgent call for reversal\" (complaint thread)",
+        "href": "https://lists.opensuse.org/archives/list/project@lists.opensuse.org/message/6PU6JU2IGKDANYNN3KIXDR2UQSVP6JI2/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Milo Varga (Quill)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-133-opensuse-terms-of-site-age-restriction.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-133-opensuse-terms-of-site-age-restriction.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-133-opensuse-terms-of-site-age-restriction.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 4,
+      "pipeline_count": 5,
+      "persona_name": "Milo Varga",
+      "confidence_score": 0.9,
+      "pipeline": [
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Milo Varga (Quill)",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-134-ai-labs-midterms-political-spending",
+    "url": "https://news.scuffedcrew.no/article/the-134-ai-labs-midterms-political-spending",
+    "http_status": 200,
+    "headline": "The two labs racing to build \"safe AI\" are now racing to fund the 2026 midterms — on opposite sides.",
+    "byline": "by Priya Nair",
+    "confidence_meter": "90%",
+    "source_count": 4,
+    "source_links": [
+      {
+        "name": "The Verge — Anthropic/OpenAI rivalry heads to the midterms (assigned lead)",
+        "href": "https://www.theverge.com/"
+      },
+      {
+        "name": "NBC News — \"Ads funded by AI industry are flooding the 2026 election\"",
+        "href": "https://www.nbcnews.com/"
+      },
+      {
+        "name": "NOTUS — Bores vs. Leading the Future coverage",
+        "href": "https://www.notus.org/"
+      },
+      {
+        "name": "AFP wire — \"AI's bitter rivalry heads to Washington\" (republished via SpaceDaily)",
+        "href": "https://www.spacedaily.com/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Priya Nair (Bolt)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-134-ai-labs-midterms-political-spending.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-134-ai-labs-midterms-political-spending.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-134-ai-labs-midterms-political-spending.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 4,
+      "pipeline_count": 5,
+      "persona_name": "Priya Nair",
+      "confidence_score": 0.9,
+      "pipeline": [
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Priya Nair (Bolt)",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-135-sfc-vizio-smart-tv-source-code-trial",
+    "url": "https://news.scuffedcrew.no/article/the-135-sfc-vizio-smart-tv-source-code-trial",
+    "http_status": 200,
+    "headline": "You bought the TV. Do you own the software running on it?",
+    "byline": "by Priya Nair",
+    "confidence_meter": "90%",
+    "source_count": 5,
+    "source_links": [
+      {
+        "name": "SFC official case page — copyleft-compliance/vizio",
+        "href": "https://sfconservancy.org/copyleft-compliance/vizio.html"
+      },
+      {
+        "name": "Ars Technica — \"Yearslong fight over users' right to tweak smart TV software heads to trial\" (assigned lead)",
+        "href": "https://arstechnica.com/"
+      },
+      {
+        "name": "FOSS Force — \"Judge Signals Win…\" (2025-12); \"Docket Traffic Jam Delays… Trial\" (2026-01)",
+        "href": "https://fossforce.com/"
+      },
+      {
+        "name": "DLA Piper / AO Shearman / Lexology legal analyses (2026-01)",
+        "href": "https://www.lexology.com/"
+      },
+      {
+        "name": "The Register (2026-04-22), \"Linux may get exemption from Colorado age-check bill\"",
+        "href": "https://www.theregister.com/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Priya Nair (Bolt)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-135-sfc-vizio-smart-tv-source-code-trial.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-135-sfc-vizio-smart-tv-source-code-trial.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-135-sfc-vizio-smart-tv-source-code-trial.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 5,
+      "pipeline_count": 5,
+      "persona_name": "Priya Nair",
+      "confidence_score": 0.9,
+      "pipeline": [
+        {
+          "step_type": "draft",
+          "agent_name": "Priya Nair (Bolt)",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-136-anthropic-spacex-colossus-gb200",
+    "url": "https://news.scuffedcrew.no/article/the-136-anthropic-spacex-colossus-gb200",
+    "http_status": 200,
+    "headline": "Anthropic is renting Elon Musk's supercomputer. The press release won't even agree on whose it is.",
+    "byline": "by Priya Nair",
+    "confidence_meter": "89%",
+    "source_count": 5,
+    "source_links": [
+      {
+        "name": "CNBC — \"Anthropic, SpaceX announce compute deal\" (original announcement, May 6)",
+        "href": "https://www.cnbc.com/2026/05/06/anthropic-spacex-data-center-capacity.html"
+      },
+      {
+        "name": "Anthropic newsroom — \"Higher usage limits for Claude and a compute deal with SpaceX\"",
+        "href": "https://www.anthropic.com/news/higher-limits-spacex"
+      },
+      {
+        "name": "Axios — \"Anthropic is paying SpaceX $15 billion per year\"",
+        "href": "https://www.axios.com/2026/05/20/anthropic-spacex-compute"
+      },
+      {
+        "name": "Tom Brown (@nottombrown), Anthropic chief compute officer — GB200 / Colossus 2 June ramp",
+        "href": "https://xcancel.com/nottombrown/status/2057194829986300375"
+      },
+      {
+        "name": "TechCrunch — \"Anthropic will pay xAI $1.25 billion per month for compute\"",
+        "href": "https://techcrunch.com/2026/05/20/anthropic-will-pay-xai-1-25-billion-per-month-for-compute/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Priya Nair (Bolt)"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Priya Nair (Bolt)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-136-anthropic-spacex-colossus-gb200.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-136-anthropic-spacex-colossus-gb200.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-136-anthropic-spacex-colossus-gb200.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 5,
+      "pipeline_count": 7,
+      "persona_name": "Priya Nair",
+      "confidence_score": 0.89,
+      "pipeline": [
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Priya Nair (Bolt)",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Priya Nair (Bolt)",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-137-colorado-sb051-open-source-exemption",
+    "url": "https://news.scuffedcrew.no/article/the-137-colorado-sb051-open-source-exemption",
+    "http_status": 200,
+    "headline": "Colorado wrote an age-check law that bends around open source. The fine print is even more interesting than the headline.",
+    "byline": "by Sable Ren",
+    "confidence_meter": "93%",
+    "source_count": 5,
+    "source_links": [
+      {
+        "name": "Linuxiac, \"Colorado Adds Open-Source Exemption to Age-Attestation Bill\"",
+        "href": "https://linuxiac.com/"
+      },
+      {
+        "name": "Bryan Lunduke (Substack), \"'Open Source Exemption' … Would Not Include GPL\" (assessed against enacted text)",
+        "href": "https://lunduke.substack.com/"
+      },
+      {
+        "name": "Colorado General Assembly — SB26-051 bill page (status, sponsors, version history)",
+        "href": "https://leg.colorado.gov/bills/SB26-051"
+      },
+      {
+        "name": "Colorado General Assembly — SB26-051 bill page (status, sponsors, version history)",
+        "href": "https://leg.colorado.gov/bills/SB26-051"
+      },
+      {
+        "name": "The Register (2026-04-22), \"Linux may get exemption from Colorado age-check bill\"",
+        "href": "https://www.theregister.com/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Sable Ren (Muse)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-137-colorado-sb051-open-source-exemption.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-137-colorado-sb051-open-source-exemption.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-137-colorado-sb051-open-source-exemption.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 5,
+      "pipeline_count": 5,
+      "persona_name": "Sable Ren",
+      "confidence_score": 0.93,
+      "pipeline": [
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Sable Ren (Muse)",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "the-138-edri-led-fragmented",
+    "url": "https://news.scuffedcrew.no/article/the-138-edri-led-fragmented",
+    "http_status": 200,
+    "headline": "The GDPR Has a Sibling for the Police. Years On, It Still Isn't Working the Same Way Twice.",
+    "byline": "by Sable Ren",
+    "confidence_meter": "86%",
+    "source_count": 3,
+    "source_links": [
+      {
+        "name": "EDRi — Shadow Evaluation Report (underlying study PDF, 794 KB)",
+        "href": "https://edri.org/wp-content/uploads/2026/05/Shadow_Evaluation_Report.pdf"
+      },
+      {
+        "name": "European Parliament — \"Assessment of the implementation of the Law Enforcement Directive\" (Vogiatzoglou & Marquenie, EP Policy Dept, 7 Dec 2022)",
+        "href": "https://www.europarl.europa.eu/thinktank/en/document/IPOL_STU(2022)740209"
+      },
+      {
+        "name": "EDRi — \"Evaluation of EU's Law Enforcement Directive shows implementation still fragmented and insufficient\" (20 May 2026)",
+        "href": "https://edri.org/our-work/research-study-evaluation-of-eus-law-enforcement-directive-shows-implementation-still-fragmented-and-insufficient/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Sable Ren (Muse)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/the-138-edri-led-fragmented.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/the-138-edri-led-fragmented.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/the-138-edri-led-fragmented.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 3,
+      "pipeline_count": 5,
+      "persona_name": "Sable Ren",
+      "confidence_score": 0.86,
+      "pipeline": [
+        {
+          "step_type": "draft",
+          "agent_name": "Sable Ren (Muse)",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "cisa-credentials-public-github-repo",
+    "url": "https://news.scuffedcrew.no/article/cisa-credentials-public-github-repo",
+    "http_status": 200,
+    "headline": "CISA spends its days telling everyone else not to leak credentials. A contractor's public repo leaked CISA's.",
+    "byline": "by Sable Ren",
+    "confidence_meter": "95%",
+    "source_count": 6,
+    "source_links": [
+      {
+        "name": "The Register — \"America's top cyber-defense agency left a GitHub repo open…\"",
+        "href": "https://www.theregister.com/security/2026/05/19/americas-top-cyber-defense-agency-left-a-github-repo-open-with-passwords-keys-tokens-and-incredibly-obvious-filenames/5242915"
+      },
+      {
+        "name": "Ars Technica — \"In stunning display of stupid, secret CISA credentials found in public GitHub repo\" (cited lead)",
+        "href": "https://arstechnica.com/information-technology/2026/05/in-stunning-display-of-stupid-secret-cisa-credentials-found-in-public-github-repo/"
+      },
+      {
+        "name": "Krebs on Security — \"CISA Admin Leaked AWS GovCloud Keys on Github\"",
+        "href": "https://krebsonsecurity.com/2026/05/cisa-admin-leaked-aws-govcloud-keys-on-github/"
+      },
+      {
+        "name": "Gizmodo — \"'The Worst Leak That I've Witnessed'…\"",
+        "href": "https://gizmodo.com/the-worst-leak-that-ive-witnessed-u-s-cybersecurity-agency-leaves-its-digital-keys-out-in-public-on-github-2000760330"
+      },
+      {
+        "name": "CyberScoop — \"CISA credential leak raises alarms, and Capitol Hill demands answers\"",
+        "href": "https://cyberscoop.com/cisa-credential-leak-congress-demands-answers/"
+      },
+      {
+        "name": "GitGuardian — \"How we got a CISA GitHub leak taken down in 26 hours\" (discoverer / primary)",
+        "href": "https://blog.gitguardian.com/how-we-got-a-cisa-github-leak-taken-down-in-26-hours/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Sable Ren (Muse)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/cisa-credentials-public-github-repo.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/cisa-credentials-public-github-repo.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/cisa-credentials-public-github-repo.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 6,
+      "pipeline_count": 5,
+      "persona_name": "Sable Ren",
+      "confidence_score": 0.95,
+      "pipeline": [
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Sable Ren (Muse)",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  },
+  {
+    "slug": "orf-at-misleading-cookie-banner",
+    "url": "https://news.scuffedcrew.no/article/orf-at-misleading-cookie-banner",
+    "http_status": 200,
+    "headline": "ORF Appealed Rather Than Even Out Two Buttons. The Court Said No.",
+    "byline": "by Sable Ren",
+    "confidence_meter": "90%",
+    "source_count": 4,
+    "source_links": [
+      {
+        "name": "Austrian DSB — Bescheid zum Cookie-Banner von www.orf.at (project ref C037-401)",
+        "href": "https://dsb.gv.at/aktuelles/bescheid-der-datenschutzbehoerde-zum-cookie-banner-von-wwworfat"
+      },
+      {
+        "name": "noyb — \"noyb success: ORF.at must correct misleading cookie banner\" (complainant / primary)",
+        "href": "https://noyb.eu/en/noyb-success-orfat-must-correct-misleading-cookie-banner"
+      },
+      {
+        "name": "diemedien.at — most-visited Austrian news site figures (cited by noyb)",
+        "href": "https://diemedien.at"
+      },
+      {
+        "name": "BVwG ruling W171 2303402-1/7E (via GDPRhub)",
+        "href": "https://gdprhub.eu/"
+      }
+    ],
+    "pipeline_steps": [
+      {
+        "step": "DISCOVER",
+        "agent": "Scanner"
+      },
+      {
+        "step": "SOURCE CHECK",
+        "agent": "Source Checker"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Sable Ren (Muse)"
+      },
+      {
+        "step": "DRAFT",
+        "agent": "Sable Ren (Muse)"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "VERIFICATION",
+        "agent": "Article Verifier"
+      },
+      {
+        "step": "EDITORIAL REVIEW",
+        "agent": "Editor-in-Chief"
+      }
+    ],
+    "monologue_short_present": true,
+    "monologue_extended_present": true,
+    "monologue_distinct": true,
+    "not_found": false,
+    "viewports": {
+      "desktop": {
+        "file": "evidence/shots/orf-at-misleading-cookie-banner.desktop.png",
+        "scrollWidth": 1440,
+        "overflow": false
+      },
+      "mobile": {
+        "file": "evidence/shots/orf-at-misleading-cookie-banner.mobile.png",
+        "scrollWidth": 390,
+        "overflow": false
+      }
+    },
+    "api": {
+      "status": 200,
+      "file": "evidence/api/orf-at-misleading-cookie-banner.json",
+      "has_sources": true,
+      "has_pipeline": true,
+      "has_monologue": true,
+      "has_monologue_extended": true,
+      "monologue_distinct": true,
+      "source_count": 4,
+      "pipeline_count": 7,
+      "persona_name": "Sable Ren",
+      "confidence_score": 0.9,
+      "pipeline": [
+        {
+          "step_type": "scan",
+          "agent_name": "Scanner",
+          "model": null
+        },
+        {
+          "step_type": "source_check",
+          "agent_name": "Source Checker",
+          "model": null
+        },
+        {
+          "step_type": "edit",
+          "agent_name": "Editor-in-Chief",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "verify",
+          "agent_name": "Article Verifier",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Sable Ren (Muse)",
+          "model": null
+        },
+        {
+          "step_type": "draft",
+          "agent_name": "Sable Ren (Muse)",
+          "model": null
+        }
+      ]
+    },
+    "checks": {
+      "renders_200": true,
+      "headline_ok": true,
+      "byline_ok": true,
+      "confidence_shown": true,
+      "sources_render": true,
+      "pipeline_render": true,
+      "monologue_short": true,
+      "monologue_extended": true,
+      "monologue_distinct": true,
+      "no_desktop_overflow": true,
+      "no_mobile_overflow": true,
+      "api_200": true,
+      "api_sources": true,
+      "api_pipeline": true,
+      "api_monologue_distinct": true
+    },
+    "errors": [],
+    "pass": true
+  }
+]
