@@ -9,6 +9,7 @@
 use axum::{
     extract::{Path, Query, State},
     http::StatusCode,
+    middleware,
     response::Json,
     routing::{get, patch},
     Router,
@@ -18,13 +19,16 @@ use serde_json::{json, Value};
 use tracing::info;
 
 use super::auth::BearerAuth;
+use super::rate_limit::{rate_limit_middleware, RateLimitState};
 use super::AppState;
 
 pub fn router(state: AppState) -> Router {
+    let rl = RateLimitState::new();
     Router::new()
         .route("/articles", get(list_articles).post(publish_article))
         .route("/articles/{slug}", get(get_article).patch(update_article_status))
         .route("/agents/status", get(agent_status).put(push_agent_status))
+        .layer(middleware::from_fn_with_state(rl, rate_limit_middleware))
         .with_state(state)
 }
 
