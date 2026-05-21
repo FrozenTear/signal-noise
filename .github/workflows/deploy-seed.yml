@@ -56,8 +56,15 @@ jobs:
       - name: Resolve mode
         id: mode
         run: |
+          # Commit-message marker takes precedence — robust on shallow runner
+          # checkouts where `git diff` against github.event.before is empty.
+          MSG="$(git log -1 --format=%B 2>/dev/null || true)"
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif printf '%s' "$MSG" | grep -qi '\[verify\]'; then
+            echo "mode=verify" >> "$GITHUB_OUTPUT"
+          elif printf '%s' "$MSG" | grep -qi '\[seed\]'; then
+            echo "mode=seed" >> "$GITHUB_OUTPUT"
           elif git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" 2>/dev/null \
                | grep -Eq 'ops/verify\.txt'; then
             echo "mode=verify" >> "$GITHUB_OUTPUT"  # verify bump -> read-only per-article transparency capture
