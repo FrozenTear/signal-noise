@@ -24,6 +24,10 @@ fn main() {
                 )
                 .try_init();
 
+            if std::env::var("SEED_API_TOKEN").unwrap_or_default().is_empty() {
+                tracing::warn!("SEED_API_TOKEN is not set — all /api/* writes will be rejected (fail-closed)");
+            }
+
             let db = api::db::init_db().await.expect("Failed to init SurrealDB");
             api::db::apply_schema(&db).await.expect("Failed to apply schema");
 

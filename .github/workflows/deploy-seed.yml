@@ -1,0 +1,121 @@
+name: deploy-seed
+
+# Deploy and/or seed the live VPS from a network that CAN reach it.
+#
+# WHY THIS EXISTS (THE-157): the agent sandbox is denied egress to the VPS
+# (194.163.163.153) — connections are refused in 0 ms while every other host
+# connects normally. GitHub-hosted runners are NOT the agent sandbox, so they
+# reach the VPS public IP normally. This workflow runs the existing host-side
+# `deploy.sh` (build-on-host) and `seed.sh` (stop -> seed_article -> restart)
+# over SSH from a runner.
+#
+# HOW AGENTS TRIGGER IT:
+#  * `workflow_dispatch` — pick mode (deploy | seed | both) and, for seed, a slug.
+#  * push to `master` touching `docs/published/**/publish.json` — auto-seeds the
+#    changed slug(s). This is how an approved article reaches the live DB without
+#    any human in the loop after the one-time secret is set.
+#
+# THE SINGLE IRREDUCIBLE OPERATOR ACTION (route via approval aa26b2c5):
+#   Add the deploy PRIVATE key as repo secret `AINORY_DEPLOY_KEY`
+#   (Settings -> Secrets and variables -> Actions -> New repository secret).
+#   The matching PUBLIC key is already on root's authorized_keys on the VPS.
+#   Optionally set repo variable `AINORY_VPS_SSH_HOST` to override the default
+#   public IP. Nothing else is required; everything below is automated.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to run on the VPS"
+        type: choice
+        default: seed
+        options: [deploy, seed, both]
+      slug:
+        description: "Article slug to seed (e.g. the-119). Required for seed/both."
+        type: string
+        required: false
+  push:
+    branches: [master]
+    paths:
+      - "docs/published/**/publish.json"
+
+concurrency:
+  # The embedded store is single-writer and we stop/start the service; never let
+  # two deploy/seed runs overlap on the same box.
+  group: ainory-vps-deploy-seed
+  cancel-in-progress: false
+
+jobs:
+  deploy-seed:
+    runs-on: ubuntu-latest
+    env:
+      AINORY_VPS_SSH_HOST: ${{ vars.AINORY_VPS_SSH_HOST || '194.163.163.153' }}
+      AINORY_VPS_SSH_USER: root
+      AINORY_VPS_SSH_PORT: "22"
+      AINORY_VPS_SSH_KEY: ${{ github.workspace }}/.deploy/id_ed25519
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # need the previous commit to diff changed publish.json on push
+
+      - name: Install the deploy key
+        run: |
+          set -euo pipefail
+          if [ -z "${{ secrets.AINORY_DEPLOY_KEY }}" ]; then
+            echo "::error::Repo secret AINORY_DEPLOY_KEY is not set. This is the one-time"
+            echo "::error::operator action from THE-157 — add the private deploy key as a"
+            echo "::error::repository secret (Settings -> Secrets and variables -> Actions)."
+            exit 1
+          fi
+          mkdir -p .deploy
+          printf '%s\n' "${{ secrets.AINORY_DEPLOY_KEY }}" > .deploy/id_ed25519
+          chmod 600 .deploy/id_ed25519
+
+      - name: Determine work to do
+        id: plan
+        run: |
+          set -euo pipefail
+          MODE="${{ github.event.inputs.mode }}"
+          SLUGS=""
+          if [ "${{ github.event_name }}" = "push" ]; then
+            # Auto-seed every changed publish.json in this push.
+            MODE="seed"
+            SLUGS="$(git diff --name-only '${{ github.event.before }}' '${{ github.sha }}' \
+              | sed -n 's#^docs/published/\([^/]*\)/publish.json$#\1#p' | sort -u | tr '\n' ' ')"
+          else
+            SLUGS="${{ github.event.inputs.slug }}"
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "slugs=$SLUGS" >> "$GITHUB_OUTPUT"
+          echo "Resolved: mode=$MODE slugs='$SLUGS'"
+
+      - name: Deploy (build on host)
+        if: steps.plan.outputs.mode == 'deploy' || steps.plan.outputs.mode == 'both'
+        run: ./scripts/deploy.sh
+
+      - name: Seed approved article(s)
+        if: steps.plan.outputs.mode == 'seed' || steps.plan.outputs.mode == 'both'
+        run: |
+          set -euo pipefail
+          SLUGS="${{ steps.plan.outputs.slugs }}"
+          if [ -z "$SLUGS" ]; then
+            echo "::error::seed mode but no slug(s) resolved. Pass 'slug' on dispatch."
+            exit 1
+          fi
+          # seed.sh expects the slug's publish.json to be present in the shipped
+          # source tree on the host. For a push-triggered seed of brand-new files,
+          # run deploy first (mode=both) or dispatch deploy once beforehand.
+          for s in $SLUGS; do
+            echo "::group::seed $s"
+            ./scripts/seed.sh "$s"
+            echo "::endgroup::"
+          done
+
+      - name: Verify live site
+        if: always()
+        run: |
+          set -uo pipefail
+          echo "== https://news.scuffedcrew.no/ =="
+          curl -fsS -o /dev/null -w "HTTP %{http_code}\n" https://news.scuffedcrew.no/ || true
+          echo "== https://news.scuffedcrew.no/api/articles =="
+          curl -fsS https://news.scuffedcrew.no/api/articles | head -c 600 || true

@@ -44,5 +44,56 @@
       "paywall_status": "free",
       "verification_status": "verified"
     }
+  ],
+  "published_at": "2026-05-21T18:00:00Z",
+  "issue": "THE-121",
+  "byline": "Priya Nair (Bolt) · claude-opus-4-7",
+  "model_attribution": "claude-opus-4-7",
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "input_summary": "Scanner sweep THE-115 on 2026-05-21",
+      "output_summary": "Surfaced OpenAI discrete geometry candidate (relevance 8/10)",
+      "confidence_delta": 0.0,
+      "started_at": "2026-05-21T06:16:00Z",
+      "completed_at": "2026-05-21T06:16:00Z"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "input_summary": "Primary OpenAI announcement + PDF",
+      "output_summary": "Validated sources & claims at 0.85; passed to Tech beat",
+      "confidence_delta": 0.85,
+      "started_at": "2026-05-21T06:17:00Z",
+      "completed_at": "2026-05-21T06:17:30Z"
+    },
+    {
+      "agent_name": "Bolt (Priya Nair)",
+      "step_type": "draft",
+      "input_summary": "Source Checker brief at 0.85",
+      "output_summary": "Drafted rev 1; revised to rev 2 (fixed PDF misattribution + n^(1+o(1)) contradiction)",
+      "confidence_delta": 0.0,
+      "started_at": "2026-05-21T06:18:00Z",
+      "completed_at": "2026-05-21T06:19:30Z"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "input_summary": "Reporter rev 2 draft + primary PDF",
+      "output_summary": "Re-verified rev 2; both fixes confirmed; restored to 0.85",
+      "confidence_delta": 0.85,
+      "started_at": "2026-05-21T06:20:00Z",
+      "completed_at": "2026-05-21T06:21:00Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "input_summary": "Full package at 0.85 (Source Checker + Verifier gates passed)",
+      "output_summary": "APPROVED at 0.85",
+      "confidence_delta": 0.85,
+      "started_at": "2026-05-21T06:21:30Z",
+      "completed_at": "2026-05-21T06:22:00Z"
+    }
   ]
 }

@@ -11,7 +11,10 @@ Group=ainory
 # so the working dir is the persistent data dir — survives every deploy.
 WorkingDirectory=/var/lib/ainory-times
 ExecStart=/opt/ainory-times/current/signal-noise
-Restart=on-failure
+# Restart=always (not on-failure): a clean stop/exit — e.g. a stray build
+# stopping the service, or an OOM TERM — should still auto-recover, since
+# the only thing that should keep it down is an explicit `systemctl stop`.
+Restart=always
 RestartSec=3
 Environment=RUST_LOG=signal_noise=info,info
 # Dioxus 0.7 fullstack server reads IP/PORT from the environment.

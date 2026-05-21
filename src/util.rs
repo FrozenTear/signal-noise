@@ -1,5 +1,9 @@
 /// Lightweight markdown-ish text → HTML converter.
 /// Splits on blank lines into `<p>` paragraphs and handles `#`/`##`/`###` headings.
+///
+/// All text content passes through `html_escape` before insertion, so article bodies
+/// and monologues rendered via `dangerous_inner_html` in Dioxus are XSS-safe even
+/// when the stored text contains `<script>` or other HTML.
 pub fn simple_md_to_html(md: &str) -> String {
     let mut html = String::new();
     let mut in_paragraph = false;
