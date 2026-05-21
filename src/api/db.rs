@@ -6,7 +6,6 @@ use surrealdb::{
 };
 
 const SCHEMA_SURQL: &str = include_str!("../../db/schema.surql");
-const DB_PATH: &str = "data/signal-noise.db";
 const DB_NS: &str = "signal_noise";
 const DB_NAME: &str = "signal_noise";
 
@@ -17,13 +16,14 @@ pub fn get_db() -> Option<&'static Surreal<Db>> {
 }
 
 pub async fn init_db() -> Result<Surreal<Db>> {
-    let db = match Surreal::new::<SurrealKv>(DB_PATH).await {
+    let db_path = signal_noise::config::db_path();
+    let db = match Surreal::new::<SurrealKv>(db_path.as_str()).await {
         Ok(db) => db,
         Err(e) if e.to_string().contains("already locked") || e.to_string().contains("LOCK") => {
-            let lock_path = format!("{}/LOCK", DB_PATH);
+            let lock_path = format!("{}/LOCK", db_path);
             tracing::warn!("Stale SurrealDB lock detected, removing: {}", lock_path);
             std::fs::remove_file(&lock_path)?;
-            Surreal::new::<SurrealKv>(DB_PATH).await?
+            Surreal::new::<SurrealKv>(db_path.as_str()).await?
         }
         Err(e) => return Err(e.into()),
     };

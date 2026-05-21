@@ -1,11 +1,9 @@
 use surrealdb::{engine::local::{Db, SurrealKv}, Surreal};
 use serde_json::Value;
 
-const DB_PATH: &str = "data/signal-noise.db";
-
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    let db: Surreal<Db> = Surreal::new::<SurrealKv>(DB_PATH).await?;
+    let db: Surreal<Db> = Surreal::new::<SurrealKv>(signal_noise::config::db_path().as_str()).await?;
     db.use_ns("signal_noise").use_db("signal_noise").await?;
     
     let slug = std::env::args().nth(1).unwrap_or_default();

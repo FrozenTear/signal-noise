@@ -7,9 +7,10 @@ Wants=network-online.target
 Type=simple
 User=ainory
 Group=ainory
-# Embedded SurrealKV (data/signal-noise.db) is opened relative to the cwd,
-# so the working dir is the persistent data dir — survives every deploy.
+# Embedded SurrealKV path is resolved from SIGNAL_NOISE_DB_PATH (THE-183),
+# defaulting to the absolute path below so it no longer depends on cwd.
 WorkingDirectory=/var/lib/ainory-times
+Environment=SIGNAL_NOISE_DB_PATH=/var/lib/ainory-times/data/signal-noise.db
 ExecStart=/opt/ainory-times/current/signal-noise
 # Restart=always (not on-failure): a clean stop/exit — e.g. a stray build
 # stopping the service, or an OOM TERM — should still auto-recover, since

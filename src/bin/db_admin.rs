@@ -7,7 +7,6 @@
 use anyhow::{bail, Result};
 use surrealdb::{engine::local::{Db, SurrealKv}, Surreal};
 
-const DB_PATH: &str = "data/signal-noise.db";
 const DB_NS: &str = "signal_noise";
 const DB_NAME: &str = "signal_noise";
 
@@ -20,7 +19,7 @@ async fn main() -> Result<()> {
     let cmd = &args[1];
     let slug = &args[2];
 
-    let db: Surreal<Db> = Surreal::new::<SurrealKv>(DB_PATH).await?;
+    let db: Surreal<Db> = Surreal::new::<SurrealKv>(signal_noise::config::db_path().as_str()).await?;
     db.use_ns(DB_NS).use_db(DB_NAME).await?;
 
     match cmd.as_str() {
