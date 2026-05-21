@@ -1,0 +1,10 @@
+[Unit]
+Description=Run the Signal Noise scanner hourly
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

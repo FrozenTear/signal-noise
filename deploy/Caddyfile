@@ -1,0 +1,16 @@
+# Signal Noise — Caddy reverse proxy (reference copy; provision.sh renders the live one).
+#
+# With a real domain (automatic Let's Encrypt TLS):
+#
+#   news.example.com {
+#       encode zstd gzip
+#       reverse_proxy 127.0.0.1:8888
+#   }
+#
+# IP-only HTTP for v1 (no domain yet) — what provision.sh installs when
+# AINORY_DOMAIN is unset:
+
+:80 {
+    encode zstd gzip
+    reverse_proxy 127.0.0.1:8888
+}

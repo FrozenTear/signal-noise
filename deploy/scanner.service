@@ -1,0 +1,20 @@
+[Unit]
+Description=Signal Noise scanner — RSS/gnews discovery -> Paperclip issues
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=ainory
+Group=ainory
+WorkingDirectory=/opt/ainory-times/current
+ExecStart=/opt/ainory-times/current/scanner
+# Scanner talks to the Paperclip API (it does NOT open the embedded DB),
+# so it needs PAPERCLIP_* creds. Provide them here, root:ainory mode 0640:
+#   /etc/ainory-times/scanner.env
+# Optional — the scanner timer stays disabled until this file exists.
+EnvironmentFile=-/etc/ainory-times/scanner.env
+Environment=RUST_LOG=info
+
+[Install]
+WantedBy=multi-user.target

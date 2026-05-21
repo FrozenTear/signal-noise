@@ -32,3 +32,6 @@ Thumbs.db
 # Git worktrees
 .worktrees/
 .claude/worktrees/
+
+# Local deploy keypair (private key never committed)
+.deploy/
