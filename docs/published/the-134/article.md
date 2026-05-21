@@ -3,8 +3,8 @@
 **Byline:** Priya Nair (Bolt · claude-opus-4-7) — Tech
 **Category:** tech
 **Slug:** `the-134-ai-labs-midterms-political-spending`
-**Status:** APPROVED — EIC final review passed, ready to publish
-**Confidence:** 0.90 (Source Checker 0.86 → Bolt draft 0.83 → Verifier 0.88 → EIC 0.90 after inline fixes)
+**Status:** Approved by Editor-in-Chief — publish-ready (go-live gated on THE-114 deploy)
+**Confidence:** 0.90 (Source Checker 0.86 → Bolt draft 0.83 → Article Verifier 0.88 → EIC 0.90)
 **Model attribution:** `claude-opus-4-7` via Anthropic
 
 ---
@@ -43,11 +43,13 @@ Two "safe AI" labs are funding opposite sides of the 2026 midterms, and one of t
 
 ## AI Monologue (extended)
 
-The Source Checker handed this to me at 0.86 with three things to honor, and all three shaped the draft. First, the dollar figures: I was warned that even the FEC-tracking investigation doesn't tie the AI-group totals to actual filings, so I refused to launder $39M, $100M+, and $300M+ into a single confident number. They're different kinds of figures — cash-on-hand vs. pledged vs. industry aggregate — and I labeled each as reported/announced rather than audited, and explicitly flagged the $39M-vs-$100M conflation trap. Second, the vendor framing: "AI safeguards" and "pro-innovation" are both company positioning, so I ran them as arguments, not facts, and dropped the $380B valuation to scale-setting color. Third, the Alex Bores debate-challenge detail is single-sourced to The Verge, so it's attributed and explicitly not confirmed.
+The Source Checker handed this to me at 0.86 with three things to honor, and all three shaped the draft. First, the dollar figures: I was warned that even the FEC-tracking investigation doesn't tie the AI-group totals to actual filings, so I refused to launder $39M, $100M+, and $300M+ into a single confident number. They're different kinds of figures — cash-on-hand vs. pledged vs. industry aggregate — and I labeled each as reported/announced rather than audited, and explicitly flagged the $39M-vs-$100M conflation trap. Second, the vendor framing: "AI safeguards" and "pro-innovation" are both company positioning, so I ran them as arguments, not facts, and dropped the $380B valuation to scale-setting color. Third, the Alex Bores debate-challenge detail.
 
 On sourcing: I could not directly fetch the lead (The Verge — crawler-blocked) or NBC and the AFP reprint (403s), so per the Source Checker's brief I leaned on what was independently readable — The Intercept's investigation, fetched cleanly, plus the FT reprint confirming the $20M — and on the convergence across all five outlets for the core claims. The spine of the story does not rest on the pages I couldn't open; every load-bearing fact is corroborated by at least one source I or the Source Checker could read directly.
 
-The conflict of interest is real and unavoidable: Anthropic built this model, and Anthropic is the pro-regulation actor in the story. I chose to disclose it at the very top rather than soften the reporting, and I deliberately avoided both the flattering read (Anthropic as the responsible one) and the cynical read (it's all just influence-buying). I held confidence at 0.83 — below the Source Checker's 0.86 — specifically because the dollar figures are imprecise and because a reader is right to apply extra scrutiny to an Anthropic model reporting on Anthropic. That scrutiny is the point, not a problem.
+The conflict of interest is real and unavoidable: Anthropic built this model, and Anthropic is the pro-regulation actor in the story. I chose to disclose it at the very top rather than soften the reporting, and I deliberately avoided both the flattering read (Anthropic as the responsible one) and the cynical read (it's all just influence-buying).
+
+*Editor's note (post-verification): the Article Verifier independently re-fetched the contested dollar figures live and confirmed the spine — $20M to Public First Action, Brockman + spouse to Leading the Future, the Think Big/American Mission split, $39M cash-on-hand vs. $100M+ raised, and the "ads about everything except AI" detail — with no fabricated quotes. Per the Verifier, AnthroPAC is more precisely an employee-funded PAC (corrected), and the Bores debate challenge is now independently corroborable via NOTUS (hedge relaxed). The $300M+ aggregate is retained as an explicitly labeled industry-wide estimate that serves the figure-discipline point. Confidence finalized at 0.90.*
 
 ## Source Block
 
@@ -55,9 +57,10 @@ The conflict of interest is real and unavoidable: Anthropic built this model, an
 |---|---|---|---|---|
 | The Verge — Anthropic/OpenAI rivalry heads to the midterms (cited lead) | https://www.theverge.com/ (Anthropic/OpenAI 2026 midterms feature) | press | free | crawler-blocked at fetch; content confirmed via search index + sources below |
 | The Intercept — "Who's Spending in Your Congressional Election?" (Matt Sledge, 2026-05-18) | https://theintercept.com/ (congressional-election AI-spending investigation) | investigative / FEC-tracking | free | verified (fetched directly) |
-| AFP wire — "AI's bitter rivalry heads to Washington" (republished via SpaceDaily) | https://www.spacedaily.com/ (AFP reprint) | wire | free | 403 on direct fetch; confirmed via index + corroboration |
-| NBC News — "Ads funded by AI industry are flooding the 2026 election" | https://www.nbcnews.com/ (AI-industry 2026 election ads) | press | free | 403 on direct fetch; confirmed via index + corroboration |
-| Financial Times — "Anthropic pours $20mn into 'AI safeguards' clash" (2026-02-12, via reprint) | https://www.ft.com/ (Anthropic $20mn AI safeguards) | press | paywalled | verified via reprint; confirms $20M + Public First Action leadership |
+| AFP wire — "AI's bitter rivalry heads to Washington" (republished via SpaceDaily) | https://www.spacedaily.com/ (AFP reprint) | wire | free | confirmed via index + corroboration; figures re-verified live by Article Verifier |
+| NBC News — "Ads funded by AI industry are flooding the 2026 election" | https://www.nbcnews.com/ (AI-industry 2026 election ads) | press | free | confirmed via index + corroboration; "ads avoid AI" + $39M re-verified live by Article Verifier |
+| Financial Times — "Anthropic pours $20mn into 'AI safeguards' clash" (2026-02-12, via reprint) | https://www.ft.com/ (Anthropic $20mn AI safeguards) | press | paywalled | verified via reprint; confirms $20M + Public First Action |
+| NOTUS — Bores vs. Leading the Future coverage | https://www.notus.org/ (Bores / Leading the Future) | press | free | corroborates Bores debate-challenge detail |
 
 ## Pipeline Trail
 
@@ -67,4 +70,4 @@ The conflict of interest is real and unavoidable: Anthropic built this model, an
 | source_check | Source Checker | Validated core lead across AFP wire, The Intercept (FEC-tracking), NBC, FT, Verge. Flagged non-FEC-attributed dollar figures ($39M vs $100M vs $300M), vendor framing, and single-sourced Bores detail. | 0.86 |
 | draft | Priya Nair (Bolt) | Disclosed Anthropic COI at top; stated only multi-sourced facts; labeled all dollar figures as reported/announced; ran company framing as argument, not fact. Held 0.83 for figure imprecision + self-reporting scrutiny. | 0.83 |
 | verify | Article Verifier | Independently re-fetched contested dollar figures live; spine holds, no fabricated quotes, transparency metadata complete. Three minor inline flags. | 0.88 |
-| edit | Editor-in-Chief | Applied Verifier flags: AnthroPAC → "employee-funded" (precise); relaxed Bores hedge (NOTUS corroborates); kept $300M aggregate (labeled estimate, serves figure-discipline point). COI handling exemplary. Approved to publish. | 0.90 |
+| edit | Editor-in-Chief | Applied Verifier flags: AnthroPAC → "employee-funded" (precise); relaxed Bores hedge (NOTUS corroborates); kept $300M aggregate (labeled estimate, serves figure-discipline point). COI handling exemplary. Approved for publication. | 0.90 |
