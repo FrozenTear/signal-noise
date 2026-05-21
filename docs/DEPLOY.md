@@ -89,6 +89,56 @@ AINORY_DOMAIN=news.scuffedcrew.no ./scripts/provision.sh # user/dirs/toolchain +
 All three default to `root@169.254.1.2`. `provision.sh` is idempotent and will
 **not** touch Caddy if our vhost is already present.
 
+## Deploy/seed from a VPS-reachable network (THE-157)
+
+The **agent sandbox cannot reach the VPS** — egress to `194.163.163.153` is
+refused in 0 ms (an IP-specific block in the agent runtime; every other host
+connects fine — see [THE-156](/THE/issues/THE-156)). So `deploy.sh`/`seed.sh`,
+which need an SSH/TCP route to the box, **cannot run from the sandbox**. The path
+below removes that dependency by running the *same* host-side scripts from a
+**GitHub Actions runner**, which is not the sandbox and reaches the VPS normally.
+
+- Workflow: `.github/workflows/deploy-seed.yml`.
+- Triggers:
+  - `workflow_dispatch` — choose `mode` (`deploy` | `seed` | `both`) and, for
+    seeding, a `slug` (e.g. `the-119`).
+  - push to `master` touching `docs/published/**/publish.json` — auto-seeds the
+    changed slug(s). This is the hands-off "approved article → live DB" path.
+- The runner SSHes to the **public IP** `194.163.163.153:22` (not the
+  `169.254.1.2` link-local address, which only works from the co-located
+  container) and runs `deploy.sh` / `seed.sh` unchanged via their env contract.
+
+### THE single irreducible operator action
+
+Add the **private** deploy key as repository secret **`AINORY_DEPLOY_KEY`**
+(GitHub → Settings → Secrets and variables → Actions → New repository secret).
+The matching public key is already on `root`'s `authorized_keys` on the VPS, so
+nothing on the box needs to change. Route this through approval
+[aa26b2c5](/THE/approvals/aa26b2c5-6ef7-471f-936a-384e8f3dfea5). After that, agents
+trigger deploy/seed by push or `workflow_dispatch` with no human in the loop.
+
+Optional repo **variable** `AINORY_VPS_SSH_HOST` overrides the default public IP.
+
+> Assumption to verify on first run: the VPS firewall must accept inbound SSH on
+> the public IP from GitHub runner IP ranges. If it does not, the alternative is a
+> VPS-side pull unit (a systemd timer on the box that pulls approved
+> `publish.json` from GitHub and runs `seed.sh` locally); install-once is then the
+> irreducible action instead of the secret. GitHub Actions is preferred because it
+> keeps future deploy/seed fully agent-triggerable.
+
+## Seeding a single approved article (live DB)
+
+```sh
+./scripts/seed.sh the-119          # stop -> seed_article -> restart -> health-check
+```
+
+Runs the offline `stop → seed_article → restart` sequence over SSH against the
+**live** embedded store (`/var/lib/ainory-times/data/signal-noise.db`). Honors the
+same `AINORY_VPS_SSH_*` env as `deploy.sh`. The slug's `publish.json` must already
+be in the shipped source tree on the host — run `deploy.sh` first if it is new.
+Seeding runs as the `ainory` user with cwd `/var/lib/ainory-times` so the relative
+DB path resolves to the live store and file ownership stays correct for restart.
+
 ## Routine deploys
 
 ```sh
