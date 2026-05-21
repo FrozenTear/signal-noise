@@ -1,0 +1,2 @@
+live redeploy trigger (bump to redeploy + re-verify mobile fit)
+THE-214: ship THE-212 mobile-overflow CSS fix (overflow-wrap: break-word) — 2026-05-21T00:00:00Z

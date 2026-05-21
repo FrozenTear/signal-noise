@@ -26,14 +26,22 @@ on:
         description: 'type "deploy" to confirm a live redeploy'
         required: true
         default: ''
+  push:
+    branches: [master]
+    paths:
+      - "ops/deploy.txt"   # bump this file -> agent-triggerable live redeploy (no gh/PAT needed; SSH push only)
 
 concurrency:
   group: live-deploy
   cancel-in-progress: false
 
+permissions:
+  contents: write   # final step commits the post-deploy mobile-fit capture back to docs/seed-status/
+
 jobs:
   redeploy:
-    if: ${{ inputs.confirm == 'deploy' }}
+    # workflow_dispatch requires the explicit "deploy" confirm; an ops/deploy.txt push is itself the confirmation.
+    if: ${{ github.event_name == 'push' || inputs.confirm == 'deploy' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -72,3 +80,16 @@ jobs:
           [ "$no" = "503" ] || { echo "FAIL: live writes still un-gated"; exit 1; }
           case "$wrong" in 401|403) ;; *) echo "FAIL: wrong token not rejected"; exit 1;; esac
           echo "OK: live write endpoint is gated."
+
+      - name: Re-verify mobile fit against freshly-deployed live (THE-214 / THE-212)
+        if: success()
+        env:
+          BASE: https://news.scuffedcrew.no
+          MODE: verify
+        run: |
+          # Reuse the proven verify path: it runs the Playwright capture (gated on
+          # ops/render.on, present) at mobile 390x844, writes evidence/summary.json with
+          # per-article no_mobile_overflow, and commits evidence back to
+          # docs/seed-status/the206-evidence/ ([skip ci]). This captures the CSS we just
+          # shipped, so summary.json is the post-deploy proof for spacex-s1.
+          bash scripts/seed-live.sh
