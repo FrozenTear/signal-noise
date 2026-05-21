@@ -40,6 +40,16 @@ const VIEWPORTS = [
   { name: 'mobile', width: 390, height: 844 },
 ];
 
+// THE-208 / THE-87: the paired Head-to-Head page. The 12-slug loop only hits
+// /article/<slug> and never captures the H2H page, so it is added here.
+const H2H_SLUG = process.env.H2H_SLUG || 'home-depot-q1-2026';
+// CAVEAT (reconstructed by Console from Frontend's THE-208 spec; commit fbd36cc
+// was trapped in an ephemeral workspace and never reached origin): src/pages/h2h.rs
+// (THE-87) is NOT on origin/master, so the live DOM column wrapper is UNVERIFIED.
+// COLUMN_SEL follows the LAYOUT-SPEC ('article'); if the deployed wrapper differs,
+// ONLY this selector changes. The /h2h route 404s until THE-216 lands h2h.rs.
+const COLUMN_SEL = process.env.COLUMN_SEL || 'article';
+
 function bad(s) {
   // headline/byline that should be treated as a failure
   if (!s) return true;
@@ -216,11 +226,104 @@ async function captureArticle(browser, slug) {
   return rec;
 }
 
-async function main() {
-  await mkdir(`${OUT}/api`, { recursive: true });
-  await mkdir(`${OUT}/shots`, { recursive: true });
+// ── H2H page: prove BOTH columns, not "present somewhere" ────────────────────
+async function captureH2H(browser) {
+  const url = `${BASE}/h2h/${H2H_SLUG}`;
+  const rec = {
+    slug: H2H_SLUG, url, http_status: null, not_found: false,
+    column_count: 0, columns: [], editor_note_present: false,
+    viewports: {}, checks: {}, errors: [],
+  };
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  try {
+    const resp = await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 });
+    rec.http_status = resp ? resp.status() : null;
+    await page.waitForSelector('h1.sn-headline', { timeout: 45000 }).catch(() => {});
+    rec.not_found = (await page.locator('h2:has-text("not found")').count()) > 0;
 
-  const browser = await chromium.launch();
+    if (!rec.not_found) {
+      rec.editor_note_present =
+        (await page.locator('.sn-editor-note, [data-editor-note]').count()) > 0;
+
+      const cols = page.locator(COLUMN_SEL);
+      rec.column_count = await cols.count();
+      for (let i = 0; i < rec.column_count; i++) {
+        const col = cols.nth(i);
+        const headline = (await col.locator('h1.sn-headline, h2.sn-headline, .sn-headline')
+          .first().textContent().catch(() => ''))?.trim() || '';
+        // confidence: percent-or-decimal tolerant (0.90 ↔ 90%, 0.86 ↔ 86%)
+        const confText = (await col.locator('.sn-conf-val').first()
+          .textContent().catch(() => ''))?.trim() || '';
+        const confNum = (() => {
+          const m = confText.match(/([\d.]+)\s*%?/);
+          if (!m) return null;
+          let v = parseFloat(m[1]);
+          if (confText.includes('%') || v > 1) v = v / 100;
+          return Number.isFinite(v) ? v : null;
+        })();
+        const sourceRows = await col.locator('.sn-source-item').count();
+        const paywallRows = await col.locator('.sn-chip-warn', { hasText: /paywall/i }).count();
+        const pipelineSteps = await col.locator('.sn-trail-step').count();
+        const shortMono =
+          (await col.locator('.sn-monologue-label', { hasText: /INTERNAL REASONING/ }).count()) > 0
+          || (await col.locator('.sn-toggle-btn', { hasText: /show AI monologue/i }).count()) > 0;
+        const extMono =
+          (await col.locator('.sn-monologue-label', { hasText: /EXTENDED INTERNAL MONOLOGUE/ }).count()) > 0
+          || (await col.locator('.sn-toggle-btn', { hasText: /show full process log/i }).count()) > 0;
+        rec.columns.push({
+          headline, conf_text: confText, conf_num: confNum,
+          source_rows: sourceRows, paywall_rows: paywallRows,
+          pipeline_steps: pipelineSteps, monologue_short: shortMono, monologue_extended: extMono,
+        });
+      }
+    }
+  } catch (e) {
+    rec.errors.push(`render: ${e.message}`);
+  }
+
+  // screenshots + per-viewport overflow gate (mobile 390 must not clip)
+  for (const vp of VIEWPORTS) {
+    try {
+      await page.setViewportSize({ width: vp.width, height: vp.height });
+      await page.waitForTimeout(400);
+      const file = `${OUT}/shots/h2h-${H2H_SLUG}.${vp.name}.png`;
+      await page.screenshot({ path: file, fullPage: true });
+      const scrollW = await page.evaluate(() => document.documentElement.scrollWidth);
+      rec.viewports[vp.name] = { file, scrollWidth: scrollW, overflow: scrollW > vp.width + 1 };
+    } catch (e) {
+      rec.errors.push(`shot ${vp.name}: ${e.message}`);
+      rec.viewports[vp.name] = { file: null, error: e.message };
+    }
+  }
+  await context.close();
+
+  // expected confidences from the THE-87 seed: 0.90 and 0.86
+  const EXP = [0.90, 0.86];
+  const confClose = (n, e) => n != null && Math.abs(n - e) <= 0.01;
+  const colHasExpectedConf = EXP.map(e => rec.columns.some(c => confClose(c.conf_num, e)));
+  const totalPaywallRows = rec.columns.reduce((a, c) => a + c.paywall_rows, 0);
+
+  rec.checks = {
+    renders_200: rec.http_status === 200 && !rec.not_found,
+    two_columns: rec.column_count >= 2,
+    each_column_headline: rec.column_count >= 2 && rec.columns.every(c => c.headline && !bad(c.headline)),
+    conf_090_present: colHasExpectedConf[0],
+    conf_086_present: colHasExpectedConf[1],
+    sources_each_column: rec.column_count >= 2 && rec.columns.every(c => c.source_rows > 0),
+    paywall_ledger_min2: totalPaywallRows >= 2, // Ledger sell-side rows
+    pipeline_each_column: rec.column_count >= 2 && rec.columns.every(c => c.pipeline_steps > 0),
+    monologue_short_each: rec.column_count >= 2 && rec.columns.every(c => c.monologue_short),
+    monologue_extended_each: rec.column_count >= 2 && rec.columns.every(c => c.monologue_extended),
+    editor_note_present: rec.editor_note_present,
+    no_desktop_overflow: rec.viewports.desktop && !rec.viewports.desktop.overflow,
+    no_mobile_overflow: rec.viewports.mobile && !rec.viewports.mobile.overflow,
+  };
+  rec.pass = Object.values(rec.checks).every(Boolean);
+  return rec;
+}
+
+async function runArticles(browser) {
   const results = [];
   for (const slug of SLUGS) {
     process.stdout.write(`▶ ${slug} ... `);
@@ -228,6 +331,52 @@ async function main() {
     results.push(rec);
     console.log(rec.pass ? 'PASS' : `FAIL (${Object.entries(rec.checks).filter(([, v]) => !v).map(([k]) => k).join(', ')})`);
   }
+  return results;
+}
+
+async function runH2H(browser) {
+  process.stdout.write(`▶ h2h/${H2H_SLUG} ... `);
+  const rec = await captureH2H(browser);
+  console.log(rec.pass ? 'PASS' : `FAIL (${Object.entries(rec.checks).filter(([, v]) => !v).map(([k]) => k).join(', ')})`);
+
+  let md = `# THE-208 H2H evidence — ${rec.url}\n\nCaptured: ${new Date().toISOString()}\n\n`;
+  md += `Columns found (COLUMN_SEL='${COLUMN_SEL}'): ${rec.column_count}\n\n`;
+  md += `| check | result |\n| --- | --- |\n`;
+  for (const [k, v] of Object.entries(rec.checks)) md += `| ${k} | ${v ? '✅' : '❌'} |\n`;
+  md += `\n## Per-column detail\n`;
+  rec.columns.forEach((c, i) => {
+    md += `\n### Column ${i + 1} — ${c.headline || '—'}\n`;
+    md += `- Confidence: ${c.conf_text || '—'} (≈${c.conf_num ?? '—'})\n`;
+    md += `- Source rows: ${c.source_rows} (paywall affordances: ${c.paywall_rows})\n`;
+    md += `- Pipeline steps: ${c.pipeline_steps}\n`;
+    md += `- Monologue short/extended: ${c.monologue_short}/${c.monologue_extended}\n`;
+  });
+  md += `\n- Editor's note present: ${rec.editor_note_present}\n`;
+  md += `- Screenshots: desktop=${rec.viewports.desktop?.file ?? '—'}, mobile=${rec.viewports.mobile?.file ?? '—'}\n`;
+  if (rec.errors.length) md += `- ⚠️ errors: ${rec.errors.join('; ')}\n`;
+  await writeFile(`${OUT}/h2h-summary.json`, JSON.stringify(rec, null, 2));
+  await writeFile(`${OUT}/H2H-SUMMARY.md`, md);
+  if (process.env.GITHUB_STEP_SUMMARY) await writeFile(process.env.GITHUB_STEP_SUMMARY, md, { flag: 'a' });
+  return rec;
+}
+
+async function main() {
+  const mode = (process.argv[2] || 'all').toLowerCase(); // h2h | articles | all
+  await mkdir(`${OUT}/api`, { recursive: true });
+  await mkdir(`${OUT}/shots`, { recursive: true });
+
+  const browser = await chromium.launch();
+
+  if (mode === 'h2h') {
+    const rec = await runH2H(browser);
+    await browser.close();
+    console.log(`\nH2H ${rec.pass ? 'PASS' : 'FAIL'}.`);
+    process.exit(rec.pass ? 0 : 1);
+  }
+
+  const results = await runArticles(browser);
+  let h2h = null;
+  if (mode === 'all') h2h = await runH2H(browser);
   await browser.close();
 
   await writeFile(`${OUT}/summary.json`, JSON.stringify(results, null, 2));
@@ -261,12 +410,13 @@ async function main() {
   await writeFile(`${OUT}/SUMMARY.md`, md);
 
   const failed = results.filter(r => !r.pass);
-  console.log(`\n${results.length - failed.length}/${results.length} passed.`);
+  console.log(`\n${results.length - failed.length}/${results.length} articles passed.`);
+  if (h2h) console.log(`H2H ${h2h.pass ? 'PASS' : 'FAIL'}.`);
   if (process.env.GITHUB_STEP_SUMMARY) {
     await writeFile(process.env.GITHUB_STEP_SUMMARY, md, { flag: 'a' });
   }
-  // Non-zero exit only flags failures; artifacts are still uploaded (if: always()).
-  process.exit(failed.length ? 1 : 0);
+  // Non-zero exit flags any failure (articles or folded-in H2H); artifacts still upload (if: always()).
+  process.exit((failed.length || (h2h && !h2h.pass)) ? 1 : 0);
 }
 
 main().catch(e => { console.error(e); process.exit(2); });
