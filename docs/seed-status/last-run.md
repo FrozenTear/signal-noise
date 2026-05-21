@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-05-21T22:12:28Z
+- when:    2026-05-21T22:43:52Z
 - mode:    verify
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26256089523
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26257289936
 - token configured: false
 
 ```
@@ -86,7 +86,7 @@ write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
     transparency: COMPLETE
 verify: 12/12 articles return 200 on both API + page route
 == browser render capture (Playwright/Chromium) ==
-▶ spacex-s1-biggest-ipo-musk-risk-factor ... FAIL (no_mobile_overflow)
+▶ spacex-s1-biggest-ipo-musk-risk-factor ... PASS
 ▶ the-116-greg-kh-more-rust-kernel-developers ... PASS
 ▶ the-121-openai-disproves-unit-distance-conjecture ... PASS
 ▶ the-132-cache-aware-scheduling-linux-7-2 ... PASS
@@ -99,7 +99,7 @@ verify: 12/12 articles return 200 on both API + page route
 ▶ cisa-credentials-public-github-repo ... PASS
 ▶ orf-at-misleading-cookie-banner ... PASS
 
-11/12 passed.
-  render capture: completed with check failures (see SUMMARY.md / artifact)
+12/12 passed.
+  render capture: all articles PASS
   evidence committed + pushed to docs/seed-status/the206-evidence/
 ```
