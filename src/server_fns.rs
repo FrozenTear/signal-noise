@@ -18,6 +18,8 @@ pub struct ArticleSummary {
     pub summary: String,
     pub category: String,
     pub persona_name: String,
+    /// Free-form byline used when persona is NULL (e.g. H2H AI-reporter pairings).
+    pub byline: Option<String>,
     pub confidence_score: f64,
     pub published_at: String,
     pub ai_monologue: Option<String>,
@@ -135,7 +137,8 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
     if let Ok(Extension(db)) = FullstackContext::extract::<Extension<Surreal<Db>>, _>().await {
         let mut res_result = if let Some(cat) = &category {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
+                "SELECT slug, title, summary, category, confidence_score, published_at, \
+                 byline, ai_monologue, ai_monologue_extended, persona.name AS persona_name \
                  FROM article WHERE status = 'published' AND category = $cat \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -143,7 +146,8 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
             .await
         } else {
             db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, ai_monologue, ai_monologue_extended, pipeline_metadata, persona.name AS persona_name \
+                "SELECT slug, title, summary, category, confidence_score, published_at, \
+                 byline, ai_monologue, ai_monologue_extended, pipeline_metadata, persona.name AS persona_name \
                  FROM article WHERE status = 'published' \
                  ORDER BY published_at DESC LIMIT 20",
             )
@@ -166,6 +170,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
                                     .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
                                     .unwrap_or("AI Reporter")
                                     .to_string(),
+                                byline: v["byline"].as_str().map(|s| s.to_string()),
                                 confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
                                 published_at: v["published_at"].as_str().unwrap_or("").to_string(),
                                 ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
@@ -251,59 +256,8 @@ pub async fn get_article_by_slug(
         {
             if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
                 if let Some(v) = rows.into_iter().next() {
-                    let sources = v["sources"]
-                        .as_array()
-                        .map(|arr| {
-                            arr.iter()
-                                .filter_map(|s| {
-                                    Some(SourceSummary {
-                                        url: s["url"].as_str()?.to_string(),
-                                        name: s["name"].as_str()?.to_string(),
-                                        source_type: s["type"].as_str().unwrap_or("wire").to_string(),
-                                        paywall: s["paywall_status"].as_str() == Some("paywalled"),
-                                        verified: s["verification_status"].as_str() == Some("verified"),
-                                    })
-                                })
-                                .collect()
-                        })
-                        .unwrap_or_default();
-
-                    let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
-                        .as_array()
-                        .map(|arr| {
-                            arr.iter()
-                                .filter_map(|p| {
-                                    let step_type = p["step_type"].as_str()?.to_string();
-                                    let sort_order = p["sort_order"]
-                                        .as_i64()
-                                        .map(|n| n as i32)
-                                        .unwrap_or_else(|| match step_type.as_str() {
-                                            "scan" => 0,
-                                            "source_check" => 1,
-                                            "fact_check" => 2,
-                                            "draft" => 3,
-                                            "verify" => 4,
-                                            "edit" => 5,
-                                            _ => 99,
-                                        });
-                                    Some(PipelineSummary {
-                                        agent_name: p["agent_name"].as_str()?.to_string(),
-                                        step_type,
-                                        output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
-                                        confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
-                                        completed_at: p["completed_at"]
-                                            .as_str()
-                                            .or_else(|| p["started_at"].as_str())
-                                            .unwrap_or("")
-                                            .to_string(),
-                                        sort_order,
-                                    })
-                                })
-                                .collect()
-                        })
-                        .unwrap_or_default();
-                    pipeline.sort_by_key(|s| s.sort_order);
-
+                    let sources = extract_sources(&v);
+                    let pipeline = extract_pipeline(&v);
                     return Ok(Some(article_detail_from_row(&v, sources, pipeline)));
                 }
             }
@@ -342,7 +296,9 @@ fn article_detail_from_row(
         pipeline,
         h2h_role: pm["h2h_role"].as_str().map(|s| s.to_string()),
         h2h_slug: pm["h2h_slug"].as_str().map(|s| s.to_string()),
-        byline: pm["byline"].as_str().map(|s| s.to_string()),
+        byline: v["byline"].as_str()
+            .or_else(|| pm["byline"].as_str())
+            .map(|s| s.to_string()),
         model_attribution: pm["model_attribution"].as_str().map(|s| s.to_string()),
         source_substitution: pm["source_substitution"].as_bool().unwrap_or(false),
         source_substitution_approved_by: pm["source_substitution_approved_by"].as_str().map(|s| s.to_string()),
@@ -352,8 +308,10 @@ fn article_detail_from_row(
     }
 }
 
-/// Load the 3-article bundle (1 intro + 2 pieces) for an H2H pairing keyed by `h2h_slug`.
-/// Returns None when no intro article is found for the slug.
+/// Load the bundle for an H2H pairing keyed by `h2h_slug` using slug conventions.
+/// intro = `"{h2h_slug}-editors-note"`, pieces = all other articles whose slug
+/// starts with `"{h2h_slug}-"`, ordered by slug ascending.
+/// No schema migration required — convention-based, no pipeline_metadata needed.
 #[server]
 pub async fn get_h2h_by_slug(
     h2h_slug: String,
@@ -366,7 +324,9 @@ pub async fn get_h2h_by_slug(
         return Ok(None);
     };
 
-    // One query, all three rows. Intro and pieces both filtered by h2h_slug.
+    let intro_slug = format!("{}-editors-note", h2h_slug);
+    let prefix = format!("{}-", h2h_slug);
+
     let Ok(mut res) = db
         .query(
             "SELECT *, \
@@ -374,10 +334,10 @@ pub async fn get_h2h_by_slug(
              ->cites->source.* AS sources, \
              ->produced_by->pipeline_step.* AS pipeline \
              FROM article \
-             WHERE pipeline_metadata.h2h_slug = $slug \
-             ORDER BY pipeline_metadata.h2h_role ASC, published_at ASC",
+             WHERE string::starts_with(slug, $prefix) \
+             ORDER BY slug ASC",
         )
-        .bind(("slug", h2h_slug.clone()))
+        .bind(("prefix", prefix))
         .await
     else {
         return Ok(None);
@@ -392,64 +352,14 @@ pub async fn get_h2h_by_slug(
     let mut pieces: Vec<ArticleDetail> = Vec::new();
 
     for v in rows.iter() {
-        let sources = v["sources"]
-            .as_array()
-            .map(|arr| {
-                arr.iter()
-                    .filter_map(|s| {
-                        Some(SourceSummary {
-                            url: s["url"].as_str()?.to_string(),
-                            name: s["name"].as_str()?.to_string(),
-                            source_type: s["type"].as_str().unwrap_or("wire").to_string(),
-                            paywall: s["paywall_status"].as_str() == Some("paywalled"),
-                            verified: s["verification_status"].as_str() == Some("verified"),
-                        })
-                    })
-                    .collect()
-            })
-            .unwrap_or_default();
-
-        let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
-            .as_array()
-            .map(|arr| {
-                arr.iter()
-                    .filter_map(|p| {
-                        let step_type = p["step_type"].as_str()?.to_string();
-                        let sort_order = p["sort_order"]
-                            .as_i64()
-                            .map(|n| n as i32)
-                            .unwrap_or_else(|| match step_type.as_str() {
-                                "scan" => 0,
-                                "source_check" => 1,
-                                "fact_check" => 2,
-                                "draft" => 3,
-                                "verify" => 4,
-                                "edit" => 5,
-                                _ => 99,
-                            });
-                        Some(PipelineSummary {
-                            agent_name: p["agent_name"].as_str()?.to_string(),
-                            step_type,
-                            output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
-                            confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
-                            completed_at: p["completed_at"]
-                                .as_str()
-                                .or_else(|| p["started_at"].as_str())
-                                .unwrap_or("")
-                                .to_string(),
-                            sort_order,
-                        })
-                    })
-                    .collect()
-            })
-            .unwrap_or_default();
-        pipeline.sort_by_key(|s| s.sort_order);
-
+        let sources = extract_sources(v);
+        let pipeline = extract_pipeline(v);
         let detail = article_detail_from_row(v, sources, pipeline);
-        match detail.h2h_role.as_deref() {
-            Some("intro") => intro = Some(detail),
-            Some("piece") => pieces.push(detail),
-            _ => {}
+
+        if v["slug"].as_str() == Some(intro_slug.as_str()) {
+            intro = Some(detail);
+        } else {
+            pieces.push(detail);
         }
     }
 
@@ -462,6 +372,66 @@ pub async fn get_h2h_by_slug(
         intro,
         pieces,
     }))
+}
+
+#[cfg(feature = "server")]
+fn extract_sources(v: &serde_json::Value) -> Vec<SourceSummary> {
+    v["sources"]
+        .as_array()
+        .map(|arr| {
+            arr.iter()
+                .filter_map(|s| {
+                    Some(SourceSummary {
+                        url: s["url"].as_str()?.to_string(),
+                        name: s["name"].as_str()?.to_string(),
+                        source_type: s["type"].as_str().unwrap_or("wire").to_string(),
+                        paywall: s["paywall_status"].as_str() == Some("paywalled"),
+                        verified: s["verification_status"].as_str() == Some("verified"),
+                    })
+                })
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+#[cfg(feature = "server")]
+fn extract_pipeline(v: &serde_json::Value) -> Vec<PipelineSummary> {
+    let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
+        .as_array()
+        .map(|arr| {
+            arr.iter()
+                .filter_map(|p| {
+                    let step_type = p["step_type"].as_str()?.to_string();
+                    let sort_order = p["sort_order"]
+                        .as_i64()
+                        .map(|n| n as i32)
+                        .unwrap_or_else(|| match step_type.as_str() {
+                            "scan" => 0,
+                            "source_check" => 1,
+                            "fact_check" => 2,
+                            "draft" => 3,
+                            "verify" => 4,
+                            "edit" => 5,
+                            _ => 99,
+                        });
+                    Some(PipelineSummary {
+                        agent_name: p["agent_name"].as_str()?.to_string(),
+                        step_type,
+                        output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
+                        confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
+                        completed_at: p["completed_at"]
+                            .as_str()
+                            .or_else(|| p["started_at"].as_str())
+                            .unwrap_or("")
+                            .to_string(),
+                        sort_order,
+                    })
+                })
+                .collect()
+        })
+        .unwrap_or_default();
+    pipeline.sort_by_key(|s| s.sort_order);
+    pipeline
 }
 
 /// Agent roster — reads from SurrealDB (populated by Paperclip heartbeats via PUT /api/agents/status).
@@ -624,6 +594,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "linux".to_string(),
             persona_name: "Linus Watcher".to_string(),
+            byline: None,
             confidence_score: 0.91,
             published_at: "2026-03-22".to_string(),
             ai_monologue: None,
@@ -639,6 +610,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "tech".to_string(),
             persona_name: "Circuit Breaker".to_string(),
+            byline: None,
             confidence_score: 0.78,
             published_at: "2026-03-21".to_string(),
             ai_monologue: None,
@@ -655,6 +627,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "privacy".to_string(),
             persona_name: "Panoptikon".to_string(),
+            byline: None,
             confidence_score: 0.87,
             published_at: "2026-03-20".to_string(),
             ai_monologue: None,
@@ -669,6 +642,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "linux".to_string(),
             persona_name: "Linus Watcher".to_string(),
+            byline: None,
             confidence_score: 0.83,
             published_at: "2026-03-19".to_string(),
             ai_monologue: None,
@@ -685,6 +659,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "privacy".to_string(),
             persona_name: "Panoptikon".to_string(),
+            byline: None,
             confidence_score: 0.94,
             published_at: "2026-03-18".to_string(),
             ai_monologue: None,
@@ -701,6 +676,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
                 .to_string(),
             category: "tech".to_string(),
             persona_name: "Circuit Breaker".to_string(),
+            byline: None,
             confidence_score: 0.61,
             published_at: "2026-03-17".to_string(),
             ai_monologue: None,

@@ -78,10 +78,12 @@ pub fn Article(slug: String) -> Element {
                                 }
                             }
 
-                            // Category + byline
+                            // Category + byline (byline string takes precedence over persona name)
                             div { style: "display:flex; align-items:center; gap:10px; margin-bottom:14px; margin-top:20px;",
                                 span { class: "sn-beat-tag {art.category.to_lowercase()}", "{art.category}" }
-                                span { class: "sn-ts", "by {art.persona_name}" }
+                                span { class: "sn-ts",
+                                    "by {art.byline.clone().unwrap_or_else(|| art.persona_name.clone())}"
+                                }
                             }
 
                             // Title

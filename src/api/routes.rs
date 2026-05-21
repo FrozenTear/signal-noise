@@ -47,8 +47,11 @@ pub struct ArticlePublishPayload {
     pub summary: Option<String>,
     pub body: String,
     pub category: String,
-    /// Persona slug (e.g. "priya-nair") — resolved to a record<persona> inside SurrealDB
+    /// Persona slug (e.g. "priya-nair") — resolved to a record<persona> inside SurrealDB.
+    /// Optional: when omitted or empty, use `byline` instead.
     pub persona: Option<String>,
+    /// Free-form byline string used when persona is NULL (e.g. H2H AI-reporter pairings).
+    pub byline: Option<String>,
     pub confidence_score: Option<f64>,
     pub ai_monologue: Option<String>,
     pub ai_monologue_extended: Option<String>,
@@ -204,12 +207,9 @@ pub async fn publish_article(
     }
     let confidence = payload.confidence_score.unwrap_or(0.0);
 
-    // persona: must be provided and non-empty
-    let persona = match &payload.persona {
-        None => return Err(bad_req("persona is required")),
-        Some(s) if s.trim().is_empty() => return Err(bad_req("persona cannot be empty")),
-        Some(s) => s.clone(),
-    };
+    // persona: optional — only validate existence when a non-empty slug is supplied
+    let persona = payload.persona.as_deref().unwrap_or("").trim().to_string();
+    let byline = payload.byline.as_deref().unwrap_or("").trim().to_string();
 
     // body: reject if it still contains the metadata sections that should be
     // extracted into dedicated API fields (monologue, sources, pipeline, etc.)
@@ -228,16 +228,18 @@ pub async fn publish_article(
         return Err(bad_req("body contains metadata sections (## AI Monologue, ## Source Block, etc.); extract these into dedicated API fields"));
     }
 
-    // Validate persona slug exists in DB
-    let mut persona_res = state
-        .db
-        .query("SELECT id FROM persona WHERE slug = $slug LIMIT 1")
-        .bind(("slug", persona.clone()))
-        .await
-        .map_err(|_| db_err())?;
-    let persona_rows: Vec<Value> = persona_res.take(0).map_err(|_| db_err())?;
-    if persona_rows.is_empty() {
-        return Err(bad_req(&format!("persona '{}' does not exist", persona)));
+    // Validate persona slug when a non-empty slug was supplied
+    if !persona.is_empty() {
+        let mut persona_res = state
+            .db
+            .query("SELECT id FROM persona WHERE slug = $slug LIMIT 1")
+            .bind(("slug", persona.clone()))
+            .await
+            .map_err(|_| db_err())?;
+        let persona_rows: Vec<Value> = persona_res.take(0).map_err(|_| db_err())?;
+        if persona_rows.is_empty() {
+            return Err(bad_req(&format!("persona '{}' does not exist", persona)));
+        }
     }
 
     // Validate category slug exists in DB
@@ -287,6 +289,7 @@ pub async fn publish_article(
                 persona:          IF $persona != '' THEN
                                       (SELECT id FROM persona WHERE slug = $persona LIMIT 1)[0].id
                                   ELSE NONE END,
+                byline:           IF $byline != '' THEN $byline ELSE NONE END,
                 confidence_score:    $confidence,
                 ai_monologue:        $monologue,
                 ai_monologue_extended: IF $monologue_extended != '' THEN $monologue_extended ELSE NONE END,
@@ -305,6 +308,7 @@ pub async fn publish_article(
         .bind(("body", payload.body))
         .bind(("category", category))
         .bind(("persona", persona))
+        .bind(("byline", byline))
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
         .bind(("monologue_extended", ai_monologue_extended))

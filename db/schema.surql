@@ -55,6 +55,7 @@ DEFINE FIELD source_urls        ON article TYPE array  DEFAULT [];
 DEFINE FIELD status             ON article TYPE string
     ASSERT $value IN ["draft","fact_checking","writing","editing","published","rejected"]
     DEFAULT "draft";
+DEFINE FIELD byline             ON article TYPE option<string>;
 DEFINE FIELD rejection_reason   ON article TYPE option<string>;
 DEFINE FIELD published_at       ON article TYPE option<datetime>;
 DEFINE FIELD created_at         ON article TYPE datetime DEFAULT time::now();
@@ -118,9 +119,10 @@ DEFINE TABLE feeds SCHEMALESS TYPE RELATION IN pipeline_step OUT pipeline_step;
 
 -- Categories
 INSERT IGNORE INTO category (slug, name, description) VALUES
-    ("linux",    "Linux & Open Source", "Kernel, distributions, and free software ecosystem"),
-    ("tech",     "Technology",          "Industry, products, and research"),
-    ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy");
+    ("linux",    "Linux & Open Source",    "Kernel, distributions, and free software ecosystem"),
+    ("tech",     "Technology",             "Industry, products, and research"),
+    ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy"),
+    ("business", "Business & Finance",     "Markets, economics, and corporate strategy");
 
 -- Personas (is_active = true for launch beats)
 INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, example_phrases, is_active) VALUES
