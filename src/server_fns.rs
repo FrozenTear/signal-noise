@@ -148,7 +148,15 @@ pub async fn get_articles(
 
         if let Ok(mut res) = res_result {
             if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
-                if !rows.is_empty() {
+                // THE-284: a successful DB query is authoritative whenever a
+                // category/region filter is active — an empty result must return
+                // an empty feed, not the mock_articles() demo fallback. Otherwise
+                // filtering to a region with no articles (e.g. all content is
+                // `global`) silently shows placeholder articles and the region
+                // menu looks broken. The mock fallback stays only for the
+                // unfiltered homepage when the DB is empty/unavailable.
+                let has_filter = category.is_some() || region.is_some();
+                if !rows.is_empty() || has_filter {
                     let articles = rows
                         .into_iter()
                         .filter_map(|v| {
