@@ -271,12 +271,12 @@ pub async fn publish_article(
     let ai_monologue = payload.ai_monologue.unwrap_or_default();
 
     // Upsert article.
-    // persona is resolved to a record<persona> inside SurrealDB via sub-select.
-    // UPSERT MERGE preserves existing fields (e.g. created_at) on re-publish;
-    // schema DEFAULTs fill pipeline_metadata, source_urls, created_at on first insert.
-    // Extract h2h routing fields from pipeline_metadata payload before discarding the
-    // full object. SurrealDB SCHEMAFULL TYPE object rejects writes of non-empty objects
-    // silently (THE-226); instead we store h2h routing as explicit top-level fields.
+    // type::record('article', $slug) gives a deterministic record ID so UPSERT creates
+    // the row when it doesn't exist. `UPSERT article MERGE … WHERE slug=$slug` only
+    // updates existing rows and silently no-ops for new slugs (SurrealDB v3).
+    // Extract h2h routing fields from pipeline_metadata and store as top-level typed
+    // fields (SurrealDB TYPE object rejects nested writes on SCHEMAFULL tables without
+    // FLEXIBLE — resolved by the scalar approach from 80c1d1e).
     let pm = payload.pipeline_metadata.as_ref();
     let h2h_slug = pm.and_then(|m| m.get("h2h_slug")).and_then(|v| v.as_str()).unwrap_or("").to_string();
     let h2h_role = pm.and_then(|m| m.get("h2h_role")).and_then(|v| v.as_str()).unwrap_or("").to_string();
@@ -285,7 +285,7 @@ pub async fn publish_article(
         .db
         .query(
             r#"
-            UPSERT article MERGE {
+            UPSERT type::record('article', $slug) MERGE {
                 slug:             $slug,
                 title:            $title,
                 summary:          $summary,
@@ -300,13 +300,13 @@ pub async fn publish_article(
                 h2h_order:        IF $h2h_order >= 0 THEN $h2h_order ELSE NONE END,
                 confidence_score:    $confidence,
                 ai_monologue:        $monologue,
-                ai_monologue_extended: IF $monologue_extended != '' THEN $monologue_extended ELSE NONE END,
+                ai_monologue_extended: $monologue_extended,
                 status:              'published',
                 published_at:     IF (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at != NONE
                                   THEN (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at
                                   ELSE time::now() END,
                 updated_at:       time::now()
-            } WHERE slug = $slug
+            }
             "#,
         )
         .bind(("slug", slug.clone()))
@@ -611,4 +611,94 @@ pub async fn update_article_status(
     }
 
     Ok(Json(json!({ "status": payload.status, "slug": slug })))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::api::AppState;
+    use axum::extract::Json as ExtractJson;
+    use axum::extract::State;
+    use surrealdb::{engine::local::SurrealKv, Surreal};
+
+    const SCHEMA: &str = include_str!("../../db/schema.surql");
+
+    async fn make_test_db(path: &str) -> Surreal<surrealdb::engine::local::Db> {
+        let _ = std::fs::remove_dir_all(path);
+        let db = Surreal::new::<SurrealKv>(path).await.unwrap();
+        db.use_ns("test").use_db("test").await.unwrap();
+        db.query(SCHEMA).await.unwrap();
+        db
+    }
+
+    // Verifies the UPSERT fix at the SurrealQL level: type::record('article',$slug)
+    // creates the record for a brand-new slug. Before the fix, UPSERT … WHERE slug=$slug
+    // silently no-opped on SurrealDB v3 leaving zero rows.
+    #[tokio::test]
+    async fn upsert_type_record_creates_new_record() {
+        let db = make_test_db("/tmp/sn_test_type_record").await;
+
+        let mut res = db
+            .query(r#"
+                UPSERT type::record('article', $slug) MERGE {
+                    slug:   $slug,
+                    title:  'Regression test article',
+                    body:   'Body.',
+                    category: 'tech',
+                    status: 'published',
+                    updated_at: time::now()
+                }
+            "#)
+            .bind(("slug", "upsert-type-record-test"))
+            .await
+            .expect("UPSERT type::record query must not error");
+        let _: Vec<Value> = res.take(0).expect("result take must succeed");
+
+        let mut check = db
+            .query("SELECT slug FROM article WHERE slug = 'upsert-type-record-test'")
+            .await
+            .unwrap();
+        let rows: Vec<Value> = check.take(0).unwrap();
+        assert_eq!(
+            rows.len(), 1,
+            "UPSERT type::record must create a new row for a new slug; got {} rows", rows.len()
+        );
+    }
+
+    // End-to-end: publish_article with a new slug → article is retrievable via SELECT.
+    #[tokio::test]
+    async fn publish_new_slug_creates_retrievable_row() {
+        let db = make_test_db("/tmp/sn_test_publish_upsert").await;
+        let state = AppState { db: db.clone() };
+
+        let result = publish_article(
+            BearerAuth,
+            State(state),
+            ExtractJson(ArticlePublishPayload {
+                title: "Upsert regression test".to_string(),
+                slug: Some("upsert-regression-test-slug".to_string()),
+                summary: None,
+                body: "Body content for upsert test.".to_string(),
+                category: "tech".to_string(),
+                persona: None,
+                byline: Some("Test Desk".to_string()),
+                pipeline_metadata: None,
+                confidence_score: Some(0.8),
+                ai_monologue: Some("Short monologue.".to_string()),
+                ai_monologue_extended: Some("Extended monologue for test.".to_string()),
+                sources: None,
+                pipeline_steps: None,
+            }),
+        )
+        .await;
+
+        assert!(result.is_ok(), "publish_article returned error: {:?}", result.err());
+
+        let mut res = db
+            .query("SELECT slug FROM article WHERE slug = 'upsert-regression-test-slug'")
+            .await
+            .unwrap();
+        let rows: Vec<Value> = res.take(0).unwrap();
+        assert_eq!(rows.len(), 1, "new slug must create a row; UPSERT fix not applied — got {} rows", rows.len());
+    }
 }
