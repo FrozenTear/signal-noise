@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-22T06:30:51Z
-- mode:    seed
+- when:    2026-05-22T09:35:41Z
+- mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272282240
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26280183760
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-235-fedora-azure-linux-deepin | Fedora's week: Microsoft moves in, Deepin gets evicted
+   - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
    - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
    - the-241-rcs-e2ee-cross-platform | Cross-Platform RCS Gets End-to-End Encryption. Instagram Lost It the S
    - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
@@ -28,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-133-opensuse-terms-of-site-age-restriction | openSUSE Wrote an Age Limit Into Its Terms. Then It Admitted It Can't 
    - the-132-cache-aware-scheduling-linux-7-2 | The kernel is finally learning where it left its keys
    - cisa-credentials-public-github-repo | CISA spends its days telling everyone else not to leak credentials. A 
-   - the-121-openai-disproves-unit-distance-conjecture | OpenAI says an internal model disproved a discrete-geometry conjecture
-   - spacex-s1-biggest-ipo-musk-risk-factor | SpaceX's S-1 makes the case for the biggest IPO ever — and lists its o
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
-ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175).
 ```
