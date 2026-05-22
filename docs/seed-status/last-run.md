@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T06:25:33Z
+- when:    2026-05-22T06:26:41Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272088788
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272128254
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
-GET /api/articles -> 18 article(s)
+GET /api/articles -> 19 article(s)
+   - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
    - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
    - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
    - the-236-openbsd-79-released | OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket
