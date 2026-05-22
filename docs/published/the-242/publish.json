@@ -21,9 +21,10 @@
       "verification_status": "verified"
     },
     {
-      "name": "MLex — \"LinkedIn's paywall over profile visitors breaches GDPR, noyb says\" (paywalled)",
+      "name": "MLex — \"LinkedIn's paywall over profile visitors breaches GDPR, noyb says\"",
       "url": "https://www.mlex.com/mlex/articles/2472934/linkedin-s-paywall-over-profile-visitors-breaches-gdpr-noyb-says",
       "type": "press",
+      "paywall_status": "paywalled",
       "verification_status": "verified"
     },
     {
