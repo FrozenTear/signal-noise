@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-22T11:15:52Z
+- when:    2026-05-22T11:17:04Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26284596617
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26284639803
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-283-google-ads-inside-ai-answers | Google Moves Ads Inside the AI Answer
+   - the-278-polyglot-pdf-gtk-command-injection | Polyglot PDFs exploit command injection in GTK-based readers — click t
+   - the-277-spotify-umg-ai-covers | Spotify and Universal Music Strike AI Licensing Deal — for Artists Who
    - the-279-ubuntu-core-26-ota-arm64-livepatch | Ubuntu Core 26 Shrinks OTA Updates by Up to 90% and Brings Rebootless 
    - the-251-copy-fail-kernel-lpe | Nine Years in Plain Sight: The "Copy Fail" Kernel Bug That Handed Root
    - the-259-uk-national-digital-id | The ID That Wasn't Mandatory — Until It Was — Until It Wasn't
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
    - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
    - the-236-openbsd-79-released | OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket
-   - home-depot-q1-2026-spark | Home Depot's CFO Just Handed the Bears Their Confirmation
-   - home-depot-q1-2026-ledger | Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Te
-   - home-depot-q1-2026-editors-note | Same print, same bear case. Two reporters arrive there from opposite d
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
