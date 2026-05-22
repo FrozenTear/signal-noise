@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-22T16:19:36Z
+- when:    2026-05-22T16:21:25Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299187147
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299273770
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - att-california-copper-landline-suit | AT&T sues California to exit copper landline obligation — 199,000 line
+   - the-289-valve-lootbox-not-gambling | Valve's Lootbox Defense: Not "Surprises," Actually "Not Gambling"
+   - the-290-gcc-16-bpf-narrows-gap-with-llvm | GCC 16 Narrows the Gap with LLVM on BPF — Toolchain Monoculture Gets a
    - workday-ai-hr-flat-headcount | The HR Software Company That Uses AI So It Doesn't Have to Hire
    - the-249-almalinux-media-entertainment | AlmaLinux Is Making a Move on Hollywood's Linux Dependency — Here's Wh
    - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-252-us-government-quantum-equity-stake | Washington Goes Long on Qubits — and Wants Equity Back
    - the-250-drupal-postgresql-sql-injection | Drupal patches 'highly critical' SQL injection in core — PostgreSQL si
    - instagram-kills-opt-in-dm-encryption | Instagram Quietly Kills the Only Encryption It Ever Gave Your DMs
-   - the-256-fbi-nationwide-license-plate-readers | The FBI Wants to Watch Every Road in America
-   - the-235-fedora-azure-linux-deepin | Fedora's week: Microsoft moves in, Deepin gets evicted
-   - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
