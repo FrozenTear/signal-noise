@@ -800,4 +800,138 @@ mod tests {
         let section: Vec<Value> = res.take(1).unwrap();
         assert!(section[0]["parent"].is_null(), "the Tech section must have no parent (it is a Section)");
     }
+
+    // THE-264: live-publish-path verification over real HTTP.
+    //
+    // Boots the actual Axum router (auth extractor + rate-limit middleware + the
+    // /api routes) on a localhost TCP port against a fresh embedded SurrealKV DB
+    // with the real db/schema.surql applied, then drives the deploy-path checks
+    // end-to-end with an HTTP client. This is the headless-reproducible proxy for
+    // the production VPS publish path (the VPS is link-local and unreachable from
+    // CI / the heartbeat env); it exercises the same router, schema, and JSON
+    // request/response surface a live deploy would.
+    #[tokio::test]
+    async fn the264_live_publish_path_over_http() {
+        use tokio::net::TcpListener;
+
+        let token = "the264-test-seed-token";
+        std::env::set_var("SEED_API_TOKEN", token);
+
+        let db = make_test_db("/tmp/sn_test_the264_http").await;
+        let state = AppState { db: db.clone() };
+        // Mirror production wiring (main.rs nests the api router under /api).
+        let app = axum::Router::new().nest("/api", super::router(state));
+
+        let listener = TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let addr = listener.local_addr().unwrap();
+        tokio::spawn(async move {
+            axum::serve(listener, app.into_make_service()).await.unwrap();
+        });
+        let base = format!("http://{}", addr);
+        let client = reqwest::Client::new();
+
+        // ── Check 1: taxonomy migration + region backfill (post-schema DB state) ──
+        let mut tx = db
+            .query("SELECT slug, parent.slug AS parent_slug FROM category WHERE slug IN ['linux','tech','privacy','business']; \
+                    SELECT parent FROM category:tech_section; \
+                    SELECT count() AS c FROM article WHERE region = NONE GROUP ALL")
+            .await
+            .unwrap();
+        let beats: Vec<Value> = tx.take(0).unwrap();
+        assert_eq!(beats.len(), 4, "all four launch beats must exist after migration");
+        for b in &beats {
+            assert_eq!(
+                b["parent_slug"].as_str(), Some("tech-section"),
+                "beat {:?} must be parented under tech-section", b["slug"]
+            );
+        }
+        let section: Vec<Value> = tx.take(1).unwrap();
+        assert!(section[0]["parent"].is_null(), "tech-section must have no parent");
+        let none_region: Vec<Value> = tx.take(2).unwrap();
+        let none_count = none_region.first().and_then(|v| v["c"].as_i64()).unwrap_or(0);
+        assert_eq!(none_count, 0, "no published article may have region = NONE after backfill");
+
+        // ── Check: auth gating — missing/wrong bearer is rejected (fail-closed) ──
+        let unauth = client
+            .post(format!("{}/api/articles", base))
+            .json(&json!({"title":"x","body":"x","category":"tech","ai_monologue_extended":"x"}))
+            .send().await.unwrap();
+        assert_eq!(unauth.status().as_u16(), 401, "publish without bearer must be 401");
+
+        // ── Check 2: backward-compat publish with NO region field → region "global" ──
+        let r2 = client
+            .post(format!("{}/api/articles", base))
+            .bearer_auth(token)
+            .json(&json!({
+                "title": "THE-264 backward compat (no region)",
+                "slug": "the264-no-region",
+                "body": "Backward-compat publish body.",
+                "category": "tech",
+                "ai_monologue_extended": "extended monologue"
+            }))
+            .send().await.unwrap();
+        assert_eq!(r2.status().as_u16(), 200, "publish without region must succeed");
+        let got2: Value = client
+            .get(format!("{}/api/articles/the264-no-region", base))
+            .send().await.unwrap().json().await.unwrap();
+        assert_eq!(got2["region"].as_str(), Some("global"), "absent region must persist as global");
+
+        // ── Check 3: region round-trip + ?region= filter include / exclude ──
+        let r3 = client
+            .post(format!("{}/api/articles", base))
+            .bearer_auth(token)
+            .json(&json!({
+                "title": "THE-264 region round-trip",
+                "slug": "the264-euro",
+                "body": "European region body.",
+                "category": "tech",
+                "region": "european",
+                "ai_monologue_extended": "extended monologue"
+            }))
+            .send().await.unwrap();
+        assert_eq!(r3.status().as_u16(), 200, "publish with region must succeed");
+        let euro: Value = client
+            .get(format!("{}/api/articles/the264-euro", base))
+            .send().await.unwrap().json().await.unwrap();
+        assert_eq!(euro["region"].as_str(), Some("european"), "supplied region must round-trip");
+
+        let by_euro: Value = client
+            .get(format!("{}/api/articles?region=european", base))
+            .send().await.unwrap().json().await.unwrap();
+        let euro_slugs: Vec<&str> = by_euro["articles"].as_array().unwrap()
+            .iter().filter_map(|a| a["slug"].as_str()).collect();
+        assert!(euro_slugs.contains(&"the264-euro"), "?region=european must include the european article");
+        assert!(!euro_slugs.contains(&"the264-no-region"), "?region=european must exclude the global article");
+
+        let by_amer: Value = client
+            .get(format!("{}/api/articles?region=american", base))
+            .send().await.unwrap().json().await.unwrap();
+        let amer_slugs: Vec<&str> = by_amer["articles"].as_array().unwrap()
+            .iter().filter_map(|a| a["slug"].as_str()).collect();
+        assert!(!amer_slugs.contains(&"the264-euro"), "?region=american must NOT include the european article");
+
+        // ── Check 4: paywall_status regression — source COUNT survives the round-trip ──
+        let r4 = client
+            .post(format!("{}/api/articles", base))
+            .bearer_auth(token)
+            .json(&json!({
+                "title": "THE-264 source count",
+                "slug": "the264-sources",
+                "body": "Source-count regression body.",
+                "category": "tech",
+                "region": "global",
+                "ai_monologue_extended": "extended monologue",
+                "sources": [
+                    {"url":"https://example.com/a","name":"Paywalled Source","type":"press","paywall_status":"paywalled","verification_status":"verified"},
+                    {"url":"https://example.com/b","name":"Free Source","type":"wire","paywall_status":"free","verification_status":"unverified"}
+                ]
+            }))
+            .send().await.unwrap();
+        assert_eq!(r4.status().as_u16(), 200, "publish with sources must succeed");
+        let with_src: Value = client
+            .get(format!("{}/api/articles/the264-sources", base))
+            .send().await.unwrap().json().await.unwrap();
+        let src_count = with_src["sources"].as_array().map(|a| a.len()).unwrap_or(0);
+        assert_eq!(src_count, 2, "both sent sources must be present after publish (paywall enum drop regression)");
+    }
 }
