@@ -64,9 +64,18 @@ pub fn Home() -> Element {
                         ArticleSkeleton {}
                         ArticleSkeleton {}
                     },
-                    Some(Ok(list)) if list.is_empty() => rsx! {
-                        div { style: "font-size:13px;color:var(--sn-text-dimmer);padding:32px 0;",
-                            "No articles yet. The pipeline is warming up."
+                    Some(Ok(list)) if list.is_empty() => {
+                        // THE-284: filter-aware empty state so a region/beat with no
+                        // articles reads as "nothing here yet" rather than a broken filter.
+                        let msg = match (active_category(), active_region()) {
+                            (_, Some(r)) => format!("No articles tagged to the {r} region yet."),
+                            (Some(c), None) => format!("No articles in the {c} beat yet."),
+                            (None, None) => "No articles yet. The pipeline is warming up.".to_string(),
+                        };
+                        rsx! {
+                            div { style: "font-size:13px;color:var(--sn-text-dimmer);padding:32px 0;",
+                                "{msg}"
+                            }
                         }
                     },
                     Some(Ok(list)) => {
