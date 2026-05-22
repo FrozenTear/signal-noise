@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-22T11:28:08Z
+- when:    2026-05-22T11:37:51Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26285123562
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26285540668
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
+   - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
    - the-280-openbsd-7-9-sixty-releases-one-syscall | OpenBSD 7.9: sixty releases, one new syscall, and a scheduler that rea
    - spacex-scrubs-starship-v3-maiden-flight | SpaceX scrubs Starship V3 maiden flight seconds before ignition
    - the-275-waymo-floods-four-cities | Waymo Pauses Service in Four Cities After Robotaxis Keep Driving Into 
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
    - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
    - the-241-rcs-e2ee-cross-platform | Cross-Platform RCS Gets End-to-End Encryption. Instagram Lost It the S
-   - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
-   - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
