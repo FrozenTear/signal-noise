@@ -1,20 +1,34 @@
 # last seed/probe run
 
-- when:    2026-05-22T10:08:49Z
-- mode:    autopublish
-- trigger: THE-271 (THE-233 Path A on-demand sweep)
-- host:    root@169.254.1.2 (deployed sha ca6cf7d)
-- token configured: true (host-local bearer, never left host)
+- when:    2026-05-22T10:20:55Z
+- mode:    probe
+- trigger: push
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26282197703
+- token configured: false
 
 ```
-== autopublish sweep THE-271 ==
-published=5 skipped=25 failed=0
-  PUBLISH instagram-kills-opt-in-dm-encryption    (THE-258) -> POST 200, GET 200, 8 sources live
-  PUBLISH the-250-drupal-postgresql-sql-injection (THE-250) -> POST 200, GET 200
-  PUBLISH the-252-us-government-quantum-equity-stake (THE-252) -> POST 200, GET 200, 7 sources live
-  PUBLISH the-253-github-fight-survival-microsoft (THE-253) -> POST 200, GET 200
-  PUBLISH the-259-uk-national-digital-id          (THE-259) -> POST 200, GET 200
-
-required-this-run: THE-252 + THE-258 both live; source counts verified intact (7/7, 8/8)
-also-swept-live:   THE-250, THE-253, THE-259 (staged on master, missed by prior sweeps)
+== probe https://news.scuffedcrew.no ==
+GET /            -> 200
+GET /api/articles -> 20 article(s)
+   - the-259-uk-national-digital-id | The ID That Wasn't Mandatory — Until It Was — Until It Wasn't
+   - the-253-github-fight-survival-microsoft | GitHub faces a fight for its survival inside Microsoft
+   - the-252-us-government-quantum-equity-stake | Washington Goes Long on Qubits — and Wants Equity Back
+   - the-250-drupal-postgresql-sql-injection | Drupal patches 'highly critical' SQL injection in core — PostgreSQL si
+   - instagram-kills-opt-in-dm-encryption | Instagram Quietly Kills the Only Encryption It Ever Gave Your DMs
+   - the-256-fbi-nationwide-license-plate-readers | The FBI Wants to Watch Every Road in America
+   - the-235-fedora-azure-linux-deepin | Fedora's week: Microsoft moves in, Deepin gets evicted
+   - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
+   - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
+   - the-241-rcs-e2ee-cross-platform | Cross-Platform RCS Gets End-to-End Encryption. Instagram Lost It the S
+   - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
+   - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
+   - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
+   - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
+   - the-236-openbsd-79-released | OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket
+   - home-depot-q1-2026-spark | Home Depot's CFO Just Handed the Bears Their Confirmation
+   - home-depot-q1-2026-ledger | Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Te
+   - home-depot-q1-2026-editors-note | Same print, same bear case. Two reporters arrive there from opposite d
+   - the-138-edri-led-fragmented | The GDPR Has a Sibling for the Police. Years On, It Still Isn't Workin
+   - the-137-colorado-sb051-open-source-exemption | Colorado wrote an age-check law that bends around open source. The fin
+write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
