@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T11:21:38Z
+- when:    2026-05-22T11:25:38Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26284840809
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26285015328
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - spacex-scrubs-starship-v3-maiden-flight | SpaceX scrubs Starship V3 maiden flight seconds before ignition
    - the-275-waymo-floods-four-cities | Waymo Pauses Service in Four Cities After Robotaxis Keep Driving Into 
    - the-283-google-ads-inside-ai-answers | Google Moves Ads Inside the AI Answer
    - the-278-polyglot-pdf-gtk-command-injection | Polyglot PDFs exploit command injection in GTK-based readers — click t
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
    - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
    - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
-   - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
