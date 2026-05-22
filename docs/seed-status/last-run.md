@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-22T06:20:36Z
+- when:    2026-05-22T06:23:12Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26271916248
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272004671
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
-GET /api/articles -> 15 article(s)
+GET /api/articles -> 17 article(s)
+   - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
+   - the-236-openbsd-79-released | OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket
    - home-depot-q1-2026-spark | Home Depot's CFO Just Handed the Bears Their Confirmation
    - home-depot-q1-2026-ledger | Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Te
    - home-depot-q1-2026-editors-note | Same print, same bear case. Two reporters arrive there from opposite d
