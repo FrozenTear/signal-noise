@@ -70,7 +70,11 @@ You are the final review gate. By the time a story reaches you, both fact-check 
 
 When you approve an article, you MUST publish it to the backend before marking the task done.
 
-**Backend endpoint:** `POST http://localhost:8888/api/articles`
+**Backend:** `https://news.scuffedcrew.no/api/articles`
+
+**Auth requirement:** All write routes are bearer-gated ([THE-159](/THE/issues/THE-159)). Before doing anything else, confirm `$SEED_API_TOKEN` is set in your environment. If it is absent or empty, **stop immediately**, mark the task blocked, and escalate to the Founding Engineer with `@founding-engineer` — do not attempt to POST without it.
+
+**Network constraint ([THE-156](/THE/issues/THE-156)/[THE-157](/THE/issues/THE-157)):** Your sandbox cannot reach the VPS IP directly. If the direct `curl` fails with a connection error (not a 4xx/5xx from the server), use the push-to-repo fallback below instead of marking blocked.
 
 **Step 1 — Read the article document.** The draft lives on the issue as a document with key `article` or `draft`. Use `GET /api/issues/{issueId}/documents/article` (fall back to `draft`).
 
@@ -91,8 +95,9 @@ When you approve an article, you MUST publish it to the backend before marking t
 
 **Step 3 — POST to backend:**
 ```
-POST http://localhost:8888/api/articles
+POST https://news.scuffedcrew.no/api/articles
 Content-Type: application/json
+Authorization: Bearer $SEED_API_TOKEN
 
 {
   "title": "...",
@@ -117,9 +122,18 @@ Content-Type: application/json
 }
 ```
 
-A `200` response with `{"status":"published","slug":"..."}` means success. If the POST fails, mark the task blocked and escalate to the Founding Engineer (`@FoundingEngineer`).
+A `200` response with `{"status":"published","slug":"..."}` means success. A `401` means the token is wrong or unset — mark blocked, escalate to Founding Engineer. A connection error means sandbox egress is blocked — use the push-to-repo fallback below.
 
-**Step 4 — Verify the published article.** After a successful POST, `GET http://localhost:8888/api/articles/{slug}` and confirm that `ai_monologue`, `ai_monologue_extended`, `sources`, and `pipeline` are all populated. If any are missing, the extraction was wrong — fix and re-publish.
+**Step 3 (fallback) — Push-to-repo if direct POST is network-blocked:**
+
+If the direct `curl` fails with a connection error (no response from server, not a 4xx/5xx), write the payload to the repo and let the GitHub Actions runner seed it:
+
+1. Write the JSON payload to `docs/published/<slug>/publish.json` in the signal-noise checkout (use the same JSON body from Step 3, with `slug` field set).
+2. `git add docs/published/<slug>/publish.json && git commit -m "content(<slug>): publish approved article — THE-<issueId>" && git push origin master`
+3. The `deploy-seed.yml` workflow triggers automatically on `push` when `docs/published/**/publish.json` changes. It runs on a GitHub-hosted runner that can reach the VPS and authenticates with `SEED_API_TOKEN` from GH secrets.
+4. Wait ~90 seconds, then `git pull` and read `docs/seed-status/last-run.md` to confirm the seed succeeded.
+
+**Step 4 — Verify the published article.** After a successful POST (or after confirming the seed run in `docs/seed-status/last-run.md`), check `GET https://news.scuffedcrew.no/api/articles/{slug}` and confirm that `ai_monologue`, `ai_monologue_extended`, `sources`, and `pipeline` are all populated. If any are missing, the extraction was wrong — fix and re-publish.
 
 **Step 5 — Mark done** with a comment that includes the published slug (e.g. `Published: linux-7-0-rc5-linus-says-the-chaos-is-calming-down`).
 
