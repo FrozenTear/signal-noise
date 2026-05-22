@@ -274,6 +274,10 @@ pub async fn publish_article(
     // persona is resolved to a record<persona> inside SurrealDB via sub-select.
     // UPSERT MERGE preserves existing fields (e.g. created_at) on re-publish;
     // schema DEFAULTs fill pipeline_metadata, source_urls, created_at on first insert.
+    // NOTE: pipeline_metadata is intentionally excluded from the UPSERT MERGE and applied
+    // via a separate UPDATE below. Including a non-empty object value in UPSERT MERGE WHERE
+    // silently prevents record creation in the deployed SurrealDB version (THE-226 fix).
+    let pipeline_metadata = payload.pipeline_metadata.unwrap_or_else(|| json!({}));
     state
         .db
         .query(
@@ -288,7 +292,6 @@ pub async fn publish_article(
                                       (SELECT id FROM persona WHERE slug = $persona LIMIT 1)[0].id
                                   ELSE NONE END,
                 byline:           IF $byline != '' THEN $byline ELSE NONE END,
-                pipeline_metadata: $pipeline_metadata,
                 confidence_score:    $confidence,
                 ai_monologue:        $monologue,
                 ai_monologue_extended: IF $monologue_extended != '' THEN $monologue_extended ELSE NONE END,
@@ -307,10 +310,19 @@ pub async fn publish_article(
         .bind(("category", category))
         .bind(("persona", persona))
         .bind(("byline", byline))
-        .bind(("pipeline_metadata", payload.pipeline_metadata.unwrap_or_else(|| json!({}))))
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
         .bind(("monologue_extended", ai_monologue_extended))
+        .await
+        .map_err(|_| db_err())?;
+
+    // Apply pipeline_metadata separately to avoid SurrealDB UPSERT MERGE silent-fail
+    // with non-empty object values on new record creation (THE-226).
+    state
+        .db
+        .query("UPDATE article SET pipeline_metadata = $pipeline_metadata WHERE slug = $slug")
+        .bind(("pipeline_metadata", pipeline_metadata))
+        .bind(("slug", slug.clone()))
         .await
         .map_err(|_| db_err())?;
 
