@@ -4,31 +4,51 @@ use crate::components::agent_roster::AgentRoster;
 use crate::components::article_card::ArticleCard;
 use crate::components::nav::Nav;
 use crate::components::section_nav::SectionNav;
-use crate::server_fns::get_articles;
-
-const CATEGORIES: &[(&str, &str)] = &[
-    ("All",     ""),
-    ("Linux",   "linux"),
-    ("Tech",    "tech"),
-    ("Privacy", "privacy"),
-];
+use crate::server_fns::{get_articles, get_categories};
 
 #[component]
 pub fn Home() -> Element {
     let mut active_category = use_signal(|| Option::<String>::None);
+    let mut active_region = use_signal(|| Option::<String>::None);
+
+    let categories_res = use_resource(|| async move { get_categories().await });
 
     let articles = use_resource(move || {
         let cat = active_category();
-        async move { get_articles(cat, None).await }
+        let reg = active_region();
+        async move { get_articles(cat, reg).await }
     });
+
+    // Build the category nav list from the server fn result.
+    // Falls back to the launch defaults while loading or on error.
+    let nav_items: Vec<(String, String)> = {
+        let mut items = vec![("All".to_string(), "".to_string())];
+        match categories_res() {
+            Some(Ok(list)) if !list.is_empty() => {
+                for cat in &list {
+                    if cat.parent_slug.is_some() {
+                        items.push((cat.name.clone(), cat.slug.clone()));
+                    }
+                }
+            }
+            _ => {
+                items.push(("Linux".to_string(),   "linux".to_string()));
+                items.push(("Tech".to_string(),     "tech".to_string()));
+                items.push(("Privacy".to_string(),  "privacy".to_string()));
+            }
+        }
+        items
+    };
 
     rsx! {
         Nav {}
 
         SectionNav {
-            categories: CATEGORIES,
+            categories: nav_items,
             active: active_category(),
             on_select: move |val| active_category.set(val),
+            active_region: active_region(),
+            on_region_select: move |val| active_region.set(val),
         }
 
         div { class: "sn-layout",
@@ -61,6 +81,7 @@ pub fn Home() -> Element {
                                 title: first.title.clone(),
                                 summary: first.summary.clone(),
                                 category: first.category.clone(),
+                                region: first.region.clone(),
                                 persona_name: first.persona_name.clone(),
                                 confidence_score: first.confidence_score,
                                 published_at: first.published_at.clone(),
@@ -80,6 +101,7 @@ pub fn Home() -> Element {
                                             title: art.title.clone(),
                                             summary: art.summary.clone(),
                                             category: art.category.clone(),
+                                            region: art.region.clone(),
                                             persona_name: art.persona_name.clone(),
                                             confidence_score: art.confidence_score,
                                             published_at: art.published_at.clone(),

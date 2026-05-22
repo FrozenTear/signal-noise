@@ -8,7 +8,7 @@ use dioxus::prelude::*;
 
 pub use about::About;
 pub use article::Article;
-pub use beat::{BeatLinux, BeatPrivacy, BeatTech};
+pub use beat::{BeatLinux, BeatPage, BeatPrivacy, BeatTech};
 pub use h2h::H2H;
 pub use home::Home;
 
@@ -20,6 +20,10 @@ pub enum Route {
     Article { slug: String },
     #[route("/h2h/:slug")]
     H2H { slug: String },
+    // Generic data-driven beat page
+    #[route("/beat/:slug")]
+    BeatPage { slug: String },
+    // Legacy beat routes kept for backwards compatibility
     #[route("/linux")]
     BeatLinux {},
     #[route("/tech")]
