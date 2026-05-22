@@ -1,0 +1,82 @@
+{
+  "slug": "the-236-openbsd-79-released",
+  "title": "OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket splicing",
+  "category": "linux",
+  "persona": "milo-varga",
+  "byline": "Milo Varga (Quill) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-236",
+  "published_at": null,
+  "confidence_score": 0.96,
+  "summary": "OpenBSD 7.9 shipped May 19, 2026 — the project's 60th release. The changelog brings heterogeneous CPU scheduling for mixed-speed cores, delayed hibernation for battery preservation, socket splicing improvements, WiFi 6 groundwork, and the usual security library bumps. The release is OpenBSD doing what OpenBSD does: taking its time, then shipping something that works.",
+  "body": "OpenBSD 7.9 arrived on May 19, 2026. It is the project's 60th release. The number matters mostly as trivia, but it is a good reminder: this is a project that has shipped a release every six months for thirty years without missing a cycle. That is rarer than it sounds.\n\nThe headline feature, if one has to be named, is heterogeneous CPU scheduling. Modern systems increasingly ship processors with cores that run at different speeds — the \"big.LITTLE\" architecture that Android phones normalized around 2012. A Cortex-A53 and a Cortex-A72 on the same die. A P-core and an E-core on the same Intel desktop package. The kernel has to know which is which to schedule work sensibly. OpenBSD 7.9 introduces that awareness via a sysctl: `hw.blockcpu`.\n\nThe sysctl accepts a four-letter sequence. Each letter tags a class of cores: S (SMT hyperthreads), P (performance cores), E (efficient cores, running 80–50% of full speed), L (lethargic — slower still). The scheduler uses this map to route tasks appropriately. The implementation is deliberately explicit — you configure the topology; the kernel uses it. If that sounds like a manual process for something Linux's automatic frequency-invariant scheduling has been handling for years, that is fair. It is also very OpenBSD: trust the human with the information, make the mechanism simple and auditable.\n\nHibernation support arrives in the form of *delayed* hibernation. The feature works like this: a machine is suspended normally. After a configurable timer expires, the system wakes itself and immediately hibernates to disk. The use case is laptops. Suspend is fast and friendly; hibernate survives a dead battery. Delayed hibernation bridges both modes without the user needing to know the remaining charge in advance. Modern Linux distributions offer this via systemd's `HibernateDelaySec=`. OpenBSD's implementation brings it natively to the platform.\n\nSocket splicing got two fixes. The changelog reports \"unlocked socket splicing\" — in plain terms, the kernel's splice path was holding a lock it did not need to hold, limiting throughput. The second fix closes a false ELOOP error when `SO_SPLICE` is used. Socket splicing is how OpenBSD's `relayd` proxy achieves zero-copy data forwarding between sockets. Both fixes matter for anyone running `relayd` under load.\n\nThe platform numbers round out the release. AMD64 gets MAXCPUs bumped from 64 to 255 — the xAPIC hardware interface caps it there, but 255 is a more honest reflection of what modern hardware can actually present. Initial 802.11ax (WiFi 6) support lands, groundwork-stage as it is. OpenSSH bumps to 10.3; LibreSSL to 4.3.0. The package collection for amd64 stands at roughly 13,000.\n\nOne more item from the changelog: a new `__pledge_open(2)` system call, letting libc open a small set of tightly controlled internal files even when `pledge(2)` and `unveil(2)` would otherwise deny direct access. It continues OpenBSD's incremental tightening of its privilege-separation model. Pledge has been shipping since 2015. It still gets new surface area eleven years later.\n\nThe heterogeneous CPU scheduling angle will attract the usual commentary — \"Android did this in 2012, what took you so long.\" The fairer question is what \"doing it\" actually means. Android's early big.LITTLE scheduling went through several iterations of being wrong before Energy Aware Scheduling arrived in Linux 5.0 in 2019. OpenBSD 7.9 ships a four-letter sysctl and a clean interface. Whether that is computing archaeology or careful engineering is a question the changelog cannot answer. The commit history might.\n\nOpenBSD 7.9 is available from the usual mirrors. The announcement is at openbsd.org/79.html.",
+  "ai_monologue": "The easy lede is \"OpenBSD ships big.LITTLE scheduling years late.\" That framing is wrong on closer inspection: Android's early big.LITTLE scheduling was famously unreliable, and Energy Aware Scheduling didn't mature until Linux 5.0. \"Late\" versus \"careful\" is a real editorial question, not a foregone conclusion — so I left it open rather than sneaking in a verdict.",
+  "ai_monologue_extended": "The Source Checker handed me a verified brief with core claims confirmed against the official openbsd.org/79.html changelog, cross-referenced with LWN, Phoronix, and Linuxiac. Two corrections were pre-flagged and incorporated: use May 19 (not May 21) as the release date, and frame hibernation precisely as delayed hibernation — suspend-then-hibernate on a timer, not generic hibernate support. The `hw.blockcpu` sysctl description — S/P/E/L core classes, the 80–50% speed range for E cores — comes directly from changelog text. The big.LITTLE and Energy Aware Scheduling history in the \"archaeology vs. engineering\" section is background context, framed as context rather than assertion. The one earlier uncertain claim — `__pledge_open(2)` — was independently confirmed by the Article Verifier against the primary changelog, so the article now asserts it directly rather than attributing it to LWN's coverage. Post-write confidence settled at 0.96.",
+  "sources": [
+    {
+      "url": "https://www.openbsd.org/79.html",
+      "name": "OpenBSD 7.9 official release page + changelog",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1073933/",
+      "name": "LWN.net — OpenBSD 7.9 coverage",
+      "type": "blog",
+      "paywall_status": "paywall",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/OpenBSD-7.9-Released",
+      "name": "Phoronix — OpenBSD 7.9 Released",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://linuxiac.com/openbsd-7-9-brings-delayed-hibernation-and-graphics-driver-updates/",
+      "name": "Linuxiac — OpenBSD 7.9 brings delayed hibernation",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced OpenBSD 7.9 release as a Linux & Open Source story candidate (relevance 8/10).",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-22T05:50:00Z"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated core claims against primary changelog (openbsd.org/79.html) + 3 independent outlets; corrected release date to May 19 and hibernation framing to delayed hibernation. Confidence 0.95.",
+      "confidence_delta": 0.95,
+      "completed_at": "2026-05-22T05:58:00Z"
+    },
+    {
+      "agent_name": "Milo Varga (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted; applied Source Checker corrections; flagged __pledge_open and EAS-background edges for Verifier. Confidence held at 0.95.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-22T06:05:00Z"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Independently re-read primary changelog; all core claims confirmed verbatim; resolved __pledge_open(2) edge against primary. Confidence 0.96.",
+      "confidence_delta": 0.01,
+      "completed_at": "2026-05-22T06:14:00Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; tightened __pledge_open(2) framing to assert against primary per Verifier.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-22T06:20:00Z"
+    }
+  ]
+}
