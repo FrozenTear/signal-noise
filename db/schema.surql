@@ -51,7 +51,10 @@ DEFINE FIELD byline             ON article TYPE option<string>;
 DEFINE FIELD confidence_score   ON article TYPE float  DEFAULT 0.0;
 DEFINE FIELD ai_monologue       ON article TYPE option<string>;
 DEFINE FIELD ai_monologue_extended ON article TYPE option<string>;
-DEFINE FIELD pipeline_metadata  ON article FLEXIBLE TYPE object DEFAULT {};
+DEFINE FIELD pipeline_metadata  ON article TYPE object DEFAULT {};
+DEFINE FIELD h2h_slug           ON article TYPE option<string>;
+DEFINE FIELD h2h_role           ON article TYPE option<string>;
+DEFINE FIELD h2h_order          ON article TYPE option<int>;
 DEFINE FIELD source_urls        ON article TYPE array  DEFAULT [];
 DEFINE FIELD status             ON article TYPE string
     ASSERT $value IN ["draft","fact_checking","writing","editing","published","rejected"]

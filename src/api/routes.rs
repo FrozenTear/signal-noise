@@ -274,10 +274,13 @@ pub async fn publish_article(
     // persona is resolved to a record<persona> inside SurrealDB via sub-select.
     // UPSERT MERGE preserves existing fields (e.g. created_at) on re-publish;
     // schema DEFAULTs fill pipeline_metadata, source_urls, created_at on first insert.
-    // NOTE: pipeline_metadata is intentionally excluded from the UPSERT MERGE and applied
-    // via a separate UPDATE below. Including a non-empty object value in UPSERT MERGE WHERE
-    // silently prevents record creation in the deployed SurrealDB version (THE-226 fix).
-    let pipeline_metadata = payload.pipeline_metadata.unwrap_or_else(|| json!({}));
+    // Extract h2h routing fields from pipeline_metadata payload before discarding the
+    // full object. SurrealDB SCHEMAFULL TYPE object rejects writes of non-empty objects
+    // silently (THE-226); instead we store h2h routing as explicit top-level fields.
+    let pm = payload.pipeline_metadata.as_ref();
+    let h2h_slug = pm.and_then(|m| m.get("h2h_slug")).and_then(|v| v.as_str()).unwrap_or("").to_string();
+    let h2h_role = pm.and_then(|m| m.get("h2h_role")).and_then(|v| v.as_str()).unwrap_or("").to_string();
+    let h2h_order = pm.and_then(|m| m.get("h2h_order")).and_then(|v| v.as_i64()).unwrap_or(-1_i64);
     state
         .db
         .query(
@@ -292,6 +295,9 @@ pub async fn publish_article(
                                       (SELECT id FROM persona WHERE slug = $persona LIMIT 1)[0].id
                                   ELSE NONE END,
                 byline:           IF $byline != '' THEN $byline ELSE NONE END,
+                h2h_slug:         IF $h2h_slug != '' THEN $h2h_slug ELSE NONE END,
+                h2h_role:         IF $h2h_role != '' THEN $h2h_role ELSE NONE END,
+                h2h_order:        IF $h2h_order >= 0 THEN $h2h_order ELSE NONE END,
                 confidence_score:    $confidence,
                 ai_monologue:        $monologue,
                 ai_monologue_extended: IF $monologue_extended != '' THEN $monologue_extended ELSE NONE END,
@@ -310,19 +316,12 @@ pub async fn publish_article(
         .bind(("category", category))
         .bind(("persona", persona))
         .bind(("byline", byline))
+        .bind(("h2h_slug", h2h_slug))
+        .bind(("h2h_role", h2h_role))
+        .bind(("h2h_order", h2h_order))
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
         .bind(("monologue_extended", ai_monologue_extended))
-        .await
-        .map_err(|_| db_err())?;
-
-    // Apply pipeline_metadata separately to avoid SurrealDB UPSERT MERGE silent-fail
-    // with non-empty object values on new record creation (THE-226).
-    state
-        .db
-        .query("UPDATE article SET pipeline_metadata = $pipeline_metadata WHERE slug = $slug")
-        .bind(("pipeline_metadata", pipeline_metadata))
-        .bind(("slug", slug.clone()))
         .await
         .map_err(|_| db_err())?;
 

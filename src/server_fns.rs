@@ -273,7 +273,7 @@ pub async fn get_h2h_by_slug(slug: String) -> Result<Option<H2HBundle>, ServerFn
                  ->cites->source.* AS sources, \
                  ->produced_by->pipeline_step.* AS pipeline \
                  FROM article \
-                 WHERE status = 'published' AND pipeline_metadata.h2h_slug = $slug",
+                 WHERE status = 'published' AND h2h_slug = $slug",
             )
             .bind(("slug", slug.clone()))
             .await
@@ -283,13 +283,13 @@ pub async fn get_h2h_by_slug(slug: String) -> Result<Option<H2HBundle>, ServerFn
                     let mut intro: Option<ArticleDetail> = None;
                     let mut pieces: Vec<(i64, ArticleDetail)> = Vec::new();
                     for v in &rows {
-                        let role = h2h_meta_str(v, "h2h_role");
+                        let role = v["h2h_role"].as_str().map(|s| s.to_string());
                         let detail = row_to_detail(v);
                         if role.as_deref() == Some("intro") {
                             intro = Some(detail);
                         } else {
-                            let order = h2h_meta_str(v, "h2h_order")
-                                .and_then(|s| s.parse::<i64>().ok())
+                            let order = v["h2h_order"]
+                                .as_i64()
                                 .unwrap_or(i64::MAX);
                             pieces.push((order, detail));
                         }
