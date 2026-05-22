@@ -86,8 +86,10 @@ fi
 say "verify bearer gate (THE-159 / THE-198 acceptance)"
 code_no=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE_LOCAL/api/articles" -H 'Content-Type: application/json' -d '{}')
 code_wrong=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE_LOCAL/api/articles" -H 'Authorization: Bearer wrong-token-deadbeef' -H 'Content-Type: application/json' -d '{}')
+# THE-284: the foundation now validates `category` against the seeded `category`
+# table, so the old "meta" probe category 400s. Use a real seeded beat slug.
 code_valid=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE_LOCAL/api/articles" -H "Authorization: Bearer ${SEED_API_TOKEN}" -H 'Content-Type: application/json' \
-  -d '{"title":"deploy gate probe","slug":"deploy-gate-probe","body":"gate verification upsert","category":"meta","ai_monologue_extended":"automated post-deploy gate check"}')
+  -d '{"title":"deploy gate probe","slug":"deploy-gate-probe","body":"gate verification upsert","category":"business","ai_monologue_extended":"automated post-deploy gate check"}')
 echo "POST {} no-bearer    -> $code_no   (expect 401 or 503)"
 echo "POST {} wrong-bearer -> $code_wrong (expect 401 or 403)"
 echo "POST valid-bearer    -> $code_valid (expect 200/201)"
@@ -102,6 +104,14 @@ if [ "$fail" -ne 0 ]; then
   [ -n "$PREV" ] && ln -snf "$PREV" "$ROOT/current" && systemctl daemon-reload && systemctl restart ainory-times
   exit 1
 fi
+
+# THE-284: the publish UPSERT sets status='published', and the foundation's
+# data-driven nav/home feed lists every published article regardless of category.
+# Reset the probe to 'rejected' so the gate check never leaks "deploy gate probe"
+# into the live feed. Best-effort: a non-200 here doesn't fail the deploy.
+reset_code=$(curl -s -o /dev/null -w '%{http_code}' -X PATCH "$BASE_LOCAL/api/articles/deploy-gate-probe" \
+  -H "Authorization: Bearer ${SEED_API_TOKEN}" -H 'Content-Type: application/json' -d '{"status":"rejected"}')
+echo "PATCH probe -> rejected -> $reset_code (expect 200)"
 
 # prune old releases (keep 5)
 ls -1dt "$ROOT"/releases/* | tail -n +6 | xargs -r rm -rf
