@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T06:26:41Z
+- when:    2026-05-22T06:27:53Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272128254
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272166611
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
-GET /api/articles -> 19 article(s)
+GET /api/articles -> 20 article(s)
+   - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
    - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
    - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
    - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
