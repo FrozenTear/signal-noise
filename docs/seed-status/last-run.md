@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T16:17:33Z
+- when:    2026-05-22T16:19:36Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299089078
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299187147
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - workday-ai-hr-flat-headcount | The HR Software Company That Uses AI So It Doesn't Have to Hire
    - the-249-almalinux-media-entertainment | AlmaLinux Is Making a Move on Hollywood's Linux Dependency — Here's Wh
    - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
    - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-256-fbi-nationwide-license-plate-readers | The FBI Wants to Watch Every Road in America
    - the-235-fedora-azure-linux-deepin | Fedora's week: Microsoft moves in, Deepin gets evicted
    - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
-   - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
