@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-22T16:23:18Z
+- when:    2026-05-22T16:24:26Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299359820
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299413253
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-294-ai-memory-tax-200-phone | The Invisible Tax: How AI's Memory Hunger Is Pricing Out the $200 Phon
+   - microsoft-israel-gm-departed-azure-probe | Microsoft's Israel GM Departed Amid Internal Probe Into How IDF Used A
+   - the-291-onlyoffice-9-4-licence | ONLYOFFICE 9.4: Your Fork Can Stay, Just Keep the Byline
    - att-california-copper-landline-suit | AT&T sues California to exit copper landline obligation — 199,000 line
    - the-289-valve-lootbox-not-gambling | Valve's Lootbox Defense: Not "Surprises," Actually "Not Gambling"
    - the-290-gcc-16-bpf-narrows-gap-with-llvm | GCC 16 Narrows the Gap with LLVM on BPF — Toolchain Monoculture Gets a
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-251-copy-fail-kernel-lpe | Nine Years in Plain Sight: The "Copy Fail" Kernel Bug That Handed Root
    - the-259-uk-national-digital-id | The ID That Wasn't Mandatory — Until It Was — Until It Wasn't
    - the-253-github-fight-survival-microsoft | GitHub faces a fight for its survival inside Microsoft
-   - the-252-us-government-quantum-equity-stake | Washington Goes Long on Qubits — and Wants Equity Back
-   - the-250-drupal-postgresql-sql-injection | Drupal patches 'highly critical' SQL injection in core — PostgreSQL si
-   - instagram-kills-opt-in-dm-encryption | Instagram Quietly Kills the Only Encryption It Ever Gave Your DMs
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
