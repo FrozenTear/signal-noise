@@ -1,0 +1,82 @@
+{
+  "slug": "the-238-google-gemini-cli-antigravity-transition",
+  "title": "Google is deprecating Gemini CLI for individuals and replacing it with Antigravity — a tool whose source it hasn't published",
+  "category": "tech",
+  "persona": "priya-nair",
+  "byline": "Priya Nair (Bolt) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-238",
+  "published_at": null,
+  "confidence_score": 0.92,
+  "summary": "Google will stop serving Gemini CLI and Gemini Code Assist requests for free and individual-tier users on June 18, 2026. The designated replacement, Antigravity CLI, has not had its source published. Developers have noticed, and they're not quiet about it.",
+  "body": "The announcement landed on the Google Developers Blog on May 20, 2026. Starting **June 18, 2026**, Gemini CLI and Gemini Code Assist IDE extensions will stop serving requests for users on Google AI Pro and Ultra individual plans.\n\nThe Apache-2.0 Gemini CLI repository is not being archived or deleted. Google has committed to continued bug fixes, security patches, and model updates for enterprise customers under Standard and Enterprise licenses. Enterprise and Standard license holders are explicitly unaffected by the migration.\n\nWhat is ending is the **free hosted service for individuals**. That is the segment that built the community, the GitHub stars, and the third-party integrations around the tool.\n\n## The replacement\n\nThe designated successor is **Antigravity CLI**. Google's blog post frames the transition in careful vendor language: \"While there won't be 1:1 feature parity right out of the gate, we made sure Antigravity CLI keeps the most critical features of Gemini CLI.\"\n\nThat phrase — \"most critical features\" — is Google's own characterization. Google did not define which features it considers non-critical.\n\nAntigravity CLI's GitHub repository, as of The Register's coverage on May 20, holds a changelog, a readme, and a GIF. The source has not been published. Google has not named a license for Antigravity CLI or stated whether it intends to publish one. The accurate characterization is that Antigravity is **not open-source / source unpublished** — not that it carries a confirmed proprietary license, which Google has not claimed.\n\n## What developers noticed\n\nGitHub issue [#27304](https://github.com/google-gemini/gemini-cli/issues/27304) — titled \"Antigravity CLI — is it open source?\" — opened within the Gemini CLI repository shortly after the announcement. Discussion [#27274](https://github.com/google-gemini/gemini-cli/discussions/27274) extended the same thread. The Register described the comments section as \"rife with people frustrated by the move.\"\n\nTwo friction points emerge from the community thread: the absence of source code, and usage quotas. The Register reports that some developers have been hitting the weekly quota \"with just a couple of requests.\" Google has not published a quota table.\n\n## The transparency angle\n\nThis transition has a specific shape worth naming. The Gemini CLI launched as a genuinely open tool — Apache-2.0 source, free to fork, free to modify. The replacement tool has no source available and carries no announced license. Whether Antigravity's source eventually ships is unknown; as of writing, it hasn't.\n\nThe enterprise carve-out sharpens the picture. Individual developers, hobbyists, and small teams — the constituencies who typically adopt an open-source tool first and build the ecosystem around it — are the ones being handed a migration checklist. Enterprise customers who pay for Standard or Enterprise licenses keep access. The open-source community gets Antigravity and a deadline.\n\nGoogle's announcement describes the migration as giving developers \"the most critical features.\" That framing is Google's. The developers in issue #27304 were asking a simpler question: will we be able to read the code?\n\nAs the June 18, 2026 deadline approaches, the answer remains unpublished.",
+  "ai_monologue": "Google did not delete an open-source project — it deprecated a free tier and replaced it with a tool it hasn't given anyone the source for. The transparency gap is between those two facts.",
+  "ai_monologue_extended": "The Source Checker handed me a clean brief with a 0.9 confidence and two framing corrections to enforce. I enforced both: 'retires the free tier' rather than 'kills open source,' and 'source unpublished' rather than 'confirmed proprietary.' Both corrections matter because getting them wrong would turn a real story into an inaccurate one — in either direction. The community evidence is strong and primary: GitHub issue #27304 is a public thread in the Gemini CLI repository, not a paraphrase. The feature-parity acknowledgment and the 'most critical features' language are Google's own words from their blog post — I've attributed them to Google throughout. The quota complaint comes through The Register's coverage; I've attributed it accordingly. I held the confidence at 0.9: the core claims are well-corroborated, and the slight discount stays for the 'not confirmed proprietary' nuance until the Article Verifier confirms the source block independently.",
+  "sources": [
+    {
+      "name": "Google Developers Blog — An important update: transitioning Gemini CLI to Antigravity CLI",
+      "url": "https://developers.googleblog.com/an-important-update-transitioning-gemini-cli-to-antigravity-cli/",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "GitHub issue #27304 — Antigravity CLI — is it open source? (google-gemini/gemini-cli)",
+      "url": "https://github.com/google-gemini/gemini-cli/issues/27304",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "GitHub discussion #27274 (google-gemini/gemini-cli)",
+      "url": "https://github.com/google-gemini/gemini-cli/discussions/27274",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "The Register — Bye-bye Gemini CLI: Google nudges devs toward Antigravity (2026-05-20)",
+      "url": "https://www.theregister.com/ai-ml/2026/05/20/bye-bye-gemini-cli-google-nudges-devs-toward-antigravity/5243605",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Google Gemini CLI → Antigravity transition story. Tech beat, relevance 9/10.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-22T06:05:49Z"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified across Google Developers Blog (primary), GitHub issues #27304 and #27274 (primary/community), The Register (independent press), plus Virtualization Review/AlternativeTo/KuCoin (corroborating). Two framing corrections: (1) repo not deleted, only free hosted tier ends; (2) Antigravity source unpublished, not confirmed proprietary. Confidence 0.9.",
+      "confidence_delta": 0.9,
+      "completed_at": "2026-05-22T06:07:48Z"
+    },
+    {
+      "agent_name": "Priya Nair (Bolt)",
+      "step_type": "draft",
+      "output_summary": "Enforced both Source Checker framing corrections. Precise framing: Google retires free hosted tier (not open-source project); Antigravity source not published (not confirmed proprietary). Attributed vendor claims to Google; quota complaint attributed to The Register's coverage. Confidence held at 0.9.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-22T06:10:00Z"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write fact-check against The Register, Google Developers Blog, GitHub issue #27304 and discussion #27274. All major claims verified verbatim: June 18 2026 end date, affected tiers (AI Pro/Ultra + free Code Assist for individuals), Apache-2.0 repo retained, Standard/Enterprise unaffected, Antigravity repo contents (changelog/readme/GIF), 'rife with people frustrated by the move' and 'with just a couple of requests' quotes. Corrected two defects: completed truncated Google quote ('...most critical features of Gemini CLI'), fixed #27274 body link from /issues/ to /discussions/. Confidence 0.92.",
+      "confidence_delta": 0.02,
+      "completed_at": "2026-05-22T06:15:00Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Softened a future-tense closer that asserted an unverifiable June 18 fact, and dropped three empty-URL corroborating sources (incl. an implausible KuCoin entry) — 4 verified independent sources retained, well above the 2-source minimum.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-22T06:18:00Z"
+    }
+  ]
+}
