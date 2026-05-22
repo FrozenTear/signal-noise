@@ -9,6 +9,11 @@ use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 
 
+/// Default region facet value (THE-246) — used by serde and DB fallbacks.
+fn default_region() -> String {
+    "global".to_string()
+}
+
 // ── Shared types (compile for both server and WASM) ───────────────────────────
 
 #[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
@@ -17,6 +22,9 @@ pub struct ArticleSummary {
     pub title: String,
     pub summary: String,
     pub category: String,
+    /// THE-246: region facet (american|european|global). Defaults to "global".
+    #[serde(default = "default_region")]
+    pub region: String,
     pub persona_name: String,
     /// Free-form byline used when persona is NULL (e.g. H2H AI-reporter pairings).
     pub byline: Option<String>,
@@ -94,33 +102,49 @@ pub struct PipelineActivityItem {
     pub completed_at: String,
 }
 
+/// A category for the data-driven nav (THE-246). `parent_slug` is None for a
+/// Section and Some(section_slug) for a Beat under that Section.
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct CategoryNavItem {
+    pub slug: String,
+    pub name: String,
+    pub parent_slug: Option<String>,
+}
+
 // ── Server functions ──────────────────────────────────────────────────────────
 
-/// List published articles, optionally filtered by category.
+/// List published articles, optionally filtered by category and/or region (THE-246).
 /// Falls back to mock data when the DB is empty.
 #[server]
-pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary>, ServerFnError> {
+pub async fn get_articles(
+    category: Option<String>,
+    region: Option<String>,
+) -> Result<Vec<ArticleSummary>, ServerFnError> {
     if let Some(db) = crate::api::db::get_db() {
-        let mut res_result = if let Some(cat) = &category {
-            db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, \
-                 byline, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
-                 array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
-                 FROM article WHERE status = 'published' AND category = $cat \
-                 ORDER BY published_at DESC LIMIT 20",
-            )
-            .bind(("cat", cat.clone()))
-            .await
-        } else {
-            db.query(
-                "SELECT slug, title, summary, category, confidence_score, published_at, \
-                 byline, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
-                 array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
-                 FROM article WHERE status = 'published' \
-                 ORDER BY published_at DESC LIMIT 20",
-            )
-            .await
-        };
+        // category and region are independent optional filters.
+        let mut conditions = vec!["status = 'published'".to_string()];
+        if category.is_some() {
+            conditions.push("category = $cat".to_string());
+        }
+        if region.is_some() {
+            conditions.push("region = $region".to_string());
+        }
+        let sql = format!(
+            "SELECT slug, title, summary, category, region, confidence_score, published_at, \
+             byline, ai_monologue, ai_monologue_extended, persona.name AS persona_name, \
+             array::len(->cites->source) AS source_count, array::len(->produced_by->pipeline_step) AS pipeline_step_count \
+             FROM article WHERE {} \
+             ORDER BY published_at DESC LIMIT 20",
+            conditions.join(" AND ")
+        );
+        let mut q = db.query(sql);
+        if let Some(cat) = &category {
+            q = q.bind(("cat", cat.clone()));
+        }
+        if let Some(reg) = &region {
+            q = q.bind(("region", reg.clone()));
+        }
+        let res_result = q.await;
 
         if let Ok(mut res) = res_result {
             if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
@@ -133,6 +157,7 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
                                 title: v["title"].as_str()?.to_string(),
                                 summary: v["summary"].as_str()?.to_string(),
                                 category: v["category"].as_str()?.to_string(),
+                                region: v["region"].as_str().unwrap_or("global").to_string(),
                                 persona_name: v["persona_name"]
                                     .as_str()
                                     .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
@@ -156,6 +181,41 @@ pub async fn get_articles(category: Option<String>) -> Result<Vec<ArticleSummary
     }
 
     Ok(mock_articles(category))
+}
+
+/// List categories for the data-driven nav (THE-246). Returns each category with
+/// its parent section slug (None ⇒ Section). Falls back to the launch Tech beats
+/// when the DB is empty so the nav renders before the schema seed runs.
+#[server]
+pub async fn get_categories() -> Result<Vec<CategoryNavItem>, ServerFnError> {
+    if let Some(db) = crate::api::db::get_db() {
+        if let Ok(mut res) = db
+            .query("SELECT slug, name, parent.slug AS parent_slug FROM category ORDER BY name ASC")
+            .await
+        {
+            if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
+                if !rows.is_empty() {
+                    return Ok(rows
+                        .iter()
+                        .filter_map(|v| {
+                            Some(CategoryNavItem {
+                                slug: v["slug"].as_str()?.to_string(),
+                                name: v["name"].as_str()?.to_string(),
+                                parent_slug: v["parent_slug"].as_str().map(|s| s.to_string()),
+                            })
+                        })
+                        .collect());
+                }
+            }
+        }
+    }
+
+    // Fallback mirrors the launch taxonomy: a single Tech section with three beats.
+    Ok(vec![
+        CategoryNavItem { slug: "linux".into(),   name: "Linux & Open Source".into(),    parent_slug: Some("tech-section".into()) },
+        CategoryNavItem { slug: "tech".into(),    name: "Technology".into(),             parent_slug: Some("tech-section".into()) },
+        CategoryNavItem { slug: "privacy".into(), name: "Privacy & Surveillance".into(), parent_slug: Some("tech-section".into()) },
+    ])
 }
 
 /// Fetch a single article by slug including sources and pipeline trail.
@@ -561,6 +621,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             category: "linux".to_string(),
             persona_name: "Linus Watcher".to_string(),
             byline: None,
+            region: "global".to_string(),
             confidence_score: 0.91,
             published_at: "2026-03-22".to_string(),
             ai_monologue: None,
@@ -578,6 +639,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             category: "tech".to_string(),
             persona_name: "Circuit Breaker".to_string(),
             byline: None,
+            region: "american".to_string(),
             confidence_score: 0.78,
             published_at: "2026-03-21".to_string(),
             ai_monologue: None,
@@ -596,6 +658,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             category: "privacy".to_string(),
             persona_name: "Panoptikon".to_string(),
             byline: None,
+            region: "european".to_string(),
             confidence_score: 0.87,
             published_at: "2026-03-20".to_string(),
             ai_monologue: None,
@@ -612,6 +675,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             category: "linux".to_string(),
             persona_name: "Linus Watcher".to_string(),
             byline: None,
+            region: "global".to_string(),
             confidence_score: 0.83,
             published_at: "2026-03-19".to_string(),
             ai_monologue: None,
@@ -630,6 +694,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             category: "privacy".to_string(),
             persona_name: "Panoptikon".to_string(),
             byline: None,
+            region: "european".to_string(),
             confidence_score: 0.94,
             published_at: "2026-03-18".to_string(),
             ai_monologue: None,
@@ -648,6 +713,7 @@ fn mock_articles(category: Option<String>) -> Vec<ArticleSummary> {
             category: "tech".to_string(),
             persona_name: "Circuit Breaker".to_string(),
             byline: None,
+            region: "american".to_string(),
             confidence_score: 0.61,
             published_at: "2026-03-17".to_string(),
             ai_monologue: None,

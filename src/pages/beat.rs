@@ -2,7 +2,7 @@ use dioxus::prelude::*;
 
 use crate::components::article_card::ArticleCard;
 use crate::components::nav::Nav;
-use crate::server_fns::get_articles;
+use crate::server_fns::{get_articles, get_categories};
 
 #[component]
 fn ArticleSkeleton() -> Element {
@@ -17,6 +17,8 @@ fn ArticleSkeleton() -> Element {
         }
     }
 }
+
+// ── Backwards-compatible aliases ──────────────────────────────────────────────
 
 #[component]
 pub fn BeatLinux() -> Element {
@@ -33,12 +35,42 @@ pub fn BeatPrivacy() -> Element {
     rsx! { Beat { category: "privacy".to_string(), title: "Privacy & Surveillance".to_string() } }
 }
 
+// ── Generic beat page (data-driven) ──────────────────────────────────────────
+
+/// Route handler for /beat/:slug — resolves the display title from get_categories().
+#[component]
+pub fn BeatPage(slug: String) -> Element {
+    let slug_for_res = slug.clone();
+    let categories_res = use_resource(move || {
+        let s = slug_for_res.clone();
+        async move {
+            let cats = get_categories().await.unwrap_or_default();
+            cats.into_iter().find(|c| c.slug == s)
+        }
+    });
+
+    let title = match categories_res() {
+        Some(Some(cat)) => cat.name.clone(),
+        _ => {
+            let mut t = slug.clone();
+            if let Some(first) = t.get_mut(0..1) {
+                first.make_ascii_uppercase();
+            }
+            t
+        }
+    };
+
+    rsx! { Beat { category: slug, title } }
+}
+
+// ── Shared beat page body ─────────────────────────────────────────────────────
+
 #[component]
 fn Beat(category: String, title: String) -> Element {
     let cat_clone = category.clone();
     let articles = use_resource(move || {
         let cat = cat_clone.clone();
-        async move { get_articles(Some(cat)).await }
+        async move { get_articles(Some(cat), None).await }
     });
 
     let beat_cls = match category.as_str() {
@@ -82,11 +114,14 @@ fn Beat(category: String, title: String) -> Element {
                                 title: art.title.clone(),
                                 summary: art.summary.clone(),
                                 category: art.category.clone(),
+                                region: art.region.clone(),
                                 persona_name: art.persona_name.clone(),
                                 confidence_score: art.confidence_score,
                                 published_at: art.published_at.clone(),
                                 ai_monologue: art.ai_monologue.clone(),
                                 ai_monologue_extended: art.ai_monologue_extended.clone(),
+                                source_count: art.source_count,
+                                pipeline_step_count: art.pipeline_step_count,
                             }
                         }
                     },

@@ -7,6 +7,8 @@ pub struct ArticleCardProps {
     pub title: String,
     pub summary: String,
     pub category: String,
+    #[props(default)]
+    pub region: String,
     pub persona_name: String,
     pub confidence_score: f64,
     pub published_at: String,
@@ -59,9 +61,12 @@ pub fn ArticleCard(props: ArticleCardProps) -> Element {
         article { class: "{article_class}",
 
             div { class: "sn-article-inner",
-                // Meta row: beat tag + timestamp + confidence + byline
+                // Meta row: beat tag + region tag + timestamp + confidence + byline
                 div { style: "display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;",
                     span { class: "sn-beat-tag {beat_cls}", "{props.category}" }
+                    if !props.region.is_empty() && props.region != "global" {
+                        span { class: "sn-region-tag sn-region-tag--{props.region}", "{props.region}" }
+                    }
                     span { class: "sn-ts", "{props.published_at}" }
                     span { style: "display:inline-flex;align-items:center;gap:5px;font-family:var(--sn-mono);font-size:9px;",
                         span { style: "color:var(--sn-text-dimmer);", "confidence" }

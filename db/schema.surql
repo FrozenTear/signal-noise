@@ -25,8 +25,12 @@ DEFINE TABLE category SCHEMAFULL;
 DEFINE FIELD slug            ON category TYPE string ASSERT $value != NONE;
 DEFINE FIELD name            ON category TYPE string ASSERT $value != NONE;
 DEFINE FIELD description     ON category TYPE string DEFAULT "";
+-- THE-246: Section→Beat hierarchy. A category with no parent is a Section;
+-- one with a parent is a Beat. Self-referencing, optional, backward compatible.
+DEFINE FIELD parent          ON category TYPE option<record<category>>;
 
 DEFINE INDEX category_slug   ON category FIELDS slug UNIQUE;
+DEFINE INDEX category_parent ON category FIELDS parent;
 
 
 DEFINE TABLE source SCHEMAFULL;
@@ -46,6 +50,10 @@ DEFINE FIELD title              ON article TYPE string ASSERT $value != NONE;
 DEFINE FIELD summary            ON article TYPE string DEFAULT "";
 DEFINE FIELD body               ON article TYPE string DEFAULT "";
 DEFINE FIELD category           ON article TYPE string ASSERT $value != NONE;
+-- THE-246: region facet — orthogonal axis to category. Default "global".
+DEFINE FIELD region             ON article TYPE string
+    ASSERT $value IN ["american","european","global"]
+    DEFAULT "global";
 DEFINE FIELD persona            ON article TYPE option<record<persona>>;
 DEFINE FIELD byline             ON article TYPE option<string>;
 DEFINE FIELD confidence_score   ON article TYPE float  DEFAULT 0.0;
@@ -66,6 +74,7 @@ DEFINE FIELD updated_at         ON article TYPE datetime DEFAULT time::now();
 DEFINE INDEX article_slug       ON article FIELDS slug UNIQUE;
 DEFINE INDEX article_status     ON article FIELDS status;
 DEFINE INDEX article_category   ON article FIELDS category;
+DEFINE INDEX article_region     ON article FIELDS region;
 DEFINE INDEX article_published  ON article FIELDS published_at;
 
 
@@ -125,6 +134,23 @@ INSERT IGNORE INTO category (slug, name, description) VALUES
     ("tech",     "Technology",             "Industry, products, and research"),
     ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy"),
     ("business", "Business & Finance",     "Markets, economics, and corporate strategy");
+
+-- THE-246: Section→Beat taxonomy migration (idempotent; runs at every startup).
+-- Tech is the single launch Section. The existing categories become Beats under it.
+-- NOTE: `business` postdates the issue text (which named only linux/tech/privacy);
+-- it is parented here too so the launch nav stays single-section. When the real
+-- section rollout lands (~1 week), promote business by repointing its parent.
+UPSERT category:tech_section SET
+    slug        = "tech-section",
+    name        = "Tech",
+    description = "Technology, Linux, privacy, and business coverage",
+    parent      = NONE;
+UPDATE category SET parent = category:tech_section
+    WHERE slug IN ["linux", "tech", "privacy", "business"];
+
+-- THE-246: backfill region on pre-existing articles. DEFAULT only applies on
+-- write, so existing rows need an explicit backfill. Idempotent.
+UPDATE article SET region = "global" WHERE region = NONE;
 
 -- Personas (is_active = true for launch beats)
 INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, example_phrases, is_active) VALUES
