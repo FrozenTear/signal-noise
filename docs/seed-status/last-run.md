@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-21T23:28:11Z
+- when:    2026-05-22T05:18:50Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26259122665
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26269890566
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
-GET /api/articles -> 12 article(s)
+GET /api/articles -> 15 article(s)
+   - home-depot-q1-2026-spark | Home Depot's CFO Just Handed the Bears Their Confirmation
+   - home-depot-q1-2026-ledger | Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Te
+   - home-depot-q1-2026-editors-note | Same print, same bear case. Two reporters arrive there from opposite d
    - the-138-edri-led-fragmented | The GDPR Has a Sibling for the Police. Years On, It Still Isn't Workin
    - the-137-colorado-sb051-open-source-exemption | Colorado wrote an age-check law that bends around open source. The fin
    - the-136-anthropic-spacex-colossus-gb200 | Anthropic is renting Elon Musk's supercomputer. The press release won'
