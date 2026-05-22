@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T06:24:02Z
+- when:    2026-05-22T06:25:33Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272034710
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272088788
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
-GET /api/articles -> 17 article(s)
+GET /api/articles -> 18 article(s)
+   - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
    - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
    - the-236-openbsd-79-released | OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket
    - home-depot-q1-2026-spark | Home Depot's CFO Just Handed the Bears Their Confirmation
