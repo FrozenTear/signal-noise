@@ -31,8 +31,8 @@
       "name": "Bloomberg — \"Waymo Suspends Service in Atlanta as Robotaxis Stumped by Floods\" (21 May 2026)",
       "url": "https://www.bloomberg.com/news/articles/2026-05-21/waymo-suspends-service-in-atlanta-as-robotaxis-stumped-by-floods",
       "type": "press",
-      "paywall_status": "subscriber",
-      "verification_status": "partial"
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
     },
     {
       "name": "CNBC — \"Waymo recalls 3,800 robotaxis after able to drive into standing water\" (12 May 2026)",
