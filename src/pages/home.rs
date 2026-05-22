@@ -19,7 +19,7 @@ pub fn Home() -> Element {
 
     let articles = use_resource(move || {
         let cat = active_category();
-        async move { get_articles(cat).await }
+        async move { get_articles(cat, None).await }
     });
 
     rsx! {

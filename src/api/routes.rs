@@ -35,6 +35,8 @@ pub fn router(state: AppState) -> Router {
 #[derive(Deserialize)]
 pub struct ArticleQuery {
     pub category: Option<String>,
+    /// THE-246: optional region facet filter (american|european|global).
+    pub region: Option<String>,
     pub limit: Option<usize>,
     pub offset: Option<usize>,
 }
@@ -46,6 +48,8 @@ pub struct ArticlePublishPayload {
     pub summary: Option<String>,
     pub body: String,
     pub category: String,
+    /// THE-246: region facet (american|european|global). Optional — defaults to "global".
+    pub region: Option<String>,
     /// Persona slug (e.g. "priya-nair") — resolved to a record<persona> inside SurrealDB.
     /// Optional: when omitted or empty, use `byline` instead.
     pub persona: Option<String>,
@@ -116,24 +120,32 @@ pub async fn list_articles(
     let limit = params.limit.unwrap_or(20);
     let offset = params.offset.unwrap_or(0);
 
-    let mut result = if let Some(cat) = params.category {
-        state
-            .db
-            .query("SELECT *, persona.name AS persona_name FROM article WHERE status = 'published' AND category = $cat ORDER BY published_at DESC LIMIT $limit START $offset")
-            .bind(("cat", cat))
-            .bind(("limit", limit))
-            .bind(("offset", offset))
-            .await
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-    } else {
-        state
-            .db
-            .query("SELECT *, persona.name AS persona_name FROM article WHERE status = 'published' ORDER BY published_at DESC LIMIT $limit START $offset")
-            .bind(("limit", limit))
-            .bind(("offset", offset))
-            .await
-            .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?
-    };
+    // THE-246: category and region are independent, both optional filters.
+    // Build the WHERE clause from whichever filters were supplied.
+    let mut conditions = vec!["status = 'published'".to_string()];
+    if params.category.is_some() {
+        conditions.push("category = $cat".to_string());
+    }
+    if params.region.is_some() {
+        conditions.push("region = $region".to_string());
+    }
+    let sql = format!(
+        "SELECT *, persona.name AS persona_name FROM article WHERE {} ORDER BY published_at DESC LIMIT $limit START $offset",
+        conditions.join(" AND ")
+    );
+
+    let mut query = state
+        .db
+        .query(sql)
+        .bind(("limit", limit))
+        .bind(("offset", offset));
+    if let Some(cat) = params.category {
+        query = query.bind(("cat", cat));
+    }
+    if let Some(region) = params.region {
+        query = query.bind(("region", region));
+    }
+    let mut result = query.await.map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
 
     let articles: Vec<Value> = result.take(0).map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     Ok(Json(json!({ "articles": articles })))
@@ -254,6 +266,19 @@ pub async fn publish_article(
         return Err(bad_req(&format!("category '{}' does not exist", category)));
     }
 
+    // THE-246: region facet. Absent/empty defaults to "global" (backward compatible);
+    // a supplied value must be one of the three allowed regions.
+    let region = match payload.region.as_deref().map(str::trim) {
+        None | Some("") => "global".to_string(),
+        Some(r) => {
+            let r = r.to_lowercase();
+            if !["american", "european", "global"].contains(&r.as_str()) {
+                return Err(bad_req("region must be one of: american, european, global"));
+            }
+            r
+        }
+    };
+
     let slug = payload
         .slug
         .filter(|s| !s.trim().is_empty())
@@ -291,6 +316,7 @@ pub async fn publish_article(
                 summary:          $summary,
                 body:             $body,
                 category:         $category,
+                region:           $region,
                 persona:          IF $persona != '' THEN
                                       (SELECT id FROM persona WHERE slug = $persona LIMIT 1)[0].id
                                   ELSE NONE END,
@@ -314,6 +340,7 @@ pub async fn publish_article(
         .bind(("summary", summary))
         .bind(("body", payload.body))
         .bind(("category", category))
+        .bind(("region", region))
         .bind(("persona", persona))
         .bind(("byline", byline))
         .bind(("h2h_slug", h2h_slug))
@@ -680,6 +707,7 @@ mod tests {
                 summary: None,
                 body: "Body content for upsert test.".to_string(),
                 category: "tech".to_string(),
+                region: None,
                 persona: None,
                 byline: Some("Test Desk".to_string()),
                 pipeline_metadata: None,
@@ -700,5 +728,76 @@ mod tests {
             .unwrap();
         let rows: Vec<Value> = res.take(0).unwrap();
         assert_eq!(rows.len(), 1, "new slug must create a row; UPSERT fix not applied — got {} rows", rows.len());
+    }
+
+    // THE-246: a publish with no `region` defaults to "global"; a publish WITH a
+    // region round-trips that value. Both are read back off the persisted row.
+    #[tokio::test]
+    async fn region_defaults_and_round_trips() {
+        let db = make_test_db("/tmp/sn_test_region").await;
+        let state = AppState { db: db.clone() };
+
+        let mk = |slug: &str, region: Option<String>| ArticlePublishPayload {
+            title: format!("Region test {slug}"),
+            slug: Some(slug.to_string()),
+            summary: None,
+            body: "Region test body.".to_string(),
+            category: "tech".to_string(),
+            region,
+            persona: None,
+            byline: Some("Test Desk".to_string()),
+            pipeline_metadata: None,
+            confidence_score: Some(0.8),
+            ai_monologue: Some("m".to_string()),
+            ai_monologue_extended: Some("ext".to_string()),
+            sources: None,
+            pipeline_steps: None,
+        };
+
+        // No region → global.
+        publish_article(BearerAuth, State(state.clone()), ExtractJson(mk("region-default-slug", None)))
+            .await
+            .expect("publish without region must succeed");
+        // Explicit region → round-trips.
+        publish_article(BearerAuth, State(state.clone()), ExtractJson(mk("region-european-slug", Some("european".to_string()))))
+            .await
+            .expect("publish with region must succeed");
+
+        let mut res = db
+            .query("SELECT region FROM article WHERE slug = 'region-default-slug'; \
+                    SELECT region FROM article WHERE slug = 'region-european-slug'")
+            .await
+            .unwrap();
+        let default_rows: Vec<Value> = res.take(0).unwrap();
+        let euro_rows: Vec<Value> = res.take(1).unwrap();
+        assert_eq!(default_rows[0]["region"].as_str(), Some("global"), "absent region must default to global");
+        assert_eq!(euro_rows[0]["region"].as_str(), Some("european"), "supplied region must round-trip");
+
+        // An invalid region is rejected with 400.
+        let bad = publish_article(BearerAuth, State(state), ExtractJson(mk("region-bad-slug", Some("antarctic".to_string())))).await;
+        assert!(bad.is_err(), "invalid region must be rejected");
+    }
+
+    // THE-246: the schema seed builds the Section→Beat taxonomy. The launch beats
+    // are parented under the Tech section, and the section itself has no parent.
+    #[tokio::test]
+    async fn taxonomy_reparents_beats_under_tech_section() {
+        let db = make_test_db("/tmp/sn_test_taxonomy").await;
+
+        let mut res = db
+            .query("SELECT slug, parent.slug AS parent_slug FROM category WHERE slug IN ['linux','tech','privacy','business']; \
+                    SELECT parent FROM category:tech_section")
+            .await
+            .unwrap();
+        let beats: Vec<Value> = res.take(0).unwrap();
+        assert_eq!(beats.len(), 4, "all four launch beats must exist");
+        for b in &beats {
+            assert_eq!(
+                b["parent_slug"].as_str(), Some("tech-section"),
+                "beat {:?} must be parented under tech-section", b["slug"]
+            );
+        }
+        let section: Vec<Value> = res.take(1).unwrap();
+        assert!(section[0]["parent"].is_null(), "the Tech section must have no parent (it is a Section)");
     }
 }

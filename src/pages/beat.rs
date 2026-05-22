@@ -38,7 +38,7 @@ fn Beat(category: String, title: String) -> Element {
     let cat_clone = category.clone();
     let articles = use_resource(move || {
         let cat = cat_clone.clone();
-        async move { get_articles(Some(cat)).await }
+        async move { get_articles(Some(cat), None).await }
     });
 
     let beat_cls = match category.as_str() {
