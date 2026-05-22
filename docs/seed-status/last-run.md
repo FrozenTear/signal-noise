@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-22T06:28:37Z
-- mode:    probe
+- when:    2026-05-22T06:30:51Z
+- mode:    seed
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272196674
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26272282240
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
+   - the-241-rcs-e2ee-cross-platform | Cross-Platform RCS Gets End-to-End Encryption. Instagram Lost It the S
    - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
    - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
    - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
@@ -28,7 +30,6 @@ GET /api/articles -> 20 article(s)
    - cisa-credentials-public-github-repo | CISA spends its days telling everyone else not to leak credentials. A 
    - the-121-openai-disproves-unit-distance-conjecture | OpenAI says an internal model disproved a discrete-geometry conjecture
    - spacex-s1-biggest-ipo-musk-risk-factor | SpaceX's S-1 makes the case for the biggest IPO ever — and lists its o
-   - the-116-greg-kh-more-rust-kernel-developers | Greg KH wants more Rust kernel developers. The keynote was the recruit
-   - orf-at-misleading-cookie-banner | ORF Appealed Rather Than Even Out Two Buttons. The Court Said No.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
+ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175).
 ```
