@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T10:20:55Z
+- when:    2026-05-22T11:13:53Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26282197703
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26284509742
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-251-copy-fail-kernel-lpe | Nine Years in Plain Sight: The "Copy Fail" Kernel Bug That Handed Root
    - the-259-uk-national-digital-id | The ID That Wasn't Mandatory — Until It Was — Until It Wasn't
    - the-253-github-fight-survival-microsoft | GitHub faces a fight for its survival inside Microsoft
    - the-252-us-government-quantum-equity-stake | Washington Goes Long on Qubits — and Wants Equity Back
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - home-depot-q1-2026-ledger | Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Te
    - home-depot-q1-2026-editors-note | Same print, same bear case. Two reporters arrive there from opposite d
    - the-138-edri-led-fragmented | The GDPR Has a Sibling for the Police. Years On, It Still Isn't Workin
-   - the-137-colorado-sb051-open-source-exemption | Colorado wrote an age-check law that bends around open source. The fin
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
