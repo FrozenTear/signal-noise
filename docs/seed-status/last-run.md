@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-22T13:25:36Z
+- when:    2026-05-22T16:16:36Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26290472801
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26299049750
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-249-almalinux-media-entertainment | AlmaLinux Is Making a Move on Hollywood's Linux Dependency — Here's Wh
    - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
    - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
    - the-280-openbsd-7-9-sixty-releases-one-syscall | OpenBSD 7.9: sixty releases, one new syscall, and a scheduler that rea
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-235-fedora-azure-linux-deepin | Fedora's week: Microsoft moves in, Deepin gets evicted
    - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
    - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
-   - the-241-rcs-e2ee-cross-platform | Cross-Platform RCS Gets End-to-End Encryption. Instagram Lost It the S
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
