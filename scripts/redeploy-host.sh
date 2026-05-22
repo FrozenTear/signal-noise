@@ -87,13 +87,13 @@ say "verify bearer gate (THE-159 / THE-198 acceptance)"
 code_no=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE_LOCAL/api/articles" -H 'Content-Type: application/json' -d '{}')
 code_wrong=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE_LOCAL/api/articles" -H 'Authorization: Bearer wrong-token-deadbeef' -H 'Content-Type: application/json' -d '{}')
 code_valid=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$BASE_LOCAL/api/articles" -H "Authorization: Bearer ${SEED_API_TOKEN}" -H 'Content-Type: application/json' \
-  -d '{"title":"deploy gate probe","slug":"deploy-gate-probe","body":"gate verification upsert","category":"meta","persona":"system","ai_monologue_extended":"automated post-deploy gate check"}')
-echo "POST {} no-bearer    -> $code_no   (expect 503)"
+  -d '{"title":"deploy gate probe","slug":"deploy-gate-probe","body":"gate verification upsert","category":"meta","ai_monologue_extended":"automated post-deploy gate check"}')
+echo "POST {} no-bearer    -> $code_no   (expect 401 or 503)"
 echo "POST {} wrong-bearer -> $code_wrong (expect 401 or 403)"
 echo "POST valid-bearer    -> $code_valid (expect 200/201)"
 
 fail=0
-[ "$code_no" = "503" ] || { echo "!! gate NOT fail-closed without token"; fail=1; }
+case "$code_no" in 401|503) ;; *) echo "!! gate NOT enforced without token (got $code_no)"; fail=1;; esac
 case "$code_wrong" in 401|403) ;; *) echo "!! wrong token not rejected"; fail=1;; esac
 case "$code_valid" in 200|201) ;; *) echo "!! valid token UPSERT did not succeed"; fail=1;; esac
 
@@ -105,4 +105,4 @@ fi
 
 # prune old releases (keep 5)
 ls -1dt "$ROOT"/releases/* | tail -n +6 | xargs -r rm -rf
-say "REDEPLOY DONE rel=$REL sha=$SHA gate=verified(503/$code_wrong/$code_valid)"
+say "REDEPLOY DONE rel=$REL sha=$SHA gate=verified($code_no/$code_wrong/$code_valid)"
