@@ -1,20 +1,34 @@
 # last seed/probe run
 
-- when:    2026-05-22T11:30:00Z
-- mode:    autopublish (on-demand, EiC handoff)
-- trigger: THE-279 Article Verifier → Editor-in-Chief final review
-- scope:   ONLY=the-279-ubuntu-core-26-ota-arm64-livepatch
-- published: 1
-- skipped:   0
-- failed:    0
+- when:    2026-05-22T11:15:52Z
+- mode:    probe
+- trigger: push
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26284596617
+- token configured: false
 
 ```
-== autopublish-host: src=/opt/ainory-times/src base=http://127.0.0.1:8888 ==
-deployed sha: 3d37ab4
-PUBLISH the-279-ubuntu-core-26-ota-arm64-livepatch -> POST 200, GET 200
-== summary: published=1 skipped=0 failed=0 ==
+== probe https://news.scuffedcrew.no ==
+GET /            -> 200
+GET /api/articles -> 20 article(s)
+   - the-279-ubuntu-core-26-ota-arm64-livepatch | Ubuntu Core 26 Shrinks OTA Updates by Up to 90% and Brings Rebootless 
+   - the-251-copy-fail-kernel-lpe | Nine Years in Plain Sight: The "Copy Fail" Kernel Bug That Handed Root
+   - the-259-uk-national-digital-id | The ID That Wasn't Mandatory — Until It Was — Until It Wasn't
+   - the-253-github-fight-survival-microsoft | GitHub faces a fight for its survival inside Microsoft
+   - the-252-us-government-quantum-equity-stake | Washington Goes Long on Qubits — and Wants Equity Back
+   - the-250-drupal-postgresql-sql-injection | Drupal patches 'highly critical' SQL injection in core — PostgreSQL si
+   - instagram-kills-opt-in-dm-encryption | Instagram Quietly Kills the Only Encryption It Ever Gave Your DMs
+   - the-256-fbi-nationwide-license-plate-readers | The FBI Wants to Watch Every Road in America
+   - the-235-fedora-azure-linux-deepin | Fedora's week: Microsoft moves in, Deepin gets evicted
+   - the-243-greece-smart-policing-unlawful | Greece's "Smart Policing" programme: €4 million for a biometric survei
+   - gtk-pdf-reader-polyglot-code-execution | Your GTK PDF Reader Will Load Whatever You Hand It
+   - the-241-rcs-e2ee-cross-platform | Cross-Platform RCS Gets End-to-End Encryption. Instagram Lost It the S
+   - the-238-google-gemini-cli-antigravity-transition | Google is deprecating Gemini CLI for individuals and replacing it with
+   - the-242-linkedin-gdpr-art15-premium-paywall | LinkedIn treats your GDPR data access right as a Premium feature — noy
+   - the-240-waymo-flood-freeway-pauses | Waymo Recalled 3,800 Robotaxis for Driving Into Standing Water. Eight 
+   - christians-trust-ai-spiritual-guidance-barna-survey | Survey: Nearly Half of Practicing U.S. Christians Would Trust AI for S
+   - the-236-openbsd-79-released | OpenBSD 7.9: heterogeneous CPU scheduling, delayed hibernation, socket
+   - home-depot-q1-2026-spark | Home Depot's CFO Just Handed the Bears Their Confirmation
+   - home-depot-q1-2026-ledger | Home Depot Cleared a Modest Bar Into a Bearish Setup — Gross Margin Te
+   - home-depot-q1-2026-editors-note | Same print, same bear case. Two reporters arrive there from opposite d
+write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
-
-Verification:
-- Host-local idempotency GET: 200
-- Live read confirms: confidence 0.93, sources=3 (no paywall-enum drop), pipeline=5 steps, ai_monologue + ai_monologue_extended populated, category=linux
