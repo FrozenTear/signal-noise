@@ -37,8 +37,8 @@ DEFINE TABLE source SCHEMAFULL;
 DEFINE FIELD url                ON source TYPE string ASSERT $value != NONE;
 DEFINE FIELD name               ON source TYPE string ASSERT $value != NONE;
 DEFINE FIELD type               ON source TYPE string ASSERT $value IN ["wire","press","primary","blog"];
-DEFINE FIELD paywall_status     ON source TYPE string ASSERT $value IN ["free","paywalled","unknown"] DEFAULT "unknown";
-DEFINE FIELD verification_status ON source TYPE string ASSERT $value IN ["verified","unverified","unknown"] DEFAULT "unknown";
+DEFINE FIELD paywall_status     ON source TYPE string ASSERT $value IN ["free","paywalled","metered","unknown"] DEFAULT "unknown";
+DEFINE FIELD verification_status ON source TYPE string ASSERT $value IN ["verified","unverified","corroborating","unknown"] DEFAULT "unknown";
 DEFINE FIELD bias_indicator     ON source TYPE option<string>;
 
 DEFINE INDEX source_url      ON source FIELDS url UNIQUE;

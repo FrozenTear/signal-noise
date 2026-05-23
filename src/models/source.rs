@@ -26,6 +26,7 @@ pub enum SourceType {
 pub enum PaywallStatus {
     Free,
     Paywalled,
+    Metered,
     Unknown,
 }
 
@@ -34,5 +35,6 @@ pub enum PaywallStatus {
 pub enum VerificationStatus {
     Verified,
     Unverified,
+    Corroborating,
     Unknown,
 }

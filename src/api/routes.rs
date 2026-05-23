@@ -279,6 +279,33 @@ pub async fn publish_article(
         }
     };
 
+    // THE-341: validate source enum values before any DB write — fail-fast with 400 so
+    // callers get a clear error instead of a silent 200 with dropped rows.
+    const ALLOWED_PAYWALL: &[&str] = &["free", "paywalled", "metered", "unknown"];
+    const ALLOWED_VERIFICATION: &[&str] = &["verified", "unverified", "corroborating", "unknown"];
+    if let Some(ref sources) = payload.sources {
+        for source in sources {
+            if let Some(ref ps) = source.paywall_status {
+                if !ALLOWED_PAYWALL.contains(&ps.as_str()) {
+                    return Err(bad_req(&format!(
+                        "paywall_status '{}' is not allowed; must be one of: {}",
+                        ps,
+                        ALLOWED_PAYWALL.join(", ")
+                    )));
+                }
+            }
+            if let Some(ref vs) = source.verification_status {
+                if !ALLOWED_VERIFICATION.contains(&vs.as_str()) {
+                    return Err(bad_req(&format!(
+                        "verification_status '{}' is not allowed; must be one of: {}",
+                        vs,
+                        ALLOWED_VERIFICATION.join(", ")
+                    )));
+                }
+            }
+        }
+    }
+
     let slug = payload
         .slug
         .filter(|s| !s.trim().is_empty())
@@ -402,6 +429,8 @@ pub async fn publish_article(
                 .bind(("paywall", paywall))
                 .bind(("verification", verification))
                 .await
+                .map_err(|_| db_err())?
+                .check()
                 .map_err(|_| db_err())?;
         }
     }
@@ -933,5 +962,103 @@ mod tests {
             .send().await.unwrap().json().await.unwrap();
         let src_count = with_src["sources"].as_array().map(|a| a.len()).unwrap_or(0);
         assert_eq!(src_count, 2, "both sent sources must be present after publish (paywall enum drop regression)");
+
+        // ── Check 5: THE-341 — pipeline-emitted metered/corroborating values are accepted ──
+        let r5 = client
+            .post(format!("{}/api/articles", base))
+            .bearer_auth(token)
+            .json(&json!({
+                "title": "THE-341 metered corroborating",
+                "slug": "the341-metered-corroborating",
+                "body": "Metered/corroborating regression body.",
+                "category": "tech",
+                "region": "global",
+                "ai_monologue_extended": "extended monologue",
+                "sources": [
+                    {"url":"https://arxiv.org/abs/123","name":"arXiv","type":"primary","paywall_status":"free","verification_status":"verified"},
+                    {"url":"https://theregister.com/story","name":"The Register","type":"press","paywall_status":"metered","verification_status":"verified"},
+                    {"url":"https://owasp.org/guide","name":"OWASP","type":"primary","paywall_status":"free","verification_status":"corroborating"}
+                ]
+            }))
+            .send().await.unwrap();
+        assert_eq!(r5.status().as_u16(), 200, "publish with metered/corroborating must succeed (THE-341)");
+        let metered_art: Value = client
+            .get(format!("{}/api/articles/the341-metered-corroborating", base))
+            .send().await.unwrap().json().await.unwrap();
+        let metered_count = metered_art["sources"].as_array().map(|a| a.len()).unwrap_or(0);
+        assert_eq!(metered_count, 3, "all 3 sources with metered/corroborating must persist — never silently dropped (THE-341)");
+
+        // ── Check 6: THE-341 — truly invalid enum value is rejected 400 ──
+        let r6 = client
+            .post(format!("{}/api/articles", base))
+            .bearer_auth(token)
+            .json(&json!({
+                "title": "THE-341 bad enum",
+                "slug": "the341-bad-enum",
+                "body": "Bad enum body.",
+                "category": "tech",
+                "region": "global",
+                "ai_monologue_extended": "extended monologue",
+                "sources": [
+                    {"url":"https://example.com/c","name":"Bad Source","type":"press","paywall_status":"gated","verification_status":"verified"}
+                ]
+            }))
+            .send().await.unwrap();
+        assert_eq!(r6.status().as_u16(), 400, "publish with invalid paywall_status must return 400 (THE-341)");
+    }
+
+    // THE-341: publish with an out-of-enum paywall_status or verification_status must be
+    // rejected 400 — never a silent 200 with dropped rows.
+    // Valid pipeline-emitted values (metered, corroborating) are covered by the
+    // the264_live_publish_path_over_http check-5 source round-trip below.
+    #[tokio::test]
+    async fn the341_out_of_enum_source_is_rejected() {
+        let db = make_test_db("/tmp/sn_test_the341_enum").await;
+        let state = AppState { db: db.clone() };
+
+        let mk_payload = |paywall: &str, verification: &str| ArticlePublishPayload {
+            title: "THE-341 enum regression".to_string(),
+            slug: Some("the341-enum-regression".to_string()),
+            summary: None,
+            body: "Body.".to_string(),
+            category: "tech".to_string(),
+            region: None,
+            persona: None,
+            byline: Some("Test Desk".to_string()),
+            pipeline_metadata: None,
+            confidence_score: None,
+            ai_monologue: None,
+            ai_monologue_extended: Some("extended monologue".to_string()),
+            sources: Some(vec![
+                SourcePayload {
+                    url: "https://arxiv.org/abs/123".to_string(),
+                    name: "arXiv".to_string(),
+                    source_type: "primary".to_string(),
+                    paywall_status: Some(paywall.to_string()),
+                    verification_status: Some(verification.to_string()),
+                },
+            ]),
+            pipeline_steps: None,
+        };
+
+        // Invalid paywall_status → 400.
+        let bad_paywall = publish_article(BearerAuth, State(state.clone()), ExtractJson(mk_payload("gated", "verified"))).await;
+        assert!(bad_paywall.is_err(), "invalid paywall_status must be rejected");
+        let (status, _) = bad_paywall.unwrap_err();
+        assert_eq!(status, StatusCode::BAD_REQUEST, "invalid paywall_status must return 400");
+
+        // Invalid verification_status → 400.
+        let bad_verif = publish_article(BearerAuth, State(state.clone()), ExtractJson(mk_payload("free", "corroborated"))).await;
+        assert!(bad_verif.is_err(), "invalid verification_status must be rejected");
+        let (status, _) = bad_verif.unwrap_err();
+        assert_eq!(status, StatusCode::BAD_REQUEST, "invalid verification_status must return 400");
+
+        // Neither rejected publish must have persisted any row.
+        let mut check = db
+            .query("SELECT slug FROM article WHERE slug = 'the341-enum-regression'")
+            .await
+            .unwrap();
+        let rows: Vec<Value> = check.take(0).unwrap();
+        assert_eq!(rows.len(), 0, "rejected publishes must not persist any article row; got {} rows", rows.len());
     }
 }
