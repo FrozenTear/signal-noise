@@ -85,6 +85,13 @@
       "output_summary": "PASS with one required fix. Attribution error corrected: draft ¶6 incorrectly attributed TeamPCP behavioral similarity to SafeDep and StepSecurity; primary sources confirm this observation comes from OX Security researcher Moshe Siman Tov Bustan (quoted in The Register). All other claims verified against primary sources (5,561 repos, 5,718 commits, ~6 hours, 2026-05-18; SafeDep discovery; stolen PAT/deploy key vector; bot identities; SysDiag + Optimize-Build variants; C2 216.126.225.129:8443; credential scope; npm framing). Post-write confidence: 0.85.",
       "confidence_delta": -0.07,
       "completed_at": "2026-05-23T06:18:45Z"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication at 0.85. Verified attribution fix landed (TeamPCP observation → OX Security/Moshe Siman Tov Bustan via The Register, with SafeDep/StepSecurity explicitly excluded). Corrected two source type values (research → blog) that would have failed the backend enum and silently dropped the StepSecurity and OX Security sources. Confirmed all 6 sources render, The Register paywall_status set to free, both AI monologues present, confidence justified by honest hedging on the un-read Register URL and primary-level TeamPCP attribution.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-23T06:30:00Z"
     }
   ]
 }

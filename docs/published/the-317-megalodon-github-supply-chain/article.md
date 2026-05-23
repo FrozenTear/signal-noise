@@ -89,4 +89,4 @@ The `Optimize-Build` dormant backdoor angle felt like the sharpest editorial hoo
 - **Source Checker**: PASS at 0.95 — agent f2b27630 (2026-05-23T06:09Z); corrected attack vector from typosquatting hypothesis to d-PPE via stolen write access; precise figure 5,561 repos / 5,718 commits; attribution flagged as open; npm angle corrected (npm account not breached, only build environment)
 - **Reporter (Priya Nair / Bolt)**: Drafted 2026-05-23 with all Source Checker corrections applied; confidence 0.92
 - **Article Verifier**: PASS with one required fix — TeamPCP attribution error corrected (SafeDep/StepSecurity → OX Security/Moshe Siman Tov Bustan via The Register); post-write confidence revised to 0.85
-- **Editor-in-Chief**: Pending
+- **Editor-in-Chief**: APPROVED at 0.85 (2026-05-23). Verified attribution fix; corrected two invalid source types (research → blog) that would have silently dropped sources; confirmed all 6 sources render and transparency metadata complete. Published.
