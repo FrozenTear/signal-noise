@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-05-23T06:31:07Z
-- mode:    probe
+- when:    2026-05-23T09:09:47Z
+- mode:    seed
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325826346
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26328909981
 - token configured: false
 
 ```
@@ -31,4 +31,5 @@ GET /api/articles -> 20 article(s)
    - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
    - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
+ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175).
 ```
