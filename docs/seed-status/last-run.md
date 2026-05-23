@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-23T06:17:08Z
+- when:    2026-05-23T06:19:01Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325558382
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325592775
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-312-yt-dlp-bun-deprecated | yt-dlp Limits and Deprecates Bun: Lockfile Security Risk Cited, "Vibe-
    - the-293-fbi-kali365-mfa-bypass | FBI warns of Kali365: a phishing service that steals Microsoft tokens 
    - the-295-trump-mobile-data-exposure | Trump Mobile Exposed Tens of Thousands of Customers' Personal Data Thr
    - the-294-ai-memory-tax-200-phone | The Invisible Tax: How AI's Memory Hunger Is Pricing Out the $200 Phon
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-278-polyglot-pdf-gtk-command-injection | Polyglot PDFs exploit command injection in GTK-based readers — click t
    - the-277-spotify-umg-ai-covers | Spotify and Universal Music Strike AI Licensing Deal — for Artists Who
    - the-279-ubuntu-core-26-ota-arm64-livepatch | Ubuntu Core 26 Shrinks OTA Updates by Up to 90% and Brings Rebootless 
-   - the-251-copy-fail-kernel-lpe | Nine Years in Plain Sight: The "Copy Fail" Kernel Bug That Handed Root
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
