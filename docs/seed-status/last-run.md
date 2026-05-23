@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-23T11:19:43Z
+- when:    2026-05-23T11:26:47Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26331304342
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26331437965
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-335-skill-md-supply-chain-attacks | AI Agent Skills Are the New App Store — and Researchers Just Found the
    - spacex-starship-v3-flies-booster-lost | SpaceX Starship V3 Reaches Space on First Try — But Loses Its Booster
    - the-333-yt-dlp-caps-bun-support | yt-dlp won't trust what the AI wrote: Bun support capped at last human
    - the-340-rhel-10-2-9-8-post-quantum | Red Hat Ships RHEL 10.2 and 9.8 on the Same Day — and One of Them Has 
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-291-onlyoffice-9-4-licence | ONLYOFFICE 9.4: Your Fork Can Stay, Just Keep the Byline
    - att-california-copper-landline-suit | AT&T sues California to exit copper landline obligation — 199,000 line
    - the-289-valve-lootbox-not-gambling | Valve's Lootbox Defense: Not "Surprises," Actually "Not Gambling"
-   - the-290-gcc-16-bpf-narrows-gap-with-llvm | GCC 16 Narrows the Gap with LLVM on BPF — Toolchain Monoculture Gets a
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
