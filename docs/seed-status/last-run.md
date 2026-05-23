@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-23T06:24:04Z
+- when:    2026-05-23T06:25:43Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325691328
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325720526
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-317-megalodon-github-supply-chain | Megalodon poisoned 5,561 GitHub repos in six hours to harvest CI/CD cl
+   - the-315-anthropic-glasswing-10k-bugs | Project Glasswing: Anthropic Reports 10,000-Plus Critical Bugs Found i
    - the-316-microsoft-claude-code-cost-reckoning | Microsoft cuts most internal Claude Code licenses; Uber burned through
    - the-321-cmg-active-listening-ftc | Cox Media Group Pays $880,000 to Settle FTC Charges Over Fake AI Eaves
    - the-322-based-apparel-clickfix-malware | FBI Director's Former Merch Site Delivered Malware to macOS Visitors V
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
    - the-280-openbsd-7-9-sixty-releases-one-syscall | OpenBSD 7.9: sixty releases, one new syscall, and a scheduler that rea
    - spacex-scrubs-starship-v3-maiden-flight | SpaceX scrubs Starship V3 maiden flight seconds before ignition
-   - the-275-waymo-floods-four-cities | Waymo Pauses Service in Four Cities After Robotaxis Keep Driving Into 
-   - the-283-google-ads-inside-ai-answers | Google Moves Ads Inside the AI Answer
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
