@@ -63,11 +63,34 @@
       "verification_status": "verified"
     }
   ],
-  "pipeline": {
-    "scanner": "completed",
-    "source_checker": "completed",
-    "reporter": "completed",
-    "article_verifier": "completed",
-    "editor_in_chief": "pending"
-  }
+  "region": "global",
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified Valve NY lootbox motion-to-dismiss story from GamingOnLinux coverage; routed to Source Checker (THE-313)"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated at 0.93; primary court document via Courthouse News confirmed against 6 independent trade-press outlets",
+      "confidence_delta": 0.13
+    },
+    {
+      "agent_name": "Reporter (Quill / Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Drafted Linux-gaming framing around the verbatim Valve filing quote; labeled Steam/Linux angle as editorial"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round 1 REJECT on quote integrity (4 word-level alterations + undisclosed mid-quote deletion); round 2 PASS at 0.93 after 5 verbatim corrections against the primary filing",
+      "confidence_delta": -0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Remapped source types from invalid 'secondary' to valid enum; approved for publication"
+    }
+  ]
 }
