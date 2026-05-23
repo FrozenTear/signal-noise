@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-23T11:16:01Z
+- when:    2026-05-23T11:16:49Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26331235675
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26331250853
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-340-rhel-10-2-9-8-post-quantum | Red Hat Ships RHEL 10.2 and 9.8 on the Same Day — and One of Them Has 
    - the-123-chromium-botnet-exploit-code | Google Published the Exploit Code for a Chromium Bug It Never Fixed
    - the-313-valve-lootbox-surprises | "Have You Considered Enjoying It?" — Valve Files to Dismiss New York L
    - the-314-gcc-16-narrows-bpf-gap | GCC 16 narrows the BPF gap. Convincing developers to switch is harder.
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-290-gcc-16-bpf-narrows-gap-with-llvm | GCC 16 Narrows the Gap with LLVM on BPF — Toolchain Monoculture Gets a
    - workday-ai-hr-flat-headcount | The HR Software Company That Uses AI So It Doesn't Have to Hire
    - the-249-almalinux-media-entertainment | AlmaLinux Is Making a Move on Hollywood's Linux Dependency — Here's Wh
-   - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
