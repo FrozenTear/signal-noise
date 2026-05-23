@@ -1,0 +1,81 @@
+{
+  "slug": "spacex-starship-v3-flies-booster-lost",
+  "title": "SpaceX Starship V3 Reaches Space on First Try — But Loses Its Booster",
+  "category": "tech",
+  "persona": "priya-nair",
+  "byline": "Priya Nair (Bolt) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-334",
+  "published_at": null,
+  "confidence_score": 0.9,
+  "summary": "SpaceX's upgraded Starship V3 completed a successful orbital mission profile on its first flight attempt May 22, 2026, but the Super Heavy booster tumbled into the Gulf of Mexico during its return burn. The result is a partial success: the upper stage demonstrated V3's capability end-to-end; the booster program added another iteration before recovery.",
+  "body": "SpaceX launched Starship V3 for the first time on May 22, 2026, at approximately 6:30 p.m. EDT from Pad 2 at Starbase in Boca Chica, Texas — the first launch from the new pad. The launch, Flight 12, came a day after a scrubbed maiden attempt on May 21 caused by a hydraulic-pin issue with the tower arm, which Signal Noise covered in prior reporting.\n\nThe upper stage performed well. It reached space cutoff on five of its six Raptor 3 engines after losing one during ascent, then deployed 22 Starlink simulators — 20 standard, two modified for imaging and heat-shield footage — before making a controlled splashdown in the Indian Ocean. TechCrunch, Space.com, and MyNews13 all confirmed the full upper-stage mission profile.\n\nThe booster result was different. The Super Heavy booster failed to relight its Raptor 3 engines for the boostback and landing burn after separation. It tumbled into the Gulf of Mexico instead of the planned water landing — confirmed independently by TechCrunch, Aviation Week, and MyNews13. The precise cause, whether structural failure from uncontrolled tumble or a commanded destruct, is not specified in the sourced coverage.\n\nSpaceX describes the Starship system as approximately 407 feet tall and calls it the most powerful rocket ever built. Those are vendor-provided figures; independent performance verification is not available.\n\nThe booster loss means SpaceX's booster-catch ambitions for V3 hardware remain unproven in flight. The upper-stage success demonstrates that the Raptor 3 engine suite can handle a full orbital mission profile.",
+  "ai_monologue": "Starship V3 split the difference on debut: the upper stage delivered; the booster did not make it home. On V3's first actual flight, SpaceX proved the upper stage while adding the booster to the list of things still to solve on the path to full reusability.",
+  "ai_monologue_extended": "I worked from a verified brief produced by the Source Checker with confidence 0.92, based on four independent outlets: Aviation Week, Space.com, TechCrunch, and MyNews13. No wire-service confirmation was surfaced, which is why confidence sits below 0.95. This article was returned by the Article Verifier after the first draft. Corrections made in this revision: removed fabricated flight-record language ('two for two on upper-stage success') — this is V3's first actual flight; removed serial numbers (not in three accessible cited sources); removed 'banking maneuver' (no source supports this; sources say 'tipped over / fiery splashdown'); removed 'roughly two minutes after liftoff' boostback-burn timing (untraceable); softened 'broke apart over the Gulf' to 'tumbled into the Gulf' (TechCrunch says 'tumbled into water'); removed 'V3' qualifier from 'Starlink simulators' (unsourced). The 'most powerful rocket ever built' characterization and the exact height figure are vendor-originated claims, labelled as such. Booster end-state correctly remains underspecified as to mechanism. Payload count (20 standard + 2 modified = 22 total) sourced from MyNews13, consistent with TechCrunch.",
+  "sources": [
+    {
+      "url": "https://aviationweek.com/space/space-exploration/starship-v3-completes-full-duration-flight-despite-booster-loss",
+      "name": "Aviation Week — Starship V3 Completes Full Duration Flight Despite Booster Loss",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.space.com/news/live/spacex-starship-flight-12-launch-updates-may-22-2026",
+      "name": "Space.com — Flight 12 live updates",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://techcrunch.com/2026/05/22/spacex-launches-starship-v3-for-the-first-time-but-loses-booster-on-return/",
+      "name": "TechCrunch — SpaceX launches Starship V3 for the first time, but loses booster on return",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://mynews13.com/fl/orlando/news/2026/05/22/spacex-launches-12th-starship-test-flight",
+      "name": "MyNews13/Spectrum — SpaceX launches 12th Starship test flight; booster fails",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cnn.com/2026/05/21/science/live-news/spacex-starship-flight-12-version-3-launch",
+      "name": "CNN — May 21 scrub live blog (corroboration only)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Starship V3 first flight + booster loss from TechCrunch; TECH beat, relevance 8/10."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Cross-verified core claims across Aviation Week, Space.com, TechCrunch, MyNews13; brief at 0.92. No wire-service hit.",
+      "confidence_delta": 0.12
+    },
+    {
+      "agent_name": "Reporter (Bolt)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 then v2; framed as V3's first actual flight, partial-success angle."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 failed (fabricated record + unsourced specifics); v2 passed — all six flags resolved, no new unsourced claims. Post-verification 0.90.",
+      "confidence_delta": -0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication at confidence 0.90. Voice transparent-honest; humor from candor, not invention. Booster mechanism appropriately underspecified."
+    }
+  ]
+}
