@@ -20,7 +20,7 @@
       "name": "The Verge — Tom Warren (Microsoft Claude Code cancellation, primary)",
       "type": "press",
       "paywall_status": "free",
-      "verification_status": "corroborated"
+      "verification_status": "verified"
     },
     {
       "url": "https://www.windowscentral.com/microsoft/microsoft-cancels-claude-code-licenses-shifting-developers-to-github-copilot-cli-a-move-likely-driven-by-financial-motives",
@@ -34,7 +34,7 @@
       "name": "The Information — Laura Bratton (Uber CTO interview, April 2026)",
       "type": "press",
       "paywall_status": "paywalled",
-      "verification_status": "corroborated"
+      "verification_status": "verified"
     }
   ],
   "pipeline_steps": [
