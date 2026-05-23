@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-23T06:29:56Z
+- when:    2026-05-23T06:31:07Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325802423
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325826346
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-313-valve-lootbox-surprises | "Have You Considered Enjoying It?" — Valve Files to Dismiss New York L
    - the-314-gcc-16-narrows-bpf-gap | GCC 16 narrows the BPF gap. Convincing developers to switch is harder.
    - the-317-megalodon-github-supply-chain | Megalodon poisoned 5,561 GitHub repos in six hours to harvest CI/CD cl
    - the-315-anthropic-glasswing-10k-bugs | Project Glasswing: Anthropic Reports 10,000-Plus Critical Bugs Found i
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-249-almalinux-media-entertainment | AlmaLinux Is Making a Move on Hollywood's Linux Dependency — Here's Wh
    - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
    - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
-   - the-280-openbsd-7-9-sixty-releases-one-syscall | OpenBSD 7.9: sixty releases, one new syscall, and a scheduler that rea
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
