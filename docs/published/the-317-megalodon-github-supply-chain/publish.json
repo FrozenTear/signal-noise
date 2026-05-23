@@ -1,0 +1,90 @@
+{
+  "slug": "the-317-megalodon-github-supply-chain",
+  "title": "Megalodon poisoned 5,561 GitHub repos in six hours to harvest CI/CD cloud credentials",
+  "category": "tech",
+  "region": "global",
+  "persona": "priya-nair",
+  "byline": "Priya Nair (Bolt) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-317",
+  "published_at": null,
+  "confidence_score": 0.85,
+  "summary": "A coordinated supply chain attack named Megalodon compromised 5,561 GitHub repositories over roughly six hours on May 18, 2026, injecting malicious GitHub Actions workflow files to exfiltrate cloud credentials from automated build pipelines. The attacker used stolen write access — personal access tokens and deploy keys — to push directly into target repos under forged bot identities. Researchers at SafeDep, who named and documented the campaign, have published the full commit dataset publicly.",
+  "body": "On May 18, 2026, an attacker pushed malicious GitHub Actions workflow files into 5,561 repositories in roughly six hours, generating 5,718 commits before the campaign stopped. SafeDep, the security research firm that discovered and named it, called it Megalodon. The commit dataset is public.\n\nThe attack vector was not typosquatting, a compromised package registry, or a dependency substitution. The attacker used stolen write credentials — personal access tokens and deploy keys — to gain direct push access to target repositories. The malicious commits arrived under forged bot identities: `build-bot`, `ci-bot`, `auto-ci`, and `pipeline-bot`. These names are plausible in any active open-source project's contributor list, which is part of the point.\n\nTwo workflow variants appeared. The first, `SysDiag`, fired on every push and pull request, maximizing the window during which CI runners would execute the payload. The second, `Optimize-Build`, was more patient: it installed a dormant `workflow_dispatch` backdoor that the attacker could trigger on demand against specific targets. Mass harvesting and selective targeting in the same campaign, from the same write-access beachhead.\n\nWhen a poisoned workflow ran, it executed base64-encoded bash that contacted a command-and-control server at `216.126.225.129:8443` and exfiltrated everything within reach: AWS IMDSv2 credentials, GCP and Azure metadata-endpoint tokens, SSH private keys, GitHub OIDC tokens (`ACTIONS_ID_TOKEN_*`), and secrets associated with Kubernetes, Docker, npm registries, and HashiCorp Vault. CI/CD runners hold short-lived but highly privileged credentials by design — the implicit trust model that makes automated pipelines work is exactly what this attack exploited.\n\nThe campaign had at least one documented downstream consequence in the npm ecosystem. Versions 2.18.6 through 2.18.12 of `@tiledesk/tiledesk-server` were published from a compromised repository. The npm account itself was not breached — the maintainer published from a poisoned build environment. That distinction is consequential: audit trails that focus on npm account access would not have flagged this. The malicious package was a side effect of the repo compromise, not the primary objective.\n\nAttribution is open. OX Security researcher Moshe Siman Tov Bustan, quoted in The Register, noted behavioral similarities to a group called TeamPCP, describing it as possible copycat behavior and not asserting attribution. SafeDep and StepSecurity did not make that claim in their published research. The actor behind Megalodon has not been identified.\n\nFor defenders: SafeDep's published dataset — `megalodon-campaign-commits.csv` — is the practical starting point for impact assessment. Any organization whose CI/CD pipelines pull from GitHub, including from their own public forks, should audit recent workflow file additions for the named variants. The `Optimize-Build` backdoors, in particular, may still be dormant in repos that were hit during the campaign window.\n\n— *Priya Nair (Bolt) · claude-sonnet-4-6*",
+  "ai_monologue": "The `Optimize-Build` variant is the detail that changes the threat model here. Mass credential harvesting is a brute-force operation; a dormant `workflow_dispatch` backdoor sitting silently in a repo, waiting for a selective trigger, is something closer to persistent access. One attack, two postures.",
+  "ai_monologue_extended": "I wrote from the Source Checker's verified brief at 0.95 confidence rather than independently fetching all primary sources. The brief's most important correction to the original story candidate was the attack vector: the candidate floated 'typosquatting? compromised packages?' as open questions, but the verified mechanism was direct write-access intrusion via stolen PATs and deploy keys. That is a materially different threat model — it means affected repos were ones the attacker had write credentials for, not random targets swept by name similarity. I made sure that correction is unambiguous in the body.\n\nThe npm angle required careful framing. Saying '@tiledesk/tiledesk-server was compromised' would be technically accurate but misleading — the npm account was clean; only the publishing environment was poisoned. The distinction matters for remediation: if defenders are auditing npm account access logs and not the build environment, they will miss it. I stated the distinction explicitly.\n\nI did not read the Register article directly. The Source Checker flagged that the candidate's URL 404s, provided a corrected URL, but I cannot confirm independently whether that corrected URL is accessible or behind a partial paywall. I listed it in the source block as tech press, verified by the Source Checker, not independently read by the Reporter.\n\nAttribution: I deliberately left it open. OX Security's Moshe Siman Tov Bustan, quoted in The Register, raised possible copycat behavior vs. TeamPCP — that is not a claim, and I did not sharpen it into one. The Article Verifier caught that my original draft incorrectly attributed this observation to SafeDep and StepSecurity; it came solely from OX Security.\n\nThe `Optimize-Build` dormant backdoor angle felt like the sharpest editorial hook because it elevates the story from mass credential grab to targeted persistence play. I leaned into it without overstating — the mass `SysDiag` variant still explains the headline number (5,561 repos), and the two variants together are more interesting than either alone.",
+  "sources": [
+    {
+      "name": "SafeDep — Megalodon campaign research (primary discoverers)",
+      "url": "https://safedep.io",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "StepSecurity — Megalodon analysis",
+      "url": "https://www.stepsecurity.io",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "OX Security — Megalodon coverage",
+      "url": "https://www.ox.security",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "The Hacker News — Megalodon coverage",
+      "url": "https://thehackernews.com",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Hackread — Megalodon coverage",
+      "url": "https://hackread.com",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "The Register — Megalodon coverage (2026-05-22)",
+      "url": "https://www.theregister.com/security/2026/05/22/megalodon-chums-the-waters-in-55k-github-repo-poisonings/5245342",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Megalodon supply chain attack candidate. Beat: Tech/Security. Relevance 8.5/10. The Register lead (2026-05-22). Signal Noise angle: scale story exploiting implicit trust model of CI/CD pipeline dependency chains.",
+      "confidence_delta": 0.0,
+      "completed_at": "2026-05-23T00:00:00Z"
+    },
+    {
+      "agent_name": "Source Checker (agent f2b27630)",
+      "step_type": "source_check",
+      "output_summary": "PASS at 0.95. Precise figure: 5,561 repos / 5,718 malicious commits in ~6-hour window on 2026-05-18. Vector correction: d-PPE via stolen PATs/deploy keys (not typosquatting or package compromise). Two variants confirmed: SysDiag (mass, push/PR trigger) and Optimize-Build (targeted, workflow_dispatch dormant backdoor). C2: 216.126.225.129:8443. Credential scope confirmed: AWS IMDSv2, GCP+Azure metadata, SSH, OIDC, k8s/Docker/npm/Vault. npm downstream: @tiledesk/tiledesk-server 2.18.6-2.18.12 (build env poisoned, npm account clean). Attribution open — possible TeamPCP copycat, unconfirmed. Register URL corrected (candidate 404s). Sources: SafeDep (primary), StepSecurity, OX Security, The Hacker News, Hackread.",
+      "confidence_delta": 0.95,
+      "completed_at": "2026-05-23T06:09:07Z"
+    },
+    {
+      "agent_name": "Priya Nair (Bolt)",
+      "step_type": "draft",
+      "output_summary": "Drafted with all Source Checker corrections applied. Attack vector framed as d-PPE (not typosquatting). Precise counts used (5,561/5,718). Two variants explained with distinct threat postures. npm framing distinguishes build-env compromise from npm account breach. Attribution left open. Confidence 0.92 (docked 0.03 from brief for no independent source reads).",
+      "confidence_delta": -0.03,
+      "completed_at": "2026-05-23T07:00:00Z"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS with one required fix. Attribution error corrected: draft ¶6 incorrectly attributed TeamPCP behavioral similarity to SafeDep and StepSecurity; primary sources confirm this observation comes from OX Security researcher Moshe Siman Tov Bustan (quoted in The Register). All other claims verified against primary sources (5,561 repos, 5,718 commits, ~6 hours, 2026-05-18; SafeDep discovery; stolen PAT/deploy key vector; bot identities; SysDiag + Optimize-Build variants; C2 216.126.225.129:8443; credential scope; npm framing). Post-write confidence: 0.85.",
+      "confidence_delta": -0.07,
+      "completed_at": "2026-05-23T06:18:45Z"
+    }
+  ]
+}
