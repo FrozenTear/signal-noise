@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-23T06:21:04Z
+- when:    2026-05-23T06:24:04Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325633742
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325691328
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-316-microsoft-claude-code-cost-reckoning | Microsoft cuts most internal Claude Code licenses; Uber burned through
+   - the-321-cmg-active-listening-ftc | Cox Media Group Pays $880,000 to Settle FTC Charges Over Fake AI Eaves
+   - the-322-based-apparel-clickfix-malware | FBI Director's Former Merch Site Delivered Malware to macOS Visitors V
    - the-312-yt-dlp-bun-deprecated | yt-dlp Limits and Deprecates Bun: Lockfile Security Risk Cited, "Vibe-
    - the-293-fbi-kali365-mfa-bypass | FBI warns of Kali365: a phishing service that steals Microsoft tokens 
    - the-295-trump-mobile-data-exposure | Trump Mobile Exposed Tens of Thousands of Customers' Personal Data Thr
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - spacex-scrubs-starship-v3-maiden-flight | SpaceX scrubs Starship V3 maiden flight seconds before ignition
    - the-275-waymo-floods-four-cities | Waymo Pauses Service in Four Cities After Robotaxis Keep Driving Into 
    - the-283-google-ads-inside-ai-answers | Google Moves Ads Inside the AI Answer
-   - the-278-polyglot-pdf-gtk-command-injection | Polyglot PDFs exploit command injection in GTK-based readers — click t
-   - the-277-spotify-umg-ai-covers | Spotify and Universal Music Strike AI Licensing Deal — for Artists Who
-   - the-279-ubuntu-core-26-ota-arm64-livepatch | Ubuntu Core 26 Shrinks OTA Updates by Up to 90% and Brings Rebootless 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
