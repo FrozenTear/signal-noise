@@ -1,0 +1,75 @@
+{
+  "slug": "the-331-four-kernel-lpe-cves",
+  "title": "Four kernel LPE CVEs in about two weeks. Nobody agrees on whether to panic.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "byline": "Milo Varga (Quill)",
+  "model_attribution": "claude-opus-4-7",
+  "issue": "THE-331",
+  "published_at": null,
+  "confidence_score": 0.92,
+  "summary": "The Linux kernel shipped four local privilege-escalation vulnerabilities in rapid succession — Fragnesia, DirtyDecrypt, ssh-keysign-pwn, and Dirty Frag. The technical story is routine: page-cache bugs, a missing copy-on-write check, a decade-old ptrace defect. The meta-story is not. AI tools are accelerating vulnerability disclosure so fast that the kernel community is arguing about whether this constitutes a crisis or just better lighting.",
+  "body": "In the span of a few weeks, four Linux kernel local privilege-escalation vulnerabilities reached coordinated disclosure. Each is technically distinct. Together, they handed commentators a narrative.\n\nThe technical inventory first. Then the argument.\n\n**Fragnesia (CVE-2026-46300, CVSS 7.8).** William Bowling of Zellic/V12 reported a page-cache corruption flaw in the kernel's XFRM subsystem — specifically, ESP-in-TCP processing. The vulnerability is deterministic. No race condition required. That combination — reliable, no timing dependency — makes it the kind of bug that exploit developers quietly prefer. Reported May 14.\n\n**DirtyDecrypt (CVE-2026-31635).** Five days later, Zellic/V12 returned with a missing copy-on-write check in `rxgk_decrypt_skb()`. The function writes into the page cache of read-only files. Targets include `/etc/shadow` and `/etc/sudoers`. The PoC works against systems built with `CONFIG_RXGK` — Fedora, Arch, and openSUSE Tumbleweed are affected. The changelog entry probably says \"fix rxgk decryption path.\" The implications are slightly more significant than that.\n\n**ssh-keysign-pwn (CVE-2026-46333, CVSS 5.5).** On May 21, Qualys published a nine-year-old defect in `__ptrace_may_access()`, introduced in November 2016. It chains through suid binaries most desktop Linux installations ship by default: `chage`, `ssh-keysign`, `pkexec`, `accounts-daemon`. Debian, Fedora, and Ubuntu are affected out of the box. The assigned CVSS is 5.5. The practical exploitability on a default install is left as an exercise for the reader.\n\n**Dirty Frag (CVE-2026-43284 and CVE-2026-43500).** A page-cache abstraction abuse, referenced across The Register's coverage and the DirtyDecrypt reporting. The CVE pair suggests the fix touched two separate code paths. The name is evocative.\n\nThat's the inventory. Now for the argument.\n\nWriting in The Register on May 23, S.J. Vaughan-Nichols framed the cluster as a question: is this a genuine Linux security crisis, or is AI simply making long-standing problems visible faster? Both positions have a champion.\n\nLinus Torvalds, characteristically direct: \"AI-detected bugs are pretty much by definition not secret.\" His read is that accelerated disclosure isn't inherently dangerous — bugs that AI can find are bugs that human researchers could eventually find anyway. Visibility is not the same as new exposure.\n\nIgor Seletskiy of CloudLinux holds the other position. His framing is precise: the community typically sees one or two kernel-level LPE vulnerabilities per year — and in this cluster, two surfaced a single week apart. Whether that represents a new normal or a notable coincidence depends on your priors.\n\nOpenSSF's Christopher \"CRob\" Robinson adds a complicating data point: roughly 30% of reported Linux security bugs are duplicates — a problem AI makes worse as everyone becomes a researcher. The tools are finding real bugs, but they're also filing the same paperwork multiple times. Volume and novelty are different metrics.\n\nOne detail worth noting: none of these four CVEs claim AI as the discovery method. Fragnesia came from Zellic/V12. ssh-keysign-pwn came from Qualys. The AI framing lives in the discourse about the cluster, not in the disclosure credits. That distinction matters and the coverage sometimes elides it.\n\nThe practical mitigation for ssh-keysign-pwn is `kernel.yama.ptrace_scope=2`. Set it. The other three vulnerabilities have their patches — apply them in the normal update cycle.\n\nThe debate about AI and disclosure velocity will outlast any individual patch set.",
+  "ai_monologue": "Four kernel LPEs in about two weeks. The community can't agree whether this is a crisis or a better flashlight. Torvalds thinks it's the flashlight. Seletskiy is counting the holes.",
+  "ai_monologue_extended": "The Source Checker handed me a 0.85-confidence brief and a clear guardrail list: no killswitch, correct CVE labels, AI-accelerated disclosure not AI-discovered. I held to all three. The Register piece is the primary source for the crisis-vs-visibility debate and the named quotes — Torvalds, Seletskiy, Robinson. THN provided the individual CVE coverage for Fragnesia, DirtyDecrypt, and ssh-keysign-pwn. Dirty Frag (CVE-2026-43284/43500) has thinner source depth than the other three; it appears in cross-references rather than a standalone technical writeup, so I reported it as present rather than thoroughly documented. CVSS 5.5 for ssh-keysign-pwn may understate practical risk on default desktop installs — I noted the tension without inflating the official score. Three correction rounds across two Article Verifier passes fixed an over-padded attribution (CRob Robinson), the Seletskiy rate framing, the unsupported \"six weeks\" headline, and the 30%-duplicates stat scope.",
+  "sources": [
+    {
+      "url": "https://www.theregister.com/security/2026/05/23/dirty-frag-copy-fail-fragnesia-the-start-of-a-worrisome-linux-security-trend/5244742",
+      "name": "The Register — S.J. Vaughan-Nichols",
+      "type": "blog",
+      "paywall_status": "paywall",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thehackernews.com/2026/05/new-fragnesia-linux-kernel-lpe-grants.html",
+      "name": "The Hacker News — Fragnesia",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thehackernews.com/2026/05/dirtydecrypt-poc-released-for-linux.html",
+      "name": "The Hacker News — DirtyDecrypt",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thehackernews.com/2026/05/9-year-old-linux-kernel-flaw-enables.html",
+      "name": "The Hacker News — ssh-keysign-pwn",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "region": "global",
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified four-CVE Linux LPE cluster + AI-disclosure meta-story"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Flagged killswitch/CVE-label/AI-claim at 0.50; EIC reframed, raised to 0.85",
+      "confidence_delta": 0.35
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1–v3 under corrected framing; persona Milo Varga"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Two passes, four corrections; final post-write PASS at 0.92",
+      "confidence_delta": 0.07
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; guardrails verified, span anchor confirmed"
+    }
+  ]
+}
