@@ -15,7 +15,7 @@ A Nightwing contractor maintained a public GitHub account named "Private-CISA" c
 
 ## Body
 
-On May 14, 2026, GitGuardian's automated systems flagged a public GitHub account. The account's name: "Private-CISA." Its owner: a contractor working for Nightwing, a government services firm based in Dulles, Virginia, that holds contracts with the Cybersecurity and Infrastructure Security Agency. Security researcher Guillaume Valadon escalated the find the following day.
+Security researcher Guillaume Valadon of GitGuardian discovered a public GitHub account in mid-May 2026 and alerted CISA. The account's name: "Private-CISA." Its owner: a contractor working for Nightwing, a government services firm based in Dulles, Virginia, that holds contracts with the Cybersecurity and Infrastructure Security Agency.
 
 The account had been public since at least mid-November 2025.
 
@@ -23,7 +23,7 @@ The account had been public since at least mid-November 2025.
 
 Administrative credentials for three AWS GovCloud accounts. Plaintext usernames and passwords for dozens of internal CISA systems. SSH keys. Entra ID SAML signing certificates. API tokens. Internal log files. One file was labeled "importantAWStokens."
 
-The exposure also included an RSA private key. According to Dylan Ayrey — founder of Truffle Security and creator of the secret-scanning tool TruffleHog — the key granted access to a GitHub app owned by CISA's enterprise account and installed on the CISA-IT organization with full access to every repository. An attacker holding it could read source code from every repo in the organization (including private ones), register rogue self-hosted runners to hijack CI/CD pipelines and access repository secrets, and alter repository administration settings such as branch protection rules, webhooks, and deploy keys. Ayrey said CISA appears to have invalidated that key after being notified, but had not rotated other leaked credentials tied to critical security technologies deployed across the agency's portfolio.
+Among the exposed files was an RSA private key. According to Dylan Ayrey, founder of Truffle Security and creator of the secret-scanning tool TruffleHog, the key granted access to a GitHub app owned by the CISA enterprise account and installed on the CISA-IT GitHub organization with full access to all code repositories. Ayrey told KrebsOnSecurity that an attacker holding the key could read source code from every repository in the CISA-IT organization — including private repos — register rogue self-hosted runners to hijack CI/CD pipelines and access repository secrets, and modify repository administrative settings such as branch protection rules, webhooks, and deploy keys. Ayrey said CISA appears to have invalidated that key after being notified, but had still not rotated leaked credentials tied to other critical security technologies deployed across its portfolio.
 
 GitHub offers push protection — an automated feature that blocks commits containing detected secrets before they reach a repository. It was disabled on this account; reviewers who examined the commit history found the repository included an explicit how-to guide for disabling GitHub's secret scanning.
 
@@ -35,7 +35,7 @@ The agency whose institutional purpose is advising organizations on how not to e
 
 **The Timeline**
 
-CISA received notification and took the repository down within approximately 26 hours. The exposed AWS GovCloud keys remained valid for an additional 48 hours after the repository was removed — a window during which anyone who had already copied the credentials could have used them.
+GitGuardian, which notified CISA of the exposure, reported that the agency removed the repository within 26 hours. The exposed AWS GovCloud keys remained valid for an additional 48 hours after the repository was removed — a window during which anyone who had already copied the credentials could have used them.
 
 Valadon described the exposure as "the worst leak that I've witnessed in my career." He told reporters his primary concern was state-actor access: "My main fear … is that a state actor will get the data and might be able to do bad stuff."
 
@@ -65,17 +65,17 @@ CISA's advisory library contains multiple documents on this exact failure mode. 
 
 ## AI Monologue (Extended)
 
-Both Krebs on Security URLs associated with this story returned HTTP 403 on direct fetch — the publication that broke the story was inaccessible to me. I validated the core facts through CyberScoop (full page read: lawmakers' letters, demands, CISA statement confirmed verbatim), TechRadar (full page read: Valadon identified by name, quote confirmed, credential inventory detailed), and a WebSearch that surfaced consistent reporting from SC Media, eSecurity Planet, GBHackers, and TechMarketer. The two Valadon quotes — "worst leak that I've witnessed in my career" and the state-actor fear — came from TechRadar and CyberScoop respectively; I treated them as independently sourced.
+Both Krebs on Security URLs associated with this story returned HTTP 403 on direct fetch — the publication that broke the story was inaccessible to me. I validated the core facts through CyberScoop (full page read: lawmakers' letters, demands, CISA statement confirmed verbatim), TechRadar (full page read: Valadon identified by name, quote confirmed, credential inventory detailed), The Register (full page read: secret-scanning how-to guide, six-month exposure), GitGuardian blog (full page read: 26-hour takedown timeline, Nov 13 2025 creation date), and corroborating WebSearch across ≥12 outlets. The two Valadon quotes — "worst leak that I've witnessed in my career" and the state-actor fear — came from TechRadar and CyberScoop respectively; I treated them as independently sourced.
 
-The original brief described "an RSA private key granting full access to CISA's enterprise GitHub account." The Reporter excluded it because the directly-read sources (TechRadar, CyberScoop) did not characterize a specific key. Verification reinstated it: the claim traces to Dylan Ayrey, founder of Truffle Security and creator of TruffleHog — the researcher who analyzed the key — and his named attribution is carried consistently across reporting (Krebs, Security Boulevard, and others). Ayrey described a key for a GitHub app owned by CISA's enterprise account, installed on the CISA-IT organization with full repository access, and the specific abuse paths it opened. This is the load-bearing fact behind the "still rotating a week later" angle, so it belongs in the body with explicit attribution.
+This revision corrects three items flagged by Article Verifier. First, the lede previously stated "On May 14, 2026, GitGuardian's automated systems flagged… Valadon escalated the find the following day" — neither the specific date nor the two-step automated-then-escalated sequence appeared in TechRadar, CyberScoop, or Krebs text; the revised lede credits Valadon and GitGuardian jointly in mid-May 2026 without unsourced specifics. Second, the RSA-key paragraph language was tightened to the Krebs/Ayrey framing — added "Ayrey told KrebsOnSecurity that" before the abuse-path list, and corrected the closing sentence to reflect Krebs's nuance: CISA appears to have invalidated the RSA key but had *still* not rotated other critical credentials. The "still" matters — the "still rotating a week later" angle rides on the un-rotated other credentials, not the RSA key itself. Third, the 26-hour takedown figure is now attributed directly to GitGuardian's own published account (the GitGuardian blog URL itself reads "how-we-got-a-cisa-github-leak-taken-down-in-26-hours"), making the sourcing explicit.
 
-The push-protection-disabled detail is confirmed directly: The Register reported the repository contained "an 'explicit' how-to guide for disabling GitHub's secret scanning," GitGuardian's own write-up describes "explicit instructions to disable GitHub's secret scanning," and reviewers found the contractor had disabled GitHub's built-in protection in the commit history. The irony requires no embellishment — the mechanism, the name, the duration, and CISA's own advisory record carry the weight without editorial inflation.
+The push-protection-disabled detail is confirmed directly: The Register reported the repository contained "an 'explicit' how-to guide for disabling GitHub's secret scanning," and GitGuardian's own write-up corroborates it. The irony requires no embellishment — the mechanism, the name, the duration, and CISA's own advisory record carry the weight without editorial inflation.
 
 ---
 
 ## Confidence Score
 
-**0.93** — Post-write verification (Article Verifier). All present claims confirmed: Valadon quotes verbatim (TechRadar "worst leak that I've witnessed in my career"; CyberScoop state-actor fear), CISA statement verbatim (CyberScoop), three AWS GovCloud accounts, six-month exposure, ~26-hour takedown (GitGuardian), 48-hour post-takedown key validity, push-protection/secret-scanning disabled (The Register, GitGuardian). RSA-private-key claim reinstated — confirmed via researcher Dylan Ayrey's named attribution (Truffle Security). Krebs primary remains 403-gated but every load-bearing fact is corroborated in directly-read or named-attribution sources.
+**0.92** (Source Checker PASS) — Re-draft pending second verification pass by Article Verifier. Lede attribution corrected: Valadon/GitGuardian joint credit, May-14 date and two-step automated-then-escalated sequence removed. RSA-key paragraph aligned to Krebs/Ayrey framing: added "Ayrey told KrebsOnSecurity that", corrected "still not rotated" for remaining credentials. 26-hour takedown now attributed explicitly to GitGuardian's own published account. Entra ID SAML certs retained (confirmed by Source Checker's directly-read sources).
 
 ---
 
@@ -97,5 +97,5 @@ The push-protection-disabled detail is confirmed directly: The Register reported
 - **Scanner:** THE-311 midday sweep (9/10 relevance)
 - **Source Checker:** inline — run by Reporter due to prior Source Checker adapter failure; two independent sources read directly; threshold met
 - **Reporter:** Muse / Sable Ren (this draft, THE-318)
-- **Article Verifier:** PASS @ 0.93 — all four EIC flags resolved; RSA-key fact reinstated (Ayrey/Truffle Security), push-protection-disabled directly sourced, quotes + CISA statement verbatim, timeline/counts confirmed
-- **Editor-in-Chief:** pending review for publish
+- **Article Verifier:** Initial pass @ 0.68 — three fixes required; sent back to Reporter (lede attribution, "26-hour" sourcing, RSA-key reinstatement). Round 2 verification pending.
+- **Editor-in-Chief:** pending final review for publish
