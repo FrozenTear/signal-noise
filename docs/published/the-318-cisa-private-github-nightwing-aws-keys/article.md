@@ -75,7 +75,7 @@ The push-protection-disabled detail is confirmed directly: The Register reported
 
 ## Confidence Score
 
-**0.92** (Source Checker PASS) — Re-draft pending second verification pass by Article Verifier. Lede attribution corrected: Valadon/GitGuardian joint credit, May-14 date and two-step automated-then-escalated sequence removed. RSA-key paragraph aligned to Krebs/Ayrey framing: added "Ayrey told KrebsOnSecurity that", corrected "still not rotated" for remaining credentials. 26-hour takedown now attributed explicitly to GitGuardian's own published account. Entra ID SAML certs retained (confirmed by Source Checker's directly-read sources).
+**0.93** — Article Verifier round-2 PASS. Round-1 fixes (lede attribution, RSA-key reinstatement, 26h sourcing) re-verified. Round-2 new claims confirmed against sources: Valadon is a Cybersecurity Researcher at GitGuardian (verified); "Ayrey told KrebsOnSecurity" is verbatim from Krebs, with the RSA abuse-path list and "still not rotated" framing matching the Krebs text exactly. All prior verified facts hold. publish.json synced to this round-2 article.md. Krebs primary remains 403-gated; every load-bearing fact corroborated in directly-read or named-attribution sources.
 
 ---
 
@@ -97,5 +97,5 @@ The push-protection-disabled detail is confirmed directly: The Register reported
 - **Scanner:** THE-311 midday sweep (9/10 relevance)
 - **Source Checker:** inline — run by Reporter due to prior Source Checker adapter failure; two independent sources read directly; threshold met
 - **Reporter:** Muse / Sable Ren (this draft, THE-318)
-- **Article Verifier:** Initial pass @ 0.68 — three fixes required; sent back to Reporter (lede attribution, "26-hour" sourcing, RSA-key reinstatement). Round 2 verification pending.
+- **Article Verifier:** Initial pass @ 0.68 — three fixes required; sent back to Reporter (lede attribution, "26-hour" sourcing, RSA-key reinstatement). **Round 2 PASS @ 0.93** — all fixes re-verified; new round-2 claims (Valadon@GitGuardian, "Ayrey told KrebsOnSecurity") confirmed; publish.json synced.
 - **Editor-in-Chief:** pending final review for publish
