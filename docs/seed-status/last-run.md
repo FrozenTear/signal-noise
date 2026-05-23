@@ -1,24 +1,34 @@
 # last seed/probe run
 
-- when:    2026-05-22T20:38:32Z
-- mode:    autopublish (THE-304 sweep, THE-233 Path A)
-- trigger: THE-304 heartbeat
-- scope:   ALL (no ONLY)
-- published: 0
-- skipped:   50
-- failed:    0
+- when:    2026-05-23T06:17:08Z
+- mode:    probe
+- trigger: push
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26325558382
+- token configured: false
 
 ```
-== autopublish-host: src=/opt/ainory-times/src base=http://127.0.0.1:8888 force=0 token=loaded(masked) ==
-deployed sha: a9c5091
-src synced to origin/master: 2e44db8
-(50 slugs already live — full skip)
-== summary: published=0 skipped=50 failed=0 ==
-RESULT published= skipped_count=50
-== trigger exit: 0 ==
+== probe https://news.scuffedcrew.no ==
+GET /            -> 200
+GET /api/articles -> 20 article(s)
+   - the-293-fbi-kali365-mfa-bypass | FBI warns of Kali365: a phishing service that steals Microsoft tokens 
+   - the-295-trump-mobile-data-exposure | Trump Mobile Exposed Tens of Thousands of Customers' Personal Data Thr
+   - the-294-ai-memory-tax-200-phone | The Invisible Tax: How AI's Memory Hunger Is Pricing Out the $200 Phon
+   - microsoft-israel-gm-departed-azure-probe | Microsoft's Israel GM Departed Amid Internal Probe Into How IDF Used A
+   - the-291-onlyoffice-9-4-licence | ONLYOFFICE 9.4: Your Fork Can Stay, Just Keep the Byline
+   - att-california-copper-landline-suit | AT&T sues California to exit copper landline obligation — 199,000 line
+   - the-289-valve-lootbox-not-gambling | Valve's Lootbox Defense: Not "Surprises," Actually "Not Gambling"
+   - the-290-gcc-16-bpf-narrows-gap-with-llvm | GCC 16 Narrows the Gap with LLVM on BPF — Toolchain Monoculture Gets a
+   - workday-ai-hr-flat-headcount | The HR Software Company That Uses AI So It Doesn't Have to Hire
+   - the-249-almalinux-media-entertainment | AlmaLinux Is Making a Move on Hollywood's Linux Dependency — Here's Wh
+   - the-281-seattle-shield-spd-corporate-surveillance | "Seattle Shield" Ran for Sixteen Years. Its Bulletins Document Protest
+   - the-282-britcard-weakest-link-political | The BritCard's Weakest Link Is Political
+   - the-280-openbsd-7-9-sixty-releases-one-syscall | OpenBSD 7.9: sixty releases, one new syscall, and a scheduler that rea
+   - spacex-scrubs-starship-v3-maiden-flight | SpaceX scrubs Starship V3 maiden flight seconds before ignition
+   - the-275-waymo-floods-four-cities | Waymo Pauses Service in Four Cities After Robotaxis Keep Driving Into 
+   - the-283-google-ads-inside-ai-answers | Google Moves Ads Inside the AI Answer
+   - the-278-polyglot-pdf-gtk-command-injection | Polyglot PDFs exploit command injection in GTK-based readers — click t
+   - the-277-spotify-umg-ai-covers | Spotify and Universal Music Strike AI Licensing Deal — for Artists Who
+   - the-279-ubuntu-core-26-ota-arm64-livepatch | Ubuntu Core 26 Shrinks OTA Updates by Up to 90% and Brings Rebootless 
+   - the-251-copy-fail-kernel-lpe | Nine Years in Plain Sight: The "Copy Fail" Kernel Bug That Handed Root
+write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
-
-Verification:
-- Host fast-forward /opt/ainory-times/src -> origin/master 2e44db8: OK
-- Host-side sweep exit 0; idempotent no-op (nothing new on master to publish)
-- Token sourced and used entirely host-side (/etc/ainory-times.env); never transmitted agent-side
