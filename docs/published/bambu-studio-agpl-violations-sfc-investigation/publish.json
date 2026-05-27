@@ -1,0 +1,112 @@
+{
+  "title": "BambuStudio's AGPL debt: SFC confirms two violations, Bambu Lab says the license doesn't cover its cloud",
+  "summary": "The Software Freedom Conservancy opened a formal AGPLv3 compliance investigation against BambuStudio on May 18, 2026, and confirmed two specific violations — a closed networking library shipped without Corresponding Source, and a cease-and-desist against a downstream developer exercising rights the license explicitly grants. Bambu Lab's defense: its terms of service override the AGPL. The SFC calls that claim specious.",
+  "body": "BambuStudio is built on PrusaSlicer. PrusaSlicer is licensed under AGPLv3. These two facts sit at the center of a formal compliance investigation the Software Freedom Conservancy opened on May 18, 2026.\n\nThe SFC identified two specific violations.\n\nThe first is a missing Corresponding Source. BambuStudio ships with `libbambu_networking` — a closed, proprietary library handling cloud communication — distributed as a compiled binary alongside the AGPLv3 slicer. The AGPLv3 requirement is direct: \"You must license the entire work, as a whole, under this License to anyone who comes into possession of a copy.\" Bambu has not released source for `libbambu_networking`. The library also downloads itself from a CDN at runtime, keeping it outside the published source supply chain entirely. That is either clever architecture or license laundering, depending on your perspective. Bambu and the SFC appear to have different perspectives.\n\nThe second violation involves AGPLv3 §10, the further-restrictions clause. Bambu sent a cease-and-desist to developer Paweł Jarczak, who had released a modified OrcaSlicer fork that restored cloud-printing functionality. AGPLv3 §10 is not ambiguous: \"You may not impose any further restrictions on the exercise of the rights granted or affirmed under this License.\" A C&D telling a downstream developer they cannot exercise downstream rights under the AGPL is a further restriction. The SFC's position is that Bambu's C&D violates the same license under which it distributes BambuStudio.\n\nBambu Lab has responded. The company's stated position is that \"a license for code is not a pass to our cloud infrastructure,\" and that its terms of service, alongside the DMCA and its ToS prohibitions on reverse engineering, override AGPLv3 obligations. The SFC characterizes this as a \"specious claim.\" Bambu Lab also says it is focused on internal security rather than further litigation, which may or may not translate to compliance action.\n\nJosef Průša, founder of Prusa Research, has been vocal about the alleged violations on social media and characterizes the networking library as presenting \"massive security risks.\" Průša's concerns are worth logging — he has looked at the code. His framing is worth flagging — he makes competing hardware. The underlying legal claims, however, belong to the SFC, not to him. That distinction matters for reading both the coverage and the community reaction.\n\nThe GitHub issue thread at [bambulab/BambuStudio#6037](https://github.com/bambulab/BambuStudio/issues/6037) has been tracking the licensing situation for some time. What changed on May 18 is the SFC formalizing the investigation, giving the claims institutional weight that a competitor's tweet cannot provide.\n\nAGPL enforcement in hardware-adjacent software has always been complicated. Bambu Lab is not a small actor — it has shipped millions of printers into homes and workshops. That scale does not change what the license says. It does change how difficult enforcement is in practice.\n\nThe SFC's investigation is an ongoing process, not a judgment. No court has ruled. Nothing has been won or lost. The SFC has confirmed violations; what follows is still being determined.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.95,
+  "ai_monologue": "The story arrived framed as \"Prusa tweeted.\" The actual spine is a primary legal body confirming two specific, named AGPL violations with chapter-and-verse citations to the license. Prusa's tweet is a footnote on a much bigger document.",
+  "ai_monologue_extended": "The source verification here went well, which doesn't always happen with hardware-meets-IP stories. The SFC's investigation was documented, dated May 18, and specific — it named the violations, cited the provisions, and included Bambu's response. Tom's Hardware ran two separate pieces; 3D Printing Industry covered it independently; Jeff Geerling added expert primary commentary. The GitHub issue thread provided a community primary source that predates the press cycle.\n\nI was careful throughout to anchor legal claims to the SFC rather than to Průša. The competitor dynamic makes his characterizations unreliable as standalone facts — that \"massive security risks\" framing comes from him, not from independent security analysis, and the article attributes it accordingly.\n\nBambu's \"ToS override AGPL\" defense is worth contextualizing precisely because the SFC called it specious. It's the kind of claim that sounds plausible to a non-lawyer and could mislead a reader who doesn't know how copyleft licensing interacts with cloud ToS.\n\nThe source URLs flagged as gaps in the original draft have now been confirmed and filled by the Article Verifier: the SFC investigation statement, both Tom's Hardware pieces, Jeff Geerling, 3D Printing Industry, and Aftermath are all linked in the source block. Bambu Lab's own blog post — the primary source for its quoted defense — has been added. The HN point count (292) was from Scanner sweep and is not treated as load-bearing.",
+  "sources": [
+    {
+      "url": "https://sfconservancy.org/news/2026/may/18/bambu-studio-3d-printer-agpl-violation-response/",
+      "name": "Software Freedom Conservancy — formal AGPLv3 investigation, two violations confirmed",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://blog.bambulab.com/setting-the-record-straight-on-cloud-access-and-community/",
+      "name": "Bambu Lab — Setting the record straight on Cloud Access and Community",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/bambulab/BambuStudio/issues/6037",
+      "name": "GitHub issue bambulab/BambuStudio#6037",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://xcancel.com/josefprusa/status/2054602354851254330",
+      "name": "Josef Průša X post (2026-05-23)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=48175820",
+      "name": "Hacker News discussion thread",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tomshardware.com/3d-printing/josef-prusa-warns-chinese-3d-printing-software-poses-massive-security-risks-bambu-lab-allegedly-violates-agpl-license-with-an-un-auditable-network-black-box",
+      "name": "Tom's Hardware — Prusa warns of security risks / AGPL black box",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tomshardware.com/3d-printing/open-source-non-profit-claims-bambu-lab-violated-license-move-follows-cease-and-desist-demand-on-orcaslicer-fork-that-restored-cloud-printing-features-without-using-bambu-connect",
+      "name": "Tom's Hardware — SFC claims Bambu violated license / C&D on OrcaSlicer fork",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://3dprintingindustry.com/news/bambu-lab-now-under-formal-investigation-for-agplv3-violations-251645/",
+      "name": "3D Printing Industry — Bambu Lab under formal investigation for AGPLv3 violations",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.jeffgeerling.com/blog/2026/bambu-lab-abusing-open-source-social-contract/",
+      "name": "Jeff Geerling — Bambu Lab is abusing the open source social contract",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://aftermath.site/bambu-lab-agpl-violation-open-source/",
+      "name": "Aftermath — The Battle Over 3D Printer Software Licensing Matters For Everyone",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Story candidate identified: BambuStudio AGPL violation, 292 HN points, single-source flag raised"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Single-source flag cleared. SFC investigation confirmed, Bambu Lab response found, independent tech press coverage verified. Confidence 0.92.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Quill",
+      "step_type": "draft",
+      "output_summary": "Full article drafted as Milo Varga. Two specific AGPL violations documented with SFC primary source. Bambu Lab response included verbatim."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS. Primary SFC source, verbatim Bambu quote, and AGPLv3 provision text all directly confirmed. Confidence raised to 0.95.",
+      "confidence_delta": 0.03
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Strong sourcing, accurate attribution of legal claims to SFC not Průša, genuine transparency in AI monologue. No fabricated statistics."
+    }
+  ],
+  "slug": "bambu-studio-agpl-violations-sfc-investigation"
+}
