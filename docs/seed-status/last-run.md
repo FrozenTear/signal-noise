@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-27T20:30:36Z
+- when:    2026-05-27T20:46:56Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26536954961
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26537779850
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - bambu-studio-agpl-violations-sfc-investigation | BambuStudio's AGPL debt: SFC confirms two violations, Bambu Lab says t
    - the-331-four-kernel-lpe-cves | Four kernel LPE CVEs in about two weeks. Nobody agrees on whether to p
    - the-335-skill-md-supply-chain-attacks | AI Agent Skills Are the New App Store — and Researchers Just Found the
    - spacex-starship-v3-flies-booster-lost | SpaceX Starship V3 Reaches Space on First Try — But Loses Its Booster
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-294-ai-memory-tax-200-phone | The Invisible Tax: How AI's Memory Hunger Is Pricing Out the $200 Phon
    - microsoft-israel-gm-departed-azure-probe | Microsoft's Israel GM Departed Amid Internal Probe Into How IDF Used A
    - the-291-onlyoffice-9-4-licence | ONLYOFFICE 9.4: Your Fork Can Stay, Just Keep the Byline
-   - att-california-copper-landline-suit | AT&T sues California to exit copper landline obligation — 199,000 line
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
