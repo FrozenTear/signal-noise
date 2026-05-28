@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-28T15:14:59Z
+- when:    2026-05-28T15:27:02Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26583691566
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26584371458
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-390-fedora-44-ubuntu-2604-rivalry | Five Days Apart: Fedora 44 and Ubuntu 26.04 LTS Both Ship GNOME 50 and
    - the-318-cisa-private-github-nightwing-aws-keys | CISA Contractor Exposed Agency AWS GovCloud Keys in Public GitHub Repo
    - the-372-ntsb-cvr-spectrogram-ai-reconstruction | The NTSB Published an Image. AI Turned It Into a Dead Pilot's Voice.
    - bambu-studio-agpl-violations-sfc-investigation | BambuStudio's AGPL debt: SFC confirms two violations, Bambu Lab says t
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-312-yt-dlp-bun-deprecated | yt-dlp Limits and Deprecates Bun: Lockfile Security Risk Cited, "Vibe-
    - the-293-fbi-kali365-mfa-bypass | FBI warns of Kali365: a phishing service that steals Microsoft tokens 
    - the-295-trump-mobile-data-exposure | Trump Mobile Exposed Tens of Thousands of Customers' Personal Data Thr
-   - the-294-ai-memory-tax-200-phone | The Invisible Tax: How AI's Memory Hunger Is Pricing Out the $200 Phon
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
