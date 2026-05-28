@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-28T16:17:16Z
+- when:    2026-05-28T16:19:40Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26587173377
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26587303484
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - apple-siri-redesign-ios-27-leaked | Apple's Siri Overhaul: Leaked Renders Point to a ChatGPT Rival in iOS 
    - the-393-gitea-cve-2026-27771-container-registry | Gitea's container registry exposed private images to anyone without cr
    - the-390-fedora-44-ubuntu-2604-rivalry | Five Days Apart: Fedora 44 and Ubuntu 26.04 LTS Both Ship GNOME 50 and
    - the-318-cisa-private-github-nightwing-aws-keys | CISA Contractor Exposed Agency AWS GovCloud Keys in Public GitHub Repo
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-321-cmg-active-listening-ftc | Cox Media Group Pays $880,000 to Settle FTC Charges Over Fake AI Eaves
    - the-322-based-apparel-clickfix-malware | FBI Director's Former Merch Site Delivered Malware to macOS Visitors V
    - the-312-yt-dlp-bun-deprecated | yt-dlp Limits and Deprecates Bun: Lockfile Security Risk Cited, "Vibe-
-   - the-293-fbi-kali365-mfa-bypass | FBI warns of Kali365: a phishing service that steals Microsoft tokens 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
