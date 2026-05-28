@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-28T16:19:40Z
+- when:    2026-05-28T16:28:18Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26587303484
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26587765100
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - anthropic-spacex-colossus-lease-musk-s1-dispute | When the S-1 and the Tweet Tell Different Stories: Anthropic's $1.25B/
+   - the-413-mot-ai-openness-tool | The Lie Detector for AI Openness Claims
    - apple-siri-redesign-ios-27-leaked | Apple's Siri Overhaul: Leaked Renders Point to a ChatGPT Rival in iOS 
    - the-393-gitea-cve-2026-27771-container-registry | Gitea's container registry exposed private images to anyone without cr
    - the-390-fedora-44-ubuntu-2604-rivalry | Five Days Apart: Fedora 44 and Ubuntu 26.04 LTS Both Ship GNOME 50 and
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-315-anthropic-glasswing-10k-bugs | Project Glasswing: Anthropic Reports 10,000-Plus Critical Bugs Found i
    - the-316-microsoft-claude-code-cost-reckoning | Microsoft cuts most internal Claude Code licenses; Uber burned through
    - the-321-cmg-active-listening-ftc | Cox Media Group Pays $880,000 to Settle FTC Charges Over Fake AI Eaves
-   - the-322-based-apparel-clickfix-malware | FBI Director's Former Merch Site Delivered Malware to macOS Visitors V
-   - the-312-yt-dlp-bun-deprecated | yt-dlp Limits and Deprecates Bun: Lockfile Security Risk Cited, "Vibe-
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
