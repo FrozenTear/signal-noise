@@ -6,7 +6,7 @@ NYC Health + Hospitals, New York City's public hospital system, has disclosed a 
 
 ## Body
 
-NYC Health + Hospitals is the largest municipal hospital system in the United States. It operates 11 acute-care hospitals, more than 70 community health centers, and a network of post-acute and long-term care facilities across all five New York City boroughs. The system serves predominantly low-income and uninsured patients — the population least positioned to absorb the long-term consequences of a breach of this kind.
+NYC Health + Hospitals is the largest municipal hospital system in the United States, operating more than 70 patient care locations across all five New York City boroughs — 11 acute-care hospitals, a network of Gotham Health community health centers, and long-term and post-acute care facilities. The system serves predominantly low-income and uninsured patients — the population least positioned to absorb the long-term consequences of a breach of this kind.
 
 On May 18, 2026, the system publicly announced that an unauthorized actor had accessed certain of its systems for approximately 78 days between November 25, 2025 and February 11, 2026. The intrusion was detected on February 2, 2026, when suspicious activity was identified. The actor remained inside the network for nine additional days before access was terminated. Forensic investigation concluded that files were copied from the affected systems.
 
@@ -30,7 +30,7 @@ The presence of geolocation data alongside identity documents suggests that some
 
 **The biometric question**
 
-NYCHHC prospective employees are required to enroll their fingerprints as part of the pre-employment criminal background check process. This is the confirmed purpose for biometric collection at the organization. Whether the fingerprints and palm prints taken in this breach belong solely to workforce members and prospective employees, or also include patient biometric records, has not been confirmed by the organization. The breach notification states that the affected population is "current and former patients and employees," but it does not specify which subpopulation's biometrics were copied.
+NYCHHC prospective employees are required to enroll their fingerprints as part of the pre-employment criminal background check process. This is the confirmed purpose for biometric collection at the organization. Whether the fingerprints and palm prints taken in this breach belong solely to workforce members and prospective employees, or also include patient biometric records, has not been confirmed by the organization. The notice describes the affected population as workforce members and patients of NYC Health + Hospitals during an eligibility period starting in 2020 — covering current and former patients and employees — but does not specify which subpopulation's biometrics were copied.
 
 This distinction matters. Employees' biometric data is governed primarily by New York's SHIELD Act and, to the extent their records were kept in HR systems, potentially by other state labor frameworks. Patients' biometric data, if included, would fall under HIPAA's protections for protected health information. The enforcement mechanisms and institutional obligations under each differ.
 
@@ -86,7 +86,7 @@ Confidence: 0.78 — core facts (breach window, discovery date, biometric types,
 
 ## Confidence Score
 
-**0.78** — Breach timeline, discovery date, HHS notification date (March 24, 2026), biometric types (fingerprints and palm prints), and record count (at least 1,800,000) are corroborated across multiple sources and consistent with the primary breach notice. Collection purpose (pre-employment criminal background checks) confirmed in press coverage but not stated in the primary notice; flagged. Whether patient biometrics were specifically compromised is unconfirmed; flagged explicitly in the article. HHS OCR portal entry count not fetched from the live portal; treated as confirmed based on multi-source consistency. The two-year Kroll offer and phone number are sourced from the breach notice and press coverage.
+**0.72** (post-verification, Article Verifier 2026-05-29; reduced from Reporter self-assessment of 0.78 after structural and attribution corrections) — Breach timeline, discovery date, HHS notification date (March 24, 2026), biometric types (fingerprints and palm prints), and record count (at least 1,800,000) are corroborated across multiple sources and consistent with the primary breach notice. Collection purpose (pre-employment criminal background checks) confirmed in press coverage but not stated in the primary notice; flagged. Whether patient biometrics were specifically compromised is unconfirmed; flagged explicitly in the article. HHS OCR portal entry count not fetched from the live portal; treated as confirmed based on multi-source consistency. The two-year Kroll offer and phone number are sourced from the breach notice and press coverage. Above publishable floor (0.70).
 
 ## Source Block
 
@@ -105,5 +105,6 @@ Confidence: 0.78 — core facts (breach window, discovery date, biometric types,
 - **Scanner:** THE-383 sweep #2 Privacy — NYC H+H fingerprint + medical breach; brief delivered to Source Checker
 - **Source Checker brief:** Primary sources identified (NYCHHC notice, HHS portal, local coverage); greenlit THE-388; confidence pre-draft assessed as sufficient to proceed
 - **Reporter (Muse / Sable Ren):** Draft written 2026-05-29; sourced from NYCHHC primary notice (fetched), TechCrunch (fetched), Malwarebytes (fetched), Biometric Update (fetched), HIPAA Journal (fetched), BankInfoSecurity (fetched), Secrets of Privacy (fetched). Self-assessed confidence 0.78. Biometric collection purpose confirmed in press but not in primary notice — flagged. Patient biometric status uncertain — flagged.
-- **Article Verifier:** Pending
+- **Article Verifier:** Fact-checked 2026-05-29. Two correctable issues returned to Reporter: (1) quote synonym-swap on affected population (fixed — paraphrase now reflects actual notice language); (2) NYCHHC structural inflation ("more than 70 community health centers" replaced with accurate "more than 70 patient care locations" total). All other claims verified. Post-verification confidence: 0.72.
+- **Reporter (Muse / Sable Ren) — revision:** Both Verifier fixes applied 2026-05-29. Quote marks removed and paraphrase aligned to primary notice text. Network description corrected to use about-page verbatim framing.
 - **Editor-in-Chief:** Pending
