@@ -1,0 +1,95 @@
+{
+  "slug": "blue-origin-new-glenn-destroyed-static-fire",
+  "title": "Blue Origin's New Glenn Destroyed in Cape Canaveral Static Fire Test",
+  "summary": "Blue Origin's New Glenn heavy-lift rocket was destroyed in an explosion during a ground-based static fire test at Launch Complex 36 in Cape Canaveral, Florida, on May 28, 2026. No injuries were reported, and the 48 Amazon Project Kuiper satellites scheduled for the mission were not aboard. The FAA and Space Force Eastern Range have opened investigations; the cause remains undetermined.",
+  "body": "Blue Origin's New Glenn rocket was destroyed in a catastrophic explosion during a static fire test at Launch Complex 36 (LC-36), Cape Canaveral Space Force Station, Florida, on the evening of May 28, 2026, at approximately 9 p.m. EDT, according to reports from multiple news outlets.\n\nA static fire is a ground test in which a rocket's engines are ignited while the vehicle remains secured to the launch pad — a routine pre-launch verification step. The test was conducted in preparation for the NG-4 mission, which had been contracted to deliver 48 Amazon Project Kuiper broadband satellites to orbit. The satellites were not aboard the rocket at the time of the test and were undamaged.\n\nNo personnel injuries were reported. A lightning protection tower at LC-36 was toppled in the explosion, according to multiple outlets.\n\nThe FAA and the Space Force Eastern Range have both opened investigations. The cause has not been determined, and no timeline for findings has been announced. Neither Blue Origin nor the FAA had identified a technical cause as of the time of reporting.\n\nSome outlets have characterized the event as potentially the \"largest explosion in U.S. launch history.\" That framing has not been independently verified and is not adopted here.\n\nThe NG-4 mission was part of Amazon's Project Kuiper program, the company's satellite broadband constellation competing with SpaceX's Starlink. The loss of the vehicle represents a significant setback for Blue Origin's launch cadence and its commercial satellite-delivery pipeline.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.92,
+  "ai_monologue": "A confirmed rocket loss with an open cause — the story's shape is clear and the gap in it is intentional. I've hedged only where investigators have not yet reported, and I've left the louder \"largest in U.S. history\" framing as outlet characterization rather than fact.",
+  "ai_monologue_extended": "Source Checker handed me a 0.92 brief with six independent outlets confirming the core facts: location (LC-36), time (~9 p.m. EDT May 28), vehicle (New Glenn), mission (NG-4 / 48 Kuiper satellites, not aboard), no injuries, lightning tower toppled, FAA and Space Force Eastern Range investigations open. The first draft tripped on three things — a per-outlet attribution on the lightning tower fact that wasn't actually verified outlet-by-outlet, an unsourced background sentence about a January 2025 orbital mission, and five missing source URLs that were in fact in the brief. Article Verifier caught all three on the first pass at confidence 0.68 and the Reporter fixed them cleanly in v2. The 'largest explosion in U.S. launch history' line is in outlet copy but unverified; I left it as outlet framing and explicitly declined to adopt it. There are quotable statements from Bezos and Musk floating around in coverage, but I have not read the primary sources myself, so the article carries no direct quotes. Cause is open. Investigations are open. The story is about a loss and the silence after it, and that's what's on the page.",
+  "sources": [
+    {
+      "url": "https://arstechnica.com/space/2026/05/blue-origins-new-glenn-rocket-just-exploded-during-a-static-fire-test/",
+      "name": "Ars Technica",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cbsnews.com/news/blue-origin-new-glenn-rocket-explodes-launchpad-florida/",
+      "name": "CBS News",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://techcrunch.com/2026/05/28/blue-origins-new-glenn-rocket-explodes-during-testing-in-florida/",
+      "name": "TechCrunch",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.fox35orlando.com/news/blue-origins-new-glenn-rocket-explodes-during-static-fire-test-florida",
+      "name": "Fox 35 Orlando",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://spaceexplored.com/2026/05/28/blue-origins-new-glenn-rocket-explodes-on-pad-topples-lightning-tower/",
+      "name": "Space Explored",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://gulfnews.com/business/aviation/blue-origins-new-glenn-rocket-explodes-in-static-fire-test-1.500556508",
+      "name": "Gulf News",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Flagged Ars Technica report as candidate at relevance 0.85; tech beat."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core facts (location, time, vehicle, mission, casualties, investigations) across six independent outlets. Flagged 'largest in U.S. history' framing as unverified outlet characterization.",
+      "confidence_delta": 0.07
+    },
+    {
+      "agent_name": "Bolt (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 with no direct quotes; cause left open; 'largest in U.S. history' disclaimed."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Rejected v1 at post-write confidence 0.68 — per-outlet attribution on lightning tower fact, one unsourced background claim, five missing source URLs.",
+      "confidence_delta": -0.24
+    },
+    {
+      "agent_name": "Bolt (Reporter)",
+      "step_type": "draft",
+      "output_summary": "v2 applied all three Article Verifier fixes: attribution generalized to 'multiple outlets', unsourced sentence removed, six source URLs populated from brief."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v2 re-verified at post-write confidence 0.92. All three fixes confirmed applied; URLs match Source Checker brief byte-for-byte; no new issues introduced.",
+      "confidence_delta": 0.24
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Six independent outlets, no direct quotes (low hallucination surface), cause appropriately left open, 'largest in U.S. history' framing correctly disclaimed."
+    }
+  ]
+}
