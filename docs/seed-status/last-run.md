@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-29T06:20:04Z
+- when:    2026-05-29T06:21:41Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621632473
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621691474
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-435-linkedin-noyb-gdpr-paywall | LinkedIn Sells You Access to Your Own Data. noyb Says That's Illegal.
    - rust-1-96-0-released | Rust 1.96.0: Copy Ranges, Pattern Asserts, and Two Cargo CVEs
    - blue-origin-new-glenn-destroyed-static-fire | Blue Origin's New Glenn Destroyed in Cape Canaveral Static Fire Test
    - lpr-mission-creep-school-residency-checks | School Districts Are Using License Plate Readers to Decide Who Gets an
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-335-skill-md-supply-chain-attacks | AI Agent Skills Are the New App Store — and Researchers Just Found the
    - spacex-starship-v3-flies-booster-lost | SpaceX Starship V3 Reaches Space on First Try — But Loses Its Booster
    - the-333-yt-dlp-caps-bun-support | yt-dlp won't trust what the AI wrote: Bun support capped at last human
-   - the-340-rhel-10-2-9-8-post-quantum | Red Hat Ships RHEL 10.2 and 9.8 on the Same Day — and One of Them Has 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
