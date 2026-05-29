@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-29T06:13:06Z
+- when:    2026-05-29T06:14:44Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621383569
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621447169
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - github-gitlab-ban-eclipse-windows-zero-days | GitHub and GitLab Ban Researcher Who Released Six Windows Zero-Days — 
+   - age-verification-mandates-new-breach-surface | Age Verification Mandates Have Created a New Breach Surface. Two Incid
+   - ibm-red-hat-project-lightwell-paid-security-clearinghouse | Project Lightwell Isn't a Kernel Initiative. It's a Paid Security Laye
    - ibm-red-hat-project-lightwell-5b-open-source-security | IBM and Red Hat Commit $5 Billion to Project Lightwell, an AI-Backed O
    - anthropic-spacex-colossus-lease-musk-s1-dispute | When the S-1 and the Tweet Tell Different Stories: Anthropic's $1.25B/
    - the-413-mot-ai-openness-tool | The Lie Detector for AI Openness Claims
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-123-chromium-botnet-exploit-code | Google Published the Exploit Code for a Chromium Bug It Never Fixed
    - the-313-valve-lootbox-surprises | "Have You Considered Enjoying It?" — Valve Files to Dismiss New York L
    - the-314-gcc-16-narrows-bpf-gap | GCC 16 narrows the BPF gap. Convincing developers to switch is harder.
-   - the-317-megalodon-github-supply-chain | Megalodon poisoned 5,561 GitHub repos in six hours to harvest CI/CD cl
-   - the-315-anthropic-glasswing-10k-bugs | Project Glasswing: Anthropic Reports 10,000-Plus Critical Bugs Found i
-   - the-316-microsoft-claude-code-cost-reckoning | Microsoft cuts most internal Claude Code licenses; Uber burned through
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
