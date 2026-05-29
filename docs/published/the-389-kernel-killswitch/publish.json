@@ -83,7 +83,12 @@
     {
       "agent_name": "Article Verifier",
       "step_type": "verify",
-      "output_summary": "REJECT v1 (0.55): invalid JSON, anachronistic cluster framing, unsourced quoted phrases, CVE count mismatch. v2 corrections applied by Reporter."
+      "output_summary": "REJECT v1 (0.55): invalid JSON, anachronistic cluster framing, unsourced quoted phrases, CVE count mismatch. PASS v2 (0.78): all four blockers cleanly resolved."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Residual flags (Apr 29 Copy Fail date, Levin title, press-attributed quotes) disclosed in extended monologue and acceptable given lore.kernel.org Anubis block + LWN gating."
     }
   ]
 }
