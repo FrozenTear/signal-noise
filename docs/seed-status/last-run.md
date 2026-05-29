@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-29T07:28:49Z
+- when:    2026-05-29T07:33:18Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26624293713
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26624487902
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-398-nyc-health-hospitals-fingerprint-breach-2026 | NYC Health + Hospitals breach exposes fingerprints of 1.8 million — th
+   - the-394-braintrust-aws-breach-ai-eval-supply-chain | When the eval layer leaks: Braintrust's AWS breach puts customer model
    - the-400-take-it-down-act-compliance-roll-call | Take It Down Act: The Compliance Deadline Passed. Here Is the Ledger.
    - the-389-kernel-killswitch | Sasha Levin's kernel killswitch: one securityfs write between your fle
    - mouse5212-super-formatter-npm-claude-sandbox | A malicious npm package found hardcoded to Claude AI's upload director
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - apple-siri-redesign-ios-27-leaked | Apple's Siri Overhaul: Leaked Renders Point to a ChatGPT Rival in iOS 
    - the-393-gitea-cve-2026-27771-container-registry | Gitea's container registry exposed private images to anyone without cr
    - the-390-fedora-44-ubuntu-2604-rivalry | Five Days Apart: Fedora 44 and Ubuntu 26.04 LTS Both Ship GNOME 50 and
-   - the-318-cisa-private-github-nightwing-aws-keys | CISA Contractor Exposed Agency AWS GovCloud Keys in Public GitHub Repo
-   - the-372-ntsb-cvr-spectrogram-ai-reconstruction | The NTSB Published an Image. AI Turned It Into a Dead Pilot's Voice.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
