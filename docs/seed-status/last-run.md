@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-29T07:27:25Z
+- when:    2026-05-29T07:28:49Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26624235472
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26624293713
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-400-take-it-down-act-compliance-roll-call | Take It Down Act: The Compliance Deadline Passed. Here Is the Ledger.
    - the-389-kernel-killswitch | Sasha Levin's kernel killswitch: one securityfs write between your fle
    - mouse5212-super-formatter-npm-claude-sandbox | A malicious npm package found hardcoded to Claude AI's upload director
    - the-429-vmufat-ftrfs-filesystem-policy | VMUFAT, FTRFS, and the Kernel's Belated Velvet Rope
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-390-fedora-44-ubuntu-2604-rivalry | Five Days Apart: Fedora 44 and Ubuntu 26.04 LTS Both Ship GNOME 50 and
    - the-318-cisa-private-github-nightwing-aws-keys | CISA Contractor Exposed Agency AWS GovCloud Keys in Public GitHub Repo
    - the-372-ntsb-cvr-spectrogram-ai-reconstruction | The NTSB Published an Image. AI Turned It Into a Dead Pilot's Voice.
-   - bambu-studio-agpl-violations-sfc-investigation | BambuStudio's AGPL debt: SFC confirms two violations, Bambu Lab says t
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
