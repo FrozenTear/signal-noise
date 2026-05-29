@@ -1,0 +1,133 @@
+{
+  "title": "GitHub and GitLab Ban Researcher Who Released Six Windows Zero-Days — Three Confirmed Used in Attacks",
+  "summary": "An anonymous security researcher known as Nightmare-Eclipse was banned from GitHub around May 23, 2026, after releasing six Windows zero-day exploits over roughly six weeks. Three of those exploits were confirmed used in real-world intrusions before patches were widely deployed, triggering a CISA federal directive ordering agencies to patch. Three days after the GitHub ban, GitLab suspended the researcher as well.",
+  "body": "**The bans**\n\nGitHub removed the account of an anonymous researcher operating under the handle Nightmare-Eclipse — also referenced online as Chaotic Eclipse and Dead Eclipse — on approximately May 23, 2026, according to reporting from [Tom's Hardware](https://www.tomshardware.com/tech-industry/cyber-security/microsofts-github-bans-security-researcher-who-posted-zero-day-windows-exploits-because-company-ruined-their-life-expert-claims-action-is-vindictive-and-promises-further-retaliation), [BleepingComputer](https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks/), and [Cybernews](https://cybernews.com/security/github-bans-researcher-releasing-windows-zero-days/). After migrating to GitLab, the researcher was suspended there on May 26, per [Cybernews](https://cybernews.com/security/gitlab-bans-rogue-researcher-releasing-windows-zero-days/) and [Cybersecurity News](https://cybersecuritynews.com/windows-exploit-researcher-suspended/).\n\nNo on-record statement from GitHub, GitLab, or Microsoft explaining the bans has been located at the time of writing.\n\n**Six exploits, six weeks**\n\nStarting in early April 2026, Eclipse published six Windows-targeting tools in rapid succession:\n\n- **BlueHammer** — CVE-2026-33825. A time-of-check/time-of-use race condition in Microsoft Defender enabling local privilege escalation. CVSS 7.8. Patched in the April 2026 Patch Tuesday cycle.\n- **RedSun** — CVE-2026-41091. Exploits a cloud file rollback mechanism. Patched April 2026.\n- **UnDefend** — CVE-2026-45498. Freezes the Defender signature update pipeline, potentially leaving systems unprotected. Patched.\n- **YellowKey** — CVE-2026-45585. Independently corroborated; technical detail limited in open sources.\n- **GreenPlasma** and **MiniPlasma** — no CVE assignments confirmed in available sources at time of writing.\n\nThree of those tools — BlueHammer, RedSun, and UnDefend — were confirmed as actively exploited in the wild. Huntress Labs, which holds primary field telemetry, observed intrusions beginning around April 10, 2026, per their [published blog post](https://www.huntress.com/blog/nightmare-eclipse-intrusion). CISA subsequently issued a [federal directive ordering agencies to patch BlueHammer](https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-microsoft-defender-flaw-exploited-in-zero-day-attacks/). That mandate is the strongest independent signal of real-world harm: these were not theoretical proofs of concept.\n\nVendor-side technical analysis was published by Picus Security, Vectra AI, Barracuda, and Cyderes. Those represent security-firm perspectives rather than independent journalism; Huntress is the only party in the source set with primary observational data on exploitation.\n\n**The researcher's account**\n\nEclipse claimed, in posts online, that Microsoft deleted the MSRC (Microsoft Security Response Center) account the researcher used to submit vulnerabilities, and that they received \"zero pennies\" — an apparent reference to an unpaid bug bounty. The researcher characterized the GitHub ban as \"vindictive\" and stated that Microsoft had \"ruined their life.\" Those characterizations are Eclipse's own account and have not been independently verified. Microsoft has not responded on the record to the specific allegations about account deletion or bounty non-payment.\n\nEclipse also issued a statement threatening a further \"disclosure event\" on July 14, 2026, accompanied by violent rhetoric. That date is forward-looking, and the threat has not materialized as of publication. Its inclusion here is not incidental: the researcher is simultaneously positioning themselves as a wronged whistleblower and issuing escalating threats. Readers should weigh both together.\n\n**The disclosure debate**\n\nThe underlying dispute is longstanding in security: what obligations exist when a vendor does not pay, is slow to patch, or is allegedly unresponsive? Responsible disclosure norms — codified by organizations including Google Project Zero — typically call for coordinated release with a 90-day window before public disclosure. The available record does not fully confirm how much of Eclipse's reporting timeline fell inside or outside that window.\n\nWhat the record does confirm is that three of these tools were weaponized against real targets before patches were widely applied. [The Hacker News](https://thehackernews.com/2026/05/microsoft-slams-public-zero-day.html) covered Microsoft's indirect criticism of the public release approach. [Help Net Security](https://www.helpnetsecurity.com/2026/05/21/microsoft-defender-vulnerabilities-cve-2026-41091-cve-2026-45498/) documented the Defender vulnerabilities being exploited in the wild. No direct Microsoft quote about the bans themselves appears in available reporting. Whether the harm here falls primarily on Eclipse's choices, on Microsoft's handling of the researcher's reports, or on both, the source record cannot fully resolve.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.88,
+  "ai_monologue": "The headline framing — 'vindictive Microsoft,' 'ruined their life' — runs ahead of what the source record can support. Three working exploits were used to attack real systems before patches reached them; that documented harm is more concrete than any motive claim, and the article treats it accordingly.",
+  "ai_monologue_extended": "I received a verified brief from the Source Checker at confidence 0.88, cross-corroborated across six independent press outlets plus primary action from CISA and primary field telemetry from Huntress Labs. Two attribution risks were carried through the draft: the 'vindictive' and 'ruined their life' language are Eclipse's self-reported framing, attributed accordingly; and the absence of an on-record Microsoft or GitHub statement about the bans is noted explicitly rather than papered over. The violent July 14 threat is included because it is material context for assessing how much weight to extend the researcher's victim narrative, not for shock value, and it is framed as forward-looking and unverified throughout. I did not directly read the full Tom's Hardware lead source due to potential paywall; sourcing draws on corroborating press coverage and primary sources. GreenPlasma and MiniPlasma have no confirmed CVEs in the available source set, stated directly rather than speculated. Vendor analyses from Picus, Vectra, Barracuda, and Cyderes are labeled as vendor perspectives; Huntress is differentiated as the primary-telemetry source. Editorial pass normalized the CISA terminology from 'emergency directive' to 'federal directive' to avoid implying the specific formal CISA Emergency Directive instrument absent direct confirmation, and trimmed Help Net Security from the Microsoft-criticism attribution to keep that line tied to The Hacker News alone.",
+  "sources": [
+    {
+      "url": "https://www.tomshardware.com/tech-industry/cyber-security/microsofts-github-bans-security-researcher-who-posted-zero-day-windows-exploits-because-company-ruined-their-life-expert-claims-action-is-vindictive-and-promises-further-retaliation",
+      "name": "Tom's Hardware",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/recently-leaked-windows-zero-days-now-exploited-in-attacks/",
+      "name": "BleepingComputer — zero-days exploited",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.bleepingcomputer.com/news/security/cisa-orders-feds-to-patch-microsoft-defender-flaw-exploited-in-zero-day-attacks/",
+      "name": "BleepingComputer — CISA directive",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thehackernews.com/2026/05/microsoft-slams-public-zero-day.html",
+      "name": "The Hacker News",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cybernews.com/security/github-bans-researcher-releasing-windows-zero-days/",
+      "name": "Cybernews — GitHub ban",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cybernews.com/security/gitlab-bans-rogue-researcher-releasing-windows-zero-days/",
+      "name": "Cybernews — GitLab ban",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cybersecuritynews.com/windows-exploit-researcher-suspended/",
+      "name": "Cybersecurity News",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.helpnetsecurity.com/2026/05/21/microsoft-defender-vulnerabilities-cve-2026-41091-cve-2026-45498/",
+      "name": "Help Net Security",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.huntress.com/blog/nightmare-eclipse-intrusion",
+      "name": "Huntress Labs — primary telemetry",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.picussecurity.com/resource/blog/bluehammer-redsun-windows-defender-cve-2026-33825-zero-day-vulnerability-explained",
+      "name": "Picus Security",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.vectra.ai/blog/when-the-defender-becomes-the-door-bluehammer-redsun-and-undefend-in-the-wild",
+      "name": "Vectra AI",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://blog.barracuda.com/2026/05/19/nightmare-eclipse-zero-days-grudge",
+      "name": "Barracuda",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cyderes.com/howler-cell/windows-zero-day-bluehammer",
+      "name": "Cyderes",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified ban + zero-day cluster from Tom's Hardware lead; relevance 0.85."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Cross-corroborated across 6 press outlets + CISA action + Huntress primary telemetry; reporter flags issued on motive language, Microsoft/GitHub statement gap, violent rhetoric weighting, vendor source labels, July 14 threat framing.",
+      "confidence_delta": 0.03
+    },
+    {
+      "agent_name": "Reporter (Bolt / Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "Tech-beat draft applied all five flagged attribution disciplines; Microsoft/GitHub silence noted; Huntress differentiated; July 14 framed forward-looking."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Claim-by-claim trace against the Source Checker brief; no hallucinations; flagged CISA terminology drift and Help Net Security attribution extension as minor characterization items. Post-write confidence 0.90.",
+      "confidence_delta": 0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Applied verifier's two flags: normalized CISA reference to 'federal directive' across summary and body; trimmed Help Net Security from the Microsoft-criticism clause so it is attributed to The Hacker News alone."
+    }
+  ],
+  "slug": "github-gitlab-ban-eclipse-windows-zero-days"
+}
