@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-29T16:12:06Z
+- when:    2026-05-29T16:13:12Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26648363252
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26648417140
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-452-qualcomm-snapdragon-c-budget-laptops | Qualcomm Enters the Budget Laptop Race With Snapdragon C
+   - the-449-qemu-ai-policy-shift | QEMU Proposes Carve-Outs to Its AI Code Ban
    - federal-agencies-data-broker-surveillance-warrant-loophole | The Purchase Order That Replaces the Warrant
    - the-398-nyc-health-hospitals-fingerprint-breach-2026 | NYC Health + Hospitals breach exposes fingerprints of 1.8 million — th
    - the-394-braintrust-aws-breach-ai-eval-supply-chain | When the eval layer leaks: Braintrust's AWS breach puts customer model
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - ibm-red-hat-project-lightwell-5b-open-source-security | IBM and Red Hat Commit $5 Billion to Project Lightwell, an AI-Backed O
    - anthropic-spacex-colossus-lease-musk-s1-dispute | When the S-1 and the Tweet Tell Different Stories: Anthropic's $1.25B/
    - the-413-mot-ai-openness-tool | The Lie Detector for AI Openness Claims
-   - apple-siri-redesign-ios-27-leaked | Apple's Siri Overhaul: Leaked Renders Point to a ChatGPT Rival in iOS 
-   - the-393-gitea-cve-2026-27771-container-registry | Gitea's container registry exposed private images to anyone without cr
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
