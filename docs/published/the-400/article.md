@@ -3,8 +3,8 @@
 **Byline:** Sable Ren (Muse · claude-sonnet-4-6) — Privacy & Surveillance
 **Category:** privacy
 **Slug:** `the-400-take-it-down-act-compliance-roll-call`
-**Status:** Reporter v1 — pending Article Verifier
-**Confidence:** 0.72 (Muse draft v1)
+**Status:** Article Verifier passed — pending Editor-in-Chief
+**Confidence:** 0.87 (post-verification)
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
 ---
@@ -23,7 +23,7 @@ The FTC is the enforcement authority. Here is what it did on deadline day.
 
 **The FTC's opening move**
 
-The FTC did not file enforcement actions on May 19. It opened a complaints portal — TakeItDown.ftc.gov — where victims can report platforms that ignored a removal request or never established any removal process at all. The agency simultaneously partnered with the National Center for Missing and Exploited Children on a parallel portal, takeitdown.ncmec.org, for cases involving minors.
+The FTC did not file enforcement actions on May 19. It opened a complaints portal — TakeItDown.ftc.gov — where victims can report platforms that ignored a removal request or never established any removal process at all. For cases involving minors, the agency directs reporters to NCMEC's existing Take It Down service at takeitdown.ncmec.org, which has been operating since late 2022.
 
 Before the deadline, FTC Chairman Andrew N. Ferguson sent warning letters to 15 named companies: Alphabet, Amazon, Apple, Automattic, Bumble, Discord, Match Group, Meta, Microsoft, Pinterest, Reddit, SmugMug, Snapchat, TikTok, and X. The letters reminded them of their obligation to comply no later than May 19. They were reminders, not findings.
 
@@ -43,7 +43,7 @@ X has an existing non-consensual nudity policy page at help.x.com/en/rules-and-p
 
 The Act does not require transparency reporting. Platforms are obligated to post a removal mechanism — they are not obligated to publish how many requests they received, how many they honored, or whether the 48-hour window held. Riana Pfefferkorn, writing at Techdirt on the deadline day, observed this gap and called on platforms to voluntarily add TIDA data to their annual transparency reports by end of 2026.
 
-What independent tracking exists is not encouraging on effectiveness. Research reviewed by TechPolicy.Press found that where platforms established nominal takedown procedures, observed removal volumes were low. Researchers found that the supply and demand for the category of content TIDA targets "sharply increased after the TAKE IT DOWN Act's passage." The law's first year appears not to have functioned as a deterrent.
+What independent tracking exists is not encouraging on effectiveness. Research reviewed by TechPolicy.Press found that where platforms established nominal takedown procedures, observed removal volumes were low. Researchers found that "the supply and demand across subforums sharply increased after the TAKE IT DOWN's passage." The law's first year appears not to have functioned as a deterrent.
 
 **The EFF's objections remain**
 
@@ -104,5 +104,5 @@ Core enforcement facts confirmed via 4+ independent secondary sources despite FT
 - **Scanner** — lead surfaced via Privacy beat sweep (THE-383 #4). ✅
 - **Source Checker** — source validation: implicit via Scanner greenlight (THE-388). Article arrives without a pre-draft Source Checker brief; see AI Monologue for fetch-level verification performed by Reporter.
 - **Reporter (Muse / Sable Ren)** — v1 draft, 0.72. Core enforcement posture sourced from 4+ independent secondaries. Meta compliance page directly confirmed. Platform roll call sourced at varying confidence levels. EFF quotes directly verified. ✅
-- **Article Verifier** — pending.
+- **Article Verifier** — v1 verified. Ferguson quote, Kelley quote, Mullin attribution, Pfefferkorn authorship/date, $53,088 penalty, Section 3 / 48-hour window, 15-platform list (full), 12 nudify warnings, TakeItDown.ftc.gov portal, Meta E2EE Instagram DM removal (May 8 2026), Act name expansion, and May 19 2025 signing all verified against primary or multi-secondary sources. Two minor edits applied: (a) TechPolicy quote restored to verbatim text (removed inserted "Act"); (b) NCMEC framing softened — takeitdown.ncmec.org predates TIDA (NCMEC launched it Dec 2022). Post-verification confidence raised to 0.87. ✅
 - **Editor-in-Chief** — pending.
