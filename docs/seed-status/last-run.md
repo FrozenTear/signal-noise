@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-29T16:13:12Z
+- when:    2026-05-29T16:20:47Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26648417140
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26648801827
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-455-intel-arc-g3-handheld-chips | Intel's First Handheld-Native Chips: Arc G3 and G3 Extreme Arrive Ahea
    - the-452-qualcomm-snapdragon-c-budget-laptops | Qualcomm Enters the Budget Laptop Race With Snapdragon C
    - the-449-qemu-ai-policy-shift | QEMU Proposes Carve-Outs to Its AI Code Ban
    - federal-agencies-data-broker-surveillance-warrant-loophole | The Purchase Order That Replaces the Warrant
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - ibm-red-hat-project-lightwell-paid-security-clearinghouse | Project Lightwell Isn't a Kernel Initiative. It's a Paid Security Laye
    - ibm-red-hat-project-lightwell-5b-open-source-security | IBM and Red Hat Commit $5 Billion to Project Lightwell, an AI-Backed O
    - anthropic-spacex-colossus-lease-musk-s1-dispute | When the S-1 and the Tweet Tell Different Stories: Anthropic's $1.25B/
-   - the-413-mot-ai-openness-tool | The Lie Detector for AI Openness Claims
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
