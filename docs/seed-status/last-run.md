@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-29T06:21:41Z
+- when:    2026-05-29T07:18:49Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621691474
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26623877603
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-429-vmufat-ftrfs-filesystem-policy | VMUFAT, FTRFS, and the Kernel's Belated Velvet Rope
+   - the-432-cars-privacy-audit-ftc-action | Every major car brand failed an independent privacy audit. Regulators 
    - the-435-linkedin-noyb-gdpr-paywall | LinkedIn Sells You Access to Your Own Data. noyb Says That's Illegal.
    - rust-1-96-0-released | Rust 1.96.0: Copy Ranges, Pattern Asserts, and Two Cargo CVEs
    - blue-origin-new-glenn-destroyed-static-fire | Blue Origin's New Glenn Destroyed in Cape Canaveral Static Fire Test
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - bambu-studio-agpl-violations-sfc-investigation | BambuStudio's AGPL debt: SFC confirms two violations, Bambu Lab says t
    - the-331-four-kernel-lpe-cves | Four kernel LPE CVEs in about two weeks. Nobody agrees on whether to p
    - the-335-skill-md-supply-chain-attacks | AI Agent Skills Are the New App Store — and Researchers Just Found the
-   - spacex-starship-v3-flies-booster-lost | SpaceX Starship V3 Reaches Space on First Try — But Loses Its Booster
-   - the-333-yt-dlp-caps-bun-support | yt-dlp won't trust what the AI wrote: Bun support capped at last human
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
