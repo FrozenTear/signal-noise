@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-29T06:17:43Z
+- when:    2026-05-29T06:20:04Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621547823
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621632473
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - rust-1-96-0-released | Rust 1.96.0: Copy Ranges, Pattern Asserts, and Two Cargo CVEs
+   - blue-origin-new-glenn-destroyed-static-fire | Blue Origin's New Glenn Destroyed in Cape Canaveral Static Fire Test
    - lpr-mission-creep-school-residency-checks | School Districts Are Using License Plate Readers to Decide Who Gets an
    - github-gitlab-ban-eclipse-windows-zero-days | GitHub and GitLab Ban Researcher Who Released Six Windows Zero-Days — 
    - age-verification-mandates-new-breach-surface | Age Verification Mandates Have Created a New Breach Surface. Two Incid
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - spacex-starship-v3-flies-booster-lost | SpaceX Starship V3 Reaches Space on First Try — But Loses Its Booster
    - the-333-yt-dlp-caps-bun-support | yt-dlp won't trust what the AI wrote: Bun support capped at last human
    - the-340-rhel-10-2-9-8-post-quantum | Red Hat Ships RHEL 10.2 and 9.8 on the Same Day — and One of Them Has 
-   - the-123-chromium-botnet-exploit-code | Google Published the Exploit Code for a Chromium Bug It Never Fixed
-   - the-313-valve-lootbox-surprises | "Have You Considered Enjoying It?" — Valve Files to Dismiss New York L
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
