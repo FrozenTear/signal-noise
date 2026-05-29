@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-29T06:14:44Z
+- when:    2026-05-29T06:16:21Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621447169
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26621504120
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - lpr-mission-creep-school-residency-checks | School Districts Are Using License Plate Readers to Decide Who Gets an
    - github-gitlab-ban-eclipse-windows-zero-days | GitHub and GitLab Ban Researcher Who Released Six Windows Zero-Days — 
    - age-verification-mandates-new-breach-surface | Age Verification Mandates Have Created a New Breach Surface. Two Incid
    - ibm-red-hat-project-lightwell-paid-security-clearinghouse | Project Lightwell Isn't a Kernel Initiative. It's a Paid Security Laye
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-340-rhel-10-2-9-8-post-quantum | Red Hat Ships RHEL 10.2 and 9.8 on the Same Day — and One of Them Has 
    - the-123-chromium-botnet-exploit-code | Google Published the Exploit Code for a Chromium Bug It Never Fixed
    - the-313-valve-lootbox-surprises | "Have You Considered Enjoying It?" — Valve Files to Dismiss New York L
-   - the-314-gcc-16-narrows-bpf-gap | GCC 16 narrows the BPF gap. Convincing developers to switch is harder.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
