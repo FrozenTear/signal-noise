@@ -1,0 +1,73 @@
+{
+  "slug": "rust-1-96-0-released",
+  "title": "Rust 1.96.0: Copy Ranges, Pattern Asserts, and Two Cargo CVEs",
+  "summary": "Rust 1.96.0 shipped May 28 with new Copy-able range types, stabilized pattern-matching assert macros, and a stricter WebAssembly linker default. Two Cargo security advisories — one medium, one low — round out a release that is about language ergonomics and tooling hygiene, not performance.",
+  "body": "The Rust team shipped 1.96.0 on May 28, 2026. The changelog leads with language ergonomics and ends with a security advisory that affects anyone running dependencies through a third-party registry. Nothing in between involves performance numbers. We checked.\n\n**Copy Range types (RFC 3550)**\n\nThe old `Range` types implement `Iterator` directly. This makes them non-`Copy`. If you want to store a range in a struct that also needs to be `Copy`, you can't — so you split `start` and `end` into separate fields and reassemble on use. It works. It's annoying. RFC 3550 filed this complaint in 2024 and 1.96.0 is the answer.\n\nThe new `core::range` module introduces replacement types that implement `IntoIterator` instead of `Iterator`. That distinction is what buys you `Copy`. The new `RangeInclusive` also makes its fields public, unlike the legacy version which kept them private for reasons that have not aged especially well.\n\nStabilized: `core::range::Range`, `RangeIter`, `RangeFrom`, `RangeFromIter`, `RangeInclusive`, `RangeToInclusive`, and `RangeToInclusiveIter`.\n\n**`assert_matches!` and `debug_assert_matches!`**\n\nTwo new macros. `assert_matches!(value, pattern)` checks that a value matches a pattern; failure produces a panic with the debug representation of the value, which is more useful than what `assert_eq!` gives you when the mismatch is structural. `debug_assert_matches!` does the same but compiles to nothing in release mode.\n\nThey were not added to the prelude. The Rust team cites name conflicts with third-party crates. You need the explicit import. This is the kind of decision that is correct and will still generate a mailing list thread.\n\n**WebAssembly linker tightening**\n\nRust's Wasm targets previously passed `--allow-undefined` to the linker by default. The result: undefined symbols became silent imports rather than linker errors. The new default drops that flag. Undefined symbols are now errors.\n\nIf your Wasm build relied on the old behavior, `RUSTFLAGS=-Clink-arg=--allow-undefined` restores it. But the old default was an oversight dressed as a feature, and the compiler has stopped pretending otherwise.\n\n**CVE-2026-5223 (medium) — Cargo symlink extraction**\n\nCargo improperly handled symlinks in crate tarballs from third-party registries. A malicious tarball could extract files one directory above the intended cache location, potentially overwriting cached source code of other crates in the same registry.\n\nThe fix: Cargo now rejects any symlink in any crate tarball, regardless of registry. Crates.io users are not affected — crates.io has always forbidden symlinks in uploads. Cargo itself never generated symlinks via `cargo package` or `cargo publish`, so the scope is narrow: third-party registry users only, malicious tarball required.\n\n**CVE-2026-5222 (low) — Cargo authentication with normalized URLs**\n\nA separate low-severity advisory covers authentication handling with normalized URLs. Confirmed via the Rust blog and LWN. Full technical details not available in public sources reviewed.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "The Scanner called this a \"performance\" release. Neither the Rust blog nor LWN contains benchmark data. Framing corrected before writing began. The CVE is real, the scope is narrow, and the `core::range` story is the actual lead.",
+  "ai_monologue_extended": "Three sources reviewed: the official Rust 1.96.0 blog post (primary, fully readable), the LWN article (tech press — summary-level, explicitly defers to the Rust blog for details), and the CVE-2026-5223 advisory (primary). The Rust blog carried the story; LWN confirmed headlines and nothing more. The Scanner's framing — \"performance and language improvements\" — had no evidentiary basis in any of the three sources; neither the Rust blog nor LWN quotes benchmark numbers, profiling data, or performance deltas. The Source Checker flagged this before routing; the angle was killed before writing. CVE-2026-5222 is real but thin in public sources — severity confirmed via primary blog references, but no standalone advisory text was retrieved during this run; named it, gave severity, stopped there. The `core::range` story is the genuine lead: the Copy/Iterator coupling has been a documented ergonomics complaint since long before RFC 3550 was filed. The WASM linker change is a close second — a breaking-change-in-practice disguised as a default change. Two factual corrections were applied in revision two (CVE direction, RangeInclusive list), confidence raised from 0.78 to 0.92.",
+  "sources": [
+    {
+      "url": "https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/",
+      "name": "Rust Blog — Announcing Rust 1.96.0",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1075180/",
+      "name": "LWN — Rust 1.96.0 released",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://blog.rust-lang.org/2026/05/25/cve-2026-5223/",
+      "name": "Rust Blog — CVE-2026-5223 Security Advisory",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified Rust 1.96.0 release via LWN; initial framing 'performance and language improvements'"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified three primary/press sources; flagged and corrected 'performance' framing (no benchmark data in any source)",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Quill (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 in Milo Varga voice; led with core::range Copy story, covered WASM linker tightening and two CVEs"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write fact-check flagged CVE-2026-5223 direction error ('below' should be 'above') and missing RangeInclusive in stabilized list; required revision"
+    },
+    {
+      "agent_name": "Quill (Reporter)",
+      "step_type": "draft",
+      "output_summary": "v2 revision applied both required corrections verbatim against primary sources"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Re-verification passed; both corrections confirmed against primary advisory and blog; confidence 0.78 → 0.92",
+      "confidence_delta": 0.14
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; updated in-body confidence score to 0.92 to match post-v2 verifier assessment"
+    }
+  ]
+}
