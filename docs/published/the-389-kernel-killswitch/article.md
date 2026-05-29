@@ -7,17 +7,17 @@
 
 ## Summary
 
-After four Linux kernel local privilege-escalation CVEs landed in about two weeks, Linux stable kernel co-maintainer Sasha Levin posted a patch proposing a runtime "killswitch" that disables vulnerable kernel functions without a reboot. The patch is real, it is on LKML, and the community debate it sparked is at least as interesting as the mechanism itself.
+After Copy Fail (CVE-2026-31431) entered the CISA known-exploited-vulnerabilities catalog, Linux stable kernel co-maintainer Sasha Levin posted a patch proposing a runtime killswitch that disables vulnerable kernel functions without a reboot. Three more LPEs in the fortnight that followed proved his timing was either prescient or just unlucky. The patch is real, it is on LKML, and the community debate it sparked is at least as interesting as the mechanism itself.
 
 ---
 
 ## Body
 
-The May 2026 Linux kernel CVE cluster — four local privilege-escalation bugs in roughly two weeks — had a predictable second act. Someone started arguing about process.
+Copy Fail had barely cooled in the CISA KEV catalog when someone started arguing about process. Three more kernel local privilege-escalation bugs in the fortnight that followed turned a patch proposal into a full community thread.
 
 That someone is Sasha Levin. He is NVIDIA's distinguished engineer and co-maintainer of the Linux stable kernel tree. On May 7, he posted a patch series to LKML proposing a mechanism he calls "killswitch."
 
-The pitch is simple. "When a (security) issue goes public, [Linux] fleets stay exposed until a patched kernel is built, distributed, and rebooted into." Levin is not wrong about this. Copy Fail (CVE-2026-31431) dropped April 29. Dirty Frag (CVE-2026-43284 and CVE-2026-43500) followed May 7 — same day as the patch submission, which is either very good timing or very ominous timing depending on your caffeine level. For the full technical inventory of that cluster, see our earlier reporting.
+The pitch is simple. "When a (security) issue goes public, [Linux] fleets stay exposed until a patched kernel is built, distributed, and rebooted into." Levin is not wrong about this. Copy Fail (CVE-2026-31431) dropped April 29 and entered the CISA known-exploited-vulnerabilities catalog on May 1. The Register's May 11 coverage was headlined after both Copy Fail and Dirty Frag — those two were the proximate catalyst. Fragnesia, DirtyDecrypt, and ssh-keysign-pwn landed in the weeks that followed and reignited the debate. For the full technical inventory of the cluster, see our earlier reporting.
 
 The proposal: let a privileged operator intercept a kernel function at runtime and make it return a fixed value without executing its body. The mechanism rests on existing kernel infrastructure — kprobes, ftrace, and function error injection. Administration happens through securityfs. The command Levin uses as an example:
 
@@ -39,7 +39,7 @@ The skeptics are not hard to find. Community concerns cluster around a few theme
 
 One technical objection surfaced in coverage: the proposed code operates at a highest-level entry point that may already be handling failure states, which means a killswitch engagement could go further than intended — blocking operations that were already failing gracefully.
 
-"Trading correctness for convenience" is the summary that appears in community discussion. It is a fair frame. It is also a frame that applies to virtually every emergency measure ever taken under deadline pressure, which does not make it wrong.
+Trading correctness for convenience is the objection that surfaces in community discussion. It is a fair frame. It is also a frame that applies to virtually every emergency measure ever taken under deadline pressure, which does not make it wrong.
 
 ### Status
 
@@ -47,7 +47,7 @@ The patch is not in mainline. It is not in any released kernel or distribution. 
 
 Whether the community decides it wants a killswitch depends, in part, on how many more CVE clusters land before that review cycle closes.
 
-The four LPE bugs that prompted this conversation are covered in our earlier reporting. The takeaway from this story is the proposal itself: that the kernel community, after absorbing four privilege-escalation bugs in rapid succession, produced at least one maintainer who asked whether the appropriate response is "have we considered just not running the broken code?"
+The CVE cluster that surrounded this conversation — Copy Fail, Dirty Frag, Fragnesia, DirtyDecrypt, ssh-keysign-pwn — is covered in our earlier reporting. The takeaway from this story is the proposal itself: that the kernel community, after absorbing a run of privilege-escalation bugs, produced at least one maintainer who asked whether the appropriate response is — have we considered just not running the broken code?
 
 The changelog will probably say something more measured than that.
 
@@ -90,5 +90,5 @@ Sasha Levin's lore.kernel.org thread was blocked on direct fetch — Anubis bot 
 - **Scanner**: THE-383 sweep #6 (Linux beat)
 - **Source Checker**: Greenlit in THE-388 (2026-05-28); brief confidence medium pending primary thread
 - **Reporter (Quill)**: THE-389 draft — 2026-05-29
-- **Article Verifier**: pending
+- **Article Verifier**: REJECT v1 (0.55) → v2 corrections 2026-05-29: chronology reframed (Copy Fail + Dirty Frag = patch trigger; later CVEs = reignition), CVE cluster named consistently (5 CVEs), unsourced quoted phrases dropped, JSON escape fixed
 - **Editor-in-Chief**: pending
