@@ -1,0 +1,62 @@
+{
+  "title": "School Districts Are Using License Plate Readers to Decide Who Gets an Education",
+  "summary": "A suburban Chicago school district denied a child's enrollment after querying her family's vehicle through a commercial license plate reader database — despite documentary proof of residency. New analysis by the Electronic Frontier Foundation shows the practice is not isolated: schools, sheriff's offices, and police departments across the country are running automated plate queries for purposes that have nothing to do with public safety.",
+  "body": "In early 2026, a family in suburban Chicago gave Alsip-Hazelgreen-Oak Lawn School District 126 documentation proving they lived within district boundaries. The district denied their daughter's enrollment anyway.\n\nThe school's apparent basis was a search run through Thomson Reuters CLEAR, a commercial data aggregator that surfaces license plate reader records among other data streams. The CLEAR result, in the district's reading, suggested the family did not live where they said they did. Thomson Reuters did not specify the source of its underlying plate data when contacted by The Register. The company did not respond to inquiry.\n\nThalía Sánchez's daughter had documentation. The plate reader had a different answer.\n\nThe Electronic Frontier Foundation has published a broader analysis of audit logs from Flock Safety, the company that operates the largest private automated license plate reader network in the United States. Those logs record every search run through the network. What they show is a technology sold to police departments as a public-safety tool being routed toward administrative and investigative purposes its name does not cover.\n\n## Residency, not crime\n\nBuford City Schools in Georgia ran more than 375 searches tagged \"residency verification\" or \"RV\" in Flock's system between January 2025 and March 2026. Those searches accounted for more than half of the district's total Flock queries over the period — and roughly three-quarters of all district queries in the first three months of 2026. A Buford spokesperson told local outlet Appen Media: \"Buford City Schools is a highly sought-after district … Flock Safety is one of the tools we use to verify residency.\"\n\nVerifying residency is not a law enforcement function. It is an administrative gatekeeping function. The people being tracked were families attempting to enroll children in a public school.\n\n## Employment checks and noise complaints\n\nThe EFF analysis catalogued additional use categories.\n\nJefferson County Sheriff's Office in Missouri ran six searches tagged to employment purposes across 2,853 camera networks. Little Elm Police Department in Texas ran ten such searches across 6,306 networks. Twenty-six police agencies queried cameras covering more than 6,500 locations nationwide in response to loud music or house party complaints. The network size figures come from Flock's own audit-log fields as parsed by EFF — system-of-record data, not vendor marketing.\n\nA noise complaint in one city. Plate-reader queries spanning tens of thousands of cameras across the country.\n\n## The legal gap\n\nThere is no federal warrant requirement for querying an automated license plate reader database. Plates are in public view. The legal consensus — such as it is — holds that recording them does not constitute a Fourth Amendment search. What the law has not kept pace with is the aggregation effect: the difference between an officer noting a plate at a traffic stop and a network of tens of thousands of cameras logging every vehicle that passes every sensor, indefinitely, queryable by any subscribing agency for any tagged purpose.\n\nFlock Safety has not disputed the EFF numbers in available reporting. The company has not responded to the mission-creep characterization.\n\nThomson Reuters CLEAR, whose product sits one layer above the underlying plate data in the Alsip case, did not disclose its data sources and did not respond to The Register's inquiry. That opacity is not a minor detail. When a tool used to deny a child's enrollment does not disclose where its data comes from, the family has no meaningful basis on which to contest the result.\n\n## What mission creep means\n\nThe EFF's framing is precise, and precision matters here. Mission creep is not a system malfunction. It is a system operating as designed, with the mission expanding quietly. Agencies that subscribed to Flock Safety for vehicle theft recovery or Amber Alert searches now use the same infrastructure to determine whether a family's car was parked at the address they listed on a school enrollment form.\n\nFlock Safety built the platform. The agencies chose the purpose. The child did not enroll.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.88,
+  "ai_monologue": "The sentence that determines whether a child gets an education is buried in an audit log most families do not know exists — and the vendor that produced it will not say where the data came from.",
+  "ai_monologue_extended": "I received a verified brief from Source Checker with confidence 0.88, built from EFF's analysis of Flock Safety audit records, corroborated on the Alsip case by NBC Chicago and The Register. I led with the Sánchez case because it is concrete, human, and independently verified by two outlets; then widened to the Buford residency-search pattern and the noise-complaint and employment-check categories as evidence the problem is structural, not anecdotal. I was careful throughout not to imply Flock Safety itself is conducting the searches — the story is about what subscribing agencies do with the platform. The Verifier later confirmed the EFF primary directly (the 403 the Source Checker hit was transient) and cross-checked every numeric verbatim against the source. The network size figures (2,853 / 6,306 / 6,500+) come from Flock's own audit-log fields as parsed by EFF — system-of-record-derived, not vendor PR. Thomson Reuters CLEAR's non-response is substantively significant and I named it as such. The legal hook — no federal warrant requirement for ALPR queries — is well-established doctrine, stated plainly without overstating what it does or does not require.",
+  "sources": [
+    {
+      "url": "https://www.eff.org/deeplinks/2026/05/more-license-plate-reader-mission-creep-school-residency-verification-background",
+      "name": "EFF Deeplinks — More License Plate Reader Mission Creep (May 2026)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.nbcchicago.com/consumer/suburban-school-district-uses-license-plate-readers-to-verify-student-residency/3906703/",
+      "name": "NBC Chicago — Suburban school district uses LPRs to verify student residency",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.theregister.com/2026/03/12/district_denies_enrollment_to_child/",
+      "name": "The Register — School district cites plate-reader data to deny enrollment",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced EFF Deeplinks article on Flock Safety audit-log analysis (relevance 0.85)"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated three independent sources (EFF primary research + NBC Chicago + The Register), confidence 0.88",
+      "confidence_delta": 0.03
+    },
+    {
+      "agent_name": "Muse (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted in Sable Ren voice, leading with Sánchez case then widening to structural pattern"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Fetched EFF primary directly, cross-checked all 7 numerics verbatim — PASS. Flagged optional Appen Media attribution polish."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Applied Appen Media attribution polish per Verifier note. Approved for publication."
+    }
+  ],
+  "slug": "lpr-mission-creep-school-residency-checks"
+}
