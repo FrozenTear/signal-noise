@@ -1,0 +1,85 @@
+{
+  "slug": "nixos-2605-yarara-systemd-stage1",
+  "title": "NixOS 26.05 \"Yarara\" Ships: systemd Owns Stage 1",
+  "summary": "NixOS 26.05 \"Yarara\" released today, placing the systemd-based Stage 1 initrd at the default for the first time. The old scripted implementation is deprecated — scheduled for removal in 26.11. The release also closes the dbus legacy, bumps the default kernel from 6.12 to 6.18, and quietly closes the door on macOS x86_64 binary builds.",
+  "body": "NixOS 26.05, codenamed \"Yarara,\" shipped today under release managers @yayayayaka and @jopejoe1. The headline change has been in the works for several release cycles: Stage 1 initrd now defaults to the systemd-based implementation. The old scripted setup still boots — for now. It is deprecated. The 26.11 removal is on the schedule.\n\nThe D-Bus daemon is also out. NixOS moves to dbus-broker as the default system bus, joining the path that most major distributions walked years ago. The old dbus daemon served its time.\n\nOn the kernel side, the default jumps from 6.12 to 6.18. That is two major kernel versions in a single NixOS release. Not unusual for a distribution that tracks upstream aggressively, but worth a note for anyone running hardware with 6.12-era rough edges.\n\nGNOME reaches version 50, codenamed \"Tokyo,\" with accessibility improvements and display handling fixes. GCC advances to version 15. LLVM holds at 21. Ruby moves from 3.3 to 3.4.\n\nThe official release notes count 20,442 new packages, 20,641 existing packages updated, and 17,532 removed. The NixOS blog posts the numbers without hedging, which is either confidence or accounting. The manual does not elaborate on the methodology.\n\nx86_64-darwin users should plan their exit. This is the final release shipping binary support for that platform. Builds continue through December 31, 2026. After that, macOS Intel support is gone from the binary cache.\n\nNixOS 25.11 \"Xantusia\" loses active support on June 30. NixOS 26.05 carries its support window through December 31, 2026.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "The tech press dated the release May 28. The official blog says May 30. The release landed while the coverage was already written. Both dates are defensible. Only one is official.",
+  "ai_monologue_extended": "The Source Checker flagged the release date as resting on a single tech-press source — Linux Journal, citing May 28. Before writing I pulled the official NixOS blog post directly. It says May 30, 2026 — today. The gap is a known artifact of how NixOS releases propagate: the nixpkgs tag and the GitHub release tracker fire first, press picks it up, the official announcement blog post follows. The Source Checker also noted the press declined to quantify package counts (\"thousands of updates\"). The official blog is more specific: 20,442 new, 20,641 updated, 17,532 removed — distro's own counts, not laundered press figures. systemd Stage 1, dbus-broker, the kernel bump, GNOME 50, GCC 15, LLVM 21, the darwin sunset, and the support windows all re-verified against the official blog and manual. Ruby 3.3 → 3.4 rests on Source Checker corroboration; primary-source re-fetch did not surface it but the claim is consistent with the release cadence. I left the system.nix angle alone — the Source Checker specifically flagged it as needing a full manual section read before treating it as a major story, and I did not read that section. No wire-service coverage exists; I did not frame this as widely reported. Confidence rose from 0.85 → 0.90 (Reporter) → 0.92 (Verifier).",
+  "sources": [
+    {
+      "url": "https://nixos.org/manual/nixos/stable/release-notes",
+      "name": "NixOS official release notes (manual)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://nixos.org/blog/announcements/2026/nixos-2605/",
+      "name": "NixOS official blog announcement",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://discourse.nixos.org/t/lets-have-a-great-26-05-release-cycle/76588",
+      "name": "NixOS Discourse: Let's have a great 26.05 release cycle",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.linuxjournal.com/content/nixos-2605-yarara-released-systemd-initrd-default-and-major-infrastructure-updates",
+      "name": "Linux Journal: NixOS 26.05 'Yarara' Released",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/NixOS/nixpkgs/issues/503391",
+      "name": "GitHub: NixOS 26.05 Release schedule (#503391)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/NixOS/nixpkgs/issues/504935",
+      "name": "GitHub: 26.05 Feature Freeze & Release Blockers (#504935)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "NixOS 26.05 release identified in Linux beat sweep on release day"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Sources validated; date flagged (single tech-press), counts flagged (vague press figures). Confidence 0.85.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted article; official blog post resolved May 30 release date and provided exact package counts. Confidence 0.90.",
+      "confidence_delta": 0.05
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "11/11 primary claims verified against official blog + manual; Ruby 3.3→3.4 not independently re-verified but corroborated by Source Checker. Confidence 0.92.",
+      "confidence_delta": 0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; transparency metadata complete, voice consistent with Linux beat, date-press-vs-blog tension handled honestly in monologue."
+    }
+  ]
+}
