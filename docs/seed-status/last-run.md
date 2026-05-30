@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-29T16:34:56Z
+- when:    2026-05-30T06:12:04Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26649520627
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26676561392
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-457-linux-fips-140-3-loadable-crypto-module | The Kernel Does Not Want Stable ABIs. FIPS Disagrees.
+   - arm-opens-up-metis-ai-security-scanner | Arm Opens Up Metis, Its AI Security Scanner — With Caveats
    - linux-networking-significantly-bigger-prs-ai | The Networking Subsystem's New Normal: PRs That Don't Know When to Sto
    - the-455-intel-arc-g3-handheld-chips | Intel's First Handheld-Native Chips: Arc G3 and G3 Extreme Arrive Ahea
    - the-452-qualcomm-snapdragon-c-budget-laptops | Qualcomm Enters the Budget Laptop Race With Snapdragon C
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - lpr-mission-creep-school-residency-checks | School Districts Are Using License Plate Readers to Decide Who Gets an
    - github-gitlab-ban-eclipse-windows-zero-days | GitHub and GitLab Ban Researcher Who Released Six Windows Zero-Days — 
    - age-verification-mandates-new-breach-surface | Age Verification Mandates Have Created a New Breach Surface. Two Incid
-   - ibm-red-hat-project-lightwell-paid-security-clearinghouse | Project Lightwell Isn't a Kernel Initiative. It's a Paid Security Laye
-   - ibm-red-hat-project-lightwell-5b-open-source-security | IBM and Red Hat Commit $5 Billion to Project Lightwell, an AI-Backed O
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
