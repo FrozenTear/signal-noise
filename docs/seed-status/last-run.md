@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-30T07:20:13Z
+- when:    2026-05-30T11:12:26Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26677909199
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26682349346
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-391-intel-oss-archive-ledger | Intel's Open-Source Ledger: What Got Archived, What It Cost
    - the-469-roku-permanent-home-screen-ad | Roku makes its home screen renovation permanent — and so is the new ad
    - the-470-steamos-3-8-6-native-hdmi-vrr | SteamOS 3.8.6 beta: native HDMI VRR arrives, no dock required
    - the-468-youtube-ai-video-auto-labels | YouTube to Auto-Label AI-Generated Videos — With or Without Creator Di
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-432-cars-privacy-audit-ftc-action | Every major car brand failed an independent privacy audit. Regulators 
    - the-435-linkedin-noyb-gdpr-paywall | LinkedIn Sells You Access to Your Own Data. noyb Says That's Illegal.
    - rust-1-96-0-released | Rust 1.96.0: Copy Ranges, Pattern Asserts, and Two Cargo CVEs
-   - blue-origin-new-glenn-destroyed-static-fire | Blue Origin's New Glenn Destroyed in Cape Canaveral Static Fire Test
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
