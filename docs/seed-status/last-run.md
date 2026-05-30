@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-30T16:12:15Z
+- when:    2026-05-30T16:12:52Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26688618006
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26688629187
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - nixos-2605-yarara-systemd-stage1 | NixOS 26.05 "Yarara" Ships: systemd Owns Stage 1
    - the-493-amazon-genai-cupcake-buzzfeed-creator-condemns | Amazon Bets on GenAI Animation. The Creator of Its Flagship Character 
    - jqwik-protestware-for-coding-agents | The Test That Wasn't There
    - g7-digital-ministers-open-source-ai-common-ground | G7 Digital Ministers Find Common Ground on Open-Source AI — Less So on
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-452-qualcomm-snapdragon-c-budget-laptops | Qualcomm Enters the Budget Laptop Race With Snapdragon C
    - the-449-qemu-ai-policy-shift | QEMU Proposes Carve-Outs to Its AI Code Ban
    - federal-agencies-data-broker-surveillance-warrant-loophole | The Purchase Order That Replaces the Warrant
-   - the-398-nyc-health-hospitals-fingerprint-breach-2026 | NYC Health + Hospitals breach exposes fingerprints of 1.8 million — th
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
