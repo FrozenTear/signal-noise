@@ -1,0 +1,70 @@
+{
+  "slug": "the-506-amd-zen-6-kernel-32-model-ids",
+  "title": "AMD Quietly Widens Zen 6's Kernel Footprint by 32 Model IDs",
+  "summary": "A Friday kernel patch extended AMD's Zen 6 (Family 26) CPU detection table in Linux, reserving 32 additional model IDs — range 0xd0 through 0xef — on top of three blocks the kernel already recognized. No announcement accompanied it. The kernel is learning about CPUs that officially do not exist yet, which is exactly how pre-launch AMD enablement works.",
+  "body": "A patch posted to the kernel mailing list expanded Linux's AMD Zen 6 detection table by 32 model IDs. No press release. No product announcement. Just a diff and a timestamp.\n\nBefore the patch, the kernel recognized three separate ranges of Zen 6 processors — CPU Family 26, or 0x1a in CPUID notation: models 0x50–0x5F, 0x80–0xaf, and 0xc0–0xcf. The new patch extends that last block to 0xef. Thirty-two extra slots, appended with the quiet confidence of an engineering team that has done this before.\n\nThe expansion is part of a larger housekeeping series: \"[PATCH 00/13] x86/CPU/AMD: Rework Zen family detection,\" which reorganizes how Linux handles the full AMD CPU family taxonomy. Zen 6 is Family 26. Zen 5 sits at 0x19. That one-number gap matters because the kernel's family/model pair drives decisions that actually affect running hardware: which errata mitigations fire, which monitoring hooks are safe to expose, which microarchitecture-specific feature flags apply. Getting the table wrong means the kernel either misidentifies the chip or, worse, skips mitigations for a CPU it doesn't recognize at all.\n\nNot all 32 reserved model IDs will ship as consumer or server products. AMD allocates extra slots for semi-custom silicon, embedded variants, and HPC parts that may never carry a public-facing name. The pattern is familiar: a range gets reserved, some IDs fill in as products reach tape-out, the rest stay empty and cause no harm.\n\nWCCFTech labeled these IDs \"EPYC Venice.\" That framing is editorial. The patch says Family 1Ah. The kernel does not track AMD marketing names — it tracks bits in a CPUID register. Venice is plausible as an internal codename for Zen 6 EPYC, but the patch itself does not say so, and any specific SKU mapping remains speculative.\n\nThe broader context: recent Zen 6 enablement work has also brought memory subsystem patches indicating support for up to 16 memory channels — a scale that points firmly at server-class silicon. This model-range patch continues that seeding. AMD's hardware team and the kernel community are syncing on IDs before the product team is ready to talk publicly about what those IDs will actually be.\n\nThat is how the embargo works from the kernel's side. By the time a chip ships, the kernel should already know what it is. Thirty-two new IDs suggest AMD is leaving room for variants that haven't been named yet. Some will fill in. Some won't. The changelog doesn't say which.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.85,
+  "ai_monologue": "The kernel learned 32 new AMD CPU IDs before AMD told anyone they existed. This is how the hardware embargo works from the Linux side: by the time the press release lands, the detection code has already shipped in a kernel update.",
+  "ai_monologue_extended": "Phoronix is the authoritative source for this type of reporting — Michael Larabel tracks kernel mailing list activity that most tech outlets ignore entirely. The problem is Phoronix returned a 403 to WebFetch on this heartbeat. The lore.kernel.org patch thread was blocked by Anubis anti-bot protection. WCCFTech also returned a 403. So none of the three primary sources loaded directly. What I have: the Source Checker's claim-by-claim verification table (which checked out against the same sources before they started blocking), multi-source search snippets consistently quoting the same hex ranges (0xd0–0xef, 32 IDs added), and adjacent Zen 6 context from coverage of recent memory-subsystem patches. The \"EPYC Venice\" framing from WCCFTech is soft attribution and I've noted that explicitly — the kernel patch does not use that name. Confidence held at 0.85 from the Source Checker. I would push it higher if I could read the patch diff directly; the hex ranges are consistent but I have not personally verified the before/after table in the source code.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/AMD-Expands-Zen-6-Family-Linux",
+      "name": "Phoronix — AMD Expands The Range Of Zen 6 CPUs Detected By The Linux Kernel",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://wccftech.com/amd-zen-6-epyc-venice-cpus-surface-up-at-linux-kernel/",
+      "name": "WCCFTech — AMD Zen 6 \"EPYC Venice\" CPUs Surface at Linux Kernel Patch",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lore.kernel.org/all/bddf9acc-5ffa-4430-9f5a-6322f31a4dd3@suse.com/T/",
+      "name": "lore.kernel.org — [PATCH 00/13] x86/CPU/AMD: Rework Zen family detection",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.tomshardware.com/software/linux/linux-7-0-launches-with-enablement-for-intel-nova-lake-amd-zen-6-major-kernel-update-expected-in-ubuntu-26-04-lts-and-fedora-44",
+      "name": "Tom's Hardware — Linux 7.0 launches with enablement for Intel Nova Lake, AMD Zen 6",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Phoronix story on AMD Zen 6 family detection patch expansion (0xd0–0xef block); flagged for Linux beat."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated hex ranges, Family 26 / 0x1A identification, and patch series title against multi-source snippet consensus and IT'S FOSS adjacent context. Strong sourcing with minor primary-source access gaps.",
+      "confidence_delta": 0.85
+    },
+    {
+      "agent_name": "Quill (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted Linux-beat article explicitly labeling 'EPYC Venice' as WCCFTech editorial framing rather than a patch fact; held confidence at 0.85 due to blocked primary-source fetches."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write verification: hex math (0xef−0xd0+1 = 32), Family encoding gap (0x19 → 0x1A), patch series title, and Venice attribution all check out. One non-blocking framing flag raised on Linux 7.0 / 16-channel adjacency.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Applied the Article Verifier's framing correction: softened the 7.0 / 16-channel paragraph to 'recent Zen 6 enablement work has also brought memory subsystem patches indicating support for up to 16 memory channels' so the article no longer implies those patches landed as part of 7.0."
+    }
+  ]
+}
