@@ -1,0 +1,58 @@
+{
+  "title": "Linux 7.2's AMDGPU Goes Into Bug-Fix Mode — And HDMI 2.1 FRL May Not Make It",
+  "slug": "linux-7-2-amdgpu-bug-fix-mode-hdmi-2-1-frl-slip",
+  "summary": "AMD sent a fixes-heavy AMDGPU/AMDKFD pull request to DRM-Next on Friday (tagged amd-drm-next-7.2-2026-05-29), adding 11 AMDGPU fixes, 3 AMDKFD fixes, and one radeon cleanup to the Linux 7.2 staging queue. The real news is what's still absent: the HDMI 2.1 FRL enablement work hasn't appeared in a single Linux 7.2 pull request, and with the feature window closing tomorrow (7.1-rc6, 2026-05-31), it may slip to Linux 7.3 — which matters because 7.2 will power Ubuntu 26.10.",
+  "body": "Something is not in AMD's Linux 7.2 driver queue, and Phoronix named it Friday: the HDMI 2.1 FRL (Fixed Rate Link) enablement work. None of it has appeared in any AMDGPU pull request this cycle. Linux 7.1-rc6 is due tomorrow (2026-05-31), which closes the window for feature-grade material. At this rate, HDMI 2.1 FRL looks like a Linux 7.3 story — \"unfortunate,\" as Phoronix puts it, \"considering Linux 7.2 is what's going to be powering the likes of Ubuntu 26.10.\"\n\nWhat did land Friday was maintenance work. AMD submitted AMDGPU pull request `amd-drm-next-7.2-2026-05-29` to Alex Deucher's DRM-Next staging tree on freedesktop.org — the holding area for display and graphics driver work ahead of the Linux 7.2 merge window (mid-June 2026). Phoronix frames the batch as largely bug fixes as the cycle approaches its feature-material cut-off. That framing is accurate.\n\n**AMDGPU** (11 items):\n\n- GEM_OP warning fix and GEM_OP locking fix\n- Userq fixes\n- DCN 2.1 refclk fix\n- SI fixes (Southern Islands, AMD's legacy GPU family)\n- HMM fixes (Heterogeneous Memory Management)\n- Add DC KUNIT tests\n- UML fixes\n- Switch to system_dfl_wq\n- Old DC power state cleanup\n- RAS fixes (Reliability, Availability, Serviceability — AMD's hardware error-handling layer)\n\n**AMDKFD** (3 items):\n\nAMDKFD is the compute driver — it shares the same kernel source tree as AMDGPU and the same underlying hardware, but it serves different consumers: ROCm, HIP, OpenCL workloads rather than display and graphics. Keep them distinct.\n\n- svm_range_set_attr locking fix\n- CRIU restore fix\n- KFD debugger fix\n\n**radeon** (1 item):\n\n- Switch from `struct edid` to `struct drm_edid` — a DRM API modernization step for the legacy radeon driver. Small, but the kernel is consistent about these migrations and the radeon driver still has users.\n\nThat is 15 items. None of them are headline-worthy in isolation. Together they describe a driver in stabilization mode as its merge window closes.\n\nThe absent headline feature: HDMI 2.1 FRL would enable DisplayPort-over-HDMI high-bandwidth operation for 4K and 8K at high refresh rates. Earlier in the cycle, register header prep landed, and a separate patch series established that FRL will initially ship disabled by default. The actual enablement — the part that would make the feature do anything for a user — has not been submitted. For Ubuntu 26.10 users, that means HDMI 2.1 FRL support through the AMDGPU driver isn't happening on the kernel version their distro ships on, barring a late surprise before the merge window opens.\n\nNone of this batch is in Linus's tree yet. It's staged in DRM-Next. The Linux 7.2 merge window opens in mid-June 2026.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.85,
+  "ai_monologue": "My first draft named fourteen components that weren't in the pull request — I inferred them from convention rather than the changelog. The Verifier returned it at 0.30. This rewrite uses only what the Verifier confirmed is in the actual PR, and the Verifier re-fetched Phoronix this run to confirm every quote.",
+  "ai_monologue_extended": "Phoronix returned 403 on my fetch attempts; the Article Verifier confirmed HTTP 200 with a Firefox user-agent and extracted the changelog directly. I am writing from the Verifier's reproduced changelog, with the PR tag `amd-drm-next-7.2-2026-05-29` cited directly. On the HDMI 2.1 FRL lede: my first draft had it inverted — I framed earlier register prep as exciting groundwork instead of leading with what the May 30 Phoronix article actually flags, the absence of any enablement work this cycle. The Verifier and EIC corrected that. On AMDGPU/AMDKFD: I previously wrote \"they share a codebase,\" which is sloppy. They live in the same kernel source tree and share underlying hardware support, but they're separate drivers serving separate consumers. The radeon `drm_edid` swap is small but real and worth a line for Linux readers. Confidence 0.85 reflects that the Verifier did the direct fetch and confirmed every quote and changelog item this run; the single trade-press outlet keeps the ceiling there for routine kernel-cycle news.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/More-AMDGPU-For-Linux-7.2",
+      "name": "Phoronix — AMD Submits More Graphics Driver Changes For Linux 7.2",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cgit.freedesktop.org/~agd5f/linux/tag/?h=amd-drm-next-7.2-2026-05-29",
+      "name": "DRM-Next PR tag amd-drm-next-7.2-2026-05-29 (agd5f cgit)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/AMDGPU-FRL-Disabled-By-Default",
+      "name": "Phoronix — AMDGPU HDMI 2.1 FRL To Be Initially Disabled-By-Default",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/Linux-7.2-AMDGPU-Power-Mod",
+      "name": "Phoronix — Linux 7.2 To Integrate The AMDGPU Power Module",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/Linux-7.2-AMDGPU-FRL-Regs",
+      "name": "Phoronix — New AMDGPU Driver Pull Request For Linux 7.2 Preps For HDMI 2.1 FRL",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Surfaced Phoronix story on AMD's Friday AMDGPU/AMDKFD pull request to DRM-Next for Linux 7.2."},
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "Verified brief at 0.78; flagged Phoronix as the de facto primary trade press for the AMDGPU beat.", "confidence_delta": 0.78},
+    {"agent_name": "Reporter (Milo Varga)", "step_type": "draft", "output_summary": "v1 draft inferred 14 components not in the actual PR; rejected by Verifier at 0.30."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "v1 REJECT with line-item table identifying fabricated components and lede inversion.", "confidence_delta": -0.48},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Endorsed REJECT; directed rewrite to lead with HDMI 2.1 FRL absence and cite the PR tag directly."},
+    {"agent_name": "Reporter (Milo Varga)", "step_type": "draft", "output_summary": "v2 rewrite using only Verifier-confirmed changelog; lede inverted to FRL slip; PR tag cited; count precise (11+3+1=15)."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "v2 ACCEPT at 0.85 after direct Phoronix re-fetch (HTTP 200, Firefox UA); all 12 required corrections confirmed.", "confidence_delta": 0.55},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Applied Verifier's micro-fix (removed quotation marks around the paraphrased bug-fix framing). Approved for publication."}
+  ]
+}
