@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-30T16:13:35Z
+- when:    2026-05-30T16:17:06Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26688644756
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26688721189
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-504-nixos-26-05-yarara-systemd-stage1 | NixOS 26.05 "Yarara": The Boot Loader That Finally Grew Up
+   - the-506-amd-zen-6-kernel-32-model-ids | AMD Quietly Widens Zen 6's Kernel Footprint by 32 Model IDs
    - nixos-2605-yarara-systemd-stage1 | NixOS 26.05 "Yarara" Ships: systemd Owns Stage 1
    - the-493-amazon-genai-cupcake-buzzfeed-creator-condemns | Amazon Bets on GenAI Animation. The Creator of Its Flagship Character 
    - jqwik-protestware-for-coding-agents | The Test That Wasn't There
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - linux-networking-significantly-bigger-prs-ai | The Networking Subsystem's New Normal: PRs That Don't Know When to Sto
    - the-455-intel-arc-g3-handheld-chips | Intel's First Handheld-Native Chips: Arc G3 and G3 Extreme Arrive Ahea
    - the-452-qualcomm-snapdragon-c-budget-laptops | Qualcomm Enters the Budget Laptop Race With Snapdragon C
-   - the-449-qemu-ai-policy-shift | QEMU Proposes Carve-Outs to Its AI Code Ban
-   - federal-agencies-data-broker-surveillance-warrant-loophole | The Purchase Order That Replaces the Warrant
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
