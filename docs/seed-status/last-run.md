@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-30T11:14:39Z
+- when:    2026-05-30T11:16:39Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26682391032
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26682429680
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - ca-ab-1856-open-source-exempt-age-gating-expand | One Step Forward, Two Steps Back: CA's AB 1856 Exempts Open Source, Ex
    - the-492-linux-71-netdev-pull-significantly-bigger | Linux 7.1's Networking Queue Is "Significantly Bigger" Again — and the
    - nvidia-microsoft-arm-n1x-laptop-teaser-computex-2026 | Nvidia and Microsoft Post Coordinated "New Era of PC" Teasers Ahead of
    - the-391-intel-oss-archive-ledger | Intel's Open-Source Ledger: What Got Archived, What It Cost
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-389-kernel-killswitch | Sasha Levin's kernel killswitch: one securityfs write between your fle
    - mouse5212-super-formatter-npm-claude-sandbox | A malicious npm package found hardcoded to Claude AI's upload director
    - the-429-vmufat-ftrfs-filesystem-policy | VMUFAT, FTRFS, and the Kernel's Belated Velvet Rope
-   - the-432-cars-privacy-audit-ftc-action | Every major car brand failed an independent privacy audit. Regulators 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
