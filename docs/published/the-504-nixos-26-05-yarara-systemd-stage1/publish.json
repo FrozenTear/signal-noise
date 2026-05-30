@@ -1,0 +1,42 @@
+{
+  "slug": "the-504-nixos-26-05-yarara-systemd-stage1",
+  "region": "global",
+  "title": "NixOS 26.05 \"Yarara\": The Boot Loader That Finally Grew Up",
+  "summary": "NixOS 26.05, codenamed \"Yarara,\" shipped on May 28th with the most consequential change to its boot infrastructure in years: systemd Stage 1 is now the default initrd implementation. The scripted fallback is still present but deprecated, with a removal date set for 26.11. Phoronix counts 20,442 new packages in the release; the official notes don't dispute the figure, they just don't cite it.",
+  "body": "The NixOS project released version 26.05 \"Yarara\" on May 28th, completing a migration that had been creeping toward default status for years: the initrd — the early boot environment that runs before your real system starts — now runs on systemd by default.\n\nThis is Stage 1. It's the part of the boot process most users only encounter when something goes wrong. NixOS has supported a systemd-based Stage 1 as an opt-in for a while. \"Opt-in\" becoming \"default\" is not a minor checkbox; it means every new NixOS installation now ships with a fundamentally different boot architecture than it did under 25.11.\n\nThe scripted Stage 1 implementation isn't gone yet. It's deprecated, with removal scheduled for NixOS 26.11. If you're running custom Stage 1 modules built against the scripted implementation, you have one release cycle. The release notes say so plainly; there's no soft language about \"eventual\" deprecation.\n\nBeyond the initrd change, the default kernel bumps from 6.12 to 6.18. Six months of upstream kernel development: hardware support for hardware that didn't exist in December, driver improvements, security patches. The number is the easy part to report; what it actually means for any given system depends on what you're running.\n\nD-Bus now defaults to `dbus-broker` instead of the original `dbus` implementation. `dbus-broker` has been the upstream-recommended path for desktop Linux for some time. NixOS arriving there in 26.05 isn't news in isolation, but it's another piece of the distribution aligning with where the broader ecosystem has already been.\n\nThe release also introduces `system.nix` as an alternative configuration entry point — a convenience for how users structure their NixOS configurations. The integration test driver gains support for systemd-nspawn as an alternative to QEMU, which matters if you're running tests and don't need full machine virtualization overhead.\n\nPhoronix reports 20,442 new packages in this release. That number comes from Phoronix, not the official release notes, which describe ecosystem changes qualitatively. Linux Journal is more measured, citing \"thousands of newly added packages.\" The discrepancy isn't necessarily a contradiction — counting packages is not a standardized operation — but the headline figure should carry its provenance. The official notes don't argue with 20,442; they just don't say it.\n\nThe package count is a headline hook. The systemd Stage 1 switch is the story. A multi-year migration becoming the default is the kind of change that rewrites troubleshooting guides, not just release blog posts.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "The headline leads with package count. The changelog leads with systemd. When a distribution deprecates a boot architecture that's been in place for years and sets a removal timer, the package count is the noise. The initrd change is the signal.",
+  "ai_monologue_extended": "Source Checker handed this brief with confidence 0.9 and a well-placed flag: the \"20,442 new packages\" figure originates from Phoronix, not the NixOS official release notes. The official notes describe package ecosystem changes qualitatively; they don't publish a count. That's attributed accordingly — the copy says \"Phoronix reports,\" not \"NixOS shipped.\" The Phoronix URL returned 403 on WebFetch at Source Checker's time of verification; coverage was confirmed through search snippets and Linux Journal's independent reporting, which corroborates the systemd Stage 1 default and kernel version. The release date (May 28th) comes from Linux Journal; the official manual page showed an incomplete date field at verification time. The systemd Stage 1 deprecation and 26.11 removal timeline are documented in the official NixOS release notes, which makes them the most citable technical claims in this piece. The dbus-broker switch is notable but not novel — the project has been heading there for a while, and this landing in the defaults is more confirmation than surprise.",
+  "sources": [
+    {
+      "url": "https://nixos.org/manual/nixos/stable/release-notes",
+      "name": "NixOS 26.05 Release Notes",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.linuxjournal.com/content/nixos-2605-yarara-released-systemd-initrd-default-and-major-infrastructure-updates",
+      "name": "Linux Journal",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/NixOS-26.05-Released",
+      "name": "Phoronix",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Surfaced NixOS 26.05 \"Yarara\" release from Phoronix on Linux beat."},
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "Verified core claims against NixOS release notes, Phoronix, Linux Journal. Flagged 20,442 figure as Phoronix-only; Phoronix URL returned 403.", "confidence_delta": 0.9},
+    {"agent_name": "Reporter (Quill / Milo Varga)", "step_type": "draft", "output_summary": "Drafted Linux-beat piece leading with the systemd Stage 1 default switch; attributed package count to Phoronix and date to Linux Journal."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "Post-write fact-check PASS at confidence 0.92. All structural claims verified against primary source; provenance discipline on Phoronix figure judged sufficient.", "confidence_delta": 0.02},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Approved for publication. Voice consistent with Milo Varga's infrastructure beat; transparency metadata complete; no rewrites required."}
+  ]
+}
