@@ -75,13 +75,6 @@
       "type": "press",
       "paywall_status": "free",
       "verification_status": "verified-attributed-not-asserted"
-    },
-    {
-      "name": "Hacker News thread — origin pointer (context only)",
-      "url": "https://news.ycombinator.com/",
-      "type": "discussion",
-      "paywall_status": "free",
-      "verification_status": "context-only"
     }
   ],
   "pipeline_steps": [

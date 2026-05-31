@@ -19,28 +19,21 @@
     {
       "name": "Remarks on the disproof of the unit distance conjecture (PDF) — Alon, Bloom, Gowers, Litt, Sawin, Shankar, Tsimerman, Wang, Wood",
       "url": "https://cdn.openai.com/pdf/74c24085-19b0-4534-9c90-465b8e29ad73/unit-distance-remarks.pdf",
-      "type": "independent_expert_verification",
+      "type": "primary",
       "paywall_status": "free",
       "verification_status": "verified"
     },
     {
       "name": "Tim Gowers (Fields Medalist) public endorsement",
       "url": "https://openai.com/index/model-disproves-discrete-geometry-conjecture/",
-      "type": "independent_expert",
-      "paywall_status": "free",
-      "verification_status": "verified"
-    },
-    {
-      "name": "Techmeme",
-      "url": "https://www.techmeme.com/260520/p43",
-      "type": "aggregator",
+      "type": "press",
       "paywall_status": "free",
       "verification_status": "verified"
     },
     {
       "name": "Interesting Engineering",
       "url": "https://interestingengineering.com/ai-robotics/openai-paul-erdos-geometry-problem-cracked",
-      "type": "tech_press",
+      "type": "press",
       "paywall_status": "free",
       "verification_status": "verified"
     }
