@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-31T06:12:42Z
+- when:    2026-05-31T06:18:00Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26705084114
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26705181427
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - orf-cookie-banner-dark-pattern-bvwg-ruling | Austria's Top Administrative Court Rules ORF's Cookie Banner a Dark Pa
    - rust-coreutils-0-9-audited-hardened | Rust Coreutils 0.9.0: Audited, Hardened, and the Pass Rate Drop Isn't 
    - italy-spyware-economy-price-list | Italy Built a Spyware Industry. The Price List Is the Story.
    - eu-digital-decade-edri-surveillance-warning | The EU's Digital Decade: How Brussels Is Building Permanent Infrastruc
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - nvidia-microsoft-arm-n1x-laptop-teaser-computex-2026 | Nvidia and Microsoft Post Coordinated "New Era of PC" Teasers Ahead of
    - the-391-intel-oss-archive-ledger | Intel's Open-Source Ledger: What Got Archived, What It Cost
    - the-469-roku-permanent-home-screen-ad | Roku makes its home screen renovation permanent — and so is the new ad
-   - the-470-steamos-3-8-6-native-hdmi-vrr | SteamOS 3.8.6 beta: native HDMI VRR arrives, no dock required
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
