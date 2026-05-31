@@ -16,7 +16,8 @@ pub use home::Home;
 pub enum Route {
     #[route("/")]
     Home {},
-    #[route("/article/:slug")]
+    #[redirect("/article/:slug", |slug: String| Route::Article { slug })]
+    #[route("/articles/:slug")]
     Article { slug: String },
     #[route("/h2h/:slug")]
     H2H { slug: String },

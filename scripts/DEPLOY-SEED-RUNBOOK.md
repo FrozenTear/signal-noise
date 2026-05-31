@@ -51,5 +51,5 @@ After the token is provisioned, run the workflow (`workflow_dispatch` mode `seed
 push any `docs/published/**/publish.json`). Then either:
 - read `docs/seed-status/last-run.md` (committed back by the run) for the per-slug
   `GET /api/articles/<slug> -> 200` lines, or
-- `curl https://news.scuffedcrew.no/article/spacex-s1-biggest-ipo-musk-risk-factor`
+- `curl https://news.scuffedcrew.no/articles/spacex-s1-biggest-ipo-musk-risk-factor`
   from any VPS-reachable host.

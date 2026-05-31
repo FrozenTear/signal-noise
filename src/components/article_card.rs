@@ -79,7 +79,7 @@ pub fn ArticleCard(props: ArticleCardProps) -> Element {
 
                 // Headline
                 h2 { class: "sn-headline", style: "{headline_style}",
-                    a { href: "/article/{props.slug}", "{props.title}" }
+                    a { href: "/articles/{props.slug}", "{props.title}" }
                 }
 
                 // Pipeline fingerprint strip

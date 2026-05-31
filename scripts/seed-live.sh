@@ -64,7 +64,7 @@ a=d.get("articles",d) if isinstance(d,dict) else d
 }
 
 # Read-only per-article transparency capture (THE-206 sign-off evidence).
-# For every live slug: GET /api/articles/<slug> + the /article/<slug> page, then
+# For every live slug: GET /api/articles/<slug> + the /articles/<slug> page, then
 # summarize the transparency payload served from PRODUCTION (confidence, source
 # count, pipeline-step count, short/extended monologue presence, persona/byline).
 # No token needed (reads only). This is the live evidence agent sandboxes cannot
@@ -85,9 +85,9 @@ a=d.get("articles",d) if isinstance(d,dict) else d
     local detail dcode pcode
     detail=$(curl -fsS --max-time 20 "${BASE}/api/articles/${slug}" || echo '{}')
     dcode=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "${BASE}/api/articles/${slug}" || echo ERR)
-    pcode=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "${BASE}/article/${slug}" || echo ERR)
+    pcode=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "${BASE}/articles/${slug}" || echo ERR)
     say "--- ${slug}"
-    say "    GET /api/articles/${slug} -> ${dcode} ; GET /article/${slug} -> ${pcode}"
+    say "    GET /api/articles/${slug} -> ${dcode} ; GET /articles/${slug} -> ${pcode}"
     printf '%s' "$detail" | python3 -c '
 import json,sys
 try: x=json.load(sys.stdin)

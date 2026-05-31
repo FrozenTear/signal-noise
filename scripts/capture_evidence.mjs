@@ -50,7 +50,7 @@ function bad(s) {
 async function captureArticle(browser, slug) {
   const rec = {
     slug,
-    url: `${BASE}/article/${slug}`,
+    url: `${BASE}/articles/${slug}`,
     http_status: null,
     headline: null,
     byline: null,
