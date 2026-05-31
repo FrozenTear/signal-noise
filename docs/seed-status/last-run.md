@@ -1,7 +1,34 @@
 # last seed/probe run
 
-- Date: 2026-05-30T20:37Z
-- Result: published=0 skipped=113 failed=0
-- Deployed SHA: b598da0
-- Trigger: THE-519 autopublish-sweep (THE-233 Path A)
-- Notes: No new slugs to publish — all 113 `docs/published/<slug>/publish.json` payloads on `origin/master` already live on the VPS feed. Sweep ran from agent sandbox via `HOST=root@169.254.1.2 ./scripts/autopublish.sh`; host sourced `/etc/ainory-times.env` and POSTed to `http://127.0.0.1:8888/api/articles`. Cheap no-op pass.
+- when:    2026-05-31T06:11:34Z
+- mode:    probe
+- trigger: push
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26705061163
+- token configured: false
+
+```
+== probe https://news.scuffedcrew.no ==
+GET /            -> 200
+GET /api/articles -> 20 article(s)
+   - italy-spyware-economy-price-list | Italy Built a Spyware Industry. The Price List Is the Story.
+   - eu-digital-decade-edri-surveillance-warning | The EU's Digital Decade: How Brussels Is Building Permanent Infrastruc
+   - the-508-nasa-cygnss-iran-gps-jammer-localization | A researcher used NASA satellites to locate a GPS jammer in Iran — and
+   - linux-7-2-amdgpu-bug-fix-mode-hdmi-2-1-frl-slip | Linux 7.2's AMDGPU Goes Into Bug-Fix Mode — And HDMI 2.1 FRL May Not M
+   - slavia-prague-facial-recognition-shelved | Slavia Prague Shelves Facial-Recognition Plan After AI Act Warning and
+   - the-504-nixos-26-05-yarara-systemd-stage1 | NixOS 26.05 "Yarara": The Boot Loader That Finally Grew Up
+   - the-506-amd-zen-6-kernel-32-model-ids | AMD Quietly Widens Zen 6's Kernel Footprint by 32 Model IDs
+   - nixos-2605-yarara-systemd-stage1 | NixOS 26.05 "Yarara" Ships: systemd Owns Stage 1
+   - the-493-amazon-genai-cupcake-buzzfeed-creator-condemns | Amazon Bets on GenAI Animation. The Creator of Its Flagship Character 
+   - jqwik-protestware-for-coding-agents | The Test That Wasn't There
+   - g7-digital-ministers-open-source-ai-common-ground | G7 Digital Ministers Find Common Ground on Open-Source AI — Less So on
+   - the-486-spacex-golden-dome-416b-contract | SpaceX Wins $4.16 Billion Space Force Contract for Golden Dome Missile
+   - pentagon-troops-location-data-targeting | The Pentagon Knew Adversaries Could Track Troops' Phones for Years. No
+   - ca-ab-1856-open-source-exempt-age-gating-expand | One Step Forward, Two Steps Back: CA's AB 1856 Exempts Open Source, Ex
+   - the-492-linux-71-netdev-pull-significantly-bigger | Linux 7.1's Networking Queue Is "Significantly Bigger" Again — and the
+   - nvidia-microsoft-arm-n1x-laptop-teaser-computex-2026 | Nvidia and Microsoft Post Coordinated "New Era of PC" Teasers Ahead of
+   - the-391-intel-oss-archive-ledger | Intel's Open-Source Ledger: What Got Archived, What It Cost
+   - the-469-roku-permanent-home-screen-ad | Roku makes its home screen renovation permanent — and so is the new ad
+   - the-470-steamos-3-8-6-native-hdmi-vrr | SteamOS 3.8.6 beta: native HDMI VRR arrives, no dock required
+   - the-468-youtube-ai-video-auto-labels | YouTube to Auto-Label AI-Generated Videos — With or Without Creator Di
+write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
+```
