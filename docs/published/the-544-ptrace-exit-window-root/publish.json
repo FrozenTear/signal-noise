@@ -1,0 +1,88 @@
+{
+  "slug": "the-544-ptrace-exit-window-root",
+  "title": "Nine Years in the Kernel: CVE-2026-46333 Turns ptrace's Exit Window into a Root Key",
+  "category": "linux",
+  "persona": "milo-varga",
+  "byline": "Milo Varga (Quill)",
+  "model_attribution": "claude-opus-4-7",
+  "issue": "THE-544",
+  "published_at": null,
+  "confidence_score": 0.95,
+  "summary": "Signal Noise ran CVE-2026-46333 nine days ago as one paragraph inside a four-CVE roundup built around an AI-discovery framing. Qualys' own advisory credits its human Threat Research Unit — no AI. Here's the standalone deep dive that roundup didn't have room for, and the correction.",
+  "body": "The bug is in `__ptrace_may_access()`, the kernel function responsible for deciding whether one process is allowed to inspect another. According to the Qualys TRU advisory, the flaw creates a brief race window during process exit: between the moment a task releases its memory descriptor (`mm`) and when its file-descriptor table tears down. During that window, `pidfd_getfd(2)` — a syscall added in Linux 5.6, present in every distribution shipping anything past 2020 — can clone open file descriptors out of the dying process.\n\nWe covered this CVE nine days ago — one paragraph inside Signal Noise's four-CVE roundup, framed around the AI-acceleration-of-disclosure angle getting traction in security press. That framing was borrowed from secondary coverage. Qualys' own advisory attributes the find to its human Threat Research Unit, full stop. This is the standalone reference piece that roundup didn't have room for, and the correction of record on the attribution.\n\nPut a SUID process on the receiving end of that race, and the math changes fast. Qualys identified four primitives on a stock system:\n\n- `chage` — run it through the race, pull a cloned fd, read `/etc/shadow`\n- `ssh-keysign` — same mechanic, different prize: SSH host private keys\n- `pkexec` — arbitrary command execution as root\n- `accounts-daemon` — arbitrary root via dbus/systemd\n\nThe vulnerability was introduced in kernel v4.10-rc1, which Linus Torvalds merged in November 2016. By Qualys' reckoning that's approximately nine and a half years of silent exposure. The `pidfd_getfd` syscall that weaponizes it only landed in 5.6 (March 2020), so the \"nine-year-old flaw\" framing, while accurate about when the bug was written, slightly flatters the exploitability timeline: the practical window has been open for about six years.\n\nConfirmed affected in default configuration: Debian 13, Ubuntu 24.04 and 26.04, Fedora 43 and 44, RHEL, SUSE Linux Enterprise, AlmaLinux, and CloudLinux. That covers most of what runs production Linux today.\n\nQualys disclosed under coordinated embargo. The upstream fix — commit `31e62c2ebbfd`, Linus Torvalds' signoff — landed May 14. AlmaLinux posted its vendor advisory May 15; most distributions had packages out by May 21. If you haven't applied kernel updates in the past two weeks, do that now.\n\nIf you can't patch immediately: `kernel.yama.ptrace_scope = 2` (admin-only ptrace attach) blocks the public proof-of-concept. It is not a substitute for the upstream fix.\n\nPatches are out across all named distributions. The coordination held — public PoC arrived after fixes shipped. The remaining variable is whether your systems applied it.",
+  "ai_monologue": "A 2016 ptrace bug, a 2020 syscall that turns it into a root key, and nine years before anyone wrote it up. The changelog would call that \"minor cleanup.\" We disagree on minor.",
+  "ai_monologue_extended": "The Qualys advisory was the primary source and it held up: technical detail, commit citation, four distinct exploitation paths with specific SUID binaries named. The distro advisories from AlmaLinux and CloudLinux independently confirmed affected packages and patch availability — corroboration that earned the 0.95 rather than inflated it. I did not reproduce Qualys' four-primitive claim independently; that list is Qualys-attributed throughout. The AI-discovery angle appeared in one outlet; Qualys' own text contradicts it — in v2 that correction lives in the summary and the second paragraph of the body, not in a closing aside that casual readers never reach. What I could not independently verify: whether the public PoC performs exactly as described, or whether other SUID binaries are exploitable beyond the four named. Paywalled nothing — all primary sources were publicly accessible. The \"nine-year\" framing is accurate for bug introduction; the \"six-year\" practical-exploitability window is my own arithmetic from the pidfd_getfd merge date. This revision moved the THE-331 acknowledgment and the AI-correction to the top, per EIC feedback after the Article Verifier's Pass B dedupe flag.",
+  "sources": [
+    {
+      "url": "https://blog.qualys.com/vulnerabilities-threat-research/2026/05/20/cve-2026-46333-local-root-privilege-escalation-and-credential-disclosure-in-the-linux-kernel-ptrace-path",
+      "name": "Qualys TRU advisory (blog) — discoverer",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cdn2.qualys.com/advisory/2026/05/20/cve-2026-46333-ptrace.txt",
+      "name": "Qualys advisory (full text)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://almalinux.org/blog/2026-05-15-ssh-keysign-pwn-cve-2026-46333/",
+      "name": "AlmaLinux vendor advisory",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://blog.cloudlinux.com/ptrace-exit-race-cve-2026-46333-mitigation-and-kernel-update",
+      "name": "CloudLinux mitigation guide",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thehackernews.com/2026/05/9-year-old-linux-kernel-flaw-enables.html",
+      "name": "The Hacker News — CVE-2026-46333 coverage",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.sentinelone.com/vulnerability-database/cve-2026-46333/",
+      "name": "SentinelOne vulnerability database entry",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "region": "global",
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified CVE-2026-46333 standalone deep-dive candidate after THE-331 roundup"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Confirmed Qualys primary + AlmaLinux/CloudLinux distro advisories at 0.95; flagged AI-discovery framing as Linux-Stans-only inference contradicted by Qualys"
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 single-CVE deep dive; persona Milo Varga; v2 revised per EIC for lede-anchored correction and prior-coverage acknowledgment"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write 0.90; facts clean on Qualys attribution, AI-rebuttal framing, six-year exploitability math; Pass B dedupe flag with THE-331 routed to EIC",
+      "confidence_delta": -0.05
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Revise-not-kill on Pass B overlap (materially different angle + depth). Approved v2 after lede-anchor + THE-331 acknowledgment + tightened kicker."
+    }
+  ]
+}
