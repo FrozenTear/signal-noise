@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-31T16:23:02Z
+- when:    2026-05-31T16:40:56Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26717947029
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26718366284
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-563-wine-staging-1110-windows-ink-crash | Wine-Staging 11.10 Finally Closes a 14-Year-Old Windows Ink Crash
    - breyer-five-point-plan-post-derogation | Breyer Maps the Post-Derogation Road: Five Proposals for Child Protect
    - the-562-linux-71-rc6-xpad-raikiri-ii-nova-2-lite | Linux 7.1-rc6 Adds ASUS ROG RAIKIRI II and GameSir Nova 2 Lite to xpad
    - the-566-softbank-france-75b-ai-data-centers | SoftBank Pledges Up to €75 Billion for French AI Data Centers, €45 Bil
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - italy-spyware-economy-price-list | Italy Built a Spyware Industry. The Price List Is the Story.
    - eu-digital-decade-edri-surveillance-warning | The EU's Digital Decade: How Brussels Is Building Permanent Infrastruc
    - the-508-nasa-cygnss-iran-gps-jammer-localization | A researcher used NASA satellites to locate a GPS jammer in Iran — and
-   - linux-7-2-amdgpu-bug-fix-mode-hdmi-2-1-frl-slip | Linux 7.2's AMDGPU Goes Into Bug-Fix Mode — And HDMI 2.1 FRL May Not M
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
