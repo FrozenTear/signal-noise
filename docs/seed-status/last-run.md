@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-31T11:30:31Z
+- when:    2026-05-31T11:32:25Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26711383438
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26711423063
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - ftc-2026-enforcement-record-de-facto-privacy-law | The FTC's 2026 Case Record Is the Federal Privacy Law Congress Won't W
    - the-546-osaurus-mac-model-agnostic-ai-node | Osaurus makes the Mac a model-agnostic AI node
    - the-544-ptrace-exit-window-root | Nine Years in the Kernel: CVE-2026-46333 Turns ptrace's Exit Window in
    - the-551-ibm-xforce-ransomware-quantum-harvest-now | The Industrialization of Ransomware: AI-Driven Attacks and the 'Harves
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-504-nixos-26-05-yarara-systemd-stage1 | NixOS 26.05 "Yarara": The Boot Loader That Finally Grew Up
    - the-506-amd-zen-6-kernel-32-model-ids | AMD Quietly Widens Zen 6's Kernel Footprint by 32 Model IDs
    - nixos-2605-yarara-systemd-stage1 | NixOS 26.05 "Yarara" Ships: systemd Owns Stage 1
-   - the-493-amazon-genai-cupcake-buzzfeed-creator-condemns | Amazon Bets on GenAI Animation. The Creator of Its Flagship Character 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
