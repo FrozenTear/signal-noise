@@ -85,6 +85,32 @@ def get_existing_candidates(beat: str) -> List[Dict]:
         return []
 
 
+def validate_candidate(entry: Dict) -> Tuple[bool, Optional[str]]:
+    """Validate that a candidate has all required fields for filing.
+
+    Required fields:
+    - url: non-empty http/https URL (from entry['link'])
+    - headline: non-empty string (from entry['title'])
+    - lead: 1-2 sentence summary (from entry['summary'])
+
+    Returns: (is_valid, error_message)
+    """
+    url = entry.get('link', '').strip()
+    headline = entry.get('title', '').strip()
+    lead = entry.get('summary', '').strip()
+
+    if not url:
+        return False, "missing url"
+    if not url.startswith(('http://', 'https://')):
+        return False, "url is not http/https"
+    if not headline:
+        return False, "missing headline"
+    if not lead:
+        return False, "missing lead/summary"
+
+    return True, None
+
+
 def is_duplicate(entry: Dict, existing: List[Dict], threshold=0.85) -> Tuple[bool, Optional[str]]:
     """Check if entry is a duplicate of an existing candidate."""
     entry_title = entry.get('title', '')
@@ -224,9 +250,23 @@ def scan_beat(beat: str, feeds_config: Dict) -> List[str]:
     existing = get_existing_candidates(beat)
     print(f"Found {len(existing)} existing candidates in pipeline")
 
+    # Validate required fields
+    validated_entries = []
+    invalid_count = 0
+    for entry in all_entries:
+        is_valid, error = validate_candidate(entry)
+        if not is_valid:
+            invalid_count += 1
+        else:
+            validated_entries.append(entry)
+
+    if invalid_count > 0:
+        print(f"Dropped {invalid_count} candidates with missing required fields (url/headline/lead)")
+    print(f"Candidates after validation: {len(validated_entries)}")
+
     # Deduplicate
     filtered_entries = []
-    for entry in all_entries:
+    for entry in validated_entries:
         is_dup, dup_id = is_duplicate(entry, existing)
         if not is_dup:
             filtered_entries.append(entry)
