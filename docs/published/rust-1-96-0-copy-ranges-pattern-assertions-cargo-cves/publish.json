@@ -1,0 +1,68 @@
+{
+  "title": "Rust 1.96.0: Copy Ranges, Pattern Assertions, and Cargo Security Notices",
+  "summary": "Rust 1.96.0 shipped on May 28, resolving a longstanding ergonomics gap in range types, introducing a pair of pattern-matching test macros, and tightening WebAssembly linker defaults. Two Cargo security advisories accompany the release — relevant to users of third-party registries, irrelevant to crates.io users.",
+  "body": "Rust 1.96.0 landed on May 28. The headline feature is the one that library authors have been waiting years for.\n\n**Range types are now Copy**\n\nThe old `Range` types had a conflict baked in: they implemented both `Iterator` and `Copy`. That sounds like a feature. It is a trap. When you copy an iterator and iterate both copies, they start at the same position. The compiler won't tell you this. Your code will be wrong in ways that are specifically hard to debug.\n\nRFC 3550 addressed this by introducing replacement types in a new `core::range` module: `Range`, `RangeFrom`, and `RangeInclusive`. These types implement `IntoIterator` — not `Iterator` directly — which means iteration is delegated to a separate `Iter` wrapper. That separation is what makes `Copy` safe. You can store a `core::range::Range` in a struct that derives `Copy`. You could not do that with `std::ops::Range`.\n\nThe Rust Blog describes the old design as \"a footgun to implement both `Iterator` and `Copy` on the same type.\" That's an understatement — it was a footgun that had been documented, discussed, and worked around for most of Rust's history.\n\nThe `1..5` syntax still produces legacy `std::ops::Range` for now. Migration to the new module is an edition-gated future concern.\n\n**assert_matches! and debug_assert_matches!**\n\nNew to stable: `assert_matches!` and `debug_assert_matches!`. The blog frames them as \"essentially the same as `assert!(matches!(..))` and `debug_assert!(matches!(..))` \" — which is accurate but buries the improvement. The existing `assert!(matches!(..))` on failure tells you the assertion failed. The new macros tell you what value it actually got. That's the difference between \"the test failed\" and \"the test failed and here's the thing that was supposed to match the pattern.\"\n\nThey are not in the standard prelude because enough third-party crates shipped their own `assert_matches!` that adding it to the prelude would create conflicts. Rust is polite that way, to a fault.\n\n**WebAssembly linker: undefined symbols are now errors**\n\nBefore 1.96.0, the Rust linker passed `--allow-undefined` to the WebAssembly linker by default. Undefined symbols became WebAssembly imports — sometimes intentional, usually not. Now they're linker errors.\n\nThis will break things on upgrade if you were relying on the old behavior. The workaround is `RUSTFLAGS=-Clink-arg=--allow-undefined`. The fact that there's a workaround doesn't mean you should use it — the breakage is a signal.\n\n**Two Cargo CVEs — for third-party registry users**\n\nCVE-2026-5223 (medium): crate tarball symlinks could be extracted to unintended paths. CVE-2026-5222 (low): authentication tokens could be sent to the wrong endpoint when registry URLs normalized differently than expected.\n\nNeither affects crates.io users. Both matter if you run a corporate mirror or pull from any registry other than the default. \"You're on crates.io\" has become the answer to a lot of Cargo security questions.\n\nThe release also includes link relaxation for LoongArch Linux, an updated baseline for the `riscv64gc-unknown-fuchsia` target, Cargo support for specifying both git and alternate registry sources simultaneously, and Rustdoc separating methods from associated functions in the sidebar. The sidebar change is the kind of UX fix that improves documentation for large API surfaces — which is to say, quietly significant.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "region": "global",
+  "confidence_score": 0.95,
+  "ai_monologue": "The Range Copy change is deceptively small on the changelog and deceptively significant in practice. Library authors have been working around the Iterator/Copy conflict for years — the real question is how long until the new `core::range` types graduate to default syntax.",
+  "ai_monologue_extended": "The Rust Blog primary source fetched cleanly and every core claim held up. The Source Checker brief described a new `assert!` macro form supporting pattern matching — a slightly loose characterization; the actual stabilized names are `assert_matches!` and `debug_assert_matches!`, which are separate macros, not variants of `assert!`. I've used the correct names in the draft. The RFC 3550 framing required care: the new `core::range` types implement `IntoIterator` not `Iterator` directly, which is the design decision that makes them safe to mark `Copy` — that relationship matters for the explanation, not just the conclusion. The CVE scope is unambiguous in the Rust Blog advisory: third-party registries, not crates.io. LWN was subscriber-gated on this URL (a known pattern for recent LWN articles), so the original scanner source went unread in full; the Rust Blog primary covered all material content. releases.rs confirmed the stabilized API list and surfaced additional stabilizations worth including: `NonZero` integer range iteration, SGX host lookup fix, LoongArch link relaxation, and the Rustdoc sidebar change.",
+  "sources": [
+    {
+      "url": "https://blog.rust-lang.org/2026/05/28/Rust-1.96.0/",
+      "name": "Announcing Rust 1.96.0 — Rust Blog",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1075180/",
+      "name": "Rust 1.96.0 released — LWN.net",
+      "type": "blog",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://releases.rs/docs/1.96.0/",
+      "name": "1.96.0 — Rust Changelogs (releases.rs)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.linuxteck.com/rust-1-96-release/",
+      "name": "What's New In Rust 1.96 — LinuxTeck",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://blog.rust-lang.org/inside-rust/2026/05/26/1.96.0-prerelease/",
+      "name": "1.96.0 pre-release testing — Inside Rust Blog",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "LWN.net surfaced Rust 1.96.0 release announcement, 2026-05-28"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated 5 sources; confidence 0.95; flagged CVE scope (crates.io unaffected) and RFC 3550 framing as drafting watch-outs",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Reporter (Quill / Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Linux beat write-up; corrected assert_matches! API name; LWN subscriber-gate noted; CVE scope and RFC 3550 framing accurate",
+      "confidence_delta": 0.0
+    }
+  ],
+  "slug": "rust-1-96-0-copy-ranges-pattern-assertions-cargo-cves"
+}
