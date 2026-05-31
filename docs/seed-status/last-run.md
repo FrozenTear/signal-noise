@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-05-31T11:17:08Z
+- when:    2026-05-31T11:20:07Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26711108575
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26711168966
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-551-ibm-xforce-ransomware-quantum-harvest-now | The Industrialization of Ransomware: AI-Driven Attacks and the 'Harves
+   - uk-eu-encryption-two-clocks-one-architecture | Two Clocks, One Architecture: UK and EU Advance Parallel Frameworks to
+   - the-548-claude-code-1-developer-rankings | Claude Code Reaches the Top of Developer Adoption Rankings — With a Qu
    - avrea-stealth-exit-47m-ai-cicd | Avrea exits stealth with $4.7M to fix CI/CD for the AI coding era
    - cifswitch-linux-cifs-root-19-year-kernel-flaw | CIFSwitch: A 19-Year-Old Kernel Flaw That Gives Root — If You've Done 
    - hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit | Five Years, One Letter: Hamburg Found PimEyes Unlawful — Then Did Noth
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-493-amazon-genai-cupcake-buzzfeed-creator-condemns | Amazon Bets on GenAI Animation. The Creator of Its Flagship Character 
    - jqwik-protestware-for-coding-agents | The Test That Wasn't There
    - g7-digital-ministers-open-source-ai-common-ground | G7 Digital Ministers Find Common Ground on Open-Source AI — Less So on
-   - the-486-spacex-golden-dome-416b-contract | SpaceX Wins $4.16 Billion Space Force Contract for Golden Dome Missile
-   - pentagon-troops-location-data-targeting | The Pentagon Knew Adversaries Could Track Troops' Phones for Years. No
-   - ca-ab-1856-open-source-exempt-age-gating-expand | One Step Forward, Two Steps Back: CA's AB 1856 Exempts Open Source, Ex
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
