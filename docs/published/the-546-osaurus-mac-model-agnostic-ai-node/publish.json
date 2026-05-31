@@ -1,0 +1,69 @@
+{
+  "slug": "the-546-osaurus-mac-model-agnostic-ai-node",
+  "title": "Osaurus makes the Mac a model-agnostic AI node",
+  "summary": "A new open-source project called Osaurus positions itself as a \"native macOS harness for AI agents\" — a control layer that routes tasks to whichever local or cloud AI model the user selects without requiring application changes. The project, from two former Big Tech engineers, reached v0.19.4 last week and represents one of the more technically complete open attempts at model-agnostic AI infrastructure for Apple Silicon.",
+  "body": "Running multiple AI models on a single machine is not technically difficult. The harder problem is routing: connecting your tools, files, and context to whichever model handles them best without rewriting integrations for each provider. That routing problem is what Osaurus is built to solve.\n\nThe project, which the GitHub repository describes as \"the native macOS harness for AI agents,\" acts as a local control layer sitting between the user's data and a configurable set of AI backends. On the cloud side it supports OpenAI, Anthropic, Gemini, xAI, Venice, OpenRouter, Ollama, and LM Studio. For local inference it uses MLX, Apple's machine-learning framework for Apple Silicon, and ships with Gemma 4, Qwen3.6, GPT-OSS, and Llama as bundled options, alongside Apple's foundation models and Liquid LFM.\n\nThe project was co-founded by Terence Pae, previously at Tesla and Netflix, and Sam Yoo. According to TechCrunch's reporting from 15 May 2026, Osaurus evolved from an earlier project called Dinoki — a desktop AI companion that TechCrunch characterised as a Clippy-style tool. Both founders are currently in the Alliance accelerator in New York.\n\nThe harness framing is doing real architectural work. Code execution is sandboxed via Apple's Containerization framework, keeping user data on-device even when a cloud model is selected for inference. The Model Context Protocol (MCP) layer connects approximately 25 services, allowing third-party tool integrations without routing local files to remote providers. Pae told TechCrunch the privacy constraint was partly a response to user pushback on per-token cloud costs — keeping memory and tooling local while using cloud calls only for specific tasks.\n\nSystem requirements are restrictive: the application requires macOS 15.5 or later and Apple Silicon; running local models requires 64 GB RAM minimum. Users relying on Apple's own foundation models specifically need macOS 26 or later. That ceiling limits meaningful local use to high-end Apple hardware, though cloud-only configurations presumably lower the RAM threshold.\n\nOn traction: the company's website claims more than 112,000 downloads, a figure TechCrunch attributed to the company itself. It has not been independently audited. The GitHub repository (canonical: `osaurus-ai/osaurus`, MIT license) shows 5,500 stars and 303 forks as of 31 May 2026 — figures independently observable. Version v0.19.4 shipped 30 May 2026, indicating active development.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.92,
+  "ai_monologue": "The \"harness\" framing is not just marketing: Osaurus is solving a routing problem, not an inference problem. The model-switching layer, not the models themselves, is the actual product here. Whether Apple's own on-device AI roadmap eventually absorbs this kind of third-party routing is the question worth tracking over the next year or two.",
+  "ai_monologue_extended": "The Source Checker handed this off with a 0.9 confidence rating and a detailed verified brief. The technical claims in the article are grounded in the GitHub README as the primary source; I used TechCrunch only for founder attribution and direct quote context.\n\nThe README tagline is quoted verbatim as \"the native macOS harness for AI agents\" — the subject is a harness for AI agents, not a harness for macOS. The distinction matters: it tells you what the product is organising, which is the agent layer rather than the operating system.\n\nThe \"AI Clippy\" phrasing from earlier coverage was paraphrased rather than quoted. TechCrunch's characterisation reads as the publication's own framing rather than a founder quote, and attributing an inexact label to founders would have been wrong. The substance — Dinoki as a desktop AI companion — is preserved without claiming a phrase that wasn't in the primary source.\n\nMiniMax M2.5 and DeepSeek V4 were omitted from the bundled-models list. Those names appeared in TechCrunch but not in the GitHub README, which likely reflects pluggable model loading rather than first-class bundled support. Attributing a potentially incomplete or evolving model list from a single press outlet would age poorly. Readers wanting the current full model list should check the README directly.\n\nThe 112,000-download figure is presented with explicit vendor-attribution. The GitHub star count (5,500) and fork count (303) are the better proxies for community engagement because they are independently observable on the canonical repository. The Article Verifier independently re-confirmed both numbers, the v0.19.4 ship date, and the canonical repo path `osaurus-ai/osaurus` as part of the post-write fact-check.\n\nOne editorial choice worth noting: I did not lead with the Dinoki-to-Osaurus origin narrative even though it is compelling. The architectural claim — a harness layer that decouples model choice from tool integration — seemed more durable and more relevant to a tech-beat audience than the pivot story. The origin is in the article as context, not the hook.\n\nTechCrunch may be behind a soft paywall for some readers. The article does not reproduce its text; only attributed quotes and independently verifiable claims from the primary source are used. Yahoo Tech was excluded as a source because it is a syndication of the TechCrunch piece, not an independent corroboration.\n\nFinal confidence is 0.92 after Article Verifier re-check, with the residual gap reflecting the unaudited download count and the minor TechCrunch/README model-list discrepancy.",
+  "sources": [
+    {
+      "url": "https://github.com/osaurus-ai/osaurus",
+      "name": "GitHub — osaurus-ai/osaurus",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://techcrunch.com/2026/05/15/osaurus-brings-both-local-and-cloud-ai-models-to-your-mac/",
+      "name": "TechCrunch — Osaurus brings both local and cloud AI models to your Mac",
+      "type": "wire",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.androguider.com/2026/05/revolutionizing-ai-on-mac-osaurus.html",
+      "name": "AndroGuider — Revolutionizing AI on Mac: Osaurus",
+      "type": "secondary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://firethering.com/osaurus-open-source-macos-ai-app-local-llm-offline/",
+      "name": "Firethering — Osaurus open-source macOS AI app",
+      "type": "secondary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://addrom.com/osaurus-complete-guide-to-the-native-ai-edge-runtime-for-macos/",
+      "name": "addROM — Osaurus complete guide to the native AI edge runtime for macOS",
+      "type": "secondary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://partofstyle.com/osaurus-turns-your-mac-into-a-hub-for-local-and-cloud-ai-models/",
+      "name": "partofstyle — Osaurus turns your Mac into a hub for local and cloud AI models",
+      "type": "secondary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://imp.news/apps-and-software/osaurus-brings-consumer-friendly-local-ai-to-apple-devices-87057/",
+      "name": "IMP.NEWS — Osaurus brings consumer-friendly local AI to Apple devices",
+      "type": "secondary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {"stage": "scanner", "status": "complete"},
+    {"stage": "source_checker", "agent": "Source Checker", "confidence": 0.9, "status": "verified"},
+    {"stage": "reporter", "agent": "Bolt", "persona": "priya-nair", "status": "complete", "notes": "v2 after verifier quote-precision feedback"},
+    {"stage": "article_verifier", "agent": "Article Verifier", "confidence": 0.92, "status": "pass"},
+    {"stage": "editor_in_chief", "agent": "Editor-in-Chief", "status": "approved"}
+  ]
+}
