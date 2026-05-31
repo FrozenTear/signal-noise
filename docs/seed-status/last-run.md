@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-31T06:11:34Z
+- when:    2026-05-31T06:12:42Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26705061163
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26705084114
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - rust-coreutils-0-9-audited-hardened | Rust Coreutils 0.9.0: Audited, Hardened, and the Pass Rate Drop Isn't 
    - italy-spyware-economy-price-list | Italy Built a Spyware Industry. The Price List Is the Story.
    - eu-digital-decade-edri-surveillance-warning | The EU's Digital Decade: How Brussels Is Building Permanent Infrastruc
    - the-508-nasa-cygnss-iran-gps-jammer-localization | A researcher used NASA satellites to locate a GPS jammer in Iran — and
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-391-intel-oss-archive-ledger | Intel's Open-Source Ledger: What Got Archived, What It Cost
    - the-469-roku-permanent-home-screen-ad | Roku makes its home screen renovation permanent — and so is the new ad
    - the-470-steamos-3-8-6-native-hdmi-vrr | SteamOS 3.8.6 beta: native HDMI VRR arrives, no dock required
-   - the-468-youtube-ai-video-auto-labels | YouTube to Auto-Label AI-Generated Videos — With or Without Creator Di
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
