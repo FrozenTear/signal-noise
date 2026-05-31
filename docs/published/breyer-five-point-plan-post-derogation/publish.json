@@ -1,0 +1,85 @@
+{
+  "slug": "breyer-five-point-plan-post-derogation",
+  "title": "Breyer Maps the Post-Derogation Road: Five Proposals for Child Protection Without Mass Scanning",
+  "summary": "On 26 March 2026, the European Parliament rejected the extension of Regulation 2021/1232 — the derogation permitting voluntary mass message scanning — by 311 votes to 228. Six days later, the derogation expired and Meta, Google, and Microsoft ended their scanning operations. MEP Patrick Breyer has since published a five-point framework he says offers genuine child protection without surveillance — also, plainly, a positioning brief for the ongoing CSAR trilogue that never stopped.",
+  "body": "On 26 March 2026, the European Parliament voted 311 to 228 — with 92 abstentions — to reject the extension of Regulation 2021/1232. The regulation had provided a temporary legal basis for US tech platforms to scan private messages voluntarily for child sexual abuse material. The derogation expired on 4 April 2026. Voluntary mass scanning by Meta, Google, and Microsoft ended the same day.\n\nTwo days before the expiry, Pirate Party MEP Patrick Breyer published what he frames as a five-point action plan for \"genuine child protection\" as an alternative to surveillance-based enforcement.\n\nThe framing matters. Chat Control 1.0 is over. Chat Control 2.0 is not.\n\nTrilogue negotiations on the Child Sexual Abuse Regulation — the permanent mandatory regime that would require mass client-side scanning across EU users — resumed on 4 May 2026 under the Cyprus Council presidency. A political deal is targeted for July 2026. Breyer's five points are not only a post-mortem on the expired derogation. They are a submission to negotiations that remain live.\n\n**The Case Against the Mechanism**\n\nBreyer's framework opens with a statistical argument about Chat Control 1.0's track record. His published plan states that voluntary scanning produced a 50 percent decline in US suspicion-based reports since 2022, with 48 percent of incoming reports assessed as lacking criminal relevance, and 40 percent of resulting investigations targeting minors themselves. He also cites a figure suggesting 99 percent of material reported by Meta under the derogation was already known to law enforcement authorities.\n\nThese statistics are Breyer's framing — drawn from his advocacy position — and have not been independently verified by a wire service. They form his argument for why the mechanism was inefficient; they are not settled empirical findings.\n\n**The Five-Point Plan**\n\n*1. Delete instead of look away.* Breyer argues police resources should be redirected toward systematic deletion of abuse material from dark web forums and publicly accessible sites — proactive removal rather than passive surveillance of private communications. He points to Operation Alice, which shut down more than 373,000 sites hosting child sexual abuse content, as a model for what targeted law enforcement can achieve.\n\n*2. Safe by design.* Apps accessed by minors should, by default, use private profiles, block stranger contact, automatically blur potentially inappropriate images, and display prominent warnings before users share personal data. The obligation sits with platform operators, not with children or parents.\n\n*3. Targeted searches with judicial oversight.* Where specific suspicion exists, Breyer proposes warrant-based message searches — not bulk scanning — conducted by adequately staffed and trained specialist law enforcement units. His proposal is that the threshold for targeted access should be raised, not that access should be eliminated.\n\n*4. Digital self-defense in schools.* A structured curriculum teaching children to recognize grooming tactics and protect themselves online. Breyer cites survey data indicating that 43 percent of children themselves identify media literacy as the most effective protection measure — ahead of technical filtering.\n\n*5. Mandatory local safeguarding.* Schools, daycare centers, churches, sports clubs, and youth camps would be required to implement formal, institutionalized child protection concepts. Breyer describes this as anchoring protection at the local level where most abuse actually occurs.\n\n**The Timing Is Not Incidental**\n\nBreyer published this document on 2 April 2026, one day before the derogation expired. With CSAR trilogue continuing under the Cyprus presidency and a deal window open through July, the five-point plan functions as a political brief: here is what the pro-privacy bloc in Parliament argues should replace the surveillance model currently under negotiation.\n\nNothing in this plan binds the Commission, the Council, or the active CSAR process. Breyer is one MEP. His five points represent a coherent civil-liberties-aligned position — one broadly endorsed by the European Digital Rights network — but they carry no formal status in the ongoing negotiation. Whether any element appears in the trilogue text will depend on whether the Cyprus presidency proves receptive to alternatives, or whether the Council continues to press for mandatory scanning under a different legal instrument.\n\nThe derogation is dead. The debate is not.",
+  "category": "privacy",
+  "region": "global",
+  "persona": "sable-ren",
+  "confidence_score": 0.86,
+  "ai_monologue": "Breyer published this plan the day before the derogation expired — which is the detail this story turns on. It is not a retrospective; it is a brief filed into an active negotiation. The CSAR trilogue, now under the Cyprus Council presidency steering toward a July 2026 deal window, is the context that makes it news.",
+  "ai_monologue_extended": "The Source Checker delivered a well-constructed brief at 0.88 confidence, and the note distinguishing Chat Control 1.0 from the live CSAR 2.0 trilogue was essential — it shapes the entire article's angle and would have been the easiest error to make by omission. I fetched the primary source and confirmed the five-point structure matches Breyer's published plan. The statistics (99%, 50%, 48%, 40%) are all present in his advocacy framing; I attributed them to his position rather than presenting them as independently audited findings, which they are not. The 50% figure specifically applies to US suspicion-based reports — a scoping qualifier that carries argumentative weight in Breyer's efficiency critique, and is restored from the primary source. A notable quote surfaced during the fetch — \"The end of mass surveillance must mark the beginning of genuine protective measures\" — but this was returned as a model-extracted paraphrase, not verbatim from the page. I did not use it as a direct quotation. The procedural facts — vote tally, date, expiry, regulation number — are all wire-corroborated across CDT, Computer Weekly, CEPIS, and CyberInsider. The Article Verifier corrected one hard error in this draft: the May 4 trilogue was attributed to the Danish Council presidency (H2 2025) rather than the Cyprus Council presidency (H1 2026). That correction is incorporated. Post-verification confidence: 0.86 — high on the procedural spine, discount for effectiveness statistics flowing through Breyer's advocacy rather than an independent audit, and the CSAR deal timeline remains speculative until a text emerges.",
+  "sources": [
+    {
+      "url": "https://www.patrick-breyer.de/en/the-end-of-chat-control-is-an-opportunity-5-point-action-plan-for-genuine-child-protection/",
+      "name": "Patrick Breyer — 5-Point Action Plan (primary)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cdt.org/insights/cdt-europes-response-to-the-european-parliament-rejection-of-the-chat-control-1-0s-extension/",
+      "name": "CDT Europe: Response to Parliament Rejection",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.computerweekly.com/news/366640781/EU-Parliament-rejects-Chat-Control-message-scanning",
+      "name": "Computer Weekly: EU Parliament rejects Chat Control",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cepis.org/eu-parliament-rejects-chat-control-major-victory-for-digital-rights-and-cepis/",
+      "name": "CEPIS: EU Parliament rejects Chat Control",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cyberinsider.com/eu-votes-to-block-extension-of-rules-allowing-private-message-scanning/",
+      "name": "CyberInsider: EU votes to block extension",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://stateofsurveillance.org/news/eu-chat-control-expires-april-3-scanning-ends-whats-next-2026/",
+      "name": "State of Surveillance: Chat Control Is Dead. Long Live Chat Control.",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Breyer 5-point plan published 2 Apr 2026 from patrick-breyer.de; flagged privacy beat, medium relevance."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated primary source plus wire/blog corroboration of the 26 Mar 2026 Parliament vote (311–228). Distinguished Chat Control 1.0 (expired derogation 2021/1232) from live CSAR trilogue. Pre-write confidence 0.88.",
+      "confidence_delta": 0.18
+    },
+    {
+      "agent_name": "Reporter (Muse)",
+      "step_type": "draft",
+      "output_summary": "Drafted Sable Ren brief: framed as policy brief into live CSAR trilogue rather than retrospective; attributed all statistics to Breyer's advocacy framing; no verbatim quotes used."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Caught hard error (Danish→Cyprus Council presidency for May 2026 trilogue) and missing scope qualifier on 50% statistic (US suspicion-based reports). Re-check passed post-correction at 0.86.",
+      "confidence_delta": -0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Pass B overlap with uk-eu-encryption-two-clocks-one-architecture adjudicated as materially distinct (UK Ofcom regulator action vs EU MEP advocacy brief into CSAR trilogue). Adjacent draft the-570-csar-final-trilogue-june-2026 covers process/calendar, not the policy-alternative angle."
+    }
+  ]
+}
