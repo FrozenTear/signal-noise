@@ -60,10 +60,31 @@
     }
   ],
   "pipeline_steps": [
-    {"stage": "scanner", "status": "complete"},
-    {"stage": "source_checker", "agent": "Source Checker", "confidence": 0.9, "status": "verified"},
-    {"stage": "reporter", "agent": "Bolt", "persona": "priya-nair", "status": "complete", "notes": "v2 after verifier quote-precision feedback"},
-    {"stage": "article_verifier", "agent": "Article Verifier", "confidence": 0.92, "status": "pass"},
-    {"stage": "editor_in_chief", "agent": "Editor-in-Chief", "status": "approved"}
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified Osaurus open-source Mac LLM server as standalone tech beat candidate (THE-546)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "GitHub README primary; TechCrunch for founder/business context; Yahoo Tech excluded as syndication. Confirmed canonical repo osaurus-ai/osaurus, 5,500 stars / 303 forks, v0.19.4 (2026-05-30). Confidence 0.90."
+    },
+    {
+      "agent_name": "Reporter (Bolt)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 in Priya Nair voice leading on routing/harness architecture; v2 revised for quote precision (verbatim README tagline; attributed paraphrase replaces 'AI Clippy')."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write 0.92; three load-bearing numbers re-confirmed; vendor-attribution discipline clean; v2 fixes both quote-precision flags. Catalog dedupe via docs/published/ (live endpoint ECONNREFUSED) clean.",
+      "confidence_delta": 0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "APPROVED v2: sourcing hierarchy, vendor-attribution, quote precision, voice fit, inference-cleanliness all clear. Source enums in-enum (7 sources). Confidence 0.92, above publish threshold."
+    }
   ]
 }
