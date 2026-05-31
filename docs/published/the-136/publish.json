@@ -25,7 +25,7 @@
       "url": "https://www.sec.gov/",
       "type": "primary",
       "paywall_status": "free",
-      "verification_status": "corroborated-not-read-directly"
+      "verification_status": "unverified"
     },
     {
       "name": "Tom Brown (@nottombrown), Anthropic chief compute officer — GB200 / Colossus 2 June ramp",
@@ -39,7 +39,7 @@
       "url": "https://x.ai/news/anthropic-compute-partnership",
       "type": "primary",
       "paywall_status": "free",
-      "verification_status": "403-corroborated-via-techcrunch"
+      "verification_status": "unverified"
     },
     {
       "name": "CNBC — \"Anthropic, SpaceX announce compute deal\" (original announcement, May 6)",
@@ -66,7 +66,7 @@
       "name": "Bloomberg — \"Anthropic to Pay SpaceX Nearly $45 Billion for Computing Deal\"",
       "url": "https://www.bloomberg.com/news/articles/2026-05-20/anthropic-to-pay-spacex-nearly-45-billion-for-computing-deal",
       "type": "press",
-      "paywall_status": "subscriber",
+      "paywall_status": "paywalled",
       "verification_status": "verified"
     },
     {
@@ -74,7 +74,7 @@
       "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/musks-colossus-1-ai-supercomputers-inefficient-mixed-architecture-design-couldnt-be-used-to-train-grok-so-anthropics-using-it-for-inference-instead-musk-readies-unified-blackwell-only-colossus-2-for-frontier-training-and-potential-ipo",
       "type": "press",
       "paywall_status": "free",
-      "verification_status": "verified-attributed-not-asserted"
+      "verification_status": "unverified"
     }
   ],
   "pipeline_steps": [
