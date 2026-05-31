@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-05-31T16:12:03Z
+- when:    2026-05-31T16:17:49Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26717694997
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26717823711
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-566-softbank-france-75b-ai-data-centers | SoftBank Pledges Up to €75 Billion for French AI Data Centers, €45 Bil
    - the-543-fragnesia-dirty-frag-patch-door | Fragnesia (CVE-2026-46300): The Dirty Frag patch left a door open
    - ftc-2026-enforcement-record-de-facto-privacy-law | The FTC's 2026 Case Record Is the Federal Privacy Law Congress Won't W
    - the-546-osaurus-mac-model-agnostic-ai-node | Osaurus makes the Mac a model-agnostic AI node
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - linux-7-2-amdgpu-bug-fix-mode-hdmi-2-1-frl-slip | Linux 7.2's AMDGPU Goes Into Bug-Fix Mode — And HDMI 2.1 FRL May Not M
    - slavia-prague-facial-recognition-shelved | Slavia Prague Shelves Facial-Recognition Plan After AI Act Warning and
    - the-504-nixos-26-05-yarara-systemd-stage1 | NixOS 26.05 "Yarara": The Boot Loader That Finally Grew Up
-   - the-506-amd-zen-6-kernel-32-model-ids | AMD Quietly Widens Zen 6's Kernel Footprint by 32 Model IDs
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
