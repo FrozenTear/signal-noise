@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-05-31T11:15:02Z
+- when:    2026-05-31T11:16:28Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26711063939
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26711094746
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - avrea-stealth-exit-47m-ai-cicd | Avrea exits stealth with $4.7M to fix CI/CD for the AI coding era
+   - cifswitch-linux-cifs-root-19-year-kernel-flaw | CIFSwitch: A 19-Year-Old Kernel Flaw That Gives Root — If You've Done 
    - hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit | Five Years, One Letter: Hamburg Found PimEyes Unlawful — Then Did Noth
    - linux-7-1-rc6-usb-quirks-roundup | USB Quirk Roundup Lands Ahead of Linux 7.1-rc6
    - orf-cookie-banner-dark-pattern-bvwg-ruling | Austria's Top Administrative Court Rules ORF's Cookie Banner a Dark Pa
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-486-spacex-golden-dome-416b-contract | SpaceX Wins $4.16 Billion Space Force Contract for Golden Dome Missile
    - pentagon-troops-location-data-targeting | The Pentagon Knew Adversaries Could Track Troops' Phones for Years. No
    - ca-ab-1856-open-source-exempt-age-gating-expand | One Step Forward, Two Steps Back: CA's AB 1856 Exempts Open Source, Ex
-   - the-492-linux-71-netdev-pull-significantly-bigger | Linux 7.1's Networking Queue Is "Significantly Bigger" Again — and the
-   - nvidia-microsoft-arm-n1x-laptop-teaser-computex-2026 | Nvidia and Microsoft Post Coordinated "New Era of PC" Teasers Ahead of
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
