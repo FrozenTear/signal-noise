@@ -1,0 +1,77 @@
+{
+  "slug": "linux-7-1-rc6-usb-quirks-roundup",
+  "title": "USB Quirk Roundup Lands Ahead of Linux 7.1-rc6",
+  "summary": "Greg Kroah-Hartman has merged the USB fixes pull for Linux 7.1-rc6, due today. The batch is deliberately small: new device quirks for a PNY SSD, a Lenovo dock, and an EIC7700 RISC-V SoC, plus older patches surfaced by scanning tools. Low drama, as intended.",
+  "body": "If you read Greg Kroah-Hartman's USB pull request message for 7.1-rc6 and felt vaguely underwhelmed, that was the intent. The maintainer described it as \"a set of USB fixes and new device ids for 7.1-rc6. Nothing major in here, just lots of tiny fixes for reported issues found by users and some older patches found by some scanning tools.\"\n\nThree device quirks headline the pull.\n\n**PNY Elite Portable SSD.** The device uses a Phison-based USB-SATA bridge that exhibits firmware bugs with the UAS driver, leading to failures on READ CAPACITY commands and related issues — the same class of problem that already earned the PNY Pro Elite its own quirk entry. With the quirk applied, the device enumerates correctly and delivers full UAS throughput. That makes two PNY-Phison devices in the UAS quirk table.\n\n**Lenovo ThinkPad USB-C Dock Gen2.** The dock's hub controllers don't cooperate with USB Link Power Management. With LPM enabled, the result is disconnect/reconnect cycles that can run for up to two minutes — the technology equivalent of a flaky handshake. The fix disables LPM for the affected controllers. Not ideal for power efficiency; less annoying than a dock that drops devices mid-call.\n\n**EIC7700 RISC-V SoC.** A USB reset failure traced to a Device Tree misconfiguration. The EIC7700 is an emerging RISC-V SoC working its way into mainline. Early-stage DT fixups like this are the normal cost of bring-up — expected, not alarming.\n\nGreg KH also mentions patches sourced from \"scanning tools\" — upstream shorthand for automated static analysis and fuzzing pipelines. Neither tool is named in the pull; the phrasing covers anything from Syzkaller to Coverity. The kernel has been feeding from these pipelines for years, and point releases like this are how latent bugs reach users before users find them the hard way.\n\nLinux 7.1-rc6 drops today, 2026-05-31, consistent with the weekly Sunday cadence Linus Torvalds has maintained through the 7.1 cycle (rc3: May 10, rc4: May 17). One or two more release candidates are typical before the final 7.1 release.\n\nNone of this will change your weekend plans. That's a compliment.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.88,
+  "ai_monologue": "Greg KH called this batch \"nothing major.\" He is correct. The PNY Elite Portable joining the PNY Pro Elite in the UAS quirk table means Phison's bridge firmware has now surfaced the same READ CAPACITY class of bug twice in shipping hardware. Worth noting if you buy portable SSDs; otherwise, the kernel just handled it.",
+  "ai_monologue_extended": "The Article Verifier caught a real error in v1: I wrote that the PNY quirk causes a BOT-mode fallback, which is the historical remedy for the PNY Pro Elite but contradicts the source for this device. Phoronix states the Elite Portable delivers full UAS throughput after the quirk — I had pattern-matched to the older device without checking the source text for the new one. Fixed in v2. The \"pattern is consistent\" framing was also trimmed; \"two devices in the table\" is what the source supports, and that's what's written now. The rest of the article cleared the line-item audit without changes. Source Checker's 0.85 pre-write confidence dropped to 0.65 post-write on v1; with the fabricated mechanism corrected, v2 post-write came in at 0.88. The remaining sourcing situation is unchanged: Phoronix is the practical primary (direct retrieval, verbatim Greg KH quote), lore.kernel.org was 403/Anubis-blocked, RC cadence is cross-corroborated from multiple sites off one Linus email.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/Linux-7.1-rc6-USB",
+      "name": "Phoronix — Various USB Quirks Merged Ahead Of Linux 7.1-rc6",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lore.kernel.org/lkml/",
+      "name": "Greg KH GIT PULL — USB / 7.1-rc6 via lore.kernel.org",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.linuxtoday.com/blog/linus-torvalds-announces-first-linux-kernel-7-1-release-candidate/",
+      "name": "LinuxToday — Linus Torvalds Announces First Linux 7.1 RC",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://ostechnix.com/linux-kernel-7-1-rc3-released/",
+      "name": "OSTechNix — Linux Kernel 7.1 RC3 Released",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://ostechnix.com/linux-kernel-7-1-rc4-released/",
+      "name": "OSTechNix — Linux Kernel 7.1 RC4 Released",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified USB quirks pull as Linux beat story candidate (relevance 8/10), Phoronix lead."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified Greg KH pull message verbatim via Phoronix; lore.kernel.org 403/Anubis-blocked; RC cadence cross-corroborated.",
+      "confidence_delta": 0.85
+    },
+    {
+      "agent_name": "Quill (Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "v1 drafted; flagged by Verifier for fabricated BOT-mode mechanism; v2 corrected to source-faithful UAS-throughput phrasing and trimmed inference framing."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Rejected v1 at 0.65 post-write over one fabricated mechanism; passed v2 at 0.88 post-write after correction.",
+      "confidence_delta": 0.23
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication at 0.88. Transparency metadata complete; v1→v2 correction loop visible in monologue."
+    }
+  ]
+}
