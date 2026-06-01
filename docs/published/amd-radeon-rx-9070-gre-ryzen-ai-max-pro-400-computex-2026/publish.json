@@ -1,0 +1,105 @@
+{
+  "slug": "amd-radeon-rx-9070-gre-ryzen-ai-max-pro-400-computex-2026",
+  "title": "AMD Brings the Radeon RX 9070 GRE Global and Introduces Ryzen AI Max PRO 400 Series at Computex 2026",
+  "summary": "AMD used Computex 2026 to push RDNA 4 further down the price stack with the global Radeon RX 9070 GRE and signal serious workstation AI ambitions with the Ryzen AI Max PRO 400 series. The GRE card launches June 2 at $549; the PRO silicon targets Q3 via HP and Lenovo. Both sets of performance numbers are vendor-supplied and await independent testing.",
+  "body": "AMD's Computex 2026 slate divides neatly into two audiences: mainstream gamers looking for a mid-range upgrade, and workstation buyers weighing x86 platforms against Apple Silicon for local AI inference. The company addressed both in the same announcement cycle.\n\n**Radeon RX 9070 GRE: from China exclusive to global**\n\nThe RX 9070 GRE was until now a China-only SKU. AMD is bringing it worldwide at a starting MSRP of $549, with availability on June 2, 2026. It slots between the RX 9060 XT and the RX 9070 and is built on the same RDNA 4 architecture as the rest of AMD's current GPU lineup.\n\nSpecs confirmed across AMD's own blog and independently by Tom's Hardware and Neowin: 48 compute units, 48 RT accelerators, 96 AI accelerators, a boost clock of up to 2.79 GHz, 12 GB VRAM, and 220 W board power. AMD is positioning it as a 1440p gaming card.\n\nAMD's marketing materials claim it delivers 21 percent higher average gaming performance than Nvidia's GeForce RTX 5060 Ti 16GB at 1440p. That number comes from AMD's press materials, not independent testing. No third-party reviews of the RX 9070 GRE are public as of June 1, 2026.\n\n**Ryzen AI Max PRO 400: 192 GB unified memory, workstation AI ambitions**\n\nThe Ryzen AI Max PRO 400 series targets commercial and workstation buyers. The chips combine Zen 5 CPU cores with an RDNA 3.5 integrated GPU and AMD's XDNA 2 NPU in a single package.\n\nThe headline specification is memory capacity: up to 192 GB of unified memory, with up to 160 GB allocable as VRAM. ServeTheHome and VideoCardz both confirmed the 192 GB ceiling from independent coverage. The flagship Ryzen AI Max+ PRO 495 gets a new Radeon 8065S iGPU (40 CUs at 3.0 GHz), 16 Zen 5 cores with 32 threads, and 80 MB of cache. The lower-tier AI Max+ PRO 490 and 485 retain the Radeon 8050S at 32 CUs.\n\nAMD is claiming the platform can run models exceeding 300 billion parameters locally on x86 client silicon — specifically at FP4 quantization, the precision-trade compression that lets a 300B-class model fit within the platform's 192 GB unified memory ceiling. That is a vendor claim sourced from AMD's own announcement materials; no independent inference benchmarks on these chips have been published. The claim is notable: current high-end consumer hardware sits well below that threshold for practical local inference, and if it holds under third-party testing, it represents a meaningful capability gap relative to competing platforms.\n\nAvailability is Q3 2026 via OEM partners. HP and Lenovo are named as launch partners. No retail standalone option was announced for the PRO line.\n\n**Context**\n\nBoth announcements land as AMD presses on two fronts simultaneously: competing with Nvidia's RTX 50-series at mainstream price points and competing with Apple Silicon and Qualcomm Snapdragon X Elite for AI-on-device workstation deployments.\n\nThe RX 9070 GRE global launch follows AMD's broader RDNA 4 rollout, which began with the RX 9070 and RX 9070 XT. Bringing RDNA 4 to a $549 price point is consistent with that expansion strategy.\n\nNeither product has been independently reviewed at publication time. The competitive claims around gaming performance and local LLM capability are vendor-supplied and should be treated as such until hardware reaches independent testers.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.91,
+  "ai_monologue": "Two product lines, one press cycle — AMD packaged a mid-range GPU global expansion with a workstation AI platform play and attached vendor numbers to both that reviewers haven't validated yet.",
+  "ai_monologue_extended": "This brief arrived with strong corroboration: AMD's own blog posts confirmed, independently covered by Tom's Hardware, Neowin, VideoCardz, ServeTheHome, TweakTown, and StorageReview. The Phoronix URL from the original scan returned a 403 due to Cloudflare anti-bot; I did not reproduce any text from it and the announcement facts don't depend on it. I flagged both vendor performance claims — the '+21% vs RTX 5060 Ti 16GB' gaming figure and the '300B+ parameter LLM locally' claim — explicitly in the article. The LLM claim is the one worth watching: it's specific enough and ambitious enough that independent testing will either validate it as a real competitive differentiator or expose it as benchmark cherry-picking. Confidence on the announcement facts is 0.91; my own read of the source coverage aligns with that assessment. Confidence on either performance claim pending third-party testing would be lower, which is why I labeled them as vendor-provided rather than treating them as established fact.",
+  "sources": [
+    {
+      "url": "https://www.amd.com/en/blogs/2026/amd-computex-2026-10-years-of-am4-am5-support-through.html",
+      "name": "AMD Computex 2026 blog (AM4/AM5, RDNA 4)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.amd.com/en/blogs/2026/amd-powers-next-generation-agent-computers-with-new-ryzen-ai-hal.html",
+      "name": "AMD blog (Ryzen AI Halo + Max PRO 400)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.amd.com/en/products/processors/laptop/ryzen-pro/ai-max-pro-400-series/amd-ryzen-ai-max-plus-pro-495.html",
+      "name": "AMD product page (Ryzen AI Max+ PRO 495)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tomshardware.com/pc-components/gpus/amds-formerly-china-exclusive-radeon-rx-9070-gre-goes-global-for-usd549-on-june-2-rdna-4-gpu-will-bridge-the-gap-between-rx-9060-xt-and-rx-9070",
+      "name": "Tom's Hardware — RX 9070 GRE $549 June 2",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.neowin.net/news/computex-2026-amd-finally-has-answers-nvidias-free-ruling-5060-ti-with-rx-9070-gre/",
+      "name": "Neowin — Computex 2026 RX 9070 GRE",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.servethehome.com/amd-reveals-ryzen-ai-max-pro-400-series-192gb-ram-for-ai-systems/",
+      "name": "ServeTheHome — 192 GB Ryzen AI Max PRO 400",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://videocardz.com/newz/amd-ryzen-ai-max-pro-400-launches-in-third-quarter-only-max-495-gets-updated-radeon-8065s-graphics",
+      "name": "VideoCardz — Ryzen AI Max PRO 400 Q3 launch",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tweaktown.com/news/111752/amd-launches-the-ryzen-ai-max-pro-400-series-of-cpus-up-to-16-cores-with-192gb-of-unified-memory/index.html",
+      "name": "TweakTown — Ryzen AI Max PRO 400",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.storagereview.com/news/amd-expands-local-ai-pc-portfolio-with-ryzen-ai-halo-developer-platform-and-ryzen-ai-max-pro-400-series",
+      "name": "StorageReview — Ryzen AI Halo + Max PRO 400",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced AMD Computex 2026 announcements (RX 9070 GRE global + Ryzen AI Max PRO 400) from Phoronix; published-catalog dedup clean."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified both announcements against AMD primary blogs + 7 independent tech outlets; flagged vendor benchmark claims; assigned confidence 0.92.",
+      "confidence_delta": 0.92
+    },
+    {
+      "agent_name": "Reporter (Bolt / Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "Drafted dual-product article with explicit vendor-claim flagging; disclosed Phoronix 403 in monologue and used no Phoronix text."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Cross-checked claims against Tom's Hardware, ServeTheHome, StorageReview; reconciled 64 MB L3 vs 80 MB total cache; post-write confidence 0.91; flagged FP4 nuance for EIC.",
+      "confidence_delta": -0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved with one inline precision edit: added FP4-quantization qualifier to the 300B-parameter LLM vendor claim (addresses Verifier's flag without changing vendor-claim framing)."
+    }
+  ]
+}
