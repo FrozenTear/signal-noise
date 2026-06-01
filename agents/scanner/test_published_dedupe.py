@@ -149,7 +149,16 @@ class TestPublishedDedupe(unittest.TestCase):
 
         # Should be detected by Pass B (vendor token overlap)
         self.assertTrue(is_dup)
-        self.assertIn(debug_info["match_type"], ["vendor_token_overlap", "exact_slug_match", "exact_full_match"])
+        self.assertIn(
+            debug_info["match_type"],
+            [
+                "slug_bigram_overlap",
+                "distinctive_token_overlap",
+                "vendor_token_overlap",
+                "exact_slug_match",
+                "exact_full_match",
+            ],
+        )
 
     def test_log_match_keys(self):
         """Test match key logging."""
