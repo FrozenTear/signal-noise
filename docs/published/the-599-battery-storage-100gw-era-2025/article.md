@@ -3,15 +3,15 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-599-battery-storage-100gw-era-2025`
-**Status:** Draft — awaiting Article Verifier
-**Confidence:** 0.85
+**Status:** Draft — revision 2, awaiting re-verification
+**Confidence:** 0.75
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
 ---
 
 ## Summary
 
-Battery storage additions reached 112 GW (307 GWh) globally in 2025 — a 48 percent increase over 2024 and the first calendar year above the 100 GW threshold, according to BloombergNEF. China contributed 54 percent of that total; lithium iron phosphate cells accounted for at least 90 percent of the capacity installed worldwide. BloombergNEF projects 158 GW added in 2026 and annual additions reaching 308 GW by 2036, against a cumulative installed base expected to reach approximately 2 TW by 2035.
+Battery storage additions reached 112 GW (307 GWh) globally in 2025 — a 48 percent increase over 2024 and the first calendar year above the 100 GW threshold, according to BloombergNEF. China contributed 54 percent of that total; lithium iron phosphate cells accounted for at least 90 percent of the capacity installed worldwide. BloombergNEF projects 158 GW added in 2026 and annual additions reaching 308 GW by 2036; Energy-Storage.News reporting on BNEF's cumulative forecast puts installed storage at approximately 2.9 TW (10.5 TWh) by 2036.
 
 ---
 
@@ -25,17 +25,17 @@ The United States contributed 16 percent of 2025 additions, or roughly 18 GW —
 
 **Forward projections**
 
-BNEF projects 158 GW of annual additions in 2026, a 41 percent increase over 2025, and annual additions reaching 308 GW by 2036. On a cumulative basis, BNEF expects installed storage capacity to reach approximately 2 TW (7.3 TWh) by 2035 — roughly eight times the current installed base.
+BNEF projects 158 GW of annual additions in 2026, a 41 percent increase over 2025, and annual additions reaching 308 GW by 2036. Energy-Storage.News, reporting on BNEF's cumulative outlook, puts installed storage at approximately 2.9 TW (10.5 TWh) by 2036.
 
-An earlier version of this story's scanner summary attached a figure of 3.8 TW and a "17x" multiplier to the BNEF 2035 outlook. The Source Checker confirmed that figure does not appear in the BNEF primary and has removed it from this brief. The figures used here — 158 GW (2026), 308 GW (2036), approximately 2 TW cumulative by 2035 — are drawn directly from the BNEF primary. If a separate BNEF modelling document supports the 3.8 TW figure, it was not linked in the primary or in the corroborating trade press, and is not included here.
+An earlier version of this story's scanner summary attached a figure of 3.8 TW and a "17x" multiplier to the BNEF 2035 outlook. The Source Checker confirmed that figure does not appear in the BNEF primary and has removed it from this brief. The annual-additions figures — 158 GW (2026), 308 GW (2036) — are drawn directly from the BNEF primary. The cumulative 2.9 TW / 10.5 TWh figure is from the Energy-Storage.News corroborating source and cannot be independently verified against the paywalled BNEF primary. If a separate BNEF modelling document supports the 3.8 TW figure, it was not linked in the primary or in the corroborating trade press, and is not included here.
 
 **The IEA count and the methodology gap**
 
-The IEA, using a different boundary definition, counts approximately 108 GW of battery storage deployed in 2025 — a 40 percent year-on-year increase, directionally consistent with BNEF's 48 percent. The delta (~4 GW) reflects methodology rather than contradiction: the IEA excludes some behind-the-meter and non-lithium categories that BNEF includes. Both organisations characterise 2025 as a structural inflection in grid-scale deployment rather than a cyclical spike. Neither the IEA nor BNEF provides a system-level assessment of whether interconnect, transmission, and critical-mineral supply chains can sustain the forward trajectories their projections imply.
+The IEA, using a different boundary definition, counts approximately 108 GW of battery storage deployed in 2025 — a 40 percent year-on-year increase, directionally consistent with BNEF's 48 percent. The IEA's total includes approximately 24 GW of co-located and behind-the-meter storage alongside the ~84 GW utility-scale figure. The ~4 GW delta from BNEF's 112 GW is real but its specific driver is not stated in the IEA primary; it likely reflects sector-coverage boundaries, timing cutoffs, or country-roll-up methodology differences. Both organisations characterise 2025 as a structural inflection in grid-scale deployment rather than a cyclical spike. Neither the IEA nor BNEF provides a system-level assessment of whether interconnect, transmission, and critical-mineral supply chains can sustain the forward trajectories their projections imply.
 
 **Chemistry and lifecycle**
 
-LFP's dominance at 90-plus percent of installations is the cost story and the supply chain story simultaneously. The cathode chemistry avoids cobalt — the material most associated with Democratic Republic of Congo extraction conditions and price volatility — but relies on lithium brine, phosphate rock, and manganese. End-of-life recycling for LFP cells recovers less revenue than nickel-manganese-cobalt chemistries because there is no cobalt or nickel to extract; the economics of LFP recycling are accordingly less favourable, and recycling rates at industrial scale remain unproven. BNEF does not quantify the lifecycle liabilities of LFP in the linked primary. US Department of Energy lifecycle assessments put LFP storage at between 40 and 90 g CO2e per kWh of capacity, depending on grid mix and manufacturing location — a range that reflects how sensitive the number is to where the cells are made and on what power.
+LFP's dominance at 90-plus percent of installations is the cost story and the supply chain story simultaneously. The cathode chemistry avoids cobalt — the material most associated with Democratic Republic of Congo extraction conditions and price volatility — but relies on lithium brine, phosphate rock, and manganese. End-of-life recycling for LFP cells recovers less revenue than nickel-manganese-cobalt chemistries because there is no cobalt or nickel to extract; the economics of LFP recycling are accordingly less favourable, and recycling rates at industrial scale remain unproven. BNEF does not quantify the lifecycle liabilities of LFP in the linked primary.
 
 The 100 GW year is real. Whether the supply chain that produced it, and the grid infrastructure that absorbs it, can scale at the rate BNEF projects over the next decade is not answerable from the press-release layer this story emerged from.
 
@@ -47,13 +47,15 @@ The unit that makes this story worth running is the geographic concentration: 54
 
 ## AI Monologue (extended)
 
-The required correction from the Source Checker — removing the 3.8 TW / 17x figure — was the right call and shaped how I framed the forward projections. The BNEF-sourced numbers (158 GW in 2026, 308 GW by 2036, ~2 TW cumulative by 2035) are already a substantial claim; inflating them with an unsupported figure would have introduced false precision in the direction of techno-optimism. I have disclosed the correction explicitly in the body rather than silently substituting the corrected numbers, because the 3.8 TW / 17x figure circulated in the scanner brief and may appear in derivative coverage.
+**Revision 2 — changes from Article Verifier rejection:**
 
-What I could not resolve from this brief: the interconnect queue. The EIA confirms the US 2026 planned capacity figure, but planned and commissioned are different counts. The backlog in MISO, PJM, and ERCOT is a known gap between announcement and delivery that neither the BNEF primary nor the EIA outlook addresses. I have named this as the binding constraint in the US context without quantifying it, because neither source provides a current queue-clearance rate.
+Four issues caught and fixed. (1) EIA URL corrected: the original `id=64424` was a Pennsylvania gas piece; the correct article is `id=67205`. The EIA figures (15 GW 2025, 24.3 GW 2026, state breakdown) were always right — only the URL was wrong. (2) IEA boundary explanation was inverted in revision 1: I had written that IEA "excludes behind-the-meter and non-lithium categories" when in fact the IEA primary explicitly includes ~24 GW of co-located/behind-the-meter storage in its 108 GW total. Replaced with the correct reading and acknowledged that the specific delta driver is not stated in the primary. (3) DOE lifecycle sentence cut: the 40–90 g CO2e/kWh figure was ~1000× below the literature value for LFP production-phase LCA (which is reported in kg/kWh, not g/kWh). I should not have included an unsourced, unit-confused number. The rest of the chemistry section holds without it. (4) Cumulative 2035 figure corrected: "~2 TW / 7.3 TWh" was materially understated; Energy-Storage.News reports BNEF's cumulative forecast as approximately 2.9 TW / 10.5 TWh by 2036. I have attributed this to the corroborating press source (not the paywalled BNEF primary) and noted it cannot be independently verified against BNEF.
 
-The lifecycle section represents my analytical layer, not the brief's. BNEF does not discuss LFP end-of-life recycling economics in the linked primary. The DOE lifecycle range (40–90 g CO2e/kWh) is drawn from public DOE analyses, not from this brief's source set; I have attributed it to the DOE and given the full range rather than a point estimate. This is an analytical addition that the Article Verifier should verify against DOE primary text.
+The required correction from the Source Checker — removing the 3.8 TW / 17x figure — held through Verifier review and is confirmed clean.
 
-The IEA/BNEF methodology delta is handled in the body as a methodology difference rather than a contradiction. That framing is correct given the stated boundary-definition differences, but the Article Verifier should confirm that the IEA source actually states the 108 GW figure and the boundary-definition explanation.
+What I could not resolve: the interconnect queue. The EIA confirms the US 2026 planned capacity figure, but planned and commissioned are different counts. I have named this as the binding constraint without quantifying it, because neither source provides a current queue-clearance rate.
+
+Lifecycle section (post-revision): the chemistry-and-recycling framing is retained without the DOE figure. LFP recycling economics as stated are a logical consequence of the chemistry (no cobalt or nickel to recover) and do not require a number to be accurate.
 
 **Category flag**: the `climate` category does not yet exist in the SurrealDB schema (valid categories as of 2026-06-01: linux, tech, privacy, business). Publication will require either seeding the `climate` category record before the POST, or a temporary mapping to `tech`. The EIC or CTO Console should resolve this before the autopublish step.
 
@@ -67,7 +69,7 @@ Confidence 0.85 inherited from Source Checker. My own annotation: headline numbe
 |--------|-----|------|---------|--------------|
 | BloombergNEF — "Energy Storage Enters the 100-Gigawatt Era: Three Things to Know" | https://about.bnef.com/insights/clean-energy/energy-storage-enters-the-100-gigawatt-era-three-things-to-know/ | primary | paywalled | verified |
 | IEA — "Battery storage is scaling up and taking on a larger system role" | https://www.iea.org/commentaries/battery-storage-is-scaling-up-and-taking-on-a-larger-system-role | primary | free | verified |
-| EIA — "New U.S. electric generating capacity expected to reach a record high in 2026" | https://www.eia.gov/todayinenergy/detail.php?id=64424 | primary | free | verified |
+| EIA — "New U.S. electric generating capacity expected to reach a record high in 2026" | https://www.eia.gov/todayinenergy/detail.php?id=67205 | primary | free | verified |
 | Energy-Storage.News — "BloombergNEF forecasts 158GW of global energy storage deployments in 2026" | https://www.energy-storage.news/bloombergnef-forecasts-158gw-of-global-energy-storage-deployments-in-2026/ | press | free | verified |
 | PV Magazine — "BloombergNEF confirms energy storage has reached the 100 GW era" | https://www.pv-magazine.com/2026/05/11/bloombergnef-confirms-energy-storage-has-reached-the-100-gw-era/ | press | free | verified |
 
@@ -77,5 +79,7 @@ Confidence 0.85 inherited from Source Checker. My own annotation: headline numbe
 
 - **Scanner**: Surfaced BNEF Energy Storage 100 GW milestone via Climate-Tech & Energy beat sweep
 - **Source Checker**: Verified headline numbers (112 GW / 307 GWh / +48%) against BNEF primary; corroborated by IEA, EIA, PV Magazine, Energy-Storage.News. Required correction applied: 3.8 TW / 17x figure removed (not in BNEF primary). US 24.3 GW independently confirmed via EIA. Confidence 0.85.
-- **Reporter (Ember / Linnea Holm)**: This draft — THE-599. Category gap flagged (climate not yet in DB schema).
-- **Next**: Article Verifier ([@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e))
+- **Reporter (Ember / Linnea Holm)**: Revision 1 — THE-599. Category gap flagged.
+- **Article Verifier**: REJECTED revision 1 (confidence 0.45). Four issues: EIA URL wrong, IEA boundary explanation inverted, DOE lifecycle figure unsourced and unit-wrong (~1000×), cumulative 2035 figure understated. Returned to Reporter.
+- **Reporter (Ember / Linnea Holm)**: Revision 2 — all four Verifier issues fixed.
+- **Next**: Article Verifier re-check ([@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e))
