@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-01T06:26:34Z
+- when:    2026-06-01T07:07:48Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738871124
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26740426826
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - lpr-mission-creep-agency-responses | When the EFF Came Knocking, Some Police Departments Changed Course
    - microsoft-azure-disclosure-gap-coalition-letter | After Suspending Azure to an Israeli Military Unit, Microsoft Has Not 
    - the-588-discord-5ca-breach-70000-government-ids | 70,000 Government IDs Were Stolen From a Discord Verification Vendor. 
    - the-585-steam-deck-back-in-stock-price-hike | Steam Deck Is Back. The Price Is Not What You Remember.
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - uk-eu-encryption-two-clocks-one-architecture | Two Clocks, One Architecture: UK and EU Advance Parallel Frameworks to
    - the-548-claude-code-1-developer-rankings | Claude Code Reaches the Top of Developer Adoption Rankings — With a Qu
    - avrea-stealth-exit-47m-ai-cicd | Avrea exits stealth with $4.7M to fix CI/CD for the AI coding era
-   - cifswitch-linux-cifs-root-19-year-kernel-flaw | CIFSwitch: A 19-Year-Old Kernel Flaw That Gives Root — If You've Done 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
