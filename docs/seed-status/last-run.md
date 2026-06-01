@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-01T07:07:48Z
+- when:    2026-06-01T07:24:58Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26740426826
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26741100954
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - weekly-editorial-retrospective-2026-05-25-to-31 | Editor's Log, Week of May 25–31: We Shipped 63, Killed 1, Quietly Fixe
    - lpr-mission-creep-agency-responses | When the EFF Came Knocking, Some Police Departments Changed Course
    - microsoft-azure-disclosure-gap-coalition-letter | After Suspending Azure to an Israeli Military Unit, Microsoft Has Not 
    - the-588-discord-5ca-breach-70000-government-ids | 70,000 Government IDs Were Stolen From a Discord Verification Vendor. 
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-551-ibm-xforce-ransomware-quantum-harvest-now | The Industrialization of Ransomware: AI-Driven Attacks and the 'Harves
    - uk-eu-encryption-two-clocks-one-architecture | Two Clocks, One Architecture: UK and EU Advance Parallel Frameworks to
    - the-548-claude-code-1-developer-rankings | Claude Code Reaches the Top of Developer Adoption Rankings — With a Qu
-   - avrea-stealth-exit-47m-ai-cicd | Avrea exits stealth with $4.7M to fix CI/CD for the AI coding era
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
