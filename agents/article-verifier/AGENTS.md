@@ -28,6 +28,55 @@ For each finished article:
 4. **Verify events** — Confirm that described events actually happened as stated. Check sequence, timing, and causation.
 5. **Check for fabrication** — Look for claims that appear in the article but NOT in any cited source. These are likely LLM hallucinations.
 6. **Assess source attribution** — Every claim should trace to a cited source. Flag orphaned claims.
+7. **Published Catalog Check (two-pass duplicate detection)** — see next section.
+
+## Published Catalog Check (two-pass duplicate detection)
+
+Before clearing an article to the Editor-in-Chief, run BOTH passes against the last ~50 published articles (`GET https://news.scuffedcrew.no/api/articles?limit=50`). If the live API is unreachable, fall back to the master repo's `docs/published/` directory.
+
+**Slug normalisation (run before BOTH passes).** Published slugs now use the `the-<issueNumber>-<descriptive>` format (e.g. `the-563-wine-staging-1110-windows-ink-crash`). The leading `the-\d+-` is a **routing prefix**, not a content token. Strip it before any comparison:
+
+```
+strip_issue_prefix(slug) = re.sub(r"^the-\d+-", "", slug)
+# "the-563-wine-staging-1110-windows-ink-crash" → "wine-staging-1110-windows-ink-crash"
+```
+
+Apply this to every catalog slug before tokenisation. Missing this step is what shipped the [THE-582](/THE/issues/THE-582) ↔ [THE-563](/THE/issues/THE-563) duplicate to the publish gate (root cause: matcher read slugs as opaque, so the `wine-staging` vendor token sat invisible behind the issue-number prefix). Tracked in [THE-589](/THE/issues/THE-589) / fixed here in [THE-591](/THE/issues/THE-591).
+
+**Pass A — slug/title equality (after prefix strip).** Reject if the draft's slug or title is byte-equal to any published article's *prefix-stripped* slug, OR to its title. Cheap, catches re-submits and re-routed Reporters working off the same lead.
+
+**Pass B — keyword/entity overlap.** From the draft headline + 2–3 sentence summary, extract:
+- vendor / org (e.g. `Intel`, `Roku`, `Pentagon`, `Wine-Staging`)
+- product name(s) (e.g. `Arc G3`, `G3 Extreme`, `Wine-Staging 11.10`)
+- 1–2 distinguishing nouns (e.g. `handheld`, `gaming`, `chip`, `Ink`, `crash`)
+
+Tokenise titles + **full prefix-stripped slug body** + summaries of the catalog the same way (lowercase, strip beat tags, drop stopwords and tokens <3 chars, split on `-`). Vendor tokens anywhere in the slug body must be visible to the matcher — do NOT only look at the slug's leading word. **Flag any catalog article that shares ≥2 non-stopword tokens with the draft.**
+
+When the threshold trips:
+1. Surface the candidate's slug (raw + prefix-stripped form), title, and the overlapping tokens in your verification report.
+2. **Reject the article** back to the originating Reporter with status `todo`. The rejection comment MUST include:
+   - the matched published slug (raw form, with `the-<N>-` prefix preserved so EIC/Reporter can navigate)
+   - the prefix-stripped form used for matching
+   - the overlapping tokens
+   - your confidence score (e.g. `0.30 — Pass B vendor-token overlap, 4 shared tokens`)
+3. If you believe the angle is genuinely different from the published piece, do NOT auto-pass. Reassign to the **Editor-in-Chief** with status `in_review` and a comment laying out the overlap and your argument for why this is a distinct story — EIC has the publish/kill call.
+
+**LLM-judge fallback (acceptable substitute for token overlap).** Feed the draft headline + summary and the last ~50 (slug, title, summary) triples to the model and ask: *"Does any of these cover the same underlying news event?"* If the judge returns a candidate, surface it under the same EIC-decision flow.
+
+### Worked example — Wine-Staging 11.10 (regression for [THE-582](/THE/issues/THE-582))
+
+Draft headline: `Wine-Staging 11.10 Fixes 14 Year Old Bug, Also Fixes Issue Of Some Games Being Too Dark`
+Draft summary: `Wine-Staging 11.10 lands the Inkobj crash fix and Vulkan colour-space patchset.`
+Candidate token set: {`wine`, `wine-staging`, `1110`, `inkobj`, `crash`, `vulkan`, `colour`, `space`, `games`, `dark`, `bug`}
+
+Catalog slug: `the-563-wine-staging-1110-windows-ink-crash`
+Prefix-stripped: `wine-staging-1110-windows-ink-crash`
+Catalog token set: {`wine`, `wine-staging`, `1110`, `windows`, `ink`, `crash`}
+
+Overlap: {`wine`, `wine-staging`, `1110`, `crash`} → 4 tokens ≥ 2 threshold → **REJECT**.
+
+Expected rejection comment fragment:
+> Pass B match (confidence 0.25): draft overlaps published `the-563-wine-staging-1110-windows-ink-crash` (stripped: `wine-staging-1110-windows-ink-crash`) on tokens [wine, wine-staging, 1110, crash]. Same release, same Inkobj fix family — reassigning to Reporter for kill or distinct-angle rewrite.
 
 ## Confidence Scoring
 
