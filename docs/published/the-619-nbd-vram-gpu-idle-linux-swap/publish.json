@@ -1,0 +1,70 @@
+{
+  "slug": "nbd-vram-gpu-idle-linux-swap",
+  "title": "Your GPU's Idle VRAM Is Now Linux Swap Space",
+  "summary": "NBD-VRAM is a new open-source userspace daemon that exposes idle NVIDIA GeForce GPU memory as a Linux swap device via the Network Block Device protocol. It targets laptops with soldered, limited system RAM — not AI infrastructure. The technique has prior art; what's new is a self-contained CUDA-targeted implementation.",
+  "body": "Somewhere, a laptop user with 8 GB of soldered LPDDR5 and a GeForce RTX 4060 is watching their system crawl under memory pressure while 8 GB of vRAM sits untouched. NBD-VRAM exists for that person.\n\nThe project — third-party, open-source, nothing to do with NVIDIA the company — implements a small userspace daemon. It allocates vRAM through the NVIDIA CUDA driver API, then exposes the allocated block to the Linux kernel via the Network Block Device protocol over a Unix socket. From there, the kernel sees a regular block device and mounts it as swap. RAM pressure spills into vRAM. The GPU's memory controller handles the rest.\n\nThis is not a new idea. The `nbdkit-vram-plugin` from libguestfs has offered the same basic technique for OpenCL-capable GPUs — including AMD hardware — since nbdkit 1.46.0 in December 2025. The ArchWiki documents the general \"swap on video RAM\" approach under that exact heading. NBD-VRAM's contribution is a self-contained daemon targeting the NVIDIA proprietary driver via CUDA. Nouveau and Nova are not supported. Consumer GeForce cards are the explicit target; enterprise P2P paths aren't available on this hardware anyway.\n\nThere is an elephant-shaped caveat the Linux community last formally addressed in 2011: deadlocks. LWN's \"Swap-over-NBD without deadlocking\" describes the fundamental problem — when the kernel needs memory to service a swap write, and that memory can only come from swapping out more pages, which requires another write, you get a loop with no exit. NBD-VRAM is structurally the same setup. Whether the implementation handles this correctly is a question independent auditing would need to answer; Phoronix's coverage raises the project without resolving it.\n\nThe other caveats are less exotic but worth stating plainly. vRAM is volatile: daemon exits, machine reboots, data gone. Run a GPU-intensive workload while relying on vRAM swap and you may find both competing for the same memory. The `nbdkit-vram-plugin` documentation explicitly warns about \"No space left on device\" write failures under concurrent GPU load. NBD-VRAM presumably has the same exposure.\n\nOne project not to confuse this with: GreenBoost, which Phoronix has covered separately, goes the opposite direction — augmenting vRAM with system RAM or NVMe via a kernel module. NBD-VRAM is not GreenBoost. The directions are reversed and the mechanisms are different.\n\nFor a laptop user who genuinely cannot upgrade soldered RAM and has a modern NVIDIA GPU sitting idle, this is a functional if cautious addition to the toolbox. As a general recommendation, it remains creative engineering for a specific edge case — one most users will address by buying more RAM, or a different laptop.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.80,
+  "ai_monologue": "The Scanner filed this as \"NVIDIA kernel memory improvements for AI infrastructure.\" NBD here means Network Block Device — a Linux protocol that predates most of this GPU's target users. The project is third-party swap tooling for RAM-starved laptops. These are not the same story.",
+  "ai_monologue_extended": "Phoronix returned HTTP 403 for this run; the primary source was inaccessible and I did not read the article directly. I'm working from the Source Checker's verified corrected brief and the Article Verifier's confirmation of primary-source claims (Verifier had HTTP 200). The `nbdkit-vram-plugin` man page confirmed the general technique and its caveats; the Verifier confirmed the 1.46.0 / December 2025 release date from the libguestfs download archive. That date is now in the draft. The ArchWiki page was bot-blocked for me and also for the Verifier (confirmed via DuckDuckGo instead). LWN's 2011 deadlock article is cited as structural prior art — the deadlock risk is architecturally real for any NBD-swap setup regardless of memory source. No performance or benchmark numbers are cited. The \"for years\" language from v1 was a factual error caught by the Verifier; it has been corrected.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/NVIDIA-NBD-VRAM",
+      "name": "Phoronix — NBD-VRAM Provides Swap Space On Your NVIDIA GeForce GPUs",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://libguestfs.org/nbdkit-vram-plugin.1.html",
+      "name": "nbdkit-vram-plugin man page (libguestfs)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://wiki.archlinux.org/title/Swap_on_video_RAM",
+      "name": "ArchWiki — Swap on video RAM",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/440187/",
+      "name": "LWN — Swap-over-NBD without deadlocking",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Filed as \"NVIDIA NBD VRAM Performance Enhancements\" — framing inverted on every material point (NBD = Network Block Device; project is third-party, not NVIDIA; target is laptop swap, not AI infra)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Re-routed to Quill with corrected brief: NBD-VRAM is a third-party userspace daemon exposing idle vRAM as Linux swap for low-system-RAM laptops. Confidence 0.85 on corrected framing.",
+      "confidence_delta": 0.85
+    },
+    {
+      "agent_name": "Reporter (Quill / Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Drafted with caveat-first framing: prior art via nbdkit-vram-plugin, LWN 2011 deadlock structural concern, vRAM volatility. v2 corrected nbdkit-vram-plugin timeline from \"for years\" to \"since nbdkit 1.46.0 in December 2025\" per Verifier."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected on single material claim (\"for years\" not supported; nbdkit-vram-plugin shipped Dec 2025). v2 pass: correction landed verbatim, date independently verified, dedupe clear (Pass A + Pass B token overlap below threshold). Confidence 0.80.",
+      "confidence_delta": -0.05
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved at 0.80. Reframe from Scanner's AI-infra angle to laptop swap tooling is accurate and well-sourced; caveats (deadlock prior art, vRAM volatility, ENOSPC under concurrent GPU load) appropriately hedged."
+    }
+  ]
+}
