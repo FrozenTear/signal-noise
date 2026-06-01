@@ -3,7 +3,7 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-598-bnef-new-energy-outlook-2026`
-**Status:** Draft — re-submitted after Article Verifier correction (v2)
+**Status:** Draft — v3 (EIC cross-reference sentence added; ready for EIC publish)
 **Confidence:** 0.78 (inherited from Source Checker; reporter annotation appended below)
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
@@ -36,7 +36,7 @@ A 24-year spread between the world's two largest economies is not a technology s
 
 Solar becomes the world's largest single source of electricity by 2032 under the Economic Transition Scenario, driven by continued price declines and persistent overcapacity in panel manufacturing. The BNEF report frames domestic manufacturing intensity — solar PV does not have a global commodity fuel price — as part of its energy-security argument.
 
-Battery storage is the other headline technology. BNEF projects global installed capacity rising 17-fold: from 223 GW in 2025 to approximately 3.8 TW by 2035. New additions in 2026 alone are forecast at 158 GW / 459 GWh.
+Battery storage is the other headline technology. BNEF projects global installed capacity rising 17-fold: from 223 GW in 2025 to approximately 3.8 TW by 2035. New additions in 2026 alone are forecast at 158 GW / 459 GWh. A separate BNEF storage brief, "Energy Storage Enters the 100-Gigawatt Era" (May 2026), projects cumulative capacity of approximately 2.9 TW by 2036 — a smaller number than the integrated NEO 2026 figure, reflecting different model scope and boundary definitions between the two BNEF publications; that figure is the basis for [THE-599](/THE/issues/THE-599).
 
 Heat pumps, EVs, and rooftop solar are named in the report's technology portfolio as tools for energy-security diversification alongside storage. The 2026 edition does not provide specific deployment figures for heat pumps.
 

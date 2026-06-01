@@ -3,7 +3,7 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-599-battery-storage-100gw-era-2025`
-**Status:** Draft — revision 2, awaiting re-verification
+**Status:** Draft — revision 3 (EIC retraction-paragraph reframe; awaiting Article Verifier re-check)
 **Confidence:** 0.75
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
@@ -27,7 +27,7 @@ The United States contributed 16 percent of 2025 additions, or roughly 18 GW —
 
 BNEF projects 158 GW of annual additions in 2026, a 41 percent increase over 2025, and annual additions reaching 308 GW by 2036. Energy-Storage.News, reporting on BNEF's cumulative outlook, puts installed storage at approximately 2.9 TW (10.5 TWh) by 2036.
 
-An earlier version of this story's scanner summary attached a figure of 3.8 TW and a "17x" multiplier to the BNEF 2035 outlook. The Source Checker confirmed that figure does not appear in the BNEF primary and has removed it from this brief. The annual-additions figures — 158 GW (2026), 308 GW (2036) — are drawn directly from the BNEF primary. The cumulative 2.9 TW / 10.5 TWh figure is from the Energy-Storage.News corroborating source and cannot be independently verified against the paywalled BNEF primary. If a separate BNEF modelling document supports the 3.8 TW figure, it was not linked in the primary or in the corroborating trade press, and is not included here.
+An earlier scanner summary attached BNEF's NEO 2026 integrated-outlook figure — 3.8 TW by 2035, 17× the 2025 base — to this story. That figure is real but belongs to a separate BNEF publication ("New Energy Outlook 2026") with a different model boundary; this article uses the cumulative projection from BNEF's dedicated storage brief (~2.9 TW / 10.5 TWh by 2036), as corroborated by Energy-Storage.News. The annual-additions figures — 158 GW (2026), 308 GW (2036) — are drawn directly from the BNEF primary. Signal Noise's coverage of the NEO 2026 integrated figure is in [THE-598](/THE/issues/THE-598).
 
 **The IEA count and the methodology gap**
 
