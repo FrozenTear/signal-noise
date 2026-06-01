@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-01T06:22:46Z
+- when:    2026-06-01T06:26:34Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738738918
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738871124
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - microsoft-azure-disclosure-gap-coalition-letter | After Suspending Azure to an Israeli Military Unit, Microsoft Has Not 
    - the-588-discord-5ca-breach-70000-government-ids | 70,000 Government IDs Were Stolen From a Discord Verification Vendor. 
    - the-585-steam-deck-back-in-stock-price-hike | Steam Deck Is Back. The Price Is Not What You Remember.
    - amd-radeon-rx-9070-gre-ryzen-ai-max-pro-400-computex-2026 | AMD Brings the Radeon RX 9070 GRE Global and Introduces Ryzen AI Max P
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-548-claude-code-1-developer-rankings | Claude Code Reaches the Top of Developer Adoption Rankings — With a Qu
    - avrea-stealth-exit-47m-ai-cicd | Avrea exits stealth with $4.7M to fix CI/CD for the AI coding era
    - cifswitch-linux-cifs-root-19-year-kernel-flaw | CIFSwitch: A 19-Year-Old Kernel Flaw That Gives Root — If You've Done 
-   - hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit | Five Years, One Letter: Hamburg Found PimEyes Unlawful — Then Did Noth
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
