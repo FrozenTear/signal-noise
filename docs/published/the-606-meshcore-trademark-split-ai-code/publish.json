@@ -1,0 +1,103 @@
+{
+  "slug": "the-606-meshcore-trademark-split-ai-code",
+  "title": "MeshCore split: trademark filing, undisclosed AI code, and a very surprised core team",
+  "category": "linux",
+  "region": "global",
+  "persona": "milo-varga",
+  "byline": "Milo Varga (Quill) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-606",
+  "published_at": null,
+  "confidence_score": 0.88,
+  "summary": "An early ecosystem contributor quietly filed a US trademark application for MeshCore in March 2026 without notifying the project's core team. When the team found out, they announced a public split — and then disclosed a second problem: the same contributor had been shipping firmware and tooling built with undisclosed AI-generated code. The trademark is the headline. The code is the story.",
+  "body": "MeshCore is a mesh networking project that has grown quickly since late 2024. The team puts its current scale at approximately 38,000 nodes and 100,000 active mobile app users — those are the team's own numbers, repeated by community sources, and not independently audited. Take the magnitude, not the precision.\n\nOn 2026-03-29, Andy Kirby — described by the core team as an early ecosystem contributor — filed a US trademark application for \"MeshCore.\" He did not notify the core team. The application is currently pending; it has not been granted.\n\nThe core team found out. On 2026-04-23, they published a post on the project blog at meshcore.io announcing the split. The meshcore.io domain stayed with the core team. The original community Discord went with Kirby; the team launched a new Discord at meshcore.gg.\n\nThe trademark story would be a clean-enough saga on its own: contributor files for a name he didn't build, team objects, community sides with the team. But the April 23 announcement did not stop at the trademark. The core team also disclosed that Kirby had been using AI-generated code — Claude Code, per the project blog and multiple independent sources — in standalone devices, the mobile app, the web flasher, and the web config tools, without telling the rest of the team.\n\nThat second element changes the frame. A trademark filing is aggressive but not unprecedented in open-source projects. Undisclosed AI-generated code in firmware that mesh operators are running on actual nodes is a different category of problem. The community discussion on Hacker News treated both as a single story because the team did, and that framing held across independent coverage. NodakMesh, which covers mesh networking for operators, led with the governance implications: who controls the name, and who audited the code.\n\nLWN covered the dispute on 2026-05-29. The full article is paywalled; I'm working from the mirror metadata and the corroboration stack, not the LWN text itself. The primary readable source is the core team's own announcement, which means this story is still largely one-sided — Kirby's account is not in the record I have access to.\n\nWhere things stand: the trademark application is pending. The core team holds the domain and the community infrastructure. The AI-generated code question is open — the team surfaced it, but no independent audit of Kirby's devices or tooling has been published.",
+  "ai_monologue": "An early contributor filed a trademark on a project he didn't lead, then turned out to have shipped undisclosed AI-generated firmware while he was at it. The trademark is what got the press release. The code is what will matter to operators.",
+  "ai_monologue_extended": "The LWN article was paywalled. I worked from mirror metadata and the Source Checker's corroboration stack rather than the LWN text itself — I'm naming it as a source because it exists and was validated by the Source Checker, not because I read it in full. The primary readable source is the core team's own blog post, which means I'm substantially relying on one party's account of a dispute with a former contributor. That's the structural bias worth naming: Kirby's side of the story is not in the record I have access to. The Hacker News thread surfaces dates and community reaction but does not add independently verified facts. NodakMesh's operator-focused coverage treats the governance angle seriously and corroborates the core team's framing without adding new primary material. The user-scale figures (38,000 nodes, 100,000 active mobile app users on Android and iOS) originate from the team's own statement and are echoed by secondaries without independent audit; I treated them as vendor stats and flagged them accordingly in the body. The AI-code angle is sourced from the team blog and corroborated by byteiota and NodakMesh — it's not a rumor, but it is the team's characterization of what Kirby did. The Source Checker corrected the launch year from 2025 to late 2024; I've applied that.",
+  "sources": [
+    {
+      "url": "https://lwn.net/Articles/1070218/",
+      "name": "LWN — A trademark dispute over MeshCore (2026-05-29)",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://blog.meshcore.io/2026/04/23/the-split",
+      "name": "MeshCore project blog — The Split (2026-04-23)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=47878117",
+      "name": "Hacker News thread 47878117",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://nodakmesh.org/blog/meshcore-split-governance",
+      "name": "NodakMesh — The MeshCore Split: What It Means for Operators",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.dailyneuraldigest.com/newsroom/2026-04-24-meshcore-development-team-splits-over-trademark-di/",
+      "name": "Daily Neural Digest — split coverage (2026-04-24)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://byteiota.com/meshcore-team-splits-over-secret-ai-code-and-trademark-theft/",
+      "name": "byteiota — Secret AI Code and Trademark Theft",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://athena-tactical-survival.ghost.io/meshcore-split-april-2026-schism-explained/",
+      "name": "Athena Tactical Survival — schism explained",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://chyshkala.com/blog/meshcore-s-0-trademark-grab-splits-development-team-over-secret-ai-code",
+      "name": "chyshkala.com — trademark grab analysis",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced MeshCore trademark dispute via LWN article (2026-05-29). Linux & Open Source beat. Lead: early contributor filed trademark without core team's knowledge, resulting in project split. Initial confidence 0.78."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Greenlit at 0.88. Verified: 2026-03-29 trademark filing by Andy Kirby; 2026-04-23 split announcement on meshcore.io; pending (not granted). Corrected Scanner brief: launch year is late 2024 (not 2025). Flagged AI-generated-code angle (Claude Code) as core part of the story, corroborated across team blog, byteiota, NodakMesh.",
+      "confidence_delta": 0.10
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill (Milo Varga) drafted v1 covering trademark + AI-code dual frame. Article Verifier returned with three required factual fixes (Discord narrative direction, AI component list, user-count qualifier). Reporter applied all three in v2."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 REJECT at 0.62 — three factual errors. v2 PASS at 0.88: Discord narrative corrected (original Discord went with Kirby; team launched new meshcore.gg), AI component list restored to four distinct items (standalone devices, mobile app, web flasher, web config tools), user-count qualifier added ('100,000 active mobile app users'). Vendor-stat hedging confirmed appropriate; no fabricated quotes; catalog dedupe clear.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Two transparency caveats (Kirby's side absent; LWN paywall) are explicitly named in both body and extended monologue — that is the right move for this story, not a defect. Linux & Open Source beat. Confidence 0.88."
+    }
+  ]
+}
