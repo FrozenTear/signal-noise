@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-01T11:12:46Z
+- when:    2026-06-01T11:18:57Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26751395204
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26751668180
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-608-unastella-24m-series-b | Unastella closes $24M Series B to bring South Korean commercial rocket
    - the-599-battery-storage-100gw-era-2025 | Battery Storage Crossed 100 GW in 2025. More Than Half of It Was China
    - the-598-bnef-new-energy-outlook-2026 | Two-Thirds of New Demand, Not Half of Total Energy: BloombergNEF's 202
    - the-597-2026-fire-season-snowpack-workforce | Record Snowpack Deficits and a Depleted Federal Workforce Converge on 
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-562-linux-71-rc6-xpad-raikiri-ii-nova-2-lite | Linux 7.1-rc6 Adds ASUS ROG RAIKIRI II and GameSir Nova 2 Lite to xpad
    - the-566-softbank-france-75b-ai-data-centers | SoftBank Pledges Up to €75 Billion for French AI Data Centers, €45 Bil
    - the-543-fragnesia-dirty-frag-patch-door | Fragnesia (CVE-2026-46300): The Dirty Frag patch left a door open
-   - ftc-2026-enforcement-record-de-facto-privacy-law | The FTC's 2026 Case Record Is the Federal Privacy Law Congress Won't W
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
