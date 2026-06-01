@@ -175,6 +175,64 @@ beat = "ai_creative"
 type = "blog"
 priority = "medium"
 
+# ─── Climate-Tech & Energy ───────────────────────────────────────────────────
+
+[[feed]]
+url = "https://www.canary.media/feed.xml"
+name = "Canary Media"
+beat = "climate"
+type = "wire"
+priority = "high"
+
+[[feed]]
+url = "https://heatmap.news/rss.xml"
+name = "Heatmap News"
+beat = "climate"
+type = "wire"
+priority = "high"
+
+[[feed]]
+url = "https://www.carbonbrief.org/feed/"
+name = "Carbon Brief"
+beat = "climate"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://insideclimatenews.org/feed/"
+name = "Inside Climate News"
+beat = "climate"
+type = "primary"
+priority = "high"
+
+[[feed]]
+url = "https://www.eenews.net/ert/feed/"
+name = "E&E News Energy"
+beat = "climate"
+type = "wire"
+priority = "medium"
+
+[[feed]]
+url = "https://feeds.reuters.com/reuters/businessNews"
+name = "Reuters Climate & Energy"
+beat = "climate"
+type = "wire"
+priority = "medium"
+
+[[feed]]
+url = "https://www.iea.org/news/feed.xml"
+name = "IEA News"
+beat = "climate"
+type = "primary"
+priority = "medium"
+
+[[feed]]
+url = "https://www.irena.org/-/media/Project/Irena/Homepage/News/Press-Release/IRENA-press-releases-en.xml"
+name = "IRENA News"
+beat = "climate"
+type = "primary"
+priority = "medium"
+
 # ─── Scanner config ──────────────────────────────────────────────────────────
 
 [scanner]
@@ -203,5 +261,7 @@ queries = [
   { beat = "privacy", q = "EU chat control CSAM scanning encryption regulation", limit = 5 },
   { beat = "ai_society", q = "artificial intelligence society impact ethics bias fairness", limit = 5 },
   { beat = "ai_policy", q = "AI regulation policy EU AI Act governance accountability", limit = 5 },
-  { beat = "ai_creative", q = "AI art creativity copyright generative music film", limit = 5 }
+  { beat = "ai_creative", q = "AI art creativity copyright generative music film", limit = 5 },
+  { beat = "climate", q = "climate technology renewable energy transition decarbonization", limit = 5 },
+  { beat = "climate", q = "battery storage nuclear power grid infrastructure", limit = 5 }
 ]
