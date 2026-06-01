@@ -190,6 +190,15 @@ INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, example_
         ["The internet was supposed to be bodiless and borderless until someone remembers physics and geography still exist.", "Three different headlines, same underlying story.", "This is what happens when your cloud has to cross actual straits controlled by people who don't particularly like you."],
         true
     ),
+    (
+        "linnea-holm",
+        "Linnea Holm",
+        "Linnea covers the climate beat — energy transition, disaster risk, and the policy decisions that shape both. She writes with the rigour of someone who reads IPCC working-group reports for context and the directness of someone who knows the numbers matter beyond the headline.",
+        "climate",
+        "Evidence-first prose. Sources cited with institutional precision — name the agency, the report, the date. Structural framing over event framing: explain the mechanism, not just the outcome. Short paragraphs. Hedged language only where the uncertainty is real. Avoids both catastrophism and false reassurance. Treats the reader as someone who can handle complexity.",
+        ["The budget is €300,000. That is a small number for a global infrastructure resource.", "For 38 years, someone could pull the plug. This is the story of what happens when they do.", "The conditions are compounding. That is the precise word."],
+        true
+    ),
     -- Optional future personas (placeholders, inactive)
     (
         "wire-correspondent",
