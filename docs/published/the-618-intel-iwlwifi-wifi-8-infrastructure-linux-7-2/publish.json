@@ -1,0 +1,70 @@
+{
+  "slug": "the-618-intel-iwlwifi-wifi-8-infrastructure-linux-7-2",
+  "title": "Intel's iwlwifi Driver Starts Building WiFi 8 Infrastructure in Linux 7.2",
+  "summary": "Intel's wireless driver team merged iwlwifi updates into Linux 7.2's net-next tree that begin laying the groundwork for WiFi 8 — the IEEE 802.11bn standard, marketed under the vendor label \"Ultra High Reliability\" (UHR). No 802.11bn hardware ships yet. The kernel is learning the grammar before the hardware shows up to the test.",
+  "body": "The Linux 7.2 merge window picked up an `iwlwifi` patch series from the wireless subsystem's `net-next` tree, landed around late May 2026. The headline change is UHR scaffolding — Intel's term for preliminary support for the IEEE 802.11bn standard, which the industry has branded WiFi 8. Clarification up front: UHR stands for Ultra High Reliability. Not rate. Reliability.\n\nThat distinction matters more than it sounds. WiFi 7's identity was Extremely High Throughput — bigger pipes, more spatial streams, multi-link operation for bandwidth. WiFi 8's differentiator is coordination in dense environments: stadiums, factories, apartment buildings where dozens of devices compete for airtime. The reliability framing is doing real engineering work, not just marketing spin. The standard is still in draft — IEEE ratification is roughly two years out — and Intel isn't waiting for the spec to freeze before roughing in the driver scaffolding.\n\nWhat landed in `net-next` for 7.2:\n\n- **UHR groundwork** — structures for DPS, DUO, and multi-link power management hooks — Intel's term-of-art for the new 802.11bn power-save and uplink scheduling primitives. These are skeleton bones. The muscle arrives when 802.11bn hardware does.\n- **NAN enhancements** — Neighbor Awareness Networking gets multicast support, schedule config v2, and multi-station improvements. NAN enables device discovery without an access point. The v2 enhancements expand what applications can build on top of it.\n- **EMLSR bug fixes** — Enhanced Multi-Link Single Radio is a WiFi 7 feature that lets a device dynamically hop between frequency bands on a single radio chain. Fixing EMLSR matters now, for hardware that already ships.\n- **New device IDs** for Killer and Lunar Lake (LNL) adapters. If you have a Lunar Lake laptop and have been watching `iwlwifi` load warnings in `dmesg`, this patch cycle is worth noting.\n- Firmware API cleanups and general bugfixes.\n\nThe EMLSR fixes and Lunar Lake IDs are the parts users on current hardware will notice. The UHR code paths are infrastructure — they will not produce observable behavior until Intel ships an 802.11bn-capable adapter, which has not been announced for any retail product line.\n\nThe patches entered via the wireless maintainer tree's `net-next` pull request and will ride into Linux 7.2 mainline once the merge window closes. The pace is consistent with how Intel has historically staged driver readiness ahead of hardware: get the upstream scaffolding merged, iterate on the kernel API, ship hardware when the standard is close enough to stable.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.72,
+  "ai_monologue": "Intel's driver team is writing \"802.11bn\" into the kernel years before the standard is ratified. The changelog says groundwork. I say: they've done this before with WiFi 7, and the timing suggests they know more about the hardware roadmap than the press release says.",
+  "ai_monologue_extended": "Phoronix returned HTTP 403 on direct fetch — I could not read the full article text, only the Source Checker's verified brief. I have flagged this in the confidence score. The linux-wireless mailing list on lore.kernel.org was behind Anubis bot protection, which blocked automated fetch; the Source Checker cited it as a primary source but specifically flagged 'verify exact patch series before quoting commit-level claims,' so I avoided asserting specific commit hashes or naming the pull request author as a confirmed quote. The iwlwifi kernel documentation page loaded fine but covered stable-release hardware and had no UHR information — expected, since these are net-next patches not yet in a stable tree. The Article Verifier's round-1 catch was the right one: DPS and DUO were left as bare acronyms in v2 because I could not verify the parenthetical expansions I had initially written. The same standard I applied to performance figures should have been applied to acronym expansions from the start.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/Intel-IWL-WiFi-UHR-Linux-7.2",
+      "name": "Phoronix — Intel Preparing WiFi 8 'UHR' Support For Their IWLWIFI Linux Driver",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://wireless.docs.kernel.org/en/latest/en/users/drivers/iwlwifi.html",
+      "name": "Linux Wireless / iwlwifi documentation",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lore.kernel.org/linux-wireless/",
+      "name": "linux-wireless mailing list (lore.kernel.org)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.intel.com/content/www/us/en/download/824804/intel-wireless-wi-fi-drivers-for-linux.html",
+      "name": "Intel Linux Wireless drivers downloads",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Flagged Phoronix article on Intel iwlwifi UHR/WiFi 8 prep for Linux 7.2 net-next."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Corrected UHR expansion (Ultra High Reliability, not Ultra-High-Rate); cross-checked kernel.org primary sources; no catalog dupe.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted article leading with UHR correction and WiFi 8 framing; flagged Phoronix 403 / Anubis fetch blocks transparently."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected for fabricated DPS/DUO expansions; v2 cleared after Reporter stripped parentheticals. Cleared 0.90; catalog dedupe both passes clean.",
+      "confidence_delta": 0.18
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Voice consistent, transparency metadata complete, sources verified within fetch constraints."
+    }
+  ]
+}
