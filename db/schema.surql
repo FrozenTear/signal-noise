@@ -133,7 +133,8 @@ INSERT IGNORE INTO category (slug, name, description) VALUES
     ("linux",    "Linux & Open Source",    "Kernel, distributions, and free software ecosystem"),
     ("tech",     "Technology",             "Industry, products, and research"),
     ("privacy",  "Privacy & Surveillance", "Data rights, security, and policy"),
-    ("business", "Business & Finance",     "Markets, economics, and corporate strategy");
+    ("business", "Business & Finance",     "Markets, economics, and corporate strategy"),
+    ("climate",  "Climate & Energy",        "Climate science, energy transition, and environmental policy");
 
 -- THE-246: Section→Beat taxonomy migration (idempotent; runs at every startup).
 -- Tech is the single launch Section. The existing categories become Beats under it.
@@ -146,7 +147,7 @@ UPSERT category:tech_section SET
     description = "Technology, Linux, privacy, and business coverage",
     parent      = NONE;
 UPDATE category SET parent = category:tech_section
-    WHERE slug IN ["linux", "tech", "privacy", "business"];
+    WHERE slug IN ["linux", "tech", "privacy", "business", "climate"];
 
 -- THE-246: backfill region on pre-existing articles. DEFAULT only applies on
 -- write, so existing rows need an explicit backfill. Idempotent.
