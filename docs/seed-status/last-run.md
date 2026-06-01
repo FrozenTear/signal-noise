@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-01T06:13:52Z
+- when:    2026-06-01T06:18:50Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738439261
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738604670
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - amd-radeon-rx-9070-gre-ryzen-ai-max-pro-400-computex-2026 | AMD Brings the Radeon RX 9070 GRE Global and Introduces Ryzen AI Max P
+   - linux-three-year-campaign-to-kill-rndis-gets-another-shot | Linux's Three-Year Campaign to Kill RNDIS Gets Another Shot
    - the-580-dell-xps-13-wildcat-lake-18a | Dell's Cheapest XPS 13 Bets on Intel 18A — Linux Upstream Support Alre
    - csar-enters-final-trilogue-stretch-29-jun | The Version That Actually Matters: CSAR Enters Final Trilogue Stretch
    - the-563-wine-staging-1110-windows-ink-crash | Wine-Staging 11.10 Finally Closes a 14-Year-Old Windows Ink Crash
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit | Five Years, One Letter: Hamburg Found PimEyes Unlawful — Then Did Noth
    - linux-7-1-rc6-usb-quirks-roundup | USB Quirk Roundup Lands Ahead of Linux 7.1-rc6
    - orf-cookie-banner-dark-pattern-bvwg-ruling | Austria's Top Administrative Court Rules ORF's Cookie Banner a Dark Pa
-   - rust-coreutils-0-9-audited-hardened | Rust Coreutils 0.9.0: Audited, Hardened, and the Pass Rate Drop Isn't 
-   - italy-spyware-economy-price-list | Italy Built a Spyware Industry. The Price List Is the Story.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
