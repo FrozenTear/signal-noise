@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-06-01T07:37:00Z
+- when:    2026-06-01T07:41:21Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26741603174
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26741790620
 - token configured: false
 
 ```
