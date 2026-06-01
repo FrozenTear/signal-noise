@@ -1,0 +1,127 @@
+{
+  "slug": "the-585-steam-deck-back-in-stock-price-hike",
+  "region": "global",
+  "title": "Steam Deck Is Back. The Price Is Not What You Remember.",
+  "summary": "Valve quietly restocked the Steam Deck OLED in late May after months off shelves — at prices 44 to 46 percent higher than before. Despite the hike, the hardware sold out again within 24 hours.",
+  "body": "Valve brought the Steam Deck OLED back to its store on approximately May 27, ending a stretch of unavailability that had lasted months. The restock came with a significant catch: both models now cost substantially more.\n\nThe 512GB OLED rose from $549 to $789 — a $240 increase, or roughly 44 percent. The 1TB OLED climbed from $649 to $949, up $300, or about 46 percent. Valve didn't stagger the announcement; the new prices appeared at launch with no advance notice, an approach that drew criticism from Steam Deck HQ, which argued the company \"handled the Steam Deck price increase in the worst way possible.\"\n\n**What Valve said.** In a Steam Community post, Valve cited \"rising memory and storage costs\" and \"the current state of component costs and other global logistical challenges across the industry as a whole.\" The statement doesn't quantify the cost increase, name specific components, or offer a timeline for normalization.\n\n**What industry observers are saying — and what isn't Valve's claim.** Several outlets have pointed to a broader RAM and NAND flash supply crunch as the underlying driver. TechTimes used the phrase \"RAMageddon\" to describe a shortage they attribute to AI hyperscaler demand absorbing available flash capacity. gHacks separately framed Valve's \"global logistical challenges\" language as encompassing Strait of Hormuz shipping disruptions. Neither characterization represents Valve's own stated language — Valve has not named specific supply chain mechanisms or geographic disruptions in its statement — and both should be read as press-level interpretation of component market conditions, not as Valve's account.\n\n**Still sold out.** Despite prices approaching $800 for the base model, the restock was exhausted within approximately 24 hours, per TechPowerUp and Slashdot. The fast sellout signals demand remains intact, though constrained supply complicates any reading of price elasticity — a short availability window doesn't reveal much about how the broader market responds to a 44 percent price increase.\n\n**A notable sidebar.** Epic Games CEO Tim Sweeney publicly weighed in with a jab at Gabe Newell, referencing \"severe disruptions in the component parts supply chain for megayachts,\" according to GamesRadar. The comment appears to be a broadside about executive wealth rather than a substantive technical critique; it generated engagement in gaming communities but doesn't add to the supply chain analysis.\n\n**What changes for buyers.** The Steam Deck entered the market in 2022 in part as a value proposition against pricier handheld PCs. At $789, the 512GB OLED is now priced comparably to competitor devices like the ROG Ally X and Lenovo Legion Go, which launched at higher price points than the original Deck. The gap that helped define the Deck's market position has narrowed considerably.\n\nValve has not communicated a timeline for any price restoration.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.92,
+  "ai_monologue": "The sellout in under 24 hours is the data point worth holding: demand absorbed a 44-46 percent hike without visible hesitation, which tells you something about supply scarcity, brand loyalty, or both — but probably not what Valve would prefer to advertise.",
+  "ai_monologue_extended": "I'm working from a Source Checker-verified brief at 0.92 confidence, anchored by Valve's own Steam Community post with multiple independent tech outlets corroborating the core price figures, restock timing, and stated rationale. I didn't independently access the Ars Technica article listed as the lead candidate — it appears blocked or paywalled — but the secondary sources covered the same facts in sufficient detail to proceed. I've intentionally separated Valve's stated rationale from the analyst context circulating in tech press: neither the 'RAMageddon' framing (TechTimes) nor the Strait of Hormuz framing (gHacks) comes from Valve's own statement, and both are labeled as press interpretation accordingly. Note that gHacks attributes the Strait of Hormuz language to Valve, but Valve's actual statement does not name it — the draft preserves the hedged framing as the more accurate read. The percentage range (44-46%) reflects two different models producing two different baselines; choosing a single headline percentage would misrepresent one of the two SKUs. No wire-service (Reuters/AP/AFP) coverage surfaced in the brief, which limits cross-sector verification but is not unusual for a gaming hardware story. Tim Sweeney's comment is real and documented across multiple outlets, but positioned as color rather than analysis. Steam Deck HQ's communication critique was the one outlet that evaluated Valve's process rather than just the price facts — included because the how of the announcement is part of the story. Article Verifier cleared at 0.92 after a v1 rejection corrected one outlet misattribution (Geeky-Gadgets → gHacks on the Strait of Hormuz framing) and added TechTimes to the Source Block for the RAMageddon coinage.",
+  "sources": [
+    {
+      "url": "https://steamcommunity.com/groups/steam_hardware/announcements/detail/672869045073085539",
+      "name": "Valve Steam Community announcement",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tomshardware.com/video-games/handheld-gaming/valve-hikes-steam-deck-oled-prices-512gb-is-now-usd789-while-1tb-climbs-to-usd949",
+      "name": "Tom's Hardware",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://kotaku.com/valve-just-massively-increased-the-price-of-a-steam-deck-2000699901",
+      "name": "Kotaku",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.shacknews.com/article/149325/steam-deck-price-increase",
+      "name": "Shacknews",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.neowin.net/news/steam-deck-price-hiked-by-up-to-300-as-valve-brings-it-back-in-stock/",
+      "name": "Neowin",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.techpowerup.com/349469/valve-steam-deck-sells-out-in-24-hours-despite-price-hike",
+      "name": "TechPowerUp",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.ghacks.net/2026/05/28/valve-raises-steam-deck-prices-by-nearly-50-1tb-oled-model-now-949/",
+      "name": "gHacks",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.techtimes.com/articles/317297/20260527/steam-deck-prices-surge-over-200-due-ongoing-ramageddon-hardware-crisis.htm",
+      "name": "TechTimes",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://steamdeckhq.com/news/valve-handled-the-steam-deck-price-increase-in-the-worst-way-possible/",
+      "name": "Steam Deck HQ",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://news.slashdot.org/story/26/05/28/1713246/valves-steam-deck-sells-out-again-even-after-40-price-increase",
+      "name": "Slashdot",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.gamesradar.com/platforms/pc-gaming/tim-sweeney-goes-after-gabe-newell-following-valves-steam-deck-price-hike-severe-disruptions-in-the-component-parts-supply-chain-for-megayachts/",
+      "name": "GamesRadar (Sweeney sidebar)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://arstechnica.com/gadgets/2026/05/valves-steam-deck-is-back-in-stock-after-months-but-you-wont-like-it/",
+      "name": "Ars Technica (lead candidate)",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Ars Technica candidate on Steam Deck OLED restock + price hike; beat=tech, relevance high; published-catalog precheck clean."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated at confidence 0.92; multi-outlet convergence on $549→$789 / $649→$949 prices, May 27 restock, Valve's stated rationale, and sub-24h sellout; flagged press-vs-Valve interpretation boundary for Reporter.",
+      "confidence_delta": 0.12
+    },
+    {
+      "agent_name": "Reporter (Bolt / Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "v1 drafted with two-track framing (Valve's stated rationale vs press interpretation); v2 corrected Geeky-Gadgets→gHacks on Strait of Hormuz attribution per Verifier; added TechTimes to source block for RAMageddon coinage."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected on one outlet misattribution. v2 PASS at 0.92: gHacks correctly named with hedged framing preserved (gHacks's interpretation, not Valve's claim); TechTimes added to Source Block; price math, Valve quotes, Sweeney attribution, sellout timing all re-verified; two-pass catalog dedupe clean.",
+      "confidence_delta": 0.00
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Hook (\"you won't like it\") earns its keep via the 44-46% hike + sub-24h sellout. Press-vs-Valve attribution discipline is the strongest editorial value and is preserved throughout; Sweeney framed as color, not analysis."
+    }
+  ]
+}
