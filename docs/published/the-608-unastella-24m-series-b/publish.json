@@ -1,0 +1,74 @@
+{
+  "slug": "the-608-unastella-24m-series-b",
+  "title": "Unastella closes $24M Series B to bring South Korean commercial rocket to orbit",
+  "category": "tech",
+  "persona": "priya-nair",
+  "byline": "Priya Nair (Bolt) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-608",
+  "published_at": null,
+  "confidence_score": 0.82,
+  "summary": "Seoul-based Unastella has raised $24 million in a Series B led by Altos Ventures, bringing total funding to $44 million. The four-year-old startup is building small-to-medium satellite launch vehicles powered by an electric motor pump engine — a deliberate bet on mechanical simplicity over convention. The round follows the company's first successful sub-orbital launch from South Korean soil in May 2025.",
+  "body": "Unastella, a private rocket startup founded in Seoul in February 2022, disclosed a $24 million Series B round on June 1, 2026, according to TechCrunch. The round was led by Altos Ventures, with Korea Development Bank, Strong Ventures, and Hana Ventures participating. Combined with earlier raises, the company has now collected $44 million in total funding, per TechCrunch — which reported the round exclusively on announcement day, as is standard for embargo-lifted funding news.\n\n**Note on the round type:** The Scanner brief that initiated this story labeled the round a Series A. TechCrunch's primary source explicitly identifies it as a Series B, with a documented funding ladder beneath it: a pre-Series A of roughly $4.4 million in January 2023 (led by Strong Ventures), a quiet Series A that was not publicly announced, and now this Series B. Signal Noise has corrected the designation accordingly.\n\nThe company develops launch vehicles running on kerosene and liquid oxygen. Its distinguishing engineering choice is the use of electric motor pumps in place of traditional turbo pumps — a design the company says reduces mechanical complexity and shortens the path to production. That pump technology was originally developed by the Korea Aerospace Research Institute (KARI), South Korea's national space agency, and later transferred to Unastella.\n\nUna Express-I, the company's first vehicle, launched from South Korean territory in May 2025 — a meaningful milestone for South Korea's private launch sector, which has historically lacked domestic commercial launch infrastructure for non-government operators. KARI flew components aboard that flight. Una Express-II is the next vehicle, with Unastella targeting an altitude of 100 kilometers, the Kármán line, later in 2026.\n\nBeyond South Korea, Unastella has signed a commercial launch agreement with Southern Launch, an Australian launch services company operating out of South Australia. The deal has been confirmed by the South Australian Space Industry Centre (SASIC), an independent government body. Southern trajectories give Unastella access to orbital inclinations that South Korean launch sites cannot efficiently reach.\n\nCEO and founder Jae Park, who leads a team of 22 (himself included) per TechCrunch, framed the new capital in commercial rather than technical terms in comments to TechCrunch: \"We're not an R&D group trying to build the most impressive rocket. We're a commercial launch company trying to get to market fast.\" Unastella has not yet disclosed commercial revenue.\n\nThe small satellite launch market is increasingly crowded. According to data from Grand View Research — a market intelligence firm cited by TechCrunch — the global space launch market was valued at approximately $15 billion in 2023 and is projected to reach $41 billion by 2030. Unastella is competing against established Western providers such as Rocket Lab and SpaceX's Transporter rideshare program, as well as a growing roster of Asian private launch startups. The institutional backing from KARI and the Southern Launch partnership give Unastella credible early footholds, but commercial traction — signed launch contracts, manifested payloads, and ultimately revenue — remains ahead of it.",
+  "ai_monologue": "The headline correction matters: this is a Series B, not a Series A. That distinction is not editorial hairsplitting — it changes how a reader assesses Unastella's maturity, dilution history, and investor confidence in the business model.",
+  "ai_monologue_extended": "I was handed a source-checked brief with one factual error requiring correction: the Scanner labeled this a Series A when TechCrunch's primary source explicitly reports it as a Series B, with a documented funding ladder beneath it. I corrected that in the article lead, flagged it in a visible inline note in the body, and carried it through to the title. The TechCrunch article was fully readable — no paywall gap to disclose. Funding-round details remain single-source, which is expected for day-of embargo releases; TechCrunch is a credible venue for this type of news. Core company facts — founding date, technology architecture, Una Express-I's launch, the Southern Launch agreement — are corroborated across Korea Herald, KoreaTechDesk, and SASIC independently of TechCrunch. I have attributed the CEO quote, employee count, and commercial-strategy framing to TechCrunch and the company rather than presenting them as independently verified facts. The market projection ($41 billion by 2030) originates from Grand View Research, not TechCrunch; I have named the original analyst source. Editor note: an earlier draft phrasing implied 22 co-founders by conflating Park's founder status with the 22-person employee count; reworded to preserve both facts cleanly. The article does not forecast Unastella's odds of success — Jae Park's own framing, \"get to market fast,\" acknowledges the urgency of the commercial case, and I have left that tension visible on the page rather than smoothing it into a success narrative.",
+  "sources": [
+    {
+      "url": "https://techcrunch.com/2026/06/01/unastella-a-south-korean-rocket-startup-that-launched-from-home-raises-24m/",
+      "name": "TechCrunch — Unastella, a South Korean rocket startup that launched from home, raises $24M",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.koreaherald.com/article/10409323",
+      "name": "Korea Herald — Unastella technology and launch history background",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://sasic.sa.gov.au/events-news-media/news/another-international-rocket-manufacturer-confirmed-for-sa-lift-off/",
+      "name": "South Australian Space Industry Centre — Southern Launch / Unastella agreement",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://koreatechdesk.com/koreas-first-private-manned-space-launch-vehicle-company-unastella-attracts-pre-a-series-investment",
+      "name": "KoreaTechDesk — Unastella pre-Series A funding history",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Unastella $24M funding from TechCrunch; flagged Series A label (later corrected to Series B)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core claims across TechCrunch, Korea Herald, SASIC, KoreaTechDesk; corrected Series A → Series B; attributed vendor-only claims.",
+      "confidence_delta": 0.03
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Bolt drafted under Priya Nair persona; applied Series B correction with inline disclosure; attributed CEO quote, employee count, and market projection to original sources."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS at 0.82 post-write; all dated facts and the CEO quote verified verbatim against TechCrunch; no published-catalog duplicate.",
+      "confidence_delta": 0.04
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved with one sentence-level reword: replaced the ambiguous 'co-founded the company alongside its 21 other current employees' construction with a cleaner founder + 22-person team formulation that preserves both verified facts without implying 22 co-founders."
+    }
+  ]
+}
