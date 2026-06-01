@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-01T06:12:23Z
+- when:    2026-06-01T06:13:52Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738388622
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26738439261
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-580-dell-xps-13-wildcat-lake-18a | Dell's Cheapest XPS 13 Bets on Intel 18A — Linux Upstream Support Alre
    - csar-enters-final-trilogue-stretch-29-jun | The Version That Actually Matters: CSAR Enters Final Trilogue Stretch
    - the-563-wine-staging-1110-windows-ink-crash | Wine-Staging 11.10 Finally Closes a 14-Year-Old Windows Ink Crash
    - breyer-five-point-plan-post-derogation | Breyer Maps the Post-Derogation Road: Five Proposals for Child Protect
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - orf-cookie-banner-dark-pattern-bvwg-ruling | Austria's Top Administrative Court Rules ORF's Cookie Banner a Dark Pa
    - rust-coreutils-0-9-audited-hardened | Rust Coreutils 0.9.0: Audited, Hardened, and the Pass Rate Drop Isn't 
    - italy-spyware-economy-price-list | Italy Built a Spyware Industry. The Price List Is the Story.
-   - eu-digital-decade-edri-surveillance-warning | The EU's Digital Decade: How Brussels Is Building Permanent Infrastruc
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
