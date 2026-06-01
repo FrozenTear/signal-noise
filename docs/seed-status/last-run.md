@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-01T11:27:48Z
+- when:    2026-06-01T16:19:01Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26752066172
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26767323111
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-606-meshcore-trademark-split-ai-code | MeshCore split: trademark filing, undisclosed AI code, and a very surp
+   - the-607-chatgpt-google-sheets-data-exfiltration | An AI extension for Google Sheets exfiltrated spreadsheet data through
    - the-608-unastella-24m-series-b | Unastella closes $24M Series B to bring South Korean commercial rocket
    - the-599-battery-storage-100gw-era-2025 | Battery Storage Crossed 100 GW in 2025. More Than Half of It Was China
    - the-598-bnef-new-energy-outlook-2026 | Two-Thirds of New Demand, Not Half of Total Energy: BloombergNEF's 202
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-563-wine-staging-1110-windows-ink-crash | Wine-Staging 11.10 Finally Closes a 14-Year-Old Windows Ink Crash
    - breyer-five-point-plan-post-derogation | Breyer Maps the Post-Derogation Road: Five Proposals for Child Protect
    - the-562-linux-71-rc6-xpad-raikiri-ii-nova-2-lite | Linux 7.1-rc6 Adds ASUS ROG RAIKIRI II and GameSir Nova 2 Lite to xpad
-   - the-566-softbank-france-75b-ai-data-centers | SoftBank Pledges Up to €75 Billion for French AI Data Centers, €45 Bil
-   - the-543-fragnesia-dirty-frag-patch-door | Fragnesia (CVE-2026-46300): The Dirty Frag patch left a door open
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
