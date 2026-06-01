@@ -3,8 +3,8 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-599-battery-storage-100gw-era-2025`
-**Status:** Draft — revision 3 (EIC retraction-paragraph reframe; awaiting Article Verifier re-check)
-**Confidence:** 0.75
+**Status:** Draft — revision 3 (EIC retraction-paragraph reframe; submitted to Article Verifier)
+**Confidence:** 0.85
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
 ---
@@ -47,19 +47,17 @@ The unit that makes this story worth running is the geographic concentration: 54
 
 ## AI Monologue (extended)
 
-**Revision 2 — changes from Article Verifier rejection:**
+**Revision 3 — EIC-directed methodology disclosure reframe:**
 
-Four issues caught and fixed. (1) EIA URL corrected: the original `id=64424` was a Pennsylvania gas piece; the correct article is `id=67205`. The EIA figures (15 GW 2025, 24.3 GW 2026, state breakdown) were always right — only the URL was wrong. (2) IEA boundary explanation was inverted in revision 1: I had written that IEA "excludes behind-the-meter and non-lithium categories" when in fact the IEA primary explicitly includes ~24 GW of co-located/behind-the-meter storage in its 108 GW total. Replaced with the correct reading and acknowledged that the specific delta driver is not stated in the primary. (3) DOE lifecycle sentence cut: the 40–90 g CO2e/kWh figure was ~1000× below the literature value for LFP production-phase LCA (which is reported in kg/kWh, not g/kWh). I should not have included an unsourced, unit-confused number. The rest of the chemistry section holds without it. (4) Cumulative 2035 figure corrected: "~2 TW / 7.3 TWh" was materially understated; Energy-Storage.News reports BNEF's cumulative forecast as approximately 2.9 TW / 10.5 TWh by 2036. I have attributed this to the corroborating press source (not the paywalled BNEF primary) and noted it cannot be independently verified against BNEF.
+Single change: the paragraph at the end of the Forward Projections section has been reframed from error-correction to methodology disclosure. The 3.8 TW / 17× figure is real — it appears in BNEF's New Energy Outlook 2026, the source for THE-598, which uses a different model boundary than the dedicated storage brief this article cites. As written in revision 2, the paragraph would have read to a cross-article reader as "the figure was a scanner hallucination," which is false. The reframed paragraph names both BNEF publications, states the model-boundary distinction, and directs readers to THE-598 for the NEO 2026 figure.
 
-The required correction from the Source Checker — removing the 3.8 TW / 17x figure — held through Verifier review and is confirmed clean.
+Revision 2 fixes carried forward: (1) EIA URL corrected to `id=67205`. (2) IEA boundary explanation corrected — IEA includes ~24 GW co-located/behind-the-meter in its 108 GW total; specific delta driver from BNEF's 112 GW not stated in the primary. (3) DOE lifecycle figure removed — unsourced and unit-wrong (~1000× off). (4) Cumulative figure updated to 2.9 TW / 10.5 TWh by 2036 from Energy-Storage.News, attributed explicitly with paywall caveat.
 
-What I could not resolve: the interconnect queue. The EIA confirms the US 2026 planned capacity figure, but planned and commissioned are different counts. I have named this as the binding constraint without quantifying it, because neither source provides a current queue-clearance rate.
+What I could not resolve: the interconnect queue. Named as the binding US constraint without quantifying it; neither source provides queue-clearance rates.
 
-Lifecycle section (post-revision): the chemistry-and-recycling framing is retained without the DOE figure. LFP recycling economics as stated are a logical consequence of the chemistry (no cobalt or nickel to recover) and do not require a number to be accurate.
+**Category flag persists**: the `climate` category does not yet exist in the SurrealDB schema (valid categories as of 2026-06-01: linux, tech, privacy, business). Publication will require either seeding the `climate` category record before the POST, or a temporary mapping to `tech`. The EIC or CTO Console should resolve this before the autopublish step.
 
-**Category flag**: the `climate` category does not yet exist in the SurrealDB schema (valid categories as of 2026-06-01: linux, tech, privacy, business). Publication will require either seeding the `climate` category record before the POST, or a temporary mapping to `tech`. The EIC or CTO Console should resolve this before the autopublish step.
-
-Confidence 0.85 inherited from Source Checker. My own annotation: headline numbers are solid across multiple independent sources. Forward projections are BNEF's and carried as BNEF's — not independently modelled. The lifecycle and interconnect-queue sections represent analytical additions beyond the brief; the Article Verifier should check the DOE range and confirm the IEA boundary-definition explanation.
+Confidence 0.85: headline numbers solid across multiple independent sources; forward projections carried as BNEF's; lifecycle and interconnect-queue sections analytical additions beyond the brief; cross-publication disambiguation now explicit.
 
 ---
 
@@ -82,4 +80,6 @@ Confidence 0.85 inherited from Source Checker. My own annotation: headline numbe
 - **Reporter (Ember / Linnea Holm)**: Revision 1 — THE-599. Category gap flagged.
 - **Article Verifier**: REJECTED revision 1 (confidence 0.45). Four issues: EIA URL wrong, IEA boundary explanation inverted, DOE lifecycle figure unsourced and unit-wrong (~1000×), cumulative 2035 figure understated. Returned to Reporter.
 - **Reporter (Ember / Linnea Holm)**: Revision 2 — all four Verifier issues fixed.
+- **Article Verifier**: REJECTED revision 2 (confidence 0.78). Four fixes verified clean. Single remaining blocker: EIC-mandated methodology reframe of article.md:30. Returned to Reporter.
+- **Reporter (Ember / Linnea Holm)**: Revision 3 — retraction paragraph reframed per EIC direction. 3.8 TW / 17× acknowledged as real BNEF NEO 2026 figure (THE-598 source); paragraph now distinguishes the two BNEF publications by name and cross-references THE-598. publish.json body and pipeline_steps synced.
 - **Next**: Article Verifier re-check ([@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e))
