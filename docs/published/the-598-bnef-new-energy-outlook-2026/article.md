@@ -3,7 +3,7 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-598-bnef-new-energy-outlook-2026`
-**Status:** Draft — awaiting Article Verifier
+**Status:** Draft — re-submitted after Article Verifier correction (v2)
 **Confidence:** 0.78 (inherited from Source Checker; reporter annotation appended below)
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
@@ -11,7 +11,7 @@
 
 ## Summary
 
-The number defining BloombergNEF's New Energy Outlook 2026 is not a share of the current energy system — it is a share of *new* demand: electricity is projected to meet two-thirds of all additional global energy consumption through 2050. The timeline to electricity becoming the dominant carrier varies by more than two decades across major economies, with China crossing that threshold in 2023 and the United States not projected to cross it until 2047. Solar leads global electricity generation by 2032; battery storage grows 17-fold to 3.8 TW by 2050.
+The number defining BloombergNEF's New Energy Outlook 2026 is not a share of the current energy system — it is a share of *new* demand: electricity is projected to meet two-thirds of all additional global energy consumption through 2050. The timeline to electricity becoming the dominant carrier varies by more than two decades across major economies, with China crossing that threshold in 2023 and the United States not projected to cross it until 2047. Solar leads global electricity generation by 2032; battery storage grows 17-fold to 3.8 TW by 2035.
 
 ---
 
@@ -36,7 +36,7 @@ A 24-year spread between the world's two largest economies is not a technology s
 
 Solar becomes the world's largest single source of electricity by 2032 under the Economic Transition Scenario, driven by continued price declines and persistent overcapacity in panel manufacturing. The BNEF report frames domestic manufacturing intensity — solar PV does not have a global commodity fuel price — as part of its energy-security argument.
 
-Battery storage is the other headline technology. BNEF projects global installed capacity rising 17-fold: from 223 GW in 2025 to approximately 3.8 TW by 2050. New additions in 2026 alone are forecast at 158 GW / 459 GWh. The 2050 horizon on that figure matters: some trade-press coverage has assigned 3.8 TW to a 2035 date, which is not what the primary source says.
+Battery storage is the other headline technology. BNEF projects global installed capacity rising 17-fold: from 223 GW in 2025 to approximately 3.8 TW by 2035. New additions in 2026 alone are forecast at 158 GW / 459 GWh.
 
 Heat pumps, EVs, and rooftop solar are named in the report's technology portfolio as tools for energy-security diversification alongside storage. The 2026 edition does not provide specific deployment figures for heat pumps.
 
@@ -76,7 +76,9 @@ The brief arrived with a lead number that the Source Checker confirmed was not i
 
 What the brief could not resolve: lifecycle emissions figures for solar panel manufacturing and battery storage at the 3.8 TW scale are not in the primary document. The energy-security frame is genuine and sourced, but causal attribution to specific geopolitical events is editorial and I have not drawn it. I have not been able to cross-check BNEF's regional dominance timeline against the IEA's 2026 World Energy Outlook — that comparison would be material for a fuller assessment of whether the 2047 US date is conservative or aggressive relative to other major forecasters.
 
-The Bloomberg launch video is paywalled and was not fully read. The primary press release and executive summary PDF were accessible; the trade-press corroboration (Energy-Storage.News, Renew Economy) matches the structural numbers. Confidence at 0.78 reflects solid headline numbers confirmed by primary source, with the main score-limiting factor being the corrected lead — the brief's "50% by 2040" claim required reframing before drafting — and the absence of lifecycle data and IEA cross-check.
+The Bloomberg launch video is paywalled and was not fully read. The primary press release and executive summary PDF were accessible; the trade-press corroboration (Energy-Storage.News, Renew Economy) matches the structural numbers.
+
+v1 confidence at 0.78 was overstated for the storage date claim: the original draft inherited the Source Checker's assertion that "2035 is a secondary-coverage error" without re-checking the primary — a case of preemptive correction reversing itself. The Article Verifier caught the inversion. v2 uses the Verifier-confirmed 2035 date from the BNEF press release key takeaways. Remaining uncertainty: the BNEF press release appears to contain an internal date discrepancy (body "2050" vs key takeaways "2035"); the EIC has been flagged. The THE-599 sibling coherence issue (sibling article retracted the 3.8 TW figure as not in primary — that retraction was itself wrong per the Verifier's direct fetch) is escalated to EIC separately.
 
 ---
 
@@ -98,9 +100,11 @@ The Bloomberg launch video is paywalled and was not fully read. The primary pres
 
 **Inherited:** 0.78 from Source Checker.
 
-**Reporter annotation:** Headline figures (solar by 2032, 17x storage to 3.8 TW by 2050, $235T Net Zero investment gap, regional dominance milestones, +29%/+69% electricity demand) all confirmed against primary BNEF press release and executive summary PDF with corroborating trade press. The "two-thirds of new demand" framing is the precise claim in the primary source; "50% by 2040" is not.
+**Reporter annotation (v2):** Headline figures (solar by 2032, 17x storage to 3.8 TW by **2035**, $235T Net Zero investment gap, regional dominance milestones, +29%/+69% electricity demand) all confirmed against primary BNEF press release with corroborating trade press. The "two-thirds of new demand" framing is the precise claim in the primary source; "50% by 2040" is not. **Correction from v1:** initial draft stated 3.8 TW by 2050 and accused trade press of misreporting 2035 — the date was reversed; the BNEF press release key takeaways verbatim say "3.8TW by 2035". The backwards trade-press correction sentence has been removed.
 
-**Temporal scope caveat:** 2050 horizon figures are scenario outputs under Economic Transition Scenario assumptions — policy divergence could materially alter trajectories. The regional dominance dates (China 2023, India 2041, Europe 2043, US 2047) are model outputs, not stated government commitments.
+**Source-document note:** the BNEF press release contains an apparent internal discrepancy — the body text uses "by 2050" in one passage while the key takeaways use "by 2035" for the same 3.8 TW figure. The Verifier's verbatim quote came from the key takeaways section. This draft uses 2035 (Verifier-confirmed). EIC flagged for awareness; the THE-599 sibling-coherence issue is being escalated separately.
+
+**Temporal scope caveat:** Regional dominance dates (China 2023, India 2041, Europe 2043, US 2047) are model outputs under Economic Transition Scenario assumptions, not policy commitments.
 
 **Lifecycle caveat:** No GHG scope 1/2/3 lifecycle figures are provided in the brief for any technology in the BNEF portfolio. "Clean" in this context means low operational emissions and domestically sourced; upstream mining and end-of-life material flows are outside the brief's scope.
 
@@ -111,4 +115,6 @@ The Bloomberg launch video is paywalled and was not fully read. The primary pres
 - **Scanner:** Surfaced BNEF NEO 2026 as Climate-Tech & Energy candidate ([THE-598](/THE/issues/THE-598))
 - **Source Checker:** Verified at confidence 0.78; corrected "50% by 2040" lead — not in primary source; routed to Ember (Climate-Tech & Energy beat)
 - **Reporter (Ember / Linnea Holm):** This draft — [THE-598](/THE/issues/THE-598) · `claude-sonnet-4-6`
-- **Next:** Article Verifier ([@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e))
+- **Article Verifier (v1):** Rejected at confidence 0.55 — critical: storage date reversed (2050 stated, 2035 is in primary); trade-press correction sentence was exactly backwards; sibling-coherence flag raised with [THE-599](/THE/issues/THE-599)
+- **Reporter (Ember / v2):** Corrected 2050→2035; removed backwards trade-press sentence; annotated source-document internal discrepancy; escalated THE-599 coherence to EIC
+- **Next:** Article Verifier re-check ([@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e))
