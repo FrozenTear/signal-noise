@@ -1,15 +1,20 @@
 # last seed/probe run
 
-- when:    2026-06-01T07:41:21Z
+- when:    2026-06-01T11:12:46Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26741790620
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26751395204
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-599-battery-storage-100gw-era-2025 | Battery Storage Crossed 100 GW in 2025. More Than Half of It Was China
+   - the-598-bnef-new-energy-outlook-2026 | Two-Thirds of New Demand, Not Half of Total Energy: BloombergNEF's 202
+   - the-597-2026-fire-season-snowpack-workforce | Record Snowpack Deficits and a Depleted Federal Workforce Converge on 
+   - the-596-us-fossil-fuel-power-investment-ai-boom | US Fossil-Fuel Power Investment Set to Exceed China's in 2026, Driven 
+   - the-600-emdat-usaid-disaster-database | A Single USAID Grant Built EM-DAT's Budget. Its Loss May End Thirty-Ei
    - weekly-editorial-retrospective-2026-05-25-to-31 | Editor's Log, Week of May 25–31: We Shipped 63, Killed 1, Quietly Fixe
    - lpr-mission-creep-agency-responses | When the EFF Came Knocking, Some Police Departments Changed Course
    - microsoft-azure-disclosure-gap-coalition-letter | After Suspending Azure to an Israeli Military Unit, Microsoft Has Not 
@@ -25,10 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-566-softbank-france-75b-ai-data-centers | SoftBank Pledges Up to €75 Billion for French AI Data Centers, €45 Bil
    - the-543-fragnesia-dirty-frag-patch-door | Fragnesia (CVE-2026-46300): The Dirty Frag patch left a door open
    - ftc-2026-enforcement-record-de-facto-privacy-law | The FTC's 2026 Case Record Is the Federal Privacy Law Congress Won't W
-   - the-546-osaurus-mac-model-agnostic-ai-node | Osaurus makes the Mac a model-agnostic AI node
-   - the-544-ptrace-exit-window-root | Nine Years in the Kernel: CVE-2026-46333 Turns ptrace's Exit Window in
-   - the-551-ibm-xforce-ransomware-quantum-harvest-now | The Industrialization of Ransomware: AI-Driven Attacks and the 'Harves
-   - uk-eu-encryption-two-clocks-one-architecture | Two Clocks, One Architecture: UK and EU Advance Parallel Frameworks to
-   - the-548-claude-code-1-developer-rankings | Claude Code Reaches the Top of Developer Adoption Rankings — With a Qu
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
