@@ -15,6 +15,8 @@ from typing import Optional, List, Dict, Tuple
 from difflib import SequenceMatcher
 import toml
 
+from published_dedupe import PublishedCatalogDedupe
+
 # Paperclip API setup
 PAPERCLIP_API_URL = os.environ.get("PAPERCLIP_API_URL", "http://127.0.0.1:3100")
 PAPERCLIP_API_KEY = os.environ.get("PAPERCLIP_API_KEY")
@@ -129,6 +131,40 @@ def is_duplicate(entry: Dict, existing: List[Dict], threshold=0.85) -> Tuple[boo
             return True, candidate.get('id')
 
     return False, None
+
+
+def check_published_catalog_duplicate(
+    entry: Dict,
+    dedupe: PublishedCatalogDedupe
+) -> Tuple[bool, Optional[str], dict]:
+    """
+    Check if entry duplicates a published article.
+
+    Args:
+        entry: The candidate entry (with 'title', 'summary' fields)
+        dedupe: PublishedCatalogDedupe instance
+
+    Returns:
+        Tuple of (is_duplicate, published_slug, debug_info)
+    """
+    headline = entry.get('title', '')
+    summary = entry.get('summary', '')
+
+    # Log the match keys for debugging
+    full_key, stripped_key = dedupe.log_match_keys(headline, summary)
+
+    # Check against published catalog
+    is_dup, matched_slug, debug_info = dedupe.check_published_duplicate(
+        headline,
+        summary
+    )
+
+    if is_dup:
+        print(f"  Published catalog match: {matched_slug}")
+        print(f"    Match keys - Full: {full_key}, Stripped: {stripped_key}")
+        print(f"    Confidence: {debug_info['confidence']}, Type: {debug_info['match_type']}")
+
+    return is_dup, matched_slug, debug_info
 
 
 def rank_candidates(entries: List[Dict], beat: str) -> List[Tuple[Dict, float]]:
@@ -250,6 +286,9 @@ def scan_beat(beat: str, feeds_config: Dict) -> List[str]:
     existing = get_existing_candidates(beat)
     print(f"Found {len(existing)} existing candidates in pipeline")
 
+    # Initialize published catalog deduplicator
+    dedupe = PublishedCatalogDedupe()
+
     # Validate required fields
     validated_entries = []
     invalid_count = 0
@@ -264,17 +303,31 @@ def scan_beat(beat: str, feeds_config: Dict) -> List[str]:
         print(f"Dropped {invalid_count} candidates with missing required fields (url/headline/lead)")
     print(f"Candidates after validation: {len(validated_entries)}")
 
-    # Deduplicate
+    # Deduplicate against pipeline candidates
     filtered_entries = []
     for entry in validated_entries:
         is_dup, dup_id = is_duplicate(entry, existing)
         if not is_dup:
             filtered_entries.append(entry)
 
-    print(f"Candidates after deduplication: {len(filtered_entries)}")
+    print(f"Candidates after pipeline deduplication: {len(filtered_entries)}")
+
+    # Deduplicate against published catalog
+    catalog_filtered_entries = []
+    published_dup_count = 0
+    for entry in filtered_entries:
+        is_dup, published_slug, debug_info = check_published_catalog_duplicate(entry, dedupe)
+        if is_dup:
+            published_dup_count += 1
+        else:
+            catalog_filtered_entries.append(entry)
+
+    if published_dup_count > 0:
+        print(f"Dropped {published_dup_count} candidates that duplicate published articles")
+    print(f"Candidates after published catalog deduplication: {len(catalog_filtered_entries)}")
 
     # Rank remaining candidates
-    ranked = rank_candidates(filtered_entries, beat)
+    ranked = rank_candidates(catalog_filtered_entries, beat)
 
     # Take top candidates (per-beat cap takes priority over global cap)
     max_per_beat = feeds_config.get('scanner', {}).get('max_candidates_per_beat', 3)
