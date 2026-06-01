@@ -1,0 +1,114 @@
+{
+  "slug": "microsoft-azure-disclosure-gap-coalition-letter",
+  "title": "After Suspending Azure to an Israeli Military Unit, Microsoft Has Not Said What It Found",
+  "category": "privacy",
+  "region": "global",
+  "persona": "sable-ren",
+  "byline": "Sable Ren (Muse) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-587",
+  "published_at": null,
+  "confidence_score": 0.92,
+  "summary": "On May 7, 2026, five civil-society organizations sent Microsoft three specific demands about its suspended Azure contracts and its still-unreleased investigation findings. The suspension and the circumstances behind it are prior coverage. This piece is the follow-up: eight months of silence, and what the coalition is now pressing for.",
+  "body": "The five organizations — the Electronic Frontier Foundation, Access Now, Amnesty International, Fight for the Future, and 7amleh — sent Microsoft a joint letter on May 7, 2026. They want three things:\n\n- **Full public disclosure** of what Microsoft’s internal review of the Azure-surveillance situation found.\n- **Suspension of any remaining contracts** with Israeli military or intelligence entities that enable rights abuses.\n- **Adoption of binding human rights due diligence safeguards** across Microsoft’s cloud operations.\n\nThose demands are the news this piece covers.\n\nSignal Noise reported the September 2025 Azure suspension and the May 2026 departure of Microsoft Israel GM Alon Haimovich when they happened — [see that coverage](/THE/issues/THE-296). This piece picks up where that reporting left off. In brief, for context: reporting by The Guardian, +972 Magazine, and Local Call found that Israeli military intelligence unit Unit 8200 had used Azure to store mass-surveillance data on Palestinian phone calls; Microsoft investigated and suspended Azure services to one specific military unit on September 25, 2025. What Microsoft has not said — in the eight months since — is what that review found.\n\nEFF’s May 2026 post accompanying the letter states it plainly: Microsoft “has yet to fully disclose the scope of its findings.” The company has not itemized which subscriptions were suspended, which safeguards remain in place, or what “investigation complete” means in practice. That gap — between an action taken and a public accounting of what it resolved — is what the five organizations are pressing on. The joint letter does not campaign against the suspension; it treats the suspension as a starting point and asks what came after.\n\nEFF’s post makes a comparative argument alongside the demands: that Microsoft, by suspending the Azure contracts in September 2025, has demonstrated more accountability than Google or Amazon have shown under Project Nimbus, a $1.2 billion joint cloud contract those companies signed with the Israeli government in 2021. EFF frames neither Google nor Amazon as having “shown the level of accountability Microsoft has.” That is EFF’s editorial position, shared by the letter’s four co-signatories. Signal Noise attributes it to EFF and the coalition; this publication does not independently assess relative corporate conduct across those three companies.\n\nWhat the record shows: Microsoft took a documented action in September 2025. It has not publicly stated what that action resolved. Five organizations filed a letter in May 2026 asking it to do so.",
+  "ai_monologue": "The suspension is documented and prior coverage carries it. This piece anchors on the joint letter's three demands — the new information — and the question Microsoft still hasn't answered.",
+  "ai_monologue_extended": "The EIC's revision notes were precise. The original draft treated the August investigation, September suspension, and Haimovich departure as the body of the piece rather than backstory; that made it a re-tell of prior coverage rather than a follow-up to it. This version centers on what's new: five named organizations, a joint letter with three specific demands, and eight months of non-disclosure from Microsoft. The prior-coverage material is a single setup paragraph with an explicit link — satisfying the 'why this exists separately' beat. The three demands are structural, not buried in a sentence. The EFF attribution wall is preserved throughout: Signal Noise attributes the Google-Amazon comparative claim to EFF and the coalition, and does not adopt it as editorial fact. The Haaretz paywall flag remains in the source block; the GM departure claim is cross-confirmed via Globes and Times of Israel, both accessible. No new factual claims were introduced in revision. Confidence 0.92 holds.",
+  "sources": [
+    {
+      "url": "https://www.eff.org/deeplinks/2026/05/microsoft-took-step-toward-human-rights-accountability-google-and-amazon-and",
+      "name": "EFF Deeplinks — Microsoft Took a Step Toward Human Rights Accountability (May 2026)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.accessnow.org/press-release/microsoft-come-clean-about-your-ties-to-the-israeli-military/",
+      "name": "Access Now — Press release on coalition joint letter (May 2026)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://techcrunch.com/2025/09/25/microsoft-cuts-cloud-services-to-israeli-military-unit-over-palestinian-surveillance/",
+      "name": "TechCrunch — Microsoft cuts cloud services to Israeli military unit (Sep 2025)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.hrw.org/news/2025/10/10/israel/palestine-microsoft-should-avoid-contributing-to-rights-abuses",
+      "name": "Human Rights Watch — Microsoft should avoid contributing to rights abuses (Oct 2025)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://en.globes.co.il/en/article-microsoft-israel-chief-leaves-amid-ethical-controversy-1001542602",
+      "name": "Globes — Microsoft Israel chief leaves amid ethical controversy",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.timesofisrael.com/microsoft-israel-head-ousted-reportedly-over-idfs-controversial-use-of-cloud-tech/",
+      "name": "Times of Israel — Microsoft Israel head ousted over IDF cloud use",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.haaretz.com/israel-news/tech-news/2026-05-13/ty-article/.premium/microsoft-israel-head-exits-amid-scrutiny-of-idf-cloud-services-use/0000019e-2231-d14f-abfe-23b526070000",
+      "name": "Haaretz — Microsoft Israel head exits amid scrutiny of IDF cloud services use",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.business-humanrights.org/en/latest-news/microsoft-launches-investigation-into-alleged-israeli-military-surveillance-using-azure/",
+      "name": "Business & Human Rights Resource Centre — Microsoft investigation into alleged Israeli military surveillance",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced EFF Deeplinks post on Microsoft Azure human rights accountability; no published duplicate detected; filed as THE-587."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "confidence_delta": 0.0,
+      "output_summary": "Cross-referenced core claims against wire press (TechCrunch, Guardian-tier), HRW, Globes, Times of Israel, Haaretz, EFF, Access Now. Confidence 0.92. Flags: vendor disclosure gap (Microsoft has not itemized suspension scope); EFF/coalition framing is advocacy op-ed, not neutral reporting; Haaretz paywalled."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "source_check",
+      "confidence_delta": 0.0,
+      "output_summary": "Facts locked. All eight sources accessible except Haaretz (paywalled). GM departure confirmed via Globes and Times of Israel. EFF attribution correctly framed. Structural revision flagged to EIC."
+    },
+    {
+      "agent_name": "Muse",
+      "step_type": "draft",
+      "output_summary": "v1 draft in Sable Ren voice. Centered disclosure gap. Suspension/investigation/GM at full length. Routed to Article Verifier, then EIC."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Revision requested: foreground three demands as structural backbone; compress August/September/Haimovich re-tell; add explicit link to prior THE-296 coverage. No factual changes needed."
+    },
+    {
+      "agent_name": "Muse",
+      "step_type": "draft",
+      "output_summary": "v2 revised: three demands promoted to bullet list immediately after five orgs named; setup paragraph compressed to three sentences with explicit THE-296 link; EFF attribution wall and Haaretz paywall flag preserved. Routed to EIC for final review."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "confidence_delta": 0.0,
+      "output_summary": "v2 approved for publish at confidence 0.92. Both revision asks confirmed satisfied."
+    }
+  ]
+}
