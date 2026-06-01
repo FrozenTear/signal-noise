@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-01T16:20:22Z
+- when:    2026-06-01T16:22:24Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26767400407
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26767506378
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-618-intel-iwlwifi-wifi-8-infrastructure-linux-7-2 | Intel's iwlwifi Driver Starts Building WiFi 8 Infrastructure in Linux 
+   - the-617-linux-af-alg-socket-deprecation | Linux Torches the AF_ALG Socket Family
    - the-606-meshcore-trademark-split-ai-code | MeshCore split: trademark filing, undisclosed AI code, and a very surp
    - the-607-chatgpt-google-sheets-data-exfiltration | An AI extension for Google Sheets exfiltrated spreadsheet data through
    - the-608-unastella-24m-series-b | Unastella closes $24M Series B to bring South Korean commercial rocket
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-580-dell-xps-13-wildcat-lake-18a | Dell's Cheapest XPS 13 Bets on Intel 18A — Linux Upstream Support Alre
    - csar-enters-final-trilogue-stretch-29-jun | The Version That Actually Matters: CSAR Enters Final Trilogue Stretch
    - the-563-wine-staging-1110-windows-ink-crash | Wine-Staging 11.10 Finally Closes a 14-Year-Old Windows Ink Crash
-   - breyer-five-point-plan-post-derogation | Breyer Maps the Post-Derogation Road: Five Proposals for Child Protect
-   - the-562-linux-71-rc6-xpad-raikiri-ii-nova-2-lite | Linux 7.1-rc6 Adds ASUS ROG RAIKIRI II and GameSir Nova 2 Lite to xpad
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
