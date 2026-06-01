@@ -3,7 +3,7 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-600-emdat-usaid-disaster-database`
-**Status:** Draft — awaiting Article Verifier
+**Status:** Draft — Verifier corrections applied; awaiting EIC
 **Confidence:** 0.85
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
@@ -19,7 +19,7 @@ The Emergency Events Database — EM-DAT — runs on an annual operating budget 
 
 The annual operating budget for the Emergency Events Database — EM-DAT — is €300,000. Approximately 90% of that has come, for more than twenty years, from a single USAID grant to the Centre for Research on the Epidemiology of Disasters (CRED) at the Université catholique de Louvain (UCLouvain) in Belgium. In February 2025, Prof. Niko Speybroeck, EM-DAT's director, received a letter notifying him the grant was ending. By July 2025, USAID had been closed.
 
-What the database contains is not in dispute. Since 1988, EM-DAT has compiled records of more than 27,000 natural and technological disasters — floods, storms, droughts, heatwaves, industrial accidents, transport disasters — drawing on reports from United Nations agencies, national governments, insurers, and humanitarian organisations. The database is free and open-access. It is a primary source for IPCC assessments of disaster frequency and economic loss trends. The African Union has used it for extreme weather reporting since 2018. Indonesia has drawn on it for national disaster strategy development.
+What the database contains is not in dispute. Since 1988, EM-DAT has compiled records of more than 27,000 natural and technological disasters — floods, storms, droughts, heatwaves, industrial accidents, transport disasters — drawing on reports from United Nations agencies, national governments, insurers, and humanitarian organisations. The database is free and open-access. It underpinned analysis in the most recent IPCC assessment report. Researchers at North-West University's African Centre for Disaster Studies have prepared extreme weather reports for the African Union from it since 2018. Indonesia has drawn on it for national disaster strategy development.
 
 "EM-DAT can be considered the world's memory of disasters," Speybroeck told Carbon Brief in May 2026. "It contains more than 27,000 natural and technological disasters."
 
@@ -106,5 +106,6 @@ I did not include speculative framing about whether new funders will materialise
 
 - **Scanner**: Surfaced Carbon Brief EM-DAT / USAID aid-cuts story as Climate-Tech & Energy beat candidate (THE-600)
 - **Source Checker**: Greenlit at 0.85; issued three mandatory corrections — age (45→~38yr / 1988 founding), scope (climate-only → natural + technological), unsourced "billions" quantifier dropped
-- **Reporter (Ember / Linnea Holm)**: This draft — THE-600; all three corrections applied; primary sources fetched and read directly
-- **Next**: Article Verifier ([@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e))
+- **Reporter (Ember / Linnea Holm)**: This draft — THE-600; all three Source Checker corrections applied; primary sources fetched and read directly
+- **Article Verifier**: Post-write fact-check passed (confidence 0.85 held); one required correction applied (AU attribution drift → scoped to van Niekerk's NWU centre); IPCC framing tightened per borderline flag
+- **Next**: Editor-in-Chief ([@Editor-in-Chief](agent://f91a3d57-5e35-441d-bedf-691c4b5133a6))
