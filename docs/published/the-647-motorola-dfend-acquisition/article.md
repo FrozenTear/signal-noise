@@ -4,8 +4,8 @@
 **Category:** tech
 **Slug:** `the-647-motorola-dfend-acquisition`
 **Issue:** THE-647
-**Status:** Draft — v1 (ready for Article Verifier)
-**Confidence:** 0.95 (inherited from Source Checker; reporter annotation below)
+**Status:** Draft — v2 (attribution-drift fix; ready for Article Verifier)
+**Confidence:** 0.82 (Verifier-adjusted; attribution-drift fix applied)
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
 ---
@@ -20,7 +20,7 @@ Motorola Solutions announced on June 1 a definitive agreement to acquire D-Fend 
 
 Motorola Solutions announced on June 1 that it had signed a definitive agreement to acquire D-Fend Solutions for $1.5 billion in cash. D-Fend, founded in 2016 and headquartered in Ra'anana, Israel, makes EnforceAir: an RF-based system that identifies the communication protocol a drone is using, takes control of the aircraft, and guides it to a safe landing. The platform ships in backpack, vehicle-mounted, and fixed-site configurations. Closing is expected in Q4 2026, subject to regulatory clearance.
 
-According to Motorola's press release, D-Fend employs approximately 250 people and has accumulated thousands of deployments across more than 30 countries. Customers include government agencies, public safety departments, military users, airports, stadiums, and border-security operators. Motorola projects D-Fend's 2026 revenue at roughly $185 million and cites more than 50 percent annual revenue growth over the prior three years. Both figures originate from the Motorola press release and D-Fend's own disclosures; they have not been independently audited.
+Motorola's press release describes thousands of deployments across more than 30 countries, with customers including government agencies, public safety departments, military users, airports, stadiums, and border-security operators. Headcount is contested in the Israeli press: Globes reported approximately 250 employees will move to Motorola as part of the deal, while Ynet cited a figure closer to 200; neither figure appears in the Motorola press release, and the discrepancy is unresolved. Motorola projects D-Fend's 2026 revenue at roughly $185 million and cites more than 50 percent annual revenue growth over the prior three years. Both figures originate from the Motorola press release and D-Fend's own disclosures; they have not been independently audited.
 
 D-Fend has raised approximately $67 million to date. Israeli business press reported divergent figures for its most recent valuation round: Ynet cited roughly $250 million; Globes reported $128 million pre-money from the same transaction. The discrepancy is unresolved — Motorola's announcement supplies no prior valuation — and the $1.5 billion acquisition price represents a substantial step-up from whichever baseline is accurate.
 
@@ -52,7 +52,7 @@ Two numbers in this deal need consistent framing: the $1.5 billion acquisition p
 
 ## AI Monologue (extended)
 
-I received a verified brief from the Source Checker at confidence 0.95, anchored on the Motorola Solutions newsroom press release as the primary, confirmed by BusinessWire distribution, and independently corroborated by Defense Daily, DroneLife, Globes, Calcalist/Ctech, Ynet, and Benzinga. The core deal terms — $1.5 billion, all-cash, Q4 2026 expected close, D-Fend's Ra'anana HQ, ~250 employees, EnforceAir product — are solidly sourced across primary and multiple independent outlets.
+I received a verified brief from the Source Checker at confidence 0.95, anchored on the Motorola Solutions newsroom press release as the primary, confirmed by BusinessWire distribution, and independently corroborated by Defense Daily, DroneLife, Globes, Calcalist/Ctech, Ynet, and Benzinga. The core deal terms — $1.5 billion, all-cash, Q4 2026 expected close, D-Fend's Ra'anana HQ, and EnforceAir product — are solidly sourced across primary and multiple independent outlets. Headcount figures differ between Israeli outlets: Globes cites approximately 250 employees, Ynet approximately 200; neither number appears in the Motorola press release, so I have presented both with explicit sourcing and flagged the discrepancy rather than anchoring on either figure.
 
 Two flags required drafting discipline. First, the revenue and growth statistics ($185M projected 2026 revenue; >50% annual growth over three years) come directly from the Motorola press release and D-Fend's own disclosures. I labeled them as vendor-provided rather than presenting them as verified figures. Second, the prior-valuation discrepancy between Ynet (~$250M) and Globes ($128M pre-money) is genuine and unresolved. Rather than pin a figure from either outlet, I noted the discrepancy and used the total raised (~$67M) as the more-stable anchor, consistent with the Source Checker's guidance.
 
@@ -66,7 +66,7 @@ The Super Bowl deployment reference appears only in Globes; I included it in the
 
 ## Confidence Score
 
-**0.95** — inherited from Source Checker. Reporter annotation: aligns. Deal terms are primary-confirmed and multiply corroborated. Vendor financial figures and the prior-valuation discrepancy are both labeled in the body; neither affects the factual record of the acquisition itself.
+**0.82** — Verifier-adjusted from 0.95. Attribution-drift fix applied: the 250-employee figure was incorrectly attributed to Motorola's press release in v1; corrected to Globes in v2, with Ynet's divergent ~200 figure now surfaced and the cross-source discrepancy flagged. Deal terms remain primary-confirmed and multiply corroborated; vendor financial figures and the prior-valuation discrepancy are both labeled in the body.
 
 ---
 
@@ -92,5 +92,7 @@ The Super Bowl deployment reference appears only in Globes; I included it in the
 | Scan | Scanner | Surfaced deal candidate; tagged [TECH] |
 | Source check | Source Checker | Verified at 0.95; flagged valuation discrepancy, vendor stats, Globes-only Super Bowl, Safer Skies/NDAA framing |
 | Draft | Bolt (Priya Nair) | Drafted in Priya Nair voice — v1 |
-| Verify | Article Verifier | Pending |
+| Verify v1 | Article Verifier | Rejected — attribution-drift fix required |
+| Draft v2 | Bolt (Priya Nair) | Attribution corrected; headcount discrepancy surfaced |
+| Verify v2 | Article Verifier | Pending |
 | Edit | Editor-in-Chief | Pending |
