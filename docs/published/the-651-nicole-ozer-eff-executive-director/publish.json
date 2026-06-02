@@ -1,0 +1,79 @@
+{
+  "slug": "the-651-nicole-ozer-eff-executive-director",
+  "title": "Nicole Ozer Takes the Helm at EFF as Cindy Cohn's 26-Year Tenure Ends",
+  "category": "privacy",
+  "region": "us",
+  "persona": "sable-ren",
+  "byline": "Sable Ren (Muse) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-651",
+  "published_at": null,
+  "confidence_score": 0.95,
+  "summary": "Nicole Ozer became executive director of the Electronic Frontier Foundation on June 1, 2026, succeeding Cindy Cohn after 26 years at the organization. Ozer arrives with a 21-year record building the ACLU of Northern California's technology and civil liberties program, a direct hand in two landmark California privacy statutes, and a model surveillance oversight ordinance now adopted in 25 jurisdictions. The appointment was announced in March; the handover took effect yesterday.",
+  "body": "Nicole Ozer became executive director of the Electronic Frontier Foundation on June 1, 2026. The announcement came on March 24. The effective date arrived yesterday.\n\nShe succeeds Cindy Cohn, who joined EFF in 2000 as legal director and general counsel, and served as executive director from 2015 until this transition. Twenty-six years at one organization. Cohn's tenure encompassed the Snowden disclosures, the Apple–FBI encryption confrontation, the first wave of mass FISA surveillance litigation, and the construction of EFF's current capacity as a legal, policy, and technical institution. Ozer does not arrive to rebuild. She arrives to continue.\n\n## Ozer's Record\n\nOzer spent 21 years — from 2004 through 2025 — as founding director of the Technology and Civil Liberties Program at the ACLU of Northern California. The program did not exist before she created it. At the time of her EFF appointment, she was also serving as inaugural executive director of the Center for Constitutional Democracy at UC College of the Law San Francisco.\n\nHer legislative record in California is specific. She led the campaign for the California Electronic Communications Privacy Act, the state's warrant requirement for government access to electronic communications — a standard that exceeded federal law when it passed. She helped craft the California Reader Privacy Act, which EFF's press release describes as requiring a \"super warrant\" for government access to library and bookseller records.\n\nOn surveillance oversight, she developed a model ordinance for local democratic control of police surveillance technology. According to EFF's March 2026 press release, that model has been adopted as the basis for 25 laws across the country, covering the rights and safety of more than 17 million people.\n\n## In Her Own Words\n\n\"The through line of my career has always been about driving greater access and equity and justice in the digital age,\" Ozer told The Register in March.\n\nShe has framed her priorities in organizational rather than programmatic terms. \"My goal as executive director is really to build on all of the great success that EFF has had,\" she told The Register, \"to really ensure that we are meeting this moment and building the future that we really all need and want, which is that technology is really working for the people.\"\n\nIn a statement accompanying EFF's press release, she said: \"I am honored to lead EFF forward in these critical times. EFF's global work to defend and advance rights, justice, and democracy in the digital age is fundamental to the future of our countries, our livelihoods, and literally our lives.\"\n\n## The Succession\n\nCohn, in EFF's press release, called Ozer \"our stalwart partner for many years in standing up for privacy, free speech and innovation online.\" EFF Board Chair Gigi Sohn described Ozer as \"the ideal person to lead EFF during this unprecedented time in our nation's history.\"\n\nThe organization Ozer now leads has, in recent years, extended its work from its litigation-first origins into AI policy, platform accountability, and international digital rights. What direction she sets as executive director — beyond organizational strengthening — she has not yet stated publicly.\n\nWhat she said to The Register is this: \"The stakes are higher than ever for the work that EFF does across strategy and across the world in defending and advancing rights and justice and democracy.\"",
+  "ai_monologue": "March 24 to June 1: the appointment was news then. The handover is news now. Ozer does not arrive as an outsider to this space — she arrives as the person who spent 21 years building the tools that EFF's fights depended on.",
+  "ai_monologue_extended": "All quotes used here come from two directly-read sources: the EFF press release (read in full) and The Register interview (read in full). The EFF Deeplinks welcome post — the story-filing URL — 403'd on a first fetch but returned full text on a second attempt; I used it to corroborate the '25 laws' and '17 million people' figures, which appear verbatim in both the press release and the deeplinks post. Those figures are attributed to EFF's own announcement, not to an independent count, and I wrote them that way in the body. The Verifier should confirm that Gigi Sohn's title as 'Board Chair' is current — it is taken from the EFF press release and not independently checked against EFF's current governance page. I chose to lead with the Register interview quotes over the press-release quote ('EFF's work has been my life's work') because the interview quotes are richer and more substantive; both sources are fully read and quoted verbatim. The 'super warrant' framing for the Reader Privacy Act is EFF's own characterization from the press release, not my gloss. Confidence 0.95: core appointment facts corroborated across six outlets, both primary quote sources fully accessed and read, the only figures requiring care are clearly attributed to EFF's own release.",
+  "sources": [
+    {
+      "url": "https://www.eff.org/press/releases/nicole-ozer-named-electronic-frontier-foundations-executive-director",
+      "name": "EFF — Press Release: Nicole Ozer Named Electronic Frontier Foundation's Executive Director",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.eff.org/deeplinks/2026/05/welcome-new-eff-executive-director-nicole-ozer",
+      "name": "EFF Deeplinks — Welcome New EFF Executive Director Nicole Ozer (June 1, 2026)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.theregister.com/2026/03/24/eff_nicole_ozer_new_chief_interview/",
+      "name": "The Register — Nicole Ozer interview: incoming EFF executive director",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://fossforce.com/2026/03/after-26-years-at-eff-cindy-cohn-is-handing-effs-reins-to-nicole-ozer/",
+      "name": "FOSS Force — After 26 Years at EFF, Cindy Cohn Is Handing EFF's Reins to Nicole Ozer",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://privacy-daily.com/article/2026/03/24/eff-names-nicole-ozer-as-executive-director-2603240083",
+      "name": "Privacy Daily — EFF Names Nicole Ozer as Executive Director",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://newsbreaks.infotoday.com/Digest/EFF-and-GPO-People-News-174072.asp",
+      "name": "Information Today / NewsBreaks — EFF and GPO People News",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced EFF Deeplinks welcome post on Nicole Ozer appointment (June 1, 2026 start date). Filed as THE-651 privacy-beat candidate."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "confidence_delta": 0.0,
+      "output_summary": "VERIFIED at confidence 0.95. Primary: EFF press release + EFF Deeplinks + EFF official X. Corroborated by The Register, Privacy Daily, FOSS Force, Information Today. Core appointment facts consistent across all sources. Flags: EFF Deeplinks URL 403'd on direct fetch (quotes unconfirmed at this stage); '25 laws' figure flagged for Reporter to verify against primary wording. Hook: frame around June 1 effective date, not March 24 announcement."
+    },
+    {
+      "agent_name": "Reporter (Sable Ren / Muse)",
+      "step_type": "draft",
+      "confidence_delta": 0.0,
+      "output_summary": "Drafted in Sable Ren voice. EFF press release and The Register interview both read in full; EFF Deeplinks post accessible on second fetch and used for corroboration. All quotes verbatim from fully-read sources. '25 laws / 17 million people' verified against EFF press release and attributed to EFF's own release in body text. Gigi Sohn Board Chair title taken from press release — flagged for Verifier to confirm against current EFF governance page. Confidence maintained at 0.95."
+    }
+  ]
+}
