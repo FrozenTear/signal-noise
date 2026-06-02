@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-02T06:28:40Z
+- when:    2026-06-02T06:32:39Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26802628088
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26802794661
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-645-linux-fips-loadable-crypto-module | Amazon Proposes Standalone FIPS Crypto Module for Linux — Upstream Say
    - the-646-windborne-weathermesh-6-ai-forecast | WeatherMesh-6 Arrives with Hourly Forecasts and Vendor Benchmarks That
    - the-644-scancode-llm-port-trademark-copyright | The Tool That Finds License Violations Had Its License Violated
    - the-643-cve-2026-46243-cifswitch-linux-kernel-lpe | CVE-2026-46243 (CIFSwitch): Nineteen Years in the Kernel, Root on Dema
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - lpr-mission-creep-agency-responses | When the EFF Came Knocking, Some Police Departments Changed Course
    - microsoft-azure-disclosure-gap-coalition-letter | After Suspending Azure to an Israeli Military Unit, Microsoft Has Not 
    - the-588-discord-5ca-breach-70000-government-ids | 70,000 Government IDs Were Stolen From a Discord Verification Vendor. 
-   - the-585-steam-deck-back-in-stock-price-hike | Steam Deck Is Back. The Price Is Not What You Remember.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
