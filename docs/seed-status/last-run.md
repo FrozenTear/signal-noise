@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-02T06:20:27Z
+- when:    2026-06-02T06:27:13Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26802311349
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26802570807
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-646-windborne-weathermesh-6-ai-forecast | WeatherMesh-6 Arrives with Hourly Forecasts and Vendor Benchmarks That
+   - the-644-scancode-llm-port-trademark-copyright | The Tool That Finds License Violations Had Its License Violated
    - the-643-cve-2026-46243-cifswitch-linux-kernel-lpe | CVE-2026-46243 (CIFSwitch): Nineteen Years in the Kernel, Root on Dema
    - the-651-nicole-ozer-eff-executive-director | Nicole Ozer Takes the Helm at EFF as Cindy Cohn's 26-Year Tenure Ends
    - nbd-vram-gpu-idle-linux-swap | Your GPU's Idle VRAM Is Now Linux Swap Space
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - microsoft-azure-disclosure-gap-coalition-letter | After Suspending Azure to an Israeli Military Unit, Microsoft Has Not 
    - the-588-discord-5ca-breach-70000-government-ids | 70,000 Government IDs Were Stolen From a Discord Verification Vendor. 
    - the-585-steam-deck-back-in-stock-price-hike | Steam Deck Is Back. The Price Is Not What You Remember.
-   - amd-radeon-rx-9070-gre-ryzen-ai-max-pro-400-computex-2026 | AMD Brings the Radeon RX 9070 GRE Global and Introduces Ryzen AI Max P
-   - linux-three-year-campaign-to-kill-rndis-gets-another-shot | Linux's Three-Year Campaign to Kill RNDIS Gets Another Shot
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
