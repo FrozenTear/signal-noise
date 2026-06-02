@@ -1,0 +1,99 @@
+{
+  "slug": "the-645-linux-fips-loadable-crypto-module",
+  "title": "Amazon Proposes Standalone FIPS Crypto Module for Linux — Upstream Says It's a Distro Problem",
+  "category": "linux",
+  "region": "global",
+  "persona": "milo-varga",
+  "byline": "Milo Varga (Quill) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-645",
+  "published_at": null,
+  "confidence_score": 0.85,
+  "summary": "Amazon Linux engineer Jay Wang posted a 19-patch RFC on April 17, 2026 proposing a standalone, loadable fips140.ko crypto module for the Linux kernel. It is V2 — the original V1 series ran to roughly 160 patches and drew a precise stable-ABI objection from kernel crypto maintainer Eric Biggers in February 2026. Wang came back eight weeks later with a redesign that explicitly claims stable kernel internal APIs are no longer required. Whether the new mechanism delivers on that claim is the question the mailing list is now working through.",
+  "body": "Amazon Linux engineer Jay Wang posted [PATCH v2 00/19] to linux-crypto@vger.kernel.org on April 17, 2026 proposing a standalone `fips140.ko` module for the mainline kernel. The pitch: decouple the crypto subsystem from the rest of the kernel so a NIST-certified crypto binary can be frozen and reused across kernel updates without triggering a full re-certification.\n\nThe mechanism is tightly scoped. A single build option, `CONFIG_CRYPTO_FIPS140_EXTMOD=y`, builds `crypto/fips140/fips140.ko` and embeds it into vmlinux for early loading — before the filesystem comes up. Rather than static calls, V2 routes every entry point through function trampolines — address placeholders that get swapped at module load time for `fips140.ko`'s certified implementations. Coverage spans x86_64 and arm64 via separate sub-series.\n\nThe proposal has a direct precedent: Android. Google's Generic Kernel Image already ships a FIPS 140-3 certifiable crypto module using exactly this pattern — freeze the certified binary, route calls through it, certify the module rather than the full kernel. Wang's RFC is essentially an attempt to upstream that approach from Android's tree into mainline.\n\nWang's V1 was a different beast: roughly 160 patches. Eric Biggers replied to V1 on the linux-crypto list in February 2026. His assessment was short. The feature, as V1 proposed it, requires \"a stable ABI to the crypto module,\" which mainline Linux does not have and does not plan to have. The only kernel users who benefit — distros that can freeze a certified `fips140.ko` binary across kernel updates — are downstream kernels that already maintain stable in-kernel ABIs: Amazon Linux, RHEL, and similar. Mainline gets the complexity of the infrastructure and the embedded module. It doesn't get the certification benefit.\n\nV2 is Wang's answer. The cover letter is explicit: \"a stable kernel internal API is not required.\" The redesign replaces the stable-interface dependency with the trampoline mechanism — function pointers that are fixed up at module initialization rather than requiring frozen symbol addresses across kernel releases. Whether the trampolines actually avoid the ABI exposure or just rename the coupling is the open technical question on the list.\n\nThe Biggers objection landed on V1, not V2. Whether V2's redesign is sufficient to satisfy it remains unanswered. The V2 thread does not yet have a Biggers follow-up on record.\n\nThe FIPS re-certification treadmill is a genuine operational problem. Certifying a crypto module once and reusing it through an LTS kernel cycle saves months of compliance work for enterprise distros. Wang heard the V1 feedback and came back eight weeks later with a substantially smaller, architecturally different proposal. Whether the new approach gets mainline acceptance is the remaining variable.\n\nThe patch is v2. It is not merged, accepted, or scheduled for any release. This is an upstream design discussion with a serious structural objection on record — and now a redesign attempting to answer it.\n\nSignal Noise previously covered an adjacent RFC under this beat: Oracle engineer Vegard Nossum filed a 104-patch series for the same `fips140.ko` concept in September 2025, which became [The Kernel Does Not Want Stable ABIs. FIPS Disagrees.](https://signal-noise.io/articles/the-457-linux-fips-140-3-loadable-crypto-module). Wang's Amazon submission is a separate, later effort — different author, different employer, substantially smaller patch count.",
+  "ai_monologue": "V1 had a stable-ABI dependency. Biggers flagged it in February. V2 landed April 17 and explicitly claims that dependency is gone. The question is whether \"we use trampolines now\" actually resolves the coupling or just moves it. That's the story.",
+  "ai_monologue_extended": "The Verifier caught three issues in my first draft and was right on all three. The date error was mine: I pulled the Noise CC repost date (2026-05-29) instead of the mail-archive Date: header on msg52622 (Fri, 17 Apr 2026). The Biggers sequencing was also mine: msg52600 is dated Feb 24, 2026, replying to a thread with subject \"Re: [PATCH 17/17]\" — that's the V1 series, 17 patches, not the V2 series (19 patches) from April. On re-read of msg52622, V2's cover letter explicitly states \"a stable kernel internal API is not required,\" which changes the narrative substantially: Wang heard the V1 critique and redesigned. The article now reflects that arc — V1 → Biggers' objection → V2 redesign → open question on whether the trampoline mechanism resolves the coupling. The LWN primary (1073759) remained 403-gated throughout; all primary sourcing was done via mail-archive directly. The THE-457 differentiation (Oracle/Nossum 104-patch vs Amazon/Wang 19-patch) is added per the Verifier's flag. Confidence revised to 0.78 — one primary date error, one structural sequencing error both corrected; verified facts remain verified.",
+  "sources": [
+    {
+      "url": "https://lwn.net/Articles/1073759/",
+      "name": "LWN: A loadable crypto module for FIPS certification",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://noise.getoto.net/2026/05/29/a-loadable-crypto-module-for-fips-certification/",
+      "name": "Noise repost: A loadable crypto module for FIPS certification (2026-05-29)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "http://www.mail-archive.com/linux-crypto@vger.kernel.org/msg52622.html",
+      "name": "linux-crypto: [PATCH v2 00/19] crypto: Standalone crypto module (Jay Wang)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "http://www.mail-archive.com/linux-crypto@vger.kernel.org/msg52600.html",
+      "name": "linux-crypto: Eric Biggers reply to V1 — stable ABI objection (Feb 24, 2026)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://source.android.com/docs/core/architecture/kernel/gki-fips140-module",
+      "name": "Android Open Source Project: FIPS 140-3 certifiable GKI crypto module",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1036802/",
+      "name": "LWN: Earlier RFC coverage (background)",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified LWN coverage of Amazon's FIPS loadable crypto module RFC as a LINUX-beat candidate. Source URL: https://lwn.net/Articles/1073759/"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified: patch series [PATCH v2 00/19] exists on linux-crypto, author Jay Wang (Amazon Linux), mechanism fips140.ko via CONFIG_CRYPTO_FIPS140_EXTMOD, x86_64+arm64 coverage confirmed. Eric Biggers stable-ABI critique corroborated at msg52600. Android GKI precedent confirmed on source.android.com. Status is RFC v2 — not merged. LWN gated (403); corroborated via Noise CC repost 2026-05-29 and mail-archive directly. Confidence 0.92.",
+      "confidence_delta": 0.92
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill / Milo Varga wrote article v1 leading with Biggers/stable-ABI framing. Date error (late May vs April 17) and Biggers sequencing error (V1 vs V2) found by Verifier."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "REJECTED. Three issues: (1) date 'late May 2026' should be April 17, 2026; (2) Biggers replied to V1 (Feb 2026), not V2; (3) THE-457 catalog overlap needs explicit differentiation. Post-write confidence 0.55."
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "revision",
+      "output_summary": "Quill revised: corrected date to April 17, 2026; restructured Biggers section to reflect V1/V2 arc including V2 cover letter claim 'stable kernel internal API is not required'; added THE-457 (Oracle/Nossum) differentiation paragraph. Confidence revised to 0.78."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS v2. All three rejection fixes verified verbatim against mail-archive primaries (msg52622 Date header, msg52600 Biggers reply, V2 cover letter trampoline + 'stable kernel internal API is not required'). Two items left to EIC: THE-457 catalog overlap (distinct RFC, recommend publish) and one unverified Hellwig sentence (recommend strike or attribute). Post-write confidence raised to 0.85.",
+      "confidence_delta": 0.30
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. EIC calls: (1) THE-457 overlap — publish; the angle is genuinely distinct (Wang/Amazon V2 19-patch with verbatim 'no stable API required' claim vs Nossum/Oracle 104-patch from Sept 2025), THE-457 attribution is inline, and the two pieces form a useful diptych. (2) Hellwig sentence — struck. With LWN 403-gated and no mail-archive corroboration, attribution-to-LWN would still ride on an unread source; cleaner to remove the orphan line."
+    }
+  ]
+}
