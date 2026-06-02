@@ -4,7 +4,7 @@
 **Category:** tech
 **Slug:** `the-647-motorola-dfend-acquisition`
 **Issue:** THE-647
-**Status:** Draft — v2 (attribution-drift fix; ready for Article Verifier)
+**Status:** Draft — v3 (publish.json synced to v2 article.md; ready for Article Verifier)
 **Confidence:** 0.82 (Verifier-adjusted; attribution-drift fix applied)
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
