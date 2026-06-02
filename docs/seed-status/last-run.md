@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-02T06:16:40Z
+- when:    2026-06-02T06:17:31Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26802167266
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26802198858
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-643-cve-2026-46243-cifswitch-linux-kernel-lpe | CVE-2026-46243 (CIFSwitch): Nineteen Years in the Kernel, Root on Dema
    - the-651-nicole-ozer-eff-executive-director | Nicole Ozer Takes the Helm at EFF as Cindy Cohn's 26-Year Tenure Ends
    - nbd-vram-gpu-idle-linux-swap | Your GPU's Idle VRAM Is Now Linux Swap Space
    - the-618-intel-iwlwifi-wifi-8-infrastructure-linux-7-2 | Intel's iwlwifi Driver Starts Building WiFi 8 Infrastructure in Linux 
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-585-steam-deck-back-in-stock-price-hike | Steam Deck Is Back. The Price Is Not What You Remember.
    - amd-radeon-rx-9070-gre-ryzen-ai-max-pro-400-computex-2026 | AMD Brings the Radeon RX 9070 GRE Global and Introduces Ryzen AI Max P
    - linux-three-year-campaign-to-kill-rndis-gets-another-shot | Linux's Three-Year Campaign to Kill RNDIS Gets Another Shot
-   - the-580-dell-xps-13-wildcat-lake-18a | Dell's Cheapest XPS 13 Bets on Intel 18A — Linux Upstream Support Alre
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
