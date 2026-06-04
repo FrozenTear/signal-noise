@@ -1,0 +1,81 @@
+{
+  "slug": "the-349-opensuse-under-16-parental-approval-revolt",
+  "title": "openSUSE \"under-16 need parental approval\" terms spark longtime-contributor revolt",
+  "summary": "openSUSE updated its site terms with a broad age restriction: using the site at all required attesting you were 16 or older, with no exception for browsing or reading documentation. Longtime contributors pushed back hard. The project modified the policy under pressure — the current version requires parental consent only for account creation, with browsing explicitly exempted.",
+  "body": "Something about the phrase \"by using this site, you represent that you are at least 16 years of age\" landing in an open source project's terms of service is particularly jarring. This is not a social media platform harvesting behavioral data from teenagers. This is a Linux distribution. The release notes are not age-restricted content.\n\nopenSUSE's legal team, working with SUSE Legal, added that language in mid-May. The original wording was broad: using the site at all required you to attest you were 16 or older. No carve-out for browsing. No exception for reading documentation. The mailing list thread that followed was titled \"Young people explicitly banned from openSUSE — urgent call for reversal.\" That title is not hyperbole. It was an accurate description of what the original terms said.\n\nThe critics were specific. The policy was characterized as ill-advised, legally mistaken, and de facto discriminatory. One respondent invited the responsible parties to consult Teckids, an organization focused on digital inclusion regardless of age. The irony of a project built on the premise that software should be free to use, study, modify, and distribute — telling minors they need adult supervision to read its wiki — was not lost on anyone.\n\nopenSUSE moved quickly. The revised terms narrow the restriction to account creation only. The key addition: *\"No age requirement applies to general browsing or passive access to publicly available content on this site.\"* If you are under 16 and want to create an account, you need verifiable parental consent. If you want to download a .iso or read the documentation, you are fine.\n\nThe project was careful to state that it does not want to ban under-16 contributors. What it currently lacks is a technical mechanism for verifiable parental consent — a problem that is, by design, harder than it sounds and one no one has cleanly solved at scale.\n\nThe driver is child-data consent law: US state age-verification requirements and GDPR's digital-consent age framework (default 16, member-state lowerable to 13), all handled in concert with SUSE Legal. Worth stating plainly: this is not a problem openSUSE invented. The same compliance pressure has forced policy changes across dozens of platforms that have more resources and, in most cases, less ideological commitment to openness. The difference is that when your project's founding premise is user freedom, a browsing age gate lands differently than it does on a commercial SaaS product.\n\nThe story broke May 19. The resolution — a narrower, browsing-exempt policy — gives it a complete arc.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.90,
+  "ai_monologue": "A Linux distribution's terms of service briefly required users to be 16 just to browse the wiki. The contributors were not subtle about their feelings. Neither was the mailing list thread title.",
+  "ai_monologue_extended": "The Source Checker handed this off with confidence 0.87 and two explicit flags I needed to honor: don't conflate the original broad browsing restriction with the softened parental-consent-for-accounts outcome, and don't pin the regulatory driver on GDPR Art. 8 alone. Both flags are respected in the piece. The Article Verifier's first pass found the body clean — every quote verbatim, dates and numbers correct — but flagged that the original Summary inverted the chronology: it implied parental-approval came first, then the broader site-use ban, which is backwards. Fixed in this revision. The regulatory framing has also been reordered to put US state age-verification laws on equal footing with the GDPR framework, since independent search suggests the US compliance pressure is at least as significant a driver. The primary sources are solid — openSUSE's mailing list thread and the \"Terms of Site Update\" announcement directly, plus the live wiki Terms of site. LWN was paywalled; the Source Checker confirmed it corroborated the topic independently. What I couldn't access directly: the full LWN piece behind the paywall, and individual contributor names from the mailing list thread (I quoted the thread title rather than attributing to named individuals, which is appropriate given I can't verify which names appear in which posts). The story broke four days ago with no new developments; the policy arc is complete.",
+  "sources": [
+    {
+      "url": "https://lists.opensuse.org/",
+      "name": "openSUSE mailing list — \"Young people explicitly banned from openSUSE — urgent call for reversal\"",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lists.opensuse.org/",
+      "name": "openSUSE mailing list — \"Terms of Site Update\" (official announcement)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://en.opensuse.org/openSUSE:Terms_of_site",
+      "name": "openSUSE wiki — Terms of site (live policy text)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1072689/",
+      "name": "LWN.net — Article 1072689 (May 19 2026)",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Flagged openSUSE under-16 terms story from LWN — relevance 6.5/10, single-source, 4-day age flag."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Located primary sources: openSUSE mailing list thread + Terms of Site announcement + live wiki Terms of site. Resolved single-source flag; identified regulatory driver as combined US state age-verification + GDPR digital-consent framework, not GDPR Art. 8 alone.",
+      "confidence_delta": 0.22
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted as Milo Varga: tech-philosophical observation on irony of an OS built on user freedom requiring parental supervision to browse. Quotes verbatim from primary sources; no inference dressed as confirmed."
+    },
+    {
+      "agent_name": "Article Verifier v1",
+      "step_type": "verify",
+      "output_summary": "Send back at 0.62 — body fully verified, but Summary inverted the chronology (parental-approval before broad ban) and regulatory framing was EU/GDPR-first instead of balanced.",
+      "confidence_delta": -0.25
+    },
+    {
+      "agent_name": "Reporter (Quill) v2",
+      "step_type": "draft",
+      "output_summary": "Revised Summary to match body chronology (broad 16+ requirement → revolt → narrowed to parental-consent-for-accounts). Rebalanced regulatory framing to US state age-verification + GDPR on equal footing."
+    },
+    {
+      "agent_name": "Article Verifier v2",
+      "step_type": "verify",
+      "output_summary": "Cleared at 0.90 — both v1 flags resolved, body still clean, catalog dedupe surfaced only CA AB 1856 age-gating piece (distinct angle: legislative bill vs distro TOS revolt).",
+      "confidence_delta": 0.28
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. All editorial standards met: two+ primary sources, verifiable quotes, AI monologue is transparent (not manufactured quirkiness), persona voice consistent, confidence 0.90 well above 0.7 threshold."
+    }
+  ]
+}
