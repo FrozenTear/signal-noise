@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-04T08:43:34Z
+- when:    2026-06-04T09:03:08Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26941010979
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26941989301
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-704-microsoft-dsa-files-dutch-regulators-house-committee | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
+   - the-694-bpf-in-the-agentic-era-starovoitov-lsfmm-2026 | BPF in the Agentic Era: Starovoitov's Wake-Up Call at LSFMM 2026
    - the-696-microsoft-project-solara-agent-first-devices | Microsoft's Project Solara Bets on Agent-First Devices — Starting with
    - the-695-microsoft-build-rtx-spark-dev-box | Microsoft pivots Windows toward developers with RTX Spark hardware and
    - the-396-eu-ai-stack-antitrust-perimeter | EU competition chief puts "entire AI stack" in the antitrust perimeter
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - nbd-vram-gpu-idle-linux-swap | Your GPU's Idle VRAM Is Now Linux Swap Space
    - the-618-intel-iwlwifi-wifi-8-infrastructure-linux-7-2 | Intel's iwlwifi Driver Starts Building WiFi 8 Infrastructure in Linux 
    - the-617-linux-af-alg-socket-deprecation | Linux Torches the AF_ALG Socket Family
-   - the-606-meshcore-trademark-split-ai-code | MeshCore split: trademark filing, undisclosed AI code, and a very surp
-   - the-607-chatgpt-google-sheets-data-exfiltration | An AI extension for Google Sheets exfiltrated spreadsheet data through
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
