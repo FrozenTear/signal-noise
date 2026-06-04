@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-04T11:42:55Z
+- when:    2026-06-04T14:35:12Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26949566665
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26958594126
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - lovable-google-cloud-multi-year-partnership | Lovable and Google Cloud Formalize Multi-Year Partnership, With Report
+   - berkeley-cs-failure-rates-ai-spring-2026 | Berkeley CS Failure Rates Hit Historic Highs as AI Tools Spread Throug
    - kasra-llm-hacking-booknook | $1,500, One Broken App, and a Scoreboard That Isn't Science
    - the-717-schibsted-pay-or-okay-noyb-complaint | Schibsted's Privacy Price Tag: noyb and Norway's Consumer Council File
    - open-source-security-not-a-solo-activity | Open-source security is not a solo activity
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-648-uber-autobrains-munich-robotaxi | Uber, Autobrains and NVIDIA Plan Munich Robotaxi Program — Regulatory 
    - the-645-linux-fips-loadable-crypto-module | Amazon Proposes Standalone FIPS Crypto Module for Linux — Upstream Say
    - the-646-windborne-weathermesh-6-ai-forecast | WeatherMesh-6 Arrives with Hourly Forecasts and Vendor Benchmarks That
-   - the-644-scancode-llm-port-trademark-copyright | The Tool That Finds License Violations Had Its License Violated
-   - the-643-cve-2026-46243-cifswitch-linux-kernel-lpe | CVE-2026-46243 (CIFSwitch): Nineteen Years in the Kernel, Root on Dema
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
