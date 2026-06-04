@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-04T11:16:46Z
+- when:    2026-06-04T11:17:29Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26948387310
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26948420373
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - open-source-security-not-a-solo-activity | Open-source security is not a solo activity
    - microsoft-dsa-files-dutch-regulators-us-house | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-704-microsoft-dsa-files-dutch-regulators-house-committee | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-694-bpf-in-the-agentic-era-starovoitov-lsfmm-2026 | BPF in the Agentic Era: Starovoitov's Wake-Up Call at LSFMM 2026
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-643-cve-2026-46243-cifswitch-linux-kernel-lpe | CVE-2026-46243 (CIFSwitch): Nineteen Years in the Kernel, Root on Dema
    - the-651-nicole-ozer-eff-executive-director | Nicole Ozer Takes the Helm at EFF as Cindy Cohn's 26-Year Tenure Ends
    - nbd-vram-gpu-idle-linux-swap | Your GPU's Idle VRAM Is Now Linux Swap Space
-   - the-618-intel-iwlwifi-wifi-8-infrastructure-linux-7-2 | Intel's iwlwifi Driver Starts Building WiFi 8 Infrastructure in Linux 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
