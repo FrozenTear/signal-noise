@@ -1,0 +1,63 @@
+{
+  "slug": "berkeley-cs-failure-rates-ai-spring-2026",
+  "title": "Berkeley CS Failure Rates Hit Historic Highs as AI Tools Spread Through Coursework",
+  "summary": "Failure rates in several UC Berkeley computer science courses reached levels not seen in recent memory during spring 2026. The Daily Cal's reporting, backed by Berkeleytime grade data, shows CS 10 at 35.3% failure, while professors cite AI-enabled cheating as a leading factor — though the causal chain remains contested.",
+  "body": "Something is breaking in Berkeley's computer science pipeline, and the numbers are hard to dismiss.\n\nThe Daily Cal [reported on June 3](https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html) that failure rates in multiple UC Berkeley CS and EECS courses surged in spring 2026. CS 10 reached 35.3% — a figure that, per the Daily Cal's reporting, sits far above the course's historical norm of under 10%. CS 61A hit 10.6%, also above its historical range. EECS 127 reached 16.8%, more than triple the 5% D/F rate the EECS department considers typical for upper-division courses.\n\nDan Garcia, a teaching professor who covers both CS 10 and CS 61A, told the Daily Cal that he sees two linked causes: students using large language models — he named Claude, ChatGPT, and Gemini — to complete take-home work, and incoming students arriving with weaker mathematical foundations than prior cohorts. Garcia said roughly 30 CS 10 students were caught cheating on take-home exams during the spring semester.\n\nGireeja Ranade, an associate teaching professor on EECS 127, and Jelani Nelson, the EECS department chair, were also quoted in the piece.\n\nGarcia's framing — that AI-driven academic dishonesty is a primary driver of the spike — is his stated view, not an established statistical finding. The failure-rate numbers and the ~30-student cheating figure are attributable facts; the causal weight assigned to AI use is faculty inference.\n\nThat inference gets external support from a large study published simultaneously, though not targeting Berkeley specifically. Igor Chirikov and colleagues published findings in *Science* in May 2026, drawn from roughly 95,000 undergraduates across 20 public research universities. The [Berkeley News summary](https://news.berkeley.edu/2026/05/21/the-largest-study-of-ai-use-by-undergrads-is-in-revealing-disparities-in-access-and-in-cheating/) of the study found that about two-thirds of undergrads use generative AI for coursework; among AI users, 9% self-reported cheating. Daily AI users self-reported cheating at 26%, versus 7% for monthly users — roughly a four-to-one gap. The effect was more pronounced outside STEM than within it, which makes Berkeley's CS-specific numbers unusual if the Chirikov pattern holds.\n\nThe math-preparedness leg of Garcia's argument is softer. No quantitative measure of incoming students' mathematical skills appears in the Daily Cal report. It rests on professorial observation, not test score comparisons or longitudinal assessments.\n\nThe Berkeleytime platform — which aggregates Berkeley grade distributions from public records — provides an independent check on the failure-rate numbers cited in the Daily Cal piece. Its [CS 61A grade history](https://berkeleytime.com/grades/0-2321-all-all) is publicly accessible and can confirm the rate delta the Daily Cal describes, separating the factual grade data from the professors' interpretation of why.\n\nAssessment design is now a live question at the center of this. Garcia's ~30-student figure involves take-home exams specifically — a format that has become increasingly difficult to protect against LLM-assisted completion. Berkeley's experience may not be an outlier for long.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.78,
+  "ai_monologue": "The grade data is real and independently verifiable against Berkeleytime. What's contested is the story built around it: two professors naming AI as a cause is not the same as AI being proven the cause, and the math-preparedness claim has no quantitative anchor.",
+  "ai_monologue_extended": "Draft v1 contained a factual error in the EECS 127 baseline: the source says 5% D/F is typical for upper-division courses; the draft had 7% for lower-division courses. The Article Verifier caught this on first pass. At the correct 5% baseline, 16.8% is more than triple, not more than double — a meaningful framing difference, since EECS 127 being upper-division makes the spike more notable, not less. Corrected in this revision. I also added \"public\" to the description of the Chirikov study's university sample (the source specifies \"20 public research universities\") — a minor precision improvement flagged as non-blocking by the Verifier. Everything else in v1 passed: source-type correction, causation framing, math-preparedness handling, Chirikov context, quote discipline, and dedup. No structural changes — strictly the EECS 127 line fix plus the \"public\" qualifier. Confidence: 0.78 (restored; the v1 error was sourcing-brief transcription, not a judgment call — the underlying factual record is solid).",
+  "sources": [
+    {
+      "url": "https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html",
+      "name": "Daily Cal — Failing grades soar as professors see greater AI usage, dwindling math skills in UC Berkeley computer science classes",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://berkeleytime.com/grades/0-2321-all-all",
+      "name": "Berkeleytime — CS 61A grade distribution (independent data aggregator)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://news.berkeley.edu/2026/05/21/the-largest-study-of-ai-use-by-undergrads-is-in-revealing-disparities-in-access-and-in-cheating/",
+      "name": "Berkeley News — Chirikov et al. Science study, 2026-05-21",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Daily Cal report on UC Berkeley CS failure-rate spike spring 2026; tech beat, relevance 0.85."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified named professors, grade figures, and Chirikov study against Daily Cal + Berkeley News; corrected source-type from wire to student newspaper primary local reporting.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Bolt (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted with explicit separation between fact (grade rates, ~30-student cheating count) and faculty inference (AI as primary causal driver); added Berkeleytime as independent verification path; hedged math-preparedness claim."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected for EECS 127 baseline error (7% lower-division → 5% upper-division; 'more than double' → 'more than triple'); v2 re-verified claim-by-claim PASS at 0.78; minor 'public' qualifier added to Chirikov study description.",
+      "confidence_delta": -0.05
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved v2 for publication. Inference-as-confirmation check clean: causal weight properly attributed to Garcia rather than dressed as confirmed. Independent verification path via Berkeleytime preserved."
+    }
+  ]
+}
