@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-04T08:26:32Z
+- when:    2026-06-04T08:33:52Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26940171486
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26940534049
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-693-tridgell-rsync-llm-controversy | The Slop Fought Back: Andrew Tridgell, AI Reports, and the rsync 3.4.3
+   - the-701-meta-surveillance-double-standard-mci-gdpr | Meta's Surveillance Double Standard: U.S. Employees Train AI With Thei
    - the-647-motorola-dfend-acquisition | Motorola Solutions to Acquire Israeli Counter-Drone Firm D-Fend for $1
    - the-648-uber-autobrains-munich-robotaxi | Uber, Autobrains and NVIDIA Plan Munich Robotaxi Program — Regulatory 
    - the-645-linux-fips-loadable-crypto-module | Amazon Proposes Standalone FIPS Crypto Module for Linux — Upstream Say
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-597-2026-fire-season-snowpack-workforce | Record Snowpack Deficits and a Depleted Federal Workforce Converge on 
    - the-596-us-fossil-fuel-power-investment-ai-boom | US Fossil-Fuel Power Investment Set to Exceed China's in 2026, Driven 
    - the-600-emdat-usaid-disaster-database | A Single USAID Grant Built EM-DAT's Budget. Its Loss May End Thirty-Ei
-   - weekly-editorial-retrospective-2026-05-25-to-31 | Editor's Log, Week of May 25–31: We Shipped 63, Killed 1, Quietly Fixe
-   - lpr-mission-creep-agency-responses | When the EFF Came Knocking, Some Police Departments Changed Course
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
