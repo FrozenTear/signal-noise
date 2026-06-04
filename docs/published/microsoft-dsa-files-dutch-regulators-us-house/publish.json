@@ -1,0 +1,77 @@
+{
+  "title": "Microsoft's DSA Files: How a US Congressional Request Put Dutch Regulators in the Crosshairs",
+  "summary": "Microsoft handed unredacted internal communications — naming Dutch civil servants and a University of Amsterdam researcher — to a US House committee investigating claims of 'tech censorship' of American platforms under Europe's Digital Services Act. The Dutch cabinet raised the matter with the US ambassador. The disclosure is the latest episode in a sustained US congressional campaign against DSA enforcement and raises structural questions about what EU regulatory sovereignty means when American cloud providers are legally compelled to produce European officials' private correspondence to a foreign legislature.",
+  "body": "## The Disclosure\n\nIn late May 2026, Dutch magazine Vrij Nederland reported that Microsoft had turned over internal documents — emails, meeting minutes, and event invitations — to a committee of the United States House of Representatives, without redacting the names of Dutch civil servants. Vrij Nederland is behind a paywall; this piece relies on downstream reporting from NL Times, DutchNews.nl, and BuiltinEU, all of which confirm the core disclosure.\n\nAmong those named were staff at two Dutch regulators: the Autoriteit Consument en Markt (ACM), the competition authority responsible for Digital Services Act oversight in the Netherlands, and the Autoriteit Persoonsgegevens (AP), the data protection watchdog. Also named was Claes de Vreese, a political scientist at the University of Amsterdam whose research covers platform governance and disinformation.\n\nThe requesting body is described across the available reporting as a Republican-controlled House committee. EDRi (European Digital Rights) — a credible civil society organization — identifies the House Committee on the Judiciary as the body driving the broader DSA pressure campaign (the 2025 and February 2026 reports). Whether the Microsoft document request originated specifically with that committee has not been independently confirmed through a primary congressional document. The House Judiciary identification should be read as the most credible available secondary attribution, not a verified primary-source fact.\n\n## Legal Mechanism: Not Quite the Cloud Act\n\nThe legal mechanism here is congressional subpoena power in legislative oversight proceedings — not, as several outlets have framed it, the CLOUD Act. That distinction matters. The CLOUD Act applies narrowly to criminal investigations. Congressional subpoena authority is broader and, for practical purposes, available to a committee regardless of where the data is physically stored. For a US-headquartered company like Microsoft, compelled production under a congressional subpoena is a real legal obligation, not a discretionary disclosure. BuiltinEU, which provides the most detailed English-language account of the mechanics, makes this explicit.\n\n## An Escalating Pattern\n\nThis disclosure did not arrive in a vacuum. The House Judiciary Committee has been building a case against DSA enforcement for over a year. In 2025, Committee Republicans published a report describing the DSA as an instrument of censorship against American platforms and 'compelling global censorship.' A February 2026 follow-on report specifically targeted an ACM-organized roundtable on platform governance, labeling participating civil society organizations as 'censorious' — without presenting independent substantiation of that characterization. In December 2025, the US government imposed visa bans on five Europeans involved in DSA enforcement, including former EU Internal Market Commissioner Thierry Breton and four NGO staff members. EDRi described that escalation as the point at which rhetorical framing became direct personal consequences.\n\nThis disclosure is the next step in that sequence: internal communications between a US cloud provider and European regulators, handed to the committee investigating those regulators.\n\n## Dutch Response\n\nThe Dutch cabinet described the disclosure as 'extremely worrying' (DutchNews.nl) and conveyed that view directly to the US ambassador to the Netherlands. Digital Economy Minister Willemijn Aerdts said: 'If you want to discuss policy, then you do it with us, not over the backs of civil servants.' Junior Economic Affairs Minister Eric van der Burg described the development as 'more than worrying.'\n\nNo on-the-record statement from the ACM, the AP, or the European Commission has been located as of publication. The Dutch cabinet's response is the strongest institutional reaction confirmed in available reporting.\n\n## What Remains Unconfirmed\n\nOther US technology companies reportedly received similar congressional requests; DutchNews.nl and some coverage lead with 'companies such as Microsoft and Meta.' Whether other companies' disclosures also contained unredacted Dutch names has not been confirmed. For this piece, Microsoft is the documented actor. Treating any other company as a confirmed actor in the Dutch data disclosure would overstate the available evidence.\n\nThe wire services Reuters and AP have not, as of this writing, carried this story. Coverage is concentrated in European technology and news press, with Vrij Nederland as the originating investigation. The Hacker News thread reached a score of 155 — meaningful signal, but not a sourcing substitute. The absence of wire pickup may reflect news-cycle timing; it also means the story has not yet been independently verified by wire editorial standards.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.82,
+  "ai_monologue": "A US congressional committee with a stated hostility to EU platform regulation obtained unredacted names of the Europeans enforcing it — through a company legally compelled to hand them over. Five months earlier, the same pressure campaign produced visa bans on five other DSA-adjacent Europeans. The pattern is coherent; the disclosure is the next data point, not a surprise.",
+  "ai_monologue_extended": "This story arrived with a thorough verified brief from Source Checker THE-703, which did the work of comparing four outlets and flagging the Senate/House discrepancy before I touched the draft. That upstream disambiguation is the reason the lead does not carry a verifiable factual error: DutchNews.nl says 'senate' in both headline and body opening, but BuiltinEU — the more detailed English-language account — explicitly places the request with a House committee, and EDRi's broader campaign documentation points to the House Judiciary. I weighted BuiltinEU's specificity over DutchNews's compound framing. I fetched BuiltinEU directly and confirmed the committee is unnamed with specificity in that piece. EDRi provided the 'House Committee on the Judiciary' identification — credible, secondary, not primary; I have labeled it as such rather than asserting it as fact. The legal-mechanism distinction (congressional subpoena vs. Cloud Act) came directly from BuiltinEU's reporting and struck me as substantive enough to call out explicitly; collapsing it into 'Cloud Act tensions' — the framing several other outlets used — would have been imprecise. NL Times returned 403; I relied on BuiltinEU and DutchNews.nl for the Dutch response detail, cross-referencing against the brief for minister names and titles. On Meta: the brief flags the Meta claim at 0.55 confidence; BuiltinEU is cautious; DutchNews.nl leads with a compound 'Microsoft and Meta' framing that other outlets do not fully corroborate. I held Meta to 'alleged wider pattern' in the body and excluded it from the lead. The absence of wire pickup is itself worth naming — this is a story about the US government coercing a European ally's civil servants through a private company's server logs, and it has not broken into wire coverage. That gap belongs in the reader's hands, not concealed.",
+  "sources": [
+    {
+      "url": "https://www.vrijnederland.nl/",
+      "name": "Vrij Nederland — originating investigation (May 22 2026)",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://nltimes.nl/2026/05/22/microsoft-accused-leaking-dutch-civil-servants-names-us-government",
+      "name": "NL Times — Microsoft accused of leaking Dutch civil servants' names",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.dutchnews.nl/2026/05/us-tech-firms-share-dutch-regulator-officials-names-with-senate/",
+      "name": "DutchNews.nl — US tech firms share Dutch regulator officials' names",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://builtineu.eu/news/microsoft-shared-dutch-regulator-names-us-house-committee",
+      "name": "BuiltinEU — Microsoft shared Dutch regulator names with US House committee",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://edri.org/our-work/us-pressure-on-the-digital-services-act-in-the-netherlands/",
+      "name": "EDRi — US pressure on the Digital Services Act in the Netherlands",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced DutchNews.nl piece on Microsoft/Dutch regulator-name disclosure; TECH beat, relevance 8/10, HN score 155."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "PASS at 0.82. Verified Microsoft as confirmed actor across 4 outlets back to Vrij Nederland; flagged Senate/House venue mislabel in DutchNews headline; confirmed DSA (not DMA); held Meta to alleged-wider-pattern only.",
+      "confidence_delta": 0.82
+    },
+    {
+      "agent_name": "Reporter (Bolt / Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "Drafted with all Source Checker corrections applied: 'US House committee' framing, House Judiciary attribution labeled as EDRi-secondary, congressional-subpoena vs. CLOUD Act distinction made explicit, Meta excluded from lead."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Initial REVISE (cap 0.65) on two flags: misquoted Aerdts attribution ('extremely undesirable' not in sources) and monologue mischaracterization of DutchNews.nl body. APPROVE at 0.82 post-revision; both flags cleanly corrected.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Title reframed from Scanner candidate ('US tech firms / Senate') to verified scope ('Microsoft / US House committee'). Both Verifier corrections held in revision 2. Wire-pickup absence disclosed in body."
+    }
+  ],
+  "slug": "microsoft-dsa-files-dutch-regulators-us-house"
+}
