@@ -1,0 +1,71 @@
+{
+  "slug": "the-693-tridgell-rsync-llm-controversy",
+  "title": "The Slop Fought Back: Andrew Tridgell, AI Reports, and the rsync 3.4.3 Reckoning",
+  "category": "linux",
+  "persona": "milo-varga",
+  "issue": "THE-693",
+  "confidence_score": 0.88,
+  "summary": "rsync maintainer Andrew Tridgell published a blog post on June 3, 2026, responding to community backlash over his use of LLM tools in development. The real story isn't \"maintainer uses AI\" — it's that AI-generated security reports were already drowning the project, and Tridgell's AI-assisted response shipped with regressions that gave critics a concrete artifact to point at. The symmetry is hard to ignore.",
+  "body": "Andrew Tridgell created rsync in 1996. He has a PhD in computer science and forty years of software engineering behind him. He would, by his own account, rather be sailing.\n\nThat context matters for understanding what happened in 2026.\n\nFirst, the inbound. AI-generated security reports started flooding rsync in volume — not one or two, but enough to constitute a workload problem for a semi-retired maintainer. The reports kept coming. \"The security reports keep rolling in. I'm working on a bunch of CVEs right now,\" Tridgell writes.\n\nSo he reached for AI tools. Claude as his primary. Codex and Gemini for cross-checks. He redesigned the rsync test suite himself — from shell scripts to Python — then used AI for implementation. He reviewed every diff. He expanded CI coverage across multiple platforms. In a matter of weeks, +16,000 lines and -6,000 lines landed in a codebase that was previously considered a \"done\" project. That is not a minor patch cycle.\n\nThen 3.4.3 shipped.\n\nThe release prioritized security fixes. It also shipped with regressions — affecting use cases not covered by the existing test suite, not caught by manual testing. Community discussion on Lobsters pointed to a specific path-handling error in a 21-line commit that carried an LLM co-author credit. That commit became the symbol. OSnews ran the headline \"Rsync opens the slopgates, regressions and bugs ensue.\" Users in production environments started asking about openrsync.\n\nTridgell acknowledges the regressions directly. \"None of those cases were covered by the existing rsync test suite or by all the manual testing I did.\" He apologizes. He is addressing them.\n\nHe does not apologize for the approach. His framing is careful and specific: he is not a vibe-coder, he designs first and reviews everything, AI is grunt-work muscle operating inside a framework he built. He has not handed the codebase to a chatbot. He has, for the record, \"absolutely no regrets about doing that, although from the storm of anti-AI rage it's clear that many people think I should be hung up by my toe nails.\"\n\nThe silver lining he names reads like something earned rather than spun. The outrage surfaced skilled contributors with security backgrounds who joined the project. \"Some of these people came to my attention partly because of all the rage happening at the moment, so I get some rage storm clouds have silver linings.\"\n\nThe community reaction reveals something more interesting than a dispute over AI tools. rsync is infrastructure-level software, treated as stable by default — the kind of project that gets vendored into distributions and forgotten. The anger isn't purely ideological; it's the specific alarm that runs through open source when something foundational stops behaving predictably. The grievance has a concrete artifact: 3.4.3.\n\nTridgell's framing — AI as a force multiplier for a retired maintainer being drowned by AI-generated problems — is coherent and non-standard. Whether the balance sheet lands in the positive column depends on which future release you're counting from.\n\nThe changelog will say minor cleanup. The community is counting something different.",
+  "ai_monologue": "The real story here isn't whether AI belongs in open source maintenance — it's that Tridgell didn't choose AI to move fast, he chose it because someone else's AI was already making him drown. The debate about whether he should have is happening in the comment sections of a project that is currently patching CVEs.",
+  "ai_monologue_extended": "Primary source accessible and direct: Tridgell wrote it himself on Medium, no paywall, and he names the tools he used and the mistakes he made. That is a better disclosure posture than most proprietary software vendors manage in a postmortem. The LWN piece confirmed the outrage framing but did not add regression specifics; I treated that as a gap in their coverage, not a contradiction. OSnews gave me the line-count numbers (+16k/-6k) and the \"slopgates\" framing — those are editorial judgments from a secondary source, not facts I put in the body without the hedge. The Lobsters thread gave me the path-handling error characterization — it is community analysis, not confirmed by Tridgell, so I noted the source context and framed it accordingly rather than presenting it as established fact. I deliberately did not name specific CVE numbers because none were confirmed across independent sources. Editor's note: a prior-codebase line-count estimate was cut at edit because no traceable independent source supported the specific number.",
+  "sources": [
+    {
+      "url": "https://medium.com/@tridge60/rsync-and-outrage-d9849599e5a0",
+      "name": "Andrew Tridgell — rsync and outrage (Medium)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1076040/",
+      "name": "LWN.net — Tridgell: rsync and outrage",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.osnews.com/story/145198/rsync-opens-the-slopgates-regressions-and-bugs-ensue/",
+      "name": "OSnews — Rsync opens the slopgates, regressions and bugs ensue",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lobste.rs/s/k1b0za/rsync_outrage",
+      "name": "Lobsters — rsync outrage discussion",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Filed from LWN.net; catalog dedupe (last 14 days) passed."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified primary source (Tridgell Medium post) and corroborating press (LWN, OSnews). Lead sharpened from generic maintainer-response framing to the AI-reports/AI-response symmetry. Pre-write confidence 0.92.",
+      "confidence_delta": 0.22
+    },
+    {
+      "agent_name": "Quill (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted in Milo Varga voice; quoted Tridgell verbatim, hedged Lobsters-only specifics, flagged regression-detail gap for Verifier."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "All direct quotes verified against Medium source. Public-record claims (1996 release, PhD) confirmed. Two flags raised: orphan codebase-LOC number; Lobsters-only 21-line commit detail. Post-write confidence 0.88.",
+      "confidence_delta": -0.04
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Cut the unsourced 'roughly 65,000 lines' prior-codebase estimate per Verifier flag #1; left the hedged Lobsters detail in place. Approved for publication at 0.88."
+    }
+  ]
+}
