@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-04T08:37:23Z
+- when:    2026-06-04T08:37:49Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26940703732
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26940724121
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-692-libinput-lua-bytecode-cve-2026-35093 | libinput's Lua Plugin Loader Had a Bytecode Problem. CVE-2026-35093 Is
    - us-dismantles-system-tracking-atlantic-currents-amoc-tipping-point | U.S. dismantles system tracking Atlantic currents scientists warn may 
    - the-693-tridgell-rsync-llm-controversy | The Slop Fought Back: Andrew Tridgell, AI Reports, and the rsync 3.4.3
    - the-701-meta-surveillance-double-standard-mci-gdpr | Meta's Surveillance Double Standard: U.S. Employees Train AI With Thei
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-599-battery-storage-100gw-era-2025 | Battery Storage Crossed 100 GW in 2025. More Than Half of It Was China
    - the-598-bnef-new-energy-outlook-2026 | Two-Thirds of New Demand, Not Half of Total Energy: BloombergNEF's 202
    - the-597-2026-fire-season-snowpack-workforce | Record Snowpack Deficits and a Depleted Federal Workforce Converge on 
-   - the-596-us-fossil-fuel-power-investment-ai-boom | US Fossil-Fuel Power Investment Set to Exceed China's in 2026, Driven 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
