@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-04T09:04:18Z
+- when:    2026-06-04T09:05:21Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26942047722
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26942099599
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - microsoft-dsa-files-dutch-regulators-us-house | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-704-microsoft-dsa-files-dutch-regulators-house-committee | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-694-bpf-in-the-agentic-era-starovoitov-lsfmm-2026 | BPF in the Agentic Era: Starovoitov's Wake-Up Call at LSFMM 2026
    - the-696-microsoft-project-solara-agent-first-devices | Microsoft's Project Solara Bets on Agent-First Devices — Starting with
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-651-nicole-ozer-eff-executive-director | Nicole Ozer Takes the Helm at EFF as Cindy Cohn's 26-Year Tenure Ends
    - nbd-vram-gpu-idle-linux-swap | Your GPU's Idle VRAM Is Now Linux Swap Space
    - the-618-intel-iwlwifi-wifi-8-infrastructure-linux-7-2 | Intel's iwlwifi Driver Starts Building WiFi 8 Infrastructure in Linux 
-   - the-617-linux-af-alg-socket-deprecation | Linux Torches the AF_ALG Socket Family
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
