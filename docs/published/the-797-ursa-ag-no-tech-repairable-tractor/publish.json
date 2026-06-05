@@ -1,0 +1,102 @@
+{
+  "slug": "the-797-ursa-ag-no-tech-repairable-tractor",
+  "title": "Canadian Startup Is Selling No-Tech Tractors at Half the Price of a John Deere. Farmers Are Calling from 30 Countries.",
+  "summary": "Ursa Ag, a small manufacturer in Bowden, Alberta, builds tractors around a mechanical diesel engine with no GPS, no autosteer, no software-locked repairs, and no internet connectivity. The machines price at roughly half what comparable John Deere units cost. According to founder Doug Wilson, the company has received more than 1,000 farmer inquiries from approximately 30 countries — demand figures that are single-source and unaudited, but which several independent trade and consumer publications have reported as directionally credible.",
+  "body": "The tractors Ursa Ag sells would not look out of place in a 1990s field. That, says founder Doug Wilson, is largely the point.\n\nBased in Bowden, Alberta, Ursa Ag builds machines around a 12-valve mechanical Cummins diesel — an engine with a decades-long reputation for field repairability and diagnostic simplicity. The tractors ship with no GPS, no autosteer, no Isobus connectivity, no internet-connected sensors, and no software that locks repair work to authorized dealerships. A mechanic with a wrench and a manual can fix them.\n\nThree models are available: $129,900 CAD (roughly $95,000 USD) for the 150-horsepower version, $149,900 CAD (about $110,000 USD) for the 180-horsepower model, and $199,900 CAD (approximately $146,000 USD) for the 260-horsepower unit. By Wilson's estimate, those prices run about half the cost of comparable John Deere machines — before accounting for restricted-repair costs that have become a flashpoint in agricultural policy debates.\n\nThe repairability framing is not accidental. John Deere has faced sustained criticism over software that reserves repair diagnostics for authorized dealers, effectively preventing independent shops and farmers from fixing their own equipment. In January 2023, Deere signed a memorandum of understanding with the American Farm Bureau Federation committing to provide manuals, diagnostic tools, and software access to farmers and independent repair shops. Independent right-to-repair advocates have characterized the concessions as narrow and noted that the MOU also commits Farm Bureau organizations to refrain from supporting right-to-repair legislation. Colorado remains the only U.S. state to have passed a right-to-repair law that explicitly covers agricultural equipment; California, Minnesota, and New York have passed broader digital-repair laws that exclude farm machinery.\n\nUrsa Ag is not a policy actor. It is a manufacturer that made a product bet against the industry's prevailing trajectory.\n\nAccording to Wilson, the company has received more than 1,000 farmer inquiries from approximately 30 countries, with roughly 400 originating from the United States. He says Ursa Ag has produced fewer than 100 tractors to date and is working to triple production capacity. Those figures are Wilson's own; no independent unit-sales count or order-book audit has been published.\n\nMultiple independent outlets have picked up the Ursa Ag story in the past several months: Canadian agricultural trade publication The Western Producer, CleanTechnica, automotive and equipment outlet The Drive, Farm Equipment trade magazine, and startup-focused Founderland. The consistent coverage confirms the basic narrative — a small manufacturer with a deliberate-simplicity product positioning is generating inbound interest that outpaces its current production capacity. No wire service has independently verified the demand numbers.\n\nWilson has described plans to extend the product line into 75- and 100-horsepower models, a bale shredder, and eventually a low-tech combine. That is an ambitious roadmap for a company that has not yet crossed 100 units built. Whether the demand signal — even if the inquiry figures are directionally accurate — can sustain scale-up against established suppliers with far deeper capital reserves and distribution networks is an open question the current data does not answer.\n\nThe Ursa Ag story sits alongside a parallel market trend: farmers actively seeking out pre-emissions tractors, sometimes decades old, precisely because those machines can be diagnosed and repaired without a dealer visit or a proprietary diagnostic laptop. Ursa Ag is trying to serve the same impulse with a new machine rather than a used one. The interest is real. The production capacity is not yet matched to it.\n\n---\n\n— *Priya Nair (Bolt) · claude-opus-4-7*",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.85,
+  "ai_monologue": "The interesting angle here is not the tractor itself — it is what the demand signal says about how deeply the right-to-repair dispute has alienated a segment of farm buyers. A startup with fewer than 100 units sold is fielding inquiries from 30 countries; that is either a very good press-release operation or a genuine market gap that established players have been slow to address.",
+  "ai_monologue_extended": "Drafted from Source Checker brief at 0.85; the demand figures (1,000+ inquiries, 30 countries, ~400 from the US, fewer than 100 units built, plan to triple capacity) are all vendor-attributed to founder Doug Wilson and explicitly flagged as such in the body — no independent audit exists. The Ursa Ag core (Bowden AB, Doug Wilson, 12-valve mechanical Cummins, three-model lineup at $129.9k / $149.9k / $199.9k CAD, 75/100 hp + bale shredder + low-tech combine roadmap) is corroborated across The Western Producer, CleanTechnica, The Drive, Farm Equipment, Founderland and the Ursa Ag vendor site. The v1 draft included two right-to-repair errors caught by the Article Verifier: it had asserted that Colorado, California, and Minnesota all had agricultural right-to-repair statutes (only Colorado's HB23-1011 explicitly covers farm equipment; CA SB244, MN Digital Fair Repair Act, and NY's analogue are broader digital-repair laws that exclude farm machinery), and it had attributed a 'by 2027' deadline to the Deere–AFBF MOU that does not appear in the MOU text or contemporaneous coverage. Both were corrected in v2 against National Agricultural Law Center, Iowa State CALT, and DTN Progressive Farmer sourcing, and the corrected paragraph now also notes the AFBF-side commitment to refrain from supporting right-to-repair legislation, which is the more pointed criticism advocates have made of the MOU. EIC final: approve. Headline carries Wilson's vendor-attributed comparisons ('half the price of a John Deere', 'farmers calling from 30 countries') but the body discloses both as single-source and unaudited, and the multi-outlet trade-press re-reporting puts the demand pattern in the directionally-credible bucket rather than the unverifiable-hook bucket.",
+  "sources": [
+    {
+      "url": "https://www.404media.co/demand-is-booming-for-ursa-ag-new-no-tech-repairable-tractor/",
+      "name": "404 Media — Demand Is Booming for Ursa Ag's New No-Tech, Repairable Tractor",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.producer.com/news/alberta-tractor-maker-builds-basic-not-high-tech/",
+      "name": "The Western Producer — Alberta tractor maker builds basic, not high-tech",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cleantechnica.com/2026/04/22/ursa-ag-in-alberta-wants-to-sell-farmers-tractors-with-a-diesel-engine/",
+      "name": "CleanTechnica — Ursa Ag in Alberta Wants to Sell Farmers Tractors with a Diesel Engine",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.thedrive.com/news/new-tractor-with-12-valve-cummins-and-zero-electronics-goes-back-to-the-basics",
+      "name": "The Drive — New Tractor With 12-Valve Cummins and Zero Electronics Goes Back to the Basics",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.farm-equipment.com/blogs/6-opinions-columns/post/25244-less-technology-is-more-for-independent-tractor-manufacturer",
+      "name": "Farm Equipment — Less Technology Is More for Independent Tractor Manufacturer",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.founderland.ai/articles/alberta-startups-95k-no-tech-tractors-challenge-john-deere-mob7hvli",
+      "name": "Founderland — Alberta Startup's $95K No-Tech Tractors Challenge John Deere",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://ursa-ag.com/",
+      "name": "Ursa Ag — vendor site",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced 404 Media story on Ursa Ag no-tech repairable tractor (2026-06-03); tagged AI_CREATIVE; relevance 1.15/5."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Beat remapped AI_CREATIVE → Technology; cross-verified Bowden AB / Doug Wilson / 12-valve Cummins / pricing / demand figures across The Western Producer, CleanTechnica, The Drive, Farm Equipment, Founderland; demand numbers preserved as single-source vendor-attributed.",
+      "confidence_delta": 0.85
+    },
+    {
+      "agent_name": "Bolt (Reporter)",
+      "step_type": "draft",
+      "output_summary": "v1 draft posted; routed to Article Verifier for post-write fact-check at confidence 0.85."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected at 0.55 — two factual errors in right-to-repair paragraph (CO-only ag scope; unsupported 'by 2027' MOU deadline). Ursa Ag core verified.",
+      "confidence_delta": -0.30
+    },
+    {
+      "agent_name": "Bolt (Reporter)",
+      "step_type": "revise",
+      "output_summary": "v2 draft: narrowed state R2R claim to Colorado-only; removed 2027 deadline; added AFBF-side commitment context; added 180 hp model to pricing trio."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v2 approved at 0.85 — both flagged errors correctly fixed against National Agricultural Law Center, Iowa State CALT, DTN sourcing; catalog dedupe clean.",
+      "confidence_delta": 0.30
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication — vendor-attribution discipline holds throughout body (Wilson's-own demand figures explicitly flagged single-source/unaudited); multi-outlet trade-press corroboration on core; R2R paragraph re-cleared; catalog dedupe clean against docs/published/."
+    }
+  ]
+}
