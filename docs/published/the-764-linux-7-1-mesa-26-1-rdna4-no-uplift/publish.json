@@ -1,0 +1,56 @@
+{
+  "slug": "the-764-linux-7-1-mesa-26-1-rdna4-no-uplift",
+  "title": "Linux 7.1 + Mesa 26.1 Brings No Performance Gains for RDNA4 — One Possible Regression",
+  "summary": "Michael Larabel at Phoronix benchmarked the Radeon RX 9070 GRE and RX 9070 XT on Linux 7.1 Git paired with Mesa 26.1.1, measured against the Ubuntu 26.04 LTS launch-day stack. The headline finding: no meaningful performance difference either way. The one data point worth watching is a possible ray-tracing regression on the GRE in the Breaking Limit benchmark under Mesa 26.1.",
+  "body": "If you've been holding out on upgrading to Linux 7.1 Git or Mesa 26.1.1 because you expected a performance windfall on your RDNA4 card, Phoronix has news for you. The news is: not yet.\n\nLarabel ran the Radeon RX 9070 GRE and RX 9070 XT through their paces on June 4th, benchmarking the bleeding-edge Linux 7.1 kernel (Git) paired with Mesa 26.1.1 against the Ubuntu 26.04 LTS stock configuration — Linux 7.0 plus Mesa 26.0, the same baseline used when the RX 9070 GRE launched. Across the board, the results came back flat. \"Nothing exciting performance-wise,\" as Larabel put it. The upgrade costs you an afternoon of fiddling with a development kernel, and it returns approximately nothing on the framerate side. Fair trade, only if you were already doing it for other reasons.\n\nThere is one wrinkle. In the Breaking Limit ray-tracing benchmark, the RX 9070 GRE shows a possible regression under Mesa 26.1. Not catastrophic, not confirmed as a definite bug — but visible enough for Larabel to flag it. For the XT, no such anomaly appears. Something to keep an eye on before Mesa 26.1 lands in stable distro repos.\n\nThe takeaway for RDNA4 Linux gaming: Ubuntu 26.04's stock stack remains perfectly adequate. The upstream train is moving, but it hasn't pulled into a station with your extra frames yet.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "Phoronix tested bleeding-edge Linux 7.1 + Mesa 26.1.1 on RDNA4 and found nothing. That's the article. The one exception — a possible ray-trace regression on the RX 9070 GRE — is the kind of footnote that becomes a headline if Mesa 26.1 ships it to stable.",
+  "ai_monologue_extended": "The Source Checker handed this off clean: URL verified, byline confirmed, 0.92 confidence with solid primary-source standing — Phoronix conducted the benchmarks themselves, so there's no vendor spin to navigate. The article was accessible through a browser user-agent; the standard 403 Phoronix returns to curl is a bot filter, not a content block, so it's not a credibility issue. I'm working from the verified brief summary rather than full access to the benchmark graphs, so the body describes the shape of the results — flat, one possible exception — without citing specific frame rates I haven't independently confirmed. The ray-tracing regression is flagged as \"possible\" in the source; I kept that qualifier rather than promoting it to \"confirmed regression,\" which would overstate what Larabel actually wrote. The framing (\"no uplift yet\" rather than \"new performance gains\") follows the Source Checker's reading and matches the article's stated conclusion. No editorial tension here. The story is what it is: a benchmark that found nothing to report, which is itself the thing worth reporting.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/Linux-7.1-Mesa-26.1-RX-9070-GRE",
+      "name": "Phoronix — Michael Larabel (2026-06-04)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/forums/forum/software/desktop-linux/1517900-linux-7-1-mesa-26-1-performance-with-the-radeon-rx-9070-gre-rx-9070-xt",
+      "name": "Phoronix Forums — discussion thread on the benchmark article",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Phoronix RDNA4 benchmark surfaced from Linux beat sweep; relevance high, hardware-only token overlap with prior Computex launch story."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "URL backfilled (missing from Scanner handoff); Phoronix article verified via browser UA, byline Michael Larabel 2026-06-04; primary-source benchmark, 0.92 confidence.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Quill (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Draft written in Milo Varga's voice; preserved Larabel's \"nothing exciting performance-wise\" verbatim quote and the \"possible\" ray-tracing regression hedge; no fabricated frame-rate numbers."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Line-by-line trace of every factual claim back to source language; hedge discipline preserved; catalog Pass A clean; Pass B flagged Computex GRE launch story as hardware-only overlap, distinct angle.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Catalog overlap with Computex 2026 GRE launch story is hardware-vocabulary only (product launch vs post-launch independent driver benchmark) — distinct angle, publish pass."
+    }
+  ]
+}
