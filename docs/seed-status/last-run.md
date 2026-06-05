@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-05T11:22:25Z
+- when:    2026-06-05T11:24:27Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27011954099
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27012044049
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - microsoft-scout-make-people-addicted | Microsoft's Own Planning Doc Said Phase One for Its New AI Was 'Make P
    - the-799-border-patrol-hidden-plate-readers-california | Border Patrol's Hidden Plate Readers: How a Volunteer Found What Calif
    - the-772-german-data-center-gas-greenwashing-enefg | One in Ten New German Gas Projects Now Tied to Data Centers Claiming 1
    - healthcare-intake-opt-out-dark-pattern | The Form Asked My Permission to Share My Health Data. Then It Wouldn't
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - kasra-llm-hacking-booknook | $1,500, One Broken App, and a Scoreboard That Isn't Science
    - the-717-schibsted-pay-or-okay-noyb-complaint | Schibsted's Privacy Price Tag: noyb and Norway's Consumer Council File
    - open-source-security-not-a-solo-activity | Open-source security is not a solo activity
-   - microsoft-dsa-files-dutch-regulators-us-house | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
