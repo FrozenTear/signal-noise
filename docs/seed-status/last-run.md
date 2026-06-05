@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-05T16:19:57Z
+- when:    2026-06-05T16:24:02Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27026548689
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27026755030
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-813-cpp-documentary-40-years | C++: The Documentary Charts 40 Years of a Language That Refuses to Ret
+   - the-810-bundler-cooldown-supply-chain | Bundler 4.0.13 Adds a Waiting Period for New Gems
    - the-819-federal-alpr-caltrans-permit-network-california-border | Federal Agencies Used Highway Permits to Install a Hidden License Plat
    - the-827-iss-zvezda-prk-shelter-dragon | Dragon as Lifeboat: NASA Sheltered Five ISS Crew Members for an Hour W
    - the-795-digital-omnibus-access-rights-noyb-reality-check | EC Proposes 'Abuse' Ground to Restrict Access Rights. noyb's Caseload 
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - phoronix-puts-the-bore-scheduler-through-its-paces-on-cachyos-linux | Phoronix Puts the BORE Scheduler Through Its Paces on CachyOS Linux
    - the-733-waymo-spent-robotaxi-batteries-grid-storage | Waymo's Retired Robotaxi Batteries Are Headed to the Grid
    - the-731-five-eyes-china-linkedin-recruiter-advisory | Five Intelligence Agencies Issue Joint Warning on LinkedIn Recruiter S
-   - the-257-met-police-700k-comms-data-requests-2025 | London's Metropolitan Police asked Big Tech for communications data ov
-   - the-373-uk-digital-id-fiasco-committee | UK Digital ID 'Nothing Short of a Fiasco': What Parliament's Post-Mort
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
