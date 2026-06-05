@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-05T11:24:27Z
+- when:    2026-06-05T11:30:20Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27012044049
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27012287062
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-797-ursa-ag-no-tech-repairable-tractor | Canadian Startup Is Selling No-Tech Tractors at Half the Price of a Jo
+   - the-801-google-voltus-vpp-pjm-byoc-hyperscaler | Google Signs 3-Year VPP Deal With Voltus for Up to 100 MW in PJM — Fir
    - microsoft-scout-make-people-addicted | Microsoft's Own Planning Doc Said Phase One for Its New AI Was 'Make P
    - the-799-border-patrol-hidden-plate-readers-california | Border Patrol's Hidden Plate Readers: How a Volunteer Found What Calif
    - the-772-german-data-center-gas-greenwashing-enefg | One in Ten New German Gas Projects Now Tied to Data Centers Claiming 1
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - lovable-google-cloud-multi-year-partnership | Lovable and Google Cloud Formalize Multi-Year Partnership, With Report
    - berkeley-cs-failure-rates-ai-spring-2026 | Berkeley CS Failure Rates Hit Historic Highs as AI Tools Spread Throug
    - kasra-llm-hacking-booknook | $1,500, One Broken App, and a Scoreboard That Isn't Science
-   - the-717-schibsted-pay-or-okay-noyb-complaint | Schibsted's Privacy Price Tag: noyb and Norway's Consumer Council File
-   - open-source-security-not-a-solo-activity | Open-source security is not a solo activity
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
