@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-06-05T06:27:13Z
+- when:    2026-06-05T06:32:41Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999292694
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999493592
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-771-ai-climate-hoax-coalition-audit-154-claims | Of 154 AI Climate-Benefit Claims, 36% Cite No Evidence — A Coalition A
+   - the-776-california-gpc-opt-out-ignored-webxray-audit | California Set a Privacy Switch. Big Tech Left It Off.
    - phoronix-puts-the-bore-scheduler-through-its-paces-on-cachyos-linux | Phoronix Puts the BORE Scheduler Through Its Paces on CachyOS Linux
    - the-733-waymo-spent-robotaxi-batteries-grid-storage | Waymo's Retired Robotaxi Batteries Are Headed to the Grid
    - the-731-five-eyes-china-linkedin-recruiter-advisory | Five Intelligence Agencies Issue Joint Warning on LinkedIn Recruiter S
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-396-eu-ai-stack-antitrust-perimeter | EU competition chief puts "entire AI stack" in the antitrust perimeter
    - the-349-opensuse-under-16-parental-approval-revolt | openSUSE "under-16 need parental approval" terms spark longtime-contri
    - the-692-libinput-lua-bytecode-cve-2026-35093 | libinput's Lua Plugin Loader Had a Bytecode Problem. CVE-2026-35093 Is
-   - us-dismantles-system-tracking-atlantic-currents-amoc-tipping-point | U.S. dismantles system tracking Atlantic currents scientists warn may 
-   - the-693-tridgell-rsync-llm-controversy | The Slop Fought Back: Andrew Tridgell, AI Reports, and the rsync 3.4.3
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
