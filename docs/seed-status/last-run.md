@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-05T06:42:47Z
+- when:    2026-06-05T06:45:59Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999873630
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999995174
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - healthcare-intake-opt-out-dark-pattern | The Form Asked My Permission to Share My Health Data. Then It Wouldn't
    - the-766-plex-social-features-lifetime-pass-price-hike | Plex rolls out social discovery tools — and triples its lifetime subsc
    - the-764-linux-7-1-mesa-26-1-rdna4-no-uplift | Linux 7.1 + Mesa 26.1 Brings No Performance Gains for RDNA4 — One Poss
    - california-data-brokers-noindex-27-of-35-compliant | California Data Brokers Were Hiding Your Right to Delete. Twenty-Seven
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - microsoft-dsa-files-dutch-regulators-us-house | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-704-microsoft-dsa-files-dutch-regulators-house-committee | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-694-bpf-in-the-agentic-era-starovoitov-lsfmm-2026 | BPF in the Agentic Era: Starovoitov's Wake-Up Call at LSFMM 2026
-   - the-696-microsoft-project-solara-agent-first-devices | Microsoft's Project Solara Bets on Agent-First Devices — Starting with
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
