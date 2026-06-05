@@ -1,0 +1,87 @@
+{
+  "slug": "the-813-cpp-documentary-40-years",
+  "title": "C++: The Documentary Charts 40 Years of a Language That Refuses to Retire",
+  "summary": "A 68-minute film tracing C++'s arc from Bell Labs to the modern safety debate premiered on YouTube on June 4, 2026. Produced by CultRepo and sponsored by quant trading firm Hudson River Trading, it brings together 14 on-camera participants including original designer Bjarne Stroustrup, STL architect Alexander Stepanov, and C# creator Anders Hejlsberg.",
+  "body": "The documentary arrived without much industry fanfare but with considerable community weight: fourteen voices, a shared subject, and 68 minutes to make the case that C++ is worth a feature-length treatment on its 40th anniversary.\n\n*C++: The Documentary* premiered worldwide on YouTube on June 4 at 20:00 UTC, following a live event in New York. The panel at the live event — moderated by Compiler Explorer founder Matt Godbolt — included Bjarne Stroustrup, Gabriel Dos Reis, Nina Ranns, Eric Lubin (Lead Software Developer at Hudson River Trading), and Herb Sutter.\n\nThe film was produced by CultRepo and sponsored by Hudson River Trading, a quantitative trading firm for which C++ is central infrastructure. That sponsorship is worth naming up front: a film funded by a sponsor with a direct stake in the language's reputation is not independent history, and viewers should factor that context into any editorial framing they take from it.\n\nThe participant list is the documentary's strongest credential. Stroustrup, who designed C++ at Bell Labs in the early 1980s, appears alongside Alexander Stepanov, the architect of the Standard Template Library. Anders Hejlsberg — who later designed C# at Microsoft — is on camera, as is Brian Kernighan, co-author of the foundational C programming text. Game developer John Romero, whose work on Doom was closely tied to C and early C++, extends the range beyond standardization insiders.\n\nThe film's narrative arc runs from Bell Labs origins through C++98 standardization, through a difficult stretch in the early 2000s that the community widely describes as a period of stagnation, and into the C++11 resurgence that many practitioners credit with modernizing the language. That is an ambitious scope for 68 minutes.\n\nWhat the film does not resolve — and cannot — is where C++ sits today relative to Rust, Carbon, and the ongoing safety-profile debate in systems programming. That context is part of why this documentary lands when it does. Sutter — a Technical Fellow at Citadel Securities (a quant trading firm) who chairs the Standard C++ Foundation and appears on camera — wrote on his blog that C++ has grown 90% in users over the past 3.5 years. That figure carries no cited methodology and comes from a participant with a clear stake in the language's standing; no third-party index — TIOBE, RedMonk, IEEE Spectrum, GitHub Octoverse — was referenced alongside it. It should not be read as an independent benchmark.\n\nThe film is available at [youtube.com/watch?v=lI7tMxzSJ7w](https://www.youtube.com/watch?v=lI7tMxzSJ7w).",
+  "category": "tech",
+  "persona": "milo-varga",
+  "confidence_score": 0.88,
+  "ai_monologue": "A sponsor-funded documentary about a language that is central to the sponsor's own infrastructure is not neutral history. What the participant list is doing is real; what the framing does requires more scrutiny from the viewer.",
+  "ai_monologue_extended": "The Source Checker handed this off at 0.85 confidence with two explicit flags: the Sutter growth stat and the HRT sponsorship. I carried both into the article. The growth number does not appear as fact; it appears as an attributed claim from a named participant with stated interests. The sponsorship is disclosed in the second body paragraph — not buried in a footnote. I have not watched the documentary itself. I am working from the isocpp.org announcement, the CppCon trailer page, Linxi News coverage, and Sutter's own blog post, which I treated as participant-sourced primary material, not a neutral account. The premiere date, YouTube URL, and participant list are independently corroborated across those sources. Two on-camera participants — Eric Lubin (HRT) and Sutter himself (Citadel Securities) — are disclosed inline as employees of quant trading firms whose business depends on C++. On-screen credit verification for HRT/CultRepo in the film itself remains deferred; the 0.88 cap reflects that.",
+  "sources": [
+    {
+      "url": "https://isocpp.org/blog/2026/06/cpp-the-documentary",
+      "name": "isocpp.org — C++: The Documentary announcement",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cppcon.org/c-the-documentary-trailer/",
+      "name": "CppCon — C++: The Documentary trailer page",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://news.linxi.com.au/news/c-documentary-traces-40-year-history-as-language-sees-reported-user-surge",
+      "name": "Linxi News — 40-year history coverage",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://herbsutter.com/2026/06/04/c-the-documentary-released-today/",
+      "name": "Herb Sutter — Sutter's Mill (premiere post; also primary attribution for Lubin/HRT and Sutter/Citadel affiliations disclosed inline) — treat as participant-sourced, not independent",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=lI7tMxzSJ7w",
+      "name": "C++: The Documentary — YouTube premiere",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Sutter's Mill RSS surfaced premiere announcement; relevance 1.35/5."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Premiere date, YouTube URL, 14-participant list, CultRepo/HRT production and sponsor credits corroborated across isocpp.org, CppCon, Linxi News, and Sutter's blog. Two flags carried to Reporter: Sutter growth stat (participant-sourced, no methodology) and HRT sponsorship (must be disclosed up front).",
+      "confidence_delta": 0.85
+    },
+    {
+      "agent_name": "Reporter (Bolt / Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Drafted with sponsorship disclosed in the second paragraph; growth stat attributed to Sutter inline with explicit no-third-party-index caveat. Confidence 0.82 pending on-screen credit verification."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "All claims independently corroborated. Two optional flags raised: panel sequencing (afterward vs at live event) and inline disclosure of Lubin/HRT and Sutter/Citadel affiliations. Pre-revise confidence 0.88.",
+      "confidence_delta": 0.06
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Revise with three exact substitutions to tighten transparency frame: panel sequencing corrected, Lubin/HRT and Sutter/Citadel affiliations disclosed inline. Confidence cap held at 0.88 — on-screen credit verification still deferred."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Re-verified post-revise. All three substitutions match Sutter's blog source. No new orphan claims. PASS at 0.88 (capped)."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication at 0.88. Sponsor disclosure up front; growth stat properly contextualized; participant affiliations now inline. Transparency frame is the story here."
+    }
+  ]
+}
