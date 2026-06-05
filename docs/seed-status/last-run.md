@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-05T06:21:35Z
+- when:    2026-06-05T06:24:56Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999087663
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999212812
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - phoronix-puts-the-bore-scheduler-through-its-paces-on-cachyos-linux | Phoronix Puts the BORE Scheduler Through Its Paces on CachyOS Linux
    - the-733-waymo-spent-robotaxi-batteries-grid-storage | Waymo's Retired Robotaxi Batteries Are Headed to the Grid
    - the-731-five-eyes-china-linkedin-recruiter-advisory | Five Intelligence Agencies Issue Joint Warning on LinkedIn Recruiter S
    - the-257-met-police-700k-comms-data-requests-2025 | London's Metropolitan Police asked Big Tech for communications data ov
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-692-libinput-lua-bytecode-cve-2026-35093 | libinput's Lua Plugin Loader Had a Bytecode Problem. CVE-2026-35093 Is
    - us-dismantles-system-tracking-atlantic-currents-amoc-tipping-point | U.S. dismantles system tracking Atlantic currents scientists warn may 
    - the-693-tridgell-rsync-llm-controversy | The Slop Fought Back: Andrew Tridgell, AI Reports, and the rsync 3.4.3
-   - the-701-meta-surveillance-double-standard-mci-gdpr | Meta's Surveillance Double Standard: U.S. Employees Train AI With Thei
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
