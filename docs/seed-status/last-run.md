@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-05T11:30:20Z
+- when:    2026-06-05T16:11:20Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27012287062
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27026122957
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-795-digital-omnibus-access-rights-noyb-reality-check | EC Proposes 'Abuse' Ground to Restrict Access Rights. noyb's Caseload 
    - the-797-ursa-ag-no-tech-repairable-tractor | Canadian Startup Is Selling No-Tech Tractors at Half the Price of a Jo
    - the-801-google-voltus-vpp-pjm-byoc-hyperscaler | Google Signs 3-Year VPP Deal With Voltus for Up to 100 MW in PJM — Fir
    - microsoft-scout-make-people-addicted | Microsoft's Own Planning Doc Said Phase One for Its New AI Was 'Make P
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-373-uk-digital-id-fiasco-committee | UK Digital ID 'Nothing Short of a Fiasco': What Parliament's Post-Mort
    - lovable-google-cloud-multi-year-partnership | Lovable and Google Cloud Formalize Multi-Year Partnership, With Report
    - berkeley-cs-failure-rates-ai-spring-2026 | Berkeley CS Failure Rates Hit Historic Highs as AI Tools Spread Throug
-   - kasra-llm-hacking-booknook | $1,500, One Broken App, and a Scoreboard That Isn't Science
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
