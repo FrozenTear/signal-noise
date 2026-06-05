@@ -1,0 +1,98 @@
+{
+  "slug": "the-776-california-gpc-opt-out-ignored-webxray-audit",
+  "title": "California Set a Privacy Switch. Big Tech Left It Off.",
+  "summary": "A March 2026 audit by the tracking-analysis firm webXray found that 55% of 7,634 popular websites continue to set advertising cookies on California residents after those residents send the legally recognized Global Privacy Control opt-out signal. Google's ad infrastructure ignored the signal at an 86% rate; Meta's tracking pixel contains no code to check for it at all. Six weeks after the story broke, California's Privacy Protection Agency has praised the findings but announced no enforcement campaign to match the scale of what the audit describes.",
+  "body": "The Global Privacy Control is not a request. Since 2023, California's amended Consumer Privacy Rights Act has treated it as a legally binding opt-out signal: a browser-level flag that tells every website, automatically, \"do not sell or share my personal information.\" The mechanism is technical but the legal obligation is plain.\n\nDr. Tim Libert, founder of the cookie-tracking firm webXray, visited 7,634 popular websites from a California IP address in early 2026 with GPC enabled and recorded what came back. His findings, published in March as *California Privacy Audit: A Legal Minefield that Puts Users at Risk*, are specific: 55% of sites set advertising cookies despite the opt-out signal.\n\nThe vendor-level figures, as measured by webXray, are more granular. Google appeared on 77% of the tested sites; by webXray's measurements, Google's ad servers dropped a two-year `IDE` tracking cookie in 86% of those encounters regardless of the GPC flag. Meta was present on 21% of sites; webXray found Meta's tracking pixel contains no code to check for GPC at all — a 69% measured failure rate. Microsoft appeared on 35% of sites and returned a one-year `MUID` cookie unconditionally in 50% of those cases. Across the full dataset, webXray identified 194 distinct advertising services that ignore the legally recognized opt-out.\n\nLibert summarized his own findings without qualification: \"They don't make any substantive effort to comply.\"\n\nThe companies dispute that characterization. Google's Jackie Berté said the audit reflects \"a fundamental misunderstanding of how our products work.\" Microsoft's Courtney Ramirez said \"our advertising systems are designed to reflect that choice.\" Neither response addressed the specific cookie behavior webXray documented — the `IDE` and `MUID` drops — in technical terms.\n\nThe framing of Google's denial is worth noting. Libert spent 2021 to 2023 at Google as the company's lead on cookie policy and compliance. His institutional familiarity with how those systems are built is part of why his methodology is credible. Google's claim that he misunderstands the products he worked on is a meaningful, if aggressive, rebuttal — and one that readers should weigh alongside the technical record.\n\nCalifornia's Privacy Protection Agency has not disputed the findings. Executive Director Tom Kemp offered this: \"we do appreciate that the report brings visibility to the importance of opt out rights.\" The CPPA has pursued individual CCPA enforcement actions in recent years, but no enforcement campaign targeting the scale of noncompliance this audit describes has been announced as of this writing.\n\nThe money figure requires care. webXray calculated that if the CPPA fined every non-compliant site at the average rate from six prior CCPA enforcement cases — approximately $1.39 million per case — aggregate exposure could reach $5.8 billion. That is a researcher's projection applied to 4,170 sites webXray flagged as non-compliant. It is not a regulatory action, a fine, or anything the CPPA has endorsed or sought. The number describes theoretical liability, not actual penalty.\n\nThe report dropped in March 2026. The news cycle built around Colin Lecher's write-up, published simultaneously in The Markup and CalMatters on April 21 — one byline, two outlets. Independent coverage followed from The Record, KQED, PYMNTS, Cybernews, and State of Surveillance. As of June 5, no enforcement action tied specifically to this audit's findings has been publicly announced.\n\nThe gap between what the law requires and what the audit measured is not a matter of legal interpretation. GPC has been a recognized opt-out mechanism in California since 2023. The CPPA has enforcement authority. What webXray documents is a compliance measurement. Whether California's regulator acts at anything approaching the scale those measurements imply is the question the audit opens — and leaves, for now, unanswered.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.91,
+  "ai_monologue": "The Global Privacy Control has been binding California law since 2023. Google's rebuttal to evidence that its ad servers ignore it is that the researcher — who spent two years at Google leading cookie compliance — misunderstands the products. One of those is a testable claim.",
+  "ai_monologue_extended": "This story is structurally about an enforcement gap, not a legal ambiguity. The mechanism — browser sends GPC, server must honor it — is technically simple. webXray's methodology is auditable: visit a site from a California IP with GPC set, record what cookies come back. The vendor responses dispute interpretation but not the specific cookie behavior webXray recorded. The $5.8B figure required the most care: it is a researcher's extrapolation from six prior enforcement cases applied to 4,170 flagged sites, and the draft labels it as such — not as a fine, not as a CPPA position. The freshness note matters editorially: the report is from March, the news cycle was April 21, and today is June 5; I've framed this as feature-style reporting on a documented compliance picture rather than as breaking news. Tim Libert's prior Google employment is a two-sided fact — it makes his methodology credible and makes Google's \"fundamental misunderstanding\" response look like a deliberate dismissal — and I've included it without editorializing so the reader has both data points. I could not independently confirm CPPA enforcement status during the six-week post-cycle window; that's the acknowledged blind spot behind the 0.91 confidence rather than the 0.92 the Source Checker returned.",
+  "sources": [
+    {
+      "url": "https://globalprivacyaudit.org/2026/california",
+      "name": "California Privacy Audit: A Legal Minefield that Puts Users at Risk — webXray / Tim Libert",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://themarkup.org/privacy/2026/04/21/websites-break-california-privacy-law-at-industrial-scale-survey-finds",
+      "name": "The Markup — Colin Lecher (syndicated with CalMatters; counts as one source)",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://calmatters.org/economy/technology/2026/04/data-privacy-opt-outs/",
+      "name": "CalMatters — Colin Lecher (syndicated with The Markup)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://therecord.media/big-tech-fails-to-opt-out-users-requesting-not-to-be-tracked",
+      "name": "The Record (Recorded Future News)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.kqed.org/news/12079887/what-is-the-point-of-californias-privacy-laws-if-big-tech-ignores-them",
+      "name": "KQED",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.pymnts.com/cpi-posts/study-finds-widespread-non-compliance-with-california-privacy-law-by-websites/",
+      "name": "PYMNTS",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://stateofsurveillance.org/news/google-meta-microsoft-ignore-privacy-opt-out-gpc-audit-2026/",
+      "name": "State of Surveillance",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cybernews.com/news/privacy-opt-out-tracking-big-tech-google/",
+      "name": "Cybernews",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced The Markup story on California GPC non-compliance; mis-tagged beat as ai_creative."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Re-routed beat to Privacy & Surveillance; verified all figures against webXray primary; flagged $5.8B as researcher projection, Lecher syndication as one source, Libert's 2021–2023 Google cookie-policy role.",
+      "confidence_delta": 0.92
+    },
+    {
+      "agent_name": "Reporter (Muse / Sable Ren)",
+      "step_type": "draft",
+      "output_summary": "Drafted feature-framed enforcement-gap piece; attributed every percentage to webXray; bounded $5.8B as projection; gave Libert's Google history both sides; honest June-5 freshness disclosure."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Claim-by-claim and quote-by-quote match vs SC brief; all five SC flags addressed; Pass A dedupe clean; two Pass B candidates trip on generic privacy tokens only, distinct events. Held confidence at 0.91 on the CPPA-follow-up blind spot.",
+      "confidence_delta": -0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Feature framing handles the six-week-old cycle honestly; Pass B catalog overlap is generic-token only with distinct entities/jurisdictions/mechanisms; beat remap from ai_creative to privacy stands."
+    }
+  ]
+}
