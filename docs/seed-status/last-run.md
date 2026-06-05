@@ -1,15 +1,19 @@
 # last seed/probe run
 
-- when:    2026-06-05T06:32:41Z
+- when:    2026-06-05T06:38:15Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999493592
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/26999702539
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-766-plex-social-features-lifetime-pass-price-hike | Plex rolls out social discovery tools — and triples its lifetime subsc
+   - the-764-linux-7-1-mesa-26-1-rdna4-no-uplift | Linux 7.1 + Mesa 26.1 Brings No Performance Gains for RDNA4 — One Poss
+   - california-data-brokers-noindex-27-of-35-compliant | California Data Brokers Were Hiding Your Right to Delete. Twenty-Seven
+   - courts-flood-ai-generated-lawsuits | AI-Generated Filings Are Measurable, Lawsuit-Ready, and Now a Vendor's
    - the-771-ai-climate-hoax-coalition-audit-154-claims | Of 154 AI Climate-Benefit Claims, 36% Cite No Evidence — A Coalition A
    - the-776-california-gpc-opt-out-ignored-webxray-audit | California Set a Privacy Switch. Big Tech Left It Off.
    - phoronix-puts-the-bore-scheduler-through-its-paces-on-cachyos-linux | Phoronix Puts the BORE Scheduler Through Its Paces on CachyOS Linux
@@ -26,9 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-704-microsoft-dsa-files-dutch-regulators-house-committee | Microsoft's DSA Files: How a US Congressional Request Put Dutch Regula
    - the-694-bpf-in-the-agentic-era-starovoitov-lsfmm-2026 | BPF in the Agentic Era: Starovoitov's Wake-Up Call at LSFMM 2026
    - the-696-microsoft-project-solara-agent-first-devices | Microsoft's Project Solara Bets on Agent-First Devices — Starting with
-   - the-695-microsoft-build-rtx-spark-dev-box | Microsoft pivots Windows toward developers with RTX Spark hardware and
-   - the-396-eu-ai-stack-antitrust-perimeter | EU competition chief puts "entire AI stack" in the antitrust perimeter
-   - the-349-opensuse-under-16-parental-approval-revolt | openSUSE "under-16 need parental approval" terms spark longtime-contri
-   - the-692-libinput-lua-bytecode-cve-2026-35093 | libinput's Lua Plugin Loader Had a Bytecode Problem. CVE-2026-35093 Is
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
