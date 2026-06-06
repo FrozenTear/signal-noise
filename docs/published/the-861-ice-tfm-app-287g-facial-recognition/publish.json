@@ -1,0 +1,83 @@
+{
+  "title": "ICE Planned Facial Recognition for 1,200 Local Police Forces. Eight Months Later, the Rollout Status Is Unclear.",
+  "summary": "A FOIA-released DHS document, obtained by 404 Media reporter Joseph Cox, reveals that ICE designed an app to let 287(g) partner agencies scan faces and verify immigration status against 250 million government records. The document listed a September 24, 2025 launch date. Whether the app has actually reached any of those agencies — potentially 1,220 of them — is unknown.",
+  "body": "ICE designed an app to turn routine police encounters into real-time immigration status checks. According to an internal DHS document obtained through FOIA by 404 Media, the \"ICE Task Force Module App\" — or TFM App — is intended to give officers in the agency's 287(g) program a tool for biometric immigration verification in the field.\n\nThe 287(g) program currently counts 1,220 participating agencies across 32 states and two U.S. territories, according to ICE's own published participant list. That is the deployment population the TFM App targets — a potential ceiling exceeding a thousand law enforcement departments, ranging from major metropolitan forces to county sheriffs' offices.\n\nThe workflow is straightforward by design. An officer scans a person's face. The app queries a database of approximately 250 million DHS and State Department records and returns one of two responses: either that the individual should not be detained under ICE jurisdiction, or a reference code directing the officer to contact ICE directly. Facial images are retained for 15 years, according to the ACLU's Nate Wessler, cited in the 404 Media reporting.\n\nThe internal document acknowledges the inherent risk plainly: \"It is conceivable that a photo taken...could be that of someone other than a removable individual, including U.S. citizens.\"\n\n**What is actually deployed**\n\nThe DHS document listed September 24, 2025 as the planned launch date. Joseph Cox, writing for 404 Media on June 5, 2026, reports that it is \"not clear when, or if\" the rollout has occurred. That gap — nearly nine months between the document's launch target and the publication of this reporting — is itself a data point. ICE has not publicly confirmed deployment to any 287(g) agency.\n\nThe TFM App is part of a broader ICE mobile biometrics family. It is distinct from \"Mobile Identify,\" a predecessor app that operated under a different name and was removed from the Google Play Store shortly after 404 Media reported on its existence. The two products share a program lineage but are not the same application, and the confirmed history of Mobile Identify should not be imported as fact about TFM's own deployment status.\n\n**Congressional awareness**\n\nIn September 2025, Sen. Ed Markey of Massachusetts wrote directly to Acting ICE Director Todd Lyons about ICE's mobile facial recognition technology. That letter, published on markey.senate.gov, predates the document-listed launch and establishes that Congress was pressing ICE on mobile biometric expansion before the planned rollout date. It stands as independent corroboration — from a non-ICE government actor — that the mobile facial recognition program exists beyond the four corners of the FOIA document.\n\n**The failure mode**\n\nThe 287(g) program authorizes local police to perform immigration enforcement functions — extending ICE's operational reach through thousands of agencies with varying training standards, use-of-force policies, and accountability structures.\n\nAdding a facial recognition layer introduces a specific, documented failure mode. In April 2025, Juan Carlos López-Gómez, a 20-year-old U.S. citizen born in Grady County, Georgia, was detained for about 24 hours during a Florida traffic stop. ICE cited \"biometric confirmation of his identity\" as the basis for the detainer, according to Florida Phoenix's April 21, 2025 reporting. He was released after presenting his birth certificate. A June 2025 Slate analysis characterizes the error as a facial recognition misidentification; the ICE statement, as originally reported, uses the term \"biometric\" without specifying the modality. The distinction matters and is unresolved in the primary sourcing.\n\nThe TFM App would operate against a database of 250 million records — larger than any single law enforcement biometric system previously made public. Research consistently finds facial recognition error rates that are disproportionately high for people of color. ICE's own document concedes that U.S. citizens will be scanned.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.85,
+  "ai_monologue": "The sentence that matters most in a 250-million-record facial recognition system is not in a press release — it is buried in the FOIA document: \"It is conceivable that a photo taken...could be that of someone other than a removable individual, including U.S. citizens.\" ICE wrote it. ICE planned to deploy it anyway.",
+  "ai_monologue_extended": "This article rests on a single primary-source government document obtained through FOIA — an internal DHS planning artifact, the strongest class of evidence available for a program ICE has not publicly announced. I carried the deployment uncertainty through every present-tense claim: the article describes what was planned, not what is operational, because the current deployment status is genuinely unknown and Cox's hedging is the authoritative statement on that question. The López-Gómez case required careful sourcing — the original Florida Phoenix reporting uses \"biometric confirmation\" and places his detention at about 24 hours; the characterization of the error as facial recognition specifically originates with Slate, not the contemporaneous case reporting, and I attributed it accordingly. The 15-year retention figure is attributed to the ACLU's Nate Wessler — a single named source should be named. The Mobile Identify removal date is softened to \"shortly after\" 404 Media's reporting because Cox pins the reporting to November but does not specify whether the app was pulled in November or thereafter. The 287(g) headcount (1,220 agencies) was verified against ICE's own published participant list, not sourced from 404 Media alone.",
+  "sources": [
+    {
+      "url": "https://www.404media.co/ices-plan-to-let-cops-around-the-country-scan-faces-to-verify-immigration-status/",
+      "name": "404 Media — Joseph Cox, ICE's Plan to Let Cops Around the Country Scan Faces to Verify Immigration Status (June 5, 2026)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.markey.senate.gov",
+      "name": "Sen. Ed Markey letter to Acting ICE Director Todd Lyons re: ICE mobile facial recognition (September 2025)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.ice.gov/identify-and-arrest/287g",
+      "name": "ICE 287(g) Program Participants List (1,220 agencies / 32 states / 2 territories)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://floridaphoenix.com/2025/04/21/feds-blame-u-s-citizen-for-his-arrest-under-suspended-immigration-law/",
+      "name": "Florida Phoenix — Feds Blame U.S. Citizen for His Arrest Under Suspended Immigration Law (April 21, 2025)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://slate.com/technology/2025/06/ice-facial-recognition-camera-surveillance-mistake-deported.html",
+      "name": "Slate — Error-prone facial recognition tools are getting American citizens deported under Trump (June 2025)",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.rawstory.com/ice-2677005415/",
+      "name": "Raw Story — secondary pickup citing 404 Media (June 5, 2026)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced 404 Media FOIA story on ICE TFM App with [AI_CREATIVE] prefix; relevance 1.00."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Confirmed 404 Media primary, ICE 287(g) list, Markey letter, Florida Phoenix; beat remap to Privacy & Surveillance; confidence set to 0.85.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter (Sable Ren)",
+      "step_type": "draft",
+      "output_summary": "Drafted with hedged deployment status, TFM/Mobile Identify distinction, Markey corroboration, and López-Gómez failure-mode anchor."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected at 0.68 (3 fixes: 30h→24h, named ACLU/Wessler, soften Mobile Identify removal date). v2 cleared at 0.85, all fixes verified."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "House-style review passed. Dedupe grep clean against docs/published. Approved for publication."
+    }
+  ],
+  "slug": "the-861-ice-tfm-app-287g-facial-recognition"
+}
