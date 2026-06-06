@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-06T06:22:00Z
+- when:    2026-06-06T06:25:33Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27054871680
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27054943571
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-861-ice-tfm-app-287g-facial-recognition | ICE Planned Facial Recognition for 1,200 Local Police Forces. Eight Mo
    - the-809-fifty-years-of-fork-exec | Fifty Years of fork(). Somebody Finally Filed a Bug Report.
    - the-834-caltrans-permits-alpr-sb34-jurisdictional-gap | The Permits Were Caltrans's. The Cameras Were Border Patrol's. Califor
    - the-813-cpp-documentary-40-years | C++: The Documentary Charts 40 Years of a Language That Refuses to Ret
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - courts-flood-ai-generated-lawsuits | AI-Generated Filings Are Measurable, Lawsuit-Ready, and Now a Vendor's
    - the-771-ai-climate-hoax-coalition-audit-154-claims | Of 154 AI Climate-Benefit Claims, 36% Cite No Evidence — A Coalition A
    - the-776-california-gpc-opt-out-ignored-webxray-audit | California Set a Privacy Switch. Big Tech Left It Off.
-   - phoronix-puts-the-bore-scheduler-through-its-paces-on-cachyos-linux | Phoronix Puts the BORE Scheduler Through Its Paces on CachyOS Linux
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
