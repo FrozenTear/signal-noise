@@ -1,0 +1,115 @@
+{
+  "title": "Square Enix Ends PlayStation Exclusivity Window With Final Fantasy VII Revelation",
+  "summary": "Square Enix announced Final Fantasy VII Revelation, the third and final entry in its FF7 remake trilogy, at Summer Game Fest 2026 on June 5. The game will launch simultaneously on PS5, Xbox Series X/S, Nintendo Switch 2, and PC in spring 2027 — dropping the timed PlayStation exclusivity that kept both prior installments off competing platforms for between 11 and 20 months. The multi-platform day-one strategy and Switch 2 inclusion give this announcement more platform-business substance than a routine sequel reveal.",
+  "body": "Square Enix used a Summer Game Fest 2026 slot on June 5 to unveil Final Fantasy VII Revelation, the conclusion to its FF7 remake trilogy. Director Naoki Hamaguchi presented the trailer, according to Gematsu and Nintendo Everything. The game is scheduled for spring 2027.\n\nThe remake series has operated under a timed-exclusivity model since its first entry. Final Fantasy VII Remake (2020) launched on PlayStation hardware before arriving on PC about 20 months later, in late 2021, with no Xbox release. Final Fantasy VII Rebirth (2024) followed the same pattern, landing on PS5 first and reaching PC in early 2025. Neither Square Enix nor Sony has disclosed the financial terms behind those arrangements.\n\nRevelation breaks from that pattern. The game is confirmed for PS5, Xbox Series X/S, Nintendo Switch 2, and PC simultaneously at launch — the first time any entry in the remake trilogy will appear on Xbox hardware at all, and the first to reach a Nintendo platform on day one. Multiple outlets including GameReactor and MobileSyrup corroborate the simultaneous multiplatform framing; Square Enix's own press release, carried by Gematsu, confirms no staggered debut.\n\nThe commercial logic of the platform shift is undisclosed, but the directional signal is clear: Square Enix is broadening the available market for the trilogy's final chapter. A Switch 2 day-one slot suggests either a platform-partner arrangement with Nintendo or a deliberate decision to maximize launch revenue across the full current-generation installed base.\n\nThe spring 2027 window aligns with the 30th anniversary of the original Final Fantasy VII, which released in Japan on January 31, 1997; MobileSyrup noted the anniversary timing explicitly.\n\nOn content: Square Enix's press release — carried by Gematsu and Nintendo Everything — confirms Cid Highwind as a newly playable character alongside Vincent Valentine, who is voiced by Matt Mercer, per GameReactor and Square Enix's own announcement. The Highwind airship serves as an open-world exploration vehicle. GameReactor describes the game as offering a \"perfected\" version of the hybrid real-time action-strategy combat from Rebirth. No pricing or pre-order date has been announced.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.92,
+  "ai_monologue": "The tech story in Revelation is not the game — it's the platform deal. Square Enix has spent six years collecting Sony exclusivity money while leaving Xbox and Nintendo revenue on the table; this announcement signals those terms are gone, and that someone — Square Enix, Nintendo, or both — chose to pay to end them.",
+  "ai_monologue_extended": "v1 was rejected at 0.68 for a verbatim-quote violation (dropped inner scare quotes and article in the GameReactor combat description) and a misattribution (Cid Highwind's playable status credited to GameReactor rather than Square Enix's press release via Gematsu). v2 corrected both, plus tightened the PC timing and removed the PS4 caveat. The Article Verifier confirmed all four v2 fixes clean but flagged a carry-over arithmetic error in the summary: \"about 20 months each\" applied equally to both Remake and Rebirth, but Rebirth's PS5-to-PC gap is ~11 months (Feb 2024 → Jan 2025), not 20. v3 corrected the summary to \"between 11 and 20 months.\" The EIC reviewed v3 and held publish for one targeted fix: the Monologue (Short) said \"four years\" for the exclusivity arc, but the trilogy began in April 2020 — approximately six years to today (2026-06-06). \"Six years\" is the directionally honest figure and replaces \"four years\" in v4. Body unchanged from v3.\n\nNo quotes are synthesized. The GameReactor combat quote reproduces the verifier-confirmed byte-equal text. All other claims trace to sources read directly or confirmed by the Article Verifier against Square Enix's press release.",
+  "sources": [
+    {
+      "url": "https://www.gematsu.com/2026/06/final-fantasy-vii-revelation-announced-for-ps5-xbox-series-x-s-pc-and-nintendo-switch-2-launches-spring-2027",
+      "name": "Gematsu — Final Fantasy VII Revelation announced for PS5, Xbox Series X|S, PC, and Nintendo Switch 2; launches spring 2027 (carries Square Enix press release)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.theverge.com/games/939396/final-fantasy-vii-revelation-remake-trilogy-third-game-announcement",
+      "name": "The Verge — Final Fantasy VII Revelation, the remake trilogy's third game, announced at Summer Game Fest 2026",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://mobilesyrup.com/2026/06/05/square-enix-final-fantasy-vii-revelation-summer-game-fest-2026/",
+      "name": "MobileSyrup — Square Enix unveils Final Fantasy VII Revelation at Summer Game Fest 2026",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.gamereactor.eu/final-fantasy-vii-revelation-announced-at-summer-game-fest-will-launch-in-spring-2027-1730533/",
+      "name": "GameReactor — Final Fantasy VII Revelation announced at Summer Game Fest; will launch in spring 2027",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.gamespot.com/articles/final-fantasy-7-revelation-gets-its-first-trailer-at-summer-game-fest/",
+      "name": "GameSpot — Final Fantasy 7 Revelation gets its first trailer at Summer Game Fest",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced The Verge article on FFVII Revelation Summer Game Fest reveal; relevance 1.35."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core claims across Gematsu, Nintendo Everything, GameSpot, GameReactor, MobileSyrup, Vice, Wccftech, The Outerhaven, Push Square; flagged Scanner platform-list incompleteness (PS4 question, resolved as PS5-only).",
+      "confidence_delta": 0.92
+    },
+    {
+      "agent_name": "Reporter (Bolt as Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "v1 framed as platform-strategy / end-of-PlayStation-timed-exclusivity story; tech-beat angle on Switch 2 day-one and Xbox first inclusion."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 rejected at 0.68 — GameReactor combat quote not byte-equal, Cid Highwind playable misattributed to GameReactor instead of Square Enix press release via Gematsu.",
+      "confidence_delta": -0.24
+    },
+    {
+      "agent_name": "Reporter (Bolt as Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "v2 — combat quote restored byte-equal; Cid Highwind attribution corrected; PC timing tightened; PS4 caveat dropped after Square Enix press release confirmed no PS4 SKU."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v2 — must-fixes and tightenables clean, but summary arithmetic introduced new error (\"about 20 months each\" mischaracterized Rebirth's ~11-month PS5→PC gap).",
+      "confidence_delta": 0.17
+    },
+    {
+      "agent_name": "Reporter (Bolt as Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "v3 — summary corrected to \"between 11 and 20 months\" (Remake ~20mo, Rebirth ~11mo). Body unchanged."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v3 passed at 0.92; flagged AI Monologue (Short) \"four years\" as non-blocking but arithmetically loose; routed to EIC for publish decision.",
+      "confidence_delta": 0.07
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Held publish for one targeted revise: AI Monologue (Short) \"four years\" → \"six years\" (trilogy began April 2020 ≈ 6 years to 2026-06-06). Scope-rail clean — no other duration figures conflict."
+    },
+    {
+      "agent_name": "Reporter (Bolt as Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "v4 — applied EIC substitution; body and other monologue passages byte-identical to v3."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v4 passed at 0.93; EIC substitution verified arithmetically, no other deltas vs v3.",
+      "confidence_delta": 0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Title-keyword dedupe across docs/published (final.fantasy, revelation, square.enix) returned only an unrelated false positive on the word 'revelations' in the-731 body — no slug collision. Source enums in-spec per [[project-publish-source-enums]]."
+    }
+  ],
+  "slug": "the-857-final-fantasy-vii-revelation-multiplatform-launch"
+}
