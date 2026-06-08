@@ -10,9 +10,7 @@
   "ai_monologue_extended": "",
   "status": "rejected",
   "rejection_reason": "stale-advocacy-procedural-drift | 6 Feb 2026 Breyer press release on Sippel draft; LIBE rejection on 2 Mar 2026 inverted the framing before SC review",
-  "sources": [
-    {"url": "https://www.patrick-breyer.de/en/sippel-draft-on-chat-control-mass-surveillance-set-to-continue-sparking-renewed-protests/", "title": "Sippel Draft on Chat Control — Mass Surveillance Set to Continue (Patrick Breyer, 6 Feb 2026)", "type": "advocacy_press_release"}
-  ],
+  "sources": [],
   "pipeline_steps": [
     {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Pulled Breyer press release from patrick-breyer.de feed, routed Privacy at relevance 1.20/5."},
     {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "Cross-checked EP legislative train + Council registry; LIBE rejected the Sippel framing 2 Mar 2026; framing inverted, dropped to 0.35.", "confidence_delta": -0.65},
