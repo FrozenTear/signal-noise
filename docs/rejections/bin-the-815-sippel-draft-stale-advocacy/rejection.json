@@ -1,0 +1,21 @@
+{
+  "slug": "bin-the-815-sippel-draft-stale-advocacy",
+  "title": "Sippel Draft on Chat Control — Mass Surveillance Set to Continue, Sparking Renewed Protest",
+  "summary": "Patrick Breyer advocacy press release flagging MEP Birgit Sippel's draft report on extending the Chat Control 1.0 derogation.",
+  "body": "Editor's note. This candidate, routed under Privacy from a Scanner pull of patrick-breyer.de, was a 6 February 2026 advocacy press release framing Sippel's draft report as a vehicle for continuing mass surveillance. By the time it reached source validation on 5 June 2026 the underlying procedure had moved on twice: the LIBE committee rejected the Sippel framing on 2 March 2026, and the file is now inside trilogue under a different posture. Publishing the lead today would put a four-month-old, inverted-outcome advocacy framing on a live news site. Killed by Source Checker at confidence 0.35 under the stale-advocacy-procedural-drift pattern. EIC ratified the kill and filed Scanner freshness-gate guidance as THE-841 so this class of candidate is intercepted earlier next time.",
+  "category": "privacy",
+  "persona": "",
+  "byline": "Source Checker",
+  "confidence_score": 0.35,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "stale-advocacy-procedural-drift | 6 Feb 2026 Breyer press release on Sippel draft; LIBE rejection on 2 Mar 2026 inverted the framing before SC review",
+  "sources": [
+    {"url": "https://www.patrick-breyer.de/en/sippel-draft-on-chat-control-mass-surveillance-set-to-continue-sparking-renewed-protests/", "title": "Sippel Draft on Chat Control — Mass Surveillance Set to Continue (Patrick Breyer, 6 Feb 2026)", "type": "advocacy_press_release"}
+  ],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Pulled Breyer press release from patrick-breyer.de feed, routed Privacy at relevance 1.20/5."},
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "Cross-checked EP legislative train + Council registry; LIBE rejected the Sippel framing 2 Mar 2026; framing inverted, dropped to 0.35.", "confidence_delta": -0.65},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Kill confirmed; Scanner freshness-gate guidance filed as THE-841."}
+  ]
+}
