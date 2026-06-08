@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-08T12:03:37Z
+- when:    2026-06-08T12:08:53Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27136298453
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/27136580750
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-885-linux-7-1-final-in-sight-rc7-lands | Linux 7.1 Final in Sight as rc7 Lands
    - the-857-final-fantasy-vii-revelation-multiplatform-launch | Square Enix Ends PlayStation Exclusivity Window With Final Fantasy VII
    - the-863-gps-encrypted-military-traffic-otad-research | GPS Has Been Carrying Encrypted Military Traffic for Two Decades, Rese
    - the-861-ice-tfm-app-287g-facial-recognition | ICE Planned Facial Recognition for 1,200 Local Police Forces. Eight Mo
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-766-plex-social-features-lifetime-pass-price-hike | Plex rolls out social discovery tools — and triples its lifetime subsc
    - the-764-linux-7-1-mesa-26-1-rdna4-no-uplift | Linux 7.1 + Mesa 26.1 Brings No Performance Gains for RDNA4 — One Poss
    - california-data-brokers-noindex-27-of-35-compliant | California Data Brokers Were Hiding Your Right to Delete. Twenty-Seven
-   - courts-flood-ai-generated-lawsuits | AI-Generated Filings Are Measurable, Lawsuit-Ready, and Now a Vendor's
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
