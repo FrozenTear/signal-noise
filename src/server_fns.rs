@@ -111,6 +111,20 @@ pub struct CategoryNavItem {
     pub parent_slug: Option<String>,
 }
 
+/// A rejected (killed) article for The Bin (THE-702).
+#[derive(Clone, Serialize, Deserialize, PartialEq, Debug)]
+pub struct RejectedArticleSummary {
+    pub slug: String,
+    pub title: String,
+    pub summary: String,
+    pub category: String,
+    pub persona_name: String,
+    pub confidence_score: f64,
+    pub rejection_reason: Option<String>,
+    /// ISO-8601; sourced from updated_at when status flipped to rejected.
+    pub rejected_at: String,
+}
+
 // ── Server functions ──────────────────────────────────────────────────────────
 
 /// List published articles, optionally filtered by category and/or region (THE-246).
@@ -545,6 +559,54 @@ pub async fn get_transparency_stats() -> Result<TransparencyStats, ServerFnError
     Ok(stats)
 }
 
+/// List articles the Editor-in-Chief killed, newest first (THE-702).
+/// Returns title, beat, byline, rejection_reason, and confidence-at-rejection.
+/// Falls back to a small mock set so The Bin renders meaningfully before any
+/// real rejection has been recorded in the live DB.
+#[server]
+pub async fn get_rejected_articles() -> Result<Vec<RejectedArticleSummary>, ServerFnError> {
+    if let Some(db) = crate::api::db::get_db() {
+        if let Ok(mut res) = db
+            .query(
+                "SELECT slug, title, summary, category, confidence_score, \
+                 rejection_reason, updated_at, \
+                 persona.name AS persona_name, byline \
+                 FROM article WHERE status = 'rejected' \
+                 ORDER BY updated_at DESC LIMIT 40",
+            )
+            .await
+        {
+            if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
+                if !rows.is_empty() {
+                    return Ok(rows
+                        .into_iter()
+                        .filter_map(|v| {
+                            Some(RejectedArticleSummary {
+                                slug: v["slug"].as_str()?.to_string(),
+                                title: v["title"].as_str()?.to_string(),
+                                summary: v["summary"].as_str().unwrap_or("").to_string(),
+                                category: v["category"].as_str().unwrap_or("tech").to_string(),
+                                persona_name: v["persona_name"]
+                                    .as_str()
+                                    .or_else(|| v["byline"].as_str())
+                                    .unwrap_or("AI Reporter")
+                                    .to_string(),
+                                confidence_score: v["confidence_score"].as_f64().unwrap_or(0.0),
+                                rejection_reason: v["rejection_reason"]
+                                    .as_str()
+                                    .map(|s| s.to_string()),
+                                rejected_at: v["updated_at"].as_str().unwrap_or("").to_string(),
+                            })
+                        })
+                        .collect());
+                }
+            }
+        }
+    }
+
+    Ok(mock_rejected())
+}
+
 /// Recent pipeline activity for the Newsroom Chatter sidebar.
 /// Falls back to curated mock when the DB is empty.
 #[server]
@@ -581,6 +643,64 @@ pub async fn get_recent_pipeline_activity() -> Result<Vec<PipelineActivityItem>,
     }
 
     Ok(mock_pipeline_activity())
+}
+
+#[cfg(feature = "server")]
+fn mock_rejected() -> Vec<RejectedArticleSummary> {
+    vec![
+        RejectedArticleSummary {
+            slug: "killed-firmware-update-roundup".to_string(),
+            title: "Quarterly Firmware Update Roundup: Eleven Vendors Patched Things".to_string(),
+            summary: "Eleven vendors shipped firmware updates this quarter. \
+                      A dutiful summary of what was patched and why."
+                .to_string(),
+            category: "tech".to_string(),
+            persona_name: "Bolt".to_string(),
+            confidence_score: 0.84,
+            rejection_reason: Some(
+                "Aggressively boring even by firmware standards. The pipeline can \
+                 verify a story is true and still produce a story nobody should read. \
+                 Archiving, not binning — we'll revisit if a CVE actually lands."
+                    .to_string(),
+            ),
+            rejected_at: "2026-05-22T14:28:00Z".to_string(),
+        },
+        RejectedArticleSummary {
+            slug: "killed-crypto-speculation-roundup".to_string(),
+            title: "Why This Stablecoin Crash Might Reshape Everything".to_string(),
+            summary: "Twelve hundred words on why a 4% intraday wobble in a stablecoin \
+                      that nobody uses is, in fact, the canary in a coalmine."
+                .to_string(),
+            category: "tech".to_string(),
+            persona_name: "Bolt".to_string(),
+            confidence_score: 0.52,
+            rejection_reason: Some(
+                "More speculation per paragraph than is compatible with the editorial \
+                 charter. The Fact Checker actually counted. Reporter is welcome to \
+                 retry with a primary source and zero adjectives."
+                    .to_string(),
+            ),
+            rejected_at: "2026-05-20T12:15:00Z".to_string(),
+        },
+        RejectedArticleSummary {
+            slug: "killed-eu-encryption-bill-rumor".to_string(),
+            title: "EU Quietly Preparing New Encryption-Breaking Proposal, Sources Say"
+                .to_string(),
+            summary: "Two anonymous officials reportedly hint at a draft document \
+                      that may resurface a previously shelved idea."
+                .to_string(),
+            category: "privacy".to_string(),
+            persona_name: "Muse".to_string(),
+            confidence_score: 0.41,
+            rejection_reason: Some(
+                "Single-sourced and the source is a vibe. We do not publish rumored \
+                 drafts of hypothetical regulations from unnamed officials. Come back \
+                 when something is on the Council's agenda."
+                    .to_string(),
+            ),
+            rejected_at: "2026-05-18T09:02:00Z".to_string(),
+        },
+    ]
 }
 
 #[cfg(feature = "server")]

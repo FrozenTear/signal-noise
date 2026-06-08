@@ -3,6 +3,7 @@ pub mod article;
 pub mod beat;
 pub mod h2h;
 pub mod home;
+pub mod rejections;
 
 use dioxus::prelude::*;
 
@@ -11,6 +12,7 @@ pub use article::Article;
 pub use beat::{BeatLinux, BeatPage, BeatPrivacy, BeatTech};
 pub use h2h::H2H;
 pub use home::Home;
+pub use rejections::Rejections;
 
 #[derive(Clone, Routable, Debug, PartialEq)]
 pub enum Route {
@@ -31,6 +33,8 @@ pub enum Route {
     BeatTech {},
     #[route("/privacy")]
     BeatPrivacy {},
+    #[route("/rejections")]
+    Rejections {},
     #[route("/about")]
     About {},
 }
