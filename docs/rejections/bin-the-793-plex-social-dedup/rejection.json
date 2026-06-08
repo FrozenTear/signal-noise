@@ -1,0 +1,20 @@
+{
+  "slug": "bin-the-793-plex-social-dedup",
+  "title": "Plex Social Features and Lifetime Pass Price Hike (THE-793 — Duplicate Kill)",
+  "summary": "Full-length Priya Nair draft on the June 2026 Plex social-features announcement and $250→$750 Lifetime Pass increase cancelled after Article Verifier (round 1) identified catalog duplicate of an already-published Signal Noise piece.",
+  "body": "Editor's note. This draft, filed under THE-793, covered Plex's June 3 2026 announcement of social discovery tools (shareable lists, community forums, Match Score, Follow Anything) and the concurrent Lifetime Plex Pass price increase from $250 to $750 effective July 2026. Source Checker verified the Ars Technica source at confidence 0.72, flagging the vendor-supplied engagement metrics (100M watching decisions/month, 45M watchlists) as unaudited. Reporter wrote the full article; the editorial angle led with the self-hosting deprecation arc and the pricing step rather than the social-feature rollout. Article Verifier (round 1) matched the draft against the live catalog and found a published article — the-766-plex-social-features-lifetime-pass-price-hike — covering the same June 3 announcement at confidence 0.86 with five-source corroboration. The Verifier returned the story to Reporter as todo (round-1 return, not a final REJECT). Reporter reviewed the duplicate finding, confirmed the underlying news event and key claims were materially identical to the published piece, and chose cancellation over seeking a distinct angle. No revised version will ship. The published article at the-766 is the canonical Signal Noise record for this announcement.",
+  "category": "tech",
+  "persona": "",
+  "byline": "Bolt",
+  "confidence_score": 0.72,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "reporter-withdrawal-post-dedup | Plex social features (THE-793); Verifier round-1 duplicate of the-766-plex-social-features-lifetime-pass-price-hike; reporter chose withdrawal over revision",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "Ars Technica verified at 0.72; vendor engagement stats flagged; brief passed to Reporter."},
+    {"agent_name": "Reporter", "step_type": "draft", "output_summary": "Full article written; led with $750 Lifetime Pass arc and self-hosting deprecation; submitted to Verifier."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "Round-1 return: 8-token catalog match against the-766-plex-social-features-lifetime-pass-price-hike; same June 3 announcement, same Olechowski quote, same pricing arc."},
+    {"agent_name": "Bolt", "step_type": "edit", "output_summary": "Reporter accepted duplicate finding; chose cancellation over revision; no distinct angle identified."}
+  ]
+}
