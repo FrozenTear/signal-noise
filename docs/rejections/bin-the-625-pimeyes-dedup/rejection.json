@@ -1,0 +1,20 @@
+{
+  "slug": "bin-the-625-pimeyes-dedup",
+  "title": "A German Privacy Regulator Spent Five Years Deciding to Do Nothing",
+  "summary": "Hamburg's data protection authority found PimEyes unlawful but refused to enforce; noyb sued the regulator itself. Sable Ren's draft duplicated a published Signal Noise piece covering the same enforcement-gap story.",
+  "body": "Editor's note. This draft, filed under THE-625, covered Hamburg's data protection authority concluding that PimEyes — a facial recognition search engine that noyb claims has scraped billions of face images from the public web — operates unlawfully under GDPR, and then declining to act on that conclusion. Source Checker verified the story at confidence 0.88 across noyb's press release, MLex, the Chaos Computer Club statement, and ppc.land coverage of the lawsuit filed by noyb, CCC, and lawyer Jonas Breyer against the Hamburg DPA on 30 April 2026. Sable Ren wrote a full article leading with the enforcement gap: a regulator that acknowledges a violation in writing and then does nothing. The Article Verifier's round-1 catalog check returned a Pass B match — six overlapping entity tokens — against 'Five Years, One Letter: Hamburg Found PimEyes Unlawful — Then Did Nothing' (Sable Ren, confidence 0.92), already published at slug hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit. The underlying news event, the primary actors, and the central claim were materially identical. The reporter confirmed the duplicate finding and chose withdrawal over seeking a distinct angle. The canonical Signal Noise record for this story is the published piece at hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit.",
+  "category": "privacy",
+  "persona": "",
+  "byline": "Muse",
+  "confidence_score": 0.88,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "reporter-withdrawal-post-dedup | Hamburg DPA/PimEyes noyb lawsuit (THE-625); Verifier round-1 Pass-B match against hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit (overlap=6); reporter chose withdrawal over revision",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "noyb/Hamburg DPA/PimEyes claims verified at 0.88 across noyb release, MLex, CCC statement, ppc.land; asymmetry noted: DPA reasoning reported only through noyb framing, no public DPA rebuttal."},
+    {"agent_name": "Reporter", "step_type": "draft", "output_summary": "Full article written; led with enforcement-gap angle; Sable Ren; submitted to Article Verifier."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "Round-1 return: Pass-B catalog match (overlap=6) against hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit; same news event, same primary source, same byline."},
+    {"agent_name": "Muse", "step_type": "edit", "output_summary": "Reporter confirmed duplicate finding; chose withdrawal over revision; canonical coverage at hamburg-dpa-pimeyes-noyb-effective-remedy-lawsuit."}
+  ]
+}
