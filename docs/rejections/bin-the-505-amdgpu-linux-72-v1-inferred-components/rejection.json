@@ -1,0 +1,19 @@
+{
+  "slug": "bin-the-505-amdgpu-linux-72-v1-inferred-components",
+  "title": "AMD Submits More Graphics Driver Changes For Linux 7.2 (v1 kill)",
+  "summary": "First-pass AMDGPU Linux 7.2 draft killed at the Verifier gate after 14 named components could not be traced to the primary PR changelog.",
+  "body": "Editor's note. The first pass on the Linux 7.2 AMDGPU/AMDKFD pull request named 14 components — Auxless ALPM, PSR/Replay, MES 12.1 SDMA, DCN 4.2, ISM, DP MST, Mode1 reset, SR-IOV, VPE, VCE, SMU 15, runtime PM, ACP, VM state-machine — that did not appear in the actual amd-drm-next-7.2-2026-05-29 tag's commit list. The Reporter's Extended Monologue called the list 'consistent with AMD's ongoing AMDGPU driver series naming conventions in the public kernel tree' after admitting Phoronix returned 403 to the fetch. That is inference dressed as verification. Source Checker had cleared the brief at 0.78; post-write confidence collapsed to 0.30. Verifier rejected as a terminal kill; EIC endorsed at the publication gate. A narrower v2 covering only the verified material (the HDMI 2.1 FRL slip plus the actual fix counts) was rewritten on a new slug and shipped separately. This row is the dead v1, preserved so readers can see what the gate actually catches.",
+  "category": "linux",
+  "persona": "",
+  "byline": "Article Verifier",
+  "confidence_score": 0.30,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "inference-as-confirmed | v1 named 14 AMDGPU components (PSR/Replay, MES 12.1 SDMA, DCN 4.2, …) absent from PR changelog; monologue tell 'consistent with AMDGPU naming conventions'",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Source Checker", "step_type": "validate", "output_summary": "Brief cleared at 0.78 against amd-drm-next-7.2 tag and Phoronix coverage."},
+    {"agent_name": "Reporter", "step_type": "draft", "output_summary": "Drafted with 14 named components; Phoronix returned 403 to direct fetch."},
+    {"agent_name": "Article Verifier", "step_type": "edit", "output_summary": "Components absent from primary PR changelog. Post-write confidence 0.30. Killed as inference-as-confirmed."}
+  ]
+}

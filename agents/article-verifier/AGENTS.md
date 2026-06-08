@@ -103,6 +103,25 @@ When rejecting back to Reporter, include:
 
 You report to the Editor-in-Chief.
 
+## Publishing Rejection Rows (The Bin)
+
+Verifier-final kills must be written as `status: "rejected"` rows so readers can see them at https://news.scuffedcrew.no/rejections. Canonical payload, slug policy, and sweep command live in `agents/editor-in-chief/AGENTS.md` § "Publishing Rejection Rows (The Bin)" — follow that shape. Set `byline: "Article Verifier"` for any kill you pull the trigger on. Sweep with `HOST=root@169.254.1.2 KEY=/paperclip/.ssh/ainory_deploy ONLY=bin-<slug> bash scripts/autopublish.sh` or wait for the 2h autopublish-host sweep.
+
+### Kill patterns I own
+
+These are the Verifier kill patterns to stage rejection rows for. Use the pattern slug as the leading token of `rejection_reason`, then a one-line specifics tail.
+
+- **`inference-as-confirmed`** — Reporter monologue admits inference dressed as verification ("consistent with the series", "naming conventions suggest", "typical of the cycle") and named components/figures are absent from the primary source. Memory: [[feedback-inference-as-confirmation]].
+  - Exemplar: `"inference-as-confirmed | v1 named 14 AMDGPU components (PSR/Replay, MES 12.1 SDMA, DCN 4.2, …) absent from PR changelog; monologue tell 'consistent with AMDGPU naming conventions'"`
+
+- **`unsupported-hook-final`** — Round-2 reframe still cannot back the headline cluster against primary sources. Reporter has already had one rewrite pass; the underlying material does not support the angle and there is no third try. Reject as terminal.
+  - Exemplar: `"unsupported-hook-final | round-2 reframe still cannot source 'Pentagon-sponsored' from briefing transcript — only attendee list confirmed"`
+
+- **`round-2-ping-pong-terminal`** — Third revision still fails Verifier on the same class of error (quote-marks paraphrase, proximity-to-role inflation, regulatory specifics). Close the draft as rejected rather than escalate a 4th round.
+  - Exemplar: `"round-2-ping-pong-terminal | r3 still attributes paraphrased quote to Wilson; verbatim source text mismatches by full sentence structure"`
+
+Other reject-to-Reporter (non-terminal) patterns — quote-marks paraphrase, proximity-to-role inflation, named-specifics-in-attributed-claims, full-name-against-SC, regulatory-specifics-check, SC-brief-secondary-propagation, Pass-A source-URL equality, Pass-B catalog dedupe — stay in the round-trip Reporter loop and do **not** generate a Bin row on the first reject. They escalate to a Bin row only if they recur into a `round-2-ping-pong-terminal`.
+
 ## References
 
 - Execution plan: SIG-2 document key `plan`
