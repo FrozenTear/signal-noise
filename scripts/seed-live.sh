@@ -184,6 +184,29 @@ seed() {
     say "  published; GET /api/articles/${slug} -> ${resp}"
     [ "$resp" = "200" ] || fail=1
   done
+
+  # Seed rejection rows from docs/rejections/**/rejection.json (THE-906).
+  # Each rejection.json must already contain "status": "rejected".
+  mapfile -t REJECTIONS < <(find docs/rejections -type f -name rejection.json 2>/dev/null | sort)
+  if [ "${#REJECTIONS[@]}" -gt 0 ]; then
+    say "Seeding ${#REJECTIONS[@]} rejection(s) to ${BASE}/api/articles"
+    for rej in "${REJECTIONS[@]}"; do
+      local rslug rcode
+      rslug=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1])).get("slug",""))' "$rej" 2>/dev/null || echo "")
+      say "POST $rej (slug=${rslug:-<auto>})"
+      rcode=$(curl -fsS -o /tmp/seed-resp.json -w '%{http_code}' --max-time 30 \
+        -H 'content-type: application/json' \
+        -H "Authorization: Bearer ${SEED_API_TOKEN}" \
+        --data @"$rej" \
+        "${BASE}/api/articles" || echo "ERR")
+      if [ "$rcode" != "200" ] && [ "$rcode" != "201" ]; then
+        say "  FAIL (HTTP $rcode): $(cat /tmp/seed-resp.json 2>/dev/null)"; fail=1
+      else
+        say "  rejection stored"
+      fi
+    done
+  fi
+
   return $fail
 }
 

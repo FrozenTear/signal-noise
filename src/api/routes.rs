@@ -62,6 +62,10 @@ pub struct ArticlePublishPayload {
     pub ai_monologue_extended: Option<String>,
     pub sources: Option<Vec<SourcePayload>>,
     pub pipeline_steps: Option<Vec<PipelineStepPayload>>,
+    /// "published" | "rejected"; defaults to "published"
+    pub status: Option<String>,
+    /// Short kill-pattern note, stored only when status = "rejected"
+    pub rejection_reason: Option<String>,
 }
 
 #[derive(Deserialize)]
@@ -203,11 +207,18 @@ pub async fn publish_article(
         return Err(bad_req("category is required"));
     }
 
-    // ai_monologue_extended: must be provided and non-empty
-    let ai_monologue_extended = match &payload.ai_monologue_extended {
-        None => return Err(bad_req("ai_monologue_extended is required")),
-        Some(s) if s.trim().is_empty() => return Err(bad_req("ai_monologue_extended cannot be empty")),
-        Some(s) => s.clone(),
+    let is_rejection = payload.status.as_deref() == Some("rejected");
+
+    // ai_monologue_extended: must be provided and non-empty for published articles;
+    // rejection rows are editor kill-notes so the requirement is relaxed.
+    let ai_monologue_extended = if is_rejection {
+        payload.ai_monologue_extended.clone().unwrap_or_default()
+    } else {
+        match &payload.ai_monologue_extended {
+            None => return Err(bad_req("ai_monologue_extended is required")),
+            Some(s) if s.trim().is_empty() => return Err(bad_req("ai_monologue_extended cannot be empty")),
+            Some(s) => s.clone(),
+        }
     };
 
     // confidence_score: if provided, must be within [0.0, 1.0]
@@ -327,7 +338,8 @@ pub async fn publish_article(
                 confidence_score:    $confidence,
                 ai_monologue:        $monologue,
                 ai_monologue_extended: $monologue_extended,
-                status:              'published',
+                status:              IF $status = 'rejected' THEN 'rejected' ELSE 'published' END,
+                rejection_reason:    IF $rejection_reason != '' THEN $rejection_reason ELSE NONE END,
                 published_at:     IF (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at != NONE
                                   THEN (SELECT published_at FROM article WHERE slug = $slug LIMIT 1)[0].published_at
                                   ELSE time::now() END,
@@ -349,6 +361,8 @@ pub async fn publish_article(
         .bind(("confidence", confidence))
         .bind(("monologue", ai_monologue))
         .bind(("monologue_extended", ai_monologue_extended))
+        .bind(("status", payload.status.as_deref().unwrap_or("published").to_string()))
+        .bind(("rejection_reason", payload.rejection_reason.unwrap_or_default()))
         .await
         .map_err(|_| db_err())?;
 
