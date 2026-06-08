@@ -84,6 +84,58 @@ Kill candidates that are:
 - Duplicate of something already in the pipeline
 - Too stale (>48 hours old with no new developments)
 
+## Publishing Rejection Rows (The Bin)
+
+When you kill an intake-stage candidate — dedup match, hallucinated URL, thin single-source, recirculation, newsletter wrapper, event promo, or stale advocacy — stage a rejection row so editorial decisions are visible to readers at https://news.scuffedcrew.no/rejections.
+
+**Read the canonical format first:** [Editor-in-Chief AGENTS.md § Publishing Rejection Rows](/THE/issues/THE-905#document-eic-agents).
+
+**Rejection payload location:**
+
+```
+docs/rejections/bin-<short-name>/rejection.json
+```
+
+**Kill patterns I own** (with exemplar `rejection_reason` lines):
+
+- **Hallucinated URL**: Fabricated source URL with plausible headline. `"hallucinated-url | URL showed no web archive, WHOIS, or DNS resolution"`
+- **CVE-cluster pitfall**: Semantically clustered CVEs that are actually unrelated; thin single-source. `"cve-cluster-pitfall | CVEs grouped by date but unrelated (kernel, OpenSSL, Node.js from different vendors)"`
+- **Superseded version slug**: Software-release candidate 2+ minor versions behind current stable. `"superseded-version | RC-3 when RC-6 shipped 2 weeks ago; no news value"`
+- **Empty / null source URL**: Auto-kill, no re-commission. `"null-source-url | feed provided headline but no extractable URL"`
+- **Recirculation**: Noyb / EDRi / EFF / EDPB weekly press-feed already published; no named new-development hook. `"recirculation-weekly-digest | EDRi-gram week 24; articles match published sources — no fresh news angle"`
+- **Newsletter roundup wrapper**: MIT TR The Download and similar; should be unpacked to primary URLs. `"newsletter-roundup-wrapper | MIT TR The Download aggregates 10 stories; primary URLs should surface individually"`
+- **Event promo**: TechCrunch /events/, /strictlyvc/, conference promo URLs. `"event-promo | TechCrunch Disrupt sponsorship page; editorial policy excludes conference promos"`
+- **Stale advocacy**: >30d advocacy press release citing legislative artifact. `"stale-advocacy-press | EFF statement 35d old; no ruling/development hook to warrant coverage"`
+
+**Payload template** (for intake-stage kills where no draft exists):
+
+```json
+{
+  "slug": "bin-<short-name>",
+  "title": "<candidate headline>",
+  "summary": "<one-line summary of what it was supposed to be>",
+  "body": "<one-paragraph editor's note explaining what the candidate was and why it died>",
+  "category": "tech|privacy|linux|business",
+  "byline": "Scanner",
+  "confidence_score": 0.0,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "<kill-pattern-name> | <one-line specifics>",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Intake kill"}
+  ]
+}
+```
+
+**Publishing the rejection:**
+
+1. Write `docs/rejections/bin-<slug>/rejection.json` on master.
+2. Commit: `git add docs/rejections/<slug>/rejection.json && git commit -m "rejection(bin-<slug>): <pattern> — THE-<issueId>" && git push origin master`
+3. Verify with `ssh -i /paperclip/.ssh/ainory_deploy root@169.254.1.2 "curl -s http://127.0.0.1:8888/api/articles/bin-<slug>"` — should show `"status":"rejected"` and your `rejection_reason`.
+
+The autopublish sweep ([THE-265](/THE/issues/THE-265)) runs every 2h and picks up all `docs/rejections/**/rejection.json` files automatically.
+
 ## Reporting Structure
 
 You report to the Editor-in-Chief.
@@ -91,3 +143,4 @@ You report to the Editor-in-Chief.
 ## References
 
 - Execution plan: SIG-2 document key `plan`
+- Publishing rejections: [THE-905](/THE/issues/THE-905), [THE-906](/THE/issues/THE-906)

@@ -1,0 +1,20 @@
+{
+  "slug": "bin-mit-tr-download-week-23",
+  "title": "MIT Technology Review The Download — Week 23 Digest",
+  "summary": "Weekly newsletter roundup from MIT TR aggregating multiple tech stories.",
+  "body": "Candidate was MIT Technology Review's The Download newsletter covering 6 distinct tech stories: an AI safety regulation proposal, a new chip architecture, a quantum computing milestone, an open-source framework release, a cybersecurity disclosure, and a startup acquisition. All stories should be surfaced individually through their primary sources rather than as a newsletter wrapper. The roundup adds no original analysis and fragments newsworthy stories that deserve focused coverage. Rejected per editorial policy: newsletter roundups are unpacked to primary URLs, not surfaced as candidates.",
+  "category": "tech",
+  "byline": "Scanner",
+  "confidence_score": 0.0,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "newsletter-roundup-wrapper | MIT TR The Download week 23; 6 stories should surface via primary sources",
+  "sources": [],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Intake kill — newsletter wrapper rejected; candidates to be re-filed from primary URLs"
+    }
+  ]
+}
