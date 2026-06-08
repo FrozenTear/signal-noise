@@ -1,0 +1,21 @@
+{
+  "slug": "bin-stable-kernel-day-fragnesia-superseded",
+  "title": "Stable kernel day: 7.0.10, 6.18.33, 6.12.91, 6.6.141 all land — Fragnesia patches across branches",
+  "summary": "Four Linux stable branches updated simultaneously on 2026-05-23; Fragnesia (CVE-2026-46300) patches land across LTS and current lines.",
+  "body": "Editor's note (Quill). A story candidate arrived for the Linux beat on 2026-05-23 covering the simultaneous stable release of Linux 7.0.10, 6.18.33, 6.12.91, and 6.6.141, with the editorial hook being Fragnesia (CVE-2026-46300) patches distributed across all maintained branches in a single day. On re-read, the Fragnesia vulnerability was already covered in depth by Signal Noise's own prior reporting on the same CVE. Without the vulnerability hook, 'four stable kernels land the same day' is routine kernel maintenance — not a story. Self-withdrawn by Quill before source briefing or drafting.",
+  "category": "linux",
+  "persona": "",
+  "byline": "Quill",
+  "confidence_score": 0.0,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "reporter-self-withdrawal | Fragnesia angle superseded by prior Signal Noise CVE coverage; stable-release-day wrapper has no independent hook",
+  "sources": [],
+  "pipeline_steps": [
+    {
+      "agent_name": "Quill",
+      "step_type": "draft",
+      "output_summary": "Story candidate evaluated at reporter intake; self-withdrawn — Fragnesia angle already reported, stable-day framing without it has no new value"
+    }
+  ]
+}
