@@ -19,6 +19,11 @@
 #   /api/articles/<slug>; if it already returns 200 we SKIP it. Set FORCE=1 to
 #   re-POST anyway (intentional content update / re-publish of a rejected slug).
 #
+# Rejections (THE-905/THE-906): the sweep also picks up
+# docs/rejections/<slug>/rejection.json. Each rejection.json must carry
+# "status": "rejected" — the same UPSERT route stores it with
+# ArticleStatus::Rejected and surfaces it on /rejections.
+#
 # Env:
 #   SRC      source tree to sweep         (default /opt/ainory-times/src)
 #   BASE     local API bind               (default http://127.0.0.1:8888)
@@ -51,8 +56,10 @@ feed_has() { # $1 slug -> 0 if live (200), 1 otherwise
   [ "$c" = "200" ]
 }
 
-mapfile -t ARTS < <(find "$SRC/docs/published" -type f -name publish.json 2>/dev/null | sort)
-[ "${#ARTS[@]}" -gt 0 ] || { say "no publish.json under $SRC/docs/published — nothing to do"; exit 0; }
+mapfile -t ARTS < <( \
+  { find "$SRC/docs/published"  -type f -name publish.json   2>/dev/null; \
+    find "$SRC/docs/rejections" -type f -name rejection.json 2>/dev/null; } | sort )
+[ "${#ARTS[@]}" -gt 0 ] || { say "no publish.json/rejection.json under $SRC/docs/{published,rejections} — nothing to do"; exit 0; }
 
 published=(); skipped=(); failed=()
 for art in "${ARTS[@]}"; do

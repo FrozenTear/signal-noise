@@ -137,6 +137,58 @@ If the direct `curl` fails with a connection error (no response from server, not
 
 **Step 5 — Mark done** with a comment that includes the published slug (e.g. `Published: linux-7-0-rc5-linus-says-the-chaos-is-calming-down`).
 
+## Publishing Rejection Rows (The Bin)
+
+Kill decisions that should be visible at https://news.scuffedcrew.no/rejections are written through the **same** `POST /api/articles` route, with `"status": "rejected"` ([THE-905](/THE/issues/THE-905), backend in [THE-906](/THE/issues/THE-906)). Use this for any kill that downstream readers should be able to inspect — Scanner intake kills, Source Checker source-asymmetry kills, Verifier-failed drafts, EIC editorial kills, dedupe kills.
+
+**Storage path.** Rejection rows live in a sibling tree to keep dead drafts and live articles separate on disk:
+
+```
+docs/rejections/<slug>/rejection.json
+```
+
+**Slug policy.** Prefix rejection slugs with `bin-` to guarantee no collision with a published article that may later cover the same event:
+
+- `bin-generic-privacy-bill-passes`
+- `bin-the-887-krishnan-leaving` (use the originating THE-NNN if it's already a draft)
+
+**Minimum payload shape** (post-[THE-906](/THE/issues/THE-906) backend):
+
+```json
+{
+  "slug": "bin-<short-name>",
+  "title": "<dead draft title or kill subject>",
+  "summary": "<one-line summary of what it was supposed to be>",
+  "body": "<one-paragraph editor's note on what died and why>",
+  "category": "tech",
+  "byline": "Editor-in-Chief",
+  "confidence_score": 0.0,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "<kill-pattern name> | <one-line specifics>",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "<kill stage>", "step_type": "edit", "output_summary": "<why killed>"}
+  ]
+}
+```
+
+Notes:
+
+- `ai_monologue_extended` is **not required** when `status: "rejected"` (relaxed in [THE-906](/THE/issues/THE-906)). Send `""` or omit the field.
+- `category` must be one of the seeded slugs (`linux`, `tech`, `privacy`, `business`). Use the beat the kill came from. There is no `intake` category — for Scanner intake kills, attribute to the beat the candidate was routed under.
+- `persona` may be empty (`""`) when the kill is editorial rather than personality-driven. Use `byline: "Editor-in-Chief"` (or the killing agent's name) so attribution stays visible.
+- `rejection_reason` should start with a short kill-pattern name from EIC memory (e.g. `noyb-recirculation`, `superseded-version-slug`, `inverted-outcome-fine`, `empty-url`, `event-promo`) followed by ` | ` and a one-line specifics tail.
+
+**Publishing the rejection.** Same sweep path as live articles ([THE-265](/THE/issues/THE-265) autopublish):
+
+1. Write `docs/rejections/<slug>/rejection.json` on the `master` worktree.
+2. `git add docs/rejections/<slug>/rejection.json && git commit -m "rejection(<slug>): kill <one-line> — THE-<issueId>" && git push origin master`
+3. Run `HOST=root@169.254.1.2 KEY=/paperclip/.ssh/ainory_deploy ONLY=<slug> bash scripts/autopublish.sh` from the sandbox, or @-mention Console and let the 2h sweep handle it. `autopublish-host.sh` sweeps both `docs/published/**/publish.json` and `docs/rejections/**/rejection.json`.
+4. Confirm with `ssh -i /paperclip/.ssh/ainory_deploy root@169.254.1.2 "curl -s http://127.0.0.1:8888/api/articles/<slug>"` — the JSON should show `"status":"rejected"` and the `rejection_reason` you wrote.
+
+**`db_admin reject` is NOT a substitute** for this path — it runs `UPDATE`, not `INSERT`, so it can only flip an already-published row back to rejected. It cannot create a fresh rejection row for an intake kill where no article ever existed.
+
 ## References
 
 - Execution plan: SIG-2 document key `plan`

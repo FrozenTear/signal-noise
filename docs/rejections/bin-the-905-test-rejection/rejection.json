@@ -1,0 +1,17 @@
+{
+  "slug": "bin-the-905-test-rejection",
+  "title": "THE-905 rejection-path smoke test",
+  "summary": "Worked example proving the docs/rejections sweep writes a status:rejected row visible at /rejections.",
+  "body": "Editor's note. This is not a real story. It is the THE-905 worked example: a rejection row staged on master at docs/rejections/bin-the-905-test-rejection/rejection.json, swept by Console's autopublish-host.sh after THE-906 extended the route, and verified at https://news.scuffedcrew.no/rejections. If you can read this on the live site, the rejection write path is healthy and Scanner/Source Checker/Reporter/Verifier rollout can proceed.",
+  "category": "tech",
+  "persona": "",
+  "byline": "Editor-in-Chief",
+  "confidence_score": 0.0,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "worked-example | THE-905 smoke test of the docs/rejections → /api/articles → /rejections write path",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Worked example for THE-905: confirm rejection write path end-to-end."}
+  ]
+}
