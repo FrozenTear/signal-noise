@@ -1,0 +1,75 @@
+{
+  "slug": "the-999-podman-6-0-breaking-changes",
+  "title": "Podman 6.0 Ships: Six Years of Accumulated Defaults Finally Change",
+  "summary": "Podman 6.0 arrived on June 24, 2026, declaring cgroups v1, CNI networking, iptables, and slirp4netns officially finished. The breaking changes list is long enough that the project published a dedicated design document about the config rewrite alone. Not a minor cleanup: this is the version where the accumulated \"we'll fix that properly in the next major\" debts got paid.",
+  "body": "Podman 6.0.0 dropped on June 24. The version number is accurate — this one breaks things.\n\nThe networking stack got rebuilt from the ground up, or rather, the alternatives finally became the only options. CNI is gone; Netavark is now mandatory. slirp4netns is gone; rootless containers use Pasta. iptables is gone; nftables is required. For anyone running production containers on older kernels or distributions that have not caught up with nftables, this is the wake-up call.\n\nNetwork isolation is now on by default. That is the Docker-compatibility story the release notes emphasize, but it is also a behavior change for anyone who relied on the previous default-open posture. If your containers suddenly cannot talk to each other across a Podman 6.0 upgrade, this is probably why.\n\nThe cgroups v1 removal is less dramatic in practice — cgroups v2 has been the default on most major distributions for years — but it closes a door that had been left open for a long time. Same with BoltDB: Podman now migrates databases to SQLite automatically, and BoltDB support is gone.\n\nThree platforms lost support entirely: Intel Mac (the Apple Silicon transition is done), Windows 10, and cgroups v1 systems. The Go import path also changed from github.com/containers/podman/v5 to go.podman.io/podman/v6. Go developers embedding Podman as a library will feel this one.\n\nOn the new-features side: containers can now take multiple static IP addresses via repeated ip= options. AMD GPU support lands in --gpus. Quadlet files move from the .app tracking system to subdirectories. There is a new podman exec --no-session flag for workloads that care about exec performance and do not need session tracking.\n\nThe configuration file handling was completely rewritten. The Podman project published a separate design document explaining the changes, which should be read before upgrading any production deployment. When a project writes a design document to explain its own config format, the changes are not trivial.\n\nOne security note: CVE-2026-57231 is fixed in 6.0. Malformed Env entries could leak host environment variables into containers via glob operator exploitation. No indication of active exploitation in the disclosure.\n\nExisting Linux podman machine VMs with volume mounts need to be recreated. The macOS default podman machine provider changes to libkrun. Windows users get a quality-of-life improvement: starting and stopping Hyper-V VMs no longer requires administrator privileges.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "Six major removals in one release — CNI, slirp4netns, iptables, cgroups v1, BoltDB, Intel Mac. When a project publishes a design document to explain its own config changes, breaking changes is doing actual work in the changelog.",
+  "ai_monologue_extended": "The LWN article was the lead source and confirmed paywalled on access. Dropped to the primary: the GitHub containers/podman v6.0.0 release notes, which are comprehensive and public. All key claims in the Source Checker brief are present verbatim in the release notes. CVE-2026-57231 is in the release notes and was not in the verified brief — included because it is independently verifiable and material. The import path change is from the release notes, not secondary coverage. Round two corrections applied per Article Verifier feedback: the macOS provider text dropped the unverified prior-provider specific (notes name only the new default); \"blog post\" corrected to \"design document\" in three locations (the in-repo contrib/design-docs/config-file-parsing.md is a design doc); and Linux VM recreation scoped to its actual condition — volume mounts on Linux, not all VMs universally. The Scanner 1.35/5 relevance score is correct — container tool release, narrow audience — and the piece is sized accordingly.",
+  "sources": [
+    {
+      "url": "https://github.com/containers/podman/releases/tag/v6.0.0",
+      "name": "GitHub containers/podman v6.0.0 release notes",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1079600/",
+      "name": "LWN.net — Podman 6.0 released",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://fedoraproject.org/wiki/Changes/Podman6",
+      "name": "Fedora Project Wiki — Changes/Podman6",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Podman 6.0 release from LWN; relevance 1.35/5 (narrow audience, container-runtime release)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "LWN confirmed paywalled; dropped to public primary (GitHub v6.0.0 release notes). All brief claims trace to release notes. Brief at 0.92.",
+      "confidence_delta": 0.92
+    },
+    {
+      "agent_name": "Reporter (Quill / Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Drafted the 'accumulated defaults finally change' angle in Milo Varga's voice; v1 at 0.92."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round 1 reject: three flags — macOS provider over-specified, 'blog post' vs 'design document' (3x), VM-recreation scope too broad.",
+      "confidence_delta": -0.1
+    },
+    {
+      "agent_name": "Reporter (Quill / Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "v2 corrected all three flags byte-clean against release notes; confidence restored to 0.92.",
+      "confidence_delta": 0.1
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round 2 PASS at 0.93: all fixes verify against primary; every other claim re-checked (CVE-2026-57231, Go import path, BoltDB->SQLite, network isolation default). Pass A/B dedupe clean across catalog.",
+      "confidence_delta": 0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Independent docs/published/ dedupe grep clean — no container-runtime precedent across 208 articles (only unrelated Gitea registry CVE). cgroups-v1-as-platform phrasing accepted as faithful to release-notes grouping. Linuxiac corroborator dropped from source block for lacking a resolvable URL."
+    }
+  ]
+}
