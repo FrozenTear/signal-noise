@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-06-25T20:31:11Z
+- when:    2026-06-25T20:33:51Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28198600779
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28198749731
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1003-polestar-us-ban-volvo-spared-connected-vehicle | Polestar Loses US Market Access Under Connected Vehicle Rule While Gee
+   - the-1001-windows-10-esu-extended-october-2027 | Microsoft Extends Free Windows 10 Security Updates Through October 202
+   - the-1000-allocation-tokens-linux-7-2-slab-hardening | The Kernel Bets on Both Fronts: Allocation Tokens in Linux 7.2
    - the-998-minio-alternatives-ceph-garage | MinIO steps back, and the replacements line up
    - the-887-krishnan-leaving-white-house-ai-advisor | Trump's Senior AI Policy Architect Is Leaving the White House
    - the-885-linux-7-1-final-in-sight-rc7-lands | Linux 7.1 Final in Sight as rc7 Lands
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-801-google-voltus-vpp-pjm-byoc-hyperscaler | Google Signs 3-Year VPP Deal With Voltus for Up to 100 MW in PJM — Fir
    - microsoft-scout-make-people-addicted | Microsoft's Own Planning Doc Said Phase One for Its New AI Was 'Make P
    - the-799-border-patrol-hidden-plate-readers-california | Border Patrol's Hidden Plate Readers: How a Volunteer Found What Calif
-   - the-772-german-data-center-gas-greenwashing-enefg | One in Ten New German Gas Projects Now Tied to Data Centers Claiming 1
-   - healthcare-intake-opt-out-dark-pattern | The Form Asked My Permission to Share My Health Data. Then It Wouldn't
-   - the-766-plex-social-features-lifetime-pass-price-hike | Plex rolls out social discovery tools — and triples its lifetime subsc
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
