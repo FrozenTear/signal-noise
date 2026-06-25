@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-25T20:28:47Z
+- when:    2026-06-25T20:29:34Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28198466804
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28198509384
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-998-minio-alternatives-ceph-garage | MinIO steps back, and the replacements line up
    - the-887-krishnan-leaving-white-house-ai-advisor | Trump's Senior AI Policy Architect Is Leaving the White House
    - the-885-linux-7-1-final-in-sight-rc7-lands | Linux 7.1 Final in Sight as rc7 Lands
    - the-857-final-fantasy-vii-revelation-multiplatform-launch | Square Enix Ends PlayStation Exclusivity Window With Final Fantasy VII
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-772-german-data-center-gas-greenwashing-enefg | One in Ten New German Gas Projects Now Tied to Data Centers Claiming 1
    - healthcare-intake-opt-out-dark-pattern | The Form Asked My Permission to Share My Health Data. Then It Wouldn't
    - the-766-plex-social-features-lifetime-pass-price-hike | Plex rolls out social discovery tools — and triples its lifetime subsc
-   - the-764-linux-7-1-mesa-26-1-rdna4-no-uplift | Linux 7.1 + Mesa 26.1 Brings No Performance Gains for RDNA4 — One Poss
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
