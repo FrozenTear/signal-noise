@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-25T20:33:51Z
+- when:    2026-06-29T07:07:55Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28198749731
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28354777116
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-999-podman-6-0-breaking-changes | Podman 6.0 Ships: Six Years of Accumulated Defaults Finally Change
    - the-1003-polestar-us-ban-volvo-spared-connected-vehicle | Polestar Loses US Market Access Under Connected Vehicle Rule While Gee
    - the-1001-windows-10-esu-extended-october-2027 | Microsoft Extends Free Windows 10 Security Updates Through October 202
    - the-1000-allocation-tokens-linux-7-2-slab-hardening | The Kernel Bets on Both Fronts: Allocation Tokens in Linux 7.2
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-797-ursa-ag-no-tech-repairable-tractor | Canadian Startup Is Selling No-Tech Tractors at Half the Price of a Jo
    - the-801-google-voltus-vpp-pjm-byoc-hyperscaler | Google Signs 3-Year VPP Deal With Voltus for Up to 100 MW in PJM — Fir
    - microsoft-scout-make-people-addicted | Microsoft's Own Planning Doc Said Phase One for Its New AI Was 'Make P
-   - the-799-border-patrol-hidden-plate-readers-california | Border Patrol's Hidden Plate Readers: How a Volunteer Found What Calif
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
