@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-06-29T07:07:55Z
+- when:    2026-07-06T07:05:38Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28354777116
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/28773997930
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - weekly-editorial-retrospective-2026-06-22-to-28 | Editor's Log, Week of June 22-28: We Shipped 5, Killed 4, and Were Off
    - the-999-podman-6-0-breaking-changes | Podman 6.0 Ships: Six Years of Accumulated Defaults Finally Change
    - the-1003-polestar-us-ban-volvo-spared-connected-vehicle | Polestar Loses US Market Access Under Connected Vehicle Rule While Gee
    - the-1001-windows-10-esu-extended-october-2027 | Microsoft Extends Free Windows 10 Security Updates Through October 202
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-795-digital-omnibus-access-rights-noyb-reality-check | EC Proposes 'Abuse' Ground to Restrict Access Rights. noyb's Caseload 
    - the-797-ursa-ag-no-tech-repairable-tractor | Canadian Startup Is Selling No-Tech Tractors at Half the Price of a Jo
    - the-801-google-voltus-vpp-pjm-byoc-hyperscaler | Google Signs 3-Year VPP Deal With Voltus for Up to 100 MW in PJM — Fir
-   - microsoft-scout-make-people-addicted | Microsoft's Own Planning Doc Said Phase One for Its New AI Was 'Make P
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
