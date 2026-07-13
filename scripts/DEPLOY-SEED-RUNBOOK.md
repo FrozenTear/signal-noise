@@ -1,11 +1,21 @@
 # VPS-reachable deploy + seed (THE-157)
 
+## Primary agent path (THE-1020)
+Agents publish via `scripts/autopublish.sh` (SSH to the VPS, host-local bearer from
+`/etc/ainory-times.env`). Stage `docs/published/<slug>/publish.json` on `master`, then
+sweep — no GitHub secret and no sandbox bearer required. See
+`agents/editor-in-chief/AGENTS.md` § "Publishing to Backend".
+
+The GitHub Actions path below is an **optional operator path** for probe/verify runs and
+future HTTP-only seeding. It is **inactive** until the repo Actions secret
+`SEED_API_TOKEN` is provisioned (confirmed broken in run `29231002089`, THE-1020).
+
 ## Problem
 The agent sandbox's egress to `194.163.163.153` (news.scuffedcrew.no) is IP-blocked
 (rejected in ~5 ms; every other host connects — see THE-156, re-confirmed 2026-05-21).
 So the live seed (THE-153) and publish-deploy (THE-125) cannot run from the sandbox.
 
-## Solution: seed over the public HTTP API from a GitHub runner
+## Solution (optional): seed over the public HTTP API from a GitHub runner
 GitHub-hosted runners are not the agent sandbox and reach the VPS normally.
 
 The Dioxus server nests the API at `/api` on the same public bind (`src/main.rs`),
@@ -44,7 +54,11 @@ deploy key cannot). No SSH key secret is required — seeding is HTTP-only.
 - ✅ Approved payloads on `master`: `docs/published/the-{116,119,121,122,124,132–138}/publish.json`
   (THE-158, commit `f9716aa`), incl. THE-119 `spacex-s1-biggest-ipo-musk-risk-factor`.
 - ✅ Workflow + script committed (this file, `seed-live.sh`, `deploy-seed.yml`).
-- ⏳ `SEED_API_TOKEN` provisioned on the VPS **and** in Actions secrets — see above.
+- ✅ VPS host-local bearer provisioned (`/etc/ainory-times.env`) — autopublish path works.
+- ❌ Repo Actions secret `SEED_API_TOKEN` **not provisioned** (THE-1020). `deploy-seed`
+  seed mode fails; `docs/seed-status/last-run.md` shows `token configured: false`.
+  Requires a PAT with `secrets` scope — agent/deploy tokens get HTTP 403 on
+  `gh secret set`. Operator must set it in GitHub Settings → Secrets → Actions.
 
 ## Verify THE-119 renders
 After the token is provisioned, run the workflow (`workflow_dispatch` mode `seed`, or

@@ -9,12 +9,17 @@ name: deploy-seed
 # mutating /api/* routes are failure-closed bearer-gated (src/api/auth.rs), so the
 # seed step authenticates with Authorization: Bearer ${{ secrets.SEED_API_TOKEN }}.
 #
-# THE SINGLE IRREDUCIBLE OPERATOR ACTION:
+# PRIMARY AGENT PATH (THE-1020): scripts/autopublish.sh over SSH — see
+# agents/editor-in-chief/AGENTS.md. This workflow is OPTIONAL and INACTIVE for
+# seed mode until the repo Actions secret below is provisioned.
+#
+# THE SINGLE IRREDUCIBLE OPERATOR ACTION (to enable this workflow's seed mode):
 #   Provision one shared SEED_API_TOKEN value in TWO places (same string):
 #     1. The live server's environment (systemd unit on the VPS) — what auth.rs reads.
 #     2. This repo's Actions secrets: Settings -> Secrets and variables -> Actions
 #        -> New repository secret -> name SEED_API_TOKEN.
 #   No SSH key secret is needed; seeding is HTTP-only.
+#   As of THE-1020: (1) is done via /etc/ainory-times.env; (2) is NOT set.
 #
 # Verification bridge: each run commits its probe/seed result to
 # docs/seed-status/last-run.md (with [skip ci], a non-trigger path) using the

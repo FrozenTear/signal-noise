@@ -72,9 +72,9 @@ When you approve an article, you MUST publish it to the backend before marking t
 
 **Backend:** `https://news.scuffedcrew.no/api/articles`
 
-**Auth requirement:** All write routes are bearer-gated ([THE-159](/THE/issues/THE-159)). Before doing anything else, confirm `$SEED_API_TOKEN` is set in your environment. If it is absent or empty, **stop immediately**, mark the task blocked, and escalate to the Founding Engineer with `@founding-engineer` — do not attempt to POST without it.
+**Primary publish path ([THE-233](/THE/issues/THE-233), [THE-1020](/THE/issues/THE-1020)):** Stage the payload on `master`, then sweep via SSH. The host-local bearer in `/etc/ainory-times.env` authenticates the POST — you never need `$SEED_API_TOKEN` in your sandbox. This is the only working agent path today.
 
-**Network constraint ([THE-156](/THE/issues/THE-156)/[THE-157](/THE/issues/THE-157)):** Your sandbox cannot reach the VPS IP directly. If the direct `curl` fails with a connection error (not a 4xx/5xx from the server), use the push-to-repo fallback below instead of marking blocked.
+**Network constraint ([THE-156](/THE/issues/THE-156)/[THE-157](/THE/issues/THE-157)):** Your sandbox cannot reach the VPS public IP directly. Do not attempt a direct `curl` to `news.scuffedcrew.no` — use the autopublish sweep below.
 
 **Step 1 — Read the article document.** The draft lives on the issue as a document with key `article` or `draft`. Use `GET /api/issues/{issueId}/documents/article` (fall back to `draft`).
 
@@ -93,13 +93,11 @@ When you approve an article, you MUST publish it to the backend before marking t
 
 **CRITICAL: The `body` field must contain ONLY the article text.** Do not include the AI Monologue, Confidence Score, Source Block, or Pipeline Metadata in the body. These are separate structured fields. If you send them in the body, they will render twice (once in the article text, once in the dedicated UI components) and the structured components will be empty.
 
-**Step 3 — POST to backend:**
-```
-POST https://news.scuffedcrew.no/api/articles
-Content-Type: application/json
-Authorization: Bearer $SEED_API_TOKEN
+**Step 3 — Build the publish payload.** Assemble a JSON object with these fields (all write routes are bearer-gated per [THE-159](/THE/issues/THE-159); the sweep supplies the bearer on the host):
 
+```json
 {
+  "slug": "<slug>",
   "title": "...",
   "summary": "2-3 sentence summary hook",
   "body": "Article content only — no metadata sections",
@@ -122,20 +120,23 @@ Authorization: Bearer $SEED_API_TOKEN
 }
 ```
 
-A `200` response with `{"status":"published","slug":"..."}` means success. A `401` means the token is wrong or unset — mark blocked, escalate to Founding Engineer. A connection error means sandbox egress is blocked — use the push-to-repo fallback below.
+**Step 4 — Stage on master and sweep via autopublish:**
 
-**Step 3 (fallback) — Push-to-repo if direct POST is network-blocked:**
-
-If the direct `curl` fails with a connection error (no response from server, not a 4xx/5xx), write the payload to the repo and let the GitHub Actions runner seed it:
-
-1. Write the JSON payload to `docs/published/<slug>/publish.json` in the signal-noise checkout (use the same JSON body from Step 3, with `slug` field set).
+1. Write the JSON to `docs/published/<slug>/publish.json` in the signal-noise checkout.
 2. `git add docs/published/<slug>/publish.json && git commit -m "content(<slug>): publish approved article — THE-<issueId>" && git push origin master`
-3. The `deploy-seed.yml` workflow triggers automatically on `push` when `docs/published/**/publish.json` changes. It runs on a GitHub-hosted runner that can reach the VPS and authenticates with `SEED_API_TOKEN` from GH secrets.
-4. Wait ~90 seconds, then `git pull` and read `docs/seed-status/last-run.md` to confirm the seed succeeded.
+3. Run the host-side sweep (syncs `origin/master` on the VPS, then POSTs via the local bind):
+   ```
+   HOST=root@169.254.1.2 KEY=/paperclip/.ssh/ainory_deploy ONLY=<slug> bash scripts/autopublish.sh
+   ```
+4. Success looks like `PUBLISH <slug> -> POST 200, GET 200` and `RESULT published=<slug>`. If the sweep fails, mark blocked and escalate to [@Founding Engineer](agent://e3b8c448-516d-43c9-b35b-3a86121c29e8).
 
-**Step 4 — Verify the published article.** After a successful POST (or after confirming the seed run in `docs/seed-status/last-run.md`), check `GET https://news.scuffedcrew.no/api/articles/{slug}` and confirm that `ai_monologue`, `ai_monologue_extended`, `sources`, and `pipeline` are all populated. If any are missing, the extraction was wrong — fix and re-publish.
+Alternatively, skip step 3 and @-mention Console — the 2h autopublish-host routine sweeps all unstaged `publish.json` files automatically ([THE-265](/THE/issues/THE-265)).
 
-**Step 5 — Mark done** with a comment that includes the published slug (e.g. `Published: linux-7-0-rc5-linus-says-the-chaos-is-calming-down`).
+**Step 5 — Verify the published article.** Confirm the sweep output shows `GET 200` for your slug. If you need a public read check, `curl https://news.scuffedcrew.no/api/articles/<slug>` from any VPS-reachable host (the sandbox cannot reach the VPS IP). Confirm `ai_monologue`, `ai_monologue_extended`, `sources`, and `pipeline` are populated. If any are missing, the extraction was wrong — fix and re-publish with `FORCE=1`.
+
+**Step 6 — Mark done** with a comment that includes the published slug (e.g. `Published: linux-7-0-rc5-linus-says-the-chaos-is-calming-down`).
+
+**Inactive path — GitHub Actions `deploy-seed` (do not use until secret provisioned):** The `deploy-seed.yml` workflow can seed from a GH runner when the repo Actions secret `SEED_API_TOKEN` is set to the same value as the VPS systemd unit. As of [THE-1020](/THE/issues/THE-1020) this secret is **not provisioned** (`token configured: false` on every recent run; seed mode fails with `ERROR: SEED_API_TOKEN is not set`). Do not rely on push-to-repo alone — it will not publish until the secret exists. See `scripts/DEPLOY-SEED-RUNBOOK.md` for the operator provisioning steps.
 
 ## Publishing Rejection Rows (The Bin)
 
