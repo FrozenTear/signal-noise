@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-13T07:47:19Z
+- when:    2026-07-13T07:51:57Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29233202040
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29233447017
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - chat-control-1-0-survives-parliament-9-jul-vote | Parliament Voted Against Chat Control. It Passed Anyway.
+   - the-1035-scraper-network-takedowns | The Feds Took Down Two Scraper Networks. The Scraping Continues.
    - the-1029-pixel-11-event-pricing-leak | Google Confirms August 12 Pixel 11 Event; Pricing Leaks Point to Memor
    - the-718-deflock-flock-trademark-cease-desist | A Hobbyist Mapped Flock's Surveillance Cameras. Then Flock Sent a Lawy
    - the-1028-hue-bridge-pro-firmware-brick-free-replacement | A Firmware Update Bricked the Hue Bridge Pro. Philips Is Replacing Uni
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-861-ice-tfm-app-287g-facial-recognition | ICE Planned Facial Recognition for 1,200 Local Police Forces. Eight Mo
    - the-809-fifty-years-of-fork-exec | Fifty Years of fork(). Somebody Finally Filed a Bug Report.
    - the-834-caltrans-permits-alpr-sb34-jurisdictional-gap | The Permits Were Caltrans's. The Cameras Were Border Patrol's. Califor
-   - the-813-cpp-documentary-40-years | C++: The Documentary Charts 40 Years of a Language That Refuses to Ret
-   - the-810-bundler-cooldown-supply-chain | Bundler 4.0.13 Adds a Waiting Period for New Gems
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
