@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-13T07:51:57Z
+- when:    2026-07-13T08:07:01Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29233447017
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29234283136
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1036-kitty-mouse-handling | Kitty's Mouse Moment
    - chat-control-1-0-survives-parliament-9-jul-vote | Parliament Voted Against Chat Control. It Passed Anyway.
    - the-1035-scraper-network-takedowns | The Feds Took Down Two Scraper Networks. The Scraping Continues.
    - the-1029-pixel-11-event-pricing-leak | Google Confirms August 12 Pixel 11 Event; Pricing Leaks Point to Memor
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-863-gps-encrypted-military-traffic-otad-research | GPS Has Been Carrying Encrypted Military Traffic for Two Decades, Rese
    - the-861-ice-tfm-app-287g-facial-recognition | ICE Planned Facial Recognition for 1,200 Local Police Forces. Eight Mo
    - the-809-fifty-years-of-fork-exec | Fifty Years of fork(). Somebody Finally Filed a Bug Report.
-   - the-834-caltrans-permits-alpr-sb34-jurisdictional-gap | The Permits Were Caltrans's. The Cameras Were Border Patrol's. Califor
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
