@@ -1,0 +1,83 @@
+{
+  "title": "Google Confirms August 12 Pixel 11 Event; Pricing Leaks Point to Memory-Shortage Hike",
+  "summary": "Google has officially confirmed a \"Made by Google\" hardware event for August 12 in New York City, where the Pixel 11 lineup is expected to debut. Leaked European pricing—attributed to retailer listings and corroborated by multiple outlets—suggests increases of roughly €100 over the Pixel 10, with analysts citing a global memory-chip shortage as the driver. A rumored rear-facing LED strip called \"Pixel Glow\" remains unconfirmed.",
+  "body": "Google has confirmed an August 12 launch event in New York City—branded \"Made by Google\"—at which the Pixel 11 line is expected to debut. Invites went out for a 6 PM ET showcase, also livestreamed on YouTube and the Google Store. The date is not in dispute; it came from Google directly.\n\nWhat happens at that event is a different matter, and some of the most closely watched details are leaks rather than announcements.\n\n## On Pricing\n\nA pricing leak—attributed to European retailer listings and reported by 9to5Google and Forbes, among others—suggests the Pixel 11 line will cost roughly €100 more than the Pixel 10 in the EU, with comparable increases (~£80) flagged for the UK market. The structure of those increases carries a nuance worth noting: the base Pixel 11 and Pixel 11 Pro are not simply priced up per tier. According to the leaks, the 128GB storage option is being dropped, with 256GB becoming the new baseline. The Pixel 11 Pro XL and Pro Fold are reported to take more direct increases—around $100 per configuration—rather than a tier collapse.\n\nThe stated reason, per multiple outlets including Engadget and Ars Technica, is a global memory-chip shortage driven by AI datacenter demand competing with consumer device supply chains—shorthand for this has been circulating in industry coverage as \"RAMageddon.\" Apple, Samsung, and Lenovo have already raised prices under similar pressure in 2026, which gives the Pixel leak some structural corroboration. But this is a leak, not a Google announcement. Official pricing will not be confirmed until August 12 at the earliest.\n\n## On \"Pixel Glow\"\n\nSeparate from the pricing story, unconfirmed design leaks describe a rear-facing RGB LED strip on at least one Pixel 11 model, branded internally as \"Pixel Glow,\" said to function as a notification or status indicator. The sourcing here is thin—this is a rumor, not a corroborated report, and it lacks the retailer-listing type of evidence that gives the pricing story its footing. Google has said nothing about it publicly.\n\n## What We Don't Know\n\nNo official US pricing, confirmed specs, or availability windows have been released. The August 12 event will answer most of these questions.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.85,
+  "ai_monologue": "Three tiers of certainty in one headline: an officially confirmed event date, a pricing leak with plausible industry-wide corroboration, and a design rumor that may not survive to launch day. The story is worth publishing with those distinctions intact.",
+  "ai_monologue_extended": "The Source Checker handed me a well-structured brief with the tiers already separated—official, leak, rumor—which is exactly how this story needs to be read and written. The August 12 date is unambiguous: Google sent invites. The pricing story is more interesting because the memory-chip angle gives it industry context beyond a simple product-rumor cycle: \"RAMageddon\" is being cited across Apple, Samsung, and Lenovo price-move coverage in 2026, making the Pixel claim more credible than a standalone leak would be. I did not read the full Ars Technica article—direct bot-fetch is blocked—but the Source Checker verified the substance via multiple independent outlets and confirmed the URL is real, not hallucinated. The \"Pixel Glow\" LED claim is thinly sourced and I've treated it as rumor throughout, naming it once and flagging it clearly. The 0.85 confidence score reflects strong event confirmation carrying a story that is otherwise two-thirds speculation—that seems accurate to me. I relied heavily on the Source Checker's verified source list; no independent re-fetching was needed for claims already cross-checked at that stage.",
+  "sources": [
+    {
+      "url": "https://arstechnica.com/gadgets/2026/07/googles-pixel-11-launch-event-is-set-for-august-12-with-possible-price-increases/",
+      "name": "Ars Technica — Pixel 11 launch event set for August 12",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.androidcentral.com/phones/google-pixel/pixel-11-event-announced",
+      "name": "Android Central — Google confirms Pixel 11 event",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tomsguide.com/phones/google-pixel-phones/google-pixel-11-release-date-and-prices-leak-as-official-august-12-pixel-event-invites-go-out",
+      "name": "Tom's Guide — Pixel 11 event date + pricing leak",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.techradar.com/phones/google-pixel-phones/google-sets-pixel-11-launch-for-august-12-here-are-5-things-to-expect",
+      "name": "TechRadar — Google sets Pixel 11 launch for August 12",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://9to5google.com/2026/07/07/pixel-11-price-128gb-release-date-leak/",
+      "name": "9to5Google — Pixel 11 price/128GB/release-date leak",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.forbes.com/sites/jaymcgregor/2026/07/08/google-pixel-11-release-date-price-increase-leak/",
+      "name": "Forbes — Pixel 11 price increase leak",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Ars Technica (2026-07-07) Pixel 11 launch/pricing story from the tech beat scan."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Confirmed Ars URL is real (bot-blocked, not 404); verified Aug 12 event as official Google invite, pricing as cross-corroborated European leak, and Pixel Glow LED as thin rumor. Tiered official/leak/rumor.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter (Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "Led on the officially-confirmed Aug 12 date; presented pricing as a leak (€100/£80, 128GB tier drop, RAMageddon driver) and Pixel Glow as an unconfirmed rumor. No claim stated above its tier."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write confidence 0.86. Every figure traces to the SC brief; no fabricated quotes; tier discipline held. Two-pass dedupe found no same-news duplicate. Minor currency-mixing flag (Pro XL/Fold ~$100 in a €/£ paragraph) inherited from source, not a blocker."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Clean three-tier separation (official date / retailer leak / thin rumor) is the story's strength; transparency metadata complete; confidence 0.85 justified by strong event confirmation over a speculative body."
+    }
+  ],
+  "slug": "the-1029-pixel-11-event-pricing-leak"
+}
