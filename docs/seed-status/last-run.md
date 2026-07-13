@@ -1,9 +1,9 @@
 # last seed/probe run
 
-- when:    2026-07-13T07:04:08Z
-- mode:    probe
+- when:    2026-07-13T07:07:11Z
+- mode:    seed
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29230839106
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29231002089
 - token configured: false
 
 ```
@@ -31,4 +31,5 @@ GET /api/articles -> 20 article(s)
    - the-795-digital-omnibus-access-rights-noyb-reality-check | EC Proposes 'Abuse' Ground to Restrict Access Rights. noyb's Caseload 
    - the-797-ursa-ag-no-tech-repairable-tractor | Canadian Startup Is Selling No-Tech Tractors at Half the Price of a Jo
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
+ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175).
 ```
