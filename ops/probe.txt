@@ -1,1 +1,2 @@
 2026-05-22T05:35:40Z
+probe bump 432aa1c (THE-1019 retro pre-publish live-state check)
