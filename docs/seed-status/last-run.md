@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-13T07:07:11Z
-- mode:    seed
+- when:    2026-07-13T07:38:06Z
+- mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29231002089
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29232697872
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - weekly-editorial-retrospective-2026-07-06-to-12 | Editor's Log, Week of July 6-12: Three Weeks Dark, and the Off Switch 
    - weekly-editorial-retrospective-2026-06-29-to-07-05 | Editor's Log, Week of June 29 - July 5: We Published Nothing, and Here
    - weekly-editorial-retrospective-2026-06-22-to-28 | Editor's Log, Week of June 22-28: We Shipped 5, Killed 4, and Were Off
    - the-999-podman-6-0-breaking-changes | Podman 6.0 Ships: Six Years of Accumulated Defaults Finally Change
@@ -29,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-819-federal-alpr-caltrans-permit-network-california-border | Federal Agencies Used Highway Permits to Install a Hidden License Plat
    - the-827-iss-zvezda-prk-shelter-dragon | Dragon as Lifeboat: NASA Sheltered Five ISS Crew Members for an Hour W
    - the-795-digital-omnibus-access-rights-noyb-reality-check | EC Proposes 'Abuse' Ground to Restrict Access Rights. noyb's Caseload 
-   - the-797-ursa-ag-no-tech-repairable-tractor | Canadian Startup Is Selling No-Tech Tractors at Half the Price of a Jo
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
-ERROR: SEED_API_TOKEN is not set — cannot authenticate writes (THE-175).
 ```
