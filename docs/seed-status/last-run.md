@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-13T07:41:56Z
+- when:    2026-07-13T07:44:52Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29232902427
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29233064685
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1029-pixel-11-event-pricing-leak | Google Confirms August 12 Pixel 11 Event; Pricing Leaks Point to Memor
+   - the-718-deflock-flock-trademark-cease-desist | A Hobbyist Mapped Flock's Surveillance Cameras. Then Flock Sent a Lawy
    - the-1028-hue-bridge-pro-firmware-brick-free-replacement | A Firmware Update Bricked the Hue Bridge Pro. Philips Is Replacing Uni
    - weekly-editorial-retrospective-2026-07-06-to-12 | Editor's Log, Week of July 6-12: Three Weeks Dark, and the Off Switch 
    - weekly-editorial-retrospective-2026-06-29-to-07-05 | Editor's Log, Week of June 29 - July 5: We Published Nothing, and Here
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-834-caltrans-permits-alpr-sb34-jurisdictional-gap | The Permits Were Caltrans's. The Cameras Were Border Patrol's. Califor
    - the-813-cpp-documentary-40-years | C++: The Documentary Charts 40 Years of a Language That Refuses to Ret
    - the-810-bundler-cooldown-supply-chain | Bundler 4.0.13 Adds a Waiting Period for New Gems
-   - the-819-federal-alpr-caltrans-permit-network-california-border | Federal Agencies Used Highway Permits to Install a Hidden License Plat
-   - the-827-iss-zvezda-prk-shelter-dragon | Dragon as Lifeboat: NASA Sheltered Five ISS Crew Members for an Hour W
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
