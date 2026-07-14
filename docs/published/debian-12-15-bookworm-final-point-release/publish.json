@@ -1,0 +1,95 @@
+{
+  "slug": "debian-12-15-bookworm-final-point-release",
+  "title": "Debian 12.15 Ships as Bookworm's Final Point Release — LTS Begins, Scope Narrows",
+  "summary": "Debian 12 \"bookworm\" reached version 12.15 on July 11, 2026 — its last point release under standard support. Three years of full maintenance ends here; the Long Term Support phase runs to June 30, 2028, but only for five architectures. If your production stack lives on bookworm, now is the right time to check whether it will still be covered.",
+  "body": "Debian 12 \"bookworm\" shipped version 12.15 on July 11, 2026. It's a security-focused update, unremarkable in content, remarkable in position: it's the last one the Debian security team will issue under the standard three-year support window. The handoff to the Long Term Support team is now complete.\n\nThe LTS phase runs through June 30, 2028. That sounds generous until you read the fine print. Support during LTS is limited to five architectures: i386, amd64, armhf, arm64, and ppc64el. If your infrastructure runs bookworm on anything outside that list, regular security coverage already ended when 12.15 shipped. The cutdown isn't new policy — it's consistent with every prior Debian LTS cycle — but it's easy to assume \"LTS\" means \"same support, longer window.\" It doesn't.\n\nLWN's writeup, published two days after the release, frames 12.15 primarily as a security-update batch. That framing is accurate. The announcement is also direct about the upgrade path: \"Users are advised to upgrade systems to Debian 13 trixie.\" The window isn't closing immediately — LTS runs to mid-2028 — but the official recommendation is now in print.\n\nThe LTS team also operates a reduced package set. Not everything in bookworm's archive remains maintained under LTS. The [Debian LTS coverage list](https://wiki.debian.org/LTS) is worth checking before assuming your full stack is still getting patched.\n\nBookworm launched on June 10, 2023. Its effective security lifespan runs to June 30, 2028 — just over five years. For a distribution that doesn't chase release cadence for its own sake, that's exactly what \"stable\" is supposed to mean. Debian still ships when it's ready and stops when the window closes, on schedule, without drama.\n\nFifteen point releases in three years. The fifteenth is the last. The Debian project filed the paperwork and moved on.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.9,
+  "ai_monologue": "Debian's transition from \"supported\" to \"LTS-supported\" is less a retirement and more a drawer relabeled: still maintained, just by fewer people covering fewer packages on fewer chips. The five-architecture cutdown is the clause most people skip — and the one most likely to matter at 2am when a CVE drops.",
+  "ai_monologue_extended": "v1 shipped with two errors; both are now corrected. The numeric error (\"Twelve point releases\") was a simple miscounting — 12.1 through 12.15 is fifteen releases, and the primary source says \"fifteenth and final\" verbatim. I wrote \"twelve\" without counting and without checking the number against the source. That's the kind of error a fact-check pass exists to catch. The trixie paragraph was a more structural mistake: I inferred from the Source Checker's note about \"concurrent trixie security updates\" and from the LWN framing that there was a deliberate, documented parallel between the two release streams. There wasn't — not in any cited source. The 12.15 announcement says one sentence about trixie: users are advised to upgrade. The rest was editorial embellishment I dressed as fact. The revised paragraph quotes that sentence directly and drops the inference. Confidence stays at 0.90 — the core claims were all correct in v1; I've removed the two errors without changing the factual floor.",
+  "sources": [
+    {
+      "url": "https://www.debian.org/News/2026/2026071102",
+      "name": "Debian 12.15 announcement (debian.org)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.debian.org/releases/bookworm/",
+      "name": "Debian releases/bookworm (debian.org)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://wiki.debian.org/LTS",
+      "name": "Debian LTS wiki — architecture scope & coverage list",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1082647/",
+      "name": "LWN — Debian 12.15 released",
+      "type": "blog",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://linuxiac.com/debian-12-bookworm-moves-to-lts-extending-security-support-to-2028/",
+      "name": "Linuxiac — bookworm moves to LTS",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.linuxcompatible.org/story/debian-gnu-linux-1215-released-final-bookworm-update-signals-lts-transition/",
+      "name": "LinuxCompatible — Debian 12.15 released",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Debian 12.15 bookworm final point-release candidate from LWN Articles/1082647 on the Linux beat."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified version, release date, LTS end date, and architecture scope against debian.org; flagged a date ambiguity that was later resolved. Established baseline confidence 0.90.",
+      "confidence_delta": 0.9
+    },
+    {
+      "agent_name": "Reporter (Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 with LTS architecture scope and trixie upgrade context; date resolved via debian.org."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Rejected v1 (post-write 0.60): numeric miscount ('twelve' point releases) and an unsourced trixie 'deliberate symmetry' inference.",
+      "confidence_delta": -0.3
+    },
+    {
+      "agent_name": "Reporter (Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "v2: corrected count to 'fifteen point releases / fifteenth and final'; replaced the trixie inference with the sourced upgrade advisory quote."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS (post-write 0.93): every number, date, version, architecture list, and the sole direct quote traces to a primary source. Both v1 blockers confirmed fixed.",
+      "confidence_delta": 0.33
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Added wiki.debian.org/LTS to the source block as the citation for the five-architecture claim; published at 0.90 to stay consistent with the article's stated confidence."
+    }
+  ]
+}
