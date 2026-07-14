@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-14T06:24:51Z
+- when:    2026-07-14T06:26:02Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311270713
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311328714
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1053-nous-research-1-5b-valuation | Nous Research in talks to raise $75M at reported $1.5B valuation as He
    - the-1036-kitty-mouse-handling | Kitty's Mouse Moment
    - chat-control-1-0-survives-parliament-9-jul-vote | Parliament Voted Against Chat Control. It Passed Anyway.
    - the-1035-scraper-network-takedowns | The Feds Took Down Two Scraper Networks. The Scraping Continues.
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-857-final-fantasy-vii-revelation-multiplatform-launch | Square Enix Ends PlayStation Exclusivity Window With Final Fantasy VII
    - the-863-gps-encrypted-military-traffic-otad-research | GPS Has Been Carrying Encrypted Military Traffic for Two Decades, Rese
    - the-861-ice-tfm-app-287g-facial-recognition | ICE Planned Facial Recognition for 1,200 Local Police Forces. Eight Mo
-   - the-809-fifty-years-of-fork-exec | Fifty Years of fork(). Somebody Finally Filed a Bug Report.
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
