@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-14T06:37:38Z
+- when:    2026-07-14T06:40:50Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311923536
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29312078966
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1051-apple-sues-openai-trade-secret-theft | Apple Sues OpenAI, Alleging Former Employee Exploited Authentication B
    - the-1056-eu-parliament-media-literacy-strategy | EU Parliament Adopts Media Literacy Strategy Calling for Algorithm Tra
    - the-1054-eu-expert-panel-age-gated-social-media-minors | EU Expert Panel Recommends Age-Gated Access to "Social Media Plus" for
    - the-1055-lapd-flock-contract-expires | LAPD Lets Flock Safety Contract Expire Over Civil Liberties Concerns
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-999-podman-6-0-breaking-changes | Podman 6.0 Ships: Six Years of Accumulated Defaults Finally Change
    - the-1003-polestar-us-ban-volvo-spared-connected-vehicle | Polestar Loses US Market Access Under Connected Vehicle Rule While Gee
    - the-1001-windows-10-esu-extended-october-2027 | Microsoft Extends Free Windows 10 Security Updates Through October 202
-   - the-1000-allocation-tokens-linux-7-2-slab-hardening | The Kernel Bets on Both Fronts: Allocation Tokens in Linux 7.2
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
