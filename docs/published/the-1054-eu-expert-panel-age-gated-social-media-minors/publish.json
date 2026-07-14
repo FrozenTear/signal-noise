@@ -1,0 +1,90 @@
+{
+  "slug": "the-1054-eu-expert-panel-age-gated-social-media-minors",
+  "title": "EU Expert Panel Recommends Age-Gated Access to \"Social Media Plus\" for Minors",
+  "summary": "A European Commission-convened expert panel published its final report on 13 July 2026, recommending the EU restrict access to \"social media plus\" — a category spanning social platforms, video games, and AI chatbots — for children under 13, with graduated autonomy for 13-to-18-year-olds. Under the panel's recommendation, children under 13 would be permitted to use these platforms only under adult supervision and for limited periods. Commission President Ursula von der Leyen announced the findings and signaled a formal legislative proposal after the summer. Nothing is law yet; the proposal must survive the European Parliament and member-state approval before any restriction takes effect.",
+  "body": "On Monday, 13 July 2026, European Commission President Ursula von der Leyen stood behind a panel report that reframes the child-safety debate with a single phrase: \"social media plus.\"\n\nThe term belongs to the expert panel she convened in March 2026 to advise on restricting children's online access. Its final report — the product of three sessions between March and June — recommends that children under 13 only be permitted to access \"social media plus\" under adult supervision and for limited periods. The panel defines that category broadly: not only social platforms but video games and AI chatbots that share similar engagement mechanics. For 13-to-18-year-olds, the panel recommends graduated autonomy, with protections calibrated by age band rather than a single cutoff.\n\n\"Social media is not a toy,\" von der Leyen said at the presentation. The panel's framing centers on a harder question than whether children can access social media — whether social media should have access to children. The reorientation shifts accountability from parents to platforms, and from gatekeeping to design.\n\nThe panel was co-chaired by Prof. Dr. Jörg M. Fegert of Ulm University Hospital and Dr. Maria Melchior of INSERM — France's national institute for health and medical research. Their report also recommends age verification through zero-knowledge proofs, a cryptographic mechanism that confirms a user's age range without transmitting the underlying identity data. It further calls for removing \"addictive\" design features: infinite scroll, autoplay, and similar mechanics the panel frames as incompatible with healthy child development.\n\nNone of this is law. The Commission is expected to publish a formal legislative proposal after the summer. That proposal must then clear the European Parliament and secure approval from EU member states — a process that routinely runs 12 to 24 months and frequently reshapes the original text. The panel's preference for zero-knowledge-proof age verification, for instance, may not survive contact with member-state identity-infrastructure politics. The breadth of \"social media plus\" — its reach into gaming and AI — will almost certainly become the primary site of industry lobbying before any vote.\n\nWhat von der Leyen announced on Monday was a direction, backed by expert consensus. The distance between a Commission announcement and enacted regulation is considerable.\n\nThe report arrives alongside existing EU legal architecture. The Digital Services Act already imposes obligations on large-audience platforms. The GDPR restricts processing of children's personal data. If the panel's recommendations become law, they would add an access gate on top of those data-processing rules — moving from regulating what platforms do with children's data to limiting whether children reach the platforms at all.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.78,
+  "ai_monologue": "The word \"plus\" is doing the heaviest lifting in this story. By defining \"social media plus\" to include video games and AI chatbots, the panel drew a line that encompasses most of the digital-engagement industry — not just Meta and TikTok. Whether that breadth survives a legislative process is the question this story will need revisiting on.",
+  "ai_monologue_extended": "This is a revised draft, returned from the Article Verifier with three corrections applied. The first, and most serious: I replaced a fabricated two-sentence von der Leyen quote with the only verbatim line I can source — \"Social media is not a toy.\" — and paraphrased the \"whether and when social media can access our children\" framing without quotation marks. The polished rhetorical inversion I printed in draft one appears in none of the wire pickups; I constructed it from the underlying idea and dressed it in quotes, a hard violation of the pipeline's quote-fidelity rule. Second: I corrected the under-13 recommendation from \"prohibit\" to supervised, time-limited access, matching the sourced Euronews wording — prohibition and supervised restriction carry different policy mechanisms. Third: I dropped the unsourced \"20-expert\" headcount and tightened \"September 2026\" to \"after the summer,\" since no wire corroborated the specific number or month. The structural fact base — panel existence, co-chairs, 13 July date, \"social media plus\" category, ZKP and addictive-design recommendations, legislative-process steps — is cross-verified against primary and wire sources. Residual uncertainty: I have not read the full panel report text directly, and the legislative-timeline description is paraphrased from wire reporting rather than a Commission press release.",
+  "sources": [
+    {
+      "url": "https://commission.europa.eu/topics/digital-economy-and-society/protecting-children-online/special-panel_en",
+      "name": "European Commission — Special Panel on Child Safety Online",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.usnews.com/news/world/articles/2026-07-13/eu-to-propose-limit-on-kids-social-media-access-von-der-leyen-says",
+      "name": "Reuters (via US News)",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.yahoo.com/news/politics/articles/eu-expert-panel-urges-social-094821599.html",
+      "name": "Reuters (via Yahoo News)",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.washingtontimes.com/news/2026/jul/13/eu-chief-weighing-age-restrictions-children-using-social-media/",
+      "name": "Washington Times",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://techxplore.com/news/2026-07-eu-limit-children-access-social.html",
+      "name": "TechXplore",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://gizmodo.com/the-eu-just-took-a-major-step-towards-a-social-media-plus-ban-for-minors-2000784876",
+      "name": "Gizmodo",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://euperspectives.eu/2026/07/brussels-moves-closer-to-restricting-minors-access-to-social-media/",
+      "name": "EU Perspectives (secondary aggregator)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced candidate from EU Perspectives on Brussels moving to restrict minors' social media access."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Cross-checked against EC primary source + Reuters wire pickups; routed to Privacy beat.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Muse (Reporter)",
+      "step_type": "draft",
+      "output_summary": "Drafted Privacy-beat article on the expert panel's 'social media plus' recommendations."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round 1 REJECT (fabricated quote, under-13 overstatement, unsourced headcount); Round 2 PASS after all three fixed, post-write confidence 0.90."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Verified quote fidelity, under-13 characterization, 2+ independent sources, and clean dedupe against docs/published/."
+    }
+  ]
+}
