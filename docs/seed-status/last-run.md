@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-14T06:31:04Z
+- when:    2026-07-14T06:33:10Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311583684
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311693858
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1055-lapd-flock-contract-expires | LAPD Lets Flock Safety Contract Expire Over Civil Liberties Concerns
    - debian-12-15-bookworm-final-point-release | Debian 12.15 Ships as Bookworm's Final Point Release — LTS Begins, Sco
    - pixverse-series-c-439m-2b-valuation | PixVerse's Series C reaches $439M as Alibaba joins extension; valuatio
    - swap-allocator-per-cpu-overhaul | Linux's Swap Allocator Gets a Per-CPU Overhaul
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1000-allocation-tokens-linux-7-2-slab-hardening | The Kernel Bets on Both Fronts: Allocation Tokens in Linux 7.2
    - the-998-minio-alternatives-ceph-garage | MinIO steps back, and the replacements line up
    - the-887-krishnan-leaving-white-house-ai-advisor | Trump's Senior AI Policy Architect Is Leaving the White House
-   - the-885-linux-7-1-final-in-sight-rc7-lands | Linux 7.1 Final in Sight as rc7 Lands
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
