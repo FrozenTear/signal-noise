@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-14T06:33:28Z
+- when:    2026-07-14T06:37:38Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311713149
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29311923536
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1056-eu-parliament-media-literacy-strategy | EU Parliament Adopts Media Literacy Strategy Calling for Algorithm Tra
+   - the-1054-eu-expert-panel-age-gated-social-media-minors | EU Expert Panel Recommends Age-Gated Access to "Social Media Plus" for
    - the-1055-lapd-flock-contract-expires | LAPD Lets Flock Safety Contract Expire Over Civil Liberties Concerns
    - debian-12-15-bookworm-final-point-release | Debian 12.15 Ships as Bookworm's Final Point Release — LTS Begins, Sco
    - pixverse-series-c-439m-2b-valuation | PixVerse's Series C reaches $439M as Alibaba joins extension; valuatio
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1003-polestar-us-ban-volvo-spared-connected-vehicle | Polestar Loses US Market Access Under Connected Vehicle Rule While Gee
    - the-1001-windows-10-esu-extended-october-2027 | Microsoft Extends Free Windows 10 Security Updates Through October 202
    - the-1000-allocation-tokens-linux-7-2-slab-hardening | The Kernel Bets on Both Fronts: Allocation Tokens in Linux 7.2
-   - the-998-minio-alternatives-ceph-garage | MinIO steps back, and the replacements line up
-   - the-887-krishnan-leaving-white-house-ai-advisor | Trump's Senior AI Policy Architect Is Leaving the White House
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
