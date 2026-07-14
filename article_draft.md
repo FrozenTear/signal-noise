@@ -19,7 +19,7 @@ That is not an education metaphor. It describes a technical infrastructure — a
 
 **The DSA transparency gap**
 
-The Digital Services Act has been binding on very large online platforms since February 2023. Among its obligations: platforms must disclose how their recommender algorithms function — what signals they use, what content they amplify, and how users can opt into ranking that does not rely on behavioral profiling. Meta, TikTok, Google, and X have filed the required transparency reports. The reports are public. Whether an ordinary user can navigate them is a different question, and the answer, as documented by the European Parliamentary Research Service in its 2025 background briefing on media literacy, is mostly no.
+The Digital Services Act has been binding on very large online platforms since August 2023, following their designation by the Commission that April. Among its obligations: platforms must disclose how their recommender algorithms function — what signals they use, what content they amplify, and how users can opt into ranking that does not rely on behavioral profiling. Meta, TikTok, Google, and X have filed the required transparency reports. The reports are public. Whether an ordinary user can navigate them is a different question, and the answer, as documented by the European Parliamentary Research Service in its 2025 background briefing on media literacy, is mostly no.
 
 Ros Sempere's report calls for that to change. The specific demands include: mandatory disclosure of algorithmic content decisions in formats accessible to non-specialist users; clear labeling of AI-generated content visible at the point of encounter rather than buried in terms of service; and disclosure of influencer monetization relationships at the moment of exposure rather than in separate disclosure documents. These go beyond current DSA obligations. They describe a version of algorithmic transparency designed to be used.
 
@@ -55,18 +55,20 @@ The Source Checker handed this to me as a privacy beat story with a flag: if it 
 
 The EU Perspectives Q&A was reachable and verified genuine (200 OK). The EP plenary adoption on 7 July 2026 is corroborated by the Renew Europe group statement independently verified by the Source Checker. The DSA recommender transparency provisions and AI Act content labeling obligations I reference are legislative texts I know directly; if the Article Verifier wants confirmation, the relevant DSA provisions are Articles 27 and 38 for very large platforms.
 
-One constraint: I could not independently verify the specific EP plenary vote tally beyond the Source Checker's corroborated sources. I stated the vote occurred without a number. The Commission's planned strategy is flagged as unpublished because I found no publication date in available sources. Confidence is 0.92 inherited from the Source Checker with no downgrade from my own read — the EP primary source is solid, the quotes are confirmed, and the EU legal framework framing is verifiable against the legislative texts.
+One constraint: I could not independently verify the specific EP plenary vote tally beyond the Source Checker's corroborated sources. I stated the vote occurred without a number. The Commission's planned strategy is flagged as unpublished because I found no publication date in available sources.
+
+**Round 2 corrections (Article Verifier returned):** Two mechanical errors fixed — (1) DSA VLOP compliance date corrected from "February 2023" to "August 2023, following designation that April" (Feb 2023 was only the user-count publication deadline; the actual compliance date for designated VLOPs was 25 August 2023); (2) Ros Sempere's MEP profile ID corrected from 197906 to 204413. Both errors were in stated-as-fact positions. Everything else verified clean on first pass.
 
 ## Confidence Score
 
-**0.92** — Inherited from Source Checker. Core claim (EP adopted the report on 7 July 2026; Ros Sempere's direct quotes) corroborated by primary EP source and Renew Europe independent statement. DSA/AI Act transparency provisions referenced from legislative texts. No downgrade from reporter review. Residual uncertainty: EP vote tally not independently confirmed in this run; Commission strategy publication date unknown.
+**0.88** — Core claims verified: quotes verbatim, EP adoption 7 July 2026 confirmed via procedure 2025/2181(INI) (IFLA + EU Agenda), affiliation/rapporteur role correct, beat fit concurred. Downgraded from 0.92 for two corrected stated-as-fact errors (DSA date, MEP URL). Residual uncertainty: EP vote tally not independently confirmed; Commission strategy publication date unknown.
 
 ## Source Block
 
 | Source | URL | Type | Paywall | Verification |
 |---|---|---|---|---|
 | EU Perspectives — Ros Sempere Q&A interview | https://euperspectives.eu/2026/07/media-literacy-is-now-as-important-as-learning-to-read-and-write/ | Wire/interview | Free | ✅ 200 OK, genuine article |
-| europarl.europa.eu — Ros Sempere MEP profile | https://www.europarl.europa.eu/meps/en/197906/MARCOS_ROS+SEMPERE_home.html | Primary | Free | ✅ Rapporteur identity confirmed |
+| europarl.europa.eu — Ros Sempere MEP profile | https://www.europarl.europa.eu/meps/en/204413/MARCOS_ROS+SEMPERE/ | Primary | Free | ✅ Rapporteur identity confirmed |
 | EPRS briefing PE 772886 (2025) | https://www.europarl.europa.eu/thinktank/en/document/EPRS_BRI(2025)772886 | Primary/institutional | Free | ✅ Media literacy as basic competence; EU policy framing |
 | Renew Europe statement 2026-07-07 | https://www.reneweuropegroup.eu/news/2026-07-07/media-literacy-strengthens-europes-democratic-resilience | Independent (political group) | Free | ✅ Plenary adoption 7 July 2026 confirmed |
 | IFLA statement on EP report | https://www.ifla.org/news/draft-european-parliament-report-highlights-role-of-libraries-in-media-literacy-and-digital-learning/ | Independent | Free | ✅ Report contents corroborated |
