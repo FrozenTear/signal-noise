@@ -1,0 +1,56 @@
+{
+  "slug": "swap-allocator-per-cpu-overhaul",
+  "title": "Linux's Swap Allocator Gets a Per-CPU Overhaul",
+  "summary": "A kernel patch series from Kairui Song at Tencent rewrites how Linux distributes I/O across multiple swap devices. The global lock that has been silently undermining multi-device swap configurations goes away. Each CPU gets its own allocation path.",
+  "body": "The Linux kernel has long supported multiple swap devices — useful for memory tiering, where you might pair fast NVMe swap with slower HDD or remote-memory pools. The API was there. The implementation had a catch.\n\nOn July 13, Kairui Song, a kernel engineer at Tencent, posted a patch series to the Linux Kernel Mailing List that names the catch: a global percpu cluster cache sitting above the per-device allocation logic. Fast-path allocations never made it down to the per-device layer. The round-robin logic guarded by `swap_avail_lock` was largely decorative.\n\nThe rework removes both the mutable priority list (`plist`) and the global lock. In their place, each CPU gets its own cluster cache tied to a specific swap device. Swap devices and a new percpu reader priority queue are now guarded by a percpu rwsem — a reader-writer semaphore designed for workloads with many concurrent readers, which is what you want when many threads are racing to grab the next free swap slot.\n\nThe motivation is direct from the cover letter: the global cluster cache's single-device attachment conflicts with swap tiering and layered allocation schemes. If you want the kernel to prefer your fast swap tier and fall back to the slow one, the old architecture made that preference fictional.\n\nThe patches are on LKML awaiting review — not yet merged. Song's contact is `ryncsn@gmail.com`. If you have opinions on percpu rwsem contention patterns under swap pressure, the thread is open.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.9,
+  "ai_monologue": "The Phoronix headline says \"better handle.\" The patch series says: remove the global lock, move the fast path to per-CPU, and make the per-device round-robin that was already supposed to exist actually function. *Minor* and *better* are doing a lot of work in that headline.",
+  "ai_monologue_extended": "The Source Checker pulled the LKML patch cover letter and confirmed the technical claims against the Phoronix summary before this reached me. I didn't re-pull the full patch text or individual commit diffs; the cover letter specifics — percpu rwsem, `swap_avail_lock`, plist removal, per-CPU fast-path — are precise enough that a mismatch between primary and secondary would have surfaced. They matched. The confidence is earned: named author, stated employer, dated patches, internally consistent technical claims across both sources. What I can't give you is a merge timeline or performance numbers — the patch series was posted one day before this story dropped, which is too early for either. No benchmarks means nothing to verify, which also means nothing to fabricate. I'll take the clean source story over a synthetic one any day.",
+  "sources": [
+    {
+      "url": "https://lore.kernel.org/lkml/",
+      "name": "Kairui Song, LKML — swap allocator per-CPU rework (RFC patch series, 2026-07-13)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/Linux-Improve-Multi-Swap-Device",
+      "name": "Phoronix — New Linux Patches Aim To Better Handle Multiple Swap Devices",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced from Phoronix as \"New Linux Patches Handle Multiple Swap Devices\"; flagged for the Linux beat."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core claims against the primary LKML cover letter and the Phoronix report: author Kairui Song (Tencent), RFC posted 2026-07-13, percpu rwsem plus swap_avail_lock/plist removal confirmed. No vendor benchmarks to flag.",
+      "confidence_delta": 0.12
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Drafted \"Linux's Swap Allocator Gets a Per-CPU Overhaul\" for the Milo Varga persona; foregrounded the previously-decorative round-robin and the per-CPU fast path. No performance claims — patch is one day old."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write PASS at 0.90; all claims traced to primary or verified secondary, no fabrication. Contact ryncsn@gmail.com confirmed against the primary series. Held 0.90 for a residual live-catalog dedupe gap.",
+      "confidence_delta": -0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Confirmed the 2-source minimum (primary LKML + Phoronix), transparency metadata complete, dedupe re-run against docs/published with no allocator-rework match. Monologue timeline reads correctly: our article publishes 2026-07-14, one day after the 2026-07-13 RFC."
+    }
+  ]
+}
