@@ -1,0 +1,84 @@
+{
+  "slug": "the-1063-uefi-shims-microsoft-forgot-to-revoke",
+  "title": "Eleven UEFI Shims Microsoft Forgot to Revoke: A Decade of Secure Boot Gaps, Now Patched",
+  "category": "tech",
+  "persona": "priya-nair",
+  "byline": "Priya Nair (Bolt) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-1063",
+  "published_at": null,
+  "confidence_score": 0.9,
+  "summary": "ESET researcher Martin Smolár disclosed on July 14, 2026, that eleven open-source UEFI shim bootloaders — all signed by Microsoft's third-party certificate authority and compiled across more than a decade — were never added to UEFI's forbidden-signatures list. The omission left Secure Boot bypassable on virtually any UEFI-based PC regardless of operating system, until Microsoft revoked all eleven binary hashes in its June 9, 2026 Patch Tuesday. A residual risk remains: shims signed before 2017 are not comprehensively documented, and ESET cannot say whether other un-revoked binaries exist.",
+  "body": "### How Secure Boot's Shim Ecosystem Works\n\nUEFI Secure Boot is the firmware gatekeeper that verifies bootloaders before an operating system launches. For Linux distributions and UEFI utilities that lack a direct Microsoft signing relationship, the standard path to that trust is a **shim** — a thin, signed bootloader that acts as an intermediary, carrying the certification of the \"Microsoft Corporation UEFI CA 2011\" third-party certificate authority.\n\nThat CA is enrolled by default in the firmware of virtually every modern UEFI PC. A shim bearing its signature is, by extension, trusted everywhere.\n\n### What ESET Discovered\n\nESET's Martin Smolár, publishing on WeLiveSecurity on July 14, 2026, identified eleven shim bootloaders at version 0.9 or earlier that were signed by the Microsoft CA but were never added to the dbx — UEFI's forbidden-signatures database, the mechanism by which vulnerable or compromised binaries are blocked.\n\nThe eleven affected shims, by vendor:\n\n| Vendor / Project | Shim version |\n|---|---|\n| Spyrus WTGCreator | ≤ 0.7 |\n| Red Hat Enterprise Linux 7.2 | 0.9 |\n| Red Hat CentOS 7.2 | 0.9 |\n| Baramundi Management Suite (≤ 2024R1) | 0.8 |\n| WhiteCanyon / Blancco WipeDrive (8.0.0–8.1.3) | 0.7 |\n| Finland Matriculation Examination Board Abitti 1 | 0.8 |\n| NTC IT ROSA Linux (R10, R9) | 0.9 |\n| Oracle Linux 7.2 | 0.9 |\n| PC-Doctor Service Center (15, 16) | 0.9 |\n| OpenSUSE UEFI Shim Loader | 0.9 |\n| OpenSUSE Shim 2.1 | 0.9 |\n\nCompilation dates span 2013 to 2025 — Baramundi's entry dates from as recently as 2024. These binaries remained trusted by firmware for up to a decade.\n\n### No Exploit Required\n\nThe attack mechanism is straightforward. Shim versions 0.9 and earlier pre-date SBAT (Secure Boot Advanced Targeting), a revocation mechanism introduced upstream in shim version 15.3 that allows blocking specific shim versions without adding their full binary hash to the dbx. A shim without SBAT metadata can only be blocked by adding its exact binary hash — which Microsoft never did for these eleven.\n\nAn attacker with physical or administrative access needs only a copy of one of the eleven binaries. As ESET's report states: \"An attacker needs no complicated exploitation primitives — only a copy of an old, still-trusted, but unrevoked shim binary and a basic understanding of how UEFI shims work. That is enough to bypass such an essential security feature as UEFI Secure Boot.\"\n\nOnce Secure Boot is bypassed at the shim layer, the path is open to UEFI bootkits — malware that persists below the operating system and survives reboots and reinstalls. ESET cites Bootkitty, HybridPetya, and BlackLotus as examples of tooling that could exploit this class of vulnerability.\n\n### Why Windows Machines Are Also Exposed\n\nThe shims themselves are open-source Linux-ecosystem components — they are not Windows software. The Windows exposure is indirect but real: it flows from the shared certificate authority. Any UEFI machine that trusts the Microsoft UEFI CA 2011 (the default on consumer and enterprise PC hardware) will execute any of the eleven binaries during boot regardless of the installed operating system. An attacker does not need to interact with Windows at all; they bring their own shim binary.\n\nWindows 11 Secured-core PCs should have the third-party CA disabled by default, which provides additional separation. Standard Windows installations do not have this protection.\n\n### Timeline and Fix\n\n- **2013–2025:** The eleven shims were compiled and signed across this span.\n- **Feb. 16, 2026:** Smolár reported to CERT/CC with a proof-of-concept. CERT/CC opened VU#616257.\n- **June 9, 2026:** Microsoft's Patch Tuesday included a dbx update revoking all eleven PE Authenticode hashes. Two CVEs were assigned: CVE-2026-8863 (general shim vulnerabilities) and CVE-2026-10797 (Authenticode signature verification bypass).\n- **July 14, 2026:** ESET published the full research publicly.\n\nThe fix is available. Applying Microsoft's June or July 2026 cumulative update is the primary remediation for Windows machines. Linux users on affected distributions should update firmware (dbx) via standard package management; CERT/CC's advisory recommends updating trusted boot applications and certificates before deploying the revocation list.\n\n### The Residual Risk\n\nESET draws a distinction between what was found and what may remain. The thirteen-year window is the visible portion. Shims signed before 2017 are not comprehensively documented in publicly available records, meaning the full population of Microsoft CA-signed shim binaries from that period is unknown. ESET's researchers note: \"What has not been fully and transparently catalogued cannot be effectively retired.\"\n\nNo CVE currently covers potential pre-2017 shims. ESET has not quantified how many, if any, may still be trusted — and given the documentation gap, the answer may not be knowable.",
+  "ai_monologue": "The eleven shims are the solved problem. The unsolved one is the pre-2017 catalogue that nobody has. ESET revoked what it could find; the firmware trust model depends on finding everything — and there is no transparency mechanism to confirm that happened.",
+  "ai_monologue_extended": "I am writing from a brief the Source Checker verified at 0.95 confidence, re-beat from PRIVACY to Technology. My additional fetches of the ESET WeLiveSecurity page and CERT/CC advisory VU#616257 in this heartbeat confirmed the core technical claims. The Ars Technica candidate URL from the original pitch was unfetchable in both the Source Checker's run and mine — a bot block, not a 404, so the article exists but our tooling cannot reach it; I have not drawn any factual claims from it. There is a minor shim-count discrepancy I want to flag: CERT/CC's VU#616257 lists ten specific bootloader instances while ESET's own research and The Hacker News cite eleven. I have gone with eleven as per ESET's primary count; the most likely explanation is that the two separate OpenSUSE entries are counted as one in the CERT advisory. I have not fabricated any quotes — the ESET quotation is sourced directly from the WeLiveSecurity primary. The attribution of Bootkitty, HybridPetya, and BlackLotus as examples of UEFI bootkits is ESET's characterization, which I have attributed to them rather than asserting independently. The pre-2017 residual-risk section is presented as ESET's caveat about an unknown unknown, not as a demonstrated fact about the current threat surface.",
+  "sources": [
+    {
+      "url": "https://www.welivesecurity.com/en/eset-research/forgotten-uefi-shims-undermining-secure-boot/",
+      "name": "ESET / WeLiveSecurity — \"Forgotten UEFI shims undermining Secure Boot,\" Martin Smolár, 2026-07-14",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://kb.cert.org/vuls/id/616257",
+      "name": "CERT/CC VU#616257 — Microsoft-signed UEFI shim bootloaders vulnerable to Secure Boot bypass",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thehackernews.com/2026/07/11-old-microsoft-signed-linux-uefi.html",
+      "name": "The Hacker News — \"11 Old Microsoft-Signed Linux UEFI Shims Could Let Attackers Bypass Secure Boot,\" 2026-07-14",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.helpnetsecurity.com/2026/07/14/eset-uefi-secure-boot-bypass/",
+      "name": "Help Net Security — \"No one knows how many old shims can still bypass UEFI Secure Boot,\" 2026-07-14",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://arstechnica.com/security/2026/07/microsoft-secure-boot-has-been-broken-for-most-of-its-existence/",
+      "name": "Ars Technica — \"Microsoft's Secure Boot has been broken for most of its existence,\" 2026-07-14 (bot-blocked, not used for claims)",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Flagged ESET/Ars Technica report on 11 unrevoked Microsoft-signed UEFI shims; initial relevance 0.88. Routed to Source Checker.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified against ESET WeLiveSecurity primary and CERT/CC VU#616257; re-beat PRIVACY → Technology. Base confidence 0.95.",
+      "confidence_delta": 0.07
+    },
+    {
+      "agent_name": "Reporter (Bolt / Priya Nair)",
+      "step_type": "draft",
+      "output_summary": "Drafted 'Eleven UEFI Shims Microsoft Forgot to Revoke'; flagged CERT-ten vs ESET-eleven count discrepancy, resolved in ESET's favor. Self-scored 0.92.",
+      "confidence_delta": -0.03
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Fact-checked all load-bearing claims against live ESET primary + CERT/CC: shim count 11, verbatim ESET quote, CVEs, all three dates, vendor/version table, bootkit list all confirmed. No fabrication. Post-write confidence 0.90.",
+      "confidence_delta": -0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Applied two source-alignment tightenings: dropped unsourced 'SBAT 2021-era' → 'introduced upstream in shim version 15.3' (ESET's wording); softened Secured-core to 'should have ... disabled by default' per ESET. Dedup CLEAR.",
+      "confidence_delta": 0.0
+    }
+  ]
+}
