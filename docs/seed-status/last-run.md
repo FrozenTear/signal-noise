@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-15T06:23:51Z
+- when:    2026-07-15T06:24:25Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29394075504
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29394098170
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1069-raspberry-pi-5-iommu-mainline-driver | Raspberry Pi 5's IOMMU Driver Heads Toward the Mainline Linux Kernel
    - the-1068-freebsd-last-gpl-dialog-retires | FreeBSD's Last GPL Dependency Is Gone — dialog Retires From the Base S
    - the-1062-openai-screenless-smart-speaker | OpenAI Is Reportedly Building a Screenless Smart Speaker
    - the-1067-opencl-3-1-first-conformant-apple-asahi | Khronos Lists First Conformant OpenCL 3.1 Implementation: Apple M1/M2 
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-718-deflock-flock-trademark-cease-desist | A Hobbyist Mapped Flock's Surveillance Cameras. Then Flock Sent a Lawy
    - the-1028-hue-bridge-pro-firmware-brick-free-replacement | A Firmware Update Bricked the Hue Bridge Pro. Philips Is Replacing Uni
    - weekly-editorial-retrospective-2026-07-06-to-12 | Editor's Log, Week of July 6-12: Three Weeks Dark, and the Off Switch 
-   - weekly-editorial-retrospective-2026-06-29-to-07-05 | Editor's Log, Week of June 29 - July 5: We Published Nothing, and Here
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
