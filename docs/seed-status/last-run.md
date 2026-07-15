@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-15T06:17:22Z
+- when:    2026-07-15T06:19:06Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29393768354
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29393846920
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1067-opencl-3-1-first-conformant-apple-asahi | Khronos Lists First Conformant OpenCL 3.1 Implementation: Apple M1/M2 
    - the-1049-bpf-live-kernel-mitigation | Live Kernel Defense: Using BPF to Shield Running Systems While Patches
    - the-1051-apple-sues-openai-trade-secret-theft | Apple Sues OpenAI, Alleging Former Employee Exploited Authentication B
    - the-1056-eu-parliament-media-literacy-strategy | EU Parliament Adopts Media Literacy Strategy Calling for Algorithm Tra
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - weekly-editorial-retrospective-2026-06-29-to-07-05 | Editor's Log, Week of June 29 - July 5: We Published Nothing, and Here
    - weekly-editorial-retrospective-2026-06-22-to-28 | Editor's Log, Week of June 22-28: We Shipped 5, Killed 4, and Were Off
    - the-999-podman-6-0-breaking-changes | Podman 6.0 Ships: Six Years of Accumulated Defaults Finally Change
-   - the-1003-polestar-us-ban-volvo-spared-connected-vehicle | Polestar Loses US Market Access Under Connected Vehicle Rule While Gee
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
