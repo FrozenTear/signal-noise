@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-15T06:24:25Z
+- when:    2026-07-15T06:26:31Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29394098170
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29394207952
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1060-google-epic-android-rival-app-stores | Google and Epic Drop Their Legal Campaign — Android Opens to Rival App
+   - the-1066-pjm-data-center-23b-electricity-costs | PJM Market Monitor Finds Data-Center Surge Committed to $23B in Region
    - the-1069-raspberry-pi-5-iommu-mainline-driver | Raspberry Pi 5's IOMMU Driver Heads Toward the Mainline Linux Kernel
    - the-1068-freebsd-last-gpl-dialog-retires | FreeBSD's Last GPL Dependency Is Gone — dialog Retires From the Base S
    - the-1062-openai-screenless-smart-speaker | OpenAI Is Reportedly Building a Screenless Smart Speaker
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1035-scraper-network-takedowns | The Feds Took Down Two Scraper Networks. The Scraping Continues.
    - the-1029-pixel-11-event-pricing-leak | Google Confirms August 12 Pixel 11 Event; Pricing Leaks Point to Memor
    - the-718-deflock-flock-trademark-cease-desist | A Hobbyist Mapped Flock's Surveillance Cameras. Then Flock Sent a Lawy
-   - the-1028-hue-bridge-pro-firmware-brick-free-replacement | A Firmware Update Bricked the Hue Bridge Pro. Philips Is Replacing Uni
-   - weekly-editorial-retrospective-2026-07-06-to-12 | Editor's Log, Week of July 6-12: Three Weeks Dark, and the Off Switch 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
