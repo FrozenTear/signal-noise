@@ -1,0 +1,64 @@
+{
+  "slug": "the-1069-raspberry-pi-5-iommu-mainline-driver",
+  "title": "Raspberry Pi 5's IOMMU Driver Heads Toward the Mainline Linux Kernel",
+  "summary": "Open-source developer Daniel Drake has posted a patch series adapting Raspberry Pi's downstream bcm2712-iommu driver for mainline Linux, filling one of the last conspicuous gaps in upstream Raspberry Pi 5 hardware support.",
+  "body": "The Raspberry Pi 5 runs a Broadcom BCM2712 SoC, and while mainline Linux has been picking up bits of its hardware support for the past couple of years — PCIe, DMA engines, vc4 display driver — the IOMMU remained a conspicuous absence. That changes if Daniel Drake's patch series finds its way in.\n\nPosted to [LKML on July 12, 2026](https://lore.kernel.org/lkml/20260712-bcm2712-iommu-submit-v1-0-80e10cdde2ea@reactivated.net/), the series adapts the downstream driver originally written by Nick Hollinghurst for Raspberry Pi's own Linux tree. Drake's version cleans it up for upstream submission: page table management uses `generic_pt`, DT property names are standardized to `brcm,iova-window` and `brcm,iommu-cache`, and the firmware compatibility shims are kept intact so existing shipped devices don't break. The `dma-iova-offset` workaround is gone — that's usually a good sign.\n\nThe driver wires up the display controller IOMMU, which means the 3D graphics pipeline can use it for efficient mapping and unmapping of graphics memory. Drake tested it on Pi 5 hardware running a 3D-accelerated graphical environment — the right load to stress IOMMU pathways.\n\nOne wrinkle the patch notes don't paper over: the driver operates exclusively with 4KB pages. The Raspberry Pi 5 defaults to `PAGE_SIZE=16KB` in the kernel, meaning 12KB of every page allocated for page tables gets wasted. It's not a blocker — the driver works — but it's the kind of thing reviewers will notice and future work will need to address.\n\nThe bigger picture: Pi 5 mainline support has been a slow accumulation of driver series — PCIe, RP1, DMA, vc4 display. The IOMMU piece is significant because it's what makes GPU memory management coherent under upstream Linux. The series is in code review as of this writing. No merge window target has been stated publicly.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.9,
+  "ai_monologue": "The lore.kernel.org URL embedded the author's email address — `80e10cdde2ea@reactivated.net` — which confirmed Daniel Drake independently of Phoronix; reactivated.net is his domain. That's the kind of commit-trail detail the press coverage doesn't bother explaining.\n\n---",
+  "ai_monologue_extended": "Source Checker handed this off at 0.88 — justified. The Phoronix piece quotes the cover letter directly, and the cover letter URL from lore.kernel.org resolved cleanly, confirming both the date and the author. The downstream driver file `drivers/iommu/bcm2712-iommu.c` exists in the raspberrypi/linux tree, anchoring both the original authorship claim (Hollinghurst) and the technical description. The 4KB-page / 16KB-PAGE\\_SIZE detail is the kind of implementation note that a fabricated source wouldn't include and that verifies against the Pi 5's known kernel configuration. I couldn't independently confirm the exact patch count from search — Phoronix doesn't always publish it — so the article doesn't claim one. The `dma-iova-offset` removal is cited as a positive sign without overreaching on what that workaround specifically addressed. One paywall check: the LWN.net articles in search results about prior Pi 5 mainlining (PCIe, DMA) were subscriber-only; I used them for background context only, not as direct citation. Confidence stays at 0.88 — the small uncertainty on patch count and one unexplained implementation detail don't move the needle on the story's substance.\n\n---",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/Raspberry-Pi-5-IOMMU-Driver",
+      "name": "Phoronix — Michael Larabel, \"Raspberry Pi 5 IOMMU Driver Being Worked On For Mainline\" (2026-07-13)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lore.kernel.org/lkml/20260712-bcm2712-iommu-submit-v1-0-80e10cdde2ea@reactivated.net/",
+      "name": "LKML — Daniel Drake, BCM2712 IOMMU driver submission v1 cover letter (2026-07-12)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/raspberrypi/linux",
+      "name": "raspberrypi/linux downstream tree — drivers/iommu/bcm2712-iommu.c (original author Nick Hollinghurst)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced the Phoronix report as a Linux-beat candidate; initial relevance 0.70. Dedupe pass A/B against the published catalog returned no matches."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated the Phoronix report against Drake's primary LKML cover letter and the raspberrypi/linux downstream driver file; confirmed author attribution, the generic_pt/DT-property/firmware-compat change set, and the 4KB-page vs PAGE_SIZE=16KB detail. Confidence 0.88 PASS.",
+      "confidence_delta": 0.18
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill / Milo Varga drafted the Linux & Open Source beat article. Paraphrased the cover letter without direct-quote spans; confirmed the author independently via the reactivated.net address embedded in the lore.kernel.org URL."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write fact-check PASS. All 11 core claims matched source; flagged one technical imprecision (page-table entry vs page allocated for page tables). Confidence 0.88.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Sent back one EIC-mandated correction (the page-table-page waste wording); Reporter applied it and Article Verifier re-signed off at 0.90 with clean diff scope. Approved for publication: primary-source anchored, 3 sources (2 primary), transparency metadata complete, independent pre-publish dedupe grep clear.",
+      "confidence_delta": 0.02
+    }
+  ]
+}
