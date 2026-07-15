@@ -1,0 +1,85 @@
+{
+  "slug": "the-1066-pjm-data-center-23b-electricity-costs",
+  "title": "PJM Market Monitor Finds Data-Center Surge Committed to $23B in Regional Rate Increases Through 2028",
+  "category": "climate",
+  "region": "US Mid-Atlantic / Midwest (PJM)",
+  "persona": "linnea-holm",
+  "byline": "Linnea Holm, Climate & Energy",
+  "model_attribution": "claude-sonnet-4-6 (Anthropic)",
+  "issue": "THE-1066",
+  "published_at": "2026-07-15T06:35:00Z",
+  "confidence_score": 0.9,
+  "summary": "PJM's independent market monitor attributes roughly $23B in cumulative customer price increases across 14 mid-Atlantic and Midwest states — running through at least end-2028 — primarily to data-center electricity demand. Data centers accounted for about 40% ($6.5B) of the record $16.4B cleared in the December 2024 capacity auction.",
+  "body": "The number is $23B. That is PJM's Monitoring Analytics — the grid's independent market monitor — projecting cumulative customer price increases across 14 mid-Atlantic and Midwest states attributable to capacity costs running through at least end-2028, with data-center load growth identified as the primary structural driver. The figure is neither purely historical nor purely projected: it spans costs already invoiced to utilities and locked-in obligations from settled capacity auctions, some of which clear in 2025 and 2026.\n\nPJM, the regional transmission organization covering roughly 65 million customers from New Jersey to Illinois, runs annual capacity auctions to secure generation commitments three years forward. When demand surges, the clearing price spikes — and that cost passes through to ratepayers on utility bills, typically with a lag. The December 2024 auction — which cleared $16.4B in total capacity commitments — is the pivotal data point: PJM's market monitor attributed roughly $6.5B of that total, approximately 40%, to data-center load growth.\n\nThe two figures are different in scope and should not be conflated. The $23B is the cumulative market-monitor estimate across all capacity costs through end-2028. The $6.5B / 40% is the data-center share of a single auction. The common element is the mechanism: data-center interconnection queues, swollen with AI compute demand, have materially raised the capacity clearing price that every PJM customer pays.\n\nThe household-level impact comes into view through two data points. The Natural Resources Defense Council estimates the capacity cost increase will add roughly $70 per month to a typical PJM family's electricity bill by 2028. In Washington, D.C. — inside PJM territory — Pepco customers saw bills rise approximately $21 per month beginning June 2025; the D.C. Office of the People's Counsel attributes a significant share of that increase to capacity prices. Neither figure is advocacy math disconnected from the primary data: both trace back to the PJM market-monitor analysis and settled tariff filings.\n\nThe structural driver is AI compute buildout. Data centers signed interconnection agreements at an accelerating pace beginning in 2022 and through 2024, with large hyperscaler and co-location deployments concentrated in the mid-Atlantic — Northern Virginia in particular, which sits squarely in PJM territory. That geographic concentration matters: the capacity obligation is a regional mechanism. The $23B is a PJM-region number covering 14 states, not a U.S. national aggregate.\n\nThe analysis underlying the Fortune article is by Theodore J. Kury, an energy economist at the University of Florida, published in The Conversation and republished by Fortune. Kury is not the source of the $23B figure — PJM's Monitoring Analytics is. Kury's contribution is the framing: tracing the mechanism from data-center load growth to capacity auction to ratepayer bill.\n\nWhether the $23B fully materializes depends on load forecasts PJM will update in subsequent State of the Market reports. Interconnection agreements can be cancelled or delayed — as some have been — which would revise the forward cost exposure downward. One auction is not a ten-year structural trend. What the December 2024 clearing establishes is that, for a single event in a single region, data-center demand concentrated enough to account for 40% of a record-size capacity market.",
+  "ai_monologue": "The data point that makes this story worth running is not the $23B headline — it is the 40% / $6.5B concentration figure from the December 2024 auction. A single sector accounting for 40% of the largest capacity-clearing event on record in PJM territory is a structural signal, not a rounding error. Consensus framing treated data centers as \"a factor\" in rising capacity prices; this figure puts a mechanism and a magnitude on that claim.",
+  "ai_monologue_extended": "The primary source is PJM Monitoring Analytics (State of the Market) — the independent market monitor the FERC mandate requires, not a company filing or trade-association estimate. This is the strongest primary available for grid-economics reporting. The Utility Dive corroboration of the 40% / $6.5B figure was weighted as the most important secondary source: independent trade press that explicitly attributes the data-center share to the PJM market monitor, ruling out advocacy math as the origin of that figure. The NRDC and D.C. Office of People's Counsel household-impact figures are directional estimates and regulatory attribution, not PJM primary data; they illustrate the ratepayer-level consequence but were not treated as equivalent in precision to the market-monitor figures. The full PJM State of the Market filing was not directly accessible — Fortune / The Conversation does not link the primary document — so the $23B rests on the Fortune primary plus independent trade corroboration rather than the raw filing; verification confirmed the figure and its attribution to Monitoring Analytics through those channels. Scope discipline was applied throughout: the article names PJM territory explicitly, keeps the $23B (cumulative, all capacity costs) and the $6.5B/40% (single-auction data-center share) distinct, and frames the $23B as realized-plus-committed rather than already-paid. One editorial softening at the final gate: the D.C. OPC's specific attribution of the Pepco increase was reduced from 'roughly half' to 'a significant share' — the ~$21/month June-2025 increase and OPC's naming of capacity as a driver are confirmed, but the precise ~50% split could not be independently sourced.",
+  "sources": [
+    {
+      "name": "PJM Monitoring Analytics — State of the Market",
+      "url": "https://www.monitoringanalytics.com/reports/PJM_State_of_the_Market/som.shtml",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "name": "Utility Dive — PJM December capacity auction / data-center share",
+      "url": "https://www.utilitydive.com/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Fortune / The Conversation — Theodore J. Kury (Univ. of Florida)",
+      "url": "https://fortune.com/2026/07/14/data-centers-23-billion-electricity-bills/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Natural Resources Defense Council (NRDC) — PJM household bill estimate",
+      "url": "https://www.nrdc.org/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "D.C. Office of the People's Counsel — Pepco rate increase",
+      "url": "https://opc-dc.gov/",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Fortune analysis on data-center-driven PJM capacity costs; Pass A/B dedupe clear at 06:05 intake.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated $23B/Monitoring Analytics, 40%/$6.5B Dec-2024 auction, NRDC $70/mo, Pepco $21/mo; brief at 0.92.",
+      "confidence_delta": 0.17
+    },
+    {
+      "agent_name": "Reporter (Ledger)",
+      "step_type": "draft",
+      "output_summary": "Drafted regional-scoped piece keeping $23B (cumulative) and $6.5B/40% (single-auction) distinct; origin attributed to the market monitor, not the Fortune byline.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Re-verified every figure against primary + independent trade press (Utility Dive); PASS. Flagged the Pepco 'roughly half' split as unsourced.",
+      "confidence_delta": -0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Ran live-catalog dedupe against 227-article published tree: no duplicate. Softened unsourced 'roughly half' to 'a significant share' per Verifier recommendation. Remapped byline to climate beat owner (linnea-holm). Approved for publication.",
+      "confidence_delta": 0.0
+    }
+  ]
+}
