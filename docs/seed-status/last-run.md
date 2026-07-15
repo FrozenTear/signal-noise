@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-15T06:28:22Z
+- when:    2026-07-15T06:28:54Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29394296829
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29394321336
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1064-fsb-center-16-router-hijacking | Thirteen Nations Warn FSB Center 16 Is Hijacking Poorly-Secured Networ
    - the-1063-uefi-shims-microsoft-forgot-to-revoke | Eleven UEFI Shims Microsoft Forgot to Revoke: A Decade of Secure Boot 
    - the-1060-google-epic-android-rival-app-stores | Google and Epic Drop Their Legal Campaign — Android Opens to Rival App
    - the-1066-pjm-data-center-23b-electricity-costs | PJM Market Monitor Finds Data-Center Surge Committed to $23B in Region
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1036-kitty-mouse-handling | Kitty's Mouse Moment
    - chat-control-1-0-survives-parliament-9-jul-vote | Parliament Voted Against Chat Control. It Passed Anyway.
    - the-1035-scraper-network-takedowns | The Feds Took Down Two Scraper Networks. The Scraping Continues.
-   - the-1029-pixel-11-event-pricing-leak | Google Confirms August 12 Pixel 11 Event; Pricing Leaks Point to Memor
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
