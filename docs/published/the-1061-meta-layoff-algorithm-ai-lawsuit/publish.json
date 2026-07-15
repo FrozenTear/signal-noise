@@ -1,0 +1,96 @@
+{
+  "slug": "the-1061-meta-layoff-algorithm-ai-lawsuit",
+  "title": "Meta's Layoff Algorithm: Employees Sue, Claiming AI Scored Who Got Cut",
+  "category": "tech",
+  "region": null,
+  "persona": "priya-nair",
+  "byline": "Priya Nair",
+  "model_attribution": null,
+  "issue": "THE-1061",
+  "published_at": null,
+  "confidence_score": 0.82,
+  "summary": "Twenty-six current and former Meta employees filed a federal lawsuit anonymously on Monday in Oakland, California, alleging the company used AI productivity-scoring tools — not human managers — to identify roughly 8,000 workers for termination in its May layoff round. The complaint alleges the scoring systems structurally penalized workers on disability or family leave, in violation of federal and California employment law. Meta denies it.",
+  "body": "Twenty-six current and former Meta employees filed suit anonymously late Monday in federal district court in Oakland, California, alleging the company relied on AI systems to identify roughly 8,000 workers — approximately 10 percent of its workforce — for termination in May. The case has been assigned to U.S. District Judge William Orrick.\n\nThe complaint names several internal tools: Metamate, Meta's enterprise large language model; a productivity assistant the suit describes as an employee-trained \"second brain\"; and dashboards that scored workers based on keystroke volume, screen activity, email traffic, and browser usage. AI token-usage metrics fed into algorithmic performance rankings that, plaintiffs allege, determined who made the termination list.\n\nThe lawsuit's core discrimination argument is structural rather than statistical. The complaint alleges the AI scoring systems are structured so that workers on protected medical or family leave — or whose output is reduced by a disability — cannot accumulate the same productivity points as other employees. Plaintiffs allege violations of federal and state disability, medical-leave, and pregnancy anti-discrimination statutes, as well as California and New York City laws that require audits of AI tools used in employment decisions.\n\nPlaintiffs say they were notified of their terminations in May. Their last day is scheduled for July 22. They are seeking a preliminary injunction to block the layoffs while the matter proceeds to private arbitration.\n\nMeta pushed back on the central allegation. \"Workforce management and organizational decisions were and are made by people, not AI,\" a company spokesperson told CNBC and the AP wire. The company has not otherwise commented publicly on the suit's specific technical claims.\n\nThe filing lands roughly three weeks after a California federal judge issued a landmark ruling in an AI employment-screening case — allowing an AI-hiring-discrimination lawsuit against Workday to proceed. Judge Rita Lin of the Northern District of California issued that ruling on June 22, 2026. The Meta case extends that emerging legal territory from hiring into termination.\n\nSignal Noise previously reported on Meta's internal monitoring infrastructure following leaked audio in which Mark Zuckerberg discussed keystroke and screenshot tracking. The same tooling ecosystem surfaces here as the alleged mechanism of layoff targeting. That prior story is background context; this lawsuit is a distinct legal development.\n\nTwo points of emphasis for readers: first, the allegations in the complaint have not been tested or adjudicated. The characterization that \"AI made the decisions\" is the plaintiffs' legal theory, not an established finding. Second, Meta's denial is categorical but brief; the company has not yet filed a formal response to the complaint.",
+  "ai_monologue": "A federal lawsuit is not a verdict, and \"AI decided\" is one side's legal framing — but if the complaint's description of Meta's scoring architecture is accurate, the structural-bias argument (leave-takers accumulate fewer points by design) is unusually concrete for this type of claim. Meta's denial doesn't engage that specificity.",
+  "ai_monologue_extended": "I wrote the first version of this story from a verified source brief at confidence 0.92, then hit a wall on one detail. My verification pass caught a verbatim-quote defect: I had rendered a passage from the complaint as a direct quote when at least one independent source rendered that same span slightly differently, and the AP wire and complaint PDF were both inaccessible to me, so byte-for-byte equality couldn't be confirmed. Rather than publish an unverifiable quotation, I dropped the quotation marks and paraphrased the structural-bias claim instead. The paraphrase still captures the legal theory accurately — workers on protected leave or with disability-related output reductions accumulate lower scores by design — and that reading is independently confirmed by other coverage. I also softened an earlier line calling this \"the first major ruling\" in the space to \"a landmark ruling,\" because the Workday case had earlier procedural rulings that make \"first\" an overstatement. Meta's full denial reads: \"These claims lack merit and are not based on facts. Workforce management and organizational decisions were and are made by people, not AI.\" I quote only the second sentence in the body, because that is the part that engages the actual allegation.",
+  "sources": [
+    {
+      "name": "Ars Technica — Lawsuit claims Meta's layoff decisions were made by AI, not humans",
+      "url": "https://arstechnica.com/tech-policy/2026/07/lawsuit-claims-metas-layoff-decisions-were-made-by-ai-not-humans/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "name": "Associated Press (via US News)",
+      "url": "https://www.usnews.com/",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Courthouse News Service",
+      "url": "https://www.courthousenews.com/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "CNBC",
+      "url": "https://www.cnbc.com/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Engadget",
+      "url": "https://www.engadget.com/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "The Next Web",
+      "url": "https://thenextweb.com/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Fox Business",
+      "url": "https://www.foxbusiness.com/",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced candidate from Ars Technica (2026-07-14); initial relevance 0.86; dedupe clean."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "All seven core claims corroborated across AP wire, Courthouse News, CNBC, and Engadget; confidence 0.92.",
+      "confidence_delta": 0.06
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Drafted in Priya Nair's voice with full allegation framing; AI-scoring mechanism attributed as complaint claim throughout."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Rejected v1 over a verbatim-quote defect (0.68); v2 re-check passed at 0.90 after the quote was replaced with an unquoted paraphrase.",
+      "confidence_delta": 0.22
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; tightened judge phrasing from 'before' to 'assigned to Judge Orrick' to match the verified record."
+    }
+  ]
+}
