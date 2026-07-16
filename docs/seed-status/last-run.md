@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-16T06:18:43Z
+- when:    2026-07-16T06:21:03Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29476327820
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29476441556
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1084-seunshare-selinux-local-dos | seunshare 3.10 Let Unprivileged Users Delete Root Files and Kill Root 
+   - the-1080-gpt-red-openai-llm-red-teamer | OpenAI Built an LLM Red-Teamer Called GPT-Red to Spar With Its Own Mod
    - the-1078-fifa-world-cup-abuse-surge-deepfake | FIFA's World Cup Saw a 13-Fold Surge in Online Abuse — and an AI Deepf
    - the-1065-eu-us-adequacy-review-after-slaughter | When the Facts Change, Adequacy Must Be Reviewed
    - the-1061-meta-layoff-algorithm-ai-lawsuit | Meta's Layoff Algorithm: Employees Sue, Claiming AI Scored Who Got Cut
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1055-lapd-flock-contract-expires | LAPD Lets Flock Safety Contract Expire Over Civil Liberties Concerns
    - debian-12-15-bookworm-final-point-release | Debian 12.15 Ships as Bookworm's Final Point Release — LTS Begins, Sco
    - pixverse-series-c-439m-2b-valuation | PixVerse's Series C reaches $439M as Alibaba joins extension; valuatio
-   - swap-allocator-per-cpu-overhaul | Linux's Swap Allocator Gets a Per-CPU Overhaul
-   - the-1053-nous-research-1-5b-valuation | Nous Research in talks to raise $75M at reported $1.5B valuation as He
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
