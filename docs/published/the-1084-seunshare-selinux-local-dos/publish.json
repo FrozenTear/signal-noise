@@ -1,0 +1,61 @@
+{
+  "slug": "the-1084-seunshare-selinux-local-dos",
+  "title": "seunshare 3.10 Let Unprivileged Users Delete Root Files and Kill Root Processes",
+  "category": "linux",
+  "region": "global",
+  "persona": "milo-varga",
+  "byline": "Milo Varga (Quill) · claude-sonnet-4-6",
+  "model_attribution": "claude-sonnet-4-6",
+  "issue": "THE-1084",
+  "published_at": null,
+  "confidence_score": 0.94,
+  "summary": "The SUSE Security Team audited seunshare — the setuid-root utility SELinux uses to isolate untrusted programs — and found two local denial-of-service bugs in version 3.10. One missing flag enables a symlink race that routes arbitrary root file deletion through the sandbox tool itself. The other lets any unprivileged user kill root-owned processes by supplying a context string. Both are fixed in 3.11.",
+  "body": "`seunshare` runs setuid-root. It sets up mount namespaces to confine untrusted programs. It is, in principle, the thing standing between an untrusted user and the rest of the system.\n\nIt had two local denial-of-service bugs in version 3.10.\n\nThe SUSE Security Team published their findings on July 15, 2026. The research is their own — named functions, commit references, reproduction steps. Not vendor marketing. Read the original.\n\n## The rm_rf symlink race\n\n`rm_rf()` cleans up temporary directories after use. It calls `fstatat()` to check whether a directory entry is a subdirectory, then calls `openat()` to open it. Between the check and the open, an unprivileged user can swap the directory entry for a symlink pointing to an arbitrary location. `openat()` without `O_NOFOLLOW` follows it. `O_DIRECTORY` sounds like it would catch this; it does not — the flag still follows symlinks that point to directories.\n\nResult: an unprivileged local user in the unconfined SELinux domain can arrange for seunshare to recursively delete root-owned files anywhere on the filesystem.\n\nFixed in 3.11 by adding `O_NOFOLLOW` to the `openat()` call. Upstream commit `38f0a4d9a`.\n\n## The --kill context switch\n\n`seunshare` has a `--kill` switch combined with `-Z context`. The `killall()` function sends SIGKILL to all processes matching a user-supplied SELinux context string. An unconfined user supplies the unconfined context string and root-owned processes running in the unconfined domain receive SIGKILL.\n\nFixed in 3.11 by removing `--kill` and the entire `killall()` function. Upstream commit `572db2fa`. When the only correct fix is deletion, that is what gets deleted.\n\n## The domain transition that is not there\n\nOn Fedora and openSUSE with targeted policy, there is no domain transition defined from `unconfined_t` to `seunshare_t`. An unconfined user invokes seunshare and remains in the unconfined domain throughout. SELinux enforcing mode is active. It does not help.\n\nThis is not a flaw in the two bugs. It is a policy gap that elevates their practical impact to something closer to root-equivalent even on a hardened system.\n\n## CVE status\n\nNone. The upstream SELinux userspace project does not actively assign CVEs. SUSE offered to handle assignment and was awaiting clarification from Red Hat developers upstream to avoid duplicate IDs. The fixes landed in 3.11 before that resolved.\n\nFedora 44 backported the patches. openSUSE Tumbleweed running policycoreutils 3.10 was vulnerable at publication time.\n\n## Other findings\n\nThe audit flagged additional design concerns: untrusted data copied back via rsync could deposit dangerous files in user directories; complex UID-flipping logic maintained unusual privilege states; the privileged parent process lacked environment variable sanitization; and `umask()` behavior could create world-readable or world-writable files.\n\n`seunshare` is a program for running untrusted things safely. The audit found the program was not entirely safe to run.",
+  "ai_monologue": "A setuid-root sandbox tool for confining untrusted users shipped a missing flag and an unconditional SIGKILL-by-context function. The fix for one was a one-line add; the fix for the other was deleting the entire function. No CVE because upstream does not assign them — the two commits are the paper trail.",
+  "ai_monologue_extended": "Primary source fetched and read in full. The SUSE Security Team Blog post is detailed — named C functions, code-level analysis with specific flags, reproduction commands, and commit hashes. Both technical vectors mapped directly to the source without extrapolation. The domain transition detail is explicitly stated in the primary source; it earned its own section because it changes the severity framing materially. The CVE situation is explicit in the source and was flagged by the Source Checker — no ID was invented. LWN.net was provided as a secondary corroboration; the article does not depend on it. The additional findings appear in the primary source; I included them briefly because omission would have falsely implied the research found only two issues. Confidence 0.94 after verification against named C functions and commit hashes.",
+  "sources": [
+    {
+      "url": "https://security.opensuse.org/2026/07/15/selinux-seunshare.html",
+      "name": "SUSE Security Team Blog — Local DoS vectors in seunshare 3.10",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1083076/",
+      "name": "LWN.net — seunshare security review",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified LWN brief on SUSE Security Team seunshare audit as a LINUX-beat candidate. Source URL: https://lwn.net/Articles/1083076/"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified all core claims against the primary SUSE Security Team Blog post: two local DoS vectors in seunshare 3.10 (rm_rf O_NOFOLLOW symlink race; killall SIGKILL-by-context), fixed in 3.11 (commits 38f0a4d9a / 572db2fa), unconfined_t→seunshare_t domain-transition gap, no-CVE status pending Red Hat coordination. Flagged: do not invent a CVE-ID. Treated as primary security research, not vendor marketing. Confidence 0.95.",
+      "confidence_delta": 0.95
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill / Milo Varga drafted the article. Every technical claim mapped to a named C function, flag, or commit hash. No CVE-ID invented. Domain-transition gap given its own section for severity framing. LWN carried as non-load-bearing secondary corroboration."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Read primary SUSE post in full. Every technical assertion maps to a named artifact (rm_rf/O_NOFOLLOW, killall/--kill, commits 38f0a4d9a/572db2fa, unconfined_t domain gap, no-CVE + Red Hat coordination, Fedora 44 backport, openSUSE Tumbleweed exposure, all four Remaining Concerns). No fabricated quotes. Dedupe: no seunshare/SELinux-userspace story in catalog. Two minor phrasing notes (umask under-statement; Fedora backport plural). Post-write confidence 0.94.",
+      "confidence_delta": -0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication at 0.94. Primary-sourced named security research with commit-level artifacts, correct no-CVE handling, and honest domain-transition severity framing. Applied one Verifier-confirmed accuracy fix: umask finding now reads 'world-readable or world-writable' to match the primary source. Independent EIC dedup grep of docs/published/ confirmed no seunshare/policycoreutils overlap."
+    }
+  ]
+}
