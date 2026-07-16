@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-16T06:16:44Z
+- when:    2026-07-16T06:17:58Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29476232171
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29476291464
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1078-fifa-world-cup-abuse-surge-deepfake | FIFA's World Cup Saw a 13-Fold Surge in Online Abuse — and an AI Deepf
    - the-1065-eu-us-adequacy-review-after-slaughter | When the Facts Change, Adequacy Must Be Reviewed
    - the-1061-meta-layoff-algorithm-ai-lawsuit | Meta's Layoff Algorithm: Employees Sue, Claiming AI Scored Who Got Cut
    - the-1064-fsb-center-16-router-hijacking | Thirteen Nations Warn FSB Center 16 Is Hijacking Poorly-Secured Networ
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - pixverse-series-c-439m-2b-valuation | PixVerse's Series C reaches $439M as Alibaba joins extension; valuatio
    - swap-allocator-per-cpu-overhaul | Linux's Swap Allocator Gets a Per-CPU Overhaul
    - the-1053-nous-research-1-5b-valuation | Nous Research in talks to raise $75M at reported $1.5B valuation as He
-   - the-1036-kitty-mouse-handling | Kitty's Mouse Moment
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
