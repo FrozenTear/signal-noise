@@ -1,0 +1,74 @@
+{
+  "slug": "bin-the-1088-chat-control-dup",
+  "title": "EU Parliament Fails to Block Chat Control 1.0 on 9 July 2026 — Breyer: \"Our Children Lose Out\"",
+  "summary": "The European Parliament failed to block the revival of Chat Control 1.0 on 9 July 2026, with 314 MEPs voting to reject against 276 to keep — falling short of the 361 absolute majority required. Patrick Breyer quoted the outcome as 'Our children lose out.' Pitched from Breyer's advocacy site as the primary source.",
+  "body": "Editor's note. This draft, filed under THE-1088, covered the European Parliament's 9 July 2026 fail-to-block vote on Chat Control 1.0 — the interim ePrivacy derogation that permits platforms to voluntarily scan private messages for child sexual abuse material. The Source Checker passed a verified brief at confidence 0.9, corroborated by The Register, Heise, Euronews, EU Perspectives, Brussels Signal, and TechTimes. The primary pitch source was Patrick Breyer's advocacy page (patrick-breyer.de), which quoted him: 'Our children lose out.' Before drafting, a pre-submission catalog check against the live issue index returned a determinative match: THE-1040 ('Parliament Voted Against Chat Control. It Passed Anyway.', Sable Ren, confidence 0.86) is already published at slug chat-control-1-0-survives-parliament-9-jul-vote. THE-1040 covers the identical event — the same vote, the same tally (314 against / 276 for / 17 abstentions), the same absolute-majority threshold of 361, and the same 2028 derogation end-date. The Breyer-advocacy source material offers no distinct angle: Breyer's quotes and the false-positive statistics attributed to him were available context at the time of THE-1040's reporting and do not constitute a new story on a separate news event. This is also at minimum the third pipeline run on this event (see THE-1032, cancelled as a duplicate of THE-1040; THE-1039, cancelled at draft stage; the Breyer URL itself flagged for recirculation in THE-867). The reporter withdrew before drafting. The canonical Signal Noise record for this story is the published piece at chat-control-1-0-survives-parliament-9-jul-vote.",
+  "category": "privacy",
+  "persona": "",
+  "byline": "Muse",
+  "confidence_score": 0.9,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "reporter-self-withdrawal | 9 Jul 2026 Chat Control 1.0 fail-to-block vote (EU Parliament); pre-draft catalog check found THE-1040 (chat-control-1-0-survives-parliament-9-jul-vote, sable-ren, 0.86) covers identical event; no distinct angle from Breyer advocacy source; reporter withdrew before drafting",
+  "sources": [
+    {
+      "name": "Patrick Breyer (MEP) — official advocacy site",
+      "url": "https://www.patrick-breyer.de/en/eu-parliament-greenlights-chat-control-1-0-breyer-our-children-lose-out/",
+      "type": "advocacy",
+      "paywall": false,
+      "verification_status": "primary source; clearly labelled advocacy; not a neutral news source"
+    },
+    {
+      "name": "The Register",
+      "url": "https://www.theregister.com/",
+      "type": "independent press",
+      "paywall": false,
+      "verification_status": "confirmed (2026-07-09) — per Source Checker brief"
+    },
+    {
+      "name": "Heise Online (English)",
+      "url": "https://www.heise.de/",
+      "type": "independent press",
+      "paywall": false,
+      "verification_status": "confirmed — per Source Checker brief; duration characterised as ~2 years"
+    },
+    {
+      "name": "Euronews",
+      "url": "https://www.euronews.com/",
+      "type": "independent press",
+      "paywall": false,
+      "verification_status": "confirmed (2026-07-10) — per Source Checker brief"
+    },
+    {
+      "name": "EU Perspectives",
+      "url": "https://euperspectives.eu/",
+      "type": "EU policy analysis",
+      "paywall": false,
+      "verification_status": "confirmed (2026-07) — per Source Checker brief; source of E2EE carve-out and Council timeline detail"
+    },
+    {
+      "name": "TechTimes",
+      "url": "https://www.techtimes.com/",
+      "type": "independent press",
+      "paywall": false,
+      "verification_status": "confirmed — headline '314 MEPs Couldn't Block...' corroborates vote tally"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Pitched from Patrick Breyer advocacy URL. Dedup check at Scanner stage returned no duplicates detected."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified brief at confidence 0.9. Core event (9 Jul 2026 fail-to-block vote, 314/276/needs-361 framing) corroborated across 5+ independent outlets. Flags raised: 'twice' in March is Breyer-only; exact 3 Apr 2028 end date is advocacy-sourced; BKA 48% false-positive and 99% Meta stats need primary verification; multiple vote tallies noted. Dedup at SC stage also returned no match."
+    },
+    {
+      "agent_name": "Muse",
+      "step_type": "edit",
+      "output_summary": "Reporter pre-draft catalog check found THE-1040 (chat-control-1-0-survives-parliament-9-jul-vote, sable-ren, 0.86) already published on the identical event. No distinct angle identified. Reporter withdrew before drafting. Third pipeline run on this event (THE-1032 and THE-1039 both previously cancelled). Breyer URL flagged for recirculation in THE-867."
+    }
+  ]
+}
