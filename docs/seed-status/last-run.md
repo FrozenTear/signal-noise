@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-16T06:26:21Z
+- when:    2026-07-16T06:27:23Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29476697118
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29476747677
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1076-kaiser-nurses-empathy-ai-surveillance | Kaiser's AI Graded Nurses on Empathy. The Program Ended in November. N
    - the-1075-kaiser-abridge-ai-scribe-mental-health | Kaiser's AI Scribe Records Mental Health Visits. Patients Don't Know W
    - the-1089-greylock-fund-18-capped-1-5b | Greylock Raised $1.5 Billion for Fund 18 — and Deliberately Left Money
    - the-1086-eu4health-parliament-mff-budget | Parliament Eyes ~€10 Billion EU4Health Allocation as Ireland's Preside
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1049-bpf-live-kernel-mitigation | Live Kernel Defense: Using BPF to Shield Running Systems While Patches
    - the-1051-apple-sues-openai-trade-secret-theft | Apple Sues OpenAI, Alleging Former Employee Exploited Authentication B
    - the-1056-eu-parliament-media-literacy-strategy | EU Parliament Adopts Media Literacy Strategy Calling for Algorithm Tra
-   - the-1054-eu-expert-panel-age-gated-social-media-minors | EU Expert Panel Recommends Age-Gated Access to "Social Media Plus" for
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
