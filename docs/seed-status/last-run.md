@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-17T06:12:26Z
+- when:    2026-07-17T06:17:02Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29559375810
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29559591724
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1093-kde-kwin-server-side-drop-shadows | KDE KWin Teaches the Compositor to Draw What Apps Forgot
    - the-1083-rocm-7-14-therock-production-release | AMD Ships ROCm 7.14.0 as Production Release, TheRock Build System Now 
    - the-1079-georgia-polyface-russian-surveillance | Seen and Silenced: How Georgia Turned a Russian-Sourced Surveillance S
    - the-1076-kaiser-nurses-empathy-ai-surveillance | Kaiser's AI Graded Nurses on Empathy. The Program Ended in November. N
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1068-freebsd-last-gpl-dialog-retires | FreeBSD's Last GPL Dependency Is Gone — dialog Retires From the Base S
    - the-1062-openai-screenless-smart-speaker | OpenAI Is Reportedly Building a Screenless Smart Speaker
    - the-1067-opencl-3-1-first-conformant-apple-asahi | Khronos Lists First Conformant OpenCL 3.1 Implementation: Apple M1/M2 
-   - the-1049-bpf-live-kernel-mitigation | Live Kernel Defense: Using BPF to Shield Running Systems While Patches
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
