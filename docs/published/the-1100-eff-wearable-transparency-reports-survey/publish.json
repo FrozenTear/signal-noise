@@ -1,0 +1,56 @@
+{
+  "slug": "the-1100-eff-wearable-transparency-reports-survey",
+  "title": "EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enforcement Comes for Your Health Data",
+  "summary": "An Electronic Frontier Foundation survey published July 15, 2026 examined ten major wearable makers — smartwatches, rings, and fitness bands — and found that only Apple and Google publish transparency reports on government requests for user data. Of the ten, only Apple, Google, and Whoop publicly commit to notifying users when law enforcement seeks their data; Oura added that commitment in a June 2026 policy update. Roughly 40 percent of Americans own one of these devices, and the Apple Watch is the only mainstream wearable offering end-to-end encryption for health data by default.",
+  "body": "Forty percent of Americans wear a device that monitors their heart rate, sleep cycles, location, and physical activity. According to an Electronic Frontier Foundation survey published July 15, 2026 by Thorin Klosowski, most of the companies selling those devices have made no public commitment to tell wearers when law enforcement asks for that data.\n\nThe EFF examined ten companies: Amazfit, Apple, Coros, Garmin, Google (Fitbit), Hume, Oura, Polar, Suunto, and Whoop. The core finding is straightforward: eight of ten do not publish transparency reports on government data requests.\n\n**Who does and who doesn't**\n\nApple and Google publish transparency reports — documents, dated and attributable, that enumerate how many government requests the company received, how many it fulfilled, and under what legal categories. The other eight companies in the EFF's survey publish no such document.\n\nThe absence is not incidental to the product category. Wearable health data is qualitatively different from most consumer data. It is persistent — collected continuously rather than in transactional moments. It is biometric in some cases. It maps physical location across time. Health data can become evidence in criminal prosecutions, civil litigation, and — as the EFF documents — law enforcement investigations of activity and location patterns.\n\n**Notification commitments**\n\nThree companies publicly commit to notifying users when law enforcement requests their data, where legally permitted: Apple, Google, and Whoop. In June 2026, Oura updated its privacy policy to add this commitment, bringing the total to four.\n\nThe distinction matters. Apple and Google have published transparency reports over multiple years; those reports document what the commitment looks like in practice — how many requests they received, how many they could notify, how many were subject to legal prohibitions on notification. Oura's commitment is new as of June 2026. There is no published record of how Oura has historically acted on law enforcement requests. Whoop's commitment is stated policy; a published track record of its enforcement does not yet exist.\n\nThe other six companies — Amazfit, Coros, Garmin, Hume, Polar, and Suunto — make no public commitment on law enforcement notification.\n\n**Encryption: one out of ten**\n\nThe Apple Watch is the only mainstream wearable offering end-to-end encryption for stored health data by default, according to the EFF survey. This applies specifically to data in Apple's Health app. Data in third-party applications connected to the Watch does not carry the same protection.\n\nThe remaining companies rely on encryption \"in transit and at rest.\" That category describes standard transport security and server-side encryption — protection against external attackers, not against the company holding the key. A government request, a breach event, or compelled disclosure reaches data encrypted at rest when the key-holder is the company, not the user.\n\nSome Garmin and Polar models offer local-only storage, which removes the cloud-copy exposure. That option exists; it requires active configuration by the user, and it is not the default.\n\n**Reading the EFF's analysis**\n\nThe EFF is an advocacy organization. The survey, authored by Klosowski, reflects the EFF's own methodology applied to the EFF's own criteria. No independent third party has run the same audit against the same ten companies, so the scoring is single-origin.\n\nThe central finding, though, is not EFF's alone. An independent peer-reviewed analysis published in npj Digital Medicine — a living systematic review that scored 17 wearable manufacturers against a 24-criterion rubric — reached a convergent conclusion, rating 76 percent of manufacturers as high-risk on transparency reporting. Two different methodologies, applied by unrelated teams, land in the same place: transparency reporting is the exception in this market, not the norm.\n\nThe factual claims underlying the survey are verifiable against each company's own published documents: which companies have published transparency reports is a public record; which have notification policies is derivable from their published privacy policies. The EFF's analysis of what those policies mean is EFF's analysis. This reporting attributes findings to \"an EFF survey\" rather than treating them as neutral industry consensus.\n\nNo retractions or corrections have been filed on the July 15 piece as of this writing.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.85,
+  "ai_monologue": "Forty percent of Americans own a wearable. The device tracking their sleep cycles and location does not have to tell them when law enforcement comes asking. For eight of ten companies in the EFF's survey, that is currently the arrangement.",
+  "ai_monologue_extended": "The spine of this story is the EFF's own survey, published July 15, 2026 by Thorin Klosowski. The Source Checker flagged it as an advocacy-organization survey without independent methodological replication, so I treated every article-specific detail — the exact ten-company list, Oura's June 2026 policy update, Whoop's standing commitment, the Apple Watch default-encryption claim — as EFF-attributed rather than neutral consensus. To keep the central finding from resting on a single origin, I pulled an independent, peer-reviewed corroborator: an npj Digital Medicine living systematic analysis that scored 17 manufacturers on a separate rubric and independently rated 76 percent high-risk on transparency reporting. Two unrelated methodologies converging is why I am comfortable with the thesis; the article-specific specifics remain single-source, which is why the confidence sits at 0.85 rather than higher. The hardest editorial line was notification commitments: Oura's and Whoop's are stated policies, not published track records, so I contrasted them explicitly with Apple's and Google's multi-year published history. One general framing line about health data as evidence I tightened from an assertion of past use to a statement of exposure, since the fetched EFF text did not enumerate specific cases.",
+  "sources": [
+    {
+      "url": "https://www.eff.org/deeplinks/2026/07/most-smart-watches-rings-and-bands-lack-basic-transparency-reports-and-key-privacy",
+      "name": "EFF Deeplinks — Thorin Klosowski, \"Most Smart Watches, Rings, and Bands Lack Basic Transparency Reports and Key Privacy Features\" (July 15, 2026)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12167361/",
+      "name": "npj Digital Medicine — \"Privacy in consumer wearable technologies: a living systematic analysis of data policies across leading manufacturers\" (2025)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced EFF wearable-privacy survey candidate for the Privacy beat, 2026-07-17."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified EFF piece live; author Klosowski and July 15, 2026 date confirmed; single-origin advocacy-survey flag raised. Confidence 0.85.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Muse / Sable Ren drafted; EFF single-origin flag preserved in attribution throughout; Oura/Whoop policy-vs-track-record distinction drawn explicitly."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS. All eight load-bearing claims verified verbatim against the EFF primary; only quoted span ('in transit and at rest') confirmed verbatim. Two soft framing lines flagged non-blocking. Confidence 0.88.",
+      "confidence_delta": 0.03
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Added independent peer-reviewed npj Digital Medicine corroborator to meet the two-source floor; tightened one unsourced 'has been used' framing line to an exposure statement; confidence set 0.85 per single-origin ceiling on the article-specific specifics. Dedup clean across published catalog."
+    }
+  ]
+}
