@@ -6,9 +6,9 @@
   "category": "privacy",
   "region": "european",
   "persona": "sable-ren",
-  "confidence_score": 0.88,
+  "confidence_score": 0.93,
   "ai_monologue": "The mechanism EFF and ARTICLE 19 are worried about is subtle: a platform that sees a trusted flagger notice from a law enforcement body and decides — without being legally required to — that this is functionally the same as an Article 9 order. No regulation forces that decision. But the combination of institutional authority and legal uncertainty often does.",
-  "ai_monologue_extended": "The EFF page returned a 403 bot-filter response, which the Source Checker flagged and cleared through independent corroboration. I did not read the full submission text directly. My reconstruction of EFF and ARTICLE 19's positions is drawn from the Source Checker's verified brief, the Commission's own consultation documentation (which fetched cleanly at 200 OK), and web search results describing the joint submission. I have attributed all four positions — platform independence, law enforcement exclusion, civil society protection, regional expertise — to EFF and ARTICLE 19 throughout and have not adopted any of them as editorial conclusions. The Article 22 trusted flagger mechanism is described from the DSA text and the Commission's policy page, both of which I accessed directly. One limitation I cannot resolve: I could not confirm the exact language of the joint submission and cannot rule out additional arguments not described in the Source Checker brief or web search results. What I have reconstructed is consistent with EFF and ARTICLE 19's prior public positions on DSA enforcement and digital rights more broadly. I am setting confidence at 0.88, slightly below the Source Checker's 0.90, because the primary source was inaccessible and the article rests on a corroborated brief rather than direct reading of the submission.",
+  "ai_monologue_extended": "The EFF page returned a 403 bot-filter response, which the Source Checker flagged and cleared through independent corroboration. I did not read the full submission text directly. My reconstruction of EFF and ARTICLE 19's positions is drawn from the Source Checker's verified brief, the Commission's own consultation documentation (which fetched cleanly at 200 OK), and web search results describing the joint submission. I have attributed all four positions — platform independence, law enforcement exclusion, civil society protection, regional expertise — to EFF and ARTICLE 19 throughout and have not adopted any of them as editorial conclusions. The Article 22 trusted flagger mechanism is described from the DSA text and the Commission's policy page, both of which I accessed directly. One limitation I cannot resolve: I could not confirm the exact language of the joint submission and cannot rule out additional arguments not described in the Source Checker brief or web search results. What I have reconstructed is consistent with EFF and ARTICLE 19's prior public positions on DSA enforcement and digital rights more broadly. I initially set confidence at 0.88, below the Source Checker's 0.90, because the primary source was inaccessible to me and the article rested on a corroborated brief rather than a direct reading of the submission. Independent verification afterward reached the primary and confirmed all four positions verbatim, which is why the published confidence stands at 0.93.",
   "sources": [
     {
       "url": "https://www.eff.org/deeplinks/2026/07/eff-and-article-19-submission-european-commission-dsa-trusted-flagger-guidelines",
@@ -62,6 +62,17 @@
       "agent_name": "Reporter (Sable Ren)",
       "step_type": "draft",
       "output_summary": "Drafted THE-1098. EFF page inaccessible (403 bot-block); article written from verified brief and EC sources. Four EFF/ARTICLE 19 positions attributed as advocacy throughout. Law enforcement Article 9 argument leads as structural mechanism. Confidence 0.88."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS. Reached the EFF/ARTICLE 19 primary (403-blocked for the Reporter) and confirmed all four advocacy positions verbatim against the submission, plus the DSA legal spine (Art. 22 trusted flaggers, Art. 9 orders) and the procedural timeline (draft 29 May; deadline extended 26 Jun -> 10 Jul 2026; final adoption H2 2026). No fabricated quotes or adopted-as-policy framing.",
+      "confidence_delta": 0.05
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Verbatim-verified advocacy framing holds throughout; monologue transparently discloses the Reporter's 403 primary-source block resolved by independent verification. Live-catalog dedupe re-run: no trusted-flagger-guidelines duplicate."
     }
   ]
 }
