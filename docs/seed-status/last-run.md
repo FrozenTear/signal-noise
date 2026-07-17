@@ -1,15 +1,19 @@
 # last seed/probe run
 
-- when:    2026-07-17T06:20:54Z
+- when:    2026-07-17T06:26:31Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29559770844
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29560034069
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1100-eff-wearable-transparency-reports-survey | EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enfor
+   - the-1095-hp-india-cci-cartel-fine | India's CCI fines HP India ₹142 crore for facilitating bid-rigging car
+   - ca-ab-1856-age-gating-expansion-walkback | California Steps Back From Dangerous Expansion of Its Age-Gating Law
+   - oneplus-exits-us-and-european-smartphone-markets | OnePlus exits the US and European smartphone markets
    - the-1096-eu-google-dma-search-data-android-ai | EU issues binding orders: Google must share search data and open Andro
    - the-1094-amd-gaia-0-22-local-email-agent | AMD GAIA 0.22: Local Email Agent Learns Your Writing Style, Still Asks
    - eff-article19-dsa-trusted-flagger-guidelines | EFF and ARTICLE 19 to European Commission: A Trusted Flagger Notice Is
@@ -26,9 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1065-eu-us-adequacy-review-after-slaughter | When the Facts Change, Adequacy Must Be Reviewed
    - the-1061-meta-layoff-algorithm-ai-lawsuit | Meta's Layoff Algorithm: Employees Sue, Claiming AI Scored Who Got Cut
    - the-1064-fsb-center-16-router-hijacking | Thirteen Nations Warn FSB Center 16 Is Hijacking Poorly-Secured Networ
-   - the-1063-uefi-shims-microsoft-forgot-to-revoke | Eleven UEFI Shims Microsoft Forgot to Revoke: A Decade of Secure Boot 
-   - the-1060-google-epic-android-rival-app-stores | Google and Epic Drop Their Legal Campaign — Android Opens to Rival App
-   - the-1066-pjm-data-center-23b-electricity-costs | PJM Market Monitor Finds Data-Center Surge Committed to $23B in Region
-   - the-1069-raspberry-pi-5-iommu-mainline-driver | Raspberry Pi 5's IOMMU Driver Heads Toward the Mainline Linux Kernel
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
