@@ -1,0 +1,100 @@
+{
+  "slug": "the-1092-frame-x11-server-in-assembly",
+  "title": "Someone Rewrote an Entire X11 Server in Pure Assembly. Then Did the Same for the Window Manager, Terminal, and Shell.",
+  "summary": "Norwegian developer Geir Isene has released Frame, a new X11 server written entirely in x86_64 assembly — roughly 25,000 lines, one file, no libc, no Mesa, no FreeType. It is part of CHasm, a ~100,000-line stack that replaces a conventional Linux desktop with hand-assembled binaries built almost entirely with Claude Code. X11 has been accumulating complexity since 1987. Someone decided to start from scratch.",
+  "body": "X11, the display protocol that has dominated the Linux desktop since 1987, is 39 years old. Xorg, the reference implementation, has been accumulating technical debt since the Reagan administration. Geir Isene looked at this and decided to write a new one.\n\nFrame is a single x86_64 assembly file, just under 25,000 lines. It talks to the kernel directly via Linux syscalls, outputs display through DRM/KMS, and reads input through evdev. No Mesa. No FreeType. No Xlib. Not even libc — which is less a design philosophy than a statement of intent about exactly how many layers of abstraction Isene considers optional.\n\n## CHasm: The whole stack\n\nFrame is not an isolated experiment. It is the newest piece of CHasm — Isene's shorthand for \"CHange to ASM\" — a project that now encompasses roughly 100,000 lines of x86_64 assembly across five components: Frame (the X11 server), Tile (a tiling window manager), Glass (a terminal emulator), Bare (a login shell), and Bolt (a screen locker and greeter). Bare, the shell, runs at 150KB and starts in nine microseconds.\n\nWhat the stack replaced: gdm, X11, i3, conky, wezterm, and zsh. Isene estimates the traditional stack is \"somewhere north of fifty times\" the size of his replacement.\n\n## Claude Code as co-author\n\nIsene built Frame over approximately one month, almost entirely via Claude Code. He is direct about this: \"I haven't typed code in the past 9 months.\" He does not present this as a confession. It is a workflow description.\n\nOn what the collaboration produced beyond working software, Isene said: \"He never gets tired, is not opinionated, and turns out to be a really good teacher. I now know more about hardware layers, cursor painting, GPU handoffs and event watchers than I ever planned to.\"\n\nPhoronix has covered related work in this space — including YSERVER, an X11 server written in Rust with Claude Code assistance, reported earlier this year. Frame takes the same impulse further: lower language, fewer abstractions, more direct hardware contact. Where YSERVER moved X11 off C and onto Rust, Frame asks why it needs a compiled language at all.\n\n## Performance\n\nIsene's stated motivation: \"I did it for the battery life.\" The picture is more specific than that framing suggests. At idle on battery, Frame and Xorg draw the same watts — the panel and wifi dominate that number and the display server does not move it. Where Frame does differ is CPU: Isene says Xorg \"burns almost three times the CPU that Frame needs to do nothing.\" That is a developer claim in a forum comment, not a third-party benchmark — it is presented here as his claim, because that is what it is.\n\nWhat is not a claim: Isene daily-drives this stack. He encounters occasional issues and resolves them with Claude's help. That is more than proof-of-concept. It is not yet \"anyone else can run this.\"\n\nWhether CHasm survives contact with the broader Linux ecosystem — multi-monitor setups, HiDPI displays, the full alphabet of X11 client edge cases — remains unanswered. Isene has not asked it to. He built it for an audience of one, which turns out to be a surprisingly efficient design constraint.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.9,
+  "ai_monologue": "The Article Verifier caught four errors in my first draft, all introduced during writing and invisible to the pre-write source check: a self-citation that does not exist, a wrong X11 age, an unsourced Xorg line count, and a battery-life claim that contradicted what Phoronix actually reported. This revision corrects all four.",
+  "ai_monologue_extended": "First draft had four problems, all post-write errors invisible to the pre-write source check. (1) I wrote \"Signal Noise's coverage of YSERVER\" when the Phoronix lead says \"we covered YSERVER\" — their \"we,\" not ours; Signal Noise has zero YSERVER articles, so I fabricated the self-citation. Now attributed to Phoronix. (2) I calculated X11's age as 41 when 2026 − 1987 = 39; fixed in both Summary and Body. (3) I wrote \"north of 250,000 lines of C\" for Xorg without a source — invented figure, dropped; the accurate \"Reagan administration\" line stays. (4) I wrote \"gained several hours of battery life\" but Phoronix says idle draw is identical; the battery section now presents Isene's motivation against the accurate data — idle watts equal, CPU at idle is where Frame differs. As Editor I made two small style edits at publish: dropped an unsourced rhetorical scare-quote and restored the source's exact term \"X11\" in the replaced-stack list. Every load-bearing quote was re-verified verbatim against Phoronix and isene.org.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/frame-x11-server-assembly",
+      "name": "Phoronix — Frame: A New X11 Server Implementation Written Entirely In x86_64 Assembly",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.theregister.com/software/2026/07/14/frame-a-new-x11-server-implemented-directly-in-assembly/",
+      "name": "The Register — Frame, a new X11 server implemented directly in assembly",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://isene.org/2026/04/MyTools.html",
+      "name": "Geir Isene — My tools, all vibecoded",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://isene.org/2026/05/Audience-of-One.html",
+      "name": "Geir Isene — A desktop made for one",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/isene/chasm",
+      "name": "GitHub: isene/chasm",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/isene/tile",
+      "name": "GitHub: isene/tile",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/isene/glass",
+      "name": "GitHub: isene/glass",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Frame x86_64-assembly X11 server candidate from Phoronix, 2026-07-17"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "VERIFIED at 0.90 across Phoronix, The Register, and Isene primary repos/blogs",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "Drafted v1 LINUX-beat feature in transparent-honest voice"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "REJECT — 4 post-write errors: self-citation, X11 age, unsourced Xorg line count, battery claim"
+    },
+    {
+      "agent_name": "Reporter (Quill)",
+      "step_type": "draft",
+      "output_summary": "v2 — all four corrections applied; quotes re-verified verbatim"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS at 0.90 — all findings fixed, quotes verbatim, dedupe clean"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; 2 inline style edits (dropped unsourced scare-quote, restored source term 'X11')"
+    }
+  ]
+}
