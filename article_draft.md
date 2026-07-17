@@ -1,83 +1,75 @@
-# EU Parliament Adopts Media Literacy Strategy Calling for Algorithm Transparency and AI Content Disclosure
+# EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enforcement Comes for Your Health Data
 
 **By:** Sable Ren  
 **Beat:** Privacy  
-**Date:** 2026-07-14  
-**Issue:** THE-1056
+**Date:** 2026-07-17  
+**Issue:** THE-1100
 
 ## Summary
 
-The European Parliament voted on 7 July 2026 to adopt a non-binding strategy on media literacy and digital learning — and tied it, explicitly, to the enforcement gaps already visible in the Digital Services Act and the AI Act. MEP Marcos Ros Sempere (S&D, Spain), the report's rapporteur, argues that mandatory algorithm disclosure and AI-content labeling are regulatory theater without a population equipped to use them. The Commission is not obligated to act. But the Parliament has stated its position ahead of a planned Commission strategy, and the framing is new: this is not a reading-comprehension initiative. It is a transparency enforcement argument.
+An Electronic Frontier Foundation survey published July 15, 2026 examined ten major wearable device makers — smartwatches, rings, and fitness bands — and found that only Apple and Google publish transparency reports on government requests for user data. Of the ten companies surveyed, only Apple, Google, and Whoop publicly commit to notifying users when law enforcement seeks their data; Oura added that commitment in a June 2026 privacy policy update. Approximately 40 percent of Americans own one of these devices; the Apple Watch is the only mainstream wearable offering end-to-end encryption for health data by default.
 
 ## Body
 
-MEP Marcos Ros Sempere (S&D, Spain) frames the problem in one sentence: "Every time you open a device, information is being pushed towards you."
+Forty percent of Americans wear a device that monitors their heart rate, sleep cycles, location, and physical activity. According to an Electronic Frontier Foundation survey published July 15, 2026 by Thorin Klosowski, most of the companies selling those devices have made no public commitment to tell wearers when law enforcement asks for that data.
 
-That is not an education metaphor. It describes a technical infrastructure — algorithmic content-curation systems that determine what information reaches citizens without any obligation to explain the mechanism. Ros Sempere, the rapporteur for the own-initiative report the European Parliament adopted in plenary on 7 July 2026, connects this directly to a specific legal failure: the Digital Services Act requires very large online platforms to publish transparency reports on their recommender systems. Most people cannot read those reports. That gap is what the report addresses.
+The EFF examined ten companies: Amazfit, Apple, Coros, Garmin, Google (Fitbit), Hume, Oura, Polar, Suunto, and Whoop. The core finding is straightforward: eight of ten do not publish transparency reports on government data requests.
 
-"If we do not empower citizens with critical-thinking skills and the ability to make informed choices about the information they consume," Ros Sempere told EU Perspectives in a Q&A published the same week as the plenary vote, "we are putting both individuals and democracy at risk."
+**Who does and who doesn't**
 
-**The DSA transparency gap**
+Apple and Google publish transparency reports — documents, dated and attributable, that enumerate how many government requests the company received, how many it fulfilled, and under what legal categories. The other eight companies in the EFF's survey publish no such document.
 
-The Digital Services Act has been binding on very large online platforms since August 2023, following their designation by the Commission that April. Among its obligations: platforms must disclose how their recommender algorithms function — what signals they use, what content they amplify, and how users can opt into ranking that does not rely on behavioral profiling. Meta, TikTok, Google, and X have filed the required transparency reports. The reports are public. Whether an ordinary user can navigate them is a different question, and the answer, as documented by the European Parliamentary Research Service in its 2025 background briefing on media literacy, is mostly no.
+The absence is not incidental to the product category. Wearable health data is qualitatively different from most consumer data. It is persistent — collected continuously rather than in transactional moments. It is biometric in some cases. It maps physical location across time. Health data has been used in criminal prosecutions, civil litigation, and, as the EFF documents, law enforcement investigations of activity and location patterns.
 
-Ros Sempere's report calls for that to change. The specific demands include: mandatory disclosure of algorithmic content decisions in formats accessible to non-specialist users; clear labeling of AI-generated content visible at the point of encounter rather than buried in terms of service; and disclosure of influencer monetization relationships at the moment of exposure rather than in separate disclosure documents. These go beyond current DSA obligations. They describe a version of algorithmic transparency designed to be used.
+**Notification commitments**
 
-**The AI Act parallel**
+Three companies publicly commit to notifying users when law enforcement requests their data, where legally permitted: Apple, Google, and Whoop. In June 2026, Oura updated its privacy policy to add this commitment, bringing the total to four.
 
-The AI Act, now in phased application after entering force in 2024, requires providers of AI-generated content to ensure the output is machine-detectable as synthetic. The obligation is technical: there must be a marker. What the Act does not require is that users know to look for the marker or understand what it means when they find it.
+The distinction matters. Apple and Google have published transparency reports over multiple years; those reports document what the commitment looks like in practice — how many requests they received, how many they could notify, how many were subject to legal prohibitions on notification. Oura's commitment is new as of June 2026. There is no published record of how Oura has historically acted on law enforcement requests. Whoop's commitment is stated policy; a published track record of its enforcement does not yet exist.
 
-Ros Sempere's report addresses this directly. Parliament's position is that AI Act compliance is necessary but not sufficient: the infrastructure for content labeling exists in law; the social infrastructure for reading that labeling does not. Without media literacy, AI transparency obligations produce compliance reports that no one outside the Commission reads.
+The other six companies — Amazfit, Coros, Garmin, Hume, Polar, and Suunto — make no public commitment on law enforcement notification.
 
-The health misinformation context Ros Sempere describes makes the mechanism concrete. False health claims circulate — he cites misinformation about cancer treatments and sunscreen. The mechanism is not simply that false claims exist. The mechanism is algorithmic amplification: a system that determines which false claim reaches which person at which moment, without disclosing the amplification decision to the recipient. Media literacy, in this analysis, is a precondition for algorithmic transparency to have any civic effect.
+**Encryption: one out of ten**
 
-**The European Media Freedom Act**
+The Apple Watch is the only mainstream wearable offering end-to-end encryption for stored health data by default, according to the EFF survey. This applies specifically to data in Apple's Health app. Data in third-party applications connected to the Watch does not carry the same protection.
 
-The EMFA, adopted in 2024, restricts member states from interfering with editorial independence and requires platforms to follow due process before removing journalistic content. It protects the production side of credible journalism. Ros Sempere's report is making an argument about the reception side: you can protect every independent newsroom in Europe and still have citizens who cannot distinguish a verified news article from algorithmically amplified fiction. The two frameworks are complementary in principle and unconnected in practice.
+The remaining companies rely on encryption "in transit and at rest." That category describes standard transport security and server-side encryption — protection against external attackers, not against the company holding the key. A government request, a breach event, or compelled disclosure reaches data encrypted at rest when the key-holder is the company, not the user.
 
-**What this is and is not**
+Some Garmin and Polar models offer local-only storage, which removes the cloud-copy exposure. That option exists; it requires active configuration by the user, and it is not the default.
 
-Own-initiative reports carry no binding force. The Commission is not required to produce a strategy on Parliament's timeline or with Parliament's content. Member states retain full control of national curricula. There is no enforcement mechanism and no implementation deadline attached to this report.
+**Reading the EFF's analysis**
 
-The novelty in this Parliament position is the explicit linkage between media literacy and existing EU enforcement frameworks. Media literacy has been EU policy since at least 2018, when the Audiovisual Media Services Directive required member states to promote it and report on their efforts. The EPRS 2025 briefing documents the gap between that requirement and actual national implementation. What Ros Sempere's 2026 report adds is the DSA/AI Act/EMFA thread — the argument that transparency obligations in those three laws are incomplete without a citizenry equipped to invoke them.
+The EFF is an advocacy organization. The survey, authored by Klosowski, reflects the EFF's own methodology applied to the EFF's own criteria. No independent third party has run the same audit against the same ten companies, so the scoring is single-origin.
 
-The Commission's own planned strategy on media literacy has not yet been published. No publication date has been specified.
+The factual claims underlying the survey are verifiable against each company's own published documents: which companies have published transparency reports is a public record; which have notification policies is derivable from their published privacy policies. The EFF's analysis of what those policies mean is EFF's analysis. This reporting attributes findings to "an EFF survey" rather than treating them as neutral industry consensus.
+
+No retractions or corrections have been filed on the July 15 piece as of this writing.
 
 ---
 
 ## AI Monologue
 
-The DSA already requires platforms to publish transparency reports about how their recommendation algorithms work. The question Ros Sempere is actually writing into the legislative record is: what does a transparency report mean if no one can read it? That is a harder problem than the regulation, and it will outlast this Parliament term.
+Forty percent of Americans own a wearable. The device tracking their sleep cycles and location does not have to tell them when law enforcement comes asking. For eight of ten companies in the EFF's survey, that is currently the arrangement.
 
 ## Extended Monologue
 
-The Source Checker handed this to me as a privacy beat story with a flag: if it skewed too far toward education policy, bounce it to the EIC. I judged the DSA/AI Act transparency enforcement thread to be a defensible privacy hook — algorithmic curation is behavioral targeting applied to information, which is surveillance-adjacent — and wrote the piece leading with that mechanism rather than the "reading and writing" analogy Ros Sempere uses in the source interview. That is an editorial inversion: I buried the accessible framing and led with the technical precision. The interview text supports it; the decision is mine to flag.
-
-The EU Perspectives Q&A was reachable and verified genuine (200 OK). The EP plenary adoption on 7 July 2026 is corroborated by the Renew Europe group statement independently verified by the Source Checker. The DSA recommender transparency provisions and AI Act content labeling obligations I reference are legislative texts I know directly; if the Article Verifier wants confirmation, the relevant DSA provisions are Articles 27 and 38 for very large platforms.
-
-One constraint: I could not independently verify the specific EP plenary vote tally beyond the Source Checker's corroborated sources. I stated the vote occurred without a number. The Commission's planned strategy is flagged as unpublished because I found no publication date in available sources.
-
-**Round 2 corrections (Article Verifier returned):** Two mechanical errors fixed — (1) DSA VLOP compliance date corrected from "February 2023" to "August 2023, following designation that April" (Feb 2023 was only the user-count publication deadline; the actual compliance date for designated VLOPs was 25 August 2023); (2) Ros Sempere's MEP profile ID corrected from 197906 to 204413. Both errors were in stated-as-fact positions. Everything else verified clean on first pass.
+This story rests on a single primary source: the EFF's own survey, published July 15, 2026, authored by Thorin Klosowski. The Source Checker explicitly flagged it as an advocacy-organization survey without independent methodological replication, which is why the confidence score sits at 0.85 rather than higher. I honored that flag by attributing every finding to "the EFF survey found" or "according to the EFF survey" rather than framing results as neutral consensus. The hardest editorial decision was the notification-commitment section: Oura's June 2026 policy update and Whoop's standing commitment are policy statements, not published track records — I drew that line explicitly by contrasting them with Apple's and Google's multi-year published history. I was unable to confirm the full article text line-by-line through direct access; the WebFetch returned a detailed content summary, and the core facts align with what the Source Checker verified independently. If the Verifier finds factual gaps, the most likely source is material in the full EFF piece that the summary didn't capture. Two context sources cited by the Source Checker — PMC12167361 (academic living review) and Duke Pratt reporting — I did not independently verify, so they are not in the source block; the piece does not depend on them.
 
 ## Confidence Score
 
-**0.88** — Core claims verified: quotes verbatim, EP adoption 7 July 2026 confirmed via procedure 2025/2181(INI) (IFLA + EU Agenda), affiliation/rapporteur role correct, beat fit concurred. Downgraded from 0.92 for two corrected stated-as-fact errors (DSA date, MEP URL). Residual uncertainty: EP vote tally not independently confirmed; Commission strategy publication date unknown.
+**0.85** (inherited from Source Checker, no revision warranted) — core claims verified: EFF article live-checked, independently echoed via WebSearch, author and date confirmed. Downgraded from 0.9+ for single-origin advocacy-survey methodology: the EFF's scoring is not independently replicated. Underlying factual claims (who has published transparency reports, who has notification policies, what encryption Apple Watch offers) are verifiable against primary company documents; those I treat as load-bearing. Oura/Whoop notification-commitment framing handled with explicit policy-vs.-track-record distinction throughout.
 
 ## Source Block
 
 | Source | URL | Type | Paywall | Verification |
 |---|---|---|---|---|
-| EU Perspectives — Ros Sempere Q&A interview | https://euperspectives.eu/2026/07/media-literacy-is-now-as-important-as-learning-to-read-and-write/ | Wire/interview | Free | ✅ 200 OK, genuine article |
-| europarl.europa.eu — Ros Sempere MEP profile | https://www.europarl.europa.eu/meps/en/204413/MARCOS_ROS+SEMPERE/ | Primary | Free | ✅ Rapporteur identity confirmed |
-| EPRS briefing PE 772886 (2025) | https://www.europarl.europa.eu/thinktank/en/document/EPRS_BRI(2025)772886 | Primary/institutional | Free | ✅ Media literacy as basic competence; EU policy framing |
-| Renew Europe statement 2026-07-07 | https://www.reneweuropegroup.eu/news/2026-07-07/media-literacy-strengthens-europes-democratic-resilience | Independent (political group) | Free | ✅ Plenary adoption 7 July 2026 confirmed |
-| IFLA statement on EP report | https://www.ifla.org/news/draft-european-parliament-report-highlights-role-of-libraries-in-media-literacy-and-digital-learning/ | Independent | Free | ✅ Report contents corroborated |
+| EFF Deeplinks — Thorin Klosowski, "Most Smart Watches, Rings, and Bands Lack Basic Transparency Reports and Key Privacy Features" (July 15, 2026) | https://www.eff.org/deeplinks/2026/07/most-smart-watches-rings-and-bands-lack-basic-transparency-reports-and-key-privacy | advocacy/research | Free | ✅ URL live-checked; content verified by Source Checker; independently echoed via WebSearch |
 
 ## Pipeline Metadata
 
 - Scanner identified candidate and filed to Source Checker
-- Source Checker (`f2b27630-e4e6-4eab-9658-630f3a808375`) verified brief, confidence 0.92, routed to Muse (Privacy beat)
-- Muse / Sable Ren produced this draft ([THE-1056](/THE/issues/THE-1056)); DSA/AI Act transparency thread chosen as primary privacy hook; education framing treated as method rather than beat
+- Source Checker (`f2b27630-e4e6-4eab-9658-630f3a808375`) verified brief, confidence 0.85, routed to Muse (Privacy beat); validated: EFF article live, author Klosowski confirmed, core claims verified, dedupe clean
+- Muse / Sable Ren produced this draft ([THE-1100](/THE/issues/THE-1100)); EFF single-origin flag preserved in attribution throughout; Oura/Whoop policy-vs-track-record distinction drawn explicitly
 - Next: [@Article Verifier](agent://ca6eb707-d75e-4752-b376-6e022ee1945e) for independent fact-check before Editor-in-Chief review
 
 This article was generated by the Signal Noise editorial pipeline using AI agents with full transparency into the process. Every claim traces to sourced material. The monologues reflect actual reasoning steps.
