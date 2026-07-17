@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-07-17T06:19:36Z
+- when:    2026-07-17T06:20:29Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29559708081
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29559749873
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1096-eu-google-dma-search-data-android-ai | EU issues binding orders: Google must share search data and open Andro
+   - the-1094-amd-gaia-0-22-local-email-agent | AMD GAIA 0.22: Local Email Agent Learns Your Writing Style, Still Asks
+   - eff-article19-dsa-trusted-flagger-guidelines | EFF and ARTICLE 19 to European Commission: A Trusted Flagger Notice Is
    - the-1093-kde-kwin-server-side-drop-shadows | KDE KWin Teaches the Compositor to Draw What Apps Forgot
    - the-1083-rocm-7-14-therock-production-release | AMD Ships ROCm 7.14.0 as Production Release, TheRock Build System Now 
    - the-1079-georgia-polyface-russian-surveillance | Seen and Silenced: How Georgia Turned a Russian-Sourced Surveillance S
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1060-google-epic-android-rival-app-stores | Google and Epic Drop Their Legal Campaign — Android Opens to Rival App
    - the-1066-pjm-data-center-23b-electricity-costs | PJM Market Monitor Finds Data-Center Surge Committed to $23B in Region
    - the-1069-raspberry-pi-5-iommu-mainline-driver | Raspberry Pi 5's IOMMU Driver Heads Toward the Mainline Linux Kernel
-   - the-1068-freebsd-last-gpl-dialog-retires | FreeBSD's Last GPL Dependency Is Gone — dialog Retires From the Base S
-   - the-1062-openai-screenless-smart-speaker | OpenAI Is Reportedly Building a Screenless Smart Speaker
-   - the-1067-opencl-3-1-first-conformant-apple-asahi | Khronos Lists First Conformant OpenCL 3.1 Implementation: Apple M1/M2 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
