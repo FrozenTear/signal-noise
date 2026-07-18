@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-17T06:26:31Z
+- when:    2026-07-18T06:13:21Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29560034069
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29633611108
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1092-frame-x11-server-in-assembly | Someone Rewrote an Entire X11 Server in Pure Assembly. Then Did the Sa
    - the-1100-eff-wearable-transparency-reports-survey | EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enfor
    - the-1095-hp-india-cci-cartel-fine | India's CCI fines HP India ₹142 crore for facilitating bid-rigging car
    - ca-ab-1856-age-gating-expansion-walkback | California Steps Back From Dangerous Expansion of Its Age-Gating Law
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1078-fifa-world-cup-abuse-surge-deepfake | FIFA's World Cup Saw a 13-Fold Surge in Online Abuse — and an AI Deepf
    - the-1065-eu-us-adequacy-review-after-slaughter | When the Facts Change, Adequacy Must Be Reviewed
    - the-1061-meta-layoff-algorithm-ai-lawsuit | Meta's Layoff Algorithm: Employees Sue, Claiming AI Scored Who Got Cut
-   - the-1064-fsb-center-16-router-hijacking | Thirteen Nations Warn FSB Center 16 Is Hijacking Poorly-Secured Networ
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
