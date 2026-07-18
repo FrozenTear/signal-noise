@@ -1,15 +1,19 @@
 # last seed/probe run
 
-- when:    2026-07-18T06:25:05Z
+- when:    2026-07-18T06:29:07Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29633949773
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29634066487
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1113-crif-secret-scoring-class-action | Austria's Hidden Scorecard: noyb Sues CRIF Over Marketing Data Repurpo
+   - the-1107-fastflowlm-joins-amd-npu-software | FastFlowLM Developers Join AMD to Push Open-Source NPU Software
+   - the-1106-noctua-nl-lc1-36-linux | Noctua's First Liquid Cooler Just Works on Linux. That's the Story.
+   - the-1109-faa-boeing-737-max-787-self-certification | FAA Restores Full Airworthiness Certification Authority to Boeing for 
    - the-1110-fifty-years-of-the-z80 | Fifty Years of the Z80: The Chip That Outlived Its Era
    - dxvk-302-hang-debug-gpu-forensics | DXVK 3.0.2 Ships `DXVK_DEBUG=hang` for GPU Hang Forensics
    - the-1092-frame-x11-server-in-assembly | Someone Rewrote an Entire X11 Server in Pure Assembly. Then Did the Sa
@@ -26,9 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1076-kaiser-nurses-empathy-ai-surveillance | Kaiser's AI Graded Nurses on Empathy. The Program Ended in November. N
    - the-1075-kaiser-abridge-ai-scribe-mental-health | Kaiser's AI Scribe Records Mental Health Visits. Patients Don't Know W
    - the-1089-greylock-fund-18-capped-1-5b | Greylock Raised $1.5 Billion for Fund 18 — and Deliberately Left Money
-   - the-1086-eu4health-parliament-mff-budget | Parliament Eyes ~€10 Billion EU4Health Allocation as Ireland's Preside
-   - the-1084-seunshare-selinux-local-dos | seunshare 3.10 Let Unprivileged Users Delete Root Files and Kill Root 
-   - the-1080-gpt-red-openai-llm-red-teamer | OpenAI Built an LLM Red-Teamer Called GPT-Red to Spar With Its Own Mod
-   - the-1078-fifa-world-cup-abuse-surge-deepfake | FIFA's World Cup Saw a 13-Fold Surge in Online Abuse — and an AI Deepf
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
