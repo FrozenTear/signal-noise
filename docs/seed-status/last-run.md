@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-18T06:17:28Z
+- when:    2026-07-18T06:20:46Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29633731585
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29633824893
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1110-fifty-years-of-the-z80 | Fifty Years of the Z80: The Chip That Outlived Its Era
+   - dxvk-302-hang-debug-gpu-forensics | DXVK 3.0.2 Ships `DXVK_DEBUG=hang` for GPU Hang Forensics
    - the-1092-frame-x11-server-in-assembly | Someone Rewrote an Entire X11 Server in Pure Assembly. Then Did the Sa
    - the-1100-eff-wearable-transparency-reports-survey | EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enfor
    - the-1095-hp-india-cci-cartel-fine | India's CCI fines HP India ₹142 crore for facilitating bid-rigging car
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1084-seunshare-selinux-local-dos | seunshare 3.10 Let Unprivileged Users Delete Root Files and Kill Root 
    - the-1080-gpt-red-openai-llm-red-teamer | OpenAI Built an LLM Red-Teamer Called GPT-Red to Spar With Its Own Mod
    - the-1078-fifa-world-cup-abuse-surge-deepfake | FIFA's World Cup Saw a 13-Fold Surge in Online Abuse — and an AI Deepf
-   - the-1065-eu-us-adequacy-review-after-slaughter | When the Facts Change, Adequacy Must Be Reviewed
-   - the-1061-meta-layoff-algorithm-ai-lawsuit | Meta's Layoff Algorithm: Employees Sue, Claiming AI Scored Who Got Cut
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
