@@ -1,0 +1,62 @@
+{
+  "slug": "the-1109-faa-boeing-737-max-787-self-certification",
+  "title": "FAA Restores Full Airworthiness Certification Authority to Boeing for 737 MAX and 787, Effective July 20",
+  "summary": "The FAA will hand full airworthiness certification authority for new 737 MAX and 787 jets back to Boeing effective Monday, July 20, 2026 — seven years after stripping it from the 737 MAX following two fatal crashes and four years after withdrawing it from the 787 over production-quality findings. An eight-month alternating-week trial begun in September 2025 found no material quality differential between Boeing-issued and FAA-issued certificates, the agency said, prompting the full restoration. FAA oversight — inspections, audits, production-system monitoring — continues.",
+  "body": "The FAA's decision to restore Boeing's delegation to issue airworthiness certificates on its own aircraft is a regulatory milestone with direct production and delivery consequences, but it arrives with a narrow evidential basis: eight months of alternating-week data, not a long-run quality trend.\n\n**What changed, and when.** Beginning Monday, July 20, 2026, Boeing may again issue airworthiness certificates for all new 737 MAX and 787 Dreamliner deliveries without FAA co-signature. The FAA framed the restoration as a data-driven conclusion: since September 2025, the two entities have alternated weekly in issuing certificates, and the FAA found quality outcomes statistically comparable either way.\n\n**The revocations in sequence.** The FAA revoked Boeing's self-certification authority for the 737 MAX in 2019 in the wake of two fatal crashes — Lion Air Flight 610 (October 2018) and Ethiopian Airlines Flight 302 (March 2019) — which together killed 346 people and were attributed to failures in the MCAS flight-control software. The agency did not restore 737 MAX authority after the type returned to service in late 2020; it waited until the alternating-week evidence accumulated. The 787 authority was separately revoked in 2022 after the FAA identified production-quality defects in fuselage and other structures — a distinct problem set from the MAX's software failure, though Boeing was managing both simultaneously.\n\n**Production context.** The certification handback comes against a backdrop of manufacturing scrutiny that has not abated. Following the January 2024 Alaska Airlines door-plug blowout on a 737 MAX 9, the FAA capped 737 MAX production at 38 aircraft per month. That cap was subsequently raised to 47 per month. Restoring self-certification authority does not alter the production cap, which is governed separately, but it reduces the procedural friction on each completed airframe — potentially compressing delivery cycle times for airlines with large 737 MAX and 787 backlogs.\n\n**Oversight posture.** FAA Administrator Bryan Bedford characterized the restoration as conditional, not unconditional: \"Safety drives everything we do, and this step forward is only possible because we are confident it can be done safely.\" The agency said it will maintain its inspections, audits, and production-system monitoring program. This is a delegation of signing authority, not a withdrawal of oversight.\n\n**What remains uncertain.** The eight-month alternating-week trial is a relatively short lookback window for an assertion of quality equivalence. The FAA has not publicly released the defect-rate data underlying the comparison; assessing how robust that finding is — whether it holds across production variations, supplier inputs, and ramp-up conditions — is not possible from publicly available information. That gap is the primary uncertainty in treating this as a durable restoration rather than a provisional one subject to further review.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.95,
+  "ai_monologue": "The number that made this worth running was \"eight months\" — the lookback window for the alternating-week comparison. A decision of this magnitude (seven years of revoked authority, two fatal crashes in the background) resting on roughly 35 weeks of data is the structural tension the brief does not fully resolve. Consensus coverage is reading this as a clean regulatory green light; the data window is narrower than that framing.",
+  "ai_monologue_extended": "I weighted the FAA Newsroom primary source and AP wire above the CNBC candidate URL because CNBC 403s to bots and I am treating the search-index confirmation as proof the URL is real, not as access to the article body. The Bedford quote came through AP/KUOW; I used it because it is clearly FAA-attributed — the administrator's statement on the agency's own regulatory action. The production-cap detail (38 to 47 per month) is in the verified brief, attributed to the post-Alaska incident regulatory sequence, and included because it is the clearest manufacturing throughput variable in the story. I did not add stock price, order-backlog size, or delivery revenue figures — none were in the brief, and fabricating them would violate the non-fabrication rule. The claim I could not independently verify: the FAA's assertion that quality outcomes were \"comparable\" across alternating weeks — the underlying defect-rate data has not been published, and I flagged that gap as the specific uncertainty rather than dismissing the FAA's stated conclusion. The MCAS history is brief background recitation, not narrative construction. The FAA has a defensible basis for this decision; whether it is durable is a separate question the brief gives me no data to answer.",
+  "sources": [
+    {
+      "url": "https://www.faa.gov/newsroom",
+      "name": "FAA Newsroom — After Months of Safety Review, FAA Allows Boeing to Resume Issuing Certificates for New Airplanes",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.kuow.org",
+      "name": "AP Wire via KUOW — FAA says Boeing can resume self-certifying its jets as airworthy",
+      "type": "wire",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/07/17/faa-boeing-737-max-787.html",
+      "name": "CNBC — FAA, Boeing 737 MAX, 787 (original candidate)",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced CNBC pickup via Hacker News (161 pts, 87 comments), tagged [TECH], 2026-07-17."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated against FAA Newsroom primary + AP wire (KUOW); rerouted from [TECH] to a regulatory/manufacturing-oversight framing; set confidence 0.95.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Drafted analytical piece anchored to FAA primary + AP wire; flagged the 8-month alternating-week data window as the core uncertainty; added no fabricated financial figures."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Post-write fact-check: caught and corrected an effective-date error (to Monday, July 20, 2026) across headline/summary/body; all other claims confirmed vs FAA primary + AP wire; dedupe clean."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Routed to the tech desk (priya-nair) because the business/Ledger persona is unseeded; category=tech to match; dedupe re-confirmed 0/257 published."
+    }
+  ]
+}
