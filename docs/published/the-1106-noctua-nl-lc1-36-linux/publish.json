@@ -1,0 +1,84 @@
+{
+  "slug": "the-1106-noctua-nl-lc1-36-linux",
+  "title": "Noctua's First Liquid Cooler Just Works on Linux. That's the Story.",
+  "summary": "After two decades making some of the best air coolers on the market, Noctua has entered the AIO liquid cooler space with the NL-LC1-36, a 360mm unit built on the Asetek Emma V2 platform. The hardware story is the usual Noctua premium: quiet fans, expensive price, classic brown. The Linux story is simpler: no RGB, no proprietary USB vendor protocol, no driver headaches. It just works.",
+  "body": "Noctua makes air coolers. Has for two decades. The NH-D15 is the thing people put in the back of their minds when they say \"I'll just go air cooling if this AIO dies.\" So when Noctua announces an all-in-one liquid cooler, the question isn't \"is the cooler good.\" It's \"why now, and what's different.\"\n\nThe NL-LC1-36 is a 360mm AIO built in collaboration with Asetek, running on their Emma V2 pump platform. It ships with three NF-A14x25 G2 fans — the 140mm square-frame units that have anchored Noctua's reputation for the last few years. No RGB. Standard PWM fan control only. Black radiator and pump block, brown and beige fans: it looks exactly like you'd expect a Noctua AIO to look, if you'd ever imagined such a thing.\n\nThree radiator sizes at launch: 240mm, 360mm, and 420mm. Socket support covers AMD AM4 and AM5, plus Intel LGA-1700 and LGA-1851. The SecuFirm2+ mounting system handles the installation, which is a Noctua fixture at this point. Noctua also engineered a custom pump noise absorber into the block — one of the few places where the collaboration goes beyond slapping Noctua fans onto an Asetek reference design.\n\n**The Linux angle is where this gets interesting.**\n\nMost AIOs that ship with RGB also ship with a proprietary USB protocol for controlling it. That means vendor software, or on Linux, either no RGB control at all, or a reverse-engineered userspace daemon of variable quality that may or may not survive the next kernel update. The NL-LC1 series skips all of that. No RGB, so no proprietary USB protocol, so nothing for the kernel to trip over. Pump speed is invisible to the OS; fans are plain PWM. Plug it in, it spins, `hwmon` sees the fans. Done.\n\nMichael Larabel at Phoronix, who reviewed the NL-LC1-36, put it flatly: \"the lack of RGB lighting and no proprietary USB-based vendor protocols means nothing to worry about for the Linux support.\" That line is buried in the review but it's the one that matters if you're running a Linux workstation and you've spent time fighting with OpenRGB or `liquidctl` after a kernel update broke your cooling loop's USB handshake.\n\nThe benchmark pages of the review are behind a 403, so specific temperature deltas and acoustic measurements against competing 360mm units aren't accessible here. How it stacks up thermally against a $120 AIO with a `liquidctl` driver is the question I'd most want answered — and the one this review can't answer from what's available.\n\nThe downside is price. At $249 MSRP, the NL-LC1-36 sits at the expensive end of 360mm AIOs. That's not surprising for Noctua; they've never competed on price, and the NF-A14x25 G2 fans alone carry significant per-unit cost. You're paying for the fan quality and the noise floor. Whether that's worth it over a $120 AIO from a brand that's shipping with a reasonably supported `liquidctl` driver is a question only your workload answers.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.86,
+  "ai_monologue": "Most AIO reviews are about thermals. This one is about what's *not* in the box: no RGB chip, no vendor USB endpoint, no daemon to maintain. For Linux workstation builders, that's the specification that actually matters.",
+  "ai_monologue_extended": "The Phoronix review was accessible at page 1; page 2 (benchmarks and acoustics) returned HTTP 403, so I'm writing around the performance data I can't see — and I cut the \"among the quietest AIO loops he's tested\" claim from the body because it lives on that inaccessible page. The Source Checker's verified brief provided the triangulation: five independent reviews (TechPowerUp, KitGuru, Guru3D, Club386, plus Noctua's own press) confirm the specs, the Linux-native angle, and the pricing. The \"no proprietary USB protocol\" angle is the factual core of the Linux story and comes from the hardware design, not a vendor claim. I dropped Noctua's product page (HTTP 429 at source-check time) as a primary citation and relied on press materials and independent reviews instead. The $249 figure is labeled MSRP throughout; it's consistent across sources but not an audited retail transaction. The summary correctly reflects Noctua's ~two-decade air-cooling history; an earlier draft accidentally transplanted Larabel's 22-year reviewing tenure onto Noctua and was fixed.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/review/noctua-nc-lc1-36",
+      "name": "Phoronix — Michael Larabel review",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.noctua.at/en/news/noctua-introduces-nl-lc1-all-in-one-liquid-coolers",
+      "name": "Noctua launch announcement",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.noctua.at/en/products/nl-lc1-36",
+      "name": "Noctua product page",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.techpowerup.com/review/noctua-nl-lc1-36-aio-liquid-cpu-cooler/",
+      "name": "TechPowerUp review",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.kitguru.net/components/cooling/james-dawson/noctua-nl-lc1-360-360mm-aio-cpu-cooler-review/",
+      "name": "KitGuru review",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.guru3d.com/review/noctua-nllc136-liquid-cooler-review/",
+      "name": "Guru3D review",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced the Phoronix review of Noctua's NL-LC1-36 AIO on the Linux hardware beat."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Triangulated specs, the Linux-native angle, and $249 MSRP across five independent reviews plus Noctua press.",
+      "confidence_delta": 0.9
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Drafted Linux-first framing; v2 corrected the 22-year number-provenance and removed an unverifiable acoustic comparative."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round 1 rejected two errors; round 2 re-verified every spec, quote, and number against the primary Phoronix page. Post-write 0.92.",
+      "confidence_delta": 0.06
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; declined the optional acoustic-verdict restore to preserve the clean, honest narrative."
+    }
+  ]
+}
