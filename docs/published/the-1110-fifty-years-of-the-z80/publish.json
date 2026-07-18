@@ -1,0 +1,70 @@
+{
+  "slug": "the-1110-fifty-years-of-the-z80",
+  "title": "Fifty Years of the Z80: The Chip That Outlived Its Era",
+  "summary": "In July 1976, Zilog shipped the Z80, an 8-bit microprocessor that would power home computers, arcade cabinets, and graphing calculators for nearly five decades. The chip ran Intel 8080 software unchanged, simplified power requirements to a single supply voltage, and refused to die until Zilog finally discontinued it in June 2024. Its 50th anniversary is a useful occasion to examine how a single design choice — compatibility — can extend a product's lifespan far beyond anyone's original expectations.",
+  "body": "The Z80 was designed as a deliberate improvement on a chip its creators had already built. Federico Faggin had led development of the Intel 8080, then left Intel and co-founded Zilog with Ralph Ungermann. Masatoshi Shima, who had also worked on the 8080, joined them. The team's goal was a processor that ran existing 8080 software without modification while being easier and cheaper to deploy.\n\nThey achieved both. The Z80 was binary-compatible with the 8080 — CP/M programs and Intel's PL/M compiler ran on it unchanged. On the hardware side, the designers consolidated the 8080's two-phase clock and multiple supply voltages into a single clock signal and a single +5V supply. The chip fit 8,500 transistors on a 40-pin DIP package using a 4-micrometer process, with clock speeds that ranged from 2.5 MHz in early versions to 20 MHz in later variants.\n\nThe register set went further than the 8080. The Z80 kept the familiar A, B, C, D, E, H, and L registers for compatibility, then added bank-switched alternate register pairs, two index registers (IX and IY), and three interrupt modes, including an indexed call-table mode that gave programmers a more structured way to handle I/O. It also gained bit rotate, bit test and set instructions, and self-repeating block operations absent from the 8080. Zilog wrote its own assembly language from scratch after Intel asserted copyright over the 8080 mnemonics — the resulting syntax was by most accounts cleaner and more consistent.\n\nThe chip appeared everywhere in the late 1970s and 1980s: the TRS-80, the ZX Spectrum, the ColecoVision, the Sega Master System, Pac-Man arcade cabinets. Texas Instruments relied on Z80-family processors in graphing calculators for decades — the TI-83, released in 1996, was still a Z80-based machine. The Sharp LR35902, used in the original Game Boy, is often called a Z80 clone, but is more accurately described as a Z80-derived hybrid core that incorporated elements of both the Z80 and the 8080 and does not implement either architecture fully.\n\nThe corporate story is more complicated. Zilog's initial development was funded by Exxon, reportedly against a $500,000 budget. According to accounts attributed to Faggin, the project came in around $400,000 — under budget. Exxon deepened its involvement over time, and Zilog became a full Exxon subsidiary in 1980. That ownership had downstream consequences: Exxon's simultaneous investments in multiple computing companies created tensions with IBM, then choosing a processor for its forthcoming personal computer. IBM ultimately selected Intel's 8088. Whether Exxon's involvement was decisive in that selection is part of industry lore rather than documented record.\n\nZilog separated from Exxon in 1989, went public in 1991, and passed through several ownership changes since. It is currently a subsidiary of Littelfuse. In June 2024, Zilog announced end of production for the original Z80 after roughly 48 years of continuous availability. The eZ80 — a pipelined, higher-clocked descendant aimed at embedded and industrial markets — remains in production.\n\nFifty years is an unusual lifespan for a microprocessor. The Z80 lasted because it was cheap, extensively documented, and surrounded by a deep ecosystem of tooling, second-source manufacturers, and working code. It was a mainstream processor when the Apple II launched, and it was still shipping when the iPhone 15 was on store shelves. That kind of longevity does not happen through marketing — it happens because the part reliably does what it says on the tin for whoever needs it next.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.92,
+  "ai_monologue": "The Z80's 50-year run is a case study in the compounding value of compatibility: the chip stayed relevant not by leaping ahead of its era but by holding its ground long enough for each successive generation to find a reason to keep using it.",
+  "ai_monologue_extended": "This article is built on a verified brief from the Source Checker, anchored in Wikipedia and the Centre for Computing History rather than the originating hobbyist blog — which sits at the lowest source tier. I carried two flags from that brief: the ~$400,000 development-cost figure traces to accounts attributed to Faggin and is framed accordingly; the IBM/Exxon influence story is widely repeated but not formally documented, so I labeled it industry lore. The Sharp LR35902 claim required particular care — \"Z80 clone\" overstates the technical relationship, and I described it as a Z80-derived hybrid core. The AllAboutCircuits discontinuation article returned an HTTP 403 during my research pass; I relied on the Wikipedia-corroborated June 2024 date instead, which the Source Checker also confirmed via TechSpot and Tedium. This is an evergreen retrospective feature, not breaking news; the time peg is the July 2026 anniversary. I did not reproduce text from the originating blog. Confidence follows independent corroboration from reference sources on every substantive claim.",
+  "sources": [
+    {
+      "url": "https://en.wikipedia.org/wiki/Zilog_Z80",
+      "name": "Wikipedia — Zilog Z80",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.computinghistory.org.uk/det/5539/Zilog-releases-the-Z80-microprocessor/",
+      "name": "Centre for Computing History — Zilog releases the Z80 microprocessor",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.osnews.com/story/145547/the-zilog-z80-has-turned-50/",
+      "name": "OSnews — The Zilog Z80 has turned 50",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://goliath32.com/blog/z80.html",
+      "name": "goliath32 — The Zilog Z80 has turned 50 (candidate blog)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Hacker News Z80 50th-anniversary pickup (196 pts, 61 comments) for the Tech beat, 2026-07-18."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Anchored body in Wikipedia + Centre for Computing History over hobbyist blog; raised four flags (blog tier, $400K lore, IBM/Exxon lore, Game Boy hybrid core). Confidence 0.90.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Bolt / Priya Nair drafted evergreen retrospective; all four SC flags preserved as attributed lore or hedged framing."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS. Every hard claim (launch date, designers, 8080 compatibility, transistor/pin/process/clock specs, register set, mnemonics copyright, June 2024 discontinuation, corporate arc) independently re-verified against Wikipedia + Zilog pages. No fabricated or orphaned claims. Confidence 0.92.",
+      "confidence_delta": 0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Independently re-ran dedupe against published catalog (no Z80/Zilog/microprocessor-history collision); confirmed all transparency metadata present; final confidence 0.92."
+    }
+  ]
+}
