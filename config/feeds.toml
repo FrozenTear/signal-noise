@@ -116,52 +116,24 @@ type = "primary"
 priority = "high"
 
 [[feed]]
-url = "https://www.canary.media/feed.xml"
+url = "https://www.canarymedia.com/rss.rss"
 name = "Canary Media"
 beat = "climate"
 type = "wire"
 priority = "high"
 
 [[feed]]
-url = "https://heatmap.news/rss.xml"
+url = "https://heatmap.news/feeds/feed.rss"
 name = "Heatmap News"
 beat = "climate"
 type = "wire"
 priority = "high"
 
 [[feed]]
-url = "https://insideclimatenews.org/feed/"
-name = "Inside Climate News"
-beat = "climate"
-type = "primary"
-priority = "medium"
-
-[[feed]]
-url = "https://www.eenews.net/ert/feed/"
+url = "https://www.eenews.net/feed"
 name = "E&E News Energy"
 beat = "climate"
 type = "wire"
-priority = "medium"
-
-[[feed]]
-url = "https://feeds.reuters.com/reuters/businessNews"
-name = "Reuters Climate & Energy"
-beat = "climate"
-type = "wire"
-priority = "medium"
-
-[[feed]]
-url = "https://www.iea.org/news/feed.xml"
-name = "IEA News"
-beat = "climate"
-type = "primary"
-priority = "medium"
-
-[[feed]]
-url = "https://irena.org/-/media/Project/Irena/Homepage/News/Press-Release/IRENA-press-releases-en.xml"
-name = "IRENA"
-beat = "climate"
-type = "primary"
 priority = "medium"
 
 # ─── AI in Society ───────────────────────────────────────────────────────────
