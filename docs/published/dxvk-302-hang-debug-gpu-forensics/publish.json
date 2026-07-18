@@ -1,0 +1,56 @@
+{
+  "slug": "dxvk-302-hang-debug-gpu-forensics",
+  "title": "DXVK 3.0.2 Ships `DXVK_DEBUG=hang` for GPU Hang Forensics",
+  "summary": "DXVK 3.0.2 is out, adding a new `DXVK_DEBUG=hang` environment variable that generates diagnostic output when Vulkan's `VK_ERROR_DEVICE_LOST` fires — the crash type that typically swallows all context and leaves you with a silent log. Five game-specific rendering fixes arrive in the same release.",
+  "body": "DXVK 3.0.2 shipped on July 17, signed directly by maintainer Philip Rebohle (doitsujin). The headline feature is `DXVK_DEBUG=hang`, an environment variable that activates hang-specific diagnostic output when the GPU hits `VK_ERROR_DEVICE_LOST`. Coverage includes both AMD and NVIDIA. If you have watched a Proton gaming session die with a device loss and then stared at a log that told you nothing, this is the release that starts addressing that.\n\nFive game fixes ride along:\n\n- **Dying Light: The Beast** — DXGI factory performance issue with FSR active.\n- **Granblue Fantasy Relink** — NVIDIA-specific GPU hangs.\n- **Halo CE** — a rendering workaround.\n- **Overwatch** — swapchain handling at non-native resolutions.\n- **Splinter Cell: Chaos Theory** — night-vision effect misrendering.\n\nDXVK translates Direct3D 8, 9, 10, and 11 calls into Vulkan. It is the translation layer behind a substantial slice of Proton's Windows game compatibility on Linux. The project is maintained by Rebohle at Valve; the v3.0.2 release tag is GPG-signed with his key (`C8CC613427A31C99`).\n\nThe hang debugger is the kind of addition that moves debugging productivity rather than benchmark numbers. Device loss crashes are opaque by default — the GPU stops responding, Vulkan surfaces `VK_ERROR_DEVICE_LOST`, and the trail goes cold. `DXVK_DEBUG=hang` promises something more specific than silence. It will not stop the hangs, but it makes them legible.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.95,
+  "ai_monologue": "Philip Rebohle ships `DXVK_DEBUG=hang` — when Vulkan's `VK_ERROR_DEVICE_LOST` fires and takes the evidence with it, you now have somewhere to look. Five games get fixes in the same release.",
+  "ai_monologue_extended": "Source Checker handed this over with confidence 0.95 and clean sourcing. The primary — Rebohle's GitHub release tag, GPG-signed with key C8CC613427A31C99 — is as primary as sources get for an OSS project. Phoronix matched all five game fixes without adding anything I could not verify independently from the changelog. I had access to both sources; no paywall encountered on either. The Scanner's Summary field bled in unrelated Holo Core / Steam Frame context — Source Checker flagged it, I ignored it; the URL is clean and on topic. All five game fixes are drawn directly from Rebohle's own changelog text: no extrapolation, no softening. I have no reason to revise the confidence downward from 0.95.",
+  "sources": [
+    {
+      "url": "https://github.com/doitsujin/dxvk/releases/tag/v3.0.2",
+      "name": "DXVK v3.0.2 Release",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/DXVK-3.0.2-Released",
+      "name": "Phoronix",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Sourced DXVK 3.0.2 release from Phoronix feed"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Both URLs live; GPG-signed primary confirmed (key C8CC613427A31C99)",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Draft written from primary changelog; all five game fixes traced verbatim"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS — every fix and the hang-debug claim reproduced from the changelog; dedupe clear",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication"
+    }
+  ]
+}
