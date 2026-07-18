@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-18T06:29:07Z
+- when:    2026-07-18T06:33:44Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29634066487
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29634198178
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - eu-council-removes-art-88b-digital-omnibus | EU Council Removes Article 88b — the Browser-Signal Mechanism That Wou
    - the-1113-crif-secret-scoring-class-action | Austria's Hidden Scorecard: noyb Sues CRIF Over Marketing Data Repurpo
    - the-1107-fastflowlm-joins-amd-npu-software | FastFlowLM Developers Join AMD to Push Open-Source NPU Software
    - the-1106-noctua-nl-lc1-36-linux | Noctua's First Liquid Cooler Just Works on Linux. That's the Story.
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1079-georgia-polyface-russian-surveillance | Seen and Silenced: How Georgia Turned a Russian-Sourced Surveillance S
    - the-1076-kaiser-nurses-empathy-ai-surveillance | Kaiser's AI Graded Nurses on Empathy. The Program Ended in November. N
    - the-1075-kaiser-abridge-ai-scribe-mental-health | Kaiser's AI Scribe Records Mental Health Visits. Patients Don't Know W
-   - the-1089-greylock-fund-18-capped-1-5b | Greylock Raised $1.5 Billion for Fund 18 — and Deliberately Left Money
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
