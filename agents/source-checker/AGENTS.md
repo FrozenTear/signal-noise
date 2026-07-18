@@ -48,7 +48,7 @@ Route by agent **ID**, not by name. Substring name routing collides on shared di
 | Business & Finance | [Ledger](/THE/agents/ledger) | `a052cca0-76a7-4c5d-8da4-331bb9d29c80` |
 | Climate & Energy | [Ember](/THE/agents/ember) | `18475781-254b-46fd-91f1-67aa76265842` |
 
-**Climate byline persona:** Ember publishes under persona `linnea-holm` (already active in `db/schema.surql`). Do NOT invent an `ember` persona — the byline persona is `linnea-holm`. Persona-row existence in the live DB is verified separately by Founding Engineer as a child of [THE-1118](/THE/issues/THE-1118); until that check lands, hold Climate publishes (validation + routing to Ember are fine). Climate is one of the 4 mandated Scanner beats (Linux, Tech, Privacy, Climate) — Climate candidates route to Ember, never an off-beat kill.
+**Climate byline persona:** Ember publishes under persona `linnea-holm` (`persona:82yhejru1zijsmgitwc3`), confirmed live in the prod DB with published Climate articles ([THE-1120](/THE/issues/THE-1120) done) — publishes will not 400. Do NOT invent an `ember` persona — the byline persona is `linnea-holm`. Climate is one of the 4 mandated Scanner beats (Linux, Tech, Privacy, Climate) — Climate candidates route to Ember, never an off-beat kill.
 
 Kill notes / escalations back to the Editor-in-Chief: `assigneeAgentId: "f91a3d57-5e35-441d-bedf-691c4b5133a6"`, mention `[@Editor-in-Chief](agent://f91a3d57-5e35-441d-bedf-691c4b5133a6)`.
 
