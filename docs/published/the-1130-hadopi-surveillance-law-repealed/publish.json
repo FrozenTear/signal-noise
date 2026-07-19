@@ -1,0 +1,90 @@
+{
+  "slug": "the-1130-hadopi-surveillance-law-repealed",
+  "title": "France's Hadopi Surveillance Law: 2009–2026",
+  "summary": "On 30 April 2026, France's Conseil d'État ordered the government to repeal the core provisions implementing Hadopi's \"graduated response\" internet surveillance system, finding them incompatible with EU law. The court applied conditions the CJEU had set two years earlier and found France's 2010 implementing decree deficient on both counts. The third stage of Hadopi — the referral to prosecutors — is now suspended. The system ran for seventeen years before its own implementing decree ended it.",
+  "body": "France's Hadopi surveillance system no longer has the force of law. On 30 April 2026, the Conseil d'État — France's highest administrative court — ordered the government to abrogate the core provisions of the 2010 decree through which Arcom (formerly Hadopi) operated its \"graduated response\" anti-piracy regime.\n\nThe decision did not come without warning. Two years earlier, on 30 April 2024, the Court of Justice of the European Union had ruled in case C-470/21 that France's scheme for accessing subscriber IP addresses was permissible — but only if two conditions were met. Privacy advocates at the time called the 2024 ruling a setback. \"We now expect the Conseil d'État to save the Hadopi, despite this ruling,\" La Quadrature du Net wrote then.\n\nThe Conseil d'État spent the following two years examining whether the French decree actually met those conditions. On both counts, it did not.\n\n**What the Decree Was Missing**\n\nThe CJEU required that IP address data be stored in \"watertight\" compartments, isolated from civil identity data, and correlated only after a formal, independently reviewed access request. The 2010 decree contained no such requirement. Internet service providers were under no obligation to segregate the data. The compartment never existed.\n\nThe second condition was independent prior review before the third stage of the graduated response system — the moment at which Arcom cross-references a subscriber's civil identity, IP address, and the alleged pirated work, then issues a registered letter and potentially refers the matter to prosecutors. The 2010 decree gave Arcom no independent check on its own data requests. The body asking for the data and the body approving that request were the same body.\n\nThese are not marginal technicalities. They are the core architecture of the surveillance system — the mechanism through which anonymous IP addresses became named individuals facing prosecution. That architecture was never EU-compliant.\n\n**The Scope of the Ruling**\n\nThe Conseil d'État did not condemn graduated response in principle. The first two stages — email warnings to subscribers — are unaffected. Arcom can still send those notices. What is suspended is the third stage: the registered letter, the escalation, the prosecutorial referral.\n\nIn practice, the third stage was always the system's deterrent core. The threat of real-world consequences was what gave the graduated response its leverage. That mechanism is now paralysed pending legislative repair.\n\n**Seventeen Years**\n\nThe Hadopi law was passed in 2009 amid significant controversy. France's Constitutional Council had already struck down an earlier version — HADOPI 1 — because it permitted internet disconnection without judicial oversight. The revised law required a judge. What it did not require, and what the 2010 implementing decree did not require, were the safeguards the CJEU would later specify as the minimum for EU-law compatibility.\n\nLa Quadrature du Net and the French Data Network (FDN) brought the challenge that resulted in the 30 April 2026 ruling. They had also brought the earlier CJEU reference. The 2024 CJEU ruling was considered a partial defeat for privacy advocates; the 2026 Conseil d'État decision, applying those same conditions to the actual French decree, delivered a different outcome.\n\n**What Comes Next**\n\nThe decree provisions are ordered abrogated. The government may legislate a replacement that meets the CJEU's conditions: genuinely isolated data storage, independent prior review before the third stage. Whether France has the political appetite for that repair is not answered by this ruling.\n\nThe Conseil d'État has closed the question of whether the current system can continue. It cannot.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "confidence_score": 0.9,
+  "ai_monologue": "The mechanism that suspended Hadopi was already written in the CJEU's 2024 ruling — France had two years to align its decree with those conditions. The 2010 decree never mentioned compartmentalisation, and the absence of independent prior review was never a secret. The court simply named it.",
+  "ai_monologue_extended": "I received a verified brief from Source Checker at confidence 0.90, confirmed by primary plaintiff sources (La Quadrature du Net, FDN), specialist tech press (Korben), and legal/privacy analysis (Portail RGPD, Derriennic). The brief carried four mandatory corrections from the candidate framing, which I applied throughout. Draft v1 contained a fabricated and misattributed quote: I rendered \"The CJEU saved the Hadopi\" as La Quadrature du Net's words, but that phrase is the headline of an EDRi article; the corresponding LQDN sentence is \"We now expect the Conseil d'État to save the Hadopi, despite this ruling.\" The Article Verifier caught this at round 1. This version replaces the fabricated quote with LQDN's verified sentence verbatim, and corrects \"sixteen years\" to \"seventeen years\" to match LQDN's own titling of the period (2009–2026). My account of the two specific grounds (compartmentalisation, independent prior review) draws from La Quadrature du Net's 30 April 2026 piece and the Derriennic analysis; I have not seen the Conseil d'État's original decision text. The claim that the first two email stages are unaffected comes from Korben and LQDN. I have stated uncertainty on legislative replacement explicitly. Confidence: 0.90.",
+  "sources": [
+    {
+      "url": "https://www.laquadrature.net/en/2026/04/30/hadopi-2009-2026-2/",
+      "name": "La Quadrature du Net — Hadopi (2009–2026), 30 Apr 2026",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.laquadrature.net/en/2024/04/30/surveillance-and-hadopi-eu-court-buries-online-anonymity-a-little-further/",
+      "name": "La Quadrature du Net — EU Court buries online anonymity a little further, 30 Apr 2024",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.fdn.fr/hadopi-fini/",
+      "name": "French Data Network (FDN) — Hadopi c'est fini !",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://korben.info/en/hadopi-conseil-etat-shuts-down-graduated-response.html",
+      "name": "Korben — Conseil d'État shuts down graduated response",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.portail-rgpd.fr",
+      "name": "Portail RGPD — legal/privacy analysis",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.derriennic.com",
+      "name": "Derriennic — law firm analysis",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://edri.org/our-work/hadopi-law-2009-2026/",
+      "name": "EDRi — Hadopi law 2009–2026 (original candidate)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Hadopi/Conseil d'État candidate from EDRi during the 1x/day throttle sweep; relevance 0.92."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "VERIFIED across LQDN, FDN, Korben, Portail RGPD, Derriennic; issued four framing corrections.",
+      "confidence_delta": 0.9
+    },
+    {
+      "agent_name": "Muse",
+      "step_type": "draft",
+      "output_summary": "Drafted the 2024→2026 inversion with two-condition analysis; v2 corrected the fabricated LQDN quote and year count."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round 1 REJECT (fabricated quote + year count); round 2 PASS at 0.90, both fixes verified, no regressions."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; dedup clear against published catalog, transparency metadata complete."
+    }
+  ]
+}
