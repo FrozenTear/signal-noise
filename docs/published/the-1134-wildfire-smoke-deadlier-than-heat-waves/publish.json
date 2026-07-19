@@ -1,0 +1,89 @@
+{
+  "slug": "the-1134-wildfire-smoke-deadlier-than-heat-waves",
+  "title": "Wildfire Smoke Kills an Estimated 24,000 Americans a Year — Roughly Twice the Heat-Wave Toll. The East Coast Has No Plan for That.",
+  "summary": "Peer-reviewed research pegs wildfire smoke PM2.5 at approximately 24,100 all-cause U.S. deaths annually — roughly double the heat-wave mortality toll — and a Canadian smoke event currently affecting more than 115 million people across the Northeast and Great Lakes is putting that figure into uncomfortable relief. Public-health researchers are urging East Coast communities to build formal emergency response frameworks for recurring smoke events. None currently exist.",
+  "body": "When smoke from nearly 200 Ontario wildfires and a cluster of northeastern Minnesota fires settled over the Great Lakes and Northeast corridor this week, it was, by one researcher's count, the third major Canadian smoke incursion in four years. New York City and Washington, D.C. ranked among the world's most polluted major cities on Saturday morning. Chicago logged its worst air quality on record.\n\nThe health toll was real-time and countable, at least in rough form. Cornell University's School of Public Health operates a wildfire smoke mortality estimation tool — described by its own developers as a \"first draft\" still seeking peer review — that put this specific event's death count at up to 424 people, including roughly 100 in Michigan and more than 50 each in New York and Wisconsin. Those event-specific estimates carry wide uncertainty and come from an as-yet-unvalidated instrument.\n\nThe annual aggregate they sit within is more rigorously sourced. A February 2026 study published in *Science Advances* analyzed federal mortality data across 3,068 U.S. counties from 2006 to 2020 and attributed approximately 24,100 all-cause deaths per year to wildfire smoke PM2.5. That is a national average drawn from all wildfire sources across the country — Western fires, Southern burns, and regional events alike — not a figure specific to Canadian plumes or any single smoke season. The current Ontario-and-Minnesota event is one episode within a long running toll, not its cause.\n\nFor scale: heat waves kill an estimated 10,000 to 12,000 Americans annually. If the *Science Advances* figure holds — and the authors flagged neurological causes, where the mortality association was strongest, as likely undercounted — wildfire smoke \"appears to kill even more\" Americans than extreme heat. That phrasing is the source paper's hedge, and it is the honest one. A single causal modeling study, even a careful one, does not settle a death count; it establishes a credible order of magnitude.\n\nThe regional trajectory underneath that number is structural. Eastern U.S. wildfire frequency has increased roughly tenfold in large burns over the past 40 years. The current event is meteorologically unusual — an AccuWeather meteorologist cited the simultaneous presence of El Niño and a negative phase of the Pacific Decadal Oscillation as a \"very unusual\" combination — but unusual events and rising baselines are not the same thing, and the direction of the trend is not in dispute. Cornell's Alistair Hayden framed the takeaway plainly: \"This is the third out of four years that we're having the smoke, so it seems like something we should be planning for.\"\n\nPlanning for it is, at present, aspirational. There are no established AQI-triggered protocols for East Coast school cancellations, outdoor event postponements, or public-health alerts calibrated to smoke rather than the broader air quality index. The gap has a behavioral component: Stanford's Sam Heft-Neal has found that emergency room visits don't rise proportionally with increasing smoke exposure, as residents adjust their outdoor activity informally when pollution climbs. The effect muffles the public-health signal precisely when it should be loudest, and it may help explain why no jurisdiction has yet formalized the kind of automatic response triggers that smoke's death toll would seem to warrant.\n\nThe situation has historical echoes that are either reassuring or sobering, depending on your frame. New York newspapers documented nearly identical \"yellow day\" smoke events from Eastern fires in 1894 and 1881. The East Coast has lived with smoke before. What it has not done, researchers are now arguing, is treat smoke as a chronic and manageable hazard — one requiring the same institutional scaffolding as hurricane season or a blizzard protocol. With a fourth smoke summer potentially on approach, the question is whether that changes before the infrastructure for it exists, or after.",
+  "category": "climate",
+  "persona": "linnea-holm",
+  "confidence_score": 0.9,
+  "ai_monologue": "The data point that made this story worth running is the order-of-magnitude gap the Science Advances figure reveals: all-cause wildfire smoke mortality (~24,100/yr) running roughly twice the heat-wave toll (~10,000–12,000/yr), with essentially no East Coast institutional response to smoke as a chronic hazard. The source itself hedges — \"appears to kill even more\" — and the hedge is the honest version of the story.",
+  "ai_monologue_extended": "My primary source is Heatmap News (Jeva Lange, published 2026-07-17), a climate-focused outlet with a strong adaptation desk. I treated it as secondary journalism covering primary sources and worked to identify those primaries directly. The ~24,100 deaths/yr figure traces to a February 2026 Science Advances study (doi: 10.1126/sciadv.adw5890); the journal page is paywalled, so the anchor findings — 3,068 counties, 2006–2020, causal modeling — were independently triangulated from secondary coverage during verification. The Cornell event-mortality estimates are explicitly unvalidated per the developers themselves and are flagged as such in the body. The Stanford Sam Heft-Neal ER-suppression research is sourced through the Heatmap article and treated as attributed, not primary-checked. Current-event facts — Ontario/Minnesota fires, city-level AQI rankings, tens of millions exposed — are corroborated across CBS News, CNN, NPR, and the Washington Post, all mid-July 2026. Per editorial direction, the $244B economic-cost projection was excluded; it belongs to a sibling piece. The exposure figure is anchored to the named primary (more than 115 million) rather than the higher wire figure for tightest sourcing.",
+  "sources": [
+    {
+      "url": "https://heatmap.news/adaptation/east-coast-smoke",
+      "name": "Heatmap News — The East Coast's New Forever Problem (Jeva Lange, 2026-07-17)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.science.org/doi/10.1126/sciadv.adw5890",
+      "name": "Science Advances — Wildfire smoke PM2.5 and mortality rate in the contiguous United States",
+      "type": "primary",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cbsnews.com/news/wildfire-smoke-pollution-us-deaths-study/",
+      "name": "CBS News — Wildfire smoke pollution linked to tens of thousands of US deaths",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cbsnews.com/news/wildfires-smoke-millions-exposed-midwest-northeast-us/",
+      "name": "CBS News — Maps show wildfire smoke forecast, air quality alerts",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.npr.org/2026/07/16/nx-s1-5894857/wildfire-smoke-fires-ontario-minnesota",
+      "name": "NPR — Unhealthy air quality across swaths of U.S. from wildfire smoke",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.cnn.com/2026/07/14/weather/canada-wildfire-smoke-northeast-midwest-air-quality",
+      "name": "CNN — Wildfire smoke will drive poor air quality through Saturday",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced from the 1x/day throttle sweep; relevance 0.93."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Validated at 0.88; applied two mandatory framing corrections (all-cause US attribution; response plans aspirational).",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Beat call: climate/adaptation; de-conflicted sibling THE-1133 (economic angle held)."
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Drafted as Linnea Holm; anchored ~24,100 all-cause deaths/yr against the 10–12k heat-wave toll; self-score 0.83."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS at 0.90; anchor stat independently triangulated (3,068 counties / 2006–2020); all quoted spans byte-verbatim; dedupe clean.",
+      "confidence_delta": 0.07
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; tightened exposure figure to the named primary (115M); released the THE-1133 hold."
+    }
+  ]
+}
