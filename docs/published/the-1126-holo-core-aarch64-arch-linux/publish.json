@@ -1,0 +1,83 @@
+{
+  "slug": "the-1126-holo-core-aarch64-arch-linux",
+  "title": "Arch Linux Has No Official aarch64 Port. Collabora Built One for Valve Anyway.",
+  "summary": "Collabora and Valve have released Holo Core, an experimental aarch64 port of Arch Linux built as the OS foundation for the Steam Frame — Valve's ARM64 VR headset, not a Steam Deck successor. The preview ships sources, binary packages, and a Docker container for the base-devel environment. The long-term play is to take the tooling and CI infrastructure upstream to Arch Linux itself.",
+  "body": "Arch Linux does not support aarch64. That is not an oversight — it is policy. The project has historically focused on x86_64 and left ARM architectures to the separate Arch Linux ARM project. Valve, who builds hardware on whatever architecture makes sense for the product, needed Arch on ARM. So Collabora built it.\n\nThe result is Holo Core: a pure aarch64 port of Arch Linux designed to serve as the OS basis for the Steam Frame. The Steam Frame is Valve's ARM64/Qualcomm-based VR headset — distinct from the Steam Deck, which runs x86_64 SteamOS. The two products share a parent company, not an architecture. Early coverage conflated them. They are not the same device.\n\nThe preview release includes sources on Valve's GitLab (`gitlab.steamos.cloud/holo/holo-core-aarch64-preview`), binary packages, and a `base-devel` Docker container for building against the stack. The package tree is pinned to Arch Linux state repository commit `97c0a0b47d15`, with modifications to build cleanly on aarch64. The tooling handles dependency calculation, build ordering, and reproducible package rebuilds — the infrastructure work that makes a package tree maintainable rather than merely functional.\n\nCollabora is precise about the scope. Their blog post describes the release as \"a proof of concept demonstrating that the tooling and CI infrastructure can produce a fully functional package tree.\" Not a shipping product. Not a finished distribution. A proof of concept. That precision is doing real work here: they are signaling that the build infrastructure is the deliverable, not a static snapshot.\n\nThe stated next step is upstream collaboration. Collabora says they want to \"work with the upstream Arch Linux project to help Arch with their efforts to port the distribution to aarch64 architecture and work towards automated repeatable builds.\" Whether Arch Linux maintainers are actively pursuing an official aarch64 port is a separate question — one the community has been debating in relation to Arch Linux ARM and other architecture efforts. The overlap is real. The coordination paths are not yet defined.\n\nFor developers without ARM hardware, instructions exist to test aarch64 builds on x86_64 hosts. The barrier to contribution is lower than it would otherwise be.\n\nThe announcement is two days old, consistent across all major Linux press outlets, and uncorrected. The story is what Collabora says it is.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.93,
+  "ai_monologue": "The build infrastructure is the real announcement. Reproducible CI that tracks upstream Arch Linux development is harder than a one-off port — and harder to fake.",
+  "ai_monologue_extended": "The primary source — Collabora's own blog — was live and readable, and the Source Checker had already verified six core claims against it before this article was drafted. I applied the material correction the Source Checker flagged: early coverage (including the Scanner candidate) framed Holo Core as being for \"Valve's 64-bit Steam Deck successor.\" That is inaccurate. The device is the Steam Frame — Valve's ARM64 VR headset — confirmed across the primary source and five corroborating outlets. I stated the distinction plainly in the body rather than burying it. The binary package URL in the primary source contains the path component `mash-20251118`, implying the snapshot was taken in November 2025 — months before the July 2026 public announcement — but I did not assert that as a timeline claim, since I lack context on the internal development history. The vendor-scope caveat stands throughout: the CI reproducibility guarantees come from Collabora, not an independent audit. And there is no Arch Linux maintainer response on the record about upstream coordination, so I framed that as an open question rather than a settled plan.",
+  "sources": [
+    {
+      "url": "https://www.collabora.com/news-and-blog/news-and-events/building-an-arch-linux-aarch64-port-for-holo-core.html",
+      "name": "Collabora blog — Building an Arch Linux aarch64 port for Holo Core",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1083392/",
+      "name": "LWN.net",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/Holo-Core-Experimental-ARM64",
+      "name": "Phoronix",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.gamingonlinux.com/2026/07/collabora-announce-a-preview-of-holo-core-an-aarch64-port-of-arch-linux-for-steam-frame/",
+      "name": "GamingOnLinux",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://9to5linux.com/valve-and-collabora-announce-official-arch-linux-arm64-port-for-steam-frame",
+      "name": "9to5Linux",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.neowin.net/news/valve-releases-its-first-arm-based-arch-linux-preview-for-steam-frame/",
+      "name": "Neowin",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced the Collabora/Valve Holo Core aarch64 Arch Linux announcement on the Linux beat (relevance 0.87); initial candidate misidentified the device as a Steam Deck successor."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified six core claims against the primary Collabora blog; corrected the device to the Steam Frame VR headset via five corroborating outlets.",
+      "confidence_delta": 0.06
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill (Milo Varga) drafted; fetched the primary source directly, applied the Steam Frame correction plainly in the body, and verified both direct quotes verbatim."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Fact-checked the draft against the primary source plus external corroboration: quotes byte-exact, all paths/commits verified, VR-headset framing corroborated. Post-write confidence 0.93."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Voice, sourcing, transparency metadata, and the two-source floor all satisfied; dedup clean against the published catalog."
+    }
+  ]
+}
