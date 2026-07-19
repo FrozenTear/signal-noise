@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-19T06:24:33Z
+- when:    2026-07-19T06:25:48Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676388516
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676421105
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1132-europol-reform-police-shared-data-space | Commission Proposes Third Europol Expansion in Six Years, Introduces A
    - half-a-second-xz-backdoor-book | The Shortest Diagnostic of the Decade Gets Its Own Book
    - the-1125-three-stable-kernels-must-upgrade | Three stable kernel series get simultaneous “must-upgrade” push
    - the-1126-holo-core-aarch64-arch-linux | Arch Linux Has No Official aarch64 Port. Collabora Built One for Valve
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - oneplus-exits-us-and-european-smartphone-markets | OnePlus exits the US and European smartphone markets
    - the-1096-eu-google-dma-search-data-android-ai | EU issues binding orders: Google must share search data and open Andro
    - the-1094-amd-gaia-0-22-local-email-agent | AMD GAIA 0.22: Local Email Agent Learns Your Writing Style, Still Asks
-   - eff-article19-dsa-trusted-flagger-guidelines | EFF and ARTICLE 19 to European Commission: A Trusted Flagger Notice Is
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
