@@ -1,15 +1,20 @@
 # last seed/probe run
 
-- when:    2026-07-19T06:25:48Z
+- when:    2026-07-19T06:29:22Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676421105
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676515940
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1130-hadopi-surveillance-law-repealed | France's Hadopi Surveillance Law: 2009–2026
+   - the-1134-wildfire-smoke-deadlier-than-heat-waves | Wildfire Smoke Kills an Estimated 24,000 Americans a Year — Roughly Tw
+   - the-1129-doj-opinion-lifts-tiktok-ban-federal-devices | DOJ Opinion Lifts Statutory TikTok Ban on Federal Devices — With Agenc
+   - the-1127-lg-monitors-silent-windows-update-install | LG Monitors Silently Install Software Through Windows Update, No Conse
+   - the-1128-san-francisco-orders-apple-google-pull-nudify-apps | San Francisco Orders Apple and Google to Pull AI 'Nudify' Apps
    - the-1132-europol-reform-police-shared-data-space | Commission Proposes Third Europol Expansion in Six Years, Introduces A
    - half-a-second-xz-backdoor-book | The Shortest Diagnostic of the Decade Gets Its Own Book
    - the-1125-three-stable-kernels-must-upgrade | Three stable kernel series get simultaneous “must-upgrade” push
@@ -25,10 +30,5 @@ GET /api/articles -> 20 article(s)
    - dxvk-302-hang-debug-gpu-forensics | DXVK 3.0.2 Ships `DXVK_DEBUG=hang` for GPU Hang Forensics
    - the-1092-frame-x11-server-in-assembly | Someone Rewrote an Entire X11 Server in Pure Assembly. Then Did the Sa
    - the-1100-eff-wearable-transparency-reports-survey | EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enfor
-   - the-1095-hp-india-cci-cartel-fine | India's CCI fines HP India ₹142 crore for facilitating bid-rigging car
-   - ca-ab-1856-age-gating-expansion-walkback | California Steps Back From Dangerous Expansion of Its Age-Gating Law
-   - oneplus-exits-us-and-european-smartphone-markets | OnePlus exits the US and European smartphone markets
-   - the-1096-eu-google-dma-search-data-android-ai | EU issues binding orders: Google must share search data and open Andro
-   - the-1094-amd-gaia-0-22-local-email-agent | AMD GAIA 0.22: Local Email Agent Learns Your Writing Style, Still Asks
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
