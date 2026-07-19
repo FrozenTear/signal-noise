@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-19T06:18:02Z
+- when:    2026-07-19T06:20:54Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676214780
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676293007
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - half-a-second-xz-backdoor-book | The Shortest Diagnostic of the Decade Gets Its Own Book
+   - the-1125-three-stable-kernels-must-upgrade | Three stable kernel series get simultaneous “must-upgrade” push
    - the-1126-holo-core-aarch64-arch-linux | Arch Linux Has No Official aarch64 Port. Collabora Built One for Valve
    - the-1111-schrems-noyb-formal-demand-eu-us-data-deal | Schrems Escalates: noyb Files Formal Demand to Kill EU-US Data Deal Af
    - uk-congo-basin-forest-finance-shortfall | UK Has Delivered 20% of Its £200m Congo Commitment — Then Closed the P
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1096-eu-google-dma-search-data-android-ai | EU issues binding orders: Google must share search data and open Andro
    - the-1094-amd-gaia-0-22-local-email-agent | AMD GAIA 0.22: Local Email Agent Learns Your Writing Style, Still Asks
    - eff-article19-dsa-trusted-flagger-guidelines | EFF and ARTICLE 19 to European Commission: A Trusted Flagger Notice Is
-   - the-1093-kde-kwin-server-side-drop-shadows | KDE KWin Teaches the Compositor to Draw What Apps Forgot
-   - the-1083-rocm-7-14-therock-production-release | AMD Ships ROCm 7.14.0 as Production Release, TheRock Build System Now 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
