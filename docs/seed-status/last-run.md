@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-18T06:37:04Z
+- when:    2026-07-19T06:11:06Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29634294562
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676020301
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1111-schrems-noyb-formal-demand-eu-us-data-deal | Schrems Escalates: noyb Files Formal Demand to Kill EU-US Data Deal Af
    - uk-congo-basin-forest-finance-shortfall | UK Has Delivered 20% of Its £200m Congo Commitment — Then Closed the P
    - eu-council-removes-art-88b-digital-omnibus | EU Council Removes Article 88b — the Browser-Signal Mechanism That Wou
    - the-1113-crif-secret-scoring-class-action | Austria's Hidden Scorecard: noyb Sues CRIF Over Marketing Data Repurpo
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1093-kde-kwin-server-side-drop-shadows | KDE KWin Teaches the Compositor to Draw What Apps Forgot
    - the-1083-rocm-7-14-therock-production-release | AMD Ships ROCm 7.14.0 as Production Release, TheRock Build System Now 
    - the-1079-georgia-polyface-russian-surveillance | Seen and Silenced: How Georgia Turned a Russian-Sourced Surveillance S
-   - the-1076-kaiser-nurses-empathy-ai-surveillance | Kaiser's AI Graded Nurses on Empathy. The Program Ended in November. N
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
