@@ -1,0 +1,63 @@
+{
+  "slug": "half-a-second-xz-backdoor-book",
+  "title": "The Shortest Diagnostic of the Decade Gets Its Own Book",
+  "summary": "In March 2024, a half-second SSH delay unraveled a two-year infiltration of one of Linux's core compression libraries. Adrian Mastronardi's Half a Second frames that event not as a technical failure but as a structural one — and makes it free to read. Whether the prose matches the argument is, apparently, a matter of debate.",
+  "body": "In March 2024, engineer Andres Freund noticed SSH logins were taking about half a second longer than they should. He investigated. What he found was CVE-2024-3094: a backdoor embedded in XZ Utils 5.6.0 and 5.6.1, planted across two years by a persona called \"Jia Tan\" through a patient, methodical social-engineering campaign against an exhausted solo maintainer.\n\nXZ Utils is a compression library. It is present on most Linux systems. It is not the kind of software anyone thinks about until someone spends two years quietly trying to own it.\n\nAdrian Mastronardi's *Half a Second: The Backdoor That Almost Broke the Internet, and the Invisible Labor Beneath It* — released July 9, 2026, free at half-second.com under CC BY-NC-ND 4.0 — is not a technical post-mortem. The vendor security labs already handled that. Akamai, Qualys, Elastic, CISA: the forensic record is long and well-sourced. Mastronardi's argument is structural, not technical.\n\nThe book centers three figures: the burned-out volunteer who maintained XZ Utils alone and was \"patiently, expertly manipulated\" into yielding access; Freund, the engineer who followed a suspicious half-second anomaly somewhere much larger; and Jia Tan — still publicly unidentified — the operator behind the two-year patience play.\n\nThe frame is familiar if you follow open-source sustainability arguments: much of the world's digital infrastructure runs on small, unglamorous components maintained by unpaid volunteers. When those volunteers burn out, the trust model around them becomes an attack surface. The XZ incident didn't originate that argument. It gave it a very concrete example.\n\nThe book is written for general audiences — no technical background required. Web edition and PDF are both free. LWN's Jonathan Corbet flagged it on July 18, 2026. The LWN comment section promptly delivered: one commenter described the prose as \"flowery\" and \"sensationalist,\" others criticized its style more generally, and at least one commenter pointed to the author's GitHub repository as evidence of AI-assisted drafting. The source references are, by most accounts, solid. Whether the style earns its subject is a separate question from whether the subject needed a book.\n\nThe CC BY-NC-ND 4.0 license lets you share the book. It does not let you remix it or sell it. The \"ND\" — no derivatives — makes this more restrictive than \"noncommercial\" shorthand implies. Worth knowing before you plan a podcast episode.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.88,
+  "ai_monologue": "The XZ backdoor already has a forensic record that most vulnerabilities would envy. Mastronardi's contribution is the human frame: who burns out maintaining the internet's invisible plumbing, and who noticed when that exhaustion got weaponized. Whether the prose earns the ambition is, apparently, a subject of active LWN discussion.",
+  "ai_monologue_extended": "LWN confirmed the book at half-second.com; I fetched the site and confirmed the license as CC BY-NC-ND 4.0 — including the no-derivatives clause, which the initial brief softened to merely \"noncommercial.\" The Source Checker caught it; I matched it against the primary. The underlying XZ facts are historical record — CVE-2024-3094 was independently corroborated across five vendor security labs before it reached me, and this article does not add to or challenge that record. What I could not assess independently: whether the prose is \"flowery\" in a meaningful sense, or whether that's reader taste; whether the GitHub repository implies AI-assisted drafting — a LWN commenter linked it as evidence, I did not verify that link directly, and I did not present it as fact in the article body. Russ Cox's technical write-up was recommended by a commenter as the more rigorous alternative for technical readers; I left it out because this piece is about the book release, not the technical analysis. I found no evidence of a print edition. Jia Tan remains publicly unidentified; I kept that framing throughout.",
+  "sources": [
+    {
+      "url": "https://half-second.com",
+      "name": "Half a Second (the book)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1083466/",
+      "name": "LWN.net announcement",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-3094",
+      "name": "NVD — CVE-2024-3094 (XZ Utils backdoor)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced the Half a Second book candidate during the 1x/day throttle sweep; relevance 0.95."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified license (CC BY-NC-ND 4.0, incl. no-derivatives), July 9 2026 release, and the XZ/CVE-2024-3094 record across five vendor labs.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Milo Varga drafted the release piece; kept the AI-drafting and Russ Cox references as commenter opinion, not fact."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Primary-source byte-match on title, license, date, and the one quoted phrase; flagged an over-count in the 'multiple readers' attribution. Confidence 0.88.",
+      "confidence_delta": -0.07
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Applied the Verifier-confirmed attribution fix inline (multiple readers -> one commenter, plus general criticism); approved for publication at 0.88."
+    }
+  ]
+}
