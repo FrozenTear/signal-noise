@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-20T06:22:13Z
+- when:    2026-07-20T06:28:55Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29721478087
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29721801347
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - fubo-15-price-hike-nbcu-channels-restored | Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and B
+   - the-1142-firesat-wildfire-satellites-launch | Three FireSat Wildfire-Detection Satellites Launched July 7; Smoke Ale
    - the-1139-last-mpeg-4-visual-patent-expired | The Last MPEG-4 Visual Patent Has Expired
    - heinrich-grid-bill-texas-connect-and-manage | Heinrich's Grid Bill Bets on Texas-Style “Connect and Manage” to Cut P
    - the-1130-hadopi-surveillance-law-repealed | France's Hadopi Surveillance Law: 2009–2026
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1107-fastflowlm-joins-amd-npu-software | FastFlowLM Developers Join AMD to Push Open-Source NPU Software
    - the-1106-noctua-nl-lc1-36-linux | Noctua's First Liquid Cooler Just Works on Linux. That's the Story.
    - the-1109-faa-boeing-737-max-787-self-certification | FAA Restores Full Airworthiness Certification Authority to Boeing for 
-   - the-1110-fifty-years-of-the-z80 | Fifty Years of the Z80: The Chip That Outlived Its Era
-   - dxvk-302-hang-debug-gpu-forensics | DXVK 3.0.2 Ships `DXVK_DEBUG=hang` for GPU Hang Forensics
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
