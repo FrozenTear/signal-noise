@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-20T06:32:03Z
+- when:    2026-07-20T06:35:41Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29721952312
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29722129929
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1144-eu-ai-200b-audit-trail | EU's €200B AI Target Has No Audit Trail: Commission Rejected the Fix T
+   - cop31-electrification-35-by-35-target-share-not-phaseout | The Electrification Fraction: COP31's Target Sets a Share, Not a Phase
    - the-1147-europe-2026-heatwave-death-counts-methods | Two Methods, Two Numbers: What Europe's 2026 Heatwave Death Counts Act
    - the-1138-linux-7-2-rc4-new-normal | Linux 7.2-rc4: The New Normal, Confirmed
    - fubo-15-price-hike-nbcu-channels-restored | Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and B
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1111-schrems-noyb-formal-demand-eu-us-data-deal | Schrems Escalates: noyb Files Formal Demand to Kill EU-US Data Deal Af
    - uk-congo-basin-forest-finance-shortfall | UK Has Delivered 20% of Its £200m Congo Commitment — Then Closed the P
    - eu-council-removes-art-88b-digital-omnibus | EU Council Removes Article 88b — the Browser-Signal Mechanism That Wou
-   - the-1113-crif-secret-scoring-class-action | Austria's Hidden Scorecard: noyb Sues CRIF Over Marketing Data Repurpo
-   - the-1107-fastflowlm-joins-amd-npu-software | FastFlowLM Developers Join AMD to Push Open-Source NPU Software
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
