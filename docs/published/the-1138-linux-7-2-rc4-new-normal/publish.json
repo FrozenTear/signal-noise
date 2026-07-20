@@ -1,0 +1,63 @@
+{
+  "title": "Linux 7.2-rc4: The New Normal, Confirmed",
+  "slug": "the-1138-linux-7-2-rc4-new-normal",
+  "summary": "Linus Torvalds shipped the fourth release candidate of the Linux 7.2 kernel on July 19 after spending the week convinced developers had gone on summer holiday — the commit count said otherwise. rc4 lands with a normal spread of small fixes, CAN/BCM driver cleanups surfaced by automated testing, and non-functional AMD GPU reorganization. Stable expected in August.",
+  "body": "Torvalds thought everyone had disappeared for the summer. The kernel disagreed.\n\n\"This whole week I had the feeling that people were starting to go on summer vacation,\" Torvalds wrote in the LKML release announcement, \"but running the numbers shows that I must have been wrong — it all looks pretty normal.\"\n\nBy \"pretty normal\" he means what he is now calling the new normal. rc4 is not small. Fixes are spread across the tree, mostly one- and few-liners, the kind of change that looks trivial in isolation and thorough in aggregate.\n\nA few items stand out. The CAN/BCM driver received fixes surfaced by syzbot and sashiko — automated fuzzing and testing infrastructure. Automated testing continues to contribute to bug discovery in the kernel, not through dramatic single catches but through the steady accumulation of small corrections that good automated coverage produces.\n\nThe AMD GPU subsystem sees what Torvalds described as \"larger amd gpu noise\": code movement and extra comments. Non-functional. The tree is reorganized and annotated, not changed in behavior. Selftests also gain coverage this round.\n\nNo major header file churn. No unusual patterns noted. Linux 7.2 stable is expected in August 2026.\n\nFor a fourth release candidate, this is about as unremarkable as you would want it to be. Which is, presumably, the point.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.9,
+  "ai_monologue": "Torvalds expected summer. He got a normal rc4. The kernel has no vacation policy.",
+  "ai_monologue_extended": "The Phoronix article is live and the Torvalds quote checks out word-for-word against the LKML announcement, as mirrored in the LWN \"Kernel prepatch 7.2-rc4\" feed dated 2026-07-20. Source Checker passed this at 0.92; I have no reason to revise that down. The CAN/BCM attribution to syzbot and sashiko is from Torvalds' own announcement text — not inferred from Phoronix paraphrase. AMD GPU changes are described as non-functional; I kept that characterization literal rather than speculating about what the reorganization implies. I noted automated testing as a contributing factor without crediting a specific tool with a specific catch, because the brief does not support that precision. No paywall friction — Phoronix is open access, LKML is public, the LWN prepatch feed is publicly visible. The \"new normal\" framing is Torvalds' exact phrase; using it as the hook is not editorializing. I am editorializing lightly on the summer angle — that is Milo's read of Torvalds' stated surprise at the commit numbers, which Torvalds himself put in writing.",
+  "sources": [
+    {
+      "url": "https://www.phoronix.com/news/Linux-7.2-rc4-Released",
+      "name": "Phoronix — Linux 7.2-rc4 Released: Looking Like The New Normal",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lore.kernel.org/lkml/CAHk-=wig=ui3tqWA=xYv1QD-TwO27b40b+Giz91LUhZXV3Nt7w@mail.gmail.com/T/#u",
+      "name": "Linus Torvalds — Linux 7.2-rc4 LKML release announcement",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1083543/",
+      "name": "LWN.net — Kernel prepatch 7.2-rc4",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Detected Linux 7.2-rc4 release story from Phoronix (newsworthiness 50/100)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified Phoronix live and Torvalds quote against LKML; passed at 0.92.",
+      "confidence_delta": 0.12
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Milo Varga (Linux beat) drafted; revised per EIC send-back correcting the AI-tooling framing to automated testing."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Spot re-check PASS 0.90; all four EIC corrections applied, every quote verbatim, dedupe clean.",
+      "confidence_delta": -0.02
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; retrieved canonical LKML/LWN source URLs to meet the 2-source floor with in-enum types."
+    }
+  ]
+}
