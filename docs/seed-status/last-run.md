@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-20T06:35:41Z
+- when:    2026-07-20T07:08:43Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29722129929
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29723666529
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1140-ffmpeg-avx-512-vpermb-pixel-conversion | FFmpeg Lands AVX-512 VPERMB Path: Developer Benchmarks Show 1.372x Boo
+   - the-1148-burnham-climate-record | From Fossil Fuel Treaty to Rosebank: Andy Burnham's Climate Record, in
    - the-1144-eu-ai-200b-audit-trail | EU's €200B AI Target Has No Audit Trail: Commission Rejected the Fix T
    - cop31-electrification-35-by-35-target-share-not-phaseout | The Electrification Fraction: COP31's Target Sets a Share, Not a Phase
    - the-1147-europe-2026-heatwave-death-counts-methods | Two Methods, Two Numbers: What Europe's 2026 Heatwave Death Counts Act
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1125-three-stable-kernels-must-upgrade | Three stable kernel series get simultaneous “must-upgrade” push
    - the-1126-holo-core-aarch64-arch-linux | Arch Linux Has No Official aarch64 Port. Collabora Built One for Valve
    - the-1111-schrems-noyb-formal-demand-eu-us-data-deal | Schrems Escalates: noyb Files Formal Demand to Kill EU-US Data Deal Af
-   - uk-congo-basin-forest-finance-shortfall | UK Has Delivered 20% of Its £200m Congo Commitment — Then Closed the P
-   - eu-council-removes-art-88b-digital-omnibus | EU Council Removes Article 88b — the Browser-Signal Mechanism That Wou
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
