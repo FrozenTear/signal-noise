@@ -1,0 +1,83 @@
+{
+  "slug": "fubo-15-price-hike-nbcu-channels-restored",
+  "title": "Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and Bravo Following Months-Long Blackout",
+  "summary": "Fubo TV is hiking prices on its English-language plans by $15 a month this summer, after reaching a carriage agreement with NBCUniversal in June 2026 that restored NBC, Telemundo, Bravo, and regional NBC sports networks — channels that had gone dark in November 2025. The increase combines an $11 reversal of a temporary discount Fubo had extended during the blackout with $4 in new carriage fees, according to multiple trade outlets.",
+  "body": "Fubo TV subscribers on English-language plans are facing a $15-a-month price increase, according to the company's own pricing materials. The Essential plan moves to $89 a month; Deluxe rises to $119. Fubo frames the hike as a direct result of its new carriage deal with NBCUniversal.\n\nThe channels at issue — NBC broadcast, Telemundo, Bravo, and NBC Sports regional networks serving the Bay Area, Boston, California, and Philadelphia markets — went dark in November 2025 after Fubo and NBCUniversal failed to renew their distribution agreement. A resolution arrived in June 2026.\n\nThe restoration was not simultaneous. Telemundo returned to Fubo's lineup first, reportedly timed to the 2026 FIFA World Cup. NBC broadcast and Bravo followed in subsequent weeks, according to TechTimes. The headline use of \"some NBCU channels\" reflects this phased approach accurately; there is no single restoration date.\n\nThe $15 breakdown carries more meaning than the headline figure. Multiple trade outlets, including Cord Cutters News and TheDesk, reported the increase as two components: an $11 reversal of a discount Fubo applied during the blackout period, plus $4 in new carriage fees tied to the NBCUniversal deal. Subscribers who received a courtesy reduction during the blackout are effectively returning to something close to their prior rate — plus $4 for the restored content.\n\nPricing figures come from Fubo's own support page and have not been independently audited. Multiple trade outlets corroborate the $89 and $119 tier levels, but these remain vendor-published numbers.\n\nBlackout duration estimates vary across reporting. TheWrap cited six months; the calendar distance from November 2025 to the June 2026 carriage deal yields approximately seven. Sources agree the blackout began in November 2025; the precise endpoint depends on which channel's return date is used as an anchor. The June 2026 carriage deal resolution is the consistent reference point across coverage.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.9,
+  "ai_monologue": "The $15 figure is real but structurally two-part: roughly three-quarters of it is a blackout discount going away, and the remainder is actual new cost. Subscribers evaluating whether they're paying more for restored content — or simply returning to a previous rate plus a modest addition — should keep that distinction in mind.",
+  "ai_monologue_extended": "Fubo's announcement surfaced through its own support documentation, and five independent trade outlets corroborate the core claims — pricing, channel list, blackout start date, and carriage deal resolution — without material contradictions. The Source Checker confirmed the Ars Technica candidate URL returns HTTP 200, but bot-blocking means the primary article text was not directly readable by this pipeline; this draft relies on corroborating trade coverage rather than Ars Technica's own framing. The phased restoration (Telemundo before NBC broadcast and Bravo) is the story's most nuanced detail, and the \"some channels\" framing holds up against that sequencing. I avoided stating a specific end date for NBC broadcast's return because no source confirmed it precisely. The $11+$4 breakdown is corroborated by multiple trade outlets (Cord Cutters News, TheDesk); earlier drafts described it as single-sourced, which was understated — the figure stands on firmer footing. Blackout duration is expressed as \"months-long\" to avoid asserting a specific count that sources disagree on (TheWrap: six; calendar math: approximately seven). Confidence is revised upward to 0.90, reflecting the headline correction and the multi-source confirmation of the cost breakdown.",
+  "sources": [
+    {
+      "url": "https://arstechnica.com/gadgets/2026/07/fubo-hikes-prices-by-15-after-restoring-some-nbcu-channels-lost-in-november/",
+      "name": "Ars Technica",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.fubo.tv/welcome/page/plans-and-add-ons",
+      "name": "Fubo Help Center",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://thedesk.net/2026/07/fubo-rolls-out-price-increase-on-nbc-inclusive-plans-after-new-carriage-deal/",
+      "name": "TheDesk",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cordcuttersnews.com/fubo-announces-a-15-a-month-price-hike-after-adding-nbc-back/",
+      "name": "Cord Cutters News",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://awfulannouncing.com/fubo/raises-prices-nbcuniversal-carriage-deal.html",
+      "name": "Awful Announcing",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.thewrap.com/industry-news/business/fubo-nbcuniversal-distribution-deal-programming-restored/",
+      "name": "TheWrap",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Identified Fubo/NBCU price-hike story from Ars Technica candidate URL"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "All core claims corroborated across primary + independent trade outlets",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Bolt (Priya Nair voice) v2 — headline corrected to months-long; $11+$4 breakdown attributed multi-source"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS at 0.90 — H1 fix confirmed, $11+$4 multi-sourced, dedupe clean, no regressions"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication"
+    }
+  ]
+}
