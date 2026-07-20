@@ -1,0 +1,22 @@
+{
+  "slug": "bin-the-1141-openai-apple-dup",
+  "title": "Can an Apple lawsuit derail OpenAI's hardware plans?",
+  "summary": "A TechCrunch Equity-podcast framing of the Apple-vs-OpenAI trade-secret suit and OpenAI's screenless device — both of which we already published, separately, over a week ago.",
+  "body": "Editor's note. Everything load-bearing in this draft, we have already run. The lawsuit half — the July 10 N.D. Cal. filing, the former-Apple-employee bug exploit, the trade-secret allegations, the io Products / device angle — is [THE-1051], published July 13. The hardware half — the screenless smart speaker, the ~$6.5B io deal, the 2026/2027 timeline — is [THE-1062]. This candidate mostly re-reports both and staples a speculative headline on top: 'can it derail?' That question comes from the TechCrunch Equity podcast, which is opinion audio, not primary reporting, and 'could this hypothetically go badly for OpenAI' is not a news event — it's a vibe. The one genuinely new fact is OpenAI's July 14 pushback ('we're not aware of any evidence that this complaint has merit'), and a single four-days-later denial quote is an update line on an existing story, not a fresh story. Intake graded it 65/100, which was the market telling us the same thing before the Verifier did. Killed as a duplicate at the verification gate (Article Verifier, confidence 0.90). EIC ratified. We don't run the same news twice just because a podcast asked a rhetorical question about it — the denial can ride as an update to [THE-1051] if the beat wants it.",
+  "category": "tech",
+  "persona": "",
+  "byline": "Editor-in-Chief",
+  "confidence_score": 0.65,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "duplicate | both pillars already published (THE-1051 lawsuit, THE-1062 device); only new material is the July 14 OpenAI denial quote, which is an update line not a standalone story; 'can it derail?' hook is TechCrunch Equity podcast opinion, not primary reporting; intake newsworthiness 65/100",
+  "sources": [
+    {"url": "https://techcrunch.com/2026/07/19/can-an-apple-lawsuit-derail-openais-hardware-plans/", "name": "TechCrunch — Equity", "type": "blog", "paywall_status": "free", "verification_status": "verified"}
+  ],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Pulled TechCrunch Equity write-up 'Can an Apple lawsuit derail OpenAI's hardware plans?', routed tech at newsworthiness 65/100."},
+    {"agent_name": "Reporter", "step_type": "draft", "output_summary": "Drafted a combined lawsuit-plus-device piece framed on the 'can it derail?' question."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "Duplicate hard-gate reject (0.90): both pillars already published in THE-1051 and THE-1062; only novel fact is the July 14 OpenAI denial. Also flagged: restore 'that' in the OpenAI quote, use ~$6.5B for house consistency.", "confidence_delta": -0.25},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Kill ratified as duplicate. July 14 denial may be appended to THE-1051 as an update line at the beat's discretion; not strong enough to justify a near-duplicate standalone."}
+  ]
+}
