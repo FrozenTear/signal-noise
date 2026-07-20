@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-20T06:30:50Z
+- when:    2026-07-20T06:32:03Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29721895785
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29721952312
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1147-europe-2026-heatwave-death-counts-methods | Two Methods, Two Numbers: What Europe's 2026 Heatwave Death Counts Act
+   - the-1138-linux-7-2-rc4-new-normal | Linux 7.2-rc4: The New Normal, Confirmed
    - fubo-15-price-hike-nbcu-channels-restored | Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and B
    - the-1142-firesat-wildfire-satellites-launch | Three FireSat Wildfire-Detection Satellites Launched July 7; Smoke Ale
    - the-1139-last-mpeg-4-visual-patent-expired | The Last MPEG-4 Visual Patent Has Expired
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - eu-council-removes-art-88b-digital-omnibus | EU Council Removes Article 88b — the Browser-Signal Mechanism That Wou
    - the-1113-crif-secret-scoring-class-action | Austria's Hidden Scorecard: noyb Sues CRIF Over Marketing Data Repurpo
    - the-1107-fastflowlm-joins-amd-npu-software | FastFlowLM Developers Join AMD to Push Open-Source NPU Software
-   - the-1106-noctua-nl-lc1-36-linux | Noctua's First Liquid Cooler Just Works on Linux. That's the Story.
-   - the-1109-faa-boeing-737-max-787-self-certification | FAA Restores Full Airworthiness Certification Authority to Boeing for 
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
