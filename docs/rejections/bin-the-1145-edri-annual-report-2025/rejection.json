@@ -1,0 +1,19 @@
+{
+  "slug": "bin-the-1145-edri-annual-report-2025",
+  "title": "EDRi Annual Report 2025: Championing digital rights in the deregulation era",
+  "summary": "European Digital Rights' self-published Annual Report 2025 — an organizational retrospective, surfaced by the Scanner as a Privacy candidate.",
+  "body": "Editor's note. The candidate URL was live and real (HTTP 200, datePublished 29 June 2026) — this is not a hallucinated link. The problem is that it resolves to EDRi's own Annual Report 2025, filed under the 'Annual reports' section of edri.org: an advocacy organization summarizing its own year of work under a promotional frame. An annual report is a yearly self-summary, not a discrete news event. There is nothing for a wire service to have independently covered, and no third-party-verifiable claim to grade — the subject is the source, so it can never clear our 2-independent-sources floor. We like EDRi's work; we cannot run 'org publishes report about org' as reporting. Killed by the Source Checker at Pass 1 (confidence 0.20) under the self-summary/roundup auto-kill pattern. EIC ratified. If the report surfaces a specific concrete development — a named ruling, an EU legislative milestone, a campaign outcome — the Scanner can pull that as its own candidate with a real lead, and we'll grade it on its own sourcing.",
+  "category": "privacy",
+  "persona": "",
+  "byline": "Source Checker",
+  "confidence_score": 0.20,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "self-summary/roundup auto-kill | EDRi Annual Report 2025 is an org's own yearly retrospective — no discrete news event, inherently single-source (subject = source), below the 0.5 threshold",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Pulled EDRi Annual Report 2025 from edri.org/our-work feed, routed Privacy at newsworthiness 65/100."},
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "URL live (HTTP 200) but resolves to EDRi's own annual report — self-published organizational retrospective, no independent news event or cross-referenceable claim. Dropped to 0.20.", "confidence_delta": -0.45},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Kill ratified under the self-summary/roundup auto-kill pattern; no brief routed to a Reporter."}
+  ]
+}
