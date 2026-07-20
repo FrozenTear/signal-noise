@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-19T06:29:22Z
+- when:    2026-07-20T06:16:42Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29676515940
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29721198411
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - heinrich-grid-bill-texas-connect-and-manage | Heinrich's Grid Bill Bets on Texas-Style “Connect and Manage” to Cut P
    - the-1130-hadopi-surveillance-law-repealed | France's Hadopi Surveillance Law: 2009–2026
    - the-1134-wildfire-smoke-deadlier-than-heat-waves | Wildfire Smoke Kills an Estimated 24,000 Americans a Year — Roughly Tw
    - the-1129-doj-opinion-lifts-tiktok-ban-federal-devices | DOJ Opinion Lifts Statutory TikTok Ban on Federal Devices — With Agenc
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1110-fifty-years-of-the-z80 | Fifty Years of the Z80: The Chip That Outlived Its Era
    - dxvk-302-hang-debug-gpu-forensics | DXVK 3.0.2 Ships `DXVK_DEBUG=hang` for GPU Hang Forensics
    - the-1092-frame-x11-server-in-assembly | Someone Rewrote an Entire X11 Server in Pure Assembly. Then Did the Sa
-   - the-1100-eff-wearable-transparency-reports-survey | EFF Survey: Eight of Ten Wearable Makers Won't Tell You When Law Enfor
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
