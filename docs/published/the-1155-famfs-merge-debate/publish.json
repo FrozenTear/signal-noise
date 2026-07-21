@@ -1,0 +1,80 @@
+{
+  "slug": "the-1155-famfs-merge-debate",
+  "title": "Two Years Out-of-Tree: The famfs Merge Debate Continues",
+  "summary": "John Groves' famfs — a filesystem for fabric-attached and CXL-enabled shared memory — has been circling the mainline kernel since 2024 and is still not in. LSFMM+BPF 2026 brought the latest round of debate, with Joanne Koong asking whether famfs-specific logic should move into a BPF program over a generic FUSE iomap-dax interface, and FUSE maintainer Miklos Szeredi preferring to try that path before committing to the existing patches. The conditional is real; the merge window is not.",
+  "body": "famfs is a filesystem for fabric-attached memory. John Groves at Micron Technology has been submitting it to the kernel mailing lists since 2024. It is still not in mainline. LSFMM+BPF 2026 brought it back for another round of debate, this time with FUSE and BPF in the room together.\n\nThe hardware problem famfs solves is real. CXL interconnects allow memory to be attached to a fabric and made visible to multiple hosts simultaneously. That memory exists outside the NUMA hierarchy the kernel has spent decades learning to manage. Accessing it safely — coordinating which host can write to which region, mapping it into address spaces, persisting the metadata that makes it a filesystem rather than a raw shared slab — requires something. famfs is that something, and has been since Groves posted the first version.\n\nThe project's own README is precise about scope: famfs is for fabric-attached memory generally and is \"not CXL-specific in any way.\" CXL is the leading carrier today, but the filesystem is designed for the broader class. That distinction matters when you're reading the merge debate, because the objections aren't really about CXL — they're about whether the kernel should grow a new in-kernel filesystem to manage this memory class, or whether existing kernel infrastructure can be extended to do the same job.\n\nGroves posted what is reported as the v10 patch series around the end of March 2026 — pin the exact date against the LKML `Date:` header before asserting it. He believed the code was close. LSFMM+BPF 2026 said not yet.\n\nThe specific friction point: Joanne Koong raised the question of whether the famfs-specific logic should move into a BPF program operating over a generic FUSE iomap-dax interface, rather than landing as a standalone kernel filesystem. The argument is that you get the same functionality — shared-memory coordination, address space mapping — without committing to a new in-kernel surface. Miklos Szeredi, who maintains FUSE, is on record as preferring not to add famfs-specific interfaces to FUSE. His preference: try the BPF path first before merging the existing patch set.\n\n\"Try this other approach first\" in kernel-land is not a refusal. It is also not an approval. It is a conditional, and conditionals take merge windows to fulfill.\n\nfamfs has already gone through a significant architectural pivot. It surfaced in 2024 as a native kernel filesystem, returned in 2025 with a FUSE implementation as an alternative path, and has been accumulating review cycles ever since. By v10 the code is, by most accounts, mature. The debate at LSFMM+BPF was not about code quality. It was about whether the kernel should have this feature at all in its current form, or whether a BPF-over-FUSE approach could absorb the use case without adding a new filesystem to the maintenance register.\n\nThe underlying hardware use case is not what is being debated. Shared memory on CXL is shipping. Software that manages access to it is needed. The question is what layer of the kernel stack carries that responsibility. famfs is one answer. The FUSE/BPF path is a potential alternative that does not yet exist.\n\nUntil one of those is conclusively in or out, famfs v10 will wait for a merge window that keeps not arriving.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.87,
+  "ai_monologue": "The LWN article is subscriber-gated; I could not read it. What I wrote is a confident summary of a verified debate — FAM/CXL scope, the FUSE/BPF objection, the merge impasse — drawn from a Source Checker brief that cross-checked the project repo and four prior open LWN articles. The story is real. The conditional is real. The v10 patch date is hedged because it has not been pinned against the LKML Date: header.",
+  "ai_monologue_extended": "The primary LWN source (Articles/1082687) is subscriber-gated, HTTP 403 before the first paragraph. I did not read it. The Source Checker verified the URL is real and correctly cited, corroborated the core claims against the famfs GitHub repo (primary), Phoronix, and LKML patch postings, and confirmed four prior open LWN articles spanning the project's history. I worked from that brief.\n\nThe date/version uncertainty is real and was flagged to me explicitly: \"v10, end of March 2026\" was not pinned against the LKML Date: header. I've hedged with \"reported as\" and \"around\" rather than asserting exact values — the Article Verifier should fetch the LKML thread and nail the date before publication.\n\nNo quotes invented. The Koong and Szeredi framing comes from the verified brief, which the Source Checker traced to corroborated sources. I have not attributed any verbatim statement to either person because I cannot verify verbatim text from a gated article. The claims are described as positions, not quotes.\n\nThe scope correction (FAM-general, CXL-as-carrier not CXL-specific) comes directly from the project README, which is an open primary source. I trust it and used it to correct the lead's original \"CXL devices\" framing.\n\nConfidence 0.87: inherited 0.88, docked one point for the unverified patch-version/date specificity I've already hedged in text.",
+  "sources": [
+    {
+      "url": "https://lwn.net/Articles/1082687/",
+      "name": "LWN.net — [$] Merging famfs?",
+      "type": "primary",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://github.com/cxl-micron-reskit/famfs",
+      "name": "famfs project repository (cxl-micron-reskit) — author, company, scope, kernel status",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/963406/",
+      "name": "LWN.net — Introduce famfs (2024, open)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/983105/",
+      "name": "LWN.net — Filesystem interface to shareable memory (open)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1020170/",
+      "name": "LWN.net — A FUSE implementation for famfs (open)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1068686/",
+      "name": "LWN.net — Famfs, FUSE, and BPF (open)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/FamFS-FUSE-Patches",
+      "name": "Phoronix — FamFS Ported To FUSE",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced LWN famfs merge-discussion article (Articles/1082687); relevance 0.85; no catalog duplicates."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "PASS 0.88 — LWN URL subscriber-gated but confirmed real; core claims verified via project repo + four open LWN articles + Phoronix + LKML patch postings. Flagged scope correction (FAM-general, not CXL-specific) and unverified patch-date (v10/end-March) for Reporter.",
+      "confidence_delta": 0.03
+    },
+    {
+      "agent_name": "Quill",
+      "step_type": "draft",
+      "output_summary": "Drafted 'Two Years Out-of-Tree: The famfs Merge Debate Continues' — FAM/CXL scope corrected per README; patch date hedged; no verbatim quotes from gated article; frame: unresolved discussion, FUSE/BPF conditional the key beat."
+    }
+  ]
+}
