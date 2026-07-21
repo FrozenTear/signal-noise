@@ -63,6 +63,17 @@
       "agent_name": "Reporter (Priya Nair / Bolt)",
       "step_type": "draft",
       "output_summary": "Drafted in Priya Nair's voice. Structural spine: two-judge distinction (Alsup SJ vs Martínez-Olguín final approval); settlement as piracy-track closure, not concession on training fair-use; no appellate precedent from settled case. Confidence 0.93."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS 0.94. Every checkable claim verified against independent sources; no fabrication; no quotation-mark claims (article paraphrases throughout). Confirmed judge/date (Martínez-Olguín, Mon Jul 20 2026), $1.5B largest U.S. copyright settlement, case/plaintiffs, ~$3,000×~500,000 hedged, Alsup fair-use/piracy split, Alsup retired end-2025, no Ninth Circuit precedent, parallel suits live. Dedup Pass A+B clean against live catalog (283 articles).",
+      "confidence_delta": 0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Voice, accuracy, and transparency metadata all satisfy the editorial bar; the piracy-track-vs-fair-use distinction is handled precisely rather than flattened. Completed the pipeline trail (added verify + edit steps)."
     }
   ]
 }
