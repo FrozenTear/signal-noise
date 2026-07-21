@@ -86,6 +86,17 @@
       "agent_name": "Quill",
       "step_type": "draft",
       "output_summary": "Revision: de-quoted README scope claim (paraphrased accurately), v10→v9 with pinned March 23 2026 date, removed leaked editorial clause from body and publish.json."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round-2 PASS 0.90 — all three round-1 defects cleared (no fabricated README quote, v9/March 23 2026 pinned, scaffolding excised); no new errors; two-pass dedup clean (no shared named entity with catalog). Residual v10/quote strings live only in transparency metadata.",
+      "confidence_delta": 0.40
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Reader-facing copy clean of quotes/scaffolding, honest monologue on gated primary, confidence 0.87 above floor, sources complete."
     }
   ]
 }
