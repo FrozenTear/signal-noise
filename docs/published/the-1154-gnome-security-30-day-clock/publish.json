@@ -1,0 +1,63 @@
+{
+  "title": "GNOME Security Gets a 30-Day Clock — and a Vacancy",
+  "slug": "the-1154-gnome-security-30-day-clock",
+  "summary": "Michael Catanzaro is cutting GNOME's vulnerability disclosure window from 90 to 30 days, effective August 1, while simultaneously announcing he'll stop tracking new reports on November 1. The changes are motivated by a rise in AI-generated security reports — though the new policy is not a mechanical AI filter; it's an honest acknowledgment of how maintainers actually work.",
+  "body": "GNOME's security tracking is due for a significant overhaul. The person running it just explained why, and then announced he was leaving.\n\nMichael Catanzaro has managed GNOME security tracking since November 2020. On July 20, 2026, he posted a detailed breakdown of two changes taking effect this year. The first: the vulnerability disclosure deadline drops from 90 days to 30 days for any issue reported on or after August 1, 2026.\n\nThe logic is direct. Catanzaro observes that GNOME maintainers handle vulnerability reports in essentially two ways: fix them within a few weeks, or don't fix them at all. Ninety days was never being used productively. Thirty days names the window that's actually operating.\n\nContext matters here. Catanzaro is direct about what's changed: \"Non-AI reports are now moderately unusual, so it really doesn't make sense to optimize for them.\" That's the backdrop for the policy change. But the shorter deadline is not a mechanical AI detector. It's a general tightening that Catanzaro says \"would probably work better for GNOME even if not for the increase in AI-generated issue reports.\" The timeline shortens; the human judgment call stays.\n\nFor projects that explicitly prohibit AI-generated content — some GNOME-adjacent projects do — the handling is more direct. Catanzaro will close the report immediately and separately notify the maintainer. No forwarding, no escalation path. If your project bans AI content, the security report goes in the bin.\n\nThe infrastructure side is also in scope — eventually. The current tracker lives in a wiki requiring \"considerable manual upkeep.\" Catanzaro floats replacing it with \"a proper web app that dynamically updates based on the actual state of the issue.\" He does not present this as a commitment; he presents it as an idea someone else might act on.\n\nWhich brings us to the second change. Catanzaro will stop tracking newly reported issues on November 1, 2026. Between November 1 and December 1, he'll remain focused on issues filed before that cutoff — all open disclosure deadlines lapse by December. After that, the queue empties and so does his role.\n\nHe is looking for a successor. Specifically, \"an experienced GNOME community member.\" He notes that \"security tracking is not a good task for newcomers.\" That is accurate. It is also a fairly urgent want ad, with a hard stop date attached.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "The 30-day window isn't a response to AI. It's a correction — 90 days was fiction; 30 days is what GNOME maintainers were already living.",
+  "ai_monologue_extended": "Primary source is Catanzaro's own GNOME blog post, dated July 20, 2026 — first-party, directly readable, no paywall. LWN ran a link-post (Article 1083754), not an original report; I've cited it as an aggregator. Phoronix independently covers the same announcement. The Source Checker flagged two precision issues and both were well-placed. First: the LWN framing compressed two distinct dates — Catanzaro stops tracking newly reported issues on November 1, not December; December 1 is when the last open disclosure deadlines lapse. I've kept them distinct in the body. Second: the AI framing flag was correct — the blog text explicitly says the shorter window \"would probably work better for GNOME even if not for the increase in AI-generated issue reports,\" which is a hedge, not a causal claim. The article treats AI as context/motivation rather than the rule's mechanical trigger. The Article Verifier (v1) caught a fabricated quote — \"vulnerability reports that are not discovered by AI are becoming increasingly rare\" — which did not appear in the primary source. Corrected to Catanzaro's actual words: \"Non-AI reports are now moderately unusual, so it really doesn't make sense to optimize for them.\" No paywalled content involved; all primary text was directly readable. The wiki-to-web-app aspiration is reported as aspiration, not commitment — Catanzaro's phrasing is conditional and he names no timeline.",
+  "sources": [
+    {
+      "url": "https://blogs.gnome.org/mcatanzaro/2026/07/20/some-changes-to-gnome-security-tracking/",
+      "name": "Michael Catanzaro, GNOME Blog",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1083754/",
+      "name": "LWN.net Article 1083754",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/GNOME-Security-Changes-2026",
+      "name": "Phoronix — GNOME Security Changes 2026",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Detected Catanzaro's 'Some changes to GNOME security tracking' via LWN link-post (Article 1083754); initial relevance 0.85."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Confirmed the GNOME blog primary and Phoronix corroboration; passed at 0.92. Issued two reporter flags: Nov 1 vs Dec 1 date precision, and AI-as-context (not causal trigger) framing.",
+      "confidence_delta": 0.07
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Milo Varga (Linux beat) drafted from the directly-read GNOME blog; both Source Checker flags applied in the body."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v1 FAIL — fabricated 'not discovered by AI' quote flagged; v2 PASS 0.92 with the verbatim 'Non-AI reports are now moderately unusual' correction, all other quotes verbatim, dedup clean.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Live-feed dedup re-confirmed clear against the 284-article catalog; source enums normalized (LWN paywall_status free)."
+    }
+  ]
+}
