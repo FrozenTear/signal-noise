@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-20T07:08:43Z
+- when:    2026-07-21T06:09:25Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29723666529
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29806146758
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - weekly-editorial-retrospective-2026-07-13-to-19 | Editor's Log, Week of July 13-19: Sixty-Three Stories, Fifteen Kills, 
    - the-1140-ffmpeg-avx-512-vpermb-pixel-conversion | FFmpeg Lands AVX-512 VPERMB Path: Developer Benchmarks Show 1.372x Boo
    - the-1148-burnham-climate-record | From Fossil Fuel Treaty to Rosebank: Andy Burnham's Climate Record, in
    - the-1144-eu-ai-200b-audit-trail | EU's €200B AI Target Has No Audit Trail: Commission Rejected the Fix T
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - half-a-second-xz-backdoor-book | The Shortest Diagnostic of the Decade Gets Its Own Book
    - the-1125-three-stable-kernels-must-upgrade | Three stable kernel series get simultaneous “must-upgrade” push
    - the-1126-holo-core-aarch64-arch-linux | Arch Linux Has No Official aarch64 Port. Collabora Built One for Valve
-   - the-1111-schrems-noyb-formal-demand-eu-us-data-deal | Schrems Escalates: noyb Files Formal Demand to Kill EU-US Data Deal Af
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
