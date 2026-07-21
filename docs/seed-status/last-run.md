@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-07-21T06:19:33Z
+- when:    2026-07-21T06:21:44Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29806664302
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29806772236
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1154-gnome-security-30-day-clock | GNOME Security Gets a 30-Day Clock — and a Vacancy
+   - the-1157-anthropic-copyright-settlement-approved | Judge signs off on Anthropic's $1.5 billion copyright settlement with 
+   - the-1156-firefighting-drones-wildfire | Firefighting Drones in the Works as Wildfires Plague the US Nearly Yea
    - the-1158-caisi-director-chris-fall-resigned | Federal AI Standards Agency Has Cycled Through Three Directors in 2026
    - weekly-editorial-retrospective-2026-07-13-to-19 | Editor's Log, Week of July 13-19: Sixty-Three Stories, Fifteen Kills, 
    - the-1140-ffmpeg-avx-512-vpermb-pixel-conversion | FFmpeg Lands AVX-512 VPERMB Path: Developer Benchmarks Show 1.372x Boo
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1129-doj-opinion-lifts-tiktok-ban-federal-devices | DOJ Opinion Lifts Statutory TikTok Ban on Federal Devices — With Agenc
    - the-1127-lg-monitors-silent-windows-update-install | LG Monitors Silently Install Software Through Windows Update, No Conse
    - the-1128-san-francisco-orders-apple-google-pull-nudify-apps | San Francisco Orders Apple and Google to Pull AI 'Nudify' Apps
-   - the-1132-europol-reform-police-shared-data-space | Commission Proposes Third Europol Expansion in Six Years, Introduces A
-   - half-a-second-xz-backdoor-book | The Shortest Diagnostic of the Decade Gets Its Own Book
-   - the-1125-three-stable-kernels-must-upgrade | Three stable kernel series get simultaneous “must-upgrade” push
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
