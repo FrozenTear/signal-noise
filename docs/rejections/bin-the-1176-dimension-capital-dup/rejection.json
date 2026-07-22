@@ -1,0 +1,23 @@
+{
+  "slug": "bin-the-1176-dimension-capital-dup",
+  "title": "Dimension Capital closes $800M Fund III as AI-in-biology bets pay off",
+  "summary": "Draft article on Dimension Capital's $800M Fund III close — same TechCrunch primary source and numeric spine as THE-1173, already published on the same date.",
+  "body": "Editor's note (Bolt). This draft covered Dimension Capital's $800M Fund III close from TechCrunch, the same primary source and same numeric spine already published in THE-1173: $800M raised, 60% above the prior $500M vehicle, Chai Discovery at $3.8B, New Limit at $3.1B, Coefficient Bio acquired by Anthropic for $400M, $1.65B AUM. The Article Verifier confirmed both round-1 fixes (corrected quote form, corrected target attribution to Endpoints/STAT) but flagged a hard duplicate on the Published Catalog Check: identical TechCrunch source URL (byte-equal) and four-entity slug overlap (dimension, capital, 800m, fund), duplicate confidence 0.97. The 'AI-in-biology bets pay off' framing is a spin on the same news event, not a distinct angle. Bolt accepted the kill rather than escalating to the Editor-in-Chief.",
+  "category": "tech",
+  "persona": "",
+  "byline": "Bolt",
+  "confidence_score": 0.90,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "reporter-withdrawal-post-dedup | Dimension Capital $800M Fund III; hard duplicate of published THE-1173; Verifier round-2 duplicate confidence 0.97; reporter chose withdrawal over EIC escalation",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Auto-flagged Dimension Capital Fund III close via TechCrunch, relevance 1.30, routed to tech beat."},
+    {"agent_name": "Source Checker", "step_type": "verify", "output_summary": "Verified pass, confidence 0.92. Multi-outlet confirmed: TechCrunch (HTTP 200), BioPharma Dive, Endpoints/STAT, FirstWord Pharma."},
+    {"agent_name": "Reporter (Bolt)", "step_type": "draft", "output_summary": "Drafted article as Priya Nair; confidence 0.90."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "Round 1 — two hard fails: fabricated direct-quote form for partner sentiment (journalist narration, not a quotation); misattributed $700M–$750M target range to TechCrunch (source was Endpoints/STAT). Returned for revision."},
+    {"agent_name": "Reporter (Bolt)", "step_type": "draft", "output_summary": "Revision 2 — corrected quote form to reported speech; corrected attribution to Endpoints/STAT. Resubmitted to Article Verifier."},
+    {"agent_name": "Article Verifier", "step_type": "verify", "output_summary": "Round 2 — both fixes verified clean. Hard fail: Published Catalog Check matched the-1173-dimension-capital-800m-third-fund (same TechCrunch source URL byte-equal, four-entity slug overlap, duplicate confidence 0.97). Returned to Reporter with kill recommendation; no distinct angle to salvage."},
+    {"agent_name": "Reporter (Bolt)", "step_type": "edit", "output_summary": "Accepted kill. No genuinely differentiated angle identified. No EIC escalation. Staged rejection row."}
+  ]
+}
