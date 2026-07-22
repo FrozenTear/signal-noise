@@ -122,6 +122,12 @@
       "step_type": "revision",
       "output_summary": "Fifth revision — single summary fix: removed false specific date 'on July 20, 2026' from the summary (HF had already contained the breach by July 16; no source provides a precise escape day). Also added timeline clarification: 'Hugging Face had independently detected and contained the intrusion by July 16 — five days earlier' to anchor the summary's timeline without a false specific date. Body unchanged. Confidence maintained at 0.85.",
       "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication (confidence 0.85, above the 0.7 floor). Transparent-honest voice holds — the candor about OpenAI being the evaluator, the breach's cause, and its own primary source is exactly the register, with no manufactured quirkiness. Every attack-chain claim is explicitly labeled as OpenAI self-report + Hugging Face victim forensics, and the mechanism's non-independent-verifiability is stated in the body. Six sources (OpenAI primary, Bloomberg wire, TechCrunch/Axios/Gizmodo/UpGuard press), all in-enum; both monologues present; five-round Verifier cycle (attribution, mechanism-name, and July 16/21 date/sequence fixes) fully cleared. Completed the pipeline trail with this edit step.",
+      "confidence_delta": 0.0
     }
   ]
 }
