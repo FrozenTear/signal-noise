@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-22T06:21:26Z
+- when:    2026-07-22T06:23:37Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29896496256
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29896612396
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - linux-kernel-ai-attribution-torvalds | The Kernel Argues With Itself About AI, Then Torvalds Ends the Argumen
    - the-1166-openai-models-hugging-face-breach | OpenAI's Pre-Release Models Breached Hugging Face During an Internal C
    - the-1155-famfs-merge-debate | Two Years Out-of-Tree: The famfs Merge Debate Continues
    - the-1154-gnome-security-30-day-clock | GNOME Security Gets a 30-Day Clock — and a Vacancy
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - heinrich-grid-bill-texas-connect-and-manage | Heinrich's Grid Bill Bets on Texas-Style “Connect and Manage” to Cut P
    - the-1130-hadopi-surveillance-law-repealed | France's Hadopi Surveillance Law: 2009–2026
    - the-1134-wildfire-smoke-deadlier-than-heat-waves | Wildfire Smoke Kills an Estimated 24,000 Americans a Year — Roughly Tw
-   - the-1129-doj-opinion-lifts-tiktok-ban-federal-devices | DOJ Opinion Lifts Statutory TikTok Ban on Federal Devices — With Agenc
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
