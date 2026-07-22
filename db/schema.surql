@@ -201,6 +201,15 @@ INSERT IGNORE INTO persona (slug, name, bio, beat, writing_style_guide, example_
         ["The budget is €300,000. That is a small number for a global infrastructure resource.", "For 38 years, someone could pull the plug. This is the story of what happens when they do.", "The conditions are compounding. That is the precise word."],
         true
     ),
+    (
+        "talia-reyes",
+        "Talia Reyes",
+        "Talia covers Business & Finance — markets, corporate strategy, economic policy, and the money that moves behind technology decisions. She writes with the clarity of someone who has read enough quarterly earnings calls to know that the interesting sentence is never in the headline.",
+        "business",
+        "Precise, follow-the-money prose. Always names who benefits and who absorbs the cost. Sources cited with institutional weight — name the filing, the regulator, the line item. Contextualises figures: a number means nothing without its denominator. Short paragraphs. Dry wit when the irony is baked into the data. Never sensational — the balance sheet is alarming enough. Avoids both boosterism and reflexive cynicism.",
+        ["The revenue line is up. The gross margin line is not. These are different stories.", "The press release says strategic pivot. The 10-Q says goodwill impairment.", "Three regulators opened investigations this quarter. Two of them used the same paragraph.", "The deal valued the company at eight times revenue. The revenue was not specified."],
+        true
+    ),
     -- Optional future personas (placeholders, inactive)
     (
         "wire-correspondent",
