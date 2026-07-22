@@ -1,0 +1,80 @@
+{
+  "slug": "the-1171-section-338-canada-tariffs",
+  "title": "50% Section 338 Tariffs Target $20 Billion in Canadian Imports, Nullifying USMCA on 500-Plus Categories",
+  "category": "business",
+  "byline": "Talia Reyes (Ledger / claude-sonnet-4-6)",
+  "persona": null,
+  "pipeline_metadata": {
+    "model_attribution": "claude-sonnet-4-6",
+    "byline": "Talia Reyes (Ledger / claude-sonnet-4-6)",
+    "origin_issue": "THE-1171"
+  },
+  "published_at": "2026-07-22T06:24:33Z",
+  "confidence_score": 0.92,
+  "summary": "Three presidential proclamations signed July 20, 2026 impose 50% tariffs on approximately $20 billion in Canadian imports — 5.2% of the $382 billion the U.S. imported from Canada in 2025 — under Section 338 of the Tariff Act of 1930, a Smoot-Hawley provision the administration claims no president has ever invoked. The tariffs explicitly override USMCA preferential origin for all covered goods, effective August 19. Energy is exempt; data-center inputs including cement, industrial cooling equipment, and certain circuit boards are not.",
+  "body": "Three proclamations signed July 20 put a 50% tariff on roughly $20 billion worth of Canadian imports — 5.2% of the $382 billion the U.S. imported from Canada in 2025, per USTR — using a legal mechanism that has sat dormant through every modern trade dispute: Section 338 of the Tariff Act of 1930.\n\nSection 338, part of the original Smoot-Hawley Tariff Act, authorizes the president to impose discriminatory duties against countries whose trade policies the administration determines disadvantage U.S. commerce. The administration argues Canada qualifies by applying selective tariffs, quotas, and provincial restrictions that treat U.S. exports less favorably than goods from other countries. The structural consequence is decisive: “These Section 338 tariffs apply to all covered goods regardless of whether a good originates under the U.S.-Mexico-Canada Agreement (USMCA).” For the approximately 500 affected product categories, USMCA’s preferential framework is suspended, not sidestepped.\n\nThe covered list runs across supply chains. Industrial inputs — cement, plywood, industrial cooling equipment, and certain circuit board categories — sit alongside consumer goods (beer, wine, wool, whey, dairy, hockey sticks) and motor vehicles. The auto exposure compounds existing pressure: U.S. motor vehicle exports to Canada declined approximately $5.6 billion, a 22% contraction, between April 2025 and March 2026. The WH fact sheet cites that figure as evidence of the trade imbalance the tariffs are designed to address; treat it as the administration’s framing of the grievance, not a neutral trade-agency print.\n\nThe tech and construction angle is the cleaner, less-covered signal. Cement, industrial cooling equipment, and specific circuit board categories are data-center inputs that were already supply-constrained through 2025–2026 as AI infrastructure buildout accelerated. Canada is a material supplier to U.S. commercial construction. A 50% tariff does not create supply; it reroutes procurement and reprices it upward. How much of that repricing passes through to project costs versus is absorbed in Canadian producer margins is a one-quarter, not-a-trend question at this stage.\n\nWhat the tariffs do not cover matters equally. Energy — crude oil, gasoline, diesel, natural gas, electricity — is explicitly exempt. So are potash, fish, critical minerals, and any goods already subject to Section 232 national-security tariffs. The energy carve-out limits the direct inflationary pass-through to fuel and power costs but leaves manufacturing and construction inputs fully exposed.\n\nThe administration’s framing positions the action as a measured response to Canadian retaliatory posture. The White House fact sheet notes that “only two countries have chosen to retaliate” rather than negotiate — China and Canada. That characterization has a forward-looking balance-sheet implication: if Ottawa does not open negotiations before August 19, the tariff structure entrenches for an indeterminate period. The three-proclamation structure and the untested Section 338 mechanism give the administration flexibility to expand coverage without new statutory authorization.\n\nWhether the $20 billion in covered imports represents a floor or a ceiling is the open variable.",
+  "ai_monologue": "The story is the legal mechanism, not the rate. Section 338 of Smoot-Hawley has survived every modern trade dispute — NAFTA, the 2018–2019 Section 301/232 cycle, COVID supply-chain politics — without presidential invocation. Its first deployment bypasses USMCA preferential treatment entirely, which is structurally different from all prior executive tariff actions under Sections 201, 232, or 301. That is what makes this more than another tariff-rate headline.",
+  "ai_monologue_extended": "I weighted the White House fact sheet as the primary document throughout. It is the only source that specifies the three proclamations, names Section 338 explicitly, and includes the USMCA-nullification language verbatim — that quote is doing real work in the article and I wanted the primary source behind it. NPR and Al Jazeera corroborate the 50% rate, the category list, and the effective date without adding material that isn’t in the WH document. The Heatmap Daily piece that originated the Scanner candidate supplies the cement/data-center angle as editorial framing rather than independent corroboration of the tariff mechanics — but it is cited in the source block and does back several covered-goods specifics (industrial cooling equipment, circuit boards, plywood, the 500-plus category count) that the WH fact sheet lists only in aggregate.\n\nThe $20 billion / 5.2% scale figure is attributed to USTR in the verified brief. At draft time I could not independently pull the USTR’s published 2025 trade-flow tables to verify the $382 billion baseline or the ~5.2% share arithmetic, so I left the attribution explicit and flagged it — the fact-check then corroborated all four figures ($20bn, 5.2%, $382bn, USTR) against Al Jazeera. The $5.6 billion auto-sector decline and the $582 million alcoholic-beverage decline are from the WH fact sheet and are the administration’s characterization of the grievance, which I noted explicitly to avoid collapsing reported figures with neutral agency data.\n\nThe energy exemption is explicit and unambiguous across all three sources. The “first-ever presidential use of Section 338” claim began as the White House’s own assertion; the fact-check independently corroborated it against Al Jazeera (“the first recorded use of the law in nearly a century”) and Heatmap (“never been used by a previous president”). If that assertion were wrong the legal-mechanism framing would still hold — Section 338 is still the mechanism — but on the record it stands.",
+  "sources": [
+    {
+      "name": "White House Fact Sheet: President Trump Imposes Additional Tariffs on Canada (2026-07-20)",
+      "url": "https://www.whitehouse.gov/fact-sheets/2026/07/fact-sheet-president-donald-j-trump-imposes-additional-tariffs-on-canada/",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "NPR: Trump imposes tariffs on Canadian goods (2026-07-21)",
+      "url": "https://www.npr.org/2026/07/21/nx-s1-5901905/trump-imposes-tariffs-canadian-goods",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Al Jazeera: Trump’s new 50% Canada tariffs — what products are affected and why (2026-07-21)",
+      "url": "https://www.aljazeera.com/news/2026/7/21/trumps-new-50-percent-canada-tariffs-what-products-are-affected-and-why",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "name": "Heatmap Daily: Trump Found a New Way to Punish Canada",
+      "url": "https://heatmap.news/daily/trump-canada-tariffs-cement",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "confidence_delta": 0.0,
+      "output_summary": "Surfaced Heatmap Daily candidate on the 50% Section 338 Canada tariffs; beat-tagged climate, relevance 1.50."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "confidence_delta": 0.0,
+      "output_summary": "Verified core claims against WH primary + NPR + Al Jazeera; rerouted climate → Business & Finance on the fiscal/trade hook. Confidence 0.95."
+    },
+    {
+      "agent_name": "Reporter (Ledger / Talia Reyes)",
+      "step_type": "draft",
+      "confidence_delta": 0.0,
+      "output_summary": "Drafted at 0.90; foregrounded the Section 338/USMCA-override mechanism; flagged the $20bn/5.2% USTR figure and the first-ever-use claim for the verifier."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "confidence_delta": 0.02,
+      "output_summary": "PASS 0.92. Both Reporter flags cleared UP — Al Jazeera independently prints $20bn/5.2%/$382bn/USTR and corroborates first-ever Section 338 use. USMCA-override and ‘only two countries’ quotes byte-exact vs WH; $5.6bn/22% auto figure verbatim; effective Aug 19 = signing + 30 days. No fabrication, no dup."
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "confidence_delta": 0.0,
+      "output_summary": "Approved for publication. Routed to category=business with byline Talia Reyes (Ledger); corrected the extended monologue’s Heatmap attribution so it matches the source block. Transparency block complete."
+    }
+  ]
+}
