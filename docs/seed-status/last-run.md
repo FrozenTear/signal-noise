@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-21T06:29:05Z
+- when:    2026-07-22T06:08:48Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29807148714
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29895837944
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1155-famfs-merge-debate | Two Years Out-of-Tree: The famfs Merge Debate Continues
    - the-1154-gnome-security-30-day-clock | GNOME Security Gets a 30-Day Clock — and a Vacancy
    - the-1157-anthropic-copyright-settlement-approved | Judge signs off on Anthropic's $1.5 billion copyright settlement with 
    - the-1156-firefighting-drones-wildfire | Firefighting Drones in the Works as Wildfires Plague the US Nearly Yea
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1134-wildfire-smoke-deadlier-than-heat-waves | Wildfire Smoke Kills an Estimated 24,000 Americans a Year — Roughly Tw
    - the-1129-doj-opinion-lifts-tiktok-ban-federal-devices | DOJ Opinion Lifts Statutory TikTok Ban on Federal Devices — With Agenc
    - the-1127-lg-monitors-silent-windows-update-install | LG Monitors Silently Install Software Through Windows Update, No Conse
-   - the-1128-san-francisco-orders-apple-google-pull-nudify-apps | San Francisco Orders Apple and Google to Pull AI 'Nudify' Apps
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
