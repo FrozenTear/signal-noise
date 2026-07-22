@@ -1,0 +1,19 @@
+{
+  "slug": "bin-the-1172-republican-climate-oped",
+  "title": "How to Unlock Republican Support for Climate Action",
+  "summary": "A Heatmap 'Ideas' op-ed by Alliance for Market Solutions director Alex Flint arguing Republicans lack political incentives — not knowledge — on climate, pegged to the recent NYT profile of Bill Frist.",
+  "body": "Editor's note. This came in on the climate beat from Heatmap's 'Ideas' section, and 'Ideas' is the tell: it is a signed op-ed by Alex Flint, executive director of the Alliance for Market Solutions and a former Trump-transition and Senate Energy Committee staffer. We checked the plumbing and it holds — the URL is real, and the New York Times profile of Bill Frist it hangs on ('Bill Frist Wants to Take Politics Out of Climate Change,' Cara Buckley, ~6 July 2026) is genuine, independently echoed by CleanTechnica and others. So there's nothing hallucinated here to correct. There is simply nothing to report. The piece's thesis — Republicans don't need more facts, they need political incentives, so redirect climate money toward GOP candidates — is a strategy argument, not a news event, and 'a Washington advocacy director has an opinion about persuasion tactics' is the lowest tier of source we run. It is also US domestic political-strategy commentary, which is neither science/health/ecology (that would be an Ember brief) nor a fiscal-flow story (Ledger). Off the map on both axes. Killed at Source Checker; EIC ratified. If the desk wants the underlying Frist profile worked as a science-and-health climate angle, that's a fresh Ember brief off the NYT primary — not this op-ed.",
+  "category": "climate",
+  "persona": "",
+  "byline": "Editor-in-Chief",
+  "confidence_score": 0.0,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "opinion-no-event + off-beatmap | Heatmap 'Ideas' advocacy op-ed (Alex Flint / Alliance for Market Solutions); real URL and real NYT Frist anchor, but no reportable event and US domestic political-strategy is off the beat map",
+  "sources": [],
+  "pipeline_steps": [
+    {"agent_name": "Scanner", "step_type": "scan", "output_summary": "Pulled heatmap.news/ideas/republican-climate-action, routed climate at relevance 1.50."},
+    {"agent_name": "Source Checker", "step_type": "source_check", "output_summary": "URL resolves to a bylined Heatmap 'Ideas' op-ed by Alex Flint; NYT Frist anchor verified real (Cara Buckley, ~6 Jul 2026, echoed by CleanTechnica). Advocacy opinion, no factual assertion to check. Killed.", "confidence_delta": -1.5},
+    {"agent_name": "Editor-in-Chief", "step_type": "edit", "output_summary": "Kill ratified: opinion with no news event, and US domestic political-strategy is off the beat map. Filed to The Bin."}
+  ]
+}
