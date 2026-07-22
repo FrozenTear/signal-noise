@@ -252,7 +252,7 @@ pub async fn get_article_by_slug(
                  persona.name AS persona_name, \
                  ->cites->source.* AS sources, \
                  ->produced_by->pipeline_step.* AS pipeline \
-                 FROM article WHERE slug = $slug LIMIT 1",
+                 FROM article WHERE slug = $slug AND status = 'published' LIMIT 1",
             )
             .bind(("slug", slug.clone()))
             .await

@@ -169,7 +169,7 @@ pub async fn get_article(
                 ->cites->source.* AS sources,
                 ->produced_by->pipeline_step.* AS pipeline
             FROM article
-            WHERE slug = $slug
+            WHERE slug = $slug AND status = 'published'
             LIMIT 1
             "#,
         )
