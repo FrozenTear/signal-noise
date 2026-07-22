@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-22T06:35:52Z
+- when:    2026-07-22T06:43:30Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29897259297
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29897671997
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1164-treesize-perpetual-license-subscribe-support | JAM Software tells TreeSize perpetual-license holders: subscribe or lo
    - the-1174-dimension-capital-800m-fund-iii | Dimension Capital's Fund III Closes at $800M — 60% Above Fund II, Over
    - the-1171-section-338-canada-tariffs | 50% Section 338 Tariffs Target $20 Billion in Canadian Imports, Nullif
    - criteo-conseil-detat-gdpr-40m-final | Criteo's €40M GDPR Fine Is Final: France's Highest Court Rejects Pseud
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1147-europe-2026-heatwave-death-counts-methods | Two Methods, Two Numbers: What Europe's 2026 Heatwave Death Counts Act
    - the-1138-linux-7-2-rc4-new-normal | Linux 7.2-rc4: The New Normal, Confirmed
    - fubo-15-price-hike-nbcu-channels-restored | Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and B
-   - the-1142-firesat-wildfire-satellites-launch | Three FireSat Wildfire-Detection Satellites Launched July 7; Smoke Ale
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
