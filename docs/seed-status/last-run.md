@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-22T06:29:49Z
+- when:    2026-07-22T06:30:24Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29896925499
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29896960016
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1173-dimension-capital-800m-third-fund | Dimension Capital Closes at $800M — 60% Above Prior Fund, Beating Its 
    - the-1171-section-338-canada-tariffs | 50% Section 338 Tariffs Target $20 Billion in Canadian Imports, Nullif
    - criteo-conseil-detat-gdpr-40m-final | Criteo's €40M GDPR Fine Is Final: France's Highest Court Rejects Pseud
    - firefox-153-tightens-local-file-and-lan-defaults | Firefox 153 tightens local-file and LAN defaults, ships experimental J
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1138-linux-7-2-rc4-new-normal | Linux 7.2-rc4: The New Normal, Confirmed
    - fubo-15-price-hike-nbcu-channels-restored | Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and B
    - the-1142-firesat-wildfire-satellites-launch | Three FireSat Wildfire-Detection Satellites Launched July 7; Smoke Ale
-   - the-1139-last-mpeg-4-visual-patent-expired | The Last MPEG-4 Visual Patent Has Expired
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
