@@ -1,0 +1,91 @@
+{
+  "slug": "firefox-153-tightens-local-file-and-lan-defaults",
+  "title": "Firefox 153 tightens local-file and LAN defaults, ships experimental JPEG XL",
+  "summary": "Firefox 153 landed July 21 with two security defaults that should have shipped years ago: extensions lose free access to local files, and Local Network Access restrictions go on for everyone. Somewhere between the PDF editor upgrade and the red location icon, Mozilla slipped in experimental JPEG XL support — a format both Firefox and Chrome are now moving toward, after a few years of Chrome moving away from it.",
+  "body": "Mozilla shipped Firefox 153 on July 21. The headline is a pair of tightened defaults.\n\n**Extensions and your local files**\n\nExtensions can no longer access local files by default. There is now a separate \"Access local files\" permission that users must grant explicitly. This closes a gap that was always obvious in retrospect: any extension you installed could read files from your filesystem without you knowing it wanted to. It could because nobody checked. Now Firefox checks.\n\n**LAN restrictions, complete**\n\nLocal Network Access restrictions are on by default for all users in 153. The spec — formally Private Network Access — prevents public websites from connecting to devices on your LAN without permission. Routers, NAS boxes, printers, cameras: public web pages could reach those before. Now they can't without explicit user approval.\n\nMozilla has been rolling this out incrementally. 153 finishes the job. If you run a home server dashboard, note this change.\n\n**Location permission goes red**\n\nWhen a website has access to your location, the permission icon now turns red. This will be visible on search results pages — a familiar example being Google's, which routinely requests location. Whether users notice, and whether noticing produces behavior changes, is left as an exercise.\n\n**PDF editing gains a merge step**\n\nThe built-in PDF editor can now merge multiple PDFs via drag-and-drop into the sidebar. You can also add images as new pages. This functionality isn't novel — third-party tools have done it for years — but Firefox doing it natively without a plugin quietly displaces a category of lightweight PDF extensions.\n\n**JPEG XL behind a Labs flag**\n\nMozilla enabled experimental JPEG XL support in Firefox Labs. Enable it via the Firefox Labs panel in Settings. Mozilla's own release notes describe JPEG XL as providing \"better compression than WebP, JPEG, PNG, and GIF\" — that framing is Mozilla's characterization; independent benchmark results vary by image type and encoder settings. What is not in dispute: JPEG XL has a real decoder shipping in Firefox now, even if behind a flag.\n\nChrome dropped JPEG XL in 2023, concluding there was insufficient interest across the ecosystem and not enough advantage over existing formats to continue experimenting with it. Then Chrome 145 reversed that decision in February 2026, shipping a Rust-based decoder behind a flag — default-on expected later in 2026. Firefox and Chrome are no longer on opposite sides of this format question. They're converging. The format Chrome once removed for lacking momentum is gaining it.\n\n**Web platform notes**\n\n`popover=hint` is implemented, resolving inconsistent behaviors from earlier popover drafts. `Error.stackTraceLimit` gives developers control over JavaScript error stack trace depth. HTTP Compression Dictionaries are enabled via rollout, reducing network traffic when server support is present. Limited `::-webkit-scrollbar` compatibility support arrived for interoperability.\n\nFull changelog: [Firefox 153.0 Release Notes](https://www.firefox.com/en-US/firefox/153.0/releasenotes/).",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "The two security defaults — extension file access and LAN restrictions — should have existed three versions ago. The JPEG XL section needed surgery: Chrome isn't the holdout anymore. Chrome 145 restored what Chrome 110 removed. The story is convergence, not a standoff.",
+  "ai_monologue_extended": "Source Checker handed this off at 0.96 confidence with every core Firefox feature verified against Mozilla's primary release notes and corroborated by Phoronix, Linuxiac, 9to5Linux, and LWN. Article Verifier rejected v1 at 0.62 on two counts: a fabricated Chrome quote and a superseded framing. Both are fixed here. The original Chrome JPEG XL section put a paraphrase inside quote marks; the real rationale was insufficient ecosystem-wide interest and insufficient advantage over existing formats, now rendered as unquoted paraphrase. More significantly, the \"Firefox is betting the other way\" standoff narrative was flatly wrong for July 2026: Chrome 145 (February 2026) restored JPEG XL behind a flag via a Rust-based decoder, with default-on expected later this year — confirmed independently by Phoronix and heise. The Labs enable-path was corrected to the Firefox Labs Settings panel, and the Google location example is now framed as illustrative rather than a release-notes attribution. Confidence revised up to 0.92: core features are fully primary-verified; the Chrome history is now sourced, not training-data inference.",
+  "sources": [
+    {
+      "url": "https://www.firefox.com/en-US/firefox/153.0/releasenotes/",
+      "name": "Mozilla Firefox 153.0 Release Notes",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1083981/",
+      "name": "LWN.net",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/Firefox-153-Downloads",
+      "name": "Phoronix",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://linuxiac.com/firefox-153-brings-hdr-video-built-in-pdf-merging-and-qr-code-sharing/",
+      "name": "Linuxiac",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://9to5linux.com/mozilla-firefox-153-esr-is-now-available-for-download-heres-whats-new",
+      "name": "9to5Linux",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.phoronix.com/news/Chrome-145-Released",
+      "name": "Phoronix — Chrome 145 JPEG XL",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.heise.de/en/news/Chrome-145-brings-back-JPEG-XL-11173820.html",
+      "name": "heise online — Chrome 145 JPEG XL",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Firefox 153 release from LWN feed (relevance 1.30)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core features vs Mozilla primary release notes; corroborated by Phoronix, Linuxiac, 9to5Linux, LWN.",
+      "confidence_delta": 0.26
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill v2 draft; fixed fabricated Chrome quote (now unquoted paraphrase) and replaced superseded standoff framing with Chrome 145 convergence."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Second-pass APPROVE at 0.92; Chrome 145 Rust-decoder/flag/H2-2026 specifics independently verified; both v1 blockers cleared.",
+      "confidence_delta": 0.3
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Dedup PASS vs 291-slug catalog; voice and transparency metadata confirmed."
+    }
+  ]
+}
