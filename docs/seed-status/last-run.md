@@ -1,16 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-22T06:33:56Z
+- when:    2026-07-22T06:35:52Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29897152445
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29897259297
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
-   - the-1173-dimension-capital-800m-third-fund | Dimension Capital Closes at $800M — 60% Above Prior Fund, Beating Its 
+   - the-1174-dimension-capital-800m-fund-iii | Dimension Capital's Fund III Closes at $800M — 60% Above Fund II, Over
    - the-1171-section-338-canada-tariffs | 50% Section 338 Tariffs Target $20 Billion in Canadian Imports, Nullif
    - criteo-conseil-detat-gdpr-40m-final | Criteo's €40M GDPR Fine Is Final: France's Highest Court Rejects Pseud
    - firefox-153-tightens-local-file-and-lan-defaults | Firefox 153 tightens local-file and LAN defaults, ships experimental J
