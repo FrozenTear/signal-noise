@@ -212,7 +212,7 @@ def create_story_candidate(entry: Dict, beat: str, relevance_score: float) -> Op
     """Create a story candidate issue in Paperclip."""
     try:
         # Get the Source Checker agent ID (must be a valid UUID)
-        SOURCE_CHECKER_ID = os.environ.get("SOURCE_CHECKER_AGENT_ID", "f0817ec6-5733-46f4-a0f8-2762ccb1b8d8")
+        SOURCE_CHECKER_ID = os.environ.get("SOURCE_CHECKER_AGENT_ID", "f2b27630-e4e6-4eab-9658-630f3a808375")
 
         title = f"[{beat.upper()}] {entry['title']}"
 
