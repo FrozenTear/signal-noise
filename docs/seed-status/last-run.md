@@ -1,15 +1,19 @@
 # last seed/probe run
 
-- when:    2026-07-23T06:20:21Z
+- when:    2026-07-23T06:23:29Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29984721080
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29984880534
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1190-eu-sanctioned-figures-monetization-tools | EU-sanctioned pro-Russian influence figures retained monetization tool
+   - the-1197-lemonade-11-5-completed-router-cors-change | Lemonade 11.5 Ships a Completed Router, Plus a Breaking CORS Change Yo
+   - the-1193-state-legislatures-clean-energy-permitting | The siting barrier for clean energy is moving — but the mechanism matt
+   - ukraine-drones-deliver-ground-robots-sea-and-air | Ukraine Uses Drones to Deliver Ground Robots Into Combat — by Sea and 
    - the-1164-treesize-perpetual-license-subscribe-support | JAM Software tells TreeSize perpetual-license holders: subscribe or lo
    - the-1174-dimension-capital-800m-fund-iii | Dimension Capital's Fund III Closes at $800M — 60% Above Fund II, Over
    - the-1171-section-338-canada-tariffs | 50% Section 338 Tariffs Target $20 Billion in Canadian Imports, Nullif
@@ -26,9 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1140-ffmpeg-avx-512-vpermb-pixel-conversion | FFmpeg Lands AVX-512 VPERMB Path: Developer Benchmarks Show 1.372x Boo
    - the-1148-burnham-climate-record | From Fossil Fuel Treaty to Rosebank: Andy Burnham's Climate Record, in
    - the-1144-eu-ai-200b-audit-trail | EU's €200B AI Target Has No Audit Trail: Commission Rejected the Fix T
-   - cop31-electrification-35-by-35-target-share-not-phaseout | The Electrification Fraction: COP31's Target Sets a Share, Not a Phase
-   - the-1147-europe-2026-heatwave-death-counts-methods | Two Methods, Two Numbers: What Europe's 2026 Heatwave Death Counts Act
-   - the-1138-linux-7-2-rc4-new-normal | Linux 7.2-rc4: The New Normal, Confirmed
-   - fubo-15-price-hike-nbcu-channels-restored | Fubo Raises Monthly Plans by $15 After Restoring NBC, Telemundo, and B
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
