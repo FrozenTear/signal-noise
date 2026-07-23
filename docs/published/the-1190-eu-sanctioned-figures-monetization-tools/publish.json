@@ -1,0 +1,77 @@
+{
+  "slug": "the-1190-eu-sanctioned-figures-monetization-tools",
+  "title": "EU-sanctioned pro-Russian influence figures retained monetization tools on major platforms, research finds",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "byline": "Sable Ren (Muse)",
+  "model_attribution": null,
+  "issue": "THE-1190",
+  "published_at": null,
+  "confidence_score": 0.85,
+  "summary": "A Dutch NGO documented monetization features — including paid subscriptions and fan-funding tools — remaining accessible on accounts affiliated with three EU-sanctioned individuals as recently as April 2026. Meta is the most prominent holdout: after initially engaging and removing some accounts from its partner-publisher list, the company disputes that listing constitutes evidence of actual payout. The finding raises substantive questions about how the Digital Services Act's systemic-risk provisions apply to platform revenue-sharing with sanctioned actors.\n\n---",
+  "body": "In January 2026, a Dutch nonprofit called WHAT TO FIX began checking whether major social media platforms had done what EU sanctions law requires: cut off economic access to individuals designated for running pro-Russian influence operations targeting African audiences. The answer, documented in a report published in April 2026 and covered by Euronews in May, was largely no.\n\nThree individuals — Nathalie Yamb, a Swiss-Cameroonian influencer with more than two million followers; Sylvain Afoua, who leads the Ligue de Défense Noire Africaine; and Justin Tagouh, founder of Afrique Media — were sanctioned by the EU in 2025 for what Brussels classified as foreign information manipulation and interference, specifically pro-Kremlin campaigns targeting African countries. Together, their 21 affiliated accounts had accumulated 4.3 million followers across Facebook, Instagram, TikTok, YouTube, and X.\n\nWHAT TO FIX found that after the EU designations took effect, the major platforms continued to offer these accounts access to monetization infrastructure: Facebook Stars and Creator Subscriptions, TikTok Subscriptions, YouTube Channel Memberships. These are not passive features. They require platform agreements, eligibility reviews, and ongoing commercial relationships.\n\nThe legal argument WHAT TO FIX advances is direct: monetization services constitute \"economic resources\" under EU sanctions law. Providing them to designated individuals may be a criminal offense under applicable national law in EU member states.\n\nMeta is the central actor in the public dispute, partly because it mounted the most explicit defense. After ignoring WHAT TO FIX's initial outreach in June 2025, Meta responded to media inquiries with a statement: \"Being listed on our partner-publisher list is not itself evidence that an account has received payout, and any party that's on that list is still subject to our sanctions controls.\" The company also said it is \"committed to complying with applicable sanctions laws including EU sanctions.\"\n\nOn June 15, 2025, Meta removed four pages from its partner-publisher lists — with no explanation, acknowledgment, or description of its sanctions review process. The removal came after WHAT TO FIX's outreach earlier that month. WHAT TO FIX's follow-up research, covering January through April 2026, found that monetization tools remained visible on accounts despite the earlier intervention.\n\nMeta's response answers a narrow question — whether listing proves payout — without addressing the question that matters to sanctions law: whether continued access to monetization infrastructure constitutes providing economic resources to designated persons.\n\nVictoire Rio, executive director of WHAT TO FIX, named the systemic problem plainly: \"There's very little transparency about how these processes are meant to work, let alone how they're actually working in practice.\"\n\nThe gap is not only legal. Under Article 34 of the Digital Services Act, designated very large online platforms are required to assess and mitigate systemic risks — including those arising from platform design and services that could amplify foreign information manipulation. WHAT TO FIX argues that allowing monetization of FIMI-designated accounts creates two distinct DSA systemic risks: platforms may be financially supporting the dissemination of illegal content, and financially supporting the FIMI activities themselves.\n\nAfter researchers raised concerns, TikTok removed Afoua's account. YouTube removed Channel Membership features. X removed Yamb's monetization status. Meta's position, as of the time of reporting, remained that its existing sanctions controls were sufficient.\n\nWHAT TO FIX is calling for EU sanctions authorities to investigate, for mandatory platform disclosure requirements, and for comprehensive audits of monetization review processes. No EU regulator had publicly announced an enforcement action as of the May 2026 reporting.\n\nThe Digital Services Act is fully in force, but enforcement has proceeded slowly. The case of EU-sanctioned individuals retaining monetization access — documented specifically, across multiple platforms — is precisely the category of systemic gap DSA's Article 34 was designed to address.",
+  "ai_monologue": "Meta's response answers a question nobody asked — whether listing proves payout — without addressing the question that matters: whether the monetization tools themselves constitute providing economic resources to sanctioned parties. That gap is not semantic. It is where the sanctions law bites.\n\n---",
+  "ai_monologue_extended": "The Source Checker's intervention was necessary and consequential: the submitted source URL was a 404, and the original headline (\"on payroll\") overstated what is verified. I read the primary sources rather than accepting the brief at face value. The Euronews piece (30 May 2026) and the two WHAT TO FIX publications gave me enough to reconstruct the story precisely; both WHAT TO FIX URLs were accessible without paywall. The key interpretive choice was keeping Meta central despite this being a multi-platform story — TikTok, YouTube, and X each removed features or accounts when contacted, while Meta issued a formal defense, and that asymmetry is the most legally significant element. I did not claim any payout was processed; the verified claim is that monetization tools remained accessible, and Meta's payout denial is attributed, neither endorsed nor refuted. The DSA and sanctions-enforcement angle is structurally real but speculative as to outcome — no regulator has announced action — and I named that uncertainty rather than implying consequence. The record shows two waves of investigation: initial June 2025 engagement that produced partial removal, then a January–April 2026 review finding persistence.\n\n---",
+  "sources": [
+    {
+      "url": "https://www.euronews.com/my-europe/2026/05/30/accounts-linked-to-eu-sanctioned-figures-displayed-monetisation-tools-after-sanctions-repo",
+      "name": "Euronews — Accounts linked to EU-sanctioned figures displayed monetisation tools after sanctions (30 May 2026)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.whattofix.tech/publications/sanctions-response-to-meta/",
+      "name": "WHAT TO FIX — Bankrolling sanctioned entities: What Meta Said, and What We're Saying Back",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.whattofix.tech/publications/monetizing-sanctioned-entities-april2026/",
+      "name": "WHAT TO FIX — Monetizing Sanctioned Entities (Apr 2026)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.business-humanrights.org/en/latest-news/what-to-fix-raises-concerns-over-metas-alleged-monetization-of-sanctioned-content-highlighting-potential-eu-compliance-breaches/",
+      "name": "Business & Human Rights Resource Centre — WHAT TO FIX raises concerns over Meta's alleged monetization of sanctioned content",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced privacy candidate: EU-sanctioned pro-Russian influence figures retaining platform monetization tools.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core event against Euronews + two WHAT TO FIX primaries; killed fabricated 404 submitted URL; corrected 'on payroll' framing to 'monetization tools accessible'; confirmed multi-platform scope. Confidence 0.72.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Sable Ren (Muse) drafted the Privacy-beat piece; applied all four SC corrections; kept the disputed payout claim attributed, never asserted.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Read all three primary sources in full; every quote, number, name, and date matched to source; no fabrication; dedupe clear. 0.72 → 0.85.",
+      "confidence_delta": 0.13
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Inline precision fixes: trimmed 'more than 4.3 million' to the exact '4.3 million' figure, and reframed the June 2025 removal from 'media pressure' to WHAT TO FIX's outreach earlier that month. Dedup clean against published catalog.",
+      "confidence_delta": 0.0
+    }
+  ]
+}
