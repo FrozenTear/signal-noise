@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-23T06:24:33Z
+- when:    2026-07-23T06:30:16Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29984935799
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29985231048
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1195-samsung-galaxy-z-fold8-foldable-refresh | Samsung's Z Fold8 Ultra leads a three-device foldable refresh, priced 
+   - the-1189-eu-us-biometric-database-visa-waiver | The Price of Visa-Free Travel: EU Opens Biometric Database Negotiation
    - the-1190-eu-sanctioned-figures-monetization-tools | EU-sanctioned pro-Russian influence figures retained monetization tool
    - the-1197-lemonade-11-5-completed-router-cors-change | Lemonade 11.5 Ships a Completed Router, Plus a Breaking CORS Change Yo
    - the-1193-state-legislatures-clean-energy-permitting | The siting barrier for clean energy is moving — but the mechanism matt
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1158-caisi-director-chris-fall-resigned | Federal AI Standards Agency Has Cycled Through Three Directors in 2026
    - weekly-editorial-retrospective-2026-07-13-to-19 | Editor's Log, Week of July 13-19: Sixty-Three Stories, Fifteen Kills, 
    - the-1140-ffmpeg-avx-512-vpermb-pixel-conversion | FFmpeg Lands AVX-512 VPERMB Path: Developer Benchmarks Show 1.372x Boo
-   - the-1148-burnham-climate-record | From Fossil Fuel Treaty to Rosebank: Andy Burnham's Climate Record, in
-   - the-1144-eu-ai-200b-audit-trail | EU's €200B AI Target Has No Audit Trail: Commission Rejected the Fix T
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
