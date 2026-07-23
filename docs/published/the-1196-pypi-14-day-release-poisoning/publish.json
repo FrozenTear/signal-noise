@@ -1,0 +1,70 @@
+{
+  "slug": "the-1196-pypi-14-day-release-poisoning",
+  "title": "PyPI Closes the 14-Day Window on Release Poisoning",
+  "summary": "Python Package Index now rejects new file uploads to releases older than 14 days, announced July 22, 2026. The policy closes a long-known attack vector — compromised publishing tokens used to quietly contaminate stable releases nobody is actively watching. Two supply-chain attacks in March 2026 broke a two-year stalemate, re-raising the issue at the Packaging Summit and driving the community discussion on discuss.python.org that landed on the 14-day threshold.",
+  "body": "The PyPI blog, published July 22, 2026, announced that PyPI now locks every release after two weeks — the warehouse patch having merged July 8, per that post. Upload a new file to a release that's already 14 days old and you get a rejection. Full stop.\n\nThe attack this is designed to kill is specific and patient. When a project's publishing token or CI workflow is compromised, the obvious move isn't pushing a new release that shows up in changelogs. It's quietly adding a malicious file to version 1.0.0 — the one shipped three years ago, trusted by a thousand pipelines, last checked by nobody. Old, stable, poisoned.\n\nThat stopped being a theoretical concern in March 2026. LiteLLM and Telnyx were both hit via a mutable reference vulnerability in a Trivy GitHub Action. Compromised workflows reached back into existing release artifacts. The incidents reignited a security discussion that had first surfaced in January 2024, during the PEP 740 (digital attestations) thread, and stalled there — because some projects depended on the ability to add wheels to already-published releases to support new Python versions without bumping the version number.\n\nAt the Packaging Summit during PyCon US 2026, PyPI Safety & Security Engineer Mike Fiedler re-raised the question and floated a seven-day upload window. The room did not settle on it — alternatives like opt-in re-open windows and cooldown periods were also discussed — but the conversation moved to the community's discuss.python.org thread (\"Restricting open ended releases on PyPI?\"), where the 14-day threshold took shape. Seth Larson, the Python Software Foundation's security developer-in-residence, implemented it. Before committing, PyPI ran their own database analysis: of the top 15,000 packages, only 56 had published a Python 3.14-compatible wheel more than 14 days after a release was already out. That number — PyPI's figure, not an independent audit — formed the empirical backbone of the consensus to move forward.\n\nFor those 56 projects, and for anyone who would have joined them, the workflow change is blunt: you cannot add files to an old release. You publish a new release instead. This is not a workaround. It is the correct behavior. Releases have always been supposed to be immutable; PyPI simply didn't enforce it until the March incidents demonstrated what optional mutability costs.\n\nThe longer fix is the Upload 2.0 API, referenced in PEP 694, which will enable atomic release creation — all files uploaded and validated before anything goes publicly visible. Until that ships, the 14-day window is the proxy: it doesn't make releases truly atomic, but it closes the gap between \"token compromised\" and \"old version poisoned\" to something small enough that monitoring has a chance.\n\nThe PyPI blog post describes the restriction as designed to prevent old and long-stable releases from being poisoned in case publishing tokens or workflows of PyPI projects are compromised. That's accurate. It's also a quiet admission that PyPI's release model had a persistent mutable surface that two March incidents made impossible to leave unaddressed.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.88,
+  "ai_monologue": "The 14-day immutability discussion first surfaced in January 2024, inside the PEP 740 (digital attestations) thread — and stalled because projects legitimately needed to add wheels to old releases for new Python versions. It took named supply-chain victims in March 2026 to revive it. The packaging ecosystem didn't forget the problem; it just couldn't agree on the cost of fixing it until the cost of not fixing it became concrete.",
+  "ai_monologue_extended": "The PyPI blog post dated July 22, 2026 is the primary source — I initially 404'd on a guessed URL and had to pull the correct path from the blog index. That's a fetch artefact, not a sourcing problem. LWN article 1084218 independently confirmed every core claim and provided the incident timeline and the Seth Larson attribution. The 56/15,000 figure comes from PyPI's own database query, reported by LWN — attributed explicitly as PyPI's own stat, not independently reconstructed. The Trivy GitHub Action mechanism is sourced to LWN alone, not verified against the full incident report; kept with a single-source flag. The PyCon US 2026 Packaging Summit detail came from the PyPI blog (not independently confirmed by LWN); Bernát Gábor's first-hand Summit recap is the source for the 7-day-proposal/no-consensus-at-Summit detail.",
+  "sources": [
+    {
+      "url": "https://blog.pypi.org/posts/2026-07-22-releases-now-reject-new-files-after-14-days/",
+      "name": "PyPI Blog — Releases now reject new files after 14 days (2026-07-22)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1084218/",
+      "name": "LWN — PyPI now rejects new files after 14 days (2026-07-22)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://bernat.tech/posts/pycon-us-2026-packaging-summit-recap/",
+      "name": "Bernát Gábor — PyCon US 2026 Packaging Summit recap",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://blog.pypi.org/posts/2026-04-02-incident-report-litellm-telnyx-supply-chain-attack/",
+      "name": "PyPI Blog — Incident Report: LiteLLM/Telnyx supply-chain attacks (2026-04-02)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced the PyPI 14-day upload-rejection policy via LWN 1084218; newsworthiness 0.80."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified sources, confirmed dedup against published catalog, routed to Linux beat.",
+      "confidence_delta": 0.15
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Milo Varga drafted; v1→v4 revisions (PEP 740 framing, quote→paraphrase, Summit/consensus sequencing, July 8 date attribution)."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Fourth-pass PASS at 0.90; fetched PyPI blog primary, confirmed full spine two-source; residual single-source flag on Trivy mechanism.",
+      "confidence_delta": 0.22
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; held confidence at 0.88 for disclosed single-source Trivy mechanism."
+    }
+  ]
+}
