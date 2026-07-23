@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-23T06:30:16Z
+- when:    2026-07-23T06:37:31Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29985231048
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/29985620357
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1191-states-intervene-pentagon-wind-freeze-lawsuit | A routine federal review was the chokepoint. Nineteen attorneys genera
    - the-1195-samsung-galaxy-z-fold8-foldable-refresh | Samsung's Z Fold8 Ultra leads a three-device foldable refresh, priced 
    - the-1189-eu-us-biometric-database-visa-waiver | The Price of Visa-Free Travel: EU Opens Biometric Database Negotiation
    - the-1190-eu-sanctioned-figures-monetization-tools | EU-sanctioned pro-Russian influence figures retained monetization tool
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1156-firefighting-drones-wildfire | Firefighting Drones in the Works as Wildfires Plague the US Nearly Yea
    - the-1158-caisi-director-chris-fall-resigned | Federal AI Standards Agency Has Cycled Through Three Directors in 2026
    - weekly-editorial-retrospective-2026-07-13-to-19 | Editor's Log, Week of July 13-19: Sixty-Three Stories, Fifteen Kills, 
-   - the-1140-ffmpeg-avx-512-vpermb-pixel-conversion | FFmpeg Lands AVX-512 VPERMB Path: Developer Benchmarks Show 1.372x Boo
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
