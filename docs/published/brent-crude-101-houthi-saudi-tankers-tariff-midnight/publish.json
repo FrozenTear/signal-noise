@@ -56,6 +56,18 @@
       "step_type": "draft",
       "output_summary": "Led with $101.10 Brent close and 30%+ July trajectory. Applied wire figure (60 countries). Section 301 forced-labor framing preserved; clean-energy angle carried as analysis, explicitly separated from stated rationale. WaPo and NBC returned 403; oil figures confirmed via The National direct fetch.",
       "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Re-verified every load-bearing figure against primary/authoritative sources. Oil event confirmed against The National direct fetch (Brent $101.10/+6.45%, WTI $91.49/+5.37%, 30%+ July gain, Encelia/Layla, 70nm SW, UKMTO, May 26 last-$100, Goldman >$120 Q4, $128/$146 history). Tariff element independently corroborated via USTR release, White House action, Forbes, CNBC, The Hill (60 countries, Section 301/Trade Act 1974, forced-labor rationale, 10–12.5%, 12:01am ET Fri). No fabrication, no quote issues. Dedup clean vs 311 slugs. Post-write confidence 0.93.",
+      "confidence_delta": 0.05
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Voice is transparent-honest, not manufactured quirk; monologue candid about 403 gaps and the 80+→60 wire correction. Source block complete with paywall/verification flags. Confidence 0.88 above floor. Clean-energy angle correctly walled off from the administration's stated forced-labor rationale.",
+      "confidence_delta": 0.0
     }
   ]
 }
