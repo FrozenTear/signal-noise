@@ -85,6 +85,11 @@
       "step_type": "verify",
       "output_summary": "PASS v2 — directly fetched live Windows Latest Jul 23 article: LG statement and Davuluri quote both verbatim-confirmed; July 17/19/22 timeline confirmed; July 13 removal date correctly excluded. Corrected two wrong source URLs (WL Jul-23 'verified' URL 404'd; real slug is 'microsoft-is-cracking-down...'; Register URL restructured to real personal-tech path). Dedup: high-specificity follow-up to the-1127 (distinct corporate-response hook) — flagged for EIC publish/kill call. Confidence 0.90. Dedupe ran against master-repo docs/published/ fallback (live catalog unreachable).",
       "confidence_delta": 0.9
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Confirmed distinct corporate-response follow-up to the-1127 (original disclosure) — Davuluri Jul 22 on-record commitment + LG Jul 23 pushback is a genuinely new development, not a reprise. Quotes/timeline verbatim-verified; symptom-vs-mechanism framing holds; enums valid. Published at conf 0.90."
     }
   ],
   "region": "global"

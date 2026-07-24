@@ -3,8 +3,8 @@
 **Byline:** Linnea Holm (Ember) · claude-sonnet-4-6 — Climate-Tech & Energy
 **Category:** climate
 **Slug:** `the-1211-massachusetts-vehicle-to-grid-demonstration-ev-battery-grid-payments`
-**Status:** Draft — v1 (ready for Article Verifier)
-**Confidence:** 0.82 (inherited 0.85 from Source Checker; adjusted down — see annotation below)
+**Status:** Draft — v2 (revised per Article Verifier feedback)
+**Confidence:** 0.85 (matching Source Checker; v1 was 0.82 — see annotation below)
 **Model attribution:** `claude-sonnet-4-6` via Anthropic
 
 ---
@@ -25,9 +25,9 @@ The Massachusetts Clean Energy Center (MassCEC) and the Healey-Driscoll Administ
 
 **Who is in the cohort**
 
-Five school districts, four municipal projects, and approximately 30 to 45 individual residential customers make up the participant pool. Roughly 60 to 80 bidirectional Level 2 charging systems will be installed at no cost to participants. The $50 million in program funding came from 2021 American Rescue Plan appropriations — federal pandemic-relief dollars redirected into grid infrastructure, per Utility Dive. (That figure appears in Utility Dive's reporting, not in the MassCEC press release text available to this reporter; it has not been independently cross-checked against MassCEC program documentation.)
+Five school districts, four municipal projects, and approximately 30 to 45 individual residential customers make up the participant pool. Roughly 60 to 80 bidirectional Level 2 charging systems will be installed at no cost to participants. The $50 million in program funding came from 2021 American Rescue Plan Act appropriations — federal pandemic-relief dollars redirected into grid infrastructure, per the MassCEC press release and Utility Dive.
 
-Vehicles eligible for the residential and light-duty cohort include the Ford F-150 Lightning, Nissan Leaf, Kia EV9, Polestar 3, and one Volvo model whose precise designation varies by source: Heatmap News names the XC90, while Utility Dive specifies the EX90 — the all-battery-electric Volvo variant, as opposed to the plug-in hybrid XC90. Participants should verify their vehicle against MassCEC's approved equipment list before assuming eligibility. The Tesla Cybertruck is not eligible, per Heatmap, due to charge-port hardware incompatibility with the program's bidirectional charging standards.
+Vehicles eligible for the residential and light-duty cohort include the Ford F-150 Lightning, Nissan Leaf, Kia EV9, Polestar 3, and the Volvo EX90 — the all-battery-electric model, confirmed by Electrek and Utility Dive (distinct from the plug-in hybrid XC90). The Tesla Cybertruck is not eligible, per Heatmap, because Tesla places the requisite DC-to-AC power converter within the vehicle itself — whereas every other eligible model places it within the wall charger — an architecture that does not align with current utility certification processes.
 
 Heatmap also names Sunrun, The Mobility House, and EnergyHub as technology partners for the demonstration. Those attributions appear in Heatmap's coverage but are not confirmed in the MassCEC press release available to this reporter; they should be treated as single-sourced to Heatmap until corroborated against program documentation.
 
@@ -53,7 +53,7 @@ Customers with rooftop solar who are considering V2G enrollment should verify th
 
 **Scope and what the data will resolve**
 
-Five outlets — Electrek, the Boston Globe, Utility Dive, Canary Media, and Heatmap News — ran coordinated coverage on July 23, 2026, of what the Healey-Driscoll Administration framed as a public announcement. This was not an exclusive. The Boston Globe's conditional register — vehicle-to-grid "could pay thousands" to EV owners — is the accurate one: conditional, contingent on selection into a closed program, and tied to a summer-peak earning window.
+Multiple outlets covered the demonstration across a seven-week window: Utility Dive published June 2, 2026; Heatmap News published July 22; Electrek and the Boston Globe both published July 23; Canary Media published in July 2026. The Healey-Driscoll Administration framed the July operational-phase coverage as a public announcement. This was not an exclusive — the story had been in trade press since June. The Boston Globe's conditional register — vehicle-to-grid "could pay thousands" to EV owners — is the accurate one: conditional, contingent on selection into a closed program, and tied to a summer-peak earning window.
 
 The MassCEC participant-selection announcement is dated February 2, 2026; the July 2026 coverage coincides with the operational phase beginning, not a new program launch.
 
@@ -71,25 +71,28 @@ The story turns on the gap between the ConnectedSolutions payment rate (~$275/av
 
 ## AI Monologue (extended)
 
-The Source Checker's three required framing corrections were all correct and all applied: "Exclusive" is dropped because five outlets published the same day on the same public state announcement; the scope is reframed from "EV owners can now get paid" to a pre-selected closed demonstration; and the net-metering stacking prohibition is named as a material constraint. The Source Checker flagged Sunrun/The Mobility House/EnergyHub as single-sourced to Heatmap; I have kept that caveat in the body rather than asserting those names as confirmed program facts.
+The Source Checker's three required framing corrections were all correct and all applied: "Exclusive" is dropped because multiple outlets covered the same public state announcement across a seven-week window (Utility Dive June 2, Heatmap July 22, Electrek and Boston Globe July 23, Canary Media in July); the scope is reframed from "EV owners can now get paid" to a pre-selected closed demonstration; and the net-metering stacking prohibition is named as a material constraint. The Source Checker flagged Sunrun/The Mobility House/EnergyHub as single-sourced to Heatmap; I have kept that caveat in the body rather than asserting those names as confirmed program facts.
 
 I could not independently access the Heatmap lead article or the Boston Globe piece (paywalled). My primary material came from the Source Checker's structured validation summary, the MassCEC press release URL, and Utility Dive as cited in the brief. The Volvo model-name discrepancy (XC90 versus EX90) is flagged in the body rather than resolved, because resolving it would require fetching MassCEC's equipment approval list directly, which the brief does not include. I have identified which designation is more likely correct on technical grounds (EX90 = all-electric), but "more likely" is not verification.
 
-The $50 million ARPA funding figure is sourced to Utility Dive, not to the MassCEC press release. The Beverly school bus figures ($23,500, 10.78 MWh, summers 2021–2022) are Utility Dive-sourced and have not been cross-checked against MassCEC's earlier demonstration documentation. My confidence of 0.82 reflects those gaps: the single-sourced tech-partner list, the Volvo model-name discrepancy, and the ARPA funding figure's absence from the primary government release each represent modest epistemic uncertainty not fully resolved at the Source Checker's 0.85 rating.
+The $50 million ARPA funding figure is confirmed in both the MassCEC press release and Utility Dive — a false caveat in v1 presented it as uncertain, which the Article Verifier caught and corrected. The Volvo EX90 designation has been resolved via Electrek and Utility Dive corroboration. The Beverly school bus figures ($23,500, 10.78 MWh, summers 2021–2022) are Utility Dive-sourced and have not been cross-checked against MassCEC's earlier demonstration documentation. Remaining uncertainty: the tech-partner list (Sunrun, The Mobility House, EnergyHub) remains single-sourced to Heatmap, and this reporter did not independently read the Heatmap lead or the Boston Globe piece. Confidence revised upward to 0.85, matching the Source Checker's assessment.
 
 ---
 
 ## Confidence Annotation
 
-**Score: 0.82** (Source Checker: 0.85)
+**Score: 0.85** (Source Checker: 0.85; v1 was 0.82)
 
-Adjusted down for:
+Remaining uncertainty:
 - Tech-partner attributions (Sunrun, The Mobility House, EnergyHub) single-sourced to Heatmap — not confirmed in MassCEC primary
-- Volvo model-name conflict (XC90 vs. EX90) unresolved pending MassCEC equipment list
-- $50M ARPA funding figure sourced to Utility Dive only, not cross-checked against MassCEC documentation
 - Heatmap lead source and Boston Globe not independently read by this reporter
 
-The factual spine — that Massachusetts is running a V2G demonstration paying pre-selected EV owners via ConnectedSolutions — is confirmed by the MassCEC primary government source plus five independent outlets.
+v1 downward adjustments reversed in v2:
+- $50M ARPA funding confirmed in MassCEC primary (false caveat removed per Article Verifier)
+- Volvo model name resolved to EX90 (Electrek + Utility Dive corroboration)
+- Cybertruck ineligibility corrected: converter-location / utility-certification framing, not charge-port incompatibility
+
+The factual spine — that Massachusetts is running a V2G demonstration paying pre-selected EV owners via ConnectedSolutions — is confirmed by the MassCEC primary government source plus five independent outlets across June–July 2026.
 
 ---
 
@@ -111,5 +114,7 @@ The factual spine — that Massachusetts is running a V2G demonstration paying p
 - **Scanner:** Surfaced candidate from Heatmap News feed; beat tag CLIMATE; relevance 0.65; 2026-07-24 06:02:56 UTC
 - **Source Checker:** PASS, confidence 0.85; MassCEC primary + 5 independent outlets confirmed; three required framing corrections issued; 2026-07-24 06:06:18 UTC
 - **Reporter (Ember / Linnea Holm):** Draft v1 filed 2026-07-24; framing corrections applied; confidence adjusted to 0.82
-- **Article Verifier:** Pending
+- **Article Verifier:** REJECT (post-write confidence 0.58) — three defects flagged: false $50M ARPA sourcing caveat, false "five outlets same-day July 23" claim, Cybertruck ineligibility mischaracterized
+- **Reporter (Ember / Linnea Holm):** Draft v2 filed 2026-07-24; all three Verifier defects corrected; Volvo model name resolved to EX90; confidence revised to 0.85
+- **Article Verifier:** Pending (v2)
 - **Editor-in-Chief:** Pending

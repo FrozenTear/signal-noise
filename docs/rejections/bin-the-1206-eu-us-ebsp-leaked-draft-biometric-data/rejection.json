@@ -1,0 +1,71 @@
+{
+  "slug": "bin-the-1206-eu-us-ebsp-leaked-draft-biometric-data",
+  "title": "The EU-US Border Data Framework: Three Draft Articles, Four Disputed Clauses, and a December Deadline (THE-1206 — Duplicate Kill)",
+  "summary": "Full-length Sable Ren draft on the EU-US Enhanced Border Security Partnership Framework Agreement cancelled after Article Verifier (round 1) identified catalog duplicate of Signal Noise piece published ~24h earlier under the same persona, same beat, and same primary source spine.",
+  "body": "Editor's note. This draft, filed under THE-1206, covered the EU-US Enhanced Border Security Partnership (EBSP) Framework Agreement — specifically the May 2026 Statewatch-leaked draft, the Article 21 automated decision-making provisions, Article 12 post-match supplementary data access (racial origin, political opinions, religious beliefs, health status), and Article 19 retention rules. Source Checker verified the primary sources (EUR-Lex CELEX:52025PC0447, Statewatch May 1 2026 analysis, Statewatch Council mandate document, Biometric Update July 15 2026 coverage, EDRi advocacy analysis) at confidence 0.85. Reporter wrote the full article under Sable Ren; the draft addressed all Source Checker flags — EDRi advocacy attributed explicitly, negotiation framed as ongoing with four unresolved disputes and December 2026 deadline. Article Verifier (round 1) matched the draft against the live catalog and found a published article — the-1189-eu-us-biometric-database-visa-waiver, 'The Price of Visa-Free Travel: EU Opens Biometric Database Negotiations With the US' — covering the same event under the same persona (Sable Ren), same beat (Privacy), and the same primary source spine (same 18 Dec 2025 Council mandate, same May 2026 Statewatch-leaked draft, same EDRi analysis at the identical URL, same 31 Dec 2026 VWP deadline, same 'US demands' framing), published approximately 24 hours earlier. The Verifier also identified one factual error: the draft's Bulgaria/Cyprus/Romania sentence attributed their exception status to 'refusing bilateral deals,' when the source (Biometric Update) said they are exceptions to VWP participation — i.e., they do not currently have visa-free US travel. The Verifier returned the story to Reporter as todo (round-1 return, not a final REJECT), noting that the July-15 'four disputes / ambassadors still reviewing' status update and Article 12/19/21 clause breakdown were genuinely new material, but were thin — insufficient to lift the draft clear of a same-event 24h reprise. The root cause of the duplicate was Scanner re-scanning the same EDRi advocacy pitch on consecutive days; THE-1189 was not yet live at scan time, defeating the Scanner's candidate dedup. Reporter reviewed the overlap report, confirmed no distinct angle justifying a 24h same-event follow-up, and chose withdrawal. No revised version will ship. The published article at the-1189-eu-us-biometric-database-visa-waiver is the canonical Signal Noise record for this EU-US EBSP negotiation.",
+  "category": "privacy",
+  "persona": "sable-ren",
+  "byline": "Muse",
+  "confidence_score": 0.85,
+  "ai_monologue_extended": "",
+  "status": "rejected",
+  "rejection_reason": "reporter-withdrawal-post-dedup | EU-US EBSP biometric data framework (THE-1206); Verifier round-1 duplicate of the-1189-eu-us-biometric-database-visa-waiver; reporter chose withdrawal over revision",
+  "sources": [
+    {
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:52025PC0447",
+      "name": "EUR-Lex — European Commission EBSP Proposal CELEX:52025PC0447",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://statewatch.org/analyses/2026/eu-us-data-exchange-proposal-in-conflict-with-eu-laws/",
+      "name": "Statewatch — EU-US data exchange proposal in conflict with EU laws (May 1, 2026)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.biometricupdate.com/202607/eu-divisions-persist-over-us-border-biometric-data-framework",
+      "name": "Biometric Update — EU divisions persist over US border biometric data framework (July 15, 2026)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://edri.org/our-work/the-eu-is-about-to-sell-our-most-sensitive-data-to-the-us-for-visa-free-travel/",
+      "name": "EDRi — The EU is about to sell our most sensitive data to the US for visa-free travel (advocacy analysis, July 2026)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced EDRi analysis of EU-US EBSP Framework Agreement negotiations; beat PRIVACY; relevance 0.65. Dedup missed live sibling THE-1189 (not yet published at scan time)."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified EUR-Lex primary, Statewatch leaked draft (May 2026), Council mandate (18 Dec 2025), Biometric Update July 15 2026. Confidence 0.85. Reporter flags: attribute EDRi advocacy explicitly; frame as ongoing negotiation, not imminent signing."
+    },
+    {
+      "agent_name": "Muse (Sable Ren)",
+      "step_type": "draft",
+      "output_summary": "Full article drafted; EDRi framing attributed throughout; Article 21 automated-decision weakness and Article 12 post-match supplementary-data scope added from direct source fetches; four unresolved disputes and December 2026 deadline foregrounded."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round-1 return: high-specificity Pass-B catalog match against the-1189-eu-us-biometric-database-visa-waiver (same event, same persona, same primary source spine, published ~24h earlier). One factual error: Bulgaria/Cyprus/Romania attributed as exceptions to 'refusing bilateral deals' but source says they are exceptions to VWP participation."
+    },
+    {
+      "agent_name": "Muse",
+      "step_type": "edit",
+      "output_summary": "Reporter accepted duplicate finding; confirmed no distinct angle; chose withdrawal over revision. Pattern: reporter-withdrawal-post-dedup."
+    }
+  ],
+  "region": "global"
+}
