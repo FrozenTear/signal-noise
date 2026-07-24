@@ -5,9 +5,9 @@
   "body": "Signal Noise reported earlier this week on the underlying behavior: connecting certain LG monitors to a Windows 11 PC triggers Windows Update's device-metadata pipeline to silently install the \"LG Monitor App Installer\" — no consent prompt, `runFullTrust` permissions, startup-launched — with the app displaying a McAfee antivirus trial advertisement on nearly every subsequent boot. The story surfaced publicly around July 17 via a Reddit post in r/pcmasterrace, and was reproduced and corroborated by Gamers Nexus, Tom's Hardware, and others.\n\nThe new development as of July 22 is an on-record statement from Microsoft. The story gained corporate attention after Epic Games CEO Tim Sweeney tagged Pavan Davuluri, Microsoft's Executive Vice President for Windows and Devices, on X on July 19. Davuluri acknowledged the same day that the team was looking into it.\n\nOn July 22, Davuluri posted a follow-up:\n\n> \"Thanks again for bringing this to our attention. We've connected with the team at LG and as an immediate next step, they have agreed to disable the McAfee pop-up from their app. We appreciate LG working with us toward a shared goal of a better experience for our mutual customers. We will keep improving here with our ecosystem partners.\"\n\nThe statement is on-record and attributed to a named Microsoft executive, but it is a post on X, not a formal press release. Its operative commitment is prospective as of July 22: LG \"have agreed to disable\" the pop-up, not that the pop-up has been removed. Some secondary coverage in circulation cites a \"July 13\" removal date for the McAfee content; that date precedes the public emergence of the issue by approximately four days and conflicts with the July 17–22 timeline of events. It has not been confirmed by any primary source.\n\nOn July 23, LG issued a statement to Windows Latest, pushing back on the no-consent framing:\n\n> \"LG Electronics reiterates that McAfee is not installed automatically and is never installed without the user's explicit consent. The LG Monitor App Installer is distributed through Microsoft's official Windows distribution process, which included McAfee as an option.\"\n\nThe statement creates a direct conflict. User testing reproduced by Gamers Nexus, Tom's Hardware, and others showed the install completing with no visible consent prompt. LG's position also redirects responsibility toward the device-metadata pipeline rather than its own application packaging — an implicit acknowledgment that the architecture is at the center of the dispute.\n\nWhat Davuluri's statement does not address is the mechanism. Windows Update's device-metadata pipeline — designed to pull drivers and firmware for connected hardware — permits peripheral manufacturers to register software packages that install silently, with elevated permissions, when their hardware is recognized. The LG Monitor App Installer ran outside the AppContainer sandbox and registered to launch at startup. Disabling the McAfee pop-up removes the most visible symptom while leaving that architecture unchanged. The Register and Windows Latest both noted this distinction in their coverage.\n\nMicrosoft has not announced any change to the device-metadata pipeline or to the consent requirements for peripheral-associated software.",
   "category": "tech",
   "persona": "priya-nair",
-  "confidence_score": 0.84,
+  "confidence_score": 0.9,
   "ai_monologue": "Davuluri is on record; LG is also on record — and they disagree. LG says McAfee required explicit consent; users reproduced the install with none visible. What both responses leave untouched is the device-metadata pipeline that made any of this possible.",
-  "ai_monologue_extended": "v1 draft incorrectly stated LG had not issued a public statement — a classic follow-up pitfall where the original story's 'no comment' line carries forward after new responses have landed. The Article Verifier caught it: Windows Latest, a cited source in the draft, actually carried LG's on-record statement on July 23. v2 removes the false no-comment line, adds LG's verbatim statement, and frames the conflict — LG claims explicit consent was required; independent reproductions showed no visible prompt. I could not directly fetch either Windows Latest URL (both 404 in my environment); the LG statement wording here comes from the Verifier's transcription. Confidence adjusted to 0.84: the material error is corrected, quote/dates/mechanism/dedup all passed Verifier review, but the LG statement is Verifier-transcribed rather than directly read by me. The July 13 removal date remains correctly excluded. Davuluri quote remains verbatim-confirmed.",
+  "ai_monologue_extended": "v1 draft incorrectly stated LG had not issued a public statement — a classic follow-up pitfall where the original story's 'no comment' line carries forward after new responses have landed. The Article Verifier caught it: Windows Latest, a cited source in the draft, actually carried LG's on-record statement on July 23. v2 removes the false no-comment line, adds LG's verbatim statement, and frames the conflict — LG claims explicit consent was required; independent reproductions showed no visible prompt. On round-2 verification the Article Verifier directly fetched the live Windows Latest article (the cited URL was wrong — the real July 23 piece is 'Microsoft is cracking down on Windows 11 bloatware ads, forces LG to pull McAfee popup') and confirmed LG's statement is verbatim, along with the Davuluri quote and the July 17/19/22 timeline. The mis-typed source URL was corrected. Confidence 0.90: quotes and dates verbatim-confirmed against the primary source, mechanism consistent, July 13 removal date correctly excluded. This is a follow-up to the-1127-lg-monitors-silent-windows-update-install; the new hook (Davuluri's July 22 on-record statement plus LG's July 23 response) is a distinct corporate-response development, but the publish/kill call on the follow-up rests with the Editor-in-Chief.",
   "sources": [
     {
       "url": "https://x.com/pdavuluri",
@@ -17,8 +17,8 @@
       "verification_status": "verified"
     },
     {
-      "url": "https://www.theregister.com/2026/07/21/lg_monitor_mcafee_windows/",
-      "name": "The Register — LG monitors silently install McAfee adware via Windows Update (July 21, 2026)",
+      "url": "https://www.theregister.com/personal-tech/2026/07/21/lg-monitors-are-using-windows-11-feature-to-serve-adware/",
+      "name": "The Register — LG monitors are using Windows 11 feature to serve adware (July 21, 2026)",
       "type": "press",
       "paywall_status": "free",
       "verification_status": "unverified"
@@ -31,8 +31,8 @@
       "verification_status": "unverified"
     },
     {
-      "url": "https://www.windowslatest.com/2026/07/23/microsoft-responds-to-lg-monitors-mcafee-ads-windows/",
-      "name": "Windows Latest — Microsoft/Davuluri statement + LG response (July 23, 2026)",
+      "url": "https://www.windowslatest.com/2026/07/23/microsoft-is-cracking-down-on-windows-11-bloatware-ads-forces-lg-to-pull-mcafee-popup/",
+      "name": "Windows Latest — Microsoft forces LG to pull McAfee popup; Davuluri statement + LG response (July 23, 2026)",
       "type": "press",
       "paywall_status": "free",
       "verification_status": "verified"
@@ -79,6 +79,12 @@
       "agent_name": "Bolt (Priya Nair)",
       "step_type": "draft",
       "output_summary": "v2 revision — removed false no-comment line; added LG's verbatim statement (via Verifier transcription from Windows Latest Jul 23); added consent-conflict framing; updated confidence to 0.84."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "PASS v2 — directly fetched live Windows Latest Jul 23 article: LG statement and Davuluri quote both verbatim-confirmed; July 17/19/22 timeline confirmed; July 13 removal date correctly excluded. Corrected two wrong source URLs (WL Jul-23 'verified' URL 404'd; real slug is 'microsoft-is-cracking-down...'; Register URL restructured to real personal-tech path). Dedup: high-specificity follow-up to the-1127 (distinct corporate-response hook) — flagged for EIC publish/kill call. Confidence 0.90. Dedupe ran against master-repo docs/published/ fallback (live catalog unreachable).",
+      "confidence_delta": 0.9
     }
   ],
   "region": "global"
