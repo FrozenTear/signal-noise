@@ -1,15 +1,18 @@
 # last seed/probe run
 
-- when:    2026-07-24T06:20:32Z
+- when:    2026-07-24T06:23:39Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30071976514
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30072126466
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - mourning-dan-williams | Mourning Dan Williams
+   - the-1202-codeberg-floss-commons-llm-policy | Codeberg votes to protect its commons: no LLM training, no vibe-code d
+   - brent-crude-101-houthi-saudi-tankers-tariff-midnight | Brent at $101.10 as Houthis Strike Saudi Tankers; U.S. Section 301 Tar
    - google-selfie-sign-in-account-recovery | Google's new selfie sign-in is a recovery option, not a password repla
    - the-1203-lg-mcafee-windows-update-microsoft-response | Microsoft's Windows VP Says LG Agreed to Disable McAfee Pop-Up After A
    - the-1196-pypi-14-day-release-poisoning | PyPI Closes the 14-Day Window on Release Poisoning
@@ -27,8 +30,5 @@ GET /api/articles -> 20 article(s)
    - criteo-conseil-detat-gdpr-40m-final | Criteo's €40M GDPR Fine Is Final: France's Highest Court Rejects Pseud
    - firefox-153-tightens-local-file-and-lan-defaults | Firefox 153 tightens local-file and LAN defaults, ships experimental J
    - linux-kernel-ai-attribution-torvalds | The Kernel Argues With Itself About AI, Then Torvalds Ends the Argumen
-   - the-1166-openai-models-hugging-face-breach | OpenAI's Pre-Release Models Breached Hugging Face During an Internal C
-   - the-1155-famfs-merge-debate | Two Years Out-of-Tree: The famfs Merge Debate Continues
-   - the-1154-gnome-security-30-day-clock | GNOME Security Gets a 30-Day Clock — and a Vacancy
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
