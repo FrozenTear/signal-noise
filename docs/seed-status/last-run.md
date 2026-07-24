@@ -1,15 +1,17 @@
 # last seed/probe run
 
-- when:    2026-07-24T06:23:39Z
+- when:    2026-07-24T06:25:06Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30072126466
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30072196933
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1211-massachusetts-vehicle-to-grid-demonstration-ev-battery-grid-payments | Grid Payments, Pre-Selected Cohort: Massachusetts' V2G Demonstration T
+   - the-1201-swap-ops-lsfmm-2026 | An Operations Structure for Swap Devices
    - mourning-dan-williams | Mourning Dan Williams
    - the-1202-codeberg-floss-commons-llm-policy | Codeberg votes to protect its commons: no LLM training, no vibe-code d
    - brent-crude-101-houthi-saudi-tankers-tariff-midnight | Brent at $101.10 as Houthis Strike Saudi Tankers; U.S. Section 301 Tar
@@ -28,7 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1174-dimension-capital-800m-fund-iii | Dimension Capital's Fund III Closes at $800M — 60% Above Fund II, Over
    - the-1171-section-338-canada-tariffs | 50% Section 338 Tariffs Target $20 Billion in Canadian Imports, Nullif
    - criteo-conseil-detat-gdpr-40m-final | Criteo's €40M GDPR Fine Is Final: France's Highest Court Rejects Pseud
-   - firefox-153-tightens-local-file-and-lan-defaults | Firefox 153 tightens local-file and LAN defaults, ships experimental J
-   - linux-kernel-ai-attribution-torvalds | The Kernel Argues With Itself About AI, Then Torvalds Ends the Argumen
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
