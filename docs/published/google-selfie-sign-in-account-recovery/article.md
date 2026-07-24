@@ -12,7 +12,7 @@ Google launched a facial recognition account recovery method on July 23, 2026, l
 
 ## Article
 
-Google rolled out "Selfie for Sign-In" on July 23, 2026, adding facial recognition to the set of account recovery options available to personal Google account holders. It sits alongside — not in place of — existing fallbacks such as recovery email addresses, recovery phone numbers, and passkeys.
+Google rolled out "selfie for sign-in" on July 23, 2026, adding facial recognition to the set of account recovery options available to personal Google account holders. It sits alongside — not in place of — existing fallbacks such as recovery email addresses, recovery phone numbers, and passkeys.
 
 Setup requires recording a guided selfie video. Users perform head movements — turning, nodding — as prompted, allowing Google to capture multiple facial angles. When recovering access, a fresh selfie video is recorded and compared against the stored reference. The system requires those same guided movements during the sign-in attempt to confirm a live recording, a measure Google says is designed to resist static images and AI-generated deepfakes.
 
