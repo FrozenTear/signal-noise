@@ -21,17 +21,69 @@
 #   PUBLIC_BASE  public URL to check liveness (default https://news.scuffedcrew.no)
 #   APPLY        1 = trigger autopublish for each stranded slug; 0 = dry-run (default 0)
 #   HERE_ONLY    comma-separated slugs to limit scope (default: all approved)
+#   SSH_HOST     host-local API host for the SSH liveness fallback (default root@169.254.1.2)
+#   SSH_KEY      SSH key for the fallback (default ~/.ssh/ainory_deploy)
+#
+# Liveness fallback (THE-1217): the direct-API probe returns HTTP 000 from the
+# agent runner because the VPS :8888 API is not reachable directly — only via
+# SSH to root@169.254.1.2. Without a fallback, every approved slug looks like a
+# false-positive STRAND. When the direct probe yields 000, this script resolves
+# liveness once against the SSH live feed and matches on the `slug` field, so the
+# report shows the *real* stranded set (typically 0–1) instead of everything.
 
 set -uo pipefail
 
 PUBLIC_BASE="${PUBLIC_BASE:-https://news.scuffedcrew.no}"
 APPLY="${APPLY:-0}"
 HERE_ONLY="${HERE_ONLY:-}"
+SSH_HOST="${SSH_HOST:-root@169.254.1.2}"
+SSH_KEY="${SSH_KEY:-$HOME/.ssh/ainory_deploy}"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 say()  { printf '%s\n' "$*"; }
 info() { printf '[info] %s\n' "$*"; }
 warn() { printf '[warn] %s\n' "$*" >&2; }
+
+# ── SSH live-feed fallback (THE-1217) ────────────────────────────────────────
+# Fetch the host-local live feed once and cache its slug set. Used when the
+# direct-API probe returns 000 (sandbox egress to :8888 is blocked).
+declare -A LIVE_SLUGS
+LIVE_FEED_LOADED=0   # 1 once we've attempted the fetch (success or failure)
+LIVE_FEED_OK=0       # 1 only if the feed parsed to a non-empty slug set
+
+load_live_feed() {
+  [ "$LIVE_FEED_LOADED" = "1" ] && return
+  LIVE_FEED_LOADED=1
+  info "direct probe returned 000 — fetching live feed over SSH ($SSH_HOST) for liveness fallback…"
+  local json
+  json=$(ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no -o ConnectTimeout=15 "$SSH_HOST" \
+      "curl -s 'localhost:8888/api/articles?limit=500'" 2>/dev/null || echo "")
+  if [ -z "$json" ]; then
+    warn "SSH live-feed fetch failed — deferring 000 slugs to VPS idempotent autopublish"
+    return
+  fi
+  local slugs
+  slugs=$(printf '%s' "$json" | python3 -c '
+import json,sys
+try:
+    d = json.load(sys.stdin)
+except Exception:
+    sys.exit(0)
+arts = d.get("articles", d) if isinstance(d, dict) else d
+if isinstance(arts, dict):
+    arts = arts.get("articles", [])
+for a in (arts or []):
+    if isinstance(a, dict) and a.get("slug"):
+        print(a["slug"])
+' 2>/dev/null || echo "")
+  if [ -z "$slugs" ]; then
+    warn "SSH live-feed returned no parseable slugs — deferring 000 slugs to VPS"
+    return
+  fi
+  while IFS= read -r s; do [ -n "$s" ] && LIVE_SLUGS["$s"]=1; done <<< "$slugs"
+  LIVE_FEED_OK=1
+  info "live feed loaded: ${#LIVE_SLUGS[@]} live slug(s)"
+}
 
 APPROVAL_PAT='publish approved|EIC approve'
 
@@ -70,15 +122,27 @@ for pf in "${PUBLISH_FILES[@]}"; do
 
   approved_count=$((approved_count + 1))
 
-  # Check liveness (best-effort from agent side; SSH-side check is authoritative)
-  http_code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$PUBLIC_BASE/api/articles/$slug" 2>/dev/null || echo UNREACHABLE)
+  # Check liveness. curl -w emits the HTTP code, or 000 on connection failure
+  # (which is what the agent runner always sees for the public URL).
+  http_code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 15 "$PUBLIC_BASE/api/articles/$slug" 2>/dev/null)
+  [ -n "$http_code" ] || http_code=000
+
   if [ "$http_code" = "200" ]; then
     info "OK     $slug (live)"
-  elif [ "$http_code" = "UNREACHABLE" ]; then
-    # Sandbox can't reach public URL — mark for SSH-side check via autopublish.sh
-    # autopublish-host.sh will skip already-live slugs idempotently
-    info "QUEUE  $slug — approved commit, liveness check deferred to VPS (sandbox egress blocked)"
-    stranded+=("$slug")
+  elif [ "$http_code" = "000" ]; then
+    # Direct API unreachable from the runner — resolve liveness via the SSH feed.
+    load_live_feed
+    if [ -n "${LIVE_SLUGS[$slug]:-}" ]; then
+      info "OK     $slug (live, via SSH feed)"
+    elif [ "$LIVE_FEED_OK" = "1" ]; then
+      # Feed loaded and slug absent → genuinely stranded.
+      warn "STRAND $slug — approved commit, absent from SSH live feed"
+      stranded+=("$slug")
+    else
+      # Couldn't load the feed — defer to VPS (autopublish-host.sh is idempotent).
+      info "QUEUE  $slug — approved commit, SSH feed unavailable; deferred to VPS idempotent publish"
+      stranded+=("$slug")
+    fi
   else
     warn "STRAND $slug — approved commit but live returns $http_code"
     stranded+=("$slug")
