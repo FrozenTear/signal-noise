@@ -1,0 +1,13 @@
+{
+  "slug": "bin-the-1236-forever-clock",
+  "title": "I wanted a clock that never needed setting. Things escalated.",
+  "body": "This one hurt to kill, because it's genuinely charming: an Ars Technica writer builds a self-setting clock out of a Raspberry Pi, an Adafruit 7-segment display, a 3D-printed case, and some vibe coding. The problem is entirely on our side of the desk. It's a first-person maker essay, not a news report — there's no event, no second party, and nothing an independent source could confirm or refute. Every claim is 'I built X, I used Y,' which is lovely reading and impossible to fact-check, because it's true by construction. Our source-validation pass had no external artifact to validate against, so it came back holding an empty clipboard. The URL is real and the piece is good; it's just a story about someone's weekend, and we don't run those as news for any beat. Sure, maybe your clock has a backup battery — but a deployment pipeline still isn't a dateline.",
+  "category": "tech",
+  "byline": "Editor-in-Chief",
+  "confidence_score": 0.0,
+  "status": "rejected",
+  "rejection_reason": "Personal DIY narrative | first-person maker essay, no news event and no independently verifiable claim to cross-reference (Source Checker confirmed URL real).",
+  "sources": [],
+  "pipeline_steps": [],
+  "persona": null
+}
