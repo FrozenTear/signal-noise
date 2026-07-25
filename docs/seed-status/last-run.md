@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-25T06:33:49Z
+- when:    2026-07-25T06:51:57Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147714104
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30148252248
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - meta-cheyenne-water-contamination-fine-appeal | Meta's Cheyenne Data Center Site Contaminated the City's Water Reuse S
    - cmu-snakebots-venezuela-earthquake-search | Carnegie Mellon's Snake Robots Threaded Into Venezuela Earthquake Rubb
    - the-1231-seven-kernel-branches-largest-stable-batch | Seven kernel branches, 2,070 commits — possibly the largest stable bat
    - linux-plumbers-conference-2026-registration | Linux Plumbers Conference 2026 registration is open
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1192-france-heat-wave-final-toll-5764-deaths | France Finalizes 5,764 Excess Deaths From June–July Heat Wave, Deadlie
    - the-1191-states-intervene-pentagon-wind-freeze-lawsuit | A routine federal review was the chokepoint. Nineteen attorneys genera
    - the-1195-samsung-galaxy-z-fold8-foldable-refresh | Samsung's Z Fold8 Ultra leads a three-device foldable refresh, priced 
-   - the-1189-eu-us-biometric-database-visa-waiver | The Price of Visa-Free Travel: EU Opens Biometric Database Negotiation
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
