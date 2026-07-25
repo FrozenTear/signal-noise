@@ -87,6 +87,50 @@ def get_existing_candidates(beat: str) -> List[Dict]:
         return []
 
 
+def is_digest_wrapper(entry: Dict) -> Tuple[bool, Optional[str]]:
+    """
+    Detect if entry is a digest/newsletter wrapper that should be killed at intake.
+
+    Auto-kill patterns:
+    - EDRi-gram: edri.org/our-work/edri-gram-<date>/
+    - MIT TR Download: MIT Technology Review The Download weekly digests
+    - Axios AM/PM: Axios newsletters roundups
+    - Politico Playbook: Politico playbook newsletters
+    - Carbon Brief DeBriefed: Carbon Brief DeBriefed newsletter
+    - LWN Weekly Index: LWN Security/Weekly TOC pages
+
+    Returns: (is_digest, kill_pattern)
+    """
+    url = entry.get('link', '').lower()
+    title = entry.get('title', '').lower()
+
+    # EDRi-gram bi-weekly digest pattern
+    if 'edri.org/our-work/edri-gram-' in url:
+        return True, 'digest-url'
+
+    # LWN Weekly/Security index pages (not individual articles)
+    if 'lwn.net' in url and ('weekly edition for' in title or 'security updates for' in title):
+        return True, 'lwn-weekly-index'
+
+    # MIT TR The Download (newsletter roundup)
+    if 'technologyreview.com' in url and 'the download' in title.lower():
+        return True, 'newsletter-roundup'
+
+    # Axios AM/PM (newsletter)
+    if 'axios.com' in url and ('axios am' in title or 'axios pm' in title):
+        return True, 'newsletter-roundup'
+
+    # Politico Playbook (newsletter)
+    if 'politico.com' in url and 'playbook' in title:
+        return True, 'newsletter-roundup'
+
+    # Carbon Brief DeBriefed (newsletter)
+    if 'carbonbrief.org' in url and 'debriefed' in title:
+        return True, 'newsletter-roundup'
+
+    return False, None
+
+
 def validate_candidate(entry: Dict) -> Tuple[bool, Optional[str]]:
     """Validate that a candidate has all required fields for filing.
 
@@ -138,10 +182,10 @@ def check_published_catalog_duplicate(
     dedupe: PublishedCatalogDedupe
 ) -> Tuple[bool, Optional[str], dict]:
     """
-    Check if entry duplicates a published article.
+    Check if entry duplicates a published or killed article.
 
     Args:
-        entry: The candidate entry (with 'title', 'summary' fields)
+        entry: The candidate entry (with 'title', 'summary', 'link' fields)
         dedupe: PublishedCatalogDedupe instance
 
     Returns:
@@ -149,20 +193,26 @@ def check_published_catalog_duplicate(
     """
     headline = entry.get('title', '')
     summary = entry.get('summary', '')
+    url = entry.get('link', '')
 
     # Log the match keys for debugging
     full_key, stripped_key = dedupe.log_match_keys(headline, summary)
 
-    # Check against published catalog
+    # Check against published catalog and killed candidates (includes Pass A.1 URL matching)
     is_dup, matched_slug, debug_info = dedupe.check_published_duplicate(
         headline,
-        summary
+        summary,
+        candidate_url=url  # Pass URL as keyword argument for Pass A.1 matching
     )
 
     if is_dup:
-        print(f"  Published catalog match: {matched_slug}")
-        print(f"    Match keys - Full: {full_key}, Stripped: {stripped_key}")
-        print(f"    Confidence: {debug_info['confidence']}, Type: {debug_info['match_type']}")
+        print(f"  Duplicate match: {matched_slug}")
+        print(f"    Match type: {debug_info['match_type']}")
+        print(f"    Confidence: {debug_info['confidence']}")
+        if debug_info.get('pass_a_type') == 'killed_url':
+            print(f"    ⚠ Matched killed candidate (source URL already rejected)")
+        elif debug_info.get('pass_a_type') == 'published_url':
+            print(f"    ✓ Matched published article (source URL in catalog)")
 
     return is_dup, matched_slug, debug_info
 
@@ -303,9 +353,23 @@ def scan_beat(beat: str, feeds_config: Dict) -> List[str]:
         print(f"Dropped {invalid_count} candidates with missing required fields (url/headline/lead)")
     print(f"Candidates after validation: {len(validated_entries)}")
 
+    # Filter out digest wrappers (kill at intake)
+    non_digest_entries = []
+    digest_count = 0
+    for entry in validated_entries:
+        is_digest, pattern = is_digest_wrapper(entry)
+        if is_digest:
+            digest_count += 1
+        else:
+            non_digest_entries.append(entry)
+
+    if digest_count > 0:
+        print(f"Dropped {digest_count} candidates that are digest/newsletter wrappers")
+    print(f"Candidates after digest filter: {len(non_digest_entries)}")
+
     # Deduplicate against pipeline candidates
     filtered_entries = []
-    for entry in validated_entries:
+    for entry in non_digest_entries:
         is_dup, dup_id = is_duplicate(entry, existing)
         if not is_dup:
             filtered_entries.append(entry)
