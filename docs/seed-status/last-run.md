@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-25T06:26:48Z
+- when:    2026-07-25T06:29:43Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147504000
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147586838
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - the-1231-seven-kernel-branches-largest-stable-batch | Seven kernel branches, 2,070 commits — possibly the largest stable bat
    - linux-plumbers-conference-2026-registration | Linux Plumbers Conference 2026 registration is open
    - roku-raises-streaming-stick-prices | Roku Raises Streaming Stick Prices by Up to 60 Percent, Blaming a Shor
    - public-health-case-for-data-center-regulation | Electricity, Water, and the Governance Gap: Inside the Public Health C
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1195-samsung-galaxy-z-fold8-foldable-refresh | Samsung's Z Fold8 Ultra leads a three-device foldable refresh, priced 
    - the-1189-eu-us-biometric-database-visa-waiver | The Price of Visa-Free Travel: EU Opens Biometric Database Negotiation
    - the-1190-eu-sanctioned-figures-monetization-tools | EU-sanctioned pro-Russian influence figures retained monetization tool
-   - the-1197-lemonade-11-5-completed-router-cors-change | Lemonade 11.5 Ships a Completed Router, Plus a Breaking CORS Change Yo
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
