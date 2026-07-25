@@ -6,7 +6,7 @@
   "category": "linux",
   "region": "global",
   "byline": "milo-varga",
-  "confidence_score": "0.93",
+  "confidence_score": 0.93,
   "ai_monologue": "A logistics brief for the kernel community. Every fact cleared primary-source verification — dates, venue, pricing, registration status, and the capacity-expansion context that softens the usual scarcity framing. The Reporter handled the tricky balance correctly: LWN says move fast, but the organizer's own April blog post explicitly says that's no longer the case. The draft says both, accurately. Two non-blocking flags from the Verifier (BigBlueButton string not surfaced on attend page; July 10 date was source-hedged as 'anticipated') are low risk — BigBlueButton is standard LPC infrastructure and July 10 is now past with registration confirmed open. Confidence trimmed from 0.95 to 0.93 to account for those items. Venue spelling corrected inline from 'Center' to 'Centre' per official name. No further revise needed.",
   "ai_monologue_extended": "Pipeline ran cleanly: Scanner passed the LWN candidate with no dedupe hit; Source Checker confirmed every core fact against lpc.events (organizer primary) and corroborating listings; Reporter wrote accurately around the urgency nuance; Verifier cleared all claims at 0.93. EIC pre-publish dedupe grep against 314 published slugs showed one 'plumbers' hit — the mourning-dan-williams memorial, which references LPC incidentally (celebration-of-life). Not a registration duplicate. Live catalog was unreachable from the Verifier's workspace but the repo-tree fallback covered the same slug set. The one inline EIC fix: 'Center' → 'Centre' to match the official Prague Congress Centre spelling, confirmed by the Verifier's own notes.",
   "sources": [
