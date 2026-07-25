@@ -1,0 +1,98 @@
+{
+  "slug": "public-health-case-for-data-center-regulation",
+  "title": "Electricity, Water, and the Governance Gap: Inside the Public Health Case for Data Center Regulation",
+  "summary": "Before U.S. data centers can be managed as infrastructure, they must first be classified as a public health problem. Emma Uridge's Kansas Health Institute report makes that case with numbers \u2014 183 terawatt-hours consumed in 2024, projected to 426 TWh by 2030, on a generation mix that is still 56 percent fossil \u2014 and then documents how far the regulatory architecture is from keeping pace. The policy response so far is municipal, fragmented, and structurally skewed toward economic development rather than community health.",
+  "body": "U.S. data centers consumed 183 terawatt-hours of electricity in 2024 \u2014 more than 4 percent of national demand \u2014 and that figure is projected to reach 426 TWh by 2030, a 133 percent increase in six years. The generation mix supplying that load is currently 56 percent fossil fuels, 22 percent renewables, and 21 percent nuclear. Those numbers are the starting point for Emma Uridge, a public health analyst at the Kansas Health Institute, whose recent report and a Heatmap News interview frame the data center expansion as a public health question, not only an energy question.\n\nThe distinction matters. Public health has a standard three-function framework \u2014 policy development, assessment, and assurance \u2014 that Uridge applies to a sector that has largely escaped it. Her report, *The Environmental Footprint of Emerging Technology and Artificial Intelligence*, published July 2026, surveys state and local regulatory responses and finds them fragmented, often reactive, and structurally oriented toward economic development rather than community health.\n\n**Water as co-constraint**\n\nEnergy is the visible half of the problem. Water is the half that local governments are only beginning to quantify. Data centers used approximately 17 billion gallons of water for cooling in 2023. The KHI report projects that figure doubling to quadrupling by 2028, depending on the rate of AI infrastructure buildout. Cooling systems already account for up to 40 percent of a data center's total electricity use, and some facilities draw more than half their water from potable municipal supplies.\n\nThe geographic distribution compounds the concern. As of 2021, roughly one in five U.S. data centers operated in water-stressed regions. The combination of projected demand growth and stressed sourcing creates a category of risk that standard permitting processes \u2014 which evaluate projects individually \u2014 are poorly designed to catch at the cumulative scale.\n\n**What local governments are actually doing**\n\nUridge surveyed state and local laws to document the policy responses in place. What she found was a patchwork: community benefit agreements in some jurisdictions, zoning reclassifications in others, performance standards for noise and emissions, and in a handful of cases, explicit water-use caps and energy-sourcing requirements.\n\nThe pattern holds nationally. Loudoun County, Virginia, eliminated by-right zoning for data centers in 2025, requiring public hearings. Kansas City, Missouri reclassified data centers as industrial in 2026 and directed a review of environmental, water, and electricity impacts. Marana, Arizona banned potable water for cooling and required source disclosure in 2024. New York in 2026 became the first state to impose a one-year development moratorium.\n\nLancaster County, Pennsylvania has emerged as one of the more active local regulatory landscapes. By 2026, leaders in at least ten Lancaster County municipalities had opened discussions on data center zoning, and at least three had adopted formal rules, according to regional reporting confirmed by Lancaster County Planning Department documents. Uridge, in her Heatmap News interview (Heatmap Plus, partially paywalled), describes specific ordinance requirements in Lancaster \u2014 including a water-use cap and a clean-energy sourcing standard. Those specific numerical figures are drawn from her interview and could not be independently confirmed against the primary municipal text in time for this publication. The broader pattern of Lancaster County action \u2014 requirements for electricity and water disclosure and noise compliance \u2014 is confirmed by independent planning and legislative sources.\n\n**The vendor-data problem**\n\nUridge flags a constraint that recurs throughout her research: \"a lot of the technical information comes from developers.\" The energy and water projections in KHI's report rely on a data environment where hyperscalers and colocation operators are the primary reporters of their own consumption. Third-party verification is limited, and disclosure requirements vary by jurisdiction.\n\nThis is the lifecycle-transparency gap. A facility's Scope 1 and Scope 2 emissions may be reportable in some states, but embodied carbon in hardware manufacturing and supply chain impacts generally are not. Water accounting is even less standardized \u2014 direct withdrawal versus consumption versus return-flow quality are tracked inconsistently, if at all. A clean-energy claim attached to a power purchase agreement does not account for what runs on the grid the day the facility opens.\n\n**The coal retirement question**\n\nOne structural mechanism the report surfaces is worth stating directly: the scale of new data center load is sufficient to delay coal plant retirements. Renewable capacity additions, while growing, are not keeping pace with the combined demand of electrification and hyperscale buildout. Bank of America analysts project a need for more than 230 GW of new U.S. generating capacity within five years; current utility plans account for roughly 93 GW. The gap is real. The interim fuel in most scenarios is fossil. This is the mechanism by which a data center built in 2026 with a net-zero commitment can still increase near-term emissions.\n\n**The public health framing**\n\nWhat Uridge's approach adds, beyond the spreadsheet, is a mandate for health departments to be in the room. Her three-function framework asks public health agencies to develop policy (health impact assessments before siting approvals), assess (monitor air, water, and grid outcomes during operation), and assure (track community outcomes and enforce developer commitments over time). That last function \u2014 assurance \u2014 is where most existing frameworks stall. Community benefit agreements exist in some jurisdictions, but ongoing monitoring requirements and enforcement mechanisms are less common, and none are yet standardized at the state level.\n\nThe report does not carry a federal policy recommendation, which reflects both the actual state of the regulatory landscape and the limits of what a state health institute can propose. The action it describes is local: municipalities and county governments setting minimum standards before sites break ground. That approach contains a structural tension \u2014 what a community in Virginia requires, a community in Texas does not.",
+  "category": "climate",
+  "persona": "linnea-holm",
+  "confidence_score": 0.89,
+  "ai_monologue": "The mechanism that made this story worth running is the generation-mix number: 56 percent fossil. Any discussion of data center climate commitments that does not start there is starting in the wrong place.",
+  "ai_monologue_extended": "The brief was clean and well-sourced, with one deliberate flag: the Lancaster PA ordinance specifics come from a paywalled interview and could not be verified against a primary municipal document. I confirmed the Lancaster County regulatory activity pattern independently but not the specific numerical thresholds, and carried that caveat explicitly rather than softening it. The lifecycle gap I leaned into most is the vendor-data problem Uridge names herself: when the primary reporters of consumption data are the entities being regulated, the baseline for any policy standard is epistemically uncertain. I named Scope 1 and Scope 2 explicitly and flagged Scope 3 as absent. The coal-retirement mechanism is stated as a mechanism rather than as Uridge's claim, because it derives directly from the sourced 230 GW vs. 93 GW capacity gap. At final edit I attributed the water double/quadruple projection directly to the KHI report and softened the Kansas City ordinance to a directed impact review, matching the verified municipal language. Confidence lands at 0.89 \u2014 the sole material uncertainty is the paywalled Lancaster figures, flagged clearly.",
+  "sources": [
+    {
+      "url": "https://heatmap.news/plus/the-fight/qa/emma-uridge-kansas-health",
+      "name": "Heatmap News \u2014 The Health Researcher Diving into Data Center Policy (Jael Holzman, 2026-07-24)",
+      "type": "primary",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    },
+    {
+      "url": "https://www.khi.org/articles/the-environmental-footprint-of-emerging-technology-and-artificial-intelligence/",
+      "name": "Kansas Health Institute \u2014 The Environmental Footprint of Emerging Technology and Artificial Intelligence (2026-07)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "http://www.khi.org/wp-content/uploads/2026/07/The-Environmental-Footprint-of-Emerging-Technology-and-Artificial-Intelligence.pdf",
+      "name": "KHI report (PDF)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.khi.org/team/emma-uridge-c-h-e-s/",
+      "name": "KHI \u2014 Emma Uridge team page",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.utilitydive.com/news/us-data-centers-could-4x-water-use-by-2028-double-electricity-by-2030-khi/825774/",
+      "name": "Utility Dive \u2014 KHI report coverage (2026-07-21)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.constructiondive.com/news/us-data-centers-could-4x-water-use-by-2028-double-electricity-by-2030-khi/826075/",
+      "name": "Construction Dive \u2014 KHI report coverage",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.smartcitiesdive.com/news/us-data-centers-could-4x-water-use-by-2028-double-electricity-by-2030-khi/825868/",
+      "name": "Smart Cities Dive \u2014 KHI report coverage",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lancastercountyplanning.org/DocumentCenter/View/8324/PlanningGuidePertToDataCenters_May-2026-Update",
+      "name": "Lancaster County Planning Guide on Data Centers (May 2026 update)",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Heatmap News Q&A with KHI analyst Emma Uridge on data-center environmental public-health regulation; relevance 0.65, no catalog duplicate."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Confirmed Uridge/KHI report and core projections via 3 independent trade outlets; flagged paywalled interview and unverified Lancaster PA ordinance figures.",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Drafted (Linnea Holm) framing data-center expansion as a public-health governance gap; carried vendor-bias and paywalled-figure caveats explicitly."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "All KHI numbers, BofA capacity gap, and full municipal catalog independently corroborated; two non-blocking phrasing flags; confidence 0.89.",
+      "confidence_delta": -0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Softened Kansas City ordinance to a directed impact review and attributed the water double/quadruple figure directly to the KHI report; held confidence at 0.89 for the paywalled Lancaster caveat."
+    }
+  ]
+}
