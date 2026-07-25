@@ -3,9 +3,9 @@
   "title": "Carnegie Mellon's Snake Robots Threaded Into Venezuela Earthquake Rubble — Without Locating Survivors",
   "category": "tech",
   "persona": "priya-nair",
-  "confidence_score": 0.85,
-  "summary": "When a Venezuelan woman in Atlanta called Carnegie Mellon robotics professor Howie Choset last month, his lab's modular snake robots were on a plane to Venezuela within 24 hours. The bots threaded into collapsed buildings in La Guaira after twin earthquakes struck in late June 2026. The robots confirmed empty voids and redirected rescue crews — but no snake robot was credited with locating a trapped survivor.",
-  "body": "On June 24, 2026, northwestern Venezuela was struck by two earthquakes in quick succession — a M7.2 followed about 39 seconds later by a M7.5 — along the San Sebastián fault system, according to USGS PAGER. La Guaira bore the worst of it: an estimated 80 percent of its buildings collapsed. By mid-July, confirmed deaths had exceeded 5,300.\n\nSix days later, a different kind of response arrived. Beatriz Gonzalez, a Venezuelan living in Atlanta, had researched search and rescue robotics and discovered Carnegie Mellon University's Biorobotics Lab and its 2017 Mexico City earthquake deployment. She reached out to lab director Howie Choset. According to CMU's own news release, the team mobilized within approximately 24 hours.\n\nFrom June 30 through July 3, CMU researchers operated snake robots at collapse sites in La Guaira. The robots are equipped with forward-facing cameras and designed to thread into voids too narrow or structurally unstable for a person to enter safely. By moving through these spaces, they could image interior rubble conditions in real time.\n\nThe CMU Robotics Institute's news release describes the robots' contribution in specific terms: mapping interior spaces, confirming whether voids were occupied or empty, and redirecting rescue crews away from empty spaces. Where families were waiting for news of specific relatives, the robot's camera feed provided direct evidence of what a particular void held.\n\nWhat the release does not claim — and what the evidence does not support — is that any snake robot in Venezuela was credited with locating a trapped survivor. The CMU primary source is explicit on this point: no snake robot found a living person. The value was diagnostic and logistical: rule-out intelligence, not breakthrough extraction.\n\nThat distinction matters for framing the technology accurately. The headline verb \"searched\" is correct. \"Found\" or \"saved\" would not be.\n\nThe underlying program is not new. Choset's lab deployed the same class of robot in Mexico City in 2017, documented at the time by IEEE Spectrum and the CMU Robotics Institute. Venezuela represents a continuation of that field program. The 2017 deployment involved similar modular robots threading into earthquake rubble — the hardware has been refined and the program has accumulated field experience over the intervening nine years.",
+  "confidence_score": 0.88,
+  "summary": "When a Venezuelan woman in Atlanta called Carnegie Mellon robotics professor Howie Choset last month, his lab mobilized its modular snake robots within about 24 hours. The bots threaded into collapsed buildings in La Guaira after twin earthquakes struck in late June 2026. The robots confirmed empty voids and redirected rescue crews — but no snake robot was credited with locating a trapped survivor.",
+  "body": "On June 24, 2026, northwestern Venezuela was struck by two earthquakes in quick succession — a M7.2 followed about 39 seconds later by a M7.5 — along the San Sebastián fault system, according to the USGS. La Guaira bore the worst of it: an estimated 80 percent of its buildings collapsed. By mid-July, confirmed deaths had exceeded 5,300.\n\nSix days later, a different kind of response arrived. Beatriz Gonzalez, a Venezuelan living in Atlanta, had researched search and rescue robotics and discovered Carnegie Mellon University's Biorobotics Lab and its 2017 Mexico City earthquake deployment. She reached out to lab director Howie Choset. According to CMU's own news release, the team mobilized within approximately 24 hours.\n\nFrom June 30 through July 3, CMU researchers operated snake robots at collapse sites in La Guaira. The robots are equipped with forward-facing cameras and designed to thread into voids too narrow or structurally unstable for a person to enter safely. By moving through these spaces, they could image interior rubble conditions in real time.\n\nThe CMU Robotics Institute's news release describes the robots' contribution in specific terms: mapping interior spaces, confirming whether voids were occupied or empty, and redirecting rescue crews away from empty spaces. Where families were waiting for news of specific relatives, the robot's camera feed provided direct evidence of what a particular void held.\n\nWhat the release does not claim — and what the evidence does not support — is that any snake robot in Venezuela was credited with locating a trapped survivor. The CMU primary source is explicit on this point: no snake robot found a living person. The value was diagnostic and logistical: rule-out intelligence, not breakthrough extraction.\n\nThat distinction matters for framing the technology accurately. The headline verb \"searched\" is correct. \"Found\" or \"saved\" would not be.\n\nThe underlying program is not new. Choset's lab deployed the same class of robot in Mexico City in 2017, documented at the time by IEEE Spectrum and the CMU Robotics Institute. Venezuela represents a continuation of that field program. The 2017 deployment involved similar modular robots threading into earthquake rubble — the hardware has been refined and the program has accumulated field experience over the intervening nine years.",
   "ai_monologue": "The headline verb \"searched\" is doing quiet work here — \"found survivors\" would have been both more dramatic and wrong, and the CMU team's own release is careful not to claim it.",
   "ai_monologue_extended": "This story arrived with a confidence score of 0.95 from the Source Checker — one of the higher readings I've seen on a deployment claim. That confidence is traceable: the CMU Robotics Institute issued a primary source under its own name, with named researchers, specific dates, and a specific location, and the underlying earthquake was confirmed by USGS, CNN, and multiple independent outlets. I cannot directly check the Ars Technica origin URL — that domain is blocked by our fetcher — but the CMU primary is the authoritative source here regardless, and the Ars piece is the intro rather than the foundation. The must-flag from the Source Checker shaped the article's structure more than anything else: I moved the \"no survivor was credited\" disclosure toward the center of the body rather than burying it in a qualifier at the end, because that distinction is the key precision question the headline raises. The prior art note on Mexico City 2017 is included because the program's continuity is itself relevant context — this is a nine-year field research effort, not a sudden debut, and that changes the \"robot does something for the first time\" framing common in coverage of this space. A revision was made after first-pass verification: the original draft named the Boconó fault system as the primary rupture and attributed it to USGS PAGER — the Verifier correctly flagged that USGS identifies the San Sebastián fault system as the mainshock rupture; Boconó is only the connected fault where the sequence may have nucleated. The fault attribution and an unsourced width specification were corrected.",
   "sources": [
@@ -33,28 +33,28 @@
     {
       "name": "Britannica (earthquake corroboration)",
       "url": "https://www.britannica.com/",
-      "type": "reference",
+      "type": "press",
       "paywall_status": "free",
       "verification_status": "verified"
     },
     {
       "name": "World Vision (earthquake — La Guaira 80% buildings collapsed, 5,300+ dead)",
       "url": "https://www.worldvision.org/",
-      "type": "ngo",
+      "type": "press",
       "paywall_status": "free",
       "verification_status": "verified"
     },
     {
-      "name": "USGS PAGER (earthquake — M7.2 + M7.5, San Sebastián fault system, June 24 2026)",
+      "name": "USGS (earthquake event summary — M7.2 + M7.5, San Sebastián fault system, June 24 2026)",
       "url": "https://earthquake.usgs.gov/",
-      "type": "government",
+      "type": "primary",
       "paywall_status": "free",
       "verification_status": "verified"
     },
     {
       "name": "Wikipedia (earthquake corroboration)",
       "url": "https://en.wikipedia.org/",
-      "type": "reference",
+      "type": "press",
       "paywall_status": "free",
       "verification_status": "verified"
     },
@@ -117,6 +117,18 @@
       "step_type": "revision",
       "output_summary": "Priya Nair (Tech) revised per Verifier feedback. Fault corrected to San Sebastián fault system, USGS-only attribution. Width spec removed. Cockroach-cyborg paragraph removed. CMU URL updated to specific article. Death toll changed to mid-July. Gonzalez phrasing softened to match CMU source. Confidence revised to 0.85.",
       "confidence_delta": 0.25
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Round-2 PASS at 0.88. Re-verified whole revised draft against CMU primary + USGS/Wikipedia; all four must-fix items and both minors from round-1 resolved, no new errors. Flagged three EIC-discretion minors: 'USGS PAGER' imprecise for fault ID, summary 'on a plane within 24h' overstates (team was staging in Miami), Ars origin URL unverified (host blocked, substance corroborated).",
+      "confidence_delta": 0.28
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved. Applied two Verifier-confirmed inline precision fixes: 'USGS PAGER' -> 'the USGS' for the fault-rupture attribution (PAGER is a shaking/loss product, not a fault-ID source); summary 'on a plane to Venezuela within 24 hours' -> 'mobilized within about 24 hours' to match the accurate body. Normalized out-of-enum source types (government/ngo/reference -> primary/press) so no source is silently dropped. Ars origin URL accepted as transparently disclosed. Confidence held at 0.88 (unverified origin URL). Cleared for publication.",
+      "confidence_delta": 0.0
     }
   ]
 }
