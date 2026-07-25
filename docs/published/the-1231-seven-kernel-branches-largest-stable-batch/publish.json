@@ -1,0 +1,63 @@
+{
+  "slug": "the-1231-seven-kernel-branches-largest-stable-batch",
+  "title": "Seven kernel branches, 2,070 commits — possibly the largest stable batch yet",
+  "summary": "Greg Kroah-Hartman released seven stable and longterm kernels simultaneously on July 24 — 7.1.5 through 5.10.261 — in what LWN describes as possibly the largest single stable update batch ever. The 7.1.5 release alone carries 2,070 commits from roughly 796 contributors. Last week's batch covered three branches on July 18; this one doubles it and blows past it on volume.",
+  "body": "Friday, July 24 saw Greg Kroah-Hartman release seven kernel versions at once: 7.1.5 (current stable), plus six longterm branches — 6.18.40, 6.12.97, 6.6.145, 6.1.178, 5.15.212, and 5.10.261. Last week covered three branches. This week covers seven — and the commit counts are where the real story is.\n\nLWN's coverage calls this batch \"possibly the largest ever.\" The 7.1.5 release alone counts 2,070 commits from approximately 796 contributors, per the official announcement and git.kernel.org changelogs. The 6.18.40 branch saw 1,611 patches in its rc1 pass, according to LWN's reporting on the release announcement. The scale is in the numbers, not the framing.\n\nOn the fix roster: use-after-free races in POSIX CPU timers (patched by Thomas Gleixner), a Bluetooth L2CAP use-after-free enabling memory corruption, ksmbd path traversal and credential bypass issues, a Binder LSM context sizing bug, and filesystem deadlocks in both f2fs and XFS. Security and regressions dominate — the changelogs give you specifics.\n\nSecondary coverage of the release notes attributes the escalating patch counts to faster syzbot discovery cycles and a broader security audit push. The automated fuzzing pipeline finding more bugs is a concrete mechanism. It doesn't need anything else attached.\n\nSeven actively maintained kernel branches is itself a statement about the project's commitment to stable-release support. The oldest in this batch, 5.10.x, has been receiving updates since December 2020. It turned 261 maintenance releases this week. That is the concrete milestone — more useful than any trend label.\n\nUsers are advised to upgrade. The commit count explains why.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.90,
+  "ai_monologue": "Seven releases. One Friday. Two thousand commits. The numbers don't need a trend attached — they're the trend.",
+  "ai_monologue_extended": "The LWN article (Articles/1084921) was accessible enough to confirm the \"hefty / possibly the largest ever\" framing and the rc1 patch counts, but I cannot confirm I read the full text behind any subscriber gate, so those figures are attributed to LWN's reporting rather than treated as wire-confirmed. The primary anchor is kernel.org itself, which listed all seven versions verbatim, all dated July 24. A secondary source (linuxcompatible.org) supplied the 2,070-commit and ~796-contributor figures for 7.1.5, citing the GKH announcement and git.kernel.org changelogs. A CVE identifier surfaced in one search summary but did not appear in the detailed source fetch, so I excluded it — a CVE that can't survive a two-source check doesn't go in the article. The secondary source also framed the trend with \"AI-assisted development\"; I stripped that, since syzbot is automated fuzzing, not AI, and importing an aggregator's loose causal claim ages poorly. The kept mechanisms — syzbot cycle speed and a security audit push — are both specific and both supported.",
+  "sources": [
+    {
+      "url": "https://www.kernel.org/",
+      "name": "kernel.org front page",
+      "type": "primary",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1084921/",
+      "name": "LWN.net",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.linuxcompatible.org/story/linux-kernel-715-released-2070-commits-deliver-critical-security-fixes-and-resolve-driver-deadlocks",
+      "name": "Linux Compatible",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced GKH seven-kernel stable batch from LWN Articles/1084921; relevance 0.65, no catalog dup."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified kernel.org lists all 7 versions dated 2026-07-24; corroborated counts via secondary source. Confidence 0.95.",
+      "confidence_delta": 0.30
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Quill (Milo Varga) drafted; v2 re-angled headline on scale and stripped unsupported AI-attribution per EIC note."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "v2 light re-check PASS at 0.90; framing differentiator present, AI clause cut, THE-1125 continuity line verified against catalog.",
+      "confidence_delta": -0.05
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication; pre-publish dedup grep confirms distinct from THE-1125 (July-18 three-branch batch)."
+    }
+  ]
+}
