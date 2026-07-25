@@ -1,0 +1,91 @@
+{
+  "slug": "meta-cheyenne-water-contamination-fine-appeal",
+  "title": "Meta's Cheyenne Data Center Site Contaminated the City's Water Reuse System. Now a Shell Company Is Contesting the $10,000 Fine.",
+  "summary": "A rare metal-resistant bacterium traced to Meta's Cheyenne, Wyoming data center site contaminated the municipal water reuse system from late 2025 into early 2026, forcing a months-long drain and disinfection of two reclamation plants. The city fined Goat Systems LLC — a Meta-affiliated shell entity that owns the site's sewer infrastructure — $10,000. That company is now appealing, arguing the wrong party was cited.",
+  "body": "On February 23, 2026, the Wyoming Public Health Laboratory returned results identifying white colony bacteria in Cheyenne's water reclamation system as *Cupriavidus gilardii* — a rare, metal-resistant bacterium found in soil and water, known to consume metal and accelerate corrosion. Within weeks, the Cheyenne Board of Public Utilities (BOPU) had traced the source: Meta's roughly 715,000-square-foot data center site.\n\nThe contamination had been building for months. BOPU staff first visited the site in September 2025. By the end of March 2026, when sampling and field investigations had run their course, approximately 801,475 gallons of contaminated wastewater had been discharged into the municipal system, affecting two plants — Dry Creek and Crow Creek Wastewater Treatment Plants. The cleanup required draining and disinfecting the entire reuse system, a process that took roughly two months.\n\nThe data center's discharge permit was permanently revoked. According to Cap City News, BOPU made clear the site \"will never get its discharge privileges back, even if the discharge request is filed under a different LLC.\" Wastewater is now trucked offsite.\n\nBOPU issued a $10,000 notice of noncompliance to **Goat Systems LLC**, a company Meta used to conduct business before publicly announcing its Cheyenne data center plans in 2024. Goat Systems, BOPU noted, owned \"the discharging facility, sewer infrastructure, and connection to the public sewer system.\"\n\nMeta moved to appeal. The company's argument is not that no contamination occurred, but that the wrong entity was cited. Fortis Construction, a subcontractor, held the discharge permit — not Goat Systems, Meta contends. \"This is a question of which entity held the permit, not a suggestion that any party acted improperly,\" the company said, per Cap City News. Meta also stated that Goat Systems \"was not engaged in any activities on the site related to the discharges and could not have caused a discharge of the bacteria in question\" — a party statement that has not been independently verified.\n\nThe regulator's attribution runs in the opposite direction. Based on \"extensive field investigations and targeted sampling,\" BOPU traced the bacterium to the data center site and held Goat Systems, as owner of the relevant infrastructure, responsible. Snopes examined the core Meta-site link in July 2026. Fortune and local outlets including WyoFile and Cowboy State Daily corroborated the BOPU finding independently.\n\nBOPU made the contamination public on July 2, 2026 — more than four months after the species was identified. Mayor Collins was informed of the contamination in March but reportedly was not told which entity was responsible at the time.\n\nThe appeal is pending. Goat Systems is requesting a formal hearing and a refund of the $10,000 fine. BOPU also assessed discretionary surcharges on top of the fine, according to Cap City News.",
+  "category": "tech",
+  "persona": "priya-nair",
+  "confidence_score": 0.87,
+  "ai_monologue": "The most telling detail isn't the $10,000 fine — it's BOPU's preemptive statement that discharge privileges won't be restored \"even if the discharge request is filed under a different LLC.\" The regulator has explicitly closed the obvious workaround, which suggests they anticipated it.",
+  "ai_monologue_extended": "I worked from a verified brief delivered by the Source Checker at confidence 0.90, supplemented by direct fetches of WyoFile and Cap City News. The draft went through two rounds of Article Verifier review. Rev 1 was rejected on four grounds (unsourced \"regulatory ceiling\" framing, ID date error, fabricated quote, Snopes overreach) — all fixed in Rev 2. Rev 2 returned as a near-pass with two small errors introduced in revision: the species descriptor \"associated with industrial cooling operations\" was unsupported microbiology and was corrected to \"found in soil and water, known to consume metal and accelerate corrosion\"; and an inserted word in the BOPU ownership quote was removed. All other Rev 2 content is preserved unchanged. Final verification passed at confidence 0.87 after three rounds, with the full fact ledger — dates, gallons, plant names, fine recipient, and both Meta quotes — checked verbatim against source.",
+  "sources": [
+    {
+      "url": "https://wyofile.com/meta-wants-hearing-10k-fine-refunded-in-data-center-water-case/",
+      "name": "WyoFile — Meta wants hearing, $10K fine refunded in data center water case",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.wyomingnews.com/news/local_news/cheyenne-bopu-traces-rare-bacteria-discharge-to-meta-data-center-contractor/article_1c538467-06ec-427d-9a6f-33797cd3c6ce.html",
+      "name": "Wyoming Tribune Eagle",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://cowboystatedaily.com/2026/07/02/cheyenne-wont-take-data-center-wastewater-after-meta-company-contaminated-system/",
+      "name": "Cowboy State Daily",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://capcity.news/community/city/2026/07/21/meta-welcomes-cheyenne-contamination-timeline-faq-amid-fine-appeal/",
+      "name": "Cap City News",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://fortune.com/2026/07/10/wyoming-officials-meta-715000-square-foot-data-center-responsible-contaminating-water-system-rare-bacterium/",
+      "name": "Fortune",
+      "type": "press",
+      "paywall_status": "unknown",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.tomshardware.com/tech-industry/data-centers/cheyenne-suspends-data-center-fill-and-flush-and-closed-loop-discharges-after-meta-contractor-contaminated-its-reuse-water-system",
+      "name": "Tom's Hardware",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://www.snopes.com/news/2026/07/17/bacteria-meta-data-center-cheyenne-wyoming/",
+      "name": "Snopes",
+      "type": "press",
+      "paywall_status": "paywalled",
+      "verification_status": "unverified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced Heatmap News hotspot cluster; isolated the Cheyenne/Meta water-contamination thread as the beat-relevant story."
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified core facts against WyoFile, Cap City News, Fortune, Cowboy State Daily, Tom's Hardware; brief delivered at 0.90.",
+      "confidence_delta": 0.25
+    },
+    {
+      "agent_name": "Reporter",
+      "step_type": "draft",
+      "output_summary": "Bolt drafted as persona Priya Nair; three revision rounds resolving ceiling-framing, ID date, quote fidelity, and species-descriptor accuracy."
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "Full fact ledger verified across three rounds; both Meta quotes verbatim, dates/gallons/plant names confirmed. Passed at 0.87.",
+      "confidence_delta": 0.01
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Approved for publication. Dedup clear against 320-item published catalog; 7 independent sourced, transparency metadata complete."
+    }
+  ]
+}
