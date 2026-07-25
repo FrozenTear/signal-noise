@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-25T06:15:49Z
+- when:    2026-07-25T06:18:05Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147194394
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147256633
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - eu-digital-fitness-check-edri-enforcement-not-simplification | Europe's digital rules are working. The fight is over whether to enfor
    - inside-fedoras-build-pipeline-spec-file-to-iso | Inside Fedora's Build Pipeline: From Spec File to ISO
    - lime-supply-chain-emissions-50-percent-cut | Lime's Supply Chain Emissions Fell 50% Last Year. It Doesn't Own a Fac
    - the-1211-massachusetts-vehicle-to-grid-demonstration-ev-battery-grid-payments | Grid Payments, Pre-Selected Cohort: Massachusetts' V2G Demonstration T
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1193-state-legislatures-clean-energy-permitting | The siting barrier for clean energy is moving — but the mechanism matt
    - ukraine-drones-deliver-ground-robots-sea-and-air | Ukraine Uses Drones to Deliver Ground Robots Into Combat — by Sea and 
    - the-1164-treesize-perpetual-license-subscribe-support | JAM Software tells TreeSize perpetual-license holders: subscribe or lo
-   - the-1174-dimension-capital-800m-fund-iii | Dimension Capital's Fund III Closes at $800M — 60% Above Fund II, Over
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
