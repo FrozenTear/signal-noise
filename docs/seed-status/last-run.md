@@ -1,15 +1,16 @@
 # last seed/probe run
 
-- when:    2026-07-25T06:19:34Z
+- when:    2026-07-25T06:22:19Z
 - mode:    probe
 - trigger: push
-- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147297462
+- run:     https://github.com/FrozenTear/signal-noise/actions/runs/30147375713
 - token configured: false
 
 ```
 == probe https://news.scuffedcrew.no ==
 GET /            -> 200
 GET /api/articles -> 20 article(s)
+   - public-health-case-for-data-center-regulation | Electricity, Water, and the Governance Gap: Inside the Public Health C
    - eu-digital-fitness-check-edri-enforcement-not-simplification | Europe's digital rules are working. The fight is over whether to enfor
    - inside-fedoras-build-pipeline-spec-file-to-iso | Inside Fedora's Build Pipeline: From Spec File to ISO
    - lime-supply-chain-emissions-50-percent-cut | Lime's Supply Chain Emissions Fell 50% Last Year. It Doesn't Own a Fac
@@ -29,6 +30,5 @@ GET /api/articles -> 20 article(s)
    - the-1197-lemonade-11-5-completed-router-cors-change | Lemonade 11.5 Ships a Completed Router, Plus a Breaking CORS Change Yo
    - the-1193-state-legislatures-clean-energy-permitting | The siting barrier for clean energy is moving — but the mechanism matt
    - ukraine-drones-deliver-ground-robots-sea-and-air | Ukraine Uses Drones to Deliver Ground Robots Into Combat — by Sea and 
-   - the-1164-treesize-perpetual-license-subscribe-support | JAM Software tells TreeSize perpetual-license holders: subscribe or lo
 write-gate: ENFORCED (POST /api/articles -> 401); real SEED_API_TOKEN required
 ```
