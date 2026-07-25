@@ -114,7 +114,7 @@
     },
     {
       "agent_name": "Reporter",
-      "step_type": "revision",
+      "step_type": "draft",
       "output_summary": "Priya Nair (Tech) revised per Verifier feedback. Fault corrected to San Sebastián fault system, USGS-only attribution. Width spec removed. Cockroach-cyborg paragraph removed. CMU URL updated to specific article. Death toll changed to mid-July. Gonzalez phrasing softened to match CMU source. Confidence revised to 0.85.",
       "confidence_delta": 0.25
     },
