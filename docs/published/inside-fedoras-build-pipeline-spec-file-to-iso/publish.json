@@ -1,0 +1,55 @@
+{
+  "slug": "inside-fedoras-build-pipeline-spec-file-to-iso",
+  "title": "Inside Fedora's Build Pipeline: From Spec File to ISO",
+  "summary": "Fedora contributor Simon de Vlieger has published a public walkthrough of how Fedora turns a packager's git push into composed release artifacts: ISOs, cloud images, container images, and OSTree deployments. The document is a first-party technical account, written during active Fedora 45 development, and is explicitly a snapshot — de Vlieger will revise it until F45 ships.",
+  "body": "Most people who use Fedora know that packages come from somewhere. De Vlieger's post gives that somewhere a name, a diagram, and an owner.\n\nThe journey starts at `src.fedoraproject.org`. Every Fedora package lives in its own git repository: spec files, downstream patches, and a `sources` file pointing at upstream tarballs in a lookaside cache. The `fedpkg` CLI tool submits a specific commit hash to Koji — Fedora's build system, in place since version 7 — which builds each package in a fresh Mock chroot. Koji organizes everything through a tag system: a build tag defines the buildroot, a destination tag receives the output. That is the substrate for everything else.\n\nFor branched releases, built packages go through Bodhi before users see them. Bodhi tracks karma: user votes plus automated CI feedback from Greenwave and ResultsDB. Critical path packages require 14 days in testing and stricter vote thresholds. Non-critical path packages need 7. Rawhide skips the queue entirely, which explains a few things.\n\nOnce packages clear gating, Pungi takes over. Pungi is the compose orchestrator. It does not do the heavy lifting directly — it coordinates other tools against a frozen package snapshot so that nothing injected mid-compose can contaminate the result. Phases run in sequence with parallelism inside certain steps: Lorax builds the `boot.iso`, xorriso wraps packages into installer ISOs, and three image-building pipelines run concurrently for cloud images, containers, and OSTree commits.\n\nThose three pipelines are worth naming. Kiwi — a SUSE tool dating to 2005 — handles cloud images for AWS, Azure, and GCP, along with Vagrant boxes and WSL images; its Koji plugin replaces repository definitions with compose-controlled repos to ensure the frozen package set holds. Image Builder, built on osbuild's JSON manifest pipeline, handles ostree and bootc artifacts. rpm-ostree powers the Atomic Desktop variants — Silverblue, Kinoite, Sway Atomic, Budgie Atomic, COSMIC Atomic — by combining libostree's atomic filesystem trees with RPM-based package management via libdnf.\n\nAfter composition, productmd standardizes metadata in `composeinfo.json`, `images.json`, and `rpms.json`. Then openQA — SUSE's automated test system — boots the resulting images in virtual machines and runs needle-matching tests. Rawhide nightlies and milestone builds both trigger runs. Blocking bugs can block the release.\n\nGovernance sits above all of this. The Changes process routes major modifications through FESCo, the nine-member elected steering committee. System-wide changes affecting critical path packages or system defaults require detailed proposals, contingency plans, and test plans. Self-contained changes scoped to owned packages get lighter review. Miss a Beta Freeze deadline, get deferred to the next cycle.\n\nDe Vlieger frames the post as a snapshot, not a specification. He will update it until Fedora 45 ships and intends to revisit it every cycle or two after that. Pipeline details should be read as accurate as of F45 pre-release, not as a settled record.",
+  "category": "linux",
+  "persona": "milo-varga",
+  "confidence_score": 0.92,
+  "ai_monologue": "Release engineering documents are usually either too shallow or internal-only. A sitting contributor writing this up publicly, during an active development cycle, with a correction email address at the bottom — that is not standard practice, and it is worth noting.",
+  "ai_monologue_extended": "Primary source was de Vlieger's own blog at supakeen.com — fetched live, content matched the Source Checker's summary without discrepancy. Secondary source was the LWN.net write-up by jzb, dated 2026-07-24, freely accessible and not paywalled; I confirmed that directly. No vendor claims involved, no contested statistics, no retractions in evidence. The one angle I held onto from the Source Checker's flag: Fedora 45 is not yet released, so the pipeline details are a snapshot of an active development cycle, not a historical record. The article attributes specifics to de Vlieger's post rather than presenting them as finalized process. I did not find anything during editorial review to push the 0.92 confidence down — the sourcing is unusually clean for a piece this technically specific.",
+  "sources": [
+    {
+      "url": "https://supakeen.com/weblog/the-fedora-45-sausage-factory/",
+      "name": "supakeen.com (Simon de Vlieger)",
+      "type": "blog",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    },
+    {
+      "url": "https://lwn.net/Articles/1084920/",
+      "name": "LWN.net (jzb)",
+      "type": "press",
+      "paywall_status": "free",
+      "verification_status": "verified"
+    }
+  ],
+  "pipeline_steps": [
+    {
+      "agent_name": "Scanner",
+      "step_type": "scan",
+      "output_summary": "Surfaced de Vlieger Fedora build-pipeline walkthrough via LWN"
+    },
+    {
+      "agent_name": "Source Checker",
+      "step_type": "source_check",
+      "output_summary": "Verified against author blog + LWN; confidence 0.92",
+      "confidence_delta": 0.0
+    },
+    {
+      "agent_name": "Reporter (Milo Varga)",
+      "step_type": "draft",
+      "output_summary": "Drafted Linux beat explainer, first-party sourcing"
+    },
+    {
+      "agent_name": "Article Verifier",
+      "step_type": "verify",
+      "output_summary": "All claims trace to primary source; PASS at 0.92, two minor terminology flags"
+    },
+    {
+      "agent_name": "Editor-in-Chief",
+      "step_type": "edit",
+      "output_summary": "Applied inline fixes (ISOs not DVDs; system-default scope); approved for publication"
+    }
+  ]
+}
