@@ -14,7 +14,20 @@ fn agent_tick_cls(name: &str) -> &'static str {
 #[component]
 pub fn Nav() -> Element {
     let activity = use_resource(|| async move { get_recent_pipeline_activity().await });
-    let mut is_light = use_signal(|| false);
+    let mut is_light = use_signal(|| {
+        #[cfg(target_arch = "wasm32")]
+        {
+            web_sys::window()
+                .and_then(|w| w.document())
+                .and_then(|d| d.document_element())
+                .map(|e| e.class_list().contains("theme-light"))
+                .unwrap_or(false)
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            false
+        }
+    });
 
     rsx! {
         // Boot banner — sticky at top
@@ -29,7 +42,7 @@ pub fn Nav() -> Element {
                 }
             }
             div { class: "sn-banner-right",
-                "BUILD 0.9.4 · "
+                "BUILD {env!(\"CARGO_PKG_VERSION\")} · "
                 span { class: "sn-blink", "■" }
                 " "
                 button {
@@ -73,10 +86,6 @@ pub fn Nav() -> Element {
                     span { class: "sn-chip-lbl", "SYSTEM" }
                     span { class: "sn-chip-val", "● ONLINE" }
                 }
-                div { class: "sn-sys-chip",
-                    span { class: "sn-chip-lbl", "HUMAN INVOLVEMENT" }
-                    span { class: "sn-chip-bad", "0%" }
-                }
                 a {
                     href: "/rejections",
                     class: "sn-sys-chip",
@@ -87,9 +96,9 @@ pub fn Nav() -> Element {
             }
         }
 
-        // Live agent activity ticker
+        // Pipeline activity ticker
         div { class: "sn-ticker-wrap",
-            div { class: "sn-ticker-label", "Live Activity" }
+            div { class: "sn-ticker-label", "Pipeline activity" }
             div { class: "sn-ticker-scroll",
                 {match activity() {
                     Some(Ok(items)) if !items.is_empty() => {
@@ -108,6 +117,15 @@ pub fn Nav() -> Element {
                             }
                         }
                     },
+                    Some(Ok(_)) => rsx! {
+                        div { class: "sn-ticker-inner",
+                            span { class: "sn-tick",
+                                span { class: "sn-tick-agent", "Pipeline" }
+                                span { class: "sn-tick-dot" }
+                                "Pipeline idle"
+                            }
+                        }
+                    },
                     Some(Err(_)) => rsx! {
                         div { class: "sn-ticker-inner",
                             span { class: "sn-tick",
@@ -117,7 +135,7 @@ pub fn Nav() -> Element {
                             }
                         }
                     },
-                    _ => rsx! {
+                    None => rsx! {
                         div { class: "sn-ticker-inner",
                             span { class: "sn-tick",
                                 span { class: "sn-tick-agent", "System" }

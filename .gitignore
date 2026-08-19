@@ -1,6 +1,8 @@
 # Rust / Cargo
 /target
-Cargo.lock
+
+# Leftover Next.js cache — this app is Dioxus, not Next
+/.next/
 
 # SurrealDB data directory
 /data/

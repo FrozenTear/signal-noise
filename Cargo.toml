@@ -39,6 +39,7 @@ chrono = { version = "0.4", features = ["serde"] }
 # uuid: v4 needs a WASM-specific entropy source
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 uuid = { version = "1", features = ["v4", "serde", "js"] }
+web-sys = { version = "0.3", features = ["Window", "Document", "Element", "DomTokenList"] }
 
 # ── Server-only dependencies (not compiled for wasm32-unknown-unknown) ────────
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]

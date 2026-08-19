@@ -22,9 +22,7 @@ pub fn AgentRoster() -> Element {
                     Some(n) if n > 0 => rsx! {
                         span { class: "badge", "{n} active" }
                     },
-                    _ => rsx! {
-                        span { class: "badge", "live" }
-                    },
+                    _ => rsx! {},
                 }}
             }
 
@@ -39,6 +37,11 @@ pub fn AgentRoster() -> Element {
                             }
                             div {}
                         }
+                    }
+                },
+                Some(Ok(list)) if list.is_empty() => rsx! {
+                    div { style: "padding:12px 16px;font-family:var(--sn-mono);font-size:10px;color:var(--sn-text-dimmer);",
+                        "No agent heartbeats yet."
                     }
                 },
                 Some(Ok(list)) => rsx! {
@@ -60,7 +63,7 @@ pub fn AgentRoster() -> Element {
             }}
         }
 
-        // Newsroom Chatter — live pipeline activity, falls back to mock
+        // Newsroom Chatter — recent pipeline steps from Surreal
         div { class: "sn-sb-card",
             div { class: "sn-sb-title", "Newsroom Chatter" }
             {match activity() {
@@ -68,6 +71,11 @@ pub fn AgentRoster() -> Element {
                     div { class: "sn-chatter-item",
                         div { class: "sn-skeleton-bar", style: "width:80%;margin-bottom:6px" }
                         div { class: "sn-skeleton-bar", style: "width:60%" }
+                    }
+                },
+                Some(Ok(items)) if items.is_empty() => rsx! {
+                    div { style: "padding:12px 16px;font-family:var(--sn-mono);font-size:10px;color:var(--sn-text-dimmer);",
+                        "No recent pipeline steps."
                     }
                 },
                 Some(Ok(items)) => rsx! {
@@ -86,27 +94,6 @@ pub fn AgentRoster() -> Element {
                     }
                 },
             }}
-        }
-
-        // Model Economics — instrumentation not yet available; shown as illustrative
-        div { class: "sn-sb-card",
-            div { class: "sn-sb-title", "Model Economics" }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Total API spend today" }
-                span { class: "sn-econ-val a", "$0.84" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Tokens consumed" }
-                span { class: "sn-econ-val", "1.24M" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Avg cost / article" }
-                span { class: "sn-econ-val g", "$0.060" }
-            }
-            div { class: "sn-econ-row",
-                span { class: "sn-econ-key", "Human journalist salary" }
-                span { class: "sn-econ-val r", "$0" }
-            }
         }
 
         // Transparency Report — real counts from SurrealDB
@@ -129,10 +116,6 @@ pub fn AgentRoster() -> Element {
                     div { class: "sn-econ-row",
                         span { class: "sn-econ-key", "Drafts rejected" }
                         span { class: "sn-econ-val a", "{s.rejected_total}" }
-                    }
-                    div { class: "sn-econ-row",
-                        span { class: "sn-econ-key", "Human involvement" }
-                        span { class: "sn-econ-val r", "0%" }
                     }
                 },
                 Some(Err(_)) => rsx! {
@@ -196,10 +179,6 @@ fn AgentCommandRow(props: AgentCommandRowProps) -> Element {
         _                            => ("sc", &props.name[..2.min(props.name.len())]),
     };
 
-    let model_label = props.model
-        .as_deref()
-        .unwrap_or("claude-sonnet-4-6");
-
     let active_cls = if is_active { "sn-agent-icon active" } else { "sn-agent-icon" };
     let dot_cls    = if is_active { "sn-task-dot active"   } else { "sn-task-dot idle" };
 
@@ -212,7 +191,9 @@ fn AgentCommandRow(props: AgentCommandRowProps) -> Element {
             div { class: "{active_cls} {icon_cls}", "{initials}" }
             div {
                 div { class: "sn-agent-name", "{props.name}" }
-                div { class: "sn-agent-role", "{model_label}" }
+                if let Some(model) = props.model.as_deref() {
+                    div { class: "sn-agent-role", "{model}" }
+                }
                 div { class: "sn-agent-task",
                     span { class: "{dot_cls}" }
                     "{task_text}"

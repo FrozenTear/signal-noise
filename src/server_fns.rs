@@ -2,8 +2,8 @@
 // When the `server` feature is enabled these run on the Axum backend;
 // when building for WASM the #[server] macro emits an HTTP-call stub.
 //
-// Mock data is returned until SIG-104 (publish pipeline) lands and
-// begins writing real articles to the DB.
+// Mock fixtures stay in this file for local UI work. They are returned
+// only when SN_USE_MOCKS=1 (or "true"). Default is honest empty data.
 
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -128,7 +128,7 @@ pub struct RejectedArticleSummary {
 // ── Server functions ──────────────────────────────────────────────────────────
 
 /// List published articles, optionally filtered by category and/or region (THE-246).
-/// Falls back to mock data when the DB is empty.
+/// Empty DB returns an empty feed unless SN_USE_MOCKS is set.
 #[server]
 pub async fn get_articles(
     category: Option<String>,
@@ -202,7 +202,11 @@ pub async fn get_articles(
         }
     }
 
-    Ok(mock_articles(category))
+    if use_mocks() {
+        Ok(mock_articles(category))
+    } else {
+        Ok(vec![])
+    }
 }
 
 /// List categories for the data-driven nav (THE-246). Returns each category with
@@ -246,7 +250,7 @@ pub async fn get_article_by_slug(
     slug: String,
 ) -> Result<Option<ArticleDetail>, ServerFnError> {
     if let Some(db) = crate::api::db::get_db() {
-        if let Ok(mut res) = db
+        let article_result = db
             .query(
                 "SELECT *, \
                  persona.name AS persona_name, \
@@ -255,86 +259,26 @@ pub async fn get_article_by_slug(
                  FROM article WHERE slug = $slug AND status = 'published' LIMIT 1",
             )
             .bind(("slug", slug.clone()))
-            .await
-        {
-            if let Ok(rows) = res.take::<Vec<serde_json::Value>>(0) {
-                if let Some(v) = rows.into_iter().next() {
-                    let sources = v["sources"]
-                        .as_array()
-                        .map(|arr| {
-                            arr.iter()
-                                .filter_map(|s| {
-                                    Some(SourceSummary {
-                                        url: s["url"].as_str()?.to_string(),
-                                        name: s["name"].as_str()?.to_string(),
-                                        source_type: s["type"].as_str().unwrap_or("wire").to_string(),
-                                        paywall: s["paywall_status"].as_str() == Some("paywalled"),
-                                        verified: s["verification_status"].as_str() == Some("verified"),
-                                    })
-                                })
-                                .collect()
-                        })
-                        .unwrap_or_default();
+            .await;
 
-                    let mut pipeline: Vec<PipelineSummary> = v["pipeline"]
-                        .as_array()
-                        .map(|arr| {
-                            arr.iter()
-                                .filter_map(|p| {
-                                    let step_type = p["step_type"].as_str()?.to_string();
-                                    let sort_order = p["sort_order"]
-                                        .as_i64()
-                                        .map(|n| n as i32)
-                                        .unwrap_or_else(|| match step_type.as_str() {
-                                            "scan" => 0,
-                                            "source_check" => 1,
-                                            "fact_check" => 2,
-                                            "draft" => 3,
-                                            "verify" => 4,
-                                            "edit" => 5,
-                                            _ => 99,
-                                        });
-                                    Some(PipelineSummary {
-                                        agent_name: p["agent_name"].as_str()?.to_string(),
-                                        step_type,
-                                        output_summary: p["output_summary"].as_str().unwrap_or("").to_string(),
-                                        confidence_delta: p["confidence_delta"].as_f64().unwrap_or(0.0),
-                                        completed_at: p["completed_at"]
-                                            .as_str()
-                                            .or_else(|| p["started_at"].as_str())
-                                            .unwrap_or("")
-                                            .to_string(),
-                                        sort_order,
-                                    })
-                                })
-                                .collect()
-                        })
-                        .unwrap_or_default();
-                    pipeline.sort_by_key(|s| s.sort_order);
-
-                    return Ok(Some(ArticleDetail {
-                        slug: v["slug"].as_str().unwrap_or("").to_string(),
-                        title: v["title"].as_str().unwrap_or("").to_string(),
-                        body: v["body"].as_str().unwrap_or("").to_string(),
-                        category: v["category"].as_str().unwrap_or("").to_string(),
-                        persona_name: v["persona_name"]
-                            .as_str()
-                            .or_else(|| v["persona"].get("name").and_then(|n| n.as_str()))
-                            .unwrap_or("AI Reporter")
-                            .to_string(),
-                        confidence_score: v["confidence_score"].as_f64().unwrap_or(0.5),
-                        ai_monologue: v["ai_monologue"].as_str().map(|s| s.to_string()),
-                        ai_monologue_extended: v["ai_monologue_extended"].as_str().map(|s| s.to_string()),
-                        published_at: v["published_at"].as_str().unwrap_or("").to_string(),
-                        sources,
-                        pipeline,
-                    }));
+        match article_result {
+            Err(e) => {
+                tracing::warn!("get_article_by_slug query error: {e}");
+            }
+            Ok(mut res) => {
+                let art_rows: Vec<serde_json::Value> = res.take(0).unwrap_or_default();
+                if let Some(v) = art_rows.into_iter().next() {
+                    return Ok(Some(row_to_detail(&v)));
                 }
             }
         }
     }
 
-    Ok(mock_article(&slug))
+    if use_mocks() {
+        Ok(mock_article(&slug))
+    } else {
+        Ok(None)
+    }
 }
 
 /// Fetch a head-to-head bundle by its `h2h_slug`.
@@ -343,8 +287,8 @@ pub async fn get_article_by_slug(
 /// then partitions on `pipeline_metadata.h2h_role` into the editorial `intro`
 /// and the reporter `pieces`. Linkage lives in `pipeline_metadata` (Option A of
 /// the THE-87 layout spec — no schema migration). Falls back to mock data when
-/// the DB is empty or the slug has not been seeded yet, so the route renders
-/// before THE-218 seeds the real home-depot-q1-2026 content.
+/// the DB is empty or the slug has not been seeded yet. Mocks only when
+/// SN_USE_MOCKS is set.
 #[server]
 pub async fn get_h2h_by_slug(slug: String) -> Result<Option<H2HBundle>, ServerFnError> {
     if let Some(db) = crate::api::db::get_db() {
@@ -393,7 +337,11 @@ pub async fn get_h2h_by_slug(slug: String) -> Result<Option<H2HBundle>, ServerFn
         }
     }
 
-    Ok(mock_h2h(&slug))
+    if use_mocks() {
+        Ok(mock_h2h(&slug))
+    } else {
+        Ok(None)
+    }
 }
 
 /// Pull a string field out of an article's `pipeline_metadata`, tolerating both
@@ -495,7 +443,7 @@ fn row_to_detail(v: &serde_json::Value) -> ArticleDetail {
 }
 
 /// Agent roster — reads from SurrealDB (populated by Paperclip heartbeats via PUT /api/agents/status).
-/// Falls back to static mock when the table is empty (before first heartbeat push).
+/// Empty table returns no agents unless SN_USE_MOCKS is set.
 #[server]
 pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
     if let Some(db) = crate::api::db::get_db() {
@@ -520,13 +468,16 @@ pub async fn get_agent_status() -> Result<Vec<AgentStatusItem>, ServerFnError> {
         }
     }
 
-    // Fallback: static mock until first heartbeat push
-    Ok(vec![
-        AgentStatusItem { name: "Scanner".to_string(),         model: None, status: "idle".to_string(), current_task: None },
-        AgentStatusItem { name: "Fact Checker".to_string(),    model: None, status: "idle".to_string(), current_task: None },
-        AgentStatusItem { name: "Reporter".to_string(),        model: None, status: "idle".to_string(), current_task: None },
-        AgentStatusItem { name: "Editor-in-Chief".to_string(), model: None, status: "idle".to_string(), current_task: None },
-    ])
+    if use_mocks() {
+        Ok(vec![
+            AgentStatusItem { name: "Scanner".to_string(),         model: None, status: "idle".to_string(), current_task: None },
+            AgentStatusItem { name: "Fact Checker".to_string(),    model: None, status: "idle".to_string(), current_task: None },
+            AgentStatusItem { name: "Reporter".to_string(),        model: None, status: "idle".to_string(), current_task: None },
+            AgentStatusItem { name: "Editor-in-Chief".to_string(), model: None, status: "idle".to_string(), current_task: None },
+        ])
+    } else {
+        Ok(vec![])
+    }
 }
 
 /// Transparency stats — counts from SurrealDB. Returns zeros when DB is empty.
@@ -604,11 +555,15 @@ pub async fn get_rejected_articles() -> Result<Vec<RejectedArticleSummary>, Serv
         }
     }
 
-    Ok(mock_rejected())
+    if use_mocks() {
+        Ok(mock_rejected())
+    } else {
+        Ok(vec![])
+    }
 }
 
 /// Recent pipeline activity for the Newsroom Chatter sidebar.
-/// Falls back to curated mock when the DB is empty.
+/// Empty table returns no items unless SN_USE_MOCKS is set.
 #[server]
 pub async fn get_recent_pipeline_activity() -> Result<Vec<PipelineActivityItem>, ServerFnError> {
     if let Some(db) = crate::api::db::get_db() {
@@ -642,7 +597,18 @@ pub async fn get_recent_pipeline_activity() -> Result<Vec<PipelineActivityItem>,
         }
     }
 
-    Ok(mock_pipeline_activity())
+    if use_mocks() {
+        Ok(mock_pipeline_activity())
+    } else {
+        Ok(vec![])
+    }
+}
+
+#[cfg(feature = "server")]
+fn use_mocks() -> bool {
+    std::env::var("SN_USE_MOCKS")
+        .map(|v| v == "1" || v.eq_ignore_ascii_case("true"))
+        .unwrap_or(false)
 }
 
 #[cfg(feature = "server")]
