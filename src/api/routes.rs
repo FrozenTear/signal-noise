@@ -730,6 +730,8 @@ mod tests {
                 ai_monologue_extended: Some("Extended monologue for test.".to_string()),
                 sources: None,
                 pipeline_steps: None,
+                status: None,
+                rejection_reason: None,
             }),
         )
         .await;
@@ -766,6 +768,8 @@ mod tests {
             ai_monologue_extended: Some("ext".to_string()),
             sources: None,
             pipeline_steps: None,
+            status: None,
+            rejection_reason: None,
         };
 
         // No region → global.
